@@ -19,6 +19,7 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
+-- be_vlg | 594732
 -- de_nrw | 742010
 ```
 

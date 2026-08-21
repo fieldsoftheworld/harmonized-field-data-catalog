@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Belgium, Flanders — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2025/be_vlg-2025.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "be_vlg",
+      "paint": {
+        "fill-color": "#d6604d",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "be_vlg",
+      "paint": {
+        "line-color": "#d6604d",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

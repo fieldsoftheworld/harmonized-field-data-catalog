@@ -1,0 +1,99 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "be_vlg-2023",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          2.531029700947351,
+          50.67422857041101
+        ],
+        [
+          5.932736829503416,
+          50.67422857041101
+        ],
+        [
+          5.932736829503416,
+          51.49545715218194
+        ],
+        [
+          2.531029700947351,
+          51.49545715218194
+        ],
+        [
+          2.531029700947351,
+          50.67422857041101
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    2.531029700947351,
+    50.67422857041101,
+    5.932736829503416,
+    51.49545715218194
+  ],
+  "properties": {
+    "title": "Belgium, Flanders — 2023",
+    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`be_vlg-2023.parquet`, 588,192 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2023-01-01T00:00:00Z",
+    "end_datetime": "2023-12-31T23:59:59Z",
+    "year": 2023,
+    "proj:code": "EPSG:31370",
+    "table:row_count": 588192,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "be_vlg",
+  "assets": {
+    "data": {
+      "href": "./be_vlg-2023.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Belgium, Flanders 2023 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 93462986,
+      "file:checksum": "12200d4c48153a5522986d7729a24dc01770df4c963c198e35cfc2d09833fceb5f1f",
+      "proj:code": "EPSG:31370"
+    },
+    "visual": {
+      "href": "./be_vlg-2023.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Belgium, Flanders 2023 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 62826987,
+      "file:checksum": "12202b7f41afe4d66bc76bf72ea6f48a2a08fdfa89f9f30bfd043d3131ed075ca711"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}
