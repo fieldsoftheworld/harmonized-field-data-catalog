@@ -1,0 +1,44 @@
+[project]
+name = "harmonized-field-data-catalog"
+version = "0.1.0"
+description = "Git-backed Portolan catalog of harmonized (fiboa) field boundary datasets"
+requires-python = ">=3.11"
+# The tooling has no package to install; pixi manages the environment below.
+dependencies = []
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "osx-64", "linux-64"]
+
+[tool.pixi.dependencies]
+python = ">=3.11,<3.14"
+# Conversion toolchain used by `fiboa publish`
+libgdal-arrow-parquet = ">=3.8"
+tippecanoe = ">=2.70"
+unrar = ">=0.4"
+# Catalog tooling (pyarrow/pyproj/rasterio/rio-cogeo let rashid run its byte checks locally)
+duckdb = ">=1.1"
+pyarrow = ">=17"
+pyproj = ">=3.6"
+rasterio = ">=1.4"
+rio-cogeo = ">=5.0"
+pillow = ">=10"
+boto3 = ">=1.35"
+pyyaml = ">=6.0"
+requests = ">=2.32"
+
+[tool.pixi.pypi-dependencies]
+# fiboa-cli is the single source of conversion logic. Until the release that
+# carries the simplified `fiboa publish` (fiboa/cli branch publish-portolan) is
+# on PyPI, tools/build.py calls the `fiboa` executable named by $FIBOA_CMD
+# (default: `fiboa` on PATH) and records its version in every collection.
+# TODO(pin): fiboa-cli = "==0.22.0" once released, and drop FIBOA_CMD.
+# Validators, pinned to what CI runs (.github/workflows/ci.yml).
+rashid = "==0.1.7"
+stac-check = ">=1.6"
+
+[tool.pixi.tasks]
+gates = "python tests/run_all.py"
+build = "python tools/build.py"
+upload = "python tools/upload_data.py"
+publish = "python tools/publish.py"

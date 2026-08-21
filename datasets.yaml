@@ -1,0 +1,44 @@
+# The publication manifest: which fiboa-cli converters are published in this
+# catalog, and with which variants (years). Everything about *how* a dataset is
+# converted lives in fiboa-cli (https://github.com/fiboa/cli); this file only
+# says *what* is published and adds the catalog-level facts a converter does not
+# carry (keywords, the reference year of datasets without variants).
+#
+# tools/build.py reads this file. Keys:
+#   years:    variants of the converter to publish, newest last. Each becomes a
+#             hive partition `year=<Y>/` and a STAC item.
+#   year:     for converters without variants: the reference year of the data,
+#             with `year_source` saying where that year comes from.
+#   keywords: discovery tags, in the publisher's own vocabulary where possible.
+#   via:      override for the rel:via link (default: the converter's provider URL).
+#   thumbnail: framing for tools/thumbnail.py — zoom, and center [lon, lat] or
+#             rank (n-th densest cluster); default is the densest cluster at
+#             the PMTiles max zoom. Record what you chose after looking at it.
+#
+# Scope: non-AI, officially published field boundary datasets, typically from
+# government bodies (IACS/LPIS, cadastre, agricultural statistics).
+
+catalog:
+  id: harmonized-field-data
+  title: Harmonized Field Boundary Data
+  public_base: https://data.source.coop/ftw/harmonized-field-data
+  human_base: https://source.coop/ftw/harmonized-field-data
+  repository: https://github.com/fieldsoftheworld/harmonized-field-data-catalog
+
+host:
+  name: Fields of the World
+  url: https://fieldsofthe.world
+  roles: [processor, host]
+
+datasets:
+  be_vlg:
+    years: ["2023", "2024", "2025"]
+    keywords: [Belgium, Flanders, Landbouwgebruikspercelen, IACS, crop fields]
+  de_nrw:
+    year: 2026
+    year_source: "The source is a rolling download without a vintage in its URL (LWK-TSCHLAG_EPSG25832_Shape.zip); the edition year is the year the snapshot was downloaded and converted."
+    keywords: [Germany, North Rhine-Westphalia, INSPIRE, field blocks]
+  nl:
+    years: ["2025"]
+    keywords: [Netherlands, BRP, Basisregistratie Gewaspercelen, IACS, crop fields, PDOK]
+    thumbnail: {zoom: 13, center: [5.66, 52.50]}  # Flevoland arable mosaic; the densest cluster is uniform grassland

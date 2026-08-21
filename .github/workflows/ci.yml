@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Pinned to the version the local environment uses (pyproject.toml), so
+      # the gate that passes locally is the gate that runs here. Bump both.
+      - name: Install the validators
+        run: python -m pip install "rashid==0.1.7" stac-check pyyaml
+
+      - name: Lint the tooling
+        run: |
+          python -m pip install pyflakes
+          pyflakes tools/*.py tests/*.py
+
+      # CI_LIGHT: data files (GeoParquet, PMTiles) are not in git, so
+      # tests/test_links.py skips hrefs to them here and checks them locally.
+      - name: Catalog gates
+        env:
+          CI_LIGHT: "1"
+        run: python3 tests/run_all.py
