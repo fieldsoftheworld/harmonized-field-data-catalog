@@ -36,15 +36,15 @@ GROUP BY year ORDER BY year;
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
 
 ```sql
-SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, any_value("hcat:name") AS example_name,
+SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, mode("hcat:name") AS most_common_name,
        count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet')
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
--- hcat_group | example_name | fields | hectares
+-- hcat_group | most_common_name | fields | hectares
 -- 330200 | pasture_meadow_grassland_grass | 226989 | 233606.0
 -- 330109 | green_silo_maize | 88985 | 141246.0
--- 330101 | winter_common_soft_wheat | 71678 | 125118.0
+-- 330101 | grain_maize_corn_popcorn | 71678 | 125118.0
 -- 330103 | potatoes | 26764 | 59326.0
 -- 330129 | sugar_beet | 11895 | 26438.0
 ```

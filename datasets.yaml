@@ -11,6 +11,9 @@
 #             with `year_source` saying where that year comes from.
 #   keywords: discovery tags, in the publisher's own vocabulary where possible.
 #   via:      override for the rel:via link (default: the converter's provider URL).
+#   thumbnail: framing for tools/thumbnail.py — zoom, and center [lon, lat] or
+#             rank (n-th densest cluster); default is the densest cluster at
+#             the PMTiles max zoom. Record what you chose after looking at it.
 #
 # Scope: non-AI, officially published field boundary datasets, typically from
 # government bodies (IACS/LPIS, cadastre, agricultural statistics).
@@ -38,3 +41,4 @@ datasets:
   nl:
     years: ["2025"]
     keywords: [Netherlands, BRP, Basisregistratie Gewaspercelen, IACS, crop fields, PDOK]
+    thumbnail: {zoom: 13, center: [5.66, 52.50]}  # Flevoland arable mosaic; the densest cluster is uniform grassland

@@ -90,7 +90,14 @@ def main() -> int:
             run([sys.executable, str(ROOT / "tools" / "catalogize.py"), dataset_id])
             if not args.skip_thumbnail:
                 try:
-                    run([sys.executable, str(ROOT / "tools" / "thumbnail.py"), dataset_id])
+                    cmd = [sys.executable, str(ROOT / "tools" / "thumbnail.py"), dataset_id]
+                    if "zoom" in ds.thumbnail:
+                        cmd += ["--zoom", str(ds.thumbnail["zoom"])]
+                    if "center" in ds.thumbnail:
+                        cmd += ["--center", ",".join(str(v) for v in ds.thumbnail["center"])]
+                    if "rank" in ds.thumbnail:
+                        cmd += ["--rank", str(ds.thumbnail["rank"])]
+                    run(cmd)
                     run([sys.executable, str(ROOT / "tools" / "catalogize.py"), dataset_id])
                 except subprocess.CalledProcessError:
                     print(f"warning: thumbnail for {dataset_id} not rendered (is chiitiler running?)", file=sys.stderr)

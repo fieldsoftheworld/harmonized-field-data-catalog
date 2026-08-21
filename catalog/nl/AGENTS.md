@@ -34,17 +34,17 @@ GROUP BY year ORDER BY year;
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
 
 ```sql
-SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, any_value("hcat:name") AS example_name,
+SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, mode("hcat:name") AS most_common_name,
        count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet')
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
--- hcat_group | example_name | fields | hectares
+-- hcat_group | most_common_name | fields | hectares
 -- 330200 | pasture_meadow_grassland_grass | 705074 | 756445.0
 -- 330109 | temporary_grass | 259926 | 405942.0
--- 330101 | millet_sorghum | 50360 | 170833.0
+-- 330101 | winter_common_soft_wheat | 50360 | 170833.0
 -- 330103 | potatoes | 37727 | 163702.0
--- 330129 | carrots_daucus | 20512 | 91760.0
+-- 330129 | sugar_beet | 20512 | 91760.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

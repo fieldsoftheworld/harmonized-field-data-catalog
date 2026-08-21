@@ -640,7 +640,7 @@ def collection_docs(
     if hcat_cols:
         a.append("Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):")
         a.append("")
-        q = f"SELECT substr(CAST(\"hcat:code\" AS VARCHAR), 1, 6) AS hcat_group, any_value(\"hcat:name\") AS example_name,\n       count(*) AS fields, round(sum(\"metrics:area\") / 1e4) AS hectares\nFROM read_parquet('{latest_url}')\nWHERE \"hcat:code\" IS NOT NULL\nGROUP BY 1 ORDER BY hectares DESC LIMIT 5;"
+        q = f"SELECT substr(CAST(\"hcat:code\" AS VARCHAR), 1, 6) AS hcat_group, mode(\"hcat:name\") AS most_common_name,\n       count(*) AS fields, round(sum(\"metrics:area\") / 1e4) AS hectares\nFROM read_parquet('{latest_url}')\nWHERE \"hcat:code\" IS NOT NULL\nGROUP BY 1 ORDER BY hectares DESC LIMIT 5;"
         a += [md_query(q, public_base), ""]
     a.append("Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:")
     a.append("")

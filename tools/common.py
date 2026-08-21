@@ -54,6 +54,7 @@ class Dataset:
     via: str | None = None
     year_source: str | None = None
     notes: str | None = None
+    thumbnail: dict = field(default_factory=dict)
 
     @property
     def latest(self) -> str:
@@ -87,6 +88,7 @@ class Manifest:
                 via=spec.get("via"),
                 year_source=spec.get("year_source"),
                 notes=spec.get("notes"),
+                thumbnail=dict(spec.get("thumbnail") or {}),
             )
         return cls(catalog=raw["catalog"], host=raw["host"], datasets=datasets)
 
