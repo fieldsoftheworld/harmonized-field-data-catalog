@@ -16,6 +16,7 @@ Belgium, Flanders field boundaries in the [fiboa](https://github.com/fiboa/speci
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `REF_ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`be_vlg_2021.csv`) have `NULL`.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `BE`, `admin:subdivision_code` = `VLG`, `determination:datetime` = `2025-01-01T00:00:00Z`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/be_vlg_2021.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -43,9 +44,9 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | example_name | fields | hectares
 -- 330200 | pasture_meadow_grassland_grass | 226989 | 233606.0
 -- 330109 | green_silo_maize | 88985 | 141246.0
--- 330101 | grain_maize_corn_popcorn | 71678 | 125118.0
+-- 330101 | winter_common_soft_wheat | 71678 | 125118.0
 -- 330103 | potatoes | 26764 | 59326.0
--- 330129 | mangelwurzel_fodder_beet | 11895 | 26438.0
+-- 330129 | sugar_beet | 11895 | 26438.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

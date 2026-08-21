@@ -46,7 +46,7 @@
     "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`be_vlg-2025.parquet`, 594,732 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2025-01-01T00:00:00Z",
-    "end_datetime": "2025-12-31T23:59:59Z",
+    "end_datetime": "2025-01-01T00:00:00Z",
     "year": 2025,
     "proj:code": "EPSG:31370",
     "table:row_count": 594732,
@@ -64,8 +64,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 96051280,
-      "file:checksum": "12206778b3ccd5a341e2233cc91143c750d10788630d2d5c3eb4361119d0204c7c99",
+      "file:size": 96051381,
+      "file:checksum": "1220d3436ba5d5c7899a7ebe927204bcbccf8129f555e3516468a3d7d39a6b613681",
       "proj:code": "EPSG:31370"
     },
     "visual": {
@@ -75,8 +75,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 62706818,
-      "file:checksum": "12200f5ed203bcd49fb30cdbe55a944dc8d1b05fd6ef656496fe2190f4f826a2f996"
+      "file:size": 63192934,
+      "file:checksum": "122025f724896341908339f4aedec5e099df291eace91afdaf29cf6ae04f2101b1b0"
     }
   },
   "links": [

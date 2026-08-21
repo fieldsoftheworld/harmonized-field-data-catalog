@@ -17,9 +17,9 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2023 | 588,192 | [89.1 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2023/be_vlg-2023.parquet) | [59.9 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2023/be_vlg-2023.pmtiles) | [be_vlg-2023.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2023/be_vlg-2023.json) |
-| 2024 | 589,749 | [89.0 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2024/be_vlg-2024.parquet) | [61.0 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2024/be_vlg-2024.pmtiles) | [be_vlg-2024.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2024/be_vlg-2024.json) |
-| 2025 | 594,732 | [91.6 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2025/be_vlg-2025.parquet) | [59.8 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2025/be_vlg-2025.pmtiles) | [be_vlg-2025.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2025/be_vlg-2025.json) |
+| 2023 | 588,192 | [89.1 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2023/be_vlg-2023.parquet) | [60.0 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2023/be_vlg-2023.pmtiles) | [be_vlg-2023.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2023/be_vlg-2023.json) |
+| 2024 | 589,749 | [89.0 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2024/be_vlg-2024.parquet) | [60.1 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2024/be_vlg-2024.pmtiles) | [be_vlg-2024.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2024/be_vlg-2024.json) |
+| 2025 | 594,732 | [91.6 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2025/be_vlg-2025.parquet) | [60.3 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2025/be_vlg-2025.pmtiles) | [be_vlg-2025.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2025/be_vlg-2025.json) |
 
 The latest edition is also available at a stable path: [be_vlg/latest/be_vlg.parquet](https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet). All editions together: `https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=*/*.parquet`.
 
@@ -27,17 +27,24 @@ The latest edition is also available at a stable path: [be_vlg/latest/be_vlg.par
 
 | Column | Type | Description |
 |---|---|---|
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
 | `typology` | string | Business type (economic specialization) (source column `BT_OMSCH`, per the fiboa data survey) |
-| `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `hcat:name` | string | The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
-| `hcat:code` | uint32 | The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
-| `hcat:name_en` | string | The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `hcat:name` | string | The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `hcat:code` | uint32 | The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `hcat:name_en` | string | The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
 | `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+
+Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
+
+- `admin:country_code`: `BE`
+- `admin:subdivision_code`: `VLG`
+- `determination:datetime`: `2025-01-01T00:00:00Z`
+- `crop:code_list`: `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/be_vlg_2021.csv`
 
 ## Access
 

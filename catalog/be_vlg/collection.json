@@ -57,7 +57,7 @@
       "interval": [
         [
           "2023-01-01T00:00:00Z",
-          "2025-12-31T23:59:59Z"
+          "2025-01-01T00:00:00Z"
         ]
       ]
     }
@@ -69,16 +69,6 @@
   },
   "table:columns": [
     {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
       "name": "crop:name",
       "type": "string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
@@ -89,9 +79,14 @@
       "description": "Business type (economic specialization) (source column `BT_OMSCH`, per the fiboa data survey)"
     },
     {
-      "name": "crop:code",
+      "name": "id",
       "type": "string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "hcat:name",
@@ -99,19 +94,24 @@
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
       "name": "hcat:code",
       "type": "uint32",
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "hcat:name_en",
       "type": "string",
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "collection",
@@ -146,8 +146,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 96051280,
-      "file:checksum": "12206778b3ccd5a341e2233cc91143c750d10788630d2d5c3eb4361119d0204c7c99",
+      "file:size": 96051381,
+      "file:checksum": "1220d3436ba5d5c7899a7ebe927204bcbccf8129f555e3516468a3d7d39a6b613681",
       "proj:code": "EPSG:31370"
     },
     "style-hcat-crops": {
@@ -191,8 +191,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 62706818,
-      "file:checksum": "12200f5ed203bcd49fb30cdbe55a944dc8d1b05fd6ef656496fe2190f4f826a2f996"
+      "file:size": 63192934,
+      "file:checksum": "122025f724896341908339f4aedec5e099df291eace91afdaf29cf6ae04f2101b1b0"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -286,16 +286,16 @@
       "title": "Belgium, Flanders — 2025"
     }
   ],
-  "updated": "2026-08-21T10:51:30Z",
+  "updated": "2026-08-21T10:58:32Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "be_vlg": [
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "Bron: Dept. LV"
