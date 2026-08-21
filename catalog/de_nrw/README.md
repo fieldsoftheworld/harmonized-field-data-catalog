@@ -37,6 +37,12 @@ The latest edition is also available at a stable path: [de_nrw/latest/de_nrw.par
 | `hcat:code` | uint32 | The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
+Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
+
+- `admin:country_code`: `DE`
+- `admin:subdivision_code`: `NW`
+- `crop:code_list`: `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/de_nrw_2021.csv`
+
 ## Access
 
 Query the published files in place with DuckDB; nothing needs downloading first.

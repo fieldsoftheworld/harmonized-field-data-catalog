@@ -58,6 +58,7 @@ from common import (
     fmt_bytes,
     fmt_int,
     hcat_crops,
+    parquet_collection_properties,
     parquet_crs,
     parse_link_str,
     partition_dir,
@@ -99,6 +100,7 @@ class YearInput:
         self.bbox = self.stac["extent"]["spatial"]["bbox"][0]
         self.interval = self.stac["extent"]["temporal"]["interval"][0]
         self.crs = parquet_crs(self.parquet)
+        self.collection_props = parquet_collection_properties(self.parquet)
 
 
 def load_converter_meta(dataset_id: str) -> dict:
@@ -586,6 +588,10 @@ def collection_docs(
     lines += ["## Columns", "", "| Column | Type | Description |", "|---|---|---|"]
     for c in columns:
         lines.append(f"| `{c['name']}` | {c['type']} | {c.get('description', '')} |")
+    if latest.collection_props:
+        lines += ["", "Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):", ""]
+        for k, v in latest.collection_props.items():
+            lines.append(f"- `{k}`: `{v}`")
     lines += ["", "## Access", "", "Query the published files in place with DuckDB; nothing needs downloading first.", ""]
     q1 = f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT count(*) AS fields, round(sum(\"metrics:area\") / 1e4) AS hectares\nFROM read_parquet('{latest_url}');" if any(c["name"] == "metrics:area" for c in columns) else f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT count(*) AS fields FROM read_parquet('{latest_url}');"
     lines += [md_query(q1, public_base), ""]
@@ -621,6 +627,8 @@ def collection_docs(
     a.append(f"- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is {'the source column `' + id_src + '`' if id_src else 'assigned by the converter'}). Whether an id persists across editions is not verified here; do not join editions on it without checking.")
     if hcat_cols:
         a.append(f"- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`{meta.get('ec_mapping_csv')}`) have `NULL`.")
+    if latest.collection_props:
+        a.append("- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: " + ", ".join(f"`{k}` = `{v}`" for k, v in latest.collection_props.items()) + f" ({latest.year} edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.")
     if ds.notes:
         a.append(f"- {ds.notes}")
     a += ["", "## Tested queries", ""]

@@ -16,6 +16,7 @@ Germany, North Rhine-Westphalia field boundaries in the [fiboa](https://github.c
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`de_nrw_2021.csv`) have `NULL`.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `DE`, `admin:subdivision_code` = `NW`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/de_nrw_2021.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -43,7 +44,7 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330200 | pasture_meadow_grassland_grass | 313163 | 442559.0
 -- 330109 | green_silo_maize | 74459 | 206967.0
 -- 330106 | winter_rapeseed_rape | 17504 | 62986.0
--- 330129 | beetroot_beets | 12996 | 54091.0
+-- 330129 | sugar_beet | 12996 | 54091.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

@@ -152,6 +152,22 @@ def parquet_crs(path: Path) -> str | None:
     return None
 
 
+COLLECTION_META_SKIP = {"schemas", "schemas:custom", "title", "description", "license", "provider", "attribution", "collection"}
+
+
+def parquet_collection_properties(path: Path) -> dict:
+    """Properties stored once for the whole file in the GeoParquet ``collection``
+    metadata (vecorel hoists columns that are constant for every row, e.g.
+    ``admin:country_code`` or ``crop:code_list``)."""
+    con = duckdb_connect()
+    rows = con.execute(f"SELECT key, value FROM parquet_kv_metadata({quote(path)})").fetchall()
+    for key, value in rows:
+        if bytes(key).decode() == "collection":
+            meta = json.loads(bytes(value).decode())
+            return {k: v for k, v in meta.items() if k not in COLLECTION_META_SKIP}
+    return {}
+
+
 def parquet_columns(path: Path) -> list[str]:
     con = duckdb_connect()
     rows = con.execute(f"DESCRIBE SELECT * FROM read_parquet({quote(path)})").fetchall()
