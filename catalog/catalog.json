@@ -6,7 +6,7 @@
   ],
   "id": "harmonized-field-data",
   "title": "Harmonized Field Boundary Data",
-  "description": "Official, non-AI field boundary datasets — typically published by governments from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 2 collections (BE, DE), 1,336,742 fields in their latest editions. Each collection is one source dataset, partitioned by edition year; `*/latest/*.parquet` reads the newest edition of every collection. Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.",
+  "description": "Official, non-AI field boundary datasets — typically published by governments from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 3 collections (BE, DE, NL), 2,630,704 fields in their latest editions. Each collection is one source dataset, partitioned by edition year; `*/latest/*.parquet` reads the newest edition of every collection. Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.",
   "links": [
     {
       "rel": "root",
@@ -25,6 +25,12 @@
       "href": "./de_nrw/collection.json",
       "type": "application/json",
       "title": "Field boundaries for North Rhine-Westphalia (NRW), Germany"
+    },
+    {
+      "rel": "child",
+      "href": "./nl/collection.json",
+      "type": "application/json",
+      "title": "BRP Crop Field Boundaries for The Netherlands (CAP-based)"
     },
     {
       "rel": "about",
@@ -63,5 +69,5 @@
       "title": "Agent/LLM usage guide"
     }
   ],
-  "updated": "2026-08-21T10:58:32Z"
+  "updated": "2026-08-21T11:11:46Z"
 }

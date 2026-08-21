@@ -1,8 +1,9 @@
 # Harmonized Field Boundary Data
 
-Official (non-AI) field boundaries harmonized to fiboa, 2 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Official (non-AI) field boundaries harmonized to fiboa, 3 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - be_vlg: Field boundaries for Flanders, Belgium — https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet (license other, CRS EPSG:31370)
 - de_nrw: Field boundaries for North Rhine-Westphalia (NRW), Germany — https://data.source.coop/ftw/harmonized-field-data/de_nrw/latest/de_nrw.parquet (license DL-DE-BY-2.0, CRS EPSG:25832)
+- nl: BRP Crop Field Boundaries for The Netherlands (CAP-based) — https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet (license CC0-1.0, CRS EPSG:28992)
 
 All newest editions: https://data.source.coop/ftw/harmonized-field-data/*/latest/*.parquet (union_by_name=true). Per-edition: https://data.source.coop/ftw/harmonized-field-data/<id>/year=*/*.parquet (hive_partitioning=true).

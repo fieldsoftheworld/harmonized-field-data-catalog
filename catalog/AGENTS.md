@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-2 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
+3 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
 
 ## How to read it
 
@@ -18,6 +18,7 @@ GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- be_vlg | 594732
 -- de_nrw | 742010
+-- nl | 1293962
 ```
 
 Every edition of every collection:
@@ -31,6 +32,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2024 | be_vlg | 589749
 -- 2025 | be_vlg | 594732
 -- 2026 | de_nrw | 742010
+-- 2025 | nl | 1293962
 ```
 
 ## Join keys
