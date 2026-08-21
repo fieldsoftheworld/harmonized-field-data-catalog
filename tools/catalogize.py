@@ -219,7 +219,7 @@ def link_data_file(src: Path, dst: Path) -> None:
     dst.symlink_to(os.path.relpath(src, dst.parent))
 
 
-def build_items(ds: Dataset, meta: dict, years: list[YearInput], public_base: str) -> list[dict]:
+def build_items(ds: Dataset, meta: dict, years: list[YearInput], public_base: str, table_columns: list[dict]) -> list[dict]:
     items = []
     for y in years:
         stem = file_stem(ds.id, y.year)
@@ -245,6 +245,8 @@ def build_items(ds: Dataset, meta: dict, years: list[YearInput], public_base: st
                 "end_datetime": end,
                 PARTITION_KEY: int(y.year),
                 "proj:code": y.crs,
+                "table:columns": table_columns,
+                "table:primary_geometry": "geometry",
                 "table:row_count": y.row_count,
                 "processing:software": y.data_asset.get("processing:software", {}),
             },
@@ -773,7 +775,7 @@ def catalogize(dataset_id: str, manifest: Manifest) -> None:
     survey_url, survey_props = data_survey(ds.id)
     table_columns = describe_columns(latest.data_asset.get("table:columns", []), meta, survey_props)
     style_assets, style_facts = build_styles(ds, meta, latest)
-    items = build_items(ds, meta, years, public_base)
+    items = build_items(ds, meta, years, public_base, table_columns)
     collection = build_collection(ds, meta, years, items, manifest, public_base, human_base, table_columns, style_assets, survey_url)
 
     for y, item in zip(years, items):
