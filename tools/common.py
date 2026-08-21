@@ -97,6 +97,22 @@ def publish_config() -> dict[str, str]:
     return load_config()
 
 
+def glob_base(config: dict[str, str]) -> str:
+    """S3 form of the public prefix, for globs (``*`` needs a listing, which
+    plain https does not provide). Through the Source Cooperative proxy the
+    bucket is the organization: s3://ftw/harmonized-field-data."""
+    return config["write_prefix"].rstrip("/")
+
+
+def duckdb_s3_setup(config: dict[str, str]) -> str:
+    """The one DuckDB statement that makes the s3 globs resolve anonymously."""
+    host = config.get("endpoint_url", "").replace("https://", "").replace("http://", "").rstrip("/")
+    return (
+        "INSTALL httpfs; LOAD httpfs;\n"
+        f"CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT '{host}', URL_STYLE 'path', REGION '{config.get('region', 'us-west-2')}');"
+    )
+
+
 def staging_year_dir(dataset_id: str, year: str) -> Path:
     return STAGING_DIR / dataset_id / partition_dir(year)
 

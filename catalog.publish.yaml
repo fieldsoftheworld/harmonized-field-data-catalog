@@ -13,6 +13,10 @@ write_prefix: s3://ftw/harmonized-field-data
 # catalog is built from this.
 public_base: https://data.source.coop/ftw/harmonized-field-data
 
+# Globs (partition:glob, the recipes in AGENTS.md) use the S3 form of the same
+# prefix through the proxy, because `*` needs a listing and plain https has
+# none: s3://ftw/harmonized-field-data/... with ENDPOINT data.source.coop.
+
 # The S3 endpoint and AWS profile used for uploads. The profile is created by
 # the Source Cooperative CLI (`source-coop login`), see README.md.
 endpoint_url: https://data.source.coop

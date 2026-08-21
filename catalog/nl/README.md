@@ -28,7 +28,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 |---|---:|---|---|---|
 | 2025 | 1,293,962 | [721.4 MB](https://data.source.coop/ftw/harmonized-field-data/nl/year=2025/nl-2025.parquet) | [507.4 MB](https://data.source.coop/ftw/harmonized-field-data/nl/year=2025/nl-2025.pmtiles) | [nl-2025.json](https://data.source.coop/ftw/harmonized-field-data/nl/year=2025/nl-2025.json) |
 
-The latest edition is also available at a stable path: [nl/latest/nl.parquet](https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet). All editions together: `https://data.source.coop/ftw/harmonized-field-data/nl/year=*/*.parquet`.
+The latest edition is also available at a stable path: [nl/latest/nl.parquet](https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/nl/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
 ## Columns
 

@@ -54,6 +54,8 @@ from common import (
     catalog_year_dir,
     column_stats,
     duckdb_connect,
+    duckdb_s3_setup,
+    glob_base,
     file_stem,
     fmt_bytes,
     fmt_int,
@@ -312,14 +314,16 @@ def build_collection(
     lic, license_links = license_fields(base)
     provider_name, provider_url = parse_link_str(meta.get("provider"))
     via = ds.via or provider_url
-    glob = f"{public_base}/{ds.id}/{PARTITION_KEY}=*/*.parquet"
+    config = publish_config()
+    glob = f"{glob_base(config)}/{ds.id}/{PARTITION_KEY}=*/*.parquet"
     year_list = ", ".join(y.year for y in years)
     collection_url = f"{human_base}/{ds.id}"
 
     access = (
         f"\n\nThis collection holds {len(years)} edition{'s' if len(years) != 1 else ''} "
         f"({year_list}), one GeoParquet file per year under `{PARTITION_KEY}=<year>/` (hive layout). "
-        f"Read them all at once with the partition glob `{glob}`; the `data` asset is a copy of the "
+        f"Read them all at once with the partition glob `{glob}` (S3 through the Source Cooperative proxy, "
+        f"endpoint `{config.get('endpoint_url')}`; plain https cannot expand `*`); the `data` asset is a copy of the "
         f"latest edition ({latest.year}). Geometries are kept in the source CRS ({latest.crs}). "
         f"Converted with [fiboa-cli]({FIBOA_CLI_REPO}) into the [fiboa]({FIBOA_SPEC}) schema; "
         f"tested queries are in the collection's [AGENTS.md]({collection_url}/AGENTS.md)."
@@ -370,7 +374,7 @@ def build_collection(
             {
                 "name": PARTITION_KEY,
                 "type": "int32",
-                "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true.",
+                "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing.",
             }
         ],
         "partition:file_count": len(years),
@@ -530,7 +534,9 @@ def run_query(sql: str) -> str:
 
 def localize(sql: str, public_base: str) -> str:
     """Point a published-URL query at staging/ so it can be run before upload."""
-    return sql.replace(public_base, STAGING_DIR.as_posix())
+    config = publish_config()
+    sql = sql.replace(public_base, STAGING_DIR.as_posix()).replace(glob_base(config), STAGING_DIR.as_posix())
+    return "\n".join(line for line in sql.splitlines() if not line.startswith("CREATE SECRET"))
 
 
 def md_query(sql: str, public_base: str) -> str:
@@ -553,6 +559,7 @@ def collection_docs(
 ) -> None:
     latest = years[-1]
     cdir = CATALOG_DIR / ds.id
+    config = publish_config()
     provider_name, provider_url = parse_link_str(meta.get("provider"))
     prov_md = f"[{provider_name}]({provider_url})" if provider_url else (provider_name or "—")
     lic = collection["license"]
@@ -586,7 +593,7 @@ def collection_docs(
         base = f"{public_base}/{ds.id}/{partition_dir(y.year)}"
         pm = f"[{fmt_bytes(y.visual_asset['file:size'])}]({base}/{y.pmtiles.name})" if y.visual_asset else "—"
         lines.append(f"| {y.year} | {fmt_int(y.row_count)} | [{fmt_bytes(y.data_asset['file:size'])}]({base}/{y.parquet.name}) | {pm} | [{stem}.json]({base}/{stem}.json) |")
-    lines += ["", f"The latest edition is also available at a stable path: [{ds.id}/latest/{ds.id}.parquet]({latest_url}). All editions together: `{glob}`.", ""]
+    lines += ["", f"The latest edition is also available at a stable path: [{ds.id}/latest/{ds.id}.parquet]({latest_url}). All editions together through the S3 glob `{glob}` (see the [AGENTS.md]({human_base}/{ds.id}/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).", ""]
     lines += ["## Columns", "", "| Column | Type | Description |", "|---|---|---|"]
     for c in columns:
         lines.append(f"| `{c['name']}` | {c['type']} | {c.get('description', '')} |")
@@ -612,7 +619,7 @@ def collection_docs(
     a += ["", "## Access", ""]
     a.append(f"- Latest edition, stable path: `{latest_url}`")
     a.append(f"- One edition: `{public_base}/{ds.id}/{PARTITION_KEY}=<year>/<file>.parquet`, e.g. `{public_base}/{ds.id}/{partition_dir(latest.year)}/{latest.parquet.name}`")
-    a.append(f"- All editions (hive partitioned): `{glob}` — read with `hive_partitioning = true` to get a `{PARTITION_KEY}` column.")
+    a.append(f"- All editions (hive partitioned): `{glob}` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT '{config.get('endpoint_url', '').replace('https://', '')}', URL_STYLE 'path', REGION '{config.get('region', 'us-west-2')}');` then `read_parquet(glob, hive_partitioning = true)` adds the `{PARTITION_KEY}` column. No credentials are needed.")
     if latest.pmtiles:
         a.append(f"- PMTiles for maps: `{public_base}/{ds.id}/{partition_dir(latest.year)}/{latest.pmtiles.name}`, layer `{ds.id}`; MapLibre styles in `styles/`.")
     a += ["", "## Quirks that produce silently wrong answers", ""]
@@ -637,7 +644,7 @@ def collection_docs(
     a.append("Fields and hectares per edition, through the partition glob:")
     a.append("")
     area_expr = 'round(sum("metrics:area") / 1e4) AS hectares' if any(c["name"] == "metrics:area" for c in columns) else "0 AS hectares"
-    q = f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT {PARTITION_KEY}, count(*) AS fields, {area_expr}\nFROM read_parquet('{glob}', hive_partitioning = true)\nGROUP BY {PARTITION_KEY} ORDER BY {PARTITION_KEY};"
+    q = f"{duckdb_s3_setup(config)}\nSELECT {PARTITION_KEY}, count(*) AS fields, {area_expr}\nFROM read_parquet('{glob}', hive_partitioning = true)\nGROUP BY {PARTITION_KEY} ORDER BY {PARTITION_KEY};"
     a += [md_query(q, public_base), ""]
     if hcat_cols:
         a.append("Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):")
@@ -653,13 +660,13 @@ def collection_docs(
         a += [md_query(q, public_base), ""]
     except Exception as exc:  # noqa: BLE001 — a failed recipe is not shipped
         print(f"note: spatial query skipped for {ds.id}: {exc}")
-    a += ["## Related collections", "", f"Every collection in this catalog shares the fiboa core columns, so the same queries work across countries; `{public_base}/*/latest/*.parquet` with `union_by_name = true` reads the newest edition of all of them (see the catalog [AGENTS.md]({human_base}/AGENTS.md)).", "", "## Structure", "", "Assets and structural links resolve relative to the object that carries them; there is no `self` link. Source: this collection is generated by [tools/catalogize.py]({0}/blob/main/tools/catalogize.py) in the catalog repository — fix documentation there.".format(manifest.catalog["repository"])]
+    a += ["## Related collections", "", f"Every collection in this catalog shares the fiboa core columns, so the same queries work across countries; `{glob_base(config)}/*/latest/*.parquet` with `union_by_name = true` reads the newest edition of all of them (see the catalog [AGENTS.md]({human_base}/AGENTS.md)).", "", "## Structure", "", "Assets and structural links resolve relative to the object that carries them; there is no `self` link. Source: this collection is generated by [tools/catalogize.py]({0}/blob/main/tools/catalogize.py) in the catalog repository — fix documentation there.".format(manifest.catalog["repository"])]
     write_text(cdir / "AGENTS.md", "\n".join(a))
 
     # -- llms.txt
     l = [f"# {meta['title']}", "", f"{meta['short_name']} field boundaries ({', '.join(y.year for y in years)}) as fiboa GeoParquet + PMTiles, mirrored by {manifest.host['name']} from {provider_name or 'the source'}. License: {lic}.", ""]
     l.append(f"- Latest: {latest_url}")
-    l.append(f"- All editions: {glob} (hive_partitioning=true adds `{PARTITION_KEY}`)")
+    l.append(f"- All editions: {glob} (S3 via endpoint {config.get('endpoint_url')}, path style, anonymous; hive_partitioning=true adds `{PARTITION_KEY}`)")
     l.append(f"- CRS {latest.crs}; `metrics:area` in m²; `{PARTITION_KEY}` = edition, `id` unique per edition only.")
     l.append(f"- Columns: {', '.join(c['name'] for c in columns)}")
     l.append(f"- Docs: {human_base}/{ds.id}/README.md, agent guide {human_base}/{ds.id}/AGENTS.md, STAC {public_base}/{ds.id}/collection.json")
@@ -677,6 +684,8 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
         print("note: no collections yet; root catalog will have no children")
     cat = manifest.catalog
     repo = cat["repository"]
+    config = publish_config()
+    s3_base = glob_base(config)
     n_fields = sum(c.get("table:row_count") or 0 for c in collections)
     countries = sorted({c["id"].split("_")[0].upper() for c in collections})
     description = (
@@ -684,8 +693,8 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
         f"subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa]({FIBOA_SPEC}) schema "
         f"with [fiboa-cli]({FIBOA_CLI_REPO}) and republished as cloud-native GeoParquet and PMTiles. "
         f"{len(collections)} collections ({', '.join(countries)}), {fmt_int(n_fields)} fields in their latest editions. "
-        f"Each collection is one source dataset, partitioned by edition year; `*/latest/*.parquet` reads the newest "
-        f"edition of every collection. Hosted by [{manifest.host['name']}]({manifest.host['url']}) on "
+        f"Each collection is one source dataset, partitioned by edition year; `{s3_base}/*/latest/*.parquet` reads the newest "
+        f"edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [{manifest.host['name']}]({manifest.host['url']}) on "
         f"[Source Cooperative]({human_base}); the metadata is maintained in the "
         f"[harmonized-field-data-catalog repository]({repo}), where corrections are welcome as pull requests. "
         f"Start at the catalog [AGENTS.md]({human_base}/AGENTS.md) for cross-dataset queries."
@@ -721,8 +730,8 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
         producer = next((p for p in c.get("providers", []) if "producer" in p.get("roles", [])), {})
         prov = f"[{producer.get('name', '—')}]({producer['url']})" if producer.get("url") else producer.get("name", "—")
         r.append(f"| [{c['title']}]({human_base}/{c['id']}) | {prov} | {', '.join(years)} | {fmt_int(c.get('table:row_count'))} | {c['license']} | [README]({human_base}/{c['id']}/README.md) · [agents]({human_base}/{c['id']}/AGENTS.md) |")
-    r += ["", "## Access", "", "Everything is static files on object storage: query them in place with DuckDB, GeoPandas or any GeoParquet reader, and render the PMTiles with MapLibre. Newest edition of every collection:", ""]
-    q = f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) AS fields\nFROM read_parquet('{public_base}/*/latest/*.parquet', union_by_name = true, filename = true)\nGROUP BY 1 ORDER BY 1;"
+    r += ["", "## Access", "", f"Everything is static files on object storage: query them in place with DuckDB, GeoPandas or any GeoParquet reader, and render the PMTiles with MapLibre. Single files are plain https URLs; globs use the S3 form of the same prefix through the Source Cooperative proxy (`{s3_base}`, endpoint `{config.get('endpoint_url')}`, anonymous), because `*` needs a listing that https does not provide. Newest edition of every collection:", ""]
+    q = f"{duckdb_s3_setup(config)}\nSELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/latest/*.parquet', union_by_name = true, filename = true)\nGROUP BY 1 ORDER BY 1;"
     r += [md_query(q, public_base), ""]
     r += ["## License", "", "Each collection carries the license of its source data provider (see the table and each `collection.json`). The catalog metadata, styles and tooling are Apache-2.0, in the [repository]({0}).".format(repo), "", "## Provenance", "", f"A mirror: every collection links its original source (`rel: via`) and the fiboa data survey entry describing it, and records the fiboa-cli version that converted it. Conversion logic lives in [fiboa-cli]({FIBOA_CLI_REPO}); this repository only orchestrates publication. Previously published at [source.coop/fiboa/data](https://source.coop/fiboa/data)."]
     write_text(CATALOG_DIR / "README.md", "\n".join(r))
@@ -730,8 +739,8 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     # AGENTS.md
     a = [f"# Agent guidance — {cat['title']}", "", "**One rule survives every edit to this file.** Every claim here is quoted from a source or measured from the data; every query below was run before it was written down and its output follows as comments.", ""]
     a += ["## What this catalog holds", "", f"{len(collections)} collections, one per source dataset, all in the [fiboa]({FIBOA_SPEC}) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `{public_base}/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.", ""]
-    a += ["## How to read it", "", "Newest edition of every collection in one query (schemas differ per source, hence `union_by_name`):", "", md_query(q, public_base), ""]
-    q2 = f"SELECT {PARTITION_KEY}, regexp_extract(filename, '/([^/]+)/{PARTITION_KEY}=', 1) AS collection, count(*) AS fields\nFROM read_parquet('{public_base}/*/{PARTITION_KEY}=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)\nGROUP BY 1, 2 ORDER BY 2, 1;"
+    a += ["## How to read it", "", f"Single files: plain https under `{public_base}/`. Globs: the S3 form of the same prefix, `{s3_base}/`, through the Source Cooperative proxy (endpoint `{config.get('endpoint_url')}`, path-style, no credentials) — `*` needs a listing and https has none. Newest edition of every collection in one query (schemas differ per source, hence `union_by_name`):", "", md_query(q, public_base), ""]
+    q2 = f"{duckdb_s3_setup(config)}\nSELECT {PARTITION_KEY}, regexp_extract(filename, '/([^/]+)/{PARTITION_KEY}=', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/{PARTITION_KEY}=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)\nGROUP BY 1, 2 ORDER BY 2, 1;"
     a += ["Every edition of every collection:", "", md_query(q2, public_base), ""]
     a += ["## Join keys", "", "There are none. `id` is unique within one edition of one collection only; collections do not share identifiers and editions are not tracked across years. Spatial joins are the only bridge, and each collection is in its own CRS (`proj:code` on the collection and the `data` asset), so transform before joining.", ""]
     a += ["## Quirks that produce silently wrong answers", "", "- Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.", "- `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.", "- Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.", "- Some sources publish field *blocks* (reference parcels) rather than crop fields; the collection description says which.", ""]
@@ -742,7 +751,7 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     l = [f"# {cat['title']}", "", f"Official (non-AI) field boundaries harmonized to fiboa, {len(collections)} collections, GeoParquet + PMTiles on Source Cooperative. Root: {public_base}/catalog.json. Agent guide: {human_base}/AGENTS.md.", ""]
     for c in collections:
         l.append(f"- {c['id']}: {c['title']} — {public_base}/{c['id']}/latest/{c['id']}.parquet (license {c['license']}, CRS {', '.join(c.get('summaries', {}).get('proj:code', []))})")
-    l += ["", f"All newest editions: {public_base}/*/latest/*.parquet (union_by_name=true). Per-edition: {public_base}/<id>/year=*/*.parquet (hive_partitioning=true)."]
+    l += ["", f"Globs need S3 through the proxy (DuckDB: CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT '{config.get('endpoint_url', '').replace('https://', '')}', URL_STYLE 'path', REGION '{config.get('region', 'us-west-2')}')): all newest editions {s3_base}/*/latest/*.parquet (union_by_name=true); per-edition {s3_base}/<id>/year=*/*.parquet (hive_partitioning=true)."]
     write_text(CATALOG_DIR / "llms.txt", "\n".join(l))
 
 

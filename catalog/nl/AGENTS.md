@@ -6,7 +6,7 @@ Netherlands (Crops) field boundaries in the [fiboa](https://github.com/fiboa/spe
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet`
 - One edition: `https://data.source.coop/ftw/harmonized-field-data/nl/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/nl/year=2025/nl-2025.parquet`
-- All editions (hive partitioned): `https://data.source.coop/ftw/harmonized-field-data/nl/year=*/*.parquet` — read with `hive_partitioning = true` to get a `year` column.
+- All editions (hive partitioned): `s3://ftw/harmonized-field-data/nl/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
 - PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/nl/year=2025/nl-2025.pmtiles`, layer `nl`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
@@ -23,9 +23,10 @@ Netherlands (Crops) field boundaries in the [fiboa](https://github.com/fiboa/spe
 Fields and hectares per edition, through the partition glob:
 
 ```sql
-INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
+INSTALL httpfs; LOAD httpfs;
+CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');
 SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
-FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/nl/year=*/*.parquet', hive_partitioning = true)
+FROM read_parquet('s3://ftw/harmonized-field-data/nl/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
 -- 2025 | 1293962 | 1787357.0
@@ -63,7 +64,7 @@ LIMIT 5;
 
 ## Related collections
 
-Every collection in this catalog shares the fiboa core columns, so the same queries work across countries; `https://data.source.coop/ftw/harmonized-field-data/*/latest/*.parquet` with `union_by_name = true` reads the newest edition of all of them (see the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md)).
+Every collection in this catalog shares the fiboa core columns, so the same queries work across countries; `s3://ftw/harmonized-field-data/*/latest/*.parquet` with `union_by_name = true` reads the newest edition of all of them (see the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md)).
 
 ## Structure
 

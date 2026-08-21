@@ -18,7 +18,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 |---|---:|---|---|---|
 | 2026 | 742,010 | [281.0 MB](https://data.source.coop/ftw/harmonized-field-data/de_nrw/year=2026/de_nrw.parquet) | [99.8 MB](https://data.source.coop/ftw/harmonized-field-data/de_nrw/year=2026/de_nrw.pmtiles) | [de_nrw-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_nrw/year=2026/de_nrw-2026.json) |
 
-The latest edition is also available at a stable path: [de_nrw/latest/de_nrw.parquet](https://data.source.coop/ftw/harmonized-field-data/de_nrw/latest/de_nrw.parquet). All editions together: `https://data.source.coop/ftw/harmonized-field-data/de_nrw/year=*/*.parquet`.
+The latest edition is also available at a stable path: [de_nrw/latest/de_nrw.parquet](https://data.source.coop/ftw/harmonized-field-data/de_nrw/latest/de_nrw.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/de_nrw/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_nrw/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
 ## Columns
 

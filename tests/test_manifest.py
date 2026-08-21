@@ -55,8 +55,8 @@ for dataset_id in sorted(built & declared):
         if not (d / f"{dataset_id}-{year}.json").is_file():
             err(f"{dataset_id}: missing item {d.relative_to(ROOT)}/{dataset_id}-{year}.json")
     glob = coll.get("partition:glob", "")
-    if not glob.startswith(config["public_base"].rstrip("/") + f"/{dataset_id}/year=*/"):
-        err(f"{dataset_id}: partition:glob {glob!r} is not under public_base")
+    if not glob.startswith(config["write_prefix"].rstrip("/") + f"/{dataset_id}/year=*/"):
+        err(f"{dataset_id}: partition:glob {glob!r} is not the S3 form of the published prefix")
     providers = coll.get("providers") or []
     if not providers or "host" not in providers[-1].get("roles", []):
         err(f"{dataset_id}: last provider is not the host")

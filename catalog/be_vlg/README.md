@@ -21,7 +21,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 | 2024 | 589,749 | [89.0 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2024/be_vlg-2024.parquet) | [60.1 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2024/be_vlg-2024.pmtiles) | [be_vlg-2024.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2024/be_vlg-2024.json) |
 | 2025 | 594,732 | [91.6 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2025/be_vlg-2025.parquet) | [60.3 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2025/be_vlg-2025.pmtiles) | [be_vlg-2025.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2025/be_vlg-2025.json) |
 
-The latest edition is also available at a stable path: [be_vlg/latest/be_vlg.parquet](https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet). All editions together: `https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=*/*.parquet`.
+The latest edition is also available at a stable path: [be_vlg/latest/be_vlg.parquet](https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/be_vlg/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/be_vlg/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
 ## Columns
 

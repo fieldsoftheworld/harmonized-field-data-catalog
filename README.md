@@ -17,17 +17,17 @@ One collection per source dataset (one fiboa-cli converter), partitioned by edit
 catalog/
   catalog.json, README.md, AGENTS.md, llms.txt
   nl/
-    collection.json, README.md, AGENTS.md, llms.txt, thumbnail.png
+    collection.json, README.md, AGENTS.md, llms.txt, thumbnail.jpg
     styles/hcat-crops.json, field-size.json, outline.json
     year=2024/nl-2024.json  nl-2024.parquet  nl-2024.pmtiles      ← data only in the bucket
     year=2025/nl-2025.json  nl-2025.parquet  nl-2025.pmtiles
     latest/nl.parquet                                             ← copy of the newest edition
 ```
 
-- all editions of one dataset: `https://data.source.coop/ftw/harmonized-field-data/nl/year=*/*.parquet` (`hive_partitioning = true` adds `year`)
-- newest edition of every dataset: `https://data.source.coop/ftw/harmonized-field-data/*/latest/*.parquet` (`union_by_name = true`)
+- all editions of one dataset: `s3://ftw/harmonized-field-data/nl/year=*/*.parquet` (`hive_partitioning = true` adds `year`)
+- newest edition of every dataset: `s3://ftw/harmonized-field-data/*/latest/*.parquet` (`union_by_name = true`)
 
-Each collection declares this with the STAC [partition extension](https://github.com/portolan-sdi/stac-partition-extension) (`partition:glob`).
+Single files are plain https URLs under `https://data.source.coop/ftw/harmonized-field-data/`; globs use the S3 form of the same prefix through the Source Cooperative proxy (DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');`, no credentials), because `*` needs a listing that https does not provide. Each collection declares this with the STAC [partition extension](https://github.com/portolan-sdi/stac-partition-extension) (`partition:glob`).
 
 ## Where things live
 

@@ -12,7 +12,7 @@
   ],
   "id": "de_nrw",
   "title": "Field boundaries for North Rhine-Westphalia (NRW), Germany",
-  "description": "A field block (German: \"Feldblock\") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `https://data.source.coop/ftw/harmonized-field-data/de_nrw/year=*/*.parquet`; the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25832). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_nrw/AGENTS.md).",
+  "description": "A field block (German: \"Feldblock\") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_nrw/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25832). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_nrw/AGENTS.md).",
   "keywords": [
     "Germany",
     "INSPIRE",
@@ -136,11 +136,11 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true."
+      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
-  "partition:glob": "https://data.source.coop/ftw/harmonized-field-data/de_nrw/year=*/*.parquet",
+  "partition:glob": "s3://ftw/harmonized-field-data/de_nrw/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/de_nrw.parquet",

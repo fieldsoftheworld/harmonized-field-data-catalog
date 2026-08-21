@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Official, non-AI field boundary datasets — typically published by governments from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 3 collections (BE, DE, NL), 2,630,704 fields in their latest editions. Each collection is one source dataset, partitioned by edition year; `*/latest/*.parquet` reads the newest edition of every collection. Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.
+Official, non-AI field boundary datasets — typically published by governments from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 3 collections (BE, DE, NL), 2,630,704 fields in their latest editions. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.
 
 ## Collections
 
@@ -12,12 +12,13 @@ Official, non-AI field boundary datasets — typically published by governments 
 
 ## Access
 
-Everything is static files on object storage: query them in place with DuckDB, GeoPandas or any GeoParquet reader, and render the PMTiles with MapLibre. Newest edition of every collection:
+Everything is static files on object storage: query them in place with DuckDB, GeoPandas or any GeoParquet reader, and render the PMTiles with MapLibre. Single files are plain https URLs; globs use the S3 form of the same prefix through the Source Cooperative proxy (`s3://ftw/harmonized-field-data`, endpoint `https://data.source.coop`, anonymous), because `*` needs a listing that https does not provide. Newest edition of every collection:
 
 ```sql
-INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
+INSTALL httpfs; LOAD httpfs;
+CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');
 SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) AS fields
-FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
+FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- be_vlg | 594732

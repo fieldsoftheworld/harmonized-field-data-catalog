@@ -3,7 +3,7 @@
 Belgium, Flanders field boundaries (2023, 2024, 2025) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Agentschap Landbouw & Zeevisserij (Government). License: other.
 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet
-- All editions: https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=*/*.parquet (hive_partitioning=true adds `year`)
+- All editions: s3://ftw/harmonized-field-data/be_vlg/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
 - CRS EPSG:31370; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
 - Columns: crop:name, typology, id, metrics:area, hcat:name, crop:code, hcat:code, geometry, hcat:name_en, collection, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/be_vlg/README.md, agent guide https://source.coop/ftw/harmonized-field-data/be_vlg/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/be_vlg/collection.json

@@ -12,7 +12,7 @@
   ],
   "id": "be_vlg",
   "title": "Field boundaries for Flanders, Belgium",
-  "description": "Since 2020, the Department of Agriculture and Fisheries has been publishing a more extensive set of data related to agricultural use plots (from the 2008 campaign).\nFrom 2023, the downloadable dataset of agricultural use plots will also include the specialization given by the company (= company typology) and that is given to the plots of the company. Based on the typology, the companies are divided into 4 major specializations: arable farming, horticulture, livestock farming and mixed farms. The specialization of each company is calculated annually according to a European method and is based on the standard output of the various agricultural productions on the company. It is therefore an economic specialization and not a reflection of all agricultural production on the company.\n\nThis collection holds 3 editions (2023, 2024, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=*/*.parquet`; the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:31370). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/be_vlg/AGENTS.md).",
+  "description": "Since 2020, the Department of Agriculture and Fisheries has been publishing a more extensive set of data related to agricultural use plots (from the 2008 campaign).\nFrom 2023, the downloadable dataset of agricultural use plots will also include the specialization given by the company (= company typology) and that is given to the plots of the company. Based on the typology, the companies are divided into 4 major specializations: arable farming, horticulture, livestock farming and mixed farms. The specialization of each company is calculated annually according to a European method and is based on the standard output of the various agricultural productions on the company. It is therefore an economic specialization and not a reflection of all agricultural production on the company.\n\nThis collection holds 3 editions (2023, 2024, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/be_vlg/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:31370). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/be_vlg/AGENTS.md).",
   "keywords": [
     "Belgium",
     "Flanders",
@@ -132,11 +132,11 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true."
+      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 3,
-  "partition:glob": "https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=*/*.parquet",
+  "partition:glob": "s3://ftw/harmonized-field-data/be_vlg/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/be_vlg.parquet",

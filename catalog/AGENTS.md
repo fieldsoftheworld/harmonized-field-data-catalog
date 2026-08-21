@@ -8,12 +8,13 @@
 
 ## How to read it
 
-Newest edition of every collection in one query (schemas differ per source, hence `union_by_name`):
+Single files: plain https under `https://data.source.coop/ftw/harmonized-field-data/`. Globs: the S3 form of the same prefix, `s3://ftw/harmonized-field-data/`, through the Source Cooperative proxy (endpoint `https://data.source.coop`, path-style, no credentials) — `*` needs a listing and https has none. Newest edition of every collection in one query (schemas differ per source, hence `union_by_name`):
 
 ```sql
-INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
+INSTALL httpfs; LOAD httpfs;
+CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');
 SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) AS fields
-FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
+FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- be_vlg | 594732
@@ -24,8 +25,10 @@ GROUP BY 1 ORDER BY 1;
 Every edition of every collection:
 
 ```sql
+INSTALL httpfs; LOAD httpfs;
+CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');
 SELECT year, regexp_extract(filename, '/([^/]+)/year=', 1) AS collection, count(*) AS fields
-FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
+FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
 -- 2023 | be_vlg | 588192
