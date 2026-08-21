@@ -1,0 +1,9 @@
+# Field boundaries for North Rhine-Westphalia (NRW), Germany
+
+Germany, North Rhine-Westphalia field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Land Nordrhein-Westfalen / Open.NRW. License: DL-DE-BY-2.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/de_nrw/latest/de_nrw.parquet
+- All editions: https://data.source.coop/ftw/harmonized-field-data/de_nrw/year=*/*.parquet (hive_partitioning=true adds `year`)
+- CRS EPSG:25832; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: id, hcat:name, crop:code, collection, geometry, flik, crop:name, determination:datetime, hcat:name_en, metrics:area, hcat:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/de_nrw/README.md, agent guide https://source.coop/ftw/harmonized-field-data/de_nrw/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/de_nrw/collection.json

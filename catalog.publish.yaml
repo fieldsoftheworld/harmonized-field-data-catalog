@@ -1,0 +1,24 @@
+# What publishes, and where.
+#
+# Everything under publish_dir is synced 1:1 to write_prefix. Data files are
+# never placed under publish_dir (they are gitignored and uploaded from
+# staging/ by tools/upload_data.py), so they cannot be published by accident.
+
+# The S3 URI uploads are written to. Source Cooperative is addressed through
+# its data proxy, where the bucket is the organization and the prefix is the
+# product: https://docs.source.coop/data-upload
+write_prefix: s3://ftw/harmonized-field-data
+
+# The public base URL that serves write_prefix. Every absolute href in the
+# catalog is built from this.
+public_base: https://data.source.coop/ftw/harmonized-field-data
+
+# The S3 endpoint and AWS profile used for uploads. The profile is created by
+# the Source Cooperative CLI (`source-coop login`), see README.md.
+endpoint_url: https://data.source.coop
+profile: source-coop
+region: us-west-2
+
+# The directory that IS the published catalog, synced 1:1 to write_prefix.
+# Nothing outside it is ever uploaded.
+publish_dir: catalog

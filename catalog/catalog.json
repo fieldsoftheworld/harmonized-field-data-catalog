@@ -1,0 +1,67 @@
+{
+  "type": "Catalog",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json"
+  ],
+  "id": "harmonized-field-data",
+  "title": "Harmonized Field Boundary Data",
+  "description": "Official, non-AI field boundary datasets — typically published by governments from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 2 collections (BE, DE), 1,336,742 fields in their latest editions. Each collection is one source dataset, partitioned by edition year; `*/latest/*.parquet` reads the newest edition of every collection. Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./catalog.json",
+      "type": "application/json",
+      "title": "Harmonized Field Boundary Data"
+    },
+    {
+      "rel": "child",
+      "href": "./be_vlg/collection.json",
+      "type": "application/json",
+      "title": "Field boundaries for Flanders, Belgium"
+    },
+    {
+      "rel": "child",
+      "href": "./de_nrw/collection.json",
+      "type": "application/json",
+      "title": "Field boundaries for North Rhine-Westphalia (NRW), Germany"
+    },
+    {
+      "rel": "about",
+      "href": "https://source.coop/ftw/harmonized-field-data",
+      "type": "text/html",
+      "title": "Dataset home page on Source Cooperative"
+    },
+    {
+      "rel": "vcs",
+      "href": "https://github.com/fieldsoftheworld/harmonized-field-data-catalog",
+      "type": "text/html",
+      "title": "Source repository"
+    },
+    {
+      "rel": "issues",
+      "href": "https://github.com/fieldsoftheworld/harmonized-field-data-catalog/issues",
+      "type": "text/html",
+      "title": "Issue tracker"
+    },
+    {
+      "rel": "agents",
+      "href": "./AGENTS.md",
+      "type": "text/markdown",
+      "title": "Guidance for AI agents"
+    },
+    {
+      "rel": "describedby",
+      "href": "./README.md",
+      "type": "text/markdown",
+      "title": "Human-readable documentation"
+    },
+    {
+      "rel": "llms",
+      "href": "./llms.txt",
+      "type": "text/markdown",
+      "title": "Agent/LLM usage guide"
+    }
+  ],
+  "updated": "2026-08-21T10:39:56Z"
+}

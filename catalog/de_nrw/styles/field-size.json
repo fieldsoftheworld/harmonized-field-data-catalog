@@ -1,0 +1,55 @@
+{
+  "version": 8,
+  "name": "Germany, North Rhine-Westphalia — field size (ha)",
+  "metadata": {
+    "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.25, 1, 2, 5 ha, chosen from the 20th/50th/80th/95th percentiles of this dataset."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/de_nrw.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-size",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "de_nrw",
+      "paint": {
+        "fill-color": [
+          "step",
+          [
+            "/",
+            [
+              "get",
+              "metrics:area"
+            ],
+            10000
+          ],
+          "#f7fcf5",
+          0.25,
+          "#c7e9c0",
+          1,
+          "#74c476",
+          2,
+          "#238b45",
+          5,
+          "#00441b"
+        ],
+        "fill-opacity": 0.8
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "de_nrw",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.4)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

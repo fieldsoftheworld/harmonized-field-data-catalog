@@ -1,0 +1,80 @@
+# Column descriptions for the fiboa / Vecorel properties that converters emit.
+# Every entry is quoted from the specification that defines the property; the
+# `source` is the page it was taken from (read in August 2026). Dataset-specific
+# columns are described from the fiboa data survey instead (see catalogize.py).
+#
+# Wording is the specification's own; keep it that way when updating.
+
+sources:
+  fiboa_core: https://github.com/fiboa/specification/blob/main/core/README.md
+  vecorel_core: https://github.com/vecorel/specification/blob/main/core/README.md
+  crop: https://github.com/fiboa/crop-extension/blob/main/README.md
+  hcat: https://github.com/fiboa/hcat-extension/blob/main/README.md
+  inspire: https://github.com/fiboa/inspire-extension/blob/main/README.md
+  flik: https://github.com/fiboa/flik-extension/blob/main/README.md
+  admin: https://github.com/vecorel/administrative-division-extension/blob/main/README.md
+
+columns:
+  id:
+    description: "An identifier for the field."
+    source: fiboa_core
+  collection:
+    description: "The identifier of the collection."
+    source: fiboa_core
+  geometry:
+    description: "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected."
+    source: fiboa_core
+  bbox:
+    description: "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS."
+    source: fiboa_core
+  category:
+    description: "A set of categories the field boundary belongs to."
+    source: fiboa_core
+  metrics:area:
+    description: "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000."
+    source: fiboa_core
+  metrics:perimeter:
+    description: "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000."
+    source: fiboa_core
+  determination:method:
+    description: "The boundary creation method, one of: manual, driven, surveyed, auto-operation, auto-imagery, unknown."
+    source: fiboa_core
+  determination:datetime:
+    description: "The last timestamp at which the field did exist and was observed."
+    source: fiboa_core
+  determination:details:
+    description: "Further details about the determination, especially the methodology."
+    source: fiboa_core
+  crop:code_list:
+    description: "A link to the code list."
+    source: crop
+  crop:code:
+    description: "The crop code, from the code list of the source."
+    source: crop
+  crop:name:
+    description: "Crop name in the original language."
+    source: crop
+  crop:name_en:
+    description: "Crop name in English."
+    source: crop
+  hcat:name:
+    description: "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops)."
+    source: hcat
+  hcat:code:
+    description: "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups."
+    source: hcat
+  hcat:name_en:
+    description: "The original crop name translated into English."
+    source: hcat
+  inspire:id:
+    description: "INSPIRE-compliant ID, an absolute and fully resolvable URI."
+    source: inspire
+  flik:
+    description: "The area identifier (FLIK code) is a 16-character string."
+    source: flik
+  admin:country_code:
+    description: "ISO 3166-1 alpha-2 country code (aka admin0). Two-letter country code for the country that contains the field."
+    source: admin
+  admin:subdivision_code:
+    description: "ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored."
+    source: admin

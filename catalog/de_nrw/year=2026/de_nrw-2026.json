@@ -1,0 +1,99 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "de_nrw-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          5.765432342009142,
+          50.31048988389993
+        ],
+        [
+          9.468054798137555,
+          50.31048988389993
+        ],
+        [
+          9.468054798137555,
+          52.53090783983452
+        ],
+        [
+          5.765432342009142,
+          52.53090783983452
+        ],
+        [
+          5.765432342009142,
+          50.31048988389993
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    5.765432342009142,
+    50.31048988389993,
+    9.468054798137555,
+    52.53090783983452
+  ],
+  "properties": {
+    "title": "Germany, North Rhine-Westphalia — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_nrw.parquet`, 742,010 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2026-03-12T00:00:00Z",
+    "end_datetime": "2026-08-20T00:00:00Z",
+    "year": 2026,
+    "proj:code": "EPSG:25832",
+    "table:row_count": 742010,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "de_nrw",
+  "assets": {
+    "data": {
+      "href": "./de_nrw.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Germany, North Rhine-Westphalia 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 294688039,
+      "file:checksum": "1220b11c86acdec589509a59732f71200939efd1b9d970b3417824bee981769f6f4d",
+      "proj:code": "EPSG:25832"
+    },
+    "visual": {
+      "href": "./de_nrw.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Germany, North Rhine-Westphalia 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 104597929,
+      "file:checksum": "1220394f9d98a6abd475cad718dc07e0549d9d32ac7a0c14f16a5d427471f2ef7155"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}
