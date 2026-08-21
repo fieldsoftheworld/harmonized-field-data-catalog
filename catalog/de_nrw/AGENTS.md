@@ -39,11 +39,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_nrw/lat
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | example_name | fields | hectares
--- 330101 | winter_common_soft_wheat | 171335 | 550132.0
+-- 330101 | winter_barley | 171335 | 550132.0
 -- 330200 | pasture_meadow_grassland_grass | 313163 | 442559.0
--- 330109 | clover | 74459 | 206967.0
--- 330106 | mints_peppermint | 17504 | 62986.0
--- 330129 | sugar_beet | 12996 | 54091.0
+-- 330109 | green_silo_maize | 74459 | 206967.0
+-- 330106 | winter_rapeseed_rape | 17504 | 62986.0
+-- 330129 | beetroot_beets | 12996 | 54091.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

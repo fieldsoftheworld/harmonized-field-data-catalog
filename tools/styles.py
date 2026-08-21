@@ -197,9 +197,10 @@ def hcat_style(
 
 
 def size_stops(stats: dict) -> list[float]:
-    """Four ascending stops in hectares, nearest nice values to p20/p50/p80/p95."""
+    """Up to four ascending stops in hectares: nice values nearest the 20th, 40th,
+    60th and 80th percentiles, so every class holds a similar share of fields."""
     stops = []
-    for key in ("p20", "p50", "p80", "p95"):
+    for key in ("p20", "p40", "p60", "p80"):
         value = stats.get(key)
         if value is None:
             continue
@@ -221,7 +222,7 @@ def field_size_style(stats: dict, layer: str, pmtiles_rel: str, title: str) -> d
         pmtiles_rel,
         "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at "
         + ", ".join(f"{s:g}" for s in stops)
-        + " ha, chosen from the 20th/50th/80th/95th percentiles of this dataset.",
+        + " ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
     )
     style["layers"] = [
         {

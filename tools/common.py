@@ -166,8 +166,8 @@ def column_stats(path: Path, column: str) -> dict | None:
     q = f'"{column}"'
     row = con.execute(
         f"SELECT count({q}), min({q}), max({q}), "
-        f"quantile_cont({q}, 0.2), quantile_cont({q}, 0.5), "
-        f"quantile_cont({q}, 0.8), quantile_cont({q}, 0.95) "
+        f"quantile_cont({q}, 0.2), quantile_cont({q}, 0.4), quantile_cont({q}, 0.5), "
+        f"quantile_cont({q}, 0.6), quantile_cont({q}, 0.8), quantile_cont({q}, 0.95) "
         f"FROM read_parquet({quote(path)})"
     ).fetchone()
     return {
@@ -175,9 +175,11 @@ def column_stats(path: Path, column: str) -> dict | None:
         "min": row[1],
         "max": row[2],
         "p20": row[3],
-        "p50": row[4],
-        "p80": row[5],
-        "p95": row[6],
+        "p40": row[4],
+        "p50": row[5],
+        "p60": row[6],
+        "p80": row[7],
+        "p95": row[8],
     }
 
 

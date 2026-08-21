@@ -27,6 +27,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/*/year=*/*
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
 -- 2023 | be_vlg | 588192
+-- 2024 | be_vlg | 589749
 -- 2026 | de_nrw | 742010
 ```
 
