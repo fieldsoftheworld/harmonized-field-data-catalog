@@ -10,12 +10,15 @@
 set -u
 cd "$(dirname "$0")/.."
 mkdir -p staging/logs
+# Call the environment's python directly: `pixi run python ... fi` fails because
+# pixi's shell parser treats the dataset id `fi` as a reserved word.
+PY=${PY:-.pixi/envs/default/bin/python}
 for id in "$@"; do
   start=$(date +%s)
-  if pixi run python tools/build.py "$id" > "staging/logs/$id.log" 2>&1; then
+  if "$PY" tools/build.py "$id" > "staging/logs/$id.log" 2>&1; then
     verdict=ok
     if [ "${BATCH_UPLOAD:-0}" = "1" ]; then
-      pixi run python tools/upload_data.py "$id" --confirm >> "staging/logs/$id.log" 2>&1 && verdict=uploaded || verdict=upload-failed
+      "$PY" tools/upload_data.py "$id" --confirm >> "staging/logs/$id.log" 2>&1 && verdict=uploaded || verdict=upload-failed
     fi
   else
     verdict=FAILED
