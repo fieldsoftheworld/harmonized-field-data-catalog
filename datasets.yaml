@@ -42,3 +42,135 @@ datasets:
     years: ["2025"]
     keywords: [Netherlands, BRP, Basisregistratie Gewaspercelen, IACS, crop fields, PDOK]
     thumbnail: {zoom: 13, center: [5.66, 52.50]}  # Flevoland arable mosaic; the densest cluster is uniform grassland
+  lu:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Luxembourg, FLIK, field blocks]
+  es_cn:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Spain, Canary Islands, crop map]
+  de_sh:
+    years: ['2026']
+    keywords: [Germany, Schleswig-Holstein, Feldblöcke]
+  de_bb:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Germany, Berlin, Brandenburg, crop fields, IACS]
+  de_bb_block:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Germany, Berlin, Brandenburg, field blocks, Feldblöcke]
+  be_wal:
+    year: 2022
+    year_source: Year in the source download name (2022).
+    keywords: [Belgium, Wallonia, parcellaire agricole anonyme, IACS]
+  si:
+    years: ['2024']
+    keywords: [Slovenia, GERK, crop fields]
+  it_1:
+    years: ['2023']
+    keywords: [Italy, Tuscany, EuroCropsV2, JRC]
+  cz:
+    years: ['2026']
+    keywords: [Czechia, LPIS, field blocks]
+  dk:
+    years: ['2026']
+    keywords: [Denmark, Marker, crop fields, IACS]
+  es_cat:
+    years: ['2024']
+    keywords: [Spain, Catalonia, Mapa de cultius, crop fields]
+  sk:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Slovakia, LPIS, field blocks]
+  es_md:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Spain, Madrid, crop fields]
+  lt:
+    year: 2024
+    year_source: Year in the source download name (2024).
+    keywords: [Lithuania, crop fields, IACS]
+  ec_ro:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Romania, EuroCrops, crop fields]
+  de_th:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Germany, Thuringia, Feldblöcke, field blocks]
+  de_by:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Germany, Bavaria, land use, crop fields]
+  de_mv:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Germany, Mecklenburg-Western Pomerania, Feldblöcke, field blocks]
+  ee:
+    years: ['2024']
+    keywords: [Estonia, GSAA, crop fields, INSPIRE]
+  lv:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Latvia, Lauki, crop fields]
+  fi:
+    year: 2023
+    year_source: Year in the source download name (2023).
+    keywords: [Finland, Maatalousmaa, crop fields, INSPIRE]
+  hr:
+    years: ['2024']
+    keywords: [Croatia, ARKOD, crop fields]
+  ie:
+    years: ['2024']
+    keywords: [Ireland, GSAA, crop fields, INSPIRE]
+  es_an:
+    years: ['2025']
+    keywords: [Spain, Andalusia, SIGPAC, crop fields]
+  at:
+    years: ['2025']
+    keywords: [Austria, Schläge, crop fields, INSPIRE]
+  at_block:
+    year: 2021
+    year_source: Year in the source download name (2021).
+    keywords: [Austria, Referenzen, field blocks, INSPIRE]
+  es_ar:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Spain, Aragon, crop fields]
+  es_cb:
+    years: ['2024']
+    keywords: [Spain, Cantabria, crop fields]
+  es_cm:
+    years: ['2024']
+    keywords: [Spain, Castilla-La Mancha, crop fields]
+  es_ga:
+    years: ['2024']
+    keywords: [Spain, Galicia, crop fields]
+  es_ib:
+    years: ['2024']
+    keywords: [Spain, Balearic Islands, crop fields]
+  es_pv:
+    years: ['2025']
+    keywords: [Spain, Basque Country, crop fields]
+  es_vc:
+    years: ['2024']
+    keywords: [Spain, Valencia, crop fields]
+  fr:
+    years: ['2024']
+    keywords: [France, RPG, Registre Parcellaire Graphique, crop fields]
+  es_cl:
+    year: 2025
+    year_source: Year in the source download name (2025).
+    keywords: [Spain, Castilla y León, SIGPAC, crop fields]
+  nl_block:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Netherlands, referentiepercelen, field blocks, PDOK]
+  us_usda_cropland:
+    years: ['2024']
+    keywords: [United States, USDA, Crop Sequence Boundaries]
+  pt:
+    years: ['2023']
+    keywords: [Portugal, IFAP, crop fields, INSPIRE]
