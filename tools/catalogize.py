@@ -145,11 +145,21 @@ def data_survey(dataset_id: str) -> tuple[str | None, dict[str, str]]:
     return DATA_SURVEY_PAGE.format(base=base), props
 
 
+def reverse_columns(meta: dict) -> dict[str, str]:
+    """fiboa column -> source column, from the converter's ``columns`` (whose
+    values may be a list when one source column feeds several properties)."""
+    out: dict[str, str] = {}
+    for src, dst in (meta.get("columns") or {}).items():
+        for name in (dst if isinstance(dst, (list, tuple)) else [dst]):
+            out[name] = src
+    return out
+
+
 def describe_columns(table_columns: list[dict], meta: dict, survey_props: dict[str, str]) -> list[dict]:
     """table:columns with a description for every column we can attest."""
     spec = FIELD_DESCRIPTIONS["columns"]
     sources = FIELD_DESCRIPTIONS["sources"]
-    reverse = {v: k for k, v in (meta.get("columns") or {}).items()}
+    reverse = reverse_columns(meta)
     out = []
     for col in table_columns:
         name = col["name"]
@@ -534,8 +544,10 @@ def run_query(sql: str) -> str:
 
 def localize(sql: str, public_base: str) -> str:
     """Point a published-URL query at staging/ so it can be run before upload."""
+    # Resolve against catalog/, where only fully catalogized datasets have their
+    # data symlinked, so a conversion in progress in staging/ cannot leak in.
     config = publish_config()
-    sql = sql.replace(public_base, STAGING_DIR.as_posix()).replace(glob_base(config), STAGING_DIR.as_posix())
+    sql = sql.replace(public_base, CATALOG_DIR.as_posix()).replace(glob_base(config), CATALOG_DIR.as_posix())
     return "\n".join(line for line in sql.splitlines() if not line.startswith("CREATE SECRET"))
 
 
@@ -624,7 +636,7 @@ def collection_docs(
         a.append(f"- PMTiles for maps: `{public_base}/{ds.id}/{partition_dir(latest.year)}/{latest.pmtiles.name}`, layer `{ds.id}`; MapLibre styles in `styles/`.")
     a += ["", "## Quirks that produce silently wrong answers", ""]
     a.append(f"- **CRS is {latest.crs}, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.")
-    area_src = next((k for k, v in (meta.get("columns") or {}).items() if v == "metrics:area"), None)
+    area_src = reverse_columns(meta).get("metrics:area")
     if area_src and meta.get("area_calculate_missing"):
         a.append(f"- **`metrics:area` is in square metres** (source column `{area_src}`{', hectares × 10 000' if meta.get('area_is_in_ha') else ''}; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.")
     elif area_src:
@@ -632,7 +644,7 @@ def collection_docs(
     elif any(c["name"] == "metrics:area" for c in columns):
         a.append("- **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.")
     a.append(f"- **`{PARTITION_KEY}` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.")
-    id_src = next((k for k, v in (meta.get("columns") or {}).items() if v == "id"), None)
+    id_src = reverse_columns(meta).get("id")
     a.append(f"- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is {'the source column `' + id_src + '`' if id_src else 'assigned by the converter'}). Whether an id persists across editions is not verified here; do not join editions on it without checking.")
     if hcat_cols:
         a.append(f"- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`{meta.get('ec_mapping_csv')}`) have `NULL`.")
@@ -655,7 +667,8 @@ def collection_docs(
     a.append("")
     cx = (latest.bbox[0] + latest.bbox[2]) / 2
     cy = (latest.bbox[1] + latest.bbox[3]) / 2
-    q = f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT id, round(\"metrics:area\") AS m2\nFROM read_parquet('{latest_url}')\nWHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point({cy:.4f}, {cx:.4f}), 'EPSG:4326', '{latest.crs}'), 500))\nLIMIT 5;"
+    sel = 'id, round("metrics:area") AS m2' if any(c["name"] == "metrics:area" for c in columns) else "id"
+    q = f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT {sel}\nFROM read_parquet('{latest_url}')\nWHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point({cy:.4f}, {cx:.4f}), 'EPSG:4326', '{latest.crs}'), 500))\nLIMIT 5;"
     try:
         a += [md_query(q, public_base), ""]
     except Exception as exc:  # noqa: BLE001 — a failed recipe is not shipped
