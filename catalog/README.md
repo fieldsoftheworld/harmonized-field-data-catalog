@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Official, non-AI field boundary datasets — typically published by governments from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 33 collections (AT, BE, CZ, DE, DK, EC, EE, ES, FI, HR, IE, IT, LT, LU, LV, NL, SI, SK), 33,932,872 fields in their latest editions. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.
+Official, non-AI field boundary datasets — typically published by governments from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 34 collections (AT, BE, CZ, DE, DK, EC, EE, ES, FI, HR, IE, IT, LT, LU, LV, NL, SI, SK), 34,467,658 fields in their latest editions. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.
 
 ## Collections
 
@@ -37,6 +37,7 @@ Official, non-AI field boundary datasets — typically published by governments 
 | [Luxembourg FLIK Parcels](https://source.coop/ftw/harmonized-field-data/lu) | [Administration des services techniques de l'agriculture](https://asta.etat.lu/en) | 2026 | 87,997 | CC-BY-4.0 | [README](https://source.coop/ftw/harmonized-field-data/lu/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/lu/AGENTS.md) |
 | [Latvia Lauki Parcels](https://source.coop/ftw/harmonized-field-data/lv) | [Rural Support Service Republic of Latvia (Lauku atbalsta dienests)](https://www.lad.gov.lv/lv/lauku-registra-dati) | 2026 | 413,218 | CC-BY-SA-4.0 | [README](https://source.coop/ftw/harmonized-field-data/lv/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/lv/AGENTS.md) |
 | [BRP Crop Field Boundaries for The Netherlands (CAP-based)](https://source.coop/ftw/harmonized-field-data/nl) | [RVO / PDOK](https://www.pdok.nl/introductie/-/article/basisregistratie-gewaspercelen-brp-) | 2025 | 1,293,962 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/nl/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md) |
+| [Field blocks for The Netherlands](https://source.coop/ftw/harmonized-field-data/nl_block) | [RVO / PDOK](https://www.pdok.nl/introductie/-/article/referentiepercelen) | 2026 | 534,786 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/nl_block/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/nl_block/AGENTS.md) |
 | [Slovenia Crop Fields](https://source.coop/ftw/harmonized-field-data/si) | [Ministry of Agriculture, Forestry and Food (Ministrstvo za kmetijstvo, gozdarstvo in prehrano)](https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-kmetijstvo-gozdarstvo-in-prehrano/) | 2024 | 809,044 | other | [README](https://source.coop/ftw/harmonized-field-data/si/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/si/AGENTS.md) |
 | [Slovakia Agricultural Land Identification System](https://source.coop/ftw/harmonized-field-data/sk) | [Pôdohospodárska platobná agentúra](https://www.apa.sk) | 2026 | 274,467 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/sk/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/sk/AGENTS.md) |
 
@@ -59,7 +60,7 @@ GROUP BY 1 ORDER BY 1;
 -- de_bb | 290688
 -- de_bb_block | 90764
 -- de_by | 1296105
--- ... 25 more rows
+-- ... 26 more rows
 ```
 
 ## License

@@ -1,0 +1,9 @@
+# Field blocks for The Netherlands
+
+Netherlands (parcels) field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from RVO / PDOK. License: CC0-1.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/nl_block/latest/nl_block.parquet
+- All editions: s3://ftw/harmonized-field-data/nl_block/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:28992; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: metrics:area, id, geometry, collection, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/nl_block/README.md, agent guide https://source.coop/ftw/harmonized-field-data/nl_block/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/nl_block/collection.json

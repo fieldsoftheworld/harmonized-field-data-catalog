@@ -1,0 +1,127 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "nl_block-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          3.2579020517149324,
+          50.73428107549361
+        ],
+        [
+          7.237753140074882,
+          50.73428107549361
+        ],
+        [
+          7.237753140074882,
+          53.48775690289261
+        ],
+        [
+          3.2579020517149324,
+          53.48775690289261
+        ],
+        [
+          3.2579020517149324,
+          50.73428107549361
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    3.2579020517149324,
+    50.73428107549361,
+    7.237753140074882,
+    53.48775690289261
+  ],
+  "properties": {
+    "title": "Netherlands (parcels) — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`nl_block.parquet`, 534,786 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2023-06-15T00:00:00Z",
+    "end_datetime": "2023-06-15T00:00:00Z",
+    "year": 2026,
+    "proj:code": "EPSG:28992",
+    "table:columns": [
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 534786,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "nl_block",
+  "assets": {
+    "data": {
+      "href": "./nl_block.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Netherlands (parcels) 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 359481676,
+      "file:checksum": "1220491476c4f7f60e72ca9f48950451ea8bc839ccf0897c9f15613a4f9ac82e01fc",
+      "proj:code": "EPSG:28992"
+    },
+    "visual": {
+      "href": "./nl_block.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Netherlands (parcels) 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 126706010,
+      "file:checksum": "12206764c92fe5e8a7c6e77916b4bcd9cf62036c3544dc5a5c58cc2745a24139cff0"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

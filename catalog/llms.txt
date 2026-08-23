@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Official (non-AI) field boundaries harmonized to fiboa, 33 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Official (non-AI) field boundaries harmonized to fiboa, 34 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - at_block: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
@@ -33,6 +33,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 33 collections, GeoParqu
 - lu: Luxembourg FLIK Parcels — https://data.source.coop/ftw/harmonized-field-data/lu/latest/lu.parquet (license CC-BY-4.0, CRS EPSG:2169)
 - lv: Latvia Lauki Parcels — https://data.source.coop/ftw/harmonized-field-data/lv/latest/lv.parquet (license CC-BY-SA-4.0, CRS EPSG:3059)
 - nl: BRP Crop Field Boundaries for The Netherlands (CAP-based) — https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet (license CC0-1.0, CRS EPSG:28992)
+- nl_block: Field blocks for The Netherlands — https://data.source.coop/ftw/harmonized-field-data/nl_block/latest/nl_block.parquet (license CC0-1.0, CRS EPSG:28992)
 - si: Slovenia Crop Fields — https://data.source.coop/ftw/harmonized-field-data/si/latest/si.parquet (license other, CRS EPSG:3794)
 - sk: Slovakia Agricultural Land Identification System — https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet (license CC0-1.0, CRS EPSG:5514)
 
