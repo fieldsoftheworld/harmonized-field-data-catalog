@@ -27,10 +27,16 @@ def main() -> int:
     from fiboa_cli.converters import Converters
 
     converter = Converters().load(dataset_id)
+    # Converters may log while resolving their URLs (e.g. es_ar lists its
+    # files from a web service); stdout must stay pure JSON. vecorel-cli's
+    # loguru sink was bound to the stdout object when the converter was
+    # created, so it has to be re-pointed rather than redirected.
+    from loguru import logger
+
+    logger.remove()
+    logger.add(sys.stderr, colorize=False, format="{message}", level="INFO")
     variants = getattr(converter, "variants", None) or {}
     sources = {}
-    # Converters may log while resolving their URLs (e.g. es_ar lists its
-    # files from a web service); stdout must stay pure JSON.
     with contextlib.redirect_stdout(sys.stderr):
         for variant in variants or [None]:
             if variant is not None:
