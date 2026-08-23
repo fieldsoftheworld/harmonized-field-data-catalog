@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Ireland — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2024/ie-2024.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "ie",
+      "paint": {
+        "fill-color": "#2166ac",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "ie",
+      "paint": {
+        "line-color": "#2166ac",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# Spain Andalusia Crop fields
+
+Spain Andalusia field boundaries (2025) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Junta de Andalucía. License: other.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/es_an/latest/es_an.parquet
+- All editions: s3://ftw/harmonized-field-data/es_an/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:25830; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: collection, geometry, crop:name, admin_province_code, metrics:area, crop:code, id, admin_municipality_code, crop:name_en, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/es_an/README.md, agent guide https://source.coop/ftw/harmonized-field-data/es_an/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/es_an/collection.json

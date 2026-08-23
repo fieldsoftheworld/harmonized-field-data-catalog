@@ -1,0 +1,9 @@
+# Ireland INSPIRE Geospatial aid application (GSAA) dataset
+
+Ireland field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Department of Agriculture, Food and the Marine. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet
+- All editions: s3://ftw/harmonized-field-data/ie/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4258; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: id, collection, geometry, crop:code, crop:name, hcat:code, hcat:name, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/ie/README.md, agent guide https://source.coop/ftw/harmonized-field-data/ie/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/ie/collection.json

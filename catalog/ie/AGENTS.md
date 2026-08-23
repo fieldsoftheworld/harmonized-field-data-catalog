@@ -1,0 +1,72 @@
+# Agent guidance — Ireland INSPIRE Geospatial aid application (GSAA) dataset
+
+Ireland field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+
+## Access
+
+- Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/ie/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/ie/year=2024/ie-2024.parquet`
+- All editions (hive partitioned): `s3://ftw/harmonized-field-data/ie/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/ie/year=2024/ie-2024.pmtiles`, layer `ie`; MapLibre styles in `styles/`.
+
+## Quirks that produce silently wrong answers
+
+- **CRS is EPSG:4258, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
+- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `localId`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/ie/ie.csv`) have `NULL`.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2024-12-31T00:00:00Z`, `admin:country_code` = `IE`, `crop:code_list` = `https://fiboa.org/code/ie/ie.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+
+## Tested queries
+
+Fields and hectares per edition, through the partition glob:
+
+```sql
+INSTALL httpfs; LOAD httpfs;
+CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');
+SELECT year, count(*) AS fields, 0 AS hectares
+FROM read_parquet('s3://ftw/harmonized-field-data/ie/year=*/*.parquet', hive_partitioning = true)
+GROUP BY year ORDER BY year;
+-- year | fields | hectares
+-- 2024 | 1119949 | 0
+```
+
+Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
+
+```sql
+SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, mode("hcat:name") AS most_common_name,
+       count(*) AS fields
+FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet')
+WHERE "hcat:code" IS NOT NULL
+GROUP BY 1 ORDER BY fields DESC LIMIT 5;
+-- hcat_group | most_common_name | fields
+-- 330200 | pasture_meadow_grassland_grass | 1002148
+-- 330101 | spring_barley | 57858
+-- 330109 | temporary_grass | 24186
+-- 339900 | not_known_and_other | 11017
+-- 330600 | tree_wood_forest | 8239
+```
+
+Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+
+```sql
+INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
+SELECT id
+FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet')
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(53.4024, -8.2935), 'EPSG:4326', 'EPSG:4258'), 500))
+LIMIT 5;
+-- id
+-- 158E880AEB513DDA516F669E61F1CFE177A7C1828AFFB56ABC526185A19DB79E
+-- 9B9657FBE101F6F536E2FA96E4C3B6B4567A32A7DD05BB42FC69E58CED033DE5
+-- 24B9BF92775549D401A4E1BD811C036C
+-- 79CEF4ABEABAF43C43C8CA8EDE25F5938452D296CB091269EB0FCD20CF48DDC3
+-- 4ADFDD79329AA73A50318D13D2A0BB2674162230787860FBAFAAB4F6BFDB9C66
+```
+
+## Related collections
+
+Every collection in this catalog shares the fiboa core columns, so the same queries work across countries; `s3://ftw/harmonized-field-data/*/latest/*.parquet` with `union_by_name = true` reads the newest edition of all of them (see the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md)).
+
+## Structure
+
+Assets and structural links resolve relative to the object that carries them; there is no `self` link. Source: this collection is generated by [tools/catalogize.py](https://github.com/fieldsoftheworld/harmonized-field-data-catalog/blob/main/tools/catalogize.py) in the catalog repository — fix documentation there.

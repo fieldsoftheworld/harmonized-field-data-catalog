@@ -1,0 +1,9 @@
+# Field boundaries for Austria
+
+Austria (parcels) field boundaries (2021) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Agrarmarkt Austria. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet
+- All editions: s3://ftw/harmonized-field-data/at_block/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:31287; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: referenz_kennung, ref_art_bezeichnung, geometry, inspire:id, id, metrics:area, ref_art, determination:datetime, collection, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/at_block/README.md, agent guide https://source.coop/ftw/harmonized-field-data/at_block/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/at_block/collection.json

@@ -1,0 +1,152 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "at_block-2021",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          9.405290337503184,
+          46.34587798618984
+        ],
+        [
+          17.232237903076726,
+          46.34587798618984
+        ],
+        [
+          17.232237903076726,
+          48.96562892993614
+        ],
+        [
+          9.405290337503184,
+          48.96562892993614
+        ],
+        [
+          9.405290337503184,
+          46.34587798618984
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    9.405290337503184,
+    46.34587798618984,
+    17.232237903076726,
+    48.96562892993614
+  ],
+  "properties": {
+    "title": "Austria (parcels) — 2021",
+    "description": "Field boundaries of the 2021 edition of this dataset, one GeoParquet file (`at_block.parquet`, 1,299,755 fields) and its PMTiles. Partition `year=2021` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2017-01-23T22:16:00Z",
+    "end_datetime": "2021-06-17T07:22:54Z",
+    "year": 2021,
+    "proj:code": "EPSG:31287",
+    "table:columns": [
+      {
+        "name": "referenz_kennung",
+        "type": "uint64",
+        "description": "Carried over from the source column `REFERENZ_KENNUNG`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "ref_art_bezeichnung",
+        "type": "string",
+        "description": "Carried over from the source column `REF_ART_BEZEICHNUNG`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "inspire:id",
+        "type": "string",
+        "description": "INSPIRE-compliant ID, an absolute and fully resolvable URI. ([spec](https://github.com/fiboa/inspire-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "ref_art",
+        "type": "string",
+        "description": "Carried over from the source column `REF_ART`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "determination:datetime",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 1299755,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "at_block",
+  "assets": {
+    "data": {
+      "href": "./at_block.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Austria (parcels) 2021 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 490161267,
+      "file:checksum": "1220e9e6d4cc6fa81eda2fbb7e3bd17faaae5ef915408bbd53197640028b77132cb0",
+      "proj:code": "EPSG:31287"
+    },
+    "visual": {
+      "href": "./at_block.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Austria (parcels) 2021 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 255967365,
+      "file:checksum": "1220ae499e6cbb60ef98c85aebb9b713821e36c2961cece1170624ca115be428c2bf"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

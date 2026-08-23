@@ -1,0 +1,152 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "es_an-2025",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -7.590391168925642,
+          35.958339356002035
+        ],
+        [
+          -1.6047633260974639,
+          35.958339356002035
+        ],
+        [
+          -1.6047633260974639,
+          38.73847669833676
+        ],
+        [
+          -7.590391168925642,
+          38.73847669833676
+        ],
+        [
+          -7.590391168925642,
+          35.958339356002035
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -7.590391168925642,
+    35.958339356002035,
+    -1.6047633260974639,
+    38.73847669833676
+  ],
+  "properties": {
+    "title": "Spain Andalusia — 2025",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`es_an-2025.parquet`, 4,415,113 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2025-01-01T00:00:00Z",
+    "end_datetime": "2025-01-01T00:00:00Z",
+    "year": 2025,
+    "proj:code": "EPSG:25830",
+    "table:columns": [
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "admin_province_code",
+        "type": "string",
+        "description": "Province code (source column `CD_PROV`, per the fiboa data survey)"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "admin_municipality_code",
+        "type": "string",
+        "description": "Municipality code (source column `CD_MUN`, per the fiboa data survey)"
+      },
+      {
+        "name": "crop:name_en",
+        "type": "string",
+        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 4415113,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "es_an",
+  "assets": {
+    "data": {
+      "href": "./es_an-2025.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Spain Andalusia 2025 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 1723583990,
+      "file:checksum": "1220c0b4820fd1d11c3d73cd867599222939570f0d9f5b01e59f3d79e2af1babbbe7",
+      "proj:code": "EPSG:25830"
+    },
+    "visual": {
+      "href": "./es_an-2025.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Spain Andalusia 2025 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 540826771,
+      "file:checksum": "1220a5b027747daa3fbd3500d516567f98daea1fed593aef5b3f236ef0413ad8f4ef"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

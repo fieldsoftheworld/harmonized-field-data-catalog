@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Spain Andalusia — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2025/es_an-2025.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "es_an",
+      "paint": {
+        "fill-color": "#b2182b",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "es_an",
+      "paint": {
+        "line-color": "#b2182b",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

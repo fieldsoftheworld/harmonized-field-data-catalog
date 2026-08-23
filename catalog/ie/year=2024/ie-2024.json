@@ -1,0 +1,142 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "ie-2024",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -10.592077026005253,
+          51.42217701056331
+        ],
+        [
+          -5.994829351117395,
+          51.42217701056331
+        ],
+        [
+          -5.994829351117395,
+          55.38271278736281
+        ],
+        [
+          -10.592077026005253,
+          55.38271278736281
+        ],
+        [
+          -10.592077026005253,
+          51.42217701056331
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -10.592077026005253,
+    51.42217701056331,
+    -5.994829351117395,
+    55.38271278736281
+  ],
+  "properties": {
+    "title": "Ireland — 2024",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`ie-2024.parquet`, 1,119,949 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2024-12-31T00:00:00Z",
+    "end_datetime": "2024-12-31T00:00:00Z",
+    "year": 2024,
+    "proj:code": "EPSG:4258",
+    "table:columns": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 1119949,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "ie",
+  "assets": {
+    "data": {
+      "href": "./ie-2024.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Ireland 2024 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 870646785,
+      "file:checksum": "1220c09fbd271287a3a4531dd8b121726dd78a8911fb8a106212e962cd493711e7f5",
+      "proj:code": "EPSG:4258"
+    },
+    "visual": {
+      "href": "./ie-2024.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Ireland 2024 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 265751977,
+      "file:checksum": "12203c41986fef94c6fbcc5834168b36c0de9d838b72a1d81154f509041670674e14"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

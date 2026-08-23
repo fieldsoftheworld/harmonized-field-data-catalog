@@ -1,0 +1,95 @@
+{
+  "version": 8,
+  "name": "Ireland — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2024/ie-2024.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "ie",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3302000000,
+            "Pasture meadow grassland grass",
+            3301010402,
+            "Spring barley",
+            3301090100,
+            "Temporary grass",
+            3399000000,
+            "Not known and other",
+            3306000000,
+            "Tree wood forest",
+            3301010401,
+            "Winter barley",
+            3301010101,
+            "Winter common soft wheat",
+            3301010600,
+            "Grain maize corn popcorn",
+            3301010502,
+            "Spring oats",
+            3301020100,
+            "Beans",
+            3301110000,
+            "Fallow land not crop",
+            3301060401,
+            "Winter rapeseed rape",
+            "Other"
+          ],
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Spring barley",
+          "#cea13b",
+          "Temporary grass",
+          "#a6cee3",
+          "Not known and other",
+          "#1f78b4",
+          "Tree wood forest",
+          "#b2df8a",
+          "Winter barley",
+          "#fb9a99",
+          "Winter common soft wheat",
+          "#e31a1c",
+          "Grain maize corn popcorn",
+          "#fdbf6f",
+          "Spring oats",
+          "#ff7f00",
+          "Beans",
+          "#6a3d9a",
+          "Fallow land not crop",
+          "#ffff99",
+          "Winter rapeseed rape",
+          "#b15928",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "ie",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}
