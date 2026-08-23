@@ -1,0 +1,152 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "es_cm-2024",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -5.406109899806412,
+          38.022098123673935
+        ],
+        [
+          -0.9165472147926754,
+          38.022098123673935
+        ],
+        [
+          -0.9165472147926754,
+          41.32617957899581
+        ],
+        [
+          -5.406109899806412,
+          41.32617957899581
+        ],
+        [
+          -5.406109899806412,
+          38.022098123673935
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -5.406109899806412,
+    38.022098123673935,
+    -0.9165472147926754,
+    41.32617957899581
+  ],
+  "properties": {
+    "title": "Spain  — 2024",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`es_cm-2024.parquet`, 6,453,236 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2024-01-01T00:00:00Z",
+    "end_datetime": "2024-01-01T00:00:00Z",
+    "year": 2024,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name_en",
+        "type": "string",
+        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "admin_municipality_code",
+        "type": "string",
+        "description": "Carried over from the source column `MUNICIPIO`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "admin_province_code",
+        "type": "string",
+        "description": "Carried over from the source column `PROVINCIA`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 6453236,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "es_cm",
+  "assets": {
+    "data": {
+      "href": "./es_cm-2024.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Spain  2024 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 2447086459,
+      "file:checksum": "12205ea2139aeaf1a9c98569e1c0702a25544afe5d19be79e3f2dd0e9c9ca868298e",
+      "proj:code": "EPSG:4326"
+    },
+    "visual": {
+      "href": "./es_cm-2024.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Spain  2024 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 999123157,
+      "file:checksum": "12202dc5d005e10dfe5f27858c4e1c6ff0292f0185390b31ebf5f43456f2ef044e30"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

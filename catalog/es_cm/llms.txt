@@ -1,0 +1,9 @@
+# Spain Castilla-La Mancha Crop fields
+
+Spain  field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Unidad de Cartografía. Secretaría General. Consejería de Agricultura, Ganadería y Desarrollo Rural.. License: CC-BY-SA-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/es_cm/latest/es_cm.parquet
+- All editions: s3://ftw/harmonized-field-data/es_cm/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: metrics:area, geometry, crop:name_en, collection, crop:name, crop:code, admin_municipality_code, admin_province_code, id, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/es_cm/README.md, agent guide https://source.coop/ftw/harmonized-field-data/es_cm/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/es_cm/collection.json

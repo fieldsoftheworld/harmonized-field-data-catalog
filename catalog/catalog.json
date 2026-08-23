@@ -6,7 +6,7 @@
   ],
   "id": "harmonized-field-data",
   "title": "Harmonized Field Boundary Data",
-  "description": "Official, non-AI field boundary datasets — typically published by governments from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 31 collections (AT, BE, CZ, DE, DK, EC, EE, ES, FI, HR, IE, IT, LT, LU, LV, NL, SI, SK), 26,917,596 fields in their latest editions. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.",
+  "description": "Official, non-AI field boundary datasets — typically published by governments from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 33 collections (AT, BE, CZ, DE, DK, EC, EE, ES, FI, HR, IE, IT, LT, LU, LV, NL, SI, SK), 33,932,872 fields in their latest editions. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.",
   "links": [
     {
       "rel": "root",
@@ -130,6 +130,12 @@
     },
     {
       "rel": "child",
+      "href": "./es_cm/collection.json",
+      "type": "application/json",
+      "title": "Spain Castilla-La Mancha Crop fields"
+    },
+    {
+      "rel": "child",
       "href": "./es_cn/collection.json",
       "type": "application/json",
       "title": "Spain Crop fields of Canary Islands"
@@ -139,6 +145,12 @@
       "href": "./es_md/collection.json",
       "type": "application/json",
       "title": "Spain Madrid Crop fields"
+    },
+    {
+      "rel": "child",
+      "href": "./es_pv/collection.json",
+      "type": "application/json",
+      "title": "Spain Basque Country Crop fields"
     },
     {
       "rel": "child",
@@ -237,5 +249,5 @@
       "title": "Agent/LLM usage guide"
     }
   ],
-  "updated": "2026-08-23T14:17:10Z"
+  "updated": "2026-08-23T17:12:30Z"
 }
