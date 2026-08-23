@@ -12,6 +12,7 @@ fiboa_cli/datasets/<id>.py — attested metadata, not research.
 """
 from __future__ import annotations
 
+import contextlib
 import json
 import sys
 
@@ -28,15 +29,18 @@ def main() -> int:
     converter = Converters().load(dataset_id)
     variants = getattr(converter, "variants", None) or {}
     sources = {}
-    for variant in variants or [None]:
-        if variant is not None:
-            converter.variant = variant
-        urls = converter.get_urls()
-        if isinstance(urls, dict):
-            urls = list(urls.keys())
-        elif isinstance(urls, str):
-            urls = [urls]
-        sources[variant or ""] = urls or []
+    # Converters may log while resolving their URLs (e.g. es_ar lists its
+    # files from a web service); stdout must stay pure JSON.
+    with contextlib.redirect_stdout(sys.stderr):
+        for variant in variants or [None]:
+            if variant is not None:
+                converter.variant = variant
+            urls = converter.get_urls()
+            if isinstance(urls, dict):
+                urls = list(urls.keys())
+            elif isinstance(urls, str):
+                urls = [urls]
+            sources[variant or ""] = urls or []
 
     meta = {
         "id": getattr(converter, "id", dataset_id),
