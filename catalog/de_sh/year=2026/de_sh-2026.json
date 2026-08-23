@@ -1,0 +1,132 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "de_sh-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          7.84810926507402,
+          53.35021709947685
+        ],
+        [
+          11.348185901330078,
+          53.35021709947685
+        ],
+        [
+          11.348185901330078,
+          55.0418639408597
+        ],
+        [
+          7.84810926507402,
+          55.0418639408597
+        ],
+        [
+          7.84810926507402,
+          53.35021709947685
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    7.84810926507402,
+    53.35021709947685,
+    11.348185901330078,
+    55.0418639408597
+  ],
+  "properties": {
+    "title": "Germany, Schleswig-Holstein — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_sh-2026.parquet`, 194,503 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2026-12-31T23:59:59Z",
+    "year": 2026,
+    "proj:code": "EPSG:4647",
+    "table:columns": [
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hbn",
+        "type": "string",
+        "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 194503,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "de_sh",
+  "assets": {
+    "data": {
+      "href": "./de_sh-2026.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Germany, Schleswig-Holstein 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 63436876,
+      "file:checksum": "12203984e2ca3e30acb9ebb6b54e99ae012771b75edc9d339d2478c476a9d283fa1b",
+      "proj:code": "EPSG:4647"
+    },
+    "visual": {
+      "href": "./de_sh-2026.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Germany, Schleswig-Holstein 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 23155130,
+      "file:checksum": "12204272e3a41bb49d59ccaa2104357e5f48fd260afb3dcc64a95e617296030fbaa6"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

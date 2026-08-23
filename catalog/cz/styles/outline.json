@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Czech — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/cz-2026.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "cz",
+      "paint": {
+        "fill-color": "#1b7837",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "cz",
+      "paint": {
+        "line-color": "#1b7837",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

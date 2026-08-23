@@ -1,0 +1,9 @@
+# Slovenia Crop Fields
+
+Slovenia field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Ministry of Agriculture, Forestry and Food (Ministrstvo za kmetijstvo, gozdarstvo in prehrano). License: other.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/si/latest/si.parquet
+- All editions: s3://ftw/harmonized-field-data/si/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3794; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:name, id, crop:name_en, block_id, hcat:name, metrics:area, geometry, collection, hcat:name_en, crop:code, hcat:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/si/README.md, agent guide https://source.coop/ftw/harmonized-field-data/si/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/si/collection.json

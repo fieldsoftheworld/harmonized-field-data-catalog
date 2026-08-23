@@ -1,0 +1,55 @@
+{
+  "version": 8,
+  "name": "Estonia — field size (ha)",
+  "metadata": {
+    "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 2, 5, 10 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2024/ee-2024.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-size",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "ee",
+      "paint": {
+        "fill-color": [
+          "step",
+          [
+            "/",
+            [
+              "get",
+              "metrics:area"
+            ],
+            10000
+          ],
+          "#f7fcf5",
+          0.5,
+          "#c7e9c0",
+          2,
+          "#74c476",
+          5,
+          "#238b45",
+          10,
+          "#00441b"
+        ],
+        "fill-opacity": 0.8
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "ee",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.4)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

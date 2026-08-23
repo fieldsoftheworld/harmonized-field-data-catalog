@@ -1,0 +1,9 @@
+# Spain Aragon Crop fields
+
+Spain Aragon field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Gobierno de Aragon. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/es_ar/latest/es_ar.parquet
+- All editions: s3://ftw/harmonized-field-data/es_ar/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4258; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: admin_province_code, crop:code, crop:name_en, collection, metrics:area, crop:name, geometry, id, admin_municipality_code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/es_ar/README.md, agent guide https://source.coop/ftw/harmonized-field-data/es_ar/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/es_ar/collection.json

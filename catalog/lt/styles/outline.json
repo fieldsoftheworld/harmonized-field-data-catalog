@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Lithuania — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2024/lt.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "lt",
+      "paint": {
+        "fill-color": "#2166ac",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "lt",
+      "paint": {
+        "line-color": "#2166ac",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

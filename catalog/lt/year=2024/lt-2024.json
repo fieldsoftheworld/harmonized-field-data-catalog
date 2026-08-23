@@ -1,0 +1,147 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "lt-2024",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          20.568966237468857,
+          53.608749980141496
+        ],
+        [
+          27.21738921838916,
+          53.608749980141496
+        ],
+        [
+          27.21738921838916,
+          56.81328926486545
+        ],
+        [
+          20.568966237468857,
+          56.81328926486545
+        ],
+        [
+          20.568966237468857,
+          53.608749980141496
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    20.568966237468857,
+    53.608749980141496,
+    27.21738921838916,
+    56.81328926486545
+  ],
+  "properties": {
+    "title": "Lithuania — 2024",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`lt.parquet`, 1,213,522 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2024-01-01T00:00:00Z",
+    "end_datetime": "2024-12-31T23:59:59Z",
+    "year": 2024,
+    "proj:code": "EPSG:3035",
+    "table:columns": [
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 1213522,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "lt",
+  "assets": {
+    "data": {
+      "href": "./lt.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Lithuania 2024 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 635487878,
+      "file:checksum": "1220f3cc6ea9676db37c3e378c7989264f92b7910cab12e68e8aec41acba631050a4",
+      "proj:code": "EPSG:3035"
+    },
+    "visual": {
+      "href": "./lt.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Lithuania 2024 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 254378578,
+      "file:checksum": "1220775bce9c6465c088c9b817cd528003856fae8c9ce455be086dc51dc6bca6e32d"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "version": 8,
+  "name": "Croatia — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 11 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2024/hr-2024.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "hr",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3301000000,
+            "Arable crops",
+            3302000000,
+            "Pasture meadow grassland grass",
+            3303010000,
+            "Orchards fruits",
+            3303050000,
+            "Olive plantations",
+            3303060000,
+            "Vineyards wine vine rebland grapes",
+            3308000000,
+            "Unmaintained",
+            3303000000,
+            "Permanent crops perennial",
+            3399000000,
+            "Not known and other",
+            3305000000,
+            "Greenhouse foil film",
+            3303070000,
+            "Nurseries nursery",
+            3306000000,
+            "Tree wood forest",
+            "Other"
+          ],
+          "Arable crops",
+          "#a6cee3",
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Orchards fruits",
+          "#1f78b4",
+          "Olive plantations",
+          "#b2df8a",
+          "Vineyards wine vine rebland grapes",
+          "#fb9a99",
+          "Unmaintained",
+          "#e31a1c",
+          "Permanent crops perennial",
+          "#fdbf6f",
+          "Not known and other",
+          "#ff7f00",
+          "Greenhouse foil film",
+          "#6a3d9a",
+          "Nurseries nursery",
+          "#ffff99",
+          "Tree wood forest",
+          "#b15928",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "hr",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

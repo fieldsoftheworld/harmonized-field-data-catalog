@@ -1,0 +1,122 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "lu-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          5.736141650909274,
+          49.44872633968608
+        ],
+        [
+          6.533284021587814,
+          49.44872633968608
+        ],
+        [
+          6.533284021587814,
+          50.18226420224323
+        ],
+        [
+          5.736141650909274,
+          50.18226420224323
+        ],
+        [
+          5.736141650909274,
+          49.44872633968608
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    5.736141650909274,
+    49.44872633968608,
+    6.533284021587814,
+    50.18226420224323
+  ],
+  "properties": {
+    "title": "Luxembourg — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`lu.parquet`, 87,997 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2026-12-31T23:59:59Z",
+    "year": 2026,
+    "proj:code": "EPSG:2169",
+    "table:columns": [
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 87997,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "lu",
+  "assets": {
+    "data": {
+      "href": "./lu.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Luxembourg 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 21416876,
+      "file:checksum": "1220ff6ff3bfc0947ec91010ab01a9c50b8a95d9232a5c4f297fed44dc577fa79930",
+      "proj:code": "EPSG:2169"
+    },
+    "visual": {
+      "href": "./lu.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Luxembourg 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 10152042,
+      "file:checksum": "1220dc7a6e14b60d0ff0fb190449df3f9c5bb6611f5dc615aa626ef70d2d464ccbc6"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

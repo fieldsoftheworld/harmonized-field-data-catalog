@@ -1,0 +1,9 @@
+# Field boundaries for Berlin / Brandenburg, Germany
+
+Germany, Berlin/Brandenburg field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Land Brandenburg. License: DL-DE-BY-2.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/de_bb/latest/de_bb.parquet
+- All editions: s3://ftw/harmonized-field-data/de_bb/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:25833; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: hcat:code, metrics:area, collection, farmer_id, hcat:name_en, hcat:name, crop:code, determination:datetime, crop:name, geometry, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/de_bb/README.md, agent guide https://source.coop/ftw/harmonized-field-data/de_bb/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/de_bb/collection.json

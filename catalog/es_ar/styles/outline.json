@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Spain Aragon — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/es_ar.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "es_ar",
+      "paint": {
+        "fill-color": "#8c510a",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "es_ar",
+      "paint": {
+        "line-color": "#8c510a",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

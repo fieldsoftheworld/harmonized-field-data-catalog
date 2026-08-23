@@ -1,0 +1,157 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "sk-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          16.665645775444663,
+          47.64901154272722
+        ],
+        [
+          22.584263808270286,
+          47.64901154272722
+        ],
+        [
+          22.584263808270286,
+          49.69904863446951
+        ],
+        [
+          16.665645775444663,
+          49.69904863446951
+        ],
+        [
+          16.665645775444663,
+          47.64901154272722
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    16.665645775444663,
+    47.64901154272722,
+    22.584263808270286,
+    49.69904863446951
+  ],
+  "properties": {
+    "title": "Slovakia — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`sk.parquet`, 274,467 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2026-12-31T23:59:59Z",
+    "year": 2026,
+    "proj:code": "EPSG:5514",
+    "table:columns": [
+      {
+        "name": "municipality",
+        "type": "string",
+        "description": "Municipality (source column `LOKALITA_N`, per the fiboa data survey)"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop_group",
+        "type": "string",
+        "description": "Crop Group (source column `KULTURA_NA`, per the fiboa data survey)"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "block_id",
+        "type": "string",
+        "description": "code KD (source column `KODKD`, per the fiboa data survey)"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 274467,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "sk",
+  "assets": {
+    "data": {
+      "href": "./sk.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Slovakia 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 334997720,
+      "file:checksum": "1220970213b483cd394b30b6cad60235e5f6b39cefd0711d634c8db02ff14e1969ca",
+      "proj:code": "EPSG:5514"
+    },
+    "visual": {
+      "href": "./sk.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Slovakia 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 113479537,
+      "file:checksum": "122088c489fcd63ed83912197427299f4e35ada7168a394617dacccab0b93e90bca8"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

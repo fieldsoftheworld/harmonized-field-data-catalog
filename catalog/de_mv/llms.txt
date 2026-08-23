@@ -1,0 +1,9 @@
+# Field boundaries for Mecklenburg-Western Pomerania, Germany
+
+Germany, Mecklenburg-Western Pomerania field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Ministerium für Landwirtschaft und Umwelt M-V. License: other.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/de_mv/latest/de_mv.parquet
+- All editions: s3://ftw/harmonized-field-data/de_mv/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:25833; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:code, bez_kreis, id, erwater, dgl_jahr, metrics:area, erwind, erwater_l, collection, metrics:perimeter, erwind_l, geometry, flik, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/de_mv/README.md, agent guide https://source.coop/ftw/harmonized-field-data/de_mv/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/de_mv/collection.json

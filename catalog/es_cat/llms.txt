@@ -1,0 +1,9 @@
+# Catalonia Crop Fields (Mapa de cultius)
+
+Catalonia field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Catalonia Department of Agriculture, Livestock, Fisheries and Food. License: other.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/es_cat/latest/es_cat.parquet
+- All editions: s3://ftw/harmonized-field-data/es_cat/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:25831; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:name_en, geometry, crop:name, metrics:area, id, crop:code, collection, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/es_cat/README.md, agent guide https://source.coop/ftw/harmonized-field-data/es_cat/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/es_cat/collection.json

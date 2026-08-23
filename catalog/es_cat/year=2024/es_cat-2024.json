@@ -1,0 +1,142 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "es_cat-2024",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          0.1246622611631865,
+          40.517607134976934
+        ],
+        [
+          3.300154846569645,
+          40.517607134976934
+        ],
+        [
+          3.300154846569645,
+          42.843188592707676
+        ],
+        [
+          0.1246622611631865,
+          42.843188592707676
+        ],
+        [
+          0.1246622611631865,
+          40.517607134976934
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    0.1246622611631865,
+    40.517607134976934,
+    3.300154846569645,
+    42.843188592707676
+  ],
+  "properties": {
+    "title": "Catalonia — 2024",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`es_cat-2024.parquet`, 723,039 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2024-01-01T00:00:00Z",
+    "end_datetime": "2024-01-01T00:00:00Z",
+    "year": 2024,
+    "proj:code": "EPSG:25831",
+    "table:columns": [
+      {
+        "name": "crop:name_en",
+        "type": "string",
+        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 723039,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "es_cat",
+  "assets": {
+    "data": {
+      "href": "./es_cat-2024.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Catalonia 2024 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 296111005,
+      "file:checksum": "1220629bca8a240ce4171a0559b5354adc6b13d1370cecacdf9f033791b23752c27e",
+      "proj:code": "EPSG:25831"
+    },
+    "visual": {
+      "href": "./es_cat-2024.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Catalonia 2024 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 120304836,
+      "file:checksum": "12202d0df774f50b0a3ffc28989939ce61d79fb955a98c5ef888b2a4d43e9e20d75f"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

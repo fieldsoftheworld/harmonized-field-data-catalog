@@ -1,0 +1,9 @@
+# Field boundaries for Estonia
+
+Estonia field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Põllumajanduse Registrite ja Informatsiooni Amet. License: CC-BY-SA-3.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/ee/latest/ee.parquet
+- All editions: s3://ftw/harmonized-field-data/ee/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3301; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: metrics:area, hcat:name, hcat:name_en, geometry, id, hcat:code, crop:name, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/ee/README.md, agent guide https://source.coop/ftw/harmonized-field-data/ee/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/ee/collection.json

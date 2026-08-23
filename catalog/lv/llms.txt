@@ -1,0 +1,9 @@
+# Latvia Lauki Parcels
+
+Latvia field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Rural Support Service Republic of Latvia (Lauku atbalsta dienests). License: CC-BY-SA-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/lv/latest/lv.parquet
+- All editions: s3://ftw/harmonized-field-data/lv/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3059; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: collection, determination:datetime, crop:name, parcel_id, metrics:area, id, hcat:name_en, hcat:name, crop:code, hcat:code, geometry, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/lv/README.md, agent guide https://source.coop/ftw/harmonized-field-data/lv/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/lv/collection.json

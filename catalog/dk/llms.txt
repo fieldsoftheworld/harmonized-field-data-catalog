@@ -1,0 +1,9 @@
+# Denmark Crop Fields (Marker)
+
+Denmark field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Danish Agricultural Agency. License: CC0-1.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/dk/latest/dk.parquet
+- All editions: s3://ftw/harmonized-field-data/dk/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:25832; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: collection, crop:name, geometry, hcat:name, metrics:area, hcat:name_en, crop:code, id, hcat:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/dk/README.md, agent guide https://source.coop/ftw/harmonized-field-data/dk/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/dk/collection.json

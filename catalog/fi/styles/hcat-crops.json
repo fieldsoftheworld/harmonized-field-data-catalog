@@ -1,0 +1,95 @@
+{
+  "version": 8,
+  "name": "Finland — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2023/fi.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "fi",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3302000000,
+            "Pasture meadow grassland grass",
+            3301010400,
+            "Barley",
+            3301010500,
+            "Oats",
+            3301010102,
+            "Spring common soft wheat",
+            3399000000,
+            "Not known and other",
+            3301010101,
+            "Winter common soft wheat",
+            3301020600,
+            "Peas",
+            3301110000,
+            "Fallow land not crop",
+            3301060402,
+            "Spring rapeseed rape",
+            3301010000,
+            "Cereal",
+            3301010301,
+            "Winter rye",
+            3301030000,
+            "Potatoes",
+            "Other"
+          ],
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Barley",
+          "#cc9e32",
+          "Oats",
+          "#a6cee3",
+          "Spring common soft wheat",
+          "#1f78b4",
+          "Not known and other",
+          "#b2df8a",
+          "Winter common soft wheat",
+          "#fb9a99",
+          "Peas",
+          "#e31a1c",
+          "Fallow land not crop",
+          "#fdbf6f",
+          "Spring rapeseed rape",
+          "#ff7f00",
+          "Cereal",
+          "#6a3d9a",
+          "Winter rye",
+          "#ffff99",
+          "Potatoes",
+          "#b15928",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "fi",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

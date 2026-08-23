@@ -1,0 +1,172 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "de_mv-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          10.460957127993252,
+          53.08446448481229
+        ],
+        [
+          14.39716051830725,
+          53.08446448481229
+        ],
+        [
+          14.39716051830725,
+          54.69063591957423
+        ],
+        [
+          10.460957127993252,
+          54.69063591957423
+        ],
+        [
+          10.460957127993252,
+          53.08446448481229
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    10.460957127993252,
+    53.08446448481229,
+    14.39716051830725,
+    54.69063591957423
+  ],
+  "properties": {
+    "title": "Germany, Mecklenburg-Western Pomerania — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_mv.parquet`, 20,000 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2026-12-31T23:59:59Z",
+    "year": 2026,
+    "proj:code": "EPSG:25833",
+    "table:columns": [
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bez_kreis",
+        "type": "string",
+        "description": "District name (Kreisbezeichnung) (per the fiboa data survey)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "erwater",
+        "type": "string",
+        "description": "Water-erosion class per Direktzahlungen-Verordnung (per the fiboa data survey)"
+      },
+      {
+        "name": "dgl_jahr",
+        "type": "int16",
+        "description": "Permanent-grassland year (DGL Jahr) (per the fiboa data survey)"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "erwind",
+        "type": "string",
+        "description": "Wind-erosion class per Direktzahlungen-Verordnung (per the fiboa data survey)"
+      },
+      {
+        "name": "erwater_l",
+        "type": "string",
+        "description": "Water-erosion class per DIN 19708 (per the fiboa data survey)"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "metrics:perimeter",
+        "type": "float",
+        "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "erwind_l",
+        "type": "string",
+        "description": "Wind-erosion class per DIN 19708 (per the fiboa data survey)"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 20000,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "de_mv",
+  "assets": {
+    "data": {
+      "href": "./de_mv.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Germany, Mecklenburg-Western Pomerania 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 45798248,
+      "file:checksum": "1220bb08eda43d3a462315695d056a95604d8a60488cafe6fdcbcfa9a34b69b480e1",
+      "proj:code": "EPSG:25833"
+    },
+    "visual": {
+      "href": "./de_mv.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Germany, Mecklenburg-Western Pomerania 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 14700859,
+      "file:checksum": "1220a9994b3a05f40802715b0cdce80684a2adc8ce536287684b7a2c925b4d905015"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

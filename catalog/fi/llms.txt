@@ -1,0 +1,9 @@
+# Finnish Crop Fields (Maatalousmaa)
+
+Finland field boundaries (2023) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Finnish Food Authority. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/fi/latest/fi.parquet
+- All editions: s3://ftw/harmonized-field-data/fi/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3067; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: geometry, crop:name, hcat:name, block_id, hcat:name_en, collection, metrics:area, hcat:code, crop:code, id, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/fi/README.md, agent guide https://source.coop/ftw/harmonized-field-data/fi/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/fi/collection.json

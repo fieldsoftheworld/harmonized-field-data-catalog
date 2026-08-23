@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Catalonia — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2024/es_cat-2024.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "es_cat",
+      "paint": {
+        "fill-color": "#5e3c99",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "es_cat",
+      "paint": {
+        "line-color": "#5e3c99",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

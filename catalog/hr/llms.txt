@@ -1,0 +1,9 @@
+# Croatian Field Boundaries
+
+Croatia field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Agencija za plaćanja u poljoprivredi, ribarstvu i ruralnom razvoju. License: other.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/hr/latest/hr.parquet
+- All editions: s3://ftw/harmonized-field-data/hr/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3765; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: rp, ot_nat, irrigation_source, slope, natura2000_povs, hcat:name_en, hcat:name, geometry, anc_area, irrigation_type, crop:code, mines_year_removed, home_name, mines_status, water_protect_zone, collection, anc, natura2000, ot_nat_area, metrics:area, natura2000_pop, height, jpaid, metrics:perimeter, id, hcat:code, irrigation, tvpv, eligibility_coef, natura2000_ok, sanitary_protection_zone, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/hr/README.md, agent guide https://source.coop/ftw/harmonized-field-data/hr/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/hr/collection.json

@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Italy, Tuscany — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2023/it_1-2023.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "it_1",
+      "paint": {
+        "fill-color": "#e08214",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "it_1",
+      "paint": {
+        "line-color": "#e08214",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

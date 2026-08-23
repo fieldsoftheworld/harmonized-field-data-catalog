@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Germany, Berlin/Brandenburg (parcels) — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/de_bb_block.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "de_bb_block",
+      "paint": {
+        "fill-color": "#c51b7d",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "de_bb_block",
+      "paint": {
+        "line-color": "#c51b7d",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

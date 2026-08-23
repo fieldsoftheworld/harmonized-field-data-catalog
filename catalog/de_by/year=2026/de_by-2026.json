@@ -1,0 +1,147 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "de_by-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          8.976888352898056,
+          47.17999939062103
+        ],
+        [
+          14.014200261063245,
+          47.17999939062103
+        ],
+        [
+          14.014200261063245,
+          50.56130126204544
+        ],
+        [
+          8.976888352898056,
+          50.56130126204544
+        ],
+        [
+          8.976888352898056,
+          47.17999939062103
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    8.976888352898056,
+    47.17999939062103,
+    14.014200261063245,
+    50.56130126204544
+  ],
+  "properties": {
+    "title": "Germany, Bavaria — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_by.parquet`, 1,296,105 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2007-06-22T08:28:07Z",
+    "end_datetime": "2025-12-30T15:55:41Z",
+    "year": 2026,
+    "proj:code": "EPSG:25832",
+    "table:columns": [
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "determination:datetime",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 1296105,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "de_by",
+  "assets": {
+    "data": {
+      "href": "./de_by.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Germany, Bavaria 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 300459989,
+      "file:checksum": "12200299fe0745055f136e007125e18982e78aaaa9448214340ba02b61363b4715f2",
+      "proj:code": "EPSG:25832"
+    },
+    "visual": {
+      "href": "./de_by.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Germany, Bavaria 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 172299464,
+      "file:checksum": "12204a4b22f13bfb3e6a70572d2f70cc1967769aadf522fa24d09bf9afc748d0cd17"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "version": 8,
+  "name": "Slovakia — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/sk.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "sk",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3302000000,
+            "Pasture meadow grassland grass",
+            3301010101,
+            "Winter common soft wheat",
+            3301010600,
+            "Grain maize corn popcorn",
+            3301060401,
+            "Winter rapeseed rape",
+            3301110000,
+            "Fallow land not crop",
+            3301010201,
+            "Winter durum hard wheat",
+            3301010402,
+            "Spring barley",
+            3301160000,
+            "Soy soybeans",
+            3301060500,
+            "Sunflower",
+            3301090400,
+            "Green silo maize",
+            3301010401,
+            "Winter barley",
+            3301090000,
+            "Plants harvested green",
+            "Other"
+          ],
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Winter common soft wheat",
+          "#cda737",
+          "Grain maize corn popcorn",
+          "#a6cee3",
+          "Winter rapeseed rape",
+          "#1f78b4",
+          "Fallow land not crop",
+          "#b2df8a",
+          "Winter durum hard wheat",
+          "#fb9a99",
+          "Spring barley",
+          "#e31a1c",
+          "Soy soybeans",
+          "#fdbf6f",
+          "Sunflower",
+          "#cc32cb",
+          "Green silo maize",
+          "#ff7f00",
+          "Winter barley",
+          "#6a3d9a",
+          "Plants harvested green",
+          "#ffff99",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "sk",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

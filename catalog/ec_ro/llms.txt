@@ -1,0 +1,9 @@
+# Field boundaries for Romania - Eurocrops
+
+Romania - Eurocrops field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Ministry of Regional Development and Public Administration <http://spatial.mdrap.ro>, EuroCrops. License: CC-BY-SA-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/ec_ro/latest/ec_ro.parquet
+- All editions: s3://ftw/harmonized-field-data/ec_ro/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:32635; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:name, collection, geometry, source, crop:code, id, hcat:name, hcat:name_en, metrics:area, hcat:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/ec_ro/README.md, agent guide https://source.coop/ftw/harmonized-field-data/ec_ro/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/ec_ro/collection.json

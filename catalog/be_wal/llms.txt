@@ -1,0 +1,9 @@
+# Belgium Wallonia: Parcellaire Agricole Anonyme
+
+Belgium, Wallonia field boundaries (2022) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Inspire Geoportal of the European Commission. License: other.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/be_wal/latest/be_wal.parquet
+- All editions: s3://ftw/harmonized-field-data/be_wal/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3035; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:code, id, geometry, hcat:name_en, hcat:code, crop:name, hcat:name, collection, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/be_wal/README.md, agent guide https://source.coop/ftw/harmonized-field-data/be_wal/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/be_wal/collection.json

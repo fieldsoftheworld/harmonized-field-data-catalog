@@ -1,0 +1,157 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "ec_ro-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          21.98360372119957,
+          43.5323910715832
+        ],
+        [
+          28.92332404837222,
+          43.5323910715832
+        ],
+        [
+          28.92332404837222,
+          45.17666803124226
+        ],
+        [
+          21.98360372119957,
+          45.17666803124226
+        ],
+        [
+          21.98360372119957,
+          43.5323910715832
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    21.98360372119957,
+    43.5323910715832,
+    28.92332404837222,
+    45.17666803124226
+  ],
+  "properties": {
+    "title": "Romania - Eurocrops — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`ec_ro.parquet`, 259,862 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2017-01-01T00:00:00Z",
+    "end_datetime": "2017-01-01T00:00:00Z",
+    "year": 2026,
+    "proj:code": "EPSG:32635",
+    "table:columns": [
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "description": "Carried over from the source column `SOURCE`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 259862,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "ec_ro",
+  "assets": {
+    "data": {
+      "href": "./ec_ro.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Romania - Eurocrops 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 94873950,
+      "file:checksum": "122064d228314331f6d7d92d177b5400a7bea97337a9511d8b345c41f2f27ca2521d",
+      "proj:code": "EPSG:32635"
+    },
+    "visual": {
+      "href": "./ec_ro.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Romania - Eurocrops 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 43308594,
+      "file:checksum": "1220b35c6507362c2f80646e52723056d1ec5d5c6fe3355ce906e63429a4bf5cc6c8"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

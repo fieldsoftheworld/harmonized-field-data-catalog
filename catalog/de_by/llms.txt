@@ -1,0 +1,9 @@
+# Field boundaries for Bavaria, Germany
+
+Germany, Bavaria field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Bayerische Vermessungsverwaltung. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/de_by/latest/de_by.parquet
+- All editions: s3://ftw/harmonized-field-data/de_by/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:25832; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:name, geometry, hcat:code, id, hcat:name, determination:datetime, crop:code, collection, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/de_by/README.md, agent guide https://source.coop/ftw/harmonized-field-data/de_by/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/de_by/collection.json

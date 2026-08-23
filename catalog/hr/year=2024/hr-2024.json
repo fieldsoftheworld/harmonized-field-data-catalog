@@ -1,0 +1,262 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "hr-2024",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          13.438328367540874,
+          42.38997322481944
+        ],
+        [
+          19.515798199251762,
+          42.38997322481944
+        ],
+        [
+          19.515798199251762,
+          46.49582712551485
+        ],
+        [
+          13.438328367540874,
+          46.49582712551485
+        ],
+        [
+          13.438328367540874,
+          42.38997322481944
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    13.438328367540874,
+    42.38997322481944,
+    19.515798199251762,
+    46.49582712551485
+  ],
+  "properties": {
+    "title": "Croatia — 2024",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`hr-2024.parquet`, 1,284,769 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2024-01-01T00:00:00Z",
+    "end_datetime": "2024-01-01T00:00:00Z",
+    "year": 2024,
+    "proj:code": "EPSG:3765",
+    "table:columns": [
+      {
+        "name": "rp",
+        "type": "int32",
+        "description": "RP flag (per the fiboa data survey)"
+      },
+      {
+        "name": "ot_nat",
+        "type": "int32",
+        "description": "Other nature flag (per the fiboa data survey)"
+      },
+      {
+        "name": "irrigation_source",
+        "type": "int32",
+        "description": "Irrigation source code (per the fiboa data survey)"
+      },
+      {
+        "name": "slope",
+        "type": "double",
+        "description": "Average slope (per the fiboa data survey)"
+      },
+      {
+        "name": "natura2000_povs",
+        "type": "double",
+        "description": "Natura 2000 POVS overlap (per the fiboa data survey)"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "anc_area",
+        "type": "double",
+        "description": "ANC area (per the fiboa data survey)"
+      },
+      {
+        "name": "irrigation_type",
+        "type": "int32",
+        "description": "Irrigation type code (per the fiboa data survey)"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "mines_year_removed",
+        "type": "int32",
+        "description": "Year mines were removed (per the fiboa data survey)"
+      },
+      {
+        "name": "home_name",
+        "type": "string",
+        "description": "Locality / home name (per the fiboa data survey)"
+      },
+      {
+        "name": "mines_status",
+        "type": "string",
+        "description": "Mine contamination status (per the fiboa data survey)"
+      },
+      {
+        "name": "water_protect_zone",
+        "type": "string",
+        "description": "Water protection zone code (per the fiboa data survey)"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "anc",
+        "type": "int32",
+        "description": "Area with Natural Constraints flag (per the fiboa data survey)"
+      },
+      {
+        "name": "natura2000",
+        "type": "double",
+        "description": "Natura 2000 overlap area (per the fiboa data survey)"
+      },
+      {
+        "name": "ot_nat_area",
+        "type": "double",
+        "description": "Other nature area (per the fiboa data survey)"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "natura2000_pop",
+        "type": "double",
+        "description": "Natura 2000 POP overlap (per the fiboa data survey)"
+      },
+      {
+        "name": "height",
+        "type": "double",
+        "description": "Average elevation (mapped to `height`) (source column `z_avg`, per the fiboa data survey)"
+      },
+      {
+        "name": "jpaid",
+        "type": "string",
+        "description": "Unique single application identifier (per the fiboa data survey)"
+      },
+      {
+        "name": "metrics:perimeter",
+        "type": "float",
+        "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "irrigation",
+        "type": "int32",
+        "description": "Irrigation flag (per the fiboa data survey)"
+      },
+      {
+        "name": "tvpv",
+        "type": "int32",
+        "description": "TVPV flag (per the fiboa data survey)"
+      },
+      {
+        "name": "eligibility_coef",
+        "type": "double",
+        "description": "Eligibility coefficient (per the fiboa data survey)"
+      },
+      {
+        "name": "natura2000_ok",
+        "type": "string",
+        "description": "Natura 2000 status (per the fiboa data survey)"
+      },
+      {
+        "name": "sanitary_protection_zone",
+        "type": "string",
+        "description": "Sanitary protection zone code (per the fiboa data survey)"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 1284769,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "hr",
+  "assets": {
+    "data": {
+      "href": "./hr-2024.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Croatia 2024 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 229099029,
+      "file:checksum": "12207fd2b92f5b11a19bf62ec87ee819499a4dce2405665e5d588ea4425befb7a3ec",
+      "proj:code": "EPSG:3765"
+    },
+    "visual": {
+      "href": "./hr-2024.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Croatia 2024 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 172915826,
+      "file:checksum": "122062ea56f01c4c6af5fac8ee000ca00915de735bcb8a694dd1ebfa2fd515f54d0f"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

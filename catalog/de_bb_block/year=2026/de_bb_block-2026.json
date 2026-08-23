@@ -1,0 +1,152 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "de_bb_block-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          11.235119972136074,
+          51.310692592945884
+        ],
+        [
+          14.765480886097825,
+          51.310692592945884
+        ],
+        [
+          14.765480886097825,
+          53.56446415731656
+        ],
+        [
+          11.235119972136074,
+          53.56446415731656
+        ],
+        [
+          11.235119972136074,
+          51.310692592945884
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    11.235119972136074,
+    51.310692592945884,
+    14.765480886097825,
+    53.56446415731656
+  ],
+  "properties": {
+    "title": "Germany, Berlin/Brandenburg (parcels) — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_bb_block.parquet`, 90,764 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2026-01-01T00:00:00Z",
+    "year": 2026,
+    "proj:code": "EPSG:25833",
+    "table:columns": [
+      {
+        "name": "tk10",
+        "type": "string",
+        "description": "Carried over from the source column `TK10_BLATT`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hbn",
+        "type": "string",
+        "description": "Carried over from the source column `HBN_KAT`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "net_area",
+        "type": "float",
+        "description": "Carried over from the source column `FL_NETTO`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      },
+      {
+        "name": "kreis_nr",
+        "type": "uint16",
+        "description": "Carried over from the source column `KREIS_NR`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 90764,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "de_bb_block",
+  "assets": {
+    "data": {
+      "href": "./de_bb_block.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Germany, Berlin/Brandenburg (parcels) 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 74050340,
+      "file:checksum": "12200ca01586f9c690256b763c92515b71feb05be50733b3db05ec3c442dc62f72d9",
+      "proj:code": "EPSG:25833"
+    },
+    "visual": {
+      "href": "./de_bb_block.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Germany, Berlin/Brandenburg (parcels) 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 36585210,
+      "file:checksum": "122080b59ef0164a6a77149b0db9918387a055caee9ca6bbe20170206b184b8b3991"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

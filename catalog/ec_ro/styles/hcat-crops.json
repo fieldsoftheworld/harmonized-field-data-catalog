@@ -1,0 +1,67 @@
+{
+  "version": 8,
+  "name": "Romania - Eurocrops — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 5 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/ec_ro.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "ec_ro",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3301000000,
+            "Arable crops",
+            3302000000,
+            "Pasture meadow grassland grass",
+            3301010700,
+            "Rice",
+            3306000000,
+            "Tree wood forest",
+            3305000000,
+            "Greenhouse foil film",
+            "Other"
+          ],
+          "Arable crops",
+          "#a6cee3",
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Rice",
+          "#ccad32",
+          "Tree wood forest",
+          "#1f78b4",
+          "Greenhouse foil film",
+          "#b2df8a",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "ec_ro",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

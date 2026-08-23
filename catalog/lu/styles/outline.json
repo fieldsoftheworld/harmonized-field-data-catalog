@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Luxembourg — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/lu.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "lu",
+      "paint": {
+        "fill-color": "#35978f",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "lu",
+      "paint": {
+        "line-color": "#35978f",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

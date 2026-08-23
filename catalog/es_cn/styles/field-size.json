@@ -1,0 +1,51 @@
+{
+  "version": 8,
+  "name": "Spain Canary Islands — field size (ha)",
+  "metadata": {
+    "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/es_cn.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-size",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "es_cn",
+      "paint": {
+        "fill-color": [
+          "step",
+          [
+            "/",
+            [
+              "get",
+              "metrics:area"
+            ],
+            10000
+          ],
+          "#f7fcf5",
+          0.1,
+          "#c7e9c0",
+          0.25,
+          "#74c476"
+        ],
+        "fill-opacity": 0.8
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "es_cn",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.4)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}
