@@ -42,10 +42,14 @@ def run(cmd: list[str], **kwargs) -> None:
     subprocess.run(cmd, check=True, cwd=ROOT, **kwargs)
 
 
-def publish(dataset_id: str, year: str, has_variants: bool) -> None:
+def publish(dataset_id: str, year: str, has_variants: bool, latest: bool = True) -> None:
     out = staging_year_dir(dataset_id, year)
     out.mkdir(parents=True, exist_ok=True)
     cmd = [*FIBOA_CMD, "publish", dataset_id, "-c", str(CACHE_DIR), "-o", str(out)]
+    if not latest:
+        # only the newest edition is rendered in the browser; tiles for older
+        # editions would double the storage without ever being seen
+        cmd += ["--no-pmtiles"]
     if has_variants:
         cmd += ["--variant", year]
     run(cmd)
@@ -85,7 +89,7 @@ def main() -> int:
         try:
             if not args.skip_convert:
                 for year in years:
-                    publish(dataset_id, year, has_variants)
+                    publish(dataset_id, year, has_variants, latest=(year == ds.years[-1]))
             converter_meta(dataset_id)
             run([sys.executable, str(ROOT / "tools" / "catalogize.py"), dataset_id])
             if not args.skip_thumbnail:

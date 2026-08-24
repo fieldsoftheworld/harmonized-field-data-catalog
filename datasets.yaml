@@ -172,7 +172,7 @@ datasets:
     years: ['2024']
     keywords: [United States, USDA, Crop Sequence Boundaries]
   jp:
-    years: ['2024']
+    years: ['2021', '2022', '2023', '2024']
     keywords: [Japan, Fude Polygons, MAFF, rice fields]
   es:
     years: ['2025']
