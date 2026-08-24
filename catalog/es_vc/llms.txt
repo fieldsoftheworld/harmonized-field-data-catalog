@@ -1,0 +1,9 @@
+# Spain Valencia Crop Fields
+
+Spain Valencia field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Spanish Agricultural Guarantee Fund (FEGA) of the Ministry of Agriculture, Fisheries and Food. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/es_vc/latest/es_vc.parquet
+- All editions: s3://ftw/harmonized-field-data/es_vc/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:25830; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: admin_province_code, crop:name, collection, crop:name_en, metrics:area, admin_municipality_code, crop:code, geometry, id, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/es_vc/README.md, agent guide https://source.coop/ftw/harmonized-field-data/es_vc/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/es_vc/collection.json

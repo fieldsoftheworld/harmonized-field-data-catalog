@@ -18,7 +18,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 87,997 | [20.4 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.parquet) | [9.7 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.pmtiles) | [lu-2026.json](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu-2026.json) |
+| 2026 | 87,997 | [20.4 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.parquet) | [9.8 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.pmtiles) | [lu-2026.json](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu-2026.json) |
 
 The latest edition is also available at a stable path: [lu/latest/lu.parquet](https://data.source.coop/ftw/harmonized-field-data/lu/latest/lu.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/lu/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lu/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -26,9 +26,9 @@ The latest edition is also available at a stable path: [lu/latest/lu.parquet](ht
 
 | Column | Type | Description |
 |---|---|---|
+| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -50,7 +50,7 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 This catalog is a mirror: the data is produced and licensed by [Administration des services techniques de l'agriculture](https://asta.etat.lu/en) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2026: converted 2026-08-22 from <https://data.public.lu/fr/datasets/r/b4ae6690-7e4c-4454-8b60-9fa33ba6a61b>
+- 2026: converted 2026-08-23 from <https://data.public.lu/fr/datasets/r/b4ae6690-7e4c-4454-8b60-9fa33ba6a61b>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

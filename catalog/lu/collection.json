@@ -45,7 +45,7 @@
       "bbox": [
         [
           5.736141650909274,
-          49.44872633968608,
+          49.44872633968609,
           6.533284021587814,
           50.18226420224323
         ]
@@ -67,6 +67,11 @@
   },
   "table:columns": [
     {
+      "name": "collection",
+      "type": "string",
+      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "geometry",
       "type": "binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -75,11 +80,6 @@
       "name": "id",
       "type": "string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -109,8 +109,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 21416876,
-      "file:checksum": "1220ff6ff3bfc0947ec91010ab01a9c50b8a95d9232a5c4f297fed44dc577fa79930",
+      "file:size": 21416875,
+      "file:checksum": "122032c572cc32f104b883627e62d1cc693328117187f9bd13e255be9aeefab35c81",
       "proj:code": "EPSG:2169"
     },
     "style-outline": {
@@ -132,8 +132,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 10152042,
-      "file:checksum": "1220dc7a6e14b60d0ff0fb190449df3f9c5bb6611f5dc615aa626ef70d2d464ccbc6"
+      "file:size": 10271242,
+      "file:checksum": "12205654ea7f6b07407e07497e2d7f99e3bf5940b0fcff3315dde80eb0620710d353"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -209,14 +209,14 @@
       "title": "Luxembourg — 2026"
     }
   ],
-  "updated": "2026-08-22T20:39:50Z",
+  "updated": "2026-08-23T17:38:23Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "lu": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "Luxembourg ministry of Agriculture"

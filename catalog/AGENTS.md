@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-34 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
+36 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
 
 ## How to read it
 
@@ -17,15 +17,9 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
--- at | 2944405
--- at_block | 1299755
--- be_vlg | 594732
--- be_wal | 341968
--- cz | 415301
--- de_bb | 290688
--- de_bb_block | 90764
--- de_by | 1296105
--- ... 26 more rows
+-- es_vc | 2319893
+-- lu | 87997
+-- pt | 4805469
 ```
 
 Every edition of every collection:
@@ -37,15 +31,9 @@ SELECT year, regexp_extract(filename, '/([^/]+)/year=', 1) AS collection, count(
 FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
--- 2025 | at | 2944405
--- 2021 | at_block | 1299755
--- 2023 | be_vlg | 588192
--- 2024 | be_vlg | 589749
--- 2025 | be_vlg | 594732
--- 2022 | be_wal | 341968
--- 2026 | cz | 415301
--- 2026 | de_bb | 290688
--- ... 28 more rows
+-- 2024 | es_vc | 2319893
+-- 2026 | lu | 87997
+-- 2023 | pt | 4805469
 ```
 
 ## Join keys
