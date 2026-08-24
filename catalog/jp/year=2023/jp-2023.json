@@ -1,0 +1,122 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "jp-2023",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          122.946031194,
+          24.046770215
+        ],
+        [
+          145.802669174,
+          24.046770215
+        ],
+        [
+          145.802669174,
+          45.520014956
+        ],
+        [
+          122.946031194,
+          45.520014956
+        ],
+        [
+          122.946031194,
+          24.046770215
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    122.946031194,
+    24.046770215,
+    145.802669174,
+    45.520014956
+  ],
+  "properties": {
+    "title": "Japan — 2023",
+    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`jp-2023.parquet`, 29,673,005 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2023-01-01T00:00:00Z",
+    "end_datetime": "2023-01-01T00:00:00Z",
+    "year": 2023,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "land_type_en",
+        "type": "string",
+        "description": "land_typeコードの英語表記（rice_field または field） (per the fiboa data survey)"
+      },
+      {
+        "name": "admin_local_code",
+        "type": "string",
+        "description": "ポリゴンの重心点と重なる市区町村の総務省地方公共団体コード (source column `local_government_cd`, per the fiboa data survey)"
+      },
+      {
+        "name": "determination:datetime",
+        "type": "timestamp[us, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 29673005,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "jp",
+  "assets": {
+    "data": {
+      "href": "./jp-2023.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Japan 2023 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 6230265315,
+      "file:checksum": "1220f8813e24db4e2ce45cf5de9f4d816836856f47b270d92fd06604571018d4b68a",
+      "proj:code": "EPSG:4326"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

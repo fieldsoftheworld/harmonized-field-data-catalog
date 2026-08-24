@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2022 | be_wal | 341968
 -- 2026 | cz | 415301
 -- 2026 | de_bb | 290688
--- ... 35 more rows
+-- ... 38 more rows
 ```
 
 ## Join keys

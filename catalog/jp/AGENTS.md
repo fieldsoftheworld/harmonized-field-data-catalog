@@ -1,6 +1,6 @@
 # Agent guidance — Japan Fude Parcels
 
-Japan field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Japan field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 4 editions (2021, 2022, 2023, 2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -26,6 +26,9 @@ SELECT year, count(*) AS fields, 0 AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/jp/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
+-- 2021 | 30165774 | 0
+-- 2022 | 29778783 | 0
+-- 2023 | 29673005 | 0
 -- 2024 | 29418076 | 0
 ```
 
