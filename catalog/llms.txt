@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Official (non-AI) field boundaries harmonized to fiboa, 39 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Official (non-AI) field boundaries harmonized to fiboa, 41 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - at_block: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
@@ -17,6 +17,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 39 collections, GeoParqu
 - dk: Denmark Crop Fields (Marker) — https://data.source.coop/ftw/harmonized-field-data/dk/latest/dk.parquet (license CC0-1.0, CRS EPSG:25832)
 - ec_ro: Field boundaries for Romania - Eurocrops — https://data.source.coop/ftw/harmonized-field-data/ec_ro/latest/ec_ro.parquet (license CC-BY-SA-4.0, CRS EPSG:32635)
 - ee: Field boundaries for Estonia — https://data.source.coop/ftw/harmonized-field-data/ee/latest/ee.parquet (license CC-BY-SA-3.0, CRS EPSG:3301)
+- es: Spain Declared Crops (Cultivos Declarados SIGPAC) — https://data.source.coop/ftw/harmonized-field-data/es/latest/es.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - es_an: Spain Andalusia Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_an/latest/es_an.parquet (license other, CRS EPSG:25830)
 - es_ar: Spain Aragon Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_ar/latest/es_ar.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - es_cat: Catalonia Crop Fields (Mapa de cultius) — https://data.source.coop/ftw/harmonized-field-data/es_cat/latest/es_cat.parquet (license other, CRS EPSG:25831)
@@ -32,6 +33,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 39 collections, GeoParqu
 - hr: Croatian Field Boundaries — https://data.source.coop/ftw/harmonized-field-data/hr/latest/hr.parquet (license other, CRS EPSG:3765)
 - ie: Ireland INSPIRE Geospatial aid application (GSAA) dataset — https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - it_1: Italy Tuscany (ITI1) Crop Fields — EuroCropsV2 — https://data.source.coop/ftw/harmonized-field-data/it_1/latest/it_1.parquet (license CC-BY-4.0, CRS EPSG:3035)
+- jp: Japan Fude Parcels — https://data.source.coop/ftw/harmonized-field-data/jp/latest/jp.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - lt: Lithuania crop fields — https://data.source.coop/ftw/harmonized-field-data/lt/latest/lt.parquet (license CC-BY-4.0, CRS EPSG:3035)
 - lu: Luxembourg FLIK Parcels — https://data.source.coop/ftw/harmonized-field-data/lu/latest/lu.parquet (license CC-BY-4.0, CRS EPSG:2169)
 - lv: Latvia Lauki Parcels — https://data.source.coop/ftw/harmonized-field-data/lv/latest/lv.parquet (license CC-BY-SA-4.0, CRS EPSG:3059)

@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Spain — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2025/es-2025.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "es",
+      "paint": {
+        "fill-color": "#c51b7d",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "es",
+      "paint": {
+        "line-color": "#c51b7d",
+        "line-width": 0.8
+      }
+    }
+  ]
+}
