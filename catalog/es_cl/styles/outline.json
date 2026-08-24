@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Spain Castilla y León — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2025/es_cl.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "es_cl",
+      "paint": {
+        "fill-color": "#35978f",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "es_cl",
+      "paint": {
+        "line-color": "#35978f",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

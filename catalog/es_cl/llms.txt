@@ -1,0 +1,9 @@
+# Spain Castile and León Crop fields
+
+Spain Castilla y León field boundaries (2025) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Junta de Castilla y León. License: other.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/es_cl/latest/es_cl.parquet
+- All editions: s3://ftw/harmonized-field-data/es_cl/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4258; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:name, crop:name_en, id, collection, geometry, crop:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/es_cl/README.md, agent guide https://source.coop/ftw/harmonized-field-data/es_cl/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/es_cl/collection.json

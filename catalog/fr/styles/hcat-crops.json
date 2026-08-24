@@ -1,0 +1,95 @@
+{
+  "version": 8,
+  "name": "France — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2024/fr-2024.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "fr",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3302000000,
+            "Pasture meadow grassland grass",
+            3301010101,
+            "Winter common soft wheat",
+            3301010600,
+            "Grain maize corn popcorn",
+            3301090100,
+            "Temporary grass",
+            3301060401,
+            "Winter rapeseed rape",
+            3301010401,
+            "Winter barley",
+            3301060500,
+            "Sunflower",
+            3303060000,
+            "Vineyards wine vine rebland grapes",
+            3301010402,
+            "Spring barley",
+            3301090301,
+            "Alfalfa lucerne",
+            3301290700,
+            "Sugar beet",
+            3301020000,
+            "Legumes dried pulses protein crops",
+            "Other"
+          ],
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Winter common soft wheat",
+          "#cda737",
+          "Grain maize corn popcorn",
+          "#a6cee3",
+          "Temporary grass",
+          "#1f78b4",
+          "Winter rapeseed rape",
+          "#b2df8a",
+          "Winter barley",
+          "#fb9a99",
+          "Sunflower",
+          "#cc32cb",
+          "Vineyards wine vine rebland grapes",
+          "#e31a1c",
+          "Spring barley",
+          "#fdbf6f",
+          "Alfalfa lucerne",
+          "#ff7f00",
+          "Sugar beet",
+          "#cc324c",
+          "Legumes dried pulses protein crops",
+          "#6a3d9a",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "fr",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

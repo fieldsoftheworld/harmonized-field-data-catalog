@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "France — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2024/fr-2024.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "fr",
+      "paint": {
+        "fill-color": "#b2182b",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "fr",
+      "paint": {
+        "line-color": "#b2182b",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

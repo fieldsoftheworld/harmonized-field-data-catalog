@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Official (non-AI) field boundaries harmonized to fiboa, 36 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Official (non-AI) field boundaries harmonized to fiboa, 39 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - at_block: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
@@ -21,12 +21,14 @@ Official (non-AI) field boundaries harmonized to fiboa, 36 collections, GeoParqu
 - es_ar: Spain Aragon Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_ar/latest/es_ar.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - es_cat: Catalonia Crop Fields (Mapa de cultius) — https://data.source.coop/ftw/harmonized-field-data/es_cat/latest/es_cat.parquet (license other, CRS EPSG:25831)
 - es_cb: Spain Cantabria Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cb/latest/es_cb.parquet (license CC-BY-NC-4.0, CRS EPSG:4326)
+- es_cl: Spain Castile and León Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cl/latest/es_cl.parquet (license other, CRS EPSG:4258)
 - es_cm: Spain Castilla-La Mancha Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cm/latest/es_cm.parquet (license CC-BY-SA-4.0, CRS EPSG:4326)
 - es_cn: Spain Crop fields of Canary Islands — https://data.source.coop/ftw/harmonized-field-data/es_cn/latest/es_cn.parquet (license CC-BY-4.0, CRS EPSG:32628)
 - es_md: Spain Madrid Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_md/latest/es_md.parquet (license CC0-1.0, CRS EPSG:4258)
 - es_pv: Spain Basque Country Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_pv/latest/es_pv.parquet (license CC-BY-4.0, CRS EPSG:25830)
 - es_vc: Spain Valencia Crop Fields — https://data.source.coop/ftw/harmonized-field-data/es_vc/latest/es_vc.parquet (license CC-BY-4.0, CRS EPSG:25830)
 - fi: Finnish Crop Fields (Maatalousmaa) — https://data.source.coop/ftw/harmonized-field-data/fi/latest/fi.parquet (license CC-BY-4.0, CRS EPSG:3067)
+- fr: Registre Parcellaire Graphique; Crop Fields France — https://data.source.coop/ftw/harmonized-field-data/fr/latest/fr.parquet (license other, CRS EPSG:2154)
 - hr: Croatian Field Boundaries — https://data.source.coop/ftw/harmonized-field-data/hr/latest/hr.parquet (license other, CRS EPSG:3765)
 - ie: Ireland INSPIRE Geospatial aid application (GSAA) dataset — https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - it_1: Italy Tuscany (ITI1) Crop Fields — EuroCropsV2 — https://data.source.coop/ftw/harmonized-field-data/it_1/latest/it_1.parquet (license CC-BY-4.0, CRS EPSG:3035)
@@ -38,5 +40,6 @@ Official (non-AI) field boundaries harmonized to fiboa, 36 collections, GeoParqu
 - pt: Field boundaries for Portugal — https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet (license other, CRS EPSG:3763)
 - si: Slovenia Crop Fields — https://data.source.coop/ftw/harmonized-field-data/si/latest/si.parquet (license other, CRS EPSG:3794)
 - sk: Slovakia Agricultural Land Identification System — https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet (license CC0-1.0, CRS EPSG:5514)
+- us_usda_cropland: U.S. Department of Agriculture Crop Sequence Boundaries — https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/latest/us_usda_cropland.parquet (license other, CRS )
 
 Globs need S3 through the proxy (DuckDB: CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2')): all newest editions s3://ftw/harmonized-field-data/*/latest/*.parquet (union_by_name=true); per-edition s3://ftw/harmonized-field-data/<id>/year=*/*.parquet (hive_partitioning=true).

@@ -1,0 +1,137 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "es_cl-2025",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -7.077106527999945,
+          40.08316509700006
+        ],
+        [
+          -1.7746691789999431,
+          40.08316509700006
+        ],
+        [
+          -1.7746691789999431,
+          43.232849491000024
+        ],
+        [
+          -7.077106527999945,
+          43.232849491000024
+        ],
+        [
+          -7.077106527999945,
+          40.08316509700006
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -7.077106527999945,
+    40.08316509700006,
+    -1.7746691789999431,
+    43.232849491000024
+  ],
+  "properties": {
+    "title": "Spain Castilla y León — 2025",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`es_cl.parquet`, 9,109,136 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2025-01-01T00:00:00Z",
+    "end_datetime": "2025-01-01T00:00:00Z",
+    "year": 2025,
+    "proj:code": "EPSG:4258",
+    "table:columns": [
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name_en",
+        "type": "string",
+        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 9109136,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.15"
+    }
+  },
+  "collection": "es_cl",
+  "assets": {
+    "data": {
+      "href": "./es_cl.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Spain Castilla y León 2025 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 2607446888,
+      "file:checksum": "1220ece8d119da2de966da027cb94fd1fe48311cde26f4ec6a2ae116473b6a490f84",
+      "proj:code": "EPSG:4258"
+    },
+    "visual": {
+      "href": "./es_cl.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Spain Castilla y León 2025 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 923324112,
+      "file:checksum": "1220a491024d826ea25b28753d9e9f997c450033904731a5084c30d8206037da5740"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

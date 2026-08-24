@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "US (USDA CSB) — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2024/us_usda_cropland-2024.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "us_usda_cropland",
+      "paint": {
+        "fill-color": "#b2182b",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "us_usda_cropland",
+      "paint": {
+        "line-color": "#b2182b",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

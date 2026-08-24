@@ -1,0 +1,9 @@
+# Registre Parcellaire Graphique; Crop Fields France
+
+France field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Anstitut National de l'Information Géographique et Forestière. License: other.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/fr/latest/fr.parquet
+- All editions: s3://ftw/harmonized-field-data/fr/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:2154; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: hcat:name, hcat:code, crop:code, metrics:area, collection, id, group_code, hcat:name_en, geometry, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/fr/README.md, agent guide https://source.coop/ftw/harmonized-field-data/fr/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/fr/collection.json
