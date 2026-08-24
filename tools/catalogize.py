@@ -551,9 +551,12 @@ def localize(sql: str, public_base: str) -> str:
     return "\n".join(line for line in sql.splitlines() if not line.startswith("CREATE SECRET"))
 
 
+REMOTE = False  # --remote: run embedded queries against the published bucket
+
+
 def md_query(sql: str, public_base: str) -> str:
     """A fenced SQL block followed by the result it produced locally."""
-    result = run_query(localize(sql, public_base))
+    result = run_query(sql if REMOTE else localize(sql, public_base))
     commented = "\n".join(f"-- {line}" for line in result.splitlines())
     return f"```sql\n{sql.strip()}\n{commented}\n```"
 
@@ -814,7 +817,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("datasets", nargs="*", help="dataset ids from datasets.yaml")
     parser.add_argument("--root", action="store_true", help="(re)generate the catalog root")
+    parser.add_argument(
+        "--remote",
+        action="store_true",
+        help="run the embedded queries against the published bucket instead of local staging",
+    )
     args = parser.parse_args()
+    global REMOTE
+    REMOTE = args.remote
     manifest = Manifest.load()
     config = publish_config()
     for dataset_id in args.datasets:
