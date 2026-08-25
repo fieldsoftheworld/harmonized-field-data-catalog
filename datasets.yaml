@@ -158,7 +158,7 @@ datasets:
     years: ['2024']
     keywords: [Spain, Valencia, crop fields]
   fr:
-    years: ['2024']
+    years: ['2017', '2019', '2020', '2021', '2022', '2023', '2024']
     keywords: [France, RPG, Registre Parcellaire Graphique, crop fields]
   es_cl:
     year: 2025
