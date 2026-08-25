@@ -173,6 +173,10 @@ datasets:
     keywords: [United States, USDA, Crop Sequence Boundaries]
   jp:
     years: ['2021', '2022', '2023', '2024']
+  ch:
+    year: 2025
+    year_source: bezugsjahr of most features (1,141,698 of 1,350,476 are 2025, the rest 2026).
+    keywords: [Switzerland, LWB, Nutzungsflaechen, crop fields, geodienste.ch]
     keywords: [Japan, Fude Polygons, MAFF, rice fields]
   es:
     years: ['2025']
