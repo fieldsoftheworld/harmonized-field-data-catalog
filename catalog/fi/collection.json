@@ -192,6 +192,16 @@
       ],
       "file:size": 145539095,
       "file:checksum": "1220d46fd59c78d4f0ffd054550be27528bb1f20027b79410d1d5f3ff56e90989346"
+    },
+    "thumbnail": {
+      "href": "./thumbnail.jpg",
+      "type": "image/jpeg",
+      "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "roles": [
+        "thumbnail"
+      ],
+      "file:size": 305558,
+      "file:checksum": "122015b3f2a1f7ab51e5ab36a822b30031428b2ce298f234172094e63fae1e0e281b"
     }
   },
   "links": [
