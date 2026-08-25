@@ -7,47 +7,47 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "fr-2024",
+  "id": "fr-2019",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          -5.506154450430994,
-          41.304624323780764
+          -5.29548321444464,
+          41.31662385129093
         ],
         [
-          10.693492513780882,
-          41.304624323780764
+          10.694271037924013,
+          41.31662385129093
         ],
         [
-          10.693492513780882,
-          50.83880327319135
+          10.694271037924013,
+          50.83874877138249
         ],
         [
-          -5.506154450430994,
-          50.83880327319135
+          -5.29548321444464,
+          50.83874877138249
         ],
         [
-          -5.506154450430994,
-          41.304624323780764
+          -5.29548321444464,
+          41.31662385129093
         ]
       ]
     ]
   },
   "bbox": [
-    -5.506154450430994,
-    41.304624323780764,
-    10.693492513780882,
-    50.83880327319135
+    -5.29548321444464,
+    41.31662385129093,
+    10.694271037924013,
+    50.83874877138249
   ],
   "properties": {
-    "title": "France — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`fr-2024.parquet`, 9,678,595 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "title": "France — 2019",
+    "description": "Field boundaries of the 2019 edition of this dataset, one GeoParquet file (`fr-2019.parquet`, 9,599,098 fields) and its PMTiles. Partition `year=2019` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2024-01-01T00:00:00Z",
-    "end_datetime": "2024-01-01T00:00:00Z",
-    "year": 2024,
+    "start_datetime": "2019-01-01T00:00:00Z",
+    "end_datetime": "2019-01-01T00:00:00Z",
+    "year": 2019,
     "proj:code": "EPSG:2154",
     "table:columns": [
       {
@@ -102,7 +102,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 9678595,
+    "table:row_count": 9599098,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.15"
@@ -111,25 +111,15 @@
   "collection": "fr",
   "assets": {
     "data": {
-      "href": "./fr-2024.parquet",
+      "href": "./fr-2019.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "France 2024 (GeoParquet)",
+      "title": "France 2019 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 2700877234,
-      "file:checksum": "122082d2820a4e005f04699cef291b1e3e2a841b03fa7c281387e1488cdd9f477ae5",
+      "file:size": 2405055099,
+      "file:checksum": "12205d14ff34785d855945c37ca7bec101e671a57155a529059e8199967805152132",
       "proj:code": "EPSG:2154"
-    },
-    "visual": {
-      "href": "./fr-2024.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "France 2024 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 1175071406,
-      "file:checksum": "1220e9b9992abc18c282492478583ca614ba7691dc2a44e0626c074bc293631e9fbf"
     }
   },
   "links": [

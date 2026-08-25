@@ -1,11 +1,12 @@
 # Harmonized Field Boundary Data
 
-Official (non-AI) field boundaries harmonized to fiboa, 41 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Official (non-AI) field boundaries harmonized to fiboa, 43 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - at_block: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - be_vlg: Field boundaries for Flanders, Belgium — https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet (license other, CRS EPSG:31370)
 - be_wal: Belgium Wallonia: Parcellaire Agricole Anonyme — https://data.source.coop/ftw/harmonized-field-data/be_wal/latest/be_wal.parquet (license other, CRS EPSG:3035)
+- ch: Field boundaries for Switzerland — https://data.source.coop/ftw/harmonized-field-data/ch/latest/ch.parquet (license other, CRS EPSG:2056)
 - cz: Field boundaries for Czech — https://data.source.coop/ftw/harmonized-field-data/cz/latest/cz.parquet (license CC0-1.0, CRS EPSG:4258)
 - de_bb: Field boundaries for Berlin / Brandenburg, Germany — https://data.source.coop/ftw/harmonized-field-data/de_bb/latest/de_bb.parquet (license DL-DE-BY-2.0, CRS EPSG:25833)
 - de_bb_block: Field boundaries for Berlin / Brandenburg, Germany — https://data.source.coop/ftw/harmonized-field-data/de_bb_block/latest/de_bb_block.parquet (license DL-DE-BY-2.0, CRS EPSG:25833)
@@ -29,7 +30,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 41 collections, GeoParqu
 - es_pv: Spain Basque Country Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_pv/latest/es_pv.parquet (license CC-BY-4.0, CRS EPSG:25830)
 - es_vc: Spain Valencia Crop Fields — https://data.source.coop/ftw/harmonized-field-data/es_vc/latest/es_vc.parquet (license CC-BY-4.0, CRS EPSG:25830)
 - fi: Finnish Crop Fields (Maatalousmaa) — https://data.source.coop/ftw/harmonized-field-data/fi/latest/fi.parquet (license CC-BY-4.0, CRS EPSG:3067)
-- fr: Registre Parcellaire Graphique; Crop Fields France — https://data.source.coop/ftw/harmonized-field-data/fr/latest/fr.parquet (license other, CRS EPSG:2154)
+- fr: Registre Parcellaire Graphique; Crop Fields France — https://data.source.coop/ftw/harmonized-field-data/fr/latest/fr.parquet (license other, CRS EPSG:2154, IGNF:LAMB93)
 - hr: Croatian Field Boundaries — https://data.source.coop/ftw/harmonized-field-data/hr/latest/hr.parquet (license other, CRS EPSG:3765)
 - ie: Ireland INSPIRE Geospatial aid application (GSAA) dataset — https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - it_1: Italy Tuscany (ITI1) Crop Fields — EuroCropsV2 — https://data.source.coop/ftw/harmonized-field-data/it_1/latest/it_1.parquet (license CC-BY-4.0, CRS EPSG:3035)
@@ -39,6 +40,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 41 collections, GeoParqu
 - lv: Latvia Lauki Parcels — https://data.source.coop/ftw/harmonized-field-data/lv/latest/lv.parquet (license CC-BY-SA-4.0, CRS EPSG:3059)
 - nl: BRP Crop Field Boundaries for The Netherlands (CAP-based) — https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet (license CC0-1.0, CRS EPSG:28992)
 - nl_block: Field blocks for The Netherlands — https://data.source.coop/ftw/harmonized-field-data/nl_block/latest/nl_block.parquet (license CC0-1.0, CRS EPSG:28992)
+- nz: Irrigated land area — https://data.source.coop/ftw/harmonized-field-data/nz/latest/nz.parquet (license CC-BY-4.0, CRS EPSG:2193)
 - pt: Field boundaries for Portugal — https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet (license other, CRS EPSG:3763)
 - si: Slovenia Crop Fields — https://data.source.coop/ftw/harmonized-field-data/si/latest/si.parquet (license other, CRS EPSG:3794)
 - sk: Slovakia Agricultural Land Identification System — https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet (license CC0-1.0, CRS EPSG:5514)

@@ -12,7 +12,7 @@
   ],
   "id": "fr",
   "title": "Registre Parcellaire Graphique; Crop Fields France",
-  "description": "France has published Crop Field data for many years. Crop fields are declared by farmers within the Common Agricultural Policy (CAP) subsidy scheme.\n\nThe anonymized version is distributed as part of the public service for making reference data available contains graphic data for plots (basic land unit for farmers' declaration) with their main crop. This data has been produced by the Services and Payment Agency (ASP) since 2007.\n\nThis collection holds 1 edition (2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/fr/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:2154). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/fr/AGENTS.md).",
+  "description": "France has published Crop Field data for many years. Crop fields are declared by farmers within the Common Agricultural Policy (CAP) subsidy scheme.\n\nThe anonymized version is distributed as part of the public service for making reference data available contains graphic data for plots (basic land unit for farmers' declaration) with their main crop. This data has been produced by the Services and Payment Agency (ASP) since 2007.\n\nThis collection holds 7 editions (2017, 2019, 2020, 2021, 2022, 2023, 2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/fr/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:2154). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/fr/AGENTS.md).",
   "keywords": [
     "France",
     "RPG",
@@ -45,9 +45,9 @@
     "spatial": {
       "bbox": [
         [
-          -5.506154450430994,
+          -5.506154450430996,
           41.304624323780764,
-          10.693492513780882,
+          10.694271037924013,
           50.83880327319135
         ]
       ]
@@ -55,37 +55,23 @@
     "temporal": {
       "interval": [
         [
-          "2024-01-01T00:00:00Z",
-          "2024-12-31T23:59:59Z"
+          "2017-01-01T00:00:00Z",
+          "2024-01-01T00:00:00Z"
         ]
       ]
     }
   },
   "summaries": {
     "proj:code": [
-      "EPSG:2154"
+      "EPSG:2154",
+      "IGNF:LAMB93"
     ]
   },
   "table:columns": [
     {
-      "name": "hcat:name",
+      "name": "group_code",
       "type": "string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "crop:code",
-      "type": "string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "description": "Carried over from the source column `code_group`; the publisher documents no meaning for it."
     },
     {
       "name": "collection",
@@ -98,9 +84,19 @@
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "group_code",
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "crop:code",
       "type": "string",
-      "description": "Carried over from the source column `code_group`; the publisher documents no meaning for it."
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "hcat:name_en",
@@ -108,9 +104,14 @@
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -129,7 +130,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 7,
   "partition:glob": "s3://ftw/harmonized-field-data/fr/year=*/*.parquet",
   "assets": {
     "data": {
@@ -140,8 +141,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 2700877089,
-      "file:checksum": "1220cf2a5ebdd66f8b9210bc0175ac840e5d435d7fa65fd6e09b1b75f56555edd0dc",
+      "file:size": 2700877234,
+      "file:checksum": "122082d2820a4e005f04699cef291b1e3e2a841b03fa7c281387e1488cdd9f477ae5",
       "proj:code": "EPSG:2154"
     },
     "style-hcat-crops": {
@@ -185,8 +186,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 1180186560,
-      "file:checksum": "122028ea917d5c932bb1aa24e62e5fa75db75ef5e808614ba2e6d21e4ecc8bffb7a9"
+      "file:size": 1175071406,
+      "file:checksum": "1220e9b9992abc18c282492478583ca614ba7691dc2a44e0626c074bc293631e9fbf"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -263,21 +264,57 @@
     },
     {
       "rel": "item",
+      "href": "./year=2017/fr-2017.json",
+      "type": "application/geo+json",
+      "title": "France — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/fr-2019.json",
+      "type": "application/geo+json",
+      "title": "France — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/fr-2020.json",
+      "type": "application/geo+json",
+      "title": "France — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/fr-2021.json",
+      "type": "application/geo+json",
+      "title": "France — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/fr-2022.json",
+      "type": "application/geo+json",
+      "title": "France — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/fr-2023.json",
+      "type": "application/geo+json",
+      "title": "France — 2023"
+    },
+    {
+      "rel": "item",
       "href": "./year=2024/fr-2024.json",
       "type": "application/geo+json",
       "title": "France — 2024"
     }
   ],
-  "updated": "2026-08-24T04:27:32Z",
+  "updated": "2026-08-25T09:31:20Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "fr": [
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "IGN - Original data from https://geoservices.ign.fr/rpg"

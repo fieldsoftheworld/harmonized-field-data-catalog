@@ -7,13 +7,13 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "fr-2024",
+  "id": "fr-2023",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          -5.506154450430994,
+          -5.506154450430996,
           41.304624323780764
         ],
         [
@@ -22,32 +22,32 @@
         ],
         [
           10.693492513780882,
-          50.83880327319135
+          50.838803273191346
         ],
         [
-          -5.506154450430994,
-          50.83880327319135
+          -5.506154450430996,
+          50.838803273191346
         ],
         [
-          -5.506154450430994,
+          -5.506154450430996,
           41.304624323780764
         ]
       ]
     ]
   },
   "bbox": [
-    -5.506154450430994,
+    -5.506154450430996,
     41.304624323780764,
     10.693492513780882,
-    50.83880327319135
+    50.838803273191346
   ],
   "properties": {
-    "title": "France — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`fr-2024.parquet`, 9,678,595 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "title": "France — 2023",
+    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`fr-2023.parquet`, 9,788,919 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2024-01-01T00:00:00Z",
-    "end_datetime": "2024-01-01T00:00:00Z",
-    "year": 2024,
+    "start_datetime": "2023-01-01T00:00:00Z",
+    "end_datetime": "2023-01-01T00:00:00Z",
+    "year": 2023,
     "proj:code": "EPSG:2154",
     "table:columns": [
       {
@@ -102,7 +102,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 9678595,
+    "table:row_count": 9788919,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.15"
@@ -111,25 +111,15 @@
   "collection": "fr",
   "assets": {
     "data": {
-      "href": "./fr-2024.parquet",
+      "href": "./fr-2023.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "France 2024 (GeoParquet)",
+      "title": "France 2023 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 2700877234,
-      "file:checksum": "122082d2820a4e005f04699cef291b1e3e2a841b03fa7c281387e1488cdd9f477ae5",
+      "file:size": 2534324311,
+      "file:checksum": "1220e96b8c0bd762bae8e5c68740fb5ebce7c68ba02eccc008106e47f21259276d42",
       "proj:code": "EPSG:2154"
-    },
-    "visual": {
-      "href": "./fr-2024.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "France 2024 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 1175071406,
-      "file:checksum": "1220e9b9992abc18c282492478583ca614ba7691dc2a44e0626c074bc293631e9fbf"
     }
   },
   "links": [

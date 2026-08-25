@@ -7,58 +7,73 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "fr-2024",
+  "id": "ch-2025",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          -5.506154450430994,
-          41.304624323780764
+          5.877849689914085,
+          45.789326319067555
         ],
         [
-          10.693492513780882,
-          41.304624323780764
+          10.536205524189402,
+          45.789326319067555
         ],
         [
-          10.693492513780882,
-          50.83880327319135
+          10.536205524189402,
+          47.802165721678286
         ],
         [
-          -5.506154450430994,
-          50.83880327319135
+          5.877849689914085,
+          47.802165721678286
         ],
         [
-          -5.506154450430994,
-          41.304624323780764
+          5.877849689914085,
+          45.789326319067555
         ]
       ]
     ]
   },
   "bbox": [
-    -5.506154450430994,
-    41.304624323780764,
-    10.693492513780882,
-    50.83880327319135
+    5.877849689914085,
+    45.789326319067555,
+    10.536205524189402,
+    47.802165721678286
   ],
   "properties": {
-    "title": "France — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`fr-2024.parquet`, 9,678,595 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "title": "Switzerland — 2025",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`ch.parquet`, 1,350,979 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2024-01-01T00:00:00Z",
-    "end_datetime": "2024-01-01T00:00:00Z",
-    "year": 2024,
-    "proj:code": "EPSG:2154",
+    "start_datetime": "2025-01-01T00:00:00Z",
+    "end_datetime": "2026-01-01T00:00:00Z",
+    "year": 2025,
+    "proj:code": "EPSG:2056",
     "table:columns": [
-      {
-        "name": "group_code",
-        "type": "string",
-        "description": "Carried over from the source column `code_group`; the publisher documents no meaning for it."
-      },
       {
         "name": "collection",
         "type": "string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "admin:subdivision_code",
+        "type": "string",
+        "description": "ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
       },
       {
         "name": "id",
@@ -71,29 +86,19 @@
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
         "name": "metrics:area",
         "type": "float",
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "determination:datetime",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -102,34 +107,34 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 9678595,
+    "table:row_count": 1350979,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.15"
     }
   },
-  "collection": "fr",
+  "collection": "ch",
   "assets": {
     "data": {
-      "href": "./fr-2024.parquet",
+      "href": "./ch.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "France 2024 (GeoParquet)",
+      "title": "Switzerland 2025 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 2700877234,
-      "file:checksum": "122082d2820a4e005f04699cef291b1e3e2a841b03fa7c281387e1488cdd9f477ae5",
-      "proj:code": "EPSG:2154"
+      "file:size": 281668731,
+      "file:checksum": "1220c0961c041e4e08933e8b54394383f1f3cbd84063450ab1e3871943697c4a79e8",
+      "proj:code": "EPSG:2056"
     },
     "visual": {
-      "href": "./fr-2024.pmtiles",
+      "href": "./ch.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "France 2024 (PMTiles)",
+      "title": "Switzerland 2025 (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 1175071406,
-      "file:checksum": "1220e9b9992abc18c282492478583ca614ba7691dc2a44e0626c074bc293631e9fbf"
+      "file:size": 162959384,
+      "file:checksum": "12204284f3c5ea73a944b24cc51905ff5c93336ba0bf0f0825b3c1126b5df12184c8"
     }
   },
   "links": [
