@@ -19,7 +19,7 @@ GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- at | 2944405
 -- at_block | 1299755
--- be_vlg | 594732
+-- be_vlg | 597088
 -- be_wal | 341968
 -- ch | 1350979
 -- cz | 415301
@@ -42,10 +42,10 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2023 | be_vlg | 588192
 -- 2024 | be_vlg | 589749
 -- 2025 | be_vlg | 594732
+-- 2026 | be_vlg | 597088
 -- 2022 | be_wal | 341968
 -- 2025 | ch | 1350979
--- 2026 | cz | 415301
--- ... 47 more rows
+-- ... 49 more rows
 ```
 
 ## Join keys

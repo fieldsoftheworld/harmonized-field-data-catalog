@@ -7,7 +7,7 @@
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2025/nl-2025.pmtiles"
+      "url": "pmtiles://../year=2026/nl-2026.pmtiles"
     }
   },
   "layers": [
@@ -41,14 +41,14 @@
             "Onions",
             3301010402,
             "Spring barley",
-            3399000000,
-            "Not known and other",
             3301010401,
             "Winter barley",
+            3399000000,
+            "Not known and other",
             3301084900,
             "Tulips",
-            3301010600,
-            "Grain maize corn popcorn",
+            3301010102,
+            "Spring common soft wheat",
             "Other"
           ],
           "Pasture meadow grassland grass",
@@ -67,13 +67,13 @@
           "#fb9a99",
           "Spring barley",
           "#e31a1c",
-          "Not known and other",
-          "#fdbf6f",
           "Winter barley",
+          "#fdbf6f",
+          "Not known and other",
           "#ff7f00",
           "Tulips",
           "#6a3d9a",
-          "Grain maize corn popcorn",
+          "Spring common soft wheat",
           "#ffff99",
           "#c8c8c8"
         ],

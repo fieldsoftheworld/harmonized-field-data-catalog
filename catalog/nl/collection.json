@@ -12,7 +12,7 @@
   ],
   "id": "nl",
   "title": "BRP Crop Field Boundaries for The Netherlands (CAP-based)",
-  "description": "BasisRegistratie Percelen (BRP) combines the location of\nagricultural plots with the crop grown. The data set\nis published by RVO (Netherlands Enterprise Agency). The boundaries of the agricultural plots\nare based within the reference parcels (formerly known as AAN). A user an agricultural plot\nannually has to register his crop fields with crops (for the Common Agricultural Policy scheme).\nA dataset is generated for each year with reference date May 15.\nA view service and a download service are available for the most recent BRP crop plots.\n\n<https://service.pdok.nl/rvo/brpgewaspercelen/atom/v1_0/index.xml>\n\nData is currently available for the years 2009 to 2024.\n\nThis collection holds 1 edition (2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/nl/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:28992). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md).",
+  "description": "BasisRegistratie Percelen (BRP) combines the location of\nagricultural plots with the crop grown. The data set\nis published by RVO (Netherlands Enterprise Agency). The boundaries of the agricultural plots\nare based within the reference parcels (formerly known as AAN). A user an agricultural plot\nannually has to register his crop fields with crops (for the Common Agricultural Policy scheme).\nA dataset is generated for each year with reference date May 15.\nA view service and a download service are available for the most recent BRP crop plots.\n\n<https://service.pdok.nl/rvo/gewaspercelen/atom/index.xml>\n\nData is currently available for the years 2009 to 2025 (final) and 2026 (concept).\n\nThis collection holds 2 editions (2025, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/nl/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:28992). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md).",
   "keywords": [
     "BRP",
     "Basisregistratie Gewaspercelen",
@@ -47,10 +47,10 @@
     "spatial": {
       "bbox": [
         [
-          3.257900752520783,
+          3.2575528672433016,
           50.73428105429953,
-          7.237753140074882,
-          53.48775690289261
+          7.2380555911643825,
+          53.49476233618904
         ]
       ]
     },
@@ -58,7 +58,7 @@
       "interval": [
         [
           "2025-05-15T00:00:00Z",
-          "2025-05-15T00:00:00Z"
+          "2026-05-15T00:00:00Z"
         ]
       ]
     }
@@ -70,19 +70,29 @@
   },
   "table:columns": [
     {
+      "name": "collection",
+      "type": "string",
+      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
       "name": "crop:name",
       "type": "string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "crop:code",
-      "type": "string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
       "name": "hcat:name_en",
       "type": "string",
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "coverage",
@@ -100,24 +110,14 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
       "name": "hcat:name",
       "type": "string",
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "collection",
+      "name": "crop:code",
       "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -126,7 +126,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 1293962,
+  "table:row_count": 1265023,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -136,19 +136,19 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 2,
   "partition:glob": "s3://ftw/harmonized-field-data/nl/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/nl.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Netherlands (Crops) — latest edition (2025) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2025/nl-2025.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "title": "Netherlands (Crops) — latest edition (2026) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2026/nl-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 756461066,
-      "file:checksum": "12204790e3db5642300fe5a9b74241b0feb192f1653143f77074ae0f877b9ae1aa8e",
+      "file:size": 741317764,
+      "file:checksum": "1220efe17a2ad7bffe009b0042db5d81487660029aa2b861592cf02697e8a2c8a895",
       "proj:code": "EPSG:28992"
     },
     "style-hcat-crops": {
@@ -161,7 +161,7 @@
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
       "file:size": 2325,
-      "file:checksum": "1220fa88e5471ce84d78af1c11f411cf9bba22f8b3f124a48cf6858c728ece8a7fbe"
+      "file:checksum": "1220a5208179dda145d66582c979435922c00b1c7262bde4775d44570deb1933329f"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -172,7 +172,7 @@
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 1, 2 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
       "file:size": 1183,
-      "file:checksum": "1220b09cf21269b4b4d6cc85e965765fe3f1b21719dd00e5d512ec3005c17940c07a"
+      "file:checksum": "1220b3129e7e41a94974e9a405827f970d7a874621afd075eb463f477e72c9a9b6ab"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -183,17 +183,17 @@
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
       "file:size": 739,
-      "file:checksum": "1220ee0b11a06a13a60aa9a9308c16c3685a85f294292cdd0015f6feff9019263ba8"
+      "file:checksum": "1220e7722f078fe1f0ebf9c092cc1fdb09eb7affa386fe18fcceaad294cb0daf5383"
     },
     "visual": {
-      "href": "./year=2025/nl-2025.pmtiles",
+      "href": "./year=2026/nl-2026.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Netherlands (Crops) — latest edition (2025) (PMTiles)",
+      "title": "Netherlands (Crops) — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 532094547,
-      "file:checksum": "1220dd7dd31157cc75f57c261b40968c1a14304ce12bb4fb8c36016e786b2806ac54"
+      "file:size": 533327207,
+      "file:checksum": "1220a40776143aa1b5ff51d12afb686f836e676fd89dc670fe5b0bebdc7b937c5b72"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -202,8 +202,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 234882,
-      "file:checksum": "122000abfab8ab0c809d8c55a13e8dbf0a6d68fb76aecb660a2b1006e37dd398ee18"
+      "file:size": 184149,
+      "file:checksum": "12203e76410ee0121e1169681cc43ea5f3eb1e91e5b43318808f78ff3ccadcb95627"
     }
   },
   "links": [
@@ -237,7 +237,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2025/nl-2025.pmtiles",
+      "href": "./year=2026/nl-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -267,18 +267,24 @@
       "href": "./year=2025/nl-2025.json",
       "type": "application/geo+json",
       "title": "Netherlands (Crops) — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2026/nl-2026.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2026"
     }
   ],
-  "updated": "2026-08-21T11:11:46Z",
+  "updated": "2026-08-25T20:18:39Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "nl": [
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   }
 }
