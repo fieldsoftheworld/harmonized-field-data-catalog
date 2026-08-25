@@ -169,7 +169,7 @@ datasets:
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Netherlands, referentiepercelen, field blocks, PDOK]
   us_usda_cropland:
-    years: ['2024']
+    years: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
     keywords: [United States, USDA, Crop Sequence Boundaries]
   jp:
     years: ['2021', '2022', '2023', '2024']
