@@ -1,6 +1,6 @@
 # Agent guidance — U.S. Department of Agriculture Crop Sequence Boundaries
 
-US (USDA CSB) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+US (USDA CSB) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 8 editions (2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -15,7 +15,7 @@ US (USDA CSB) field boundaries in the [fiboa](https://github.com/fiboa/specifica
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `CSBID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/us/usda/cropland.csv`) have `NULL`.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2023-05-01T00:00:00Z`, `admin:country_code` = `US`, `crop:code_list` = `https://fiboa.org/code/us/usda/cropland.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `US`, `determination:datetime` = `2024-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/us/usda/cropland.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -28,6 +28,13 @@ SELECT year, count(*) AS fields, 0 AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/us_usda_cropland/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
+-- 2017 | 7660547 | 0
+-- 2018 | 7517019 | 0
+-- 2019 | 7677349 | 0
+-- 2020 | 7595821 | 0
+-- 2021 | 7590146 | 0
+-- 2022 | 7659738 | 0
+-- 2023 | 7637878 | 0
 -- 2024 | 7522713 | 0
 ```
 

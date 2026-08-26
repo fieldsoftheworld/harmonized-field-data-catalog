@@ -1,9 +1,9 @@
 # U.S. Department of Agriculture Crop Sequence Boundaries
 
-US (USDA CSB) field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from United States Department of Agriculture. License: other.
+US (USDA CSB) field boundaries (2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from United States Department of Agriculture. License: other.
 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/latest/us_usda_cropland.parquet
 - All editions: s3://ftw/harmonized-field-data/us_usda_cropland/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
 - CRS None; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: geometry, crop:name, hcat:name_en, hcat:code, administrative_area_level_2, id, crop:code, collection, hcat:name, bbox
+- Columns: hcat:name_en, geometry, id, administrative_area_level_2, crop:code, hcat:name, collection, hcat:code, crop:name, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/us_usda_cropland/README.md, agent guide https://source.coop/ftw/harmonized-field-data/us_usda_cropland/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/collection.json

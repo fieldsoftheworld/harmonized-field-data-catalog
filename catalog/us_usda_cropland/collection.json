@@ -12,7 +12,7 @@
   ],
   "id": "us_usda_cropland",
   "title": "U.S. Department of Agriculture Crop Sequence Boundaries",
-  "description": "The Crop Sequence Boundaries (CSB) developed with USDA's Economic Research Service, produces estimates of field boundaries, crop acreage, and crop rotations across the contiguous United States. It uses satellite imagery with other public data and is open source allowing users to conduct area and statistical analysis of planted U.S. commodities and provides insight on farmer cropping decisions.\n\nNASS needed a representative field to predict crop planting based on common crop rotations such as corn-soy and ERS is using this product to study changes in farm management practices like tillage or cover cropping over time.\n\nCSB represents non-confidential single crop field boundaries over a set time frame. It does not contain personal identifying information. The boundaries captured are of crops grown only, not ownership boundaries or tax parcels (unit of property). The data are from satellite imagery and publicly available data, it does not come from producers or agencies like the Farm Service Agency.\n\nThis collection holds 1 edition (2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/us_usda_cropland/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (None). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/us_usda_cropland/AGENTS.md).",
+  "description": "The Crop Sequence Boundaries (CSB) developed with USDA's Economic Research Service, produces estimates of field boundaries, crop acreage, and crop rotations across the contiguous United States. It uses satellite imagery with other public data and is open source allowing users to conduct area and statistical analysis of planted U.S. commodities and provides insight on farmer cropping decisions.\n\nNASS needed a representative field to predict crop planting based on common crop rotations such as corn-soy and ERS is using this product to study changes in farm management practices like tillage or cover cropping over time.\n\nCSB represents non-confidential single crop field boundaries over a set time frame. It does not contain personal identifying information. The boundaries captured are of crops grown only, not ownership boundaries or tax parcels (unit of property). The data are from satellite imagery and publicly available data, it does not come from producers or agencies like the Farm Service Agency.\n\nThis collection holds 8 editions (2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/us_usda_cropland/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (None). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/us_usda_cropland/AGENTS.md).",
   "keywords": [
     "Crop Sequence Boundaries",
     "USDA",
@@ -54,8 +54,8 @@
     "temporal": {
       "interval": [
         [
-          "2023-05-01T00:00:00Z",
-          "2023-05-01T00:00:00Z"
+          "2017-01-01T00:00:00Z",
+          "2024-01-01T00:00:00Z"
         ]
       ]
     }
@@ -65,29 +65,14 @@
   },
   "table:columns": [
     {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:name",
-      "type": "string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
       "name": "hcat:name_en",
       "type": "string",
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "administrative_area_level_2",
-      "type": "string",
-      "description": "Carried over from the source column `CNTY`; the publisher documents no meaning for it."
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "id",
@@ -95,9 +80,19 @@
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
+      "name": "administrative_area_level_2",
+      "type": "string",
+      "description": "Carried over from the source column `CNTY`; the publisher documents no meaning for it."
+    },
+    {
       "name": "crop:code",
       "type": "string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "collection",
@@ -105,9 +100,14 @@
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "hcat:name",
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "crop:name",
       "type": "string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -126,7 +126,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 8,
   "partition:glob": "s3://ftw/harmonized-field-data/us_usda_cropland/year=*/*.parquet",
   "assets": {
     "data": {
@@ -137,8 +137,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 3048746856,
-      "file:checksum": "1220558feb1e996d8ff0d33cc01da505134b62f41ed5626460cd74d5aacedb50c864",
+      "file:size": 3048746851,
+      "file:checksum": "1220a9bac39bb19a77e0f23adf35242dbc8fc0ae67fbbb8b2b2424708e421c854467",
       "proj:code": null
     },
     "style-hcat-crops": {
@@ -171,8 +171,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 690409197,
-      "file:checksum": "1220fd50c9a39c7c5a1ec1d0f4a463c2e8c08000a09b8d03d29c0f1bee2d98702bfa"
+      "file:size": 690288602,
+      "file:checksum": "1220e83c05a90f13306a96c522d2035133c0e09f7b1a36c03c669496183f133879d8"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -243,21 +243,63 @@
     },
     {
       "rel": "item",
+      "href": "./year=2017/us_usda_cropland-2017.json",
+      "type": "application/geo+json",
+      "title": "US (USDA CSB) — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/us_usda_cropland-2018.json",
+      "type": "application/geo+json",
+      "title": "US (USDA CSB) — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/us_usda_cropland-2019.json",
+      "type": "application/geo+json",
+      "title": "US (USDA CSB) — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/us_usda_cropland-2020.json",
+      "type": "application/geo+json",
+      "title": "US (USDA CSB) — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/us_usda_cropland-2021.json",
+      "type": "application/geo+json",
+      "title": "US (USDA CSB) — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/us_usda_cropland-2022.json",
+      "type": "application/geo+json",
+      "title": "US (USDA CSB) — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/us_usda_cropland-2023.json",
+      "type": "application/geo+json",
+      "title": "US (USDA CSB) — 2023"
+    },
+    {
+      "rel": "item",
       "href": "./year=2024/us_usda_cropland-2024.json",
       "type": "application/geo+json",
       "title": "US (USDA CSB) — 2024"
     }
   ],
-  "updated": "2026-08-24T09:39:50Z",
+  "updated": "2026-08-26T10:36:15Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "us_usda_cropland": [
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   }
 }

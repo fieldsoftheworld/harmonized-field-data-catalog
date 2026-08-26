@@ -7,7 +7,7 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "us_usda_cropland-2024",
+  "id": "us_usda_cropland-2019",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
@@ -42,12 +42,12 @@
     48.18311215673329
   ],
   "properties": {
-    "title": "US (USDA CSB) — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`us_usda_cropland-2024.parquet`, 7,522,713 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "title": "US (USDA CSB) — 2019",
+    "description": "Field boundaries of the 2019 edition of this dataset, one GeoParquet file (`us_usda_cropland-2019.parquet`, 7,677,349 fields) and its PMTiles. Partition `year=2019` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2024-01-01T00:00:00Z",
-    "end_datetime": "2024-01-01T00:00:00Z",
-    "year": 2024,
+    "start_datetime": "2019-01-01T00:00:00Z",
+    "end_datetime": "2019-01-01T00:00:00Z",
+    "year": 2019,
     "proj:code": null,
     "table:columns": [
       {
@@ -102,7 +102,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 7522713,
+    "table:row_count": 7677349,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.15"
@@ -111,25 +111,15 @@
   "collection": "us_usda_cropland",
   "assets": {
     "data": {
-      "href": "./us_usda_cropland-2024.parquet",
+      "href": "./us_usda_cropland-2019.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "US (USDA CSB) 2024 (GeoParquet)",
+      "title": "US (USDA CSB) 2019 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 3048746851,
-      "file:checksum": "1220a9bac39bb19a77e0f23adf35242dbc8fc0ae67fbbb8b2b2424708e421c854467",
+      "file:size": 3037370936,
+      "file:checksum": "1220c4f0b12446e13705208523f206b5cfe059a686cb7ae58da6d666e4b0c6371698",
       "proj:code": null
-    },
-    "visual": {
-      "href": "./us_usda_cropland-2024.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "US (USDA CSB) 2024 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 690288602,
-      "file:checksum": "1220e83c05a90f13306a96c522d2035133c0e09f7b1a36c03c669496183f133879d8"
     }
   },
   "links": [
