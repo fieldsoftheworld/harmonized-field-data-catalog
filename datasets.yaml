@@ -39,7 +39,7 @@ datasets:
     year_source: "The source is a rolling download without a vintage in its URL (LWK-TSCHLAG_EPSG25832_Shape.zip); the edition year is the year the snapshot was downloaded and converted."
     keywords: [Germany, North Rhine-Westphalia, INSPIRE, field blocks]
   nl:
-    years: ["2025", "2026"]
+    years: ["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"]
     keywords: [Netherlands, BRP, Basisregistratie Gewaspercelen, IACS, crop fields, PDOK]
     thumbnail: {zoom: 13, center: [5.66, 52.50]}  # Flevoland arable mosaic; the densest cluster is uniform grassland
   lu:
