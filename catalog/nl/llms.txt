@@ -1,6 +1,6 @@
 # BRP Crop Field Boundaries for The Netherlands (CAP-based)
 
-Netherlands (Crops) field boundaries (2025, 2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from RVO / PDOK. License: CC0-1.0.
+Netherlands (Crops) field boundaries (2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from RVO / PDOK. License: CC0-1.0.
 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet
 - All editions: s3://ftw/harmonized-field-data/nl/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)

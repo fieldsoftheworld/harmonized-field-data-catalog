@@ -12,7 +12,7 @@
   ],
   "id": "nl",
   "title": "BRP Crop Field Boundaries for The Netherlands (CAP-based)",
-  "description": "BasisRegistratie Percelen (BRP) combines the location of\nagricultural plots with the crop grown. The data set\nis published by RVO (Netherlands Enterprise Agency). The boundaries of the agricultural plots\nare based within the reference parcels (formerly known as AAN). A user an agricultural plot\nannually has to register his crop fields with crops (for the Common Agricultural Policy scheme).\nA dataset is generated for each year with reference date May 15.\nA view service and a download service are available for the most recent BRP crop plots.\n\n<https://service.pdok.nl/rvo/gewaspercelen/atom/index.xml>\n\nData is currently available for the years 2009 to 2025 (final) and 2026 (concept).\n\nThis collection holds 2 editions (2025, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/nl/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:28992). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md).",
+  "description": "BasisRegistratie Percelen (BRP) combines the location of\nagricultural plots with the crop grown. The data set\nis published by RVO (Netherlands Enterprise Agency). The boundaries of the agricultural plots\nare based within the reference parcels (formerly known as AAN). A user an agricultural plot\nannually has to register his crop fields with crops (for the Common Agricultural Policy scheme).\nA dataset is generated for each year with reference date May 15.\nA view service and a download service are available for the most recent BRP crop plots.\n\n<https://service.pdok.nl/rvo/gewaspercelen/atom/index.xml>\n\nData is currently available for the years 2009 to 2025 (final) and 2026 (concept).\n\nThis collection holds 18 editions (2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/nl/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:28992). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md).",
   "keywords": [
     "BRP",
     "Basisregistratie Gewaspercelen",
@@ -47,17 +47,17 @@
     "spatial": {
       "bbox": [
         [
-          3.2575528672433016,
-          50.73428105429953,
-          7.2380555911643825,
-          53.49476233618904
+          3.257552867243302,
+          50.734265583314304,
+          7.238055591164383,
+          53.49476233618906
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2025-05-15T00:00:00Z",
+          "2009-05-15T00:00:00Z",
           "2026-05-15T00:00:00Z"
         ]
       ]
@@ -136,7 +136,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 2,
+  "partition:file_count": 18,
   "partition:glob": "s3://ftw/harmonized-field-data/nl/year=*/*.parquet",
   "assets": {
     "data": {
@@ -264,6 +264,102 @@
     },
     {
       "rel": "item",
+      "href": "./year=2009/nl-2009.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2009"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2010/nl-2010.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2010"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2011/nl-2011.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2011"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2012/nl-2012.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2012"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2013/nl-2013.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2013"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2014/nl-2014.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2014"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2015/nl-2015.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2015"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2016/nl-2016.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2016"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2017/nl-2017.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/nl-2018.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/nl-2019.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/nl-2020.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/nl-2021.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/nl-2022.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/nl-2023.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/nl-2024.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2024"
+    },
+    {
+      "rel": "item",
       "href": "./year=2025/nl-2025.json",
       "type": "application/geo+json",
       "title": "Netherlands (Crops) — 2025"
@@ -275,16 +371,16 @@
       "title": "Netherlands (Crops) — 2026"
     }
   ],
-  "updated": "2026-08-25T20:18:39Z",
+  "updated": "2026-08-28T13:55:34Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "nl": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   }
 }

@@ -1,6 +1,6 @@
 # Agent guidance — BRP Crop Field Boundaries for The Netherlands (CAP-based)
 
-Netherlands (Crops) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 2 editions (2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Netherlands (Crops) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 18 editions (2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -29,8 +29,15 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/nl/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2025 | 1293962 | 1787357.0
--- 2026 | 1265023 | 1798282.0
+-- 2009 | 781445 | 1802019.0
+-- 2010 | 747450 | 1791128.0
+-- 2011 | 743778 | 1787196.0
+-- 2012 | 761067 | 1835176.0
+-- 2013 | 751585 | 1817903.0
+-- 2014 | 753749 | 1819421.0
+-- 2015 | 781377 | 1832265.0
+-- 2016 | 775949 | 1830776.0
+-- ... 10 more rows
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):

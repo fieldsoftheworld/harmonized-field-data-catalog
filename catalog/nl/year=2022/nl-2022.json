@@ -7,47 +7,47 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "nl-2026",
+  "id": "nl-2022",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          3.257552867243302,
-          50.73428105429953
+          3.2580253272838804,
+          50.73426581693989
         ],
         [
-          7.238055591164383,
-          50.73428105429953
+          7.2376572851450796,
+          50.73426581693989
         ],
         [
-          7.238055591164383,
-          53.49476233618906
+          7.2376572851450796,
+          53.48553614104339
         ],
         [
-          3.257552867243302,
-          53.49476233618906
+          3.2580253272838804,
+          53.48553614104339
         ],
         [
-          3.257552867243302,
-          50.73428105429953
+          3.2580253272838804,
+          50.73426581693989
         ]
       ]
     ]
   },
   "bbox": [
-    3.257552867243302,
-    50.73428105429953,
-    7.238055591164383,
-    53.49476233618906
+    3.2580253272838804,
+    50.73426581693989,
+    7.2376572851450796,
+    53.48553614104339
   ],
   "properties": {
-    "title": "Netherlands (Crops) — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`nl-2026.parquet`, 1,265,023 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "title": "Netherlands (Crops) — 2022",
+    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`nl-2022.parquet`, 744,949 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2026-05-15T00:00:00Z",
-    "end_datetime": "2026-05-15T00:00:00Z",
-    "year": 2026,
+    "start_datetime": "2022-05-15T00:00:00Z",
+    "end_datetime": "2022-05-15T00:00:00Z",
+    "year": 2022,
     "proj:code": "EPSG:28992",
     "table:columns": [
       {
@@ -107,7 +107,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 1265023,
+    "table:row_count": 744949,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.15"
@@ -116,25 +116,15 @@
   "collection": "nl",
   "assets": {
     "data": {
-      "href": "./nl-2026.parquet",
+      "href": "./nl-2022.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Netherlands (Crops) 2026 (GeoParquet)",
+      "title": "Netherlands (Crops) 2022 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 741317764,
-      "file:checksum": "1220efe17a2ad7bffe009b0042db5d81487660029aa2b861592cf02697e8a2c8a895",
+      "file:size": 450870243,
+      "file:checksum": "1220d2f759c32b935bcb7e6e8e5f1f275575c750bf207d0a5ddd5d836f0038fbefe1",
       "proj:code": "EPSG:28992"
-    },
-    "visual": {
-      "href": "./nl-2026.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Netherlands (Crops) 2026 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 533327207,
-      "file:checksum": "1220a40776143aa1b5ff51d12afb686f836e676fd89dc670fe5b0bebdc7b937c5b72"
     }
   },
   "links": [
