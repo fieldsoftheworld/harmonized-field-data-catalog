@@ -7,47 +7,47 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "dk-2026",
+  "id": "dk-2019",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          8.027665150302246,
-          54.444237495906144
+          8.026830344541496,
+          54.44421901380453
         ],
         [
-          15.573199436854463,
-          54.444237495906144
+          15.571121372696341,
+          54.44421901380453
         ],
         [
-          15.573199436854463,
-          57.75163625266765
+          15.571121372696341,
+          57.740075242809844
         ],
         [
-          8.027665150302246,
-          57.75163625266765
+          8.026830344541496,
+          57.740075242809844
         ],
         [
-          8.027665150302246,
-          54.444237495906144
+          8.026830344541496,
+          54.44421901380453
         ]
       ]
     ]
   },
   "bbox": [
-    8.027665150302246,
-    54.444237495906144,
-    15.573199436854463,
-    57.75163625266765
+    8.026830344541496,
+    54.44421901380453,
+    15.571121372696341,
+    57.740075242809844
   ],
   "properties": {
-    "title": "Denmark — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`dk-2026.parquet`, 604,198 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "title": "Denmark — 2019",
+    "description": "Field boundaries of the 2019 edition of this dataset, one GeoParquet file (`dk-2019.parquet`, 587,474 fields) and its PMTiles. Partition `year=2019` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2026-01-01T00:00:00Z",
-    "end_datetime": "2026-01-01T00:00:00Z",
-    "year": 2026,
+    "start_datetime": "2019-01-01T00:00:00Z",
+    "end_datetime": "2019-01-01T00:00:00Z",
+    "year": 2019,
     "proj:code": "EPSG:25832",
     "table:columns": [
       {
@@ -102,7 +102,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 604198,
+    "table:row_count": 587474,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.15"
@@ -111,25 +111,15 @@
   "collection": "dk",
   "assets": {
     "data": {
-      "href": "./dk-2026.parquet",
+      "href": "./dk-2019.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Denmark 2026 (GeoParquet)",
+      "title": "Denmark 2019 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 328896268,
-      "file:checksum": "1220a868c467c415aeaf2cb74e0aaa5ab1d2a0ad178d37277550d5f876aff792ffee",
+      "file:size": 308508151,
+      "file:checksum": "1220181312370e667dfc797290d4b81d017a7eb4093d067e424a3590ca7225970998",
       "proj:code": "EPSG:25832"
-    },
-    "visual": {
-      "href": "./dk-2026.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Denmark 2026 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 247612253,
-      "file:checksum": "12204599e0e22de720cd33b7a01d47afbd1cd8d02cc47cb32e08343c58736f9847f3"
     }
   },
   "links": [

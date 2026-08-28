@@ -12,7 +12,7 @@
   ],
   "id": "dk",
   "title": "Denmark Crop Fields (Marker)",
-  "description": "The Danish Ministry of Food, Agriculture and Fisheries publishes Crop Fields (Marker) for each year.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/dk/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25832). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/dk/AGENTS.md).",
+  "description": "The Danish Ministry of Food, Agriculture and Fisheries publishes Crop Fields (Marker) for each year.\n\nThis collection holds 19 editions (2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/dk/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25832). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/dk/AGENTS.md).",
   "keywords": [
     "Denmark",
     "IACS",
@@ -45,17 +45,17 @@
     "spatial": {
       "bbox": [
         [
-          8.027665150302246,
-          54.444237495906144,
+          8.026519929443044,
+          54.44421479514903,
           15.573199436854463,
-          57.751636252667666
+          57.75163625266765
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2026-01-01T00:00:00Z",
+          "2008-01-01T00:00:00Z",
           "2026-01-01T00:00:00Z"
         ]
       ]
@@ -129,7 +129,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 19,
   "partition:glob": "s3://ftw/harmonized-field-data/dk/year=*/*.parquet",
   "assets": {
     "data": {
@@ -257,20 +257,128 @@
     },
     {
       "rel": "item",
+      "href": "./year=2008/dk-2008.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2008"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2009/dk-2009.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2009"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2010/dk-2010.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2010"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2011/dk-2011.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2011"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2012/dk-2012.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2012"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2013/dk-2013.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2013"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2014/dk-2014.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2014"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2015/dk-2015.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2015"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2016/dk-2016.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2016"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2017/dk-2017.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/dk-2018.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/dk-2019.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/dk-2020.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/dk-2021.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/dk-2022.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/dk-2023.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/dk-2024.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2024"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/dk-2025.json",
+      "type": "application/geo+json",
+      "title": "Denmark — 2025"
+    },
+    {
+      "rel": "item",
       "href": "./year=2026/dk-2026.json",
       "type": "application/geo+json",
       "title": "Denmark — 2026"
     }
   ],
-  "updated": "2026-08-22T21:07:05Z",
+  "updated": "2026-08-28T16:29:02Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "dk": [
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   }

@@ -1,6 +1,6 @@
 # Agent guidance — Denmark Crop Fields (Marker)
 
-Denmark field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Denmark field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 19 editions (2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -29,7 +29,15 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/dk/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2026 | 604198 | 2649306.0
+-- 2008 | 678957 | 2751300.0
+-- 2009 | 476088 | 2000904.0
+-- 2010 | 644670 | 2731338.0
+-- 2011 | 625273 | 2703844.0
+-- 2012 | 618150 | 2690710.0
+-- 2013 | 615237 | 2687338.0
+-- 2014 | 604312 | 2670783.0
+-- 2015 | 599008 | 2675575.0
+-- ... 11 more rows
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):

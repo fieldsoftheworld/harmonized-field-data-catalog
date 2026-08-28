@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2026 | be_vlg | 597088
 -- 2022 | be_wal | 341968
 -- 2025 | ch | 1350979
--- ... 72 more rows
+-- ... 90 more rows
 ```
 
 ## Join keys
