@@ -41,11 +41,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/jp/latest/
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(34.7834, 134.3744), 'EPSG:4326', 'EPSG:4326'), 500))
 LIMIT 5;
 -- id
--- 3ba97f65-80d0-44e8-9415-f45da7e0110a
--- 579f0c4e-0055-40b5-9e2e-bba2f4d3f479
--- 8b2bf93a-4169-428b-bfff-b2b8cbacefee
--- 577683f2-a950-460f-b2b7-13a70ec2799b
--- a7413471-3665-4d51-8f9f-adcd31641f37
+-- 76b9eac9-97c3-4500-8800-80af4d556dda
+-- 2aab42af-49a6-4748-9ad7-b800beecf0cf
+-- a2db20be-2e9f-4836-ad20-89a5e384f34e
+-- 5335b890-f994-437a-acc2-0b1e7d8fadf3
+-- 0030045e-2129-4cda-82ad-3be9874143a7
 ```
 
 ## Related collections

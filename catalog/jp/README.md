@@ -19,10 +19,10 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2021 | 30,165,774 | [5.9 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2021/jp-2021.parquet) | — | [jp-2021.json](https://data.source.coop/ftw/harmonized-field-data/jp/year=2021/jp-2021.json) |
-| 2022 | 29,778,783 | [5.8 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2022/jp-2022.parquet) | — | [jp-2022.json](https://data.source.coop/ftw/harmonized-field-data/jp/year=2022/jp-2022.json) |
-| 2023 | 29,673,005 | [5.8 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2023/jp-2023.parquet) | — | [jp-2023.json](https://data.source.coop/ftw/harmonized-field-data/jp/year=2023/jp-2023.json) |
-| 2024 | 29,418,076 | [5.8 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2024/jp-2024.parquet) | [3.2 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2024/jp-2024.pmtiles) | [jp-2024.json](https://data.source.coop/ftw/harmonized-field-data/jp/year=2024/jp-2024.json) |
+| 2021 | 30,165,774 | [5.4 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2021/jp-2021.parquet) | — | [jp-2021.json](https://data.source.coop/ftw/harmonized-field-data/jp/year=2021/jp-2021.json) |
+| 2022 | 29,778,783 | [5.4 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2022/jp-2022.parquet) | — | [jp-2022.json](https://data.source.coop/ftw/harmonized-field-data/jp/year=2022/jp-2022.json) |
+| 2023 | 29,673,005 | [5.3 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2023/jp-2023.parquet) | — | [jp-2023.json](https://data.source.coop/ftw/harmonized-field-data/jp/year=2023/jp-2023.json) |
+| 2024 | 29,418,076 | [5.3 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2024/jp-2024.parquet) | [3.2 GB](https://data.source.coop/ftw/harmonized-field-data/jp/year=2024/jp-2024.pmtiles) | [jp-2024.json](https://data.source.coop/ftw/harmonized-field-data/jp/year=2024/jp-2024.json) |
 
 The latest edition is also available at a stable path: [jp/latest/jp.parquet](https://data.source.coop/ftw/harmonized-field-data/jp/latest/jp.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/jp/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/jp/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -30,10 +30,10 @@ The latest edition is also available at a stable path: [jp/latest/jp.parquet](ht
 
 | Column | Type | Description |
 |---|---|---|
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `land_type_en` | string | land_typeコードの英語表記（rice_field または field） (per the fiboa data survey) |
-| `admin_local_code` | string | ポリゴンの重心点と重なる市区町村の総務省地方公共団体コード (source column `local_government_cd`, per the fiboa data survey) |
+| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `land_type_en` | large_string | land_typeコードの英語表記（rice_field または field） (per the fiboa data survey) |
+| `admin_local_code` | large_string | ポリゴンの重心点と重なる市区町村の総務省地方公共団体コード (source column `local_government_cd`, per the fiboa data survey) |
 | `determination:datetime` | timestamp[us, tz=UTC] | The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
@@ -52,10 +52,10 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 This catalog is a mirror: the data is produced and licensed by [Japanese Ministry of Agriculture, Forestry and Fisheries (MAFF, 農林水産省)](https://www.maff.go.jp/) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2021: converted 2026-08-24 from <https://data.source.coop/pacificspatial/field-polygon-jp/parquet/jp_field_polygons_2021.parquet>
-- 2022: converted 2026-08-24 from <https://data.source.coop/pacificspatial/field-polygon-jp/parquet/jp_field_polygons_2022.parquet>
-- 2023: converted 2026-08-24 from <https://data.source.coop/pacificspatial/field-polygon-jp/parquet/jp_field_polygons_2023.parquet>
-- 2024: converted 2026-08-24 from <https://data.source.coop/pacificspatial/field-polygon-jp/parquet/jp_field_polygons_2024.parquet>
+- 2021: converted 2026-08-29 from <https://data.source.coop/pacificspatial/field-polygon-jp/parquet/jp_field_polygons_2021.parquet>
+- 2022: converted 2026-08-29 from <https://data.source.coop/pacificspatial/field-polygon-jp/parquet/jp_field_polygons_2022.parquet>
+- 2023: converted 2026-08-29 from <https://data.source.coop/pacificspatial/field-polygon-jp/parquet/jp_field_polygons_2023.parquet>
+- 2024: converted 2026-08-29 from <https://data.source.coop/pacificspatial/field-polygon-jp/parquet/jp_field_polygons_2024.parquet>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 
