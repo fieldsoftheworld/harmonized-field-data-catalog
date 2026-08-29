@@ -13,7 +13,7 @@
     "coordinates": [
       [
         [
-          20.840484290141,
+          20.840484290140996,
           55.633028806090024
         ],
         [
@@ -25,18 +25,18 @@
           58.04389796506207
         ],
         [
-          20.840484290141,
+          20.840484290140996,
           58.04389796506207
         ],
         [
-          20.840484290141,
+          20.840484290140996,
           55.633028806090024
         ]
       ]
     ]
   },
   "bbox": [
-    20.840484290141,
+    20.840484290140996,
     55.633028806090024,
     28.42497276168695,
     58.04389796506207
@@ -52,7 +52,7 @@
     "table:columns": [
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -62,7 +62,7 @@
       },
       {
         "name": "crop:name",
-        "type": "string",
+        "type": "large_string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
@@ -77,22 +77,22 @@
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hcat:name_en",
-        "type": "string",
+        "type": "large_string",
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name",
-        "type": "string",
+        "type": "large_string",
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "crop:code",
-        "type": "string",
+        "type": "large_string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
@@ -102,7 +102,7 @@
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -127,8 +127,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 416307073,
-      "file:checksum": "1220eda1c63ef7adc4f202811af14095e685288e30cb21ef6497a957d705147b6668",
+      "file:size": 627522559,
+      "file:checksum": "1220330b94a16152a0ce3f3ce1e6ca4dc41caf6eaf1c8f6a2094c48ba3ad99a8e887",
       "proj:code": "EPSG:3059"
     },
     "visual": {

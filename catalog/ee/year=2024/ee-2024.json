@@ -14,11 +14,11 @@
       [
         [
           21.757601117191882,
-          57.4812170900922
+          57.481217090092194
         ],
         [
           28.17978012475788,
-          57.4812170900922
+          57.481217090092194
         ],
         [
           28.17978012475788,
@@ -30,14 +30,14 @@
         ],
         [
           21.757601117191882,
-          57.4812170900922
+          57.481217090092194
         ]
       ]
     ]
   },
   "bbox": [
     21.757601117191882,
-    57.4812170900922,
+    57.481217090092194,
     28.17978012475788,
     59.62382987747699
   ],
@@ -57,22 +57,22 @@
       },
       {
         "name": "hcat:name",
-        "type": "string",
+        "type": "large_string",
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name_en",
-        "type": "string",
+        "type": "large_string",
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -82,7 +82,7 @@
       },
       {
         "name": "crop:name",
-        "type": "string",
+        "type": "large_string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
@@ -107,8 +107,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 262861478,
-      "file:checksum": "1220c375bbb25b58055335d70689258c063e06f88aa7712988ead3106fc9763f2a10",
+      "file:size": 279914192,
+      "file:checksum": "1220ae0c283fe0a1e7dbf52ba8210ba46dde68b8a8a690e94bf35e0d1bafbc5762b6",
       "proj:code": "EPSG:3301"
     },
     "visual": {

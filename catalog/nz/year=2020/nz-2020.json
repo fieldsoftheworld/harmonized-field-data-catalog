@@ -52,12 +52,12 @@
     "table:columns": [
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "admin:subdivision_code",
-        "type": "string",
+        "type": "large_string",
         "description": "ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
       },
       {
@@ -67,17 +67,17 @@
       },
       {
         "name": "type",
-        "type": "string",
+        "type": "large_string",
         "description": "Irrigation type. Drip/micro, Rotorainer, Pivot, K-line/Long lateral, Unknown (per the fiboa data survey)"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -107,8 +107,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 14492180,
-      "file:checksum": "12202756b5fec977c0e79016e5e22016f938ddca0cd5401bdfba592678998769e746",
+      "file:size": 15365385,
+      "file:checksum": "122059c563f40e583da42047eb4d4acabc3a5dfcd05b0d4d43f9e4b5a9e91010c5bb",
       "proj:code": "EPSG:2193"
     },
     "visual": {

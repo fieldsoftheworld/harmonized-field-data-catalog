@@ -52,27 +52,27 @@
     "table:columns": [
       {
         "name": "group_code",
-        "type": "string",
+        "type": "large_string",
         "description": "Carried over from the source column `code_group`; the publisher documents no meaning for it."
       },
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:code",
-        "type": "string",
+        "type": "large_string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
@@ -82,12 +82,12 @@
       },
       {
         "name": "hcat:name_en",
-        "type": "string",
+        "type": "large_string",
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name",
-        "type": "string",
+        "type": "large_string",
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
@@ -117,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 2405055099,
-      "file:checksum": "12205d14ff34785d855945c37ca7bec101e671a57155a529059e8199967805152132",
+      "file:size": 3147752970,
+      "file:checksum": "1220babb8bf89fcc628fe42acdbeb46805cc991134b693d90838afbf5ce8d8dc5b25",
       "proj:code": "EPSG:2154"
     }
   },

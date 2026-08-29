@@ -47,7 +47,7 @@
           7.84810926507402,
           53.35021709947685,
           11.348185901330078,
-          55.0418639408597
+          55.04186394085969
         ]
       ]
     },
@@ -68,27 +68,27 @@
   "table:columns": [
     {
       "name": "flik",
-      "type": "string",
+      "type": "large_string",
       "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
     },
     {
       "name": "hbn",
-      "type": "string",
+      "type": "large_string",
       "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
     },
     {
       "name": "id",
-      "type": "string",
+      "type": "large_string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "geometry",
-      "type": "binary",
+      "type": "large_binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "collection",
-      "type": "string",
+      "type": "large_string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -119,8 +119,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 63436876,
-      "file:checksum": "12203984e2ca3e30acb9ebb6b54e99ae012771b75edc9d339d2478c476a9d283fa1b",
+      "file:size": 82875042,
+      "file:checksum": "12201d87e3d2f93d3e776d357a1f2b9e64218bcd98198341ab245a97df6eda7cbb50",
       "proj:code": "EPSG:4647"
     },
     "style-outline": {
@@ -219,15 +219,15 @@
       "title": "Germany, Schleswig-Holstein — 2026"
     }
   ],
-  "updated": "2026-08-22T20:44:44Z",
+  "updated": "2026-08-28T18:53:03Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_sh": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   }
 }

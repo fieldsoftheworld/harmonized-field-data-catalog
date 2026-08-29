@@ -69,12 +69,12 @@
   "table:columns": [
     {
       "name": "crop:name",
-      "type": "string",
+      "type": "large_string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "geometry",
-      "type": "binary",
+      "type": "large_binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -84,12 +84,12 @@
     },
     {
       "name": "id",
-      "type": "string",
+      "type": "large_string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "hcat:name",
-      "type": "string",
+      "type": "large_string",
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
@@ -99,12 +99,12 @@
     },
     {
       "name": "crop:code",
-      "type": "string",
+      "type": "large_string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "collection",
-      "type": "string",
+      "type": "large_string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -135,8 +135,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 300459989,
-      "file:checksum": "12200299fe0745055f136e007125e18982e78aaaa9448214340ba02b61363b4715f2",
+      "file:size": 391819314,
+      "file:checksum": "12209e2990f9b27adf9ab377d3df06a1b4756921a7ea5665045bdf12f40f7d60210e",
       "proj:code": "EPSG:25832"
     },
     "style-hcat-crops": {
@@ -240,16 +240,16 @@
       "title": "Germany, Bavaria — 2026"
     }
   ],
-  "updated": "2026-08-22T21:43:00Z",
+  "updated": "2026-08-28T18:44:08Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_by": [
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "Datenquelle: Bayerische Vermessungsverwaltung – www.geodaten.bayern.de"

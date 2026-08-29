@@ -145,8 +145,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 281668731,
-      "file:checksum": "1220c0961c041e4e08933e8b54394383f1f3cbd84063450ab1e3871943697c4a79e8",
+      "file:size": 410309342,
+      "file:checksum": "12208261fd2a88417b5052298b4e260b0d7425f03e946b9af8dfd4c27ef990b3518e",
       "proj:code": "EPSG:2056"
     },
     "style-hcat-crops": {
@@ -273,16 +273,16 @@
       "title": "Switzerland — 2025"
     }
   ],
-  "updated": "2026-08-25T07:44:19Z",
+  "updated": "2026-08-28T18:01:46Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "ch": [
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   }
 }

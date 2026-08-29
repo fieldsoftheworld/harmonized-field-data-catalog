@@ -52,32 +52,32 @@
     "table:columns": [
       {
         "name": "crop:name",
-        "type": "string",
+        "type": "large_string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:code",
-        "type": "string",
+        "type": "large_string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:name_en",
-        "type": "string",
+        "type": "large_string",
         "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -102,8 +102,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 277949182,
-      "file:checksum": "1220b9c1af9363358fcce89778fbd1663886874b56cce0e3c35ed3f9985276f756c2",
+      "file:size": 298111365,
+      "file:checksum": "1220f455f0e9b7b8ac867861636c32baa548ebdb64ecc70fa14380e0cb831246d026",
       "proj:code": "EPSG:4258"
     },
     "visual": {

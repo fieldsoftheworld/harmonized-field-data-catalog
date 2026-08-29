@@ -52,22 +52,22 @@
     "table:columns": [
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "land_type_en",
-        "type": "string",
+        "type": "large_string",
         "description": "land_typeコードの英語表記（rice_field または field） (per the fiboa data survey)"
       },
       {
         "name": "admin_local_code",
-        "type": "string",
+        "type": "large_string",
         "description": "ポリゴンの重心点と重なる市区町村の総務省地方公共団体コード (source column `local_government_cd`, per the fiboa data survey)"
       },
       {
@@ -97,8 +97,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 6179333905,
-      "file:checksum": "1220033f3fb5be3f1bf2ea9a791649be6e0f15fc8f934028bdccfa553262d6151d5c",
+      "file:size": 5680850754,
+      "file:checksum": "12207d412d82b6a377a7a8d2267cb5f1b3af2beb5da70c48a8c6aa4204af922e77d4",
       "proj:code": "EPSG:4326"
     },
     "visual": {

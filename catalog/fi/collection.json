@@ -69,17 +69,17 @@
   "table:columns": [
     {
       "name": "geometry",
-      "type": "binary",
+      "type": "large_binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "crop:name",
-      "type": "string",
+      "type": "large_string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "hcat:name",
-      "type": "string",
+      "type": "large_string",
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
@@ -89,12 +89,12 @@
     },
     {
       "name": "hcat:name_en",
-      "type": "string",
+      "type": "large_string",
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "collection",
-      "type": "string",
+      "type": "large_string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -109,12 +109,12 @@
     },
     {
       "name": "crop:code",
-      "type": "string",
+      "type": "large_string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "id",
-      "type": "string",
+      "type": "large_string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -145,8 +145,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 282085826,
-      "file:checksum": "1220a1f50565909b8ce403068cf37ebd76c5da57d683959390f71aa87d9d40a16502",
+      "file:size": 395106654,
+      "file:checksum": "1220baf5e602ae319d51452377b9926ca04900c4d8fa061776ef846101a8990e8a8f",
       "proj:code": "EPSG:3067"
     },
     "style-hcat-crops": {
@@ -267,16 +267,16 @@
       "title": "Finland — 2023"
     }
   ],
-  "updated": "2026-08-22T22:20:05Z",
+  "updated": "2026-08-28T18:54:47Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "fi": [
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "Finnish Food Authority"

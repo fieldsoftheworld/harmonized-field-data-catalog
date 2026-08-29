@@ -147,8 +147,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 741317764,
-      "file:checksum": "1220efe17a2ad7bffe009b0042db5d81487660029aa2b861592cf02697e8a2c8a895",
+      "file:size": 993723671,
+      "file:checksum": "1220763f361e1b85d7af4b33e89be50765a291908420aae5d022ad96c6024d19fb86",
       "proj:code": "EPSG:28992"
     },
     "style-hcat-crops": {
@@ -371,16 +371,16 @@
       "title": "Netherlands (Crops) — 2026"
     }
   ],
-  "updated": "2026-08-28T13:55:34Z",
+  "updated": "2026-08-28T18:01:41Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "nl": [
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   }
 }

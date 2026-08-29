@@ -139,8 +139,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 1016386741,
-      "file:checksum": "1220b8bc69551ebea062a4ff52121fd71525de088f675f6b76668566566cc40ff16d",
+      "file:size": 1116238535,
+      "file:checksum": "122062f293a8e265705ed38f2b79d50fd0e6103847fed9fdbd8c4fad9bc7d95250c5",
       "proj:code": "EPSG:25830"
     },
     "style-field-size": {
@@ -250,15 +250,15 @@
       "title": "Spain Valencia — 2024"
     }
   ],
-  "updated": "2026-08-24T02:31:29Z",
+  "updated": "2026-08-28T18:07:57Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_vc": [
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "© Institut Cartogràfic Valencià, Generalitat"

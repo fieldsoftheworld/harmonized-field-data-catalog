@@ -52,37 +52,37 @@
     "table:columns": [
       {
         "name": "hcat:name_en",
-        "type": "string",
+        "type": "large_string",
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "administrative_area_level_2",
-        "type": "string",
+        "type": "large_string",
         "description": "Carried over from the source column `CNTY`; the publisher documents no meaning for it."
       },
       {
         "name": "crop:code",
-        "type": "string",
+        "type": "large_string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name",
-        "type": "string",
+        "type": "large_string",
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -92,7 +92,7 @@
       },
       {
         "name": "crop:name",
-        "type": "string",
+        "type": "large_string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
@@ -117,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 3026918244,
-      "file:checksum": "1220433be62f1ea083d64488c665c41da4de5ea666cf0d6346ab3cbec935172ceeeb",
+      "file:size": 4151003549,
+      "file:checksum": "1220e59b2bb84fe549b6f1666eb82a6ecfcbc4c5f2e6affa7ecb78aece8b44c4d585",
       "proj:code": null
     }
   },

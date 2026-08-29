@@ -68,27 +68,27 @@
   "table:columns": [
     {
       "name": "crop:code",
-      "type": "string",
+      "type": "large_string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "crop:name",
-      "type": "string",
+      "type": "large_string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "collection",
-      "type": "string",
+      "type": "large_string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "admin_island",
-      "type": "string",
+      "type": "large_string",
       "description": "Island name (source column `ISLA_NA`, per the fiboa data survey)"
     },
     {
       "name": "id",
-      "type": "string",
+      "type": "large_string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -98,7 +98,7 @@
     },
     {
       "name": "geometry",
-      "type": "binary",
+      "type": "large_binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -134,8 +134,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 117179591,
-      "file:checksum": "12207a75645729abebeadaf87f57c81230760e8975a6674a77d4d316ff2606730c46",
+      "file:size": 146208475,
+      "file:checksum": "12206f6ff7f410af1e0ddc8c3447838814cb4bbf2c2ce839e5c463aa4d6c4a5b41d1",
       "proj:code": "EPSG:32628"
     },
     "style-field-size": {
@@ -245,15 +245,15 @@
       "title": "Spain Canary Islands — 2026"
     }
   ],
-  "updated": "2026-08-22T20:46:58Z",
+  "updated": "2026-08-28T18:53:32Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_cn": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "Gobierno de Canarias"

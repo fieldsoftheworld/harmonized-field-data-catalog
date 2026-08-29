@@ -52,12 +52,12 @@
     "table:columns": [
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "tk10",
-        "type": "string",
+        "type": "large_string",
         "description": "Sheet of the 1:10,000 topographic map covering the centroid of the field block. Example: `51334` (source column `TK10`, per the fiboa data survey)"
       },
       {
@@ -72,12 +72,12 @@
       },
       {
         "name": "flik",
-        "type": "string",
+        "type": "large_string",
         "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -87,7 +87,7 @@
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -102,7 +102,7 @@
       },
       {
         "name": "bnk",
-        "type": "string",
+        "type": "large_string",
         "description": "Category of main land use, short code (source column `BNK`, per the fiboa data survey)"
       },
       {
@@ -132,8 +132,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 85639899,
-      "file:checksum": "1220eabdafdb6cad20f20de8668c5158e63a6ba183a09b8985c62fa76ee859beb443",
+      "file:size": 132118027,
+      "file:checksum": "122019e9b5e2e02528a4c846278b4858f002e25b4561616fcd389fd606f6e5a266fb",
       "proj:code": "EPSG:25832"
     },
     "visual": {

@@ -22,11 +22,11 @@
         ],
         [
           14.39716051830725,
-          54.69063591957423
+          54.69063591957422
         ],
         [
           10.460957127993252,
-          54.69063591957423
+          54.69063591957422
         ],
         [
           10.460957127993252,
@@ -39,7 +39,7 @@
     10.460957127993252,
     53.08446448481229,
     14.39716051830725,
-    54.69063591957423
+    54.69063591957422
   ],
   "properties": {
     "title": "Germany, Mecklenburg-Western Pomerania — 2026",
@@ -52,22 +52,22 @@
     "table:columns": [
       {
         "name": "crop:code",
-        "type": "string",
+        "type": "large_string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "bez_kreis",
-        "type": "string",
+        "type": "large_string",
         "description": "District name (Kreisbezeichnung) (per the fiboa data survey)"
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "erwater",
-        "type": "string",
+        "type": "large_string",
         "description": "Water-erosion class per Direktzahlungen-Verordnung (per the fiboa data survey)"
       },
       {
@@ -82,17 +82,17 @@
       },
       {
         "name": "erwind",
-        "type": "string",
+        "type": "large_string",
         "description": "Wind-erosion class per Direktzahlungen-Verordnung (per the fiboa data survey)"
       },
       {
         "name": "erwater_l",
-        "type": "string",
+        "type": "large_string",
         "description": "Water-erosion class per DIN 19708 (per the fiboa data survey)"
       },
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -102,17 +102,17 @@
       },
       {
         "name": "erwind_l",
-        "type": "string",
+        "type": "large_string",
         "description": "Wind-erosion class per DIN 19708 (per the fiboa data survey)"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "flik",
-        "type": "string",
+        "type": "large_string",
         "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
       },
       {
@@ -137,8 +137,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 45798248,
-      "file:checksum": "1220bb08eda43d3a462315695d056a95604d8a60488cafe6fdcbcfa9a34b69b480e1",
+      "file:size": 48385432,
+      "file:checksum": "12201c15b8a41069ccec5cd51975f4d96f4225efd992b696bb66c753a6bbc6c9233f",
       "proj:code": "EPSG:25833"
     },
     "visual": {

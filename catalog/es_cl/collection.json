@@ -69,32 +69,32 @@
   "table:columns": [
     {
       "name": "crop:name",
-      "type": "string",
+      "type": "large_string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "crop:name_en",
-      "type": "string",
+      "type": "large_string",
       "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "id",
-      "type": "string",
+      "type": "large_string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "collection",
-      "type": "string",
+      "type": "large_string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "geometry",
-      "type": "binary",
+      "type": "large_binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "crop:code",
-      "type": "string",
+      "type": "large_string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
@@ -125,8 +125,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 2607446888,
-      "file:checksum": "1220ece8d119da2de966da027cb94fd1fe48311cde26f4ec6a2ae116473b6a490f84",
+      "file:size": 3003290110,
+      "file:checksum": "1220bcad31f9bffc304e6bd4bc9fa6f7848a0c8da7ee661c75519f354d4a06b55b20",
       "proj:code": "EPSG:4258"
     },
     "style-outline": {
@@ -231,7 +231,7 @@
       "title": "Spain Castilla y León — 2025"
     }
   ],
-  "updated": "2026-08-24T03:12:31Z",
+  "updated": "2026-08-28T18:34:55Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {

@@ -52,22 +52,22 @@
     "table:columns": [
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:name",
-        "type": "string",
+        "type": "large_string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "admin_province_code",
-        "type": "string",
+        "type": "large_string",
         "description": "Province code (source column `CD_PROV`, per the fiboa data survey)"
       },
       {
@@ -77,22 +77,22 @@
       },
       {
         "name": "crop:code",
-        "type": "string",
+        "type": "large_string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "admin_municipality_code",
-        "type": "string",
+        "type": "large_string",
         "description": "Municipality code (source column `CD_MUN`, per the fiboa data survey)"
       },
       {
         "name": "crop:name_en",
-        "type": "string",
+        "type": "large_string",
         "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
@@ -117,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 1723583990,
-      "file:checksum": "1220c0b4820fd1d11c3d73cd867599222939570f0d9f5b01e59f3d79e2af1babbbe7",
+      "file:size": 1908404500,
+      "file:checksum": "122036e487b0bdfbf96b6d447043cc1358a65b9cc92d3ab6037d9be80e4351e62be2",
       "proj:code": "EPSG:25830"
     },
     "visual": {

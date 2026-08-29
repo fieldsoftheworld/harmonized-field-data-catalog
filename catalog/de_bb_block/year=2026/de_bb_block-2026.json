@@ -14,11 +14,11 @@
       [
         [
           11.235119972136074,
-          51.310692592945884
+          51.31069259294588
         ],
         [
           14.765480886097825,
-          51.310692592945884
+          51.31069259294588
         ],
         [
           14.765480886097825,
@@ -30,14 +30,14 @@
         ],
         [
           11.235119972136074,
-          51.310692592945884
+          51.31069259294588
         ]
       ]
     ]
   },
   "bbox": [
     11.235119972136074,
-    51.310692592945884,
+    51.31069259294588,
     14.765480886097825,
     53.56446415731656
   ],
@@ -52,22 +52,22 @@
     "table:columns": [
       {
         "name": "tk10",
-        "type": "string",
+        "type": "large_string",
         "description": "Carried over from the source column `TK10_BLATT`; the publisher documents no meaning for it."
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hbn",
-        "type": "string",
+        "type": "large_string",
         "description": "Carried over from the source column `HBN_KAT`; the publisher documents no meaning for it."
       },
       {
@@ -82,7 +82,7 @@
       },
       {
         "name": "flik",
-        "type": "string",
+        "type": "large_string",
         "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
       },
       {
@@ -92,7 +92,7 @@
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -117,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 74050340,
-      "file:checksum": "12200ca01586f9c690256b763c92515b71feb05be50733b3db05ec3c442dc62f72d9",
+      "file:size": 88619653,
+      "file:checksum": "1220752062e14842ad68417bf5a51e45a78802786517033bebe594d79104860cb9a1",
       "proj:code": "EPSG:25833"
     },
     "visual": {

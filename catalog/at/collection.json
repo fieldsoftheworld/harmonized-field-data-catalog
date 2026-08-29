@@ -46,7 +46,7 @@
       "bbox": [
         [
           9.405290334050287,
-          46.345878031124734,
+          46.34587803112473,
           17.232237933779267,
           48.96562897393914
         ]
@@ -69,7 +69,7 @@
   "table:columns": [
     {
       "name": "geometry",
-      "type": "binary",
+      "type": "large_binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -84,32 +84,32 @@
     },
     {
       "name": "hcat:name",
-      "type": "string",
+      "type": "large_string",
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "crop:name",
-      "type": "string",
+      "type": "large_string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "hcat:name_en",
-      "type": "string",
+      "type": "large_string",
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "crop:code",
-      "type": "string",
+      "type": "large_string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "collection",
-      "type": "string",
+      "type": "large_string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "id",
-      "type": "string",
+      "type": "large_string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -145,8 +145,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 851527143,
-      "file:checksum": "1220b67438cce68b6f93b62aa6aad294a469bd5f13f2950bf045204af5b03f875735",
+      "file:size": 1026055915,
+      "file:checksum": "1220ccd9dba0f9e64b66e06019513bf107928472a14bdf3e9def6bafb5f4d41a72e5",
       "proj:code": "EPSG:31287"
     },
     "style-hcat-crops": {
@@ -267,16 +267,16 @@
       "title": "Austria — 2025"
     }
   ],
-  "updated": "2026-08-23T13:52:01Z",
+  "updated": "2026-08-28T18:41:35Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "at": [
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   }
 }

@@ -17,16 +17,16 @@
           46.34587798618984
         ],
         [
-          17.232237903076726,
+          17.232237903076722,
           46.34587798618984
         ],
         [
-          17.232237903076726,
-          48.96562892993614
+          17.232237903076722,
+          48.96562892993612
         ],
         [
           9.405290337503184,
-          48.96562892993614
+          48.96562892993612
         ],
         [
           9.405290337503184,
@@ -38,8 +38,8 @@
   "bbox": [
     9.405290337503184,
     46.34587798618984,
-    17.232237903076726,
-    48.96562892993614
+    17.232237903076722,
+    48.96562892993612
   ],
   "properties": {
     "title": "Austria (parcels) — 2021",
@@ -57,22 +57,22 @@
       },
       {
         "name": "ref_art_bezeichnung",
-        "type": "string",
+        "type": "large_string",
         "description": "Carried over from the source column `REF_ART_BEZEICHNUNG`; the publisher documents no meaning for it."
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "inspire:id",
-        "type": "string",
+        "type": "large_string",
         "description": "INSPIRE-compliant ID, an absolute and fully resolvable URI. ([spec](https://github.com/fiboa/inspire-extension/blob/main/README.md))"
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -82,7 +82,7 @@
       },
       {
         "name": "ref_art",
-        "type": "string",
+        "type": "large_string",
         "description": "Carried over from the source column `REF_ART`; the publisher documents no meaning for it."
       },
       {
@@ -92,7 +92,7 @@
       },
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -117,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 490161267,
-      "file:checksum": "1220e9e6d4cc6fa81eda2fbb7e3bd17faaae5ef915408bbd53197640028b77132cb0",
+      "file:size": 763243424,
+      "file:checksum": "12207b24012a4af2cc3fee98d3748d361adc5a75dcec2b2190ce1747069dd1dfaee9",
       "proj:code": "EPSG:31287"
     },
     "visual": {

@@ -60,37 +60,37 @@
   "table:columns": [
     {
       "name": "crop:code",
-      "type": "string",
+      "type": "large_string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "geometry",
-      "type": "binary",
+      "type": "large_binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "admin_municipality_code",
-      "type": "string",
+      "type": "large_string",
       "description": "Municipality ID (source column `MUNICIPIO`, per the fiboa data survey)"
     },
     {
       "name": "crop:name_en",
-      "type": "string",
+      "type": "large_string",
       "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "collection",
-      "type": "string",
+      "type": "large_string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "id",
-      "type": "string",
+      "type": "large_string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "crop:name",
-      "type": "string",
+      "type": "large_string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
@@ -121,8 +121,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 246408762,
-      "file:checksum": "1220710c87712252d7c46de4ec7e9004e31b08d1b6fad8bb373e9525d97e85a23046",
+      "file:size": 264375768,
+      "file:checksum": "12201b1f882eaf63710379e3ab59dfe15cf3acdc0a03ebf6760990323df5525f1086",
       "proj:code": "EPSG:4326"
     },
     "style-outline": {
@@ -215,14 +215,14 @@
       "title": "Spain Cantabria — 2024"
     }
   ],
-  "updated": "2026-08-23T09:03:43Z",
+  "updated": "2026-08-28T18:53:09Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_cb": [
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   },

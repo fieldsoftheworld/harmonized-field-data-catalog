@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          3.2579020517149324,
-          50.73428107549361
+          3.257902051714933,
+          50.73428107549366
         ],
         [
           7.237753140074882,
-          50.73428107549361
+          50.73428107549366
         ],
         [
           7.237753140074882,
-          53.48775690289261
+          53.487756902892635
         ],
         [
-          3.2579020517149324,
-          53.48775690289261
+          3.257902051714933,
+          53.487756902892635
         ],
         [
-          3.2579020517149324,
-          50.73428107549361
+          3.257902051714933,
+          50.73428107549366
         ]
       ]
     ]
   },
   "bbox": [
-    3.2579020517149324,
-    50.73428107549361,
+    3.257902051714933,
+    50.73428107549366,
     7.237753140074882,
-    53.48775690289261
+    53.487756902892635
   ],
   "properties": {
     "title": "Netherlands (parcels) — 2026",
@@ -57,17 +57,17 @@
       },
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -92,8 +92,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 359481676,
-      "file:checksum": "1220491476c4f7f60e72ca9f48950451ea8bc839ccf0897c9f15613a4f9ac82e01fc",
+      "file:size": 506705050,
+      "file:checksum": "1220e675632de0ca8aee91890360ea226c5a41d0c96583d0952e567c2761094bd8ac",
       "proj:code": "EPSG:28992"
     },
     "visual": {

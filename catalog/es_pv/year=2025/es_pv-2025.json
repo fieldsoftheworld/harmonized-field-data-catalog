@@ -22,11 +22,11 @@
         ],
         [
           -1.7271870391114859,
-          43.45579907089769
+          43.4557990708977
         ],
         [
           -3.450468751847184,
-          43.45579907089769
+          43.4557990708977
         ],
         [
           -3.450468751847184,
@@ -39,7 +39,7 @@
     -3.450468751847184,
     42.46666208396817,
     -1.7271870391114859,
-    43.45579907089769
+    43.4557990708977
   ],
   "properties": {
     "title": "Spain Basque Country — 2025",
@@ -52,27 +52,27 @@
     "table:columns": [
       {
         "name": "id",
-        "type": "string",
+        "type": "large_string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "collection",
-        "type": "string",
+        "type": "large_string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:code",
-        "type": "string",
+        "type": "large_string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "crop:name",
-        "type": "string",
+        "type": "large_string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "geometry",
-        "type": "binary",
+        "type": "large_binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -97,8 +97,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 136981833,
-      "file:checksum": "1220012840dcba715b27df92a153883bc68b198e03fd15ce0dda2a45c4a730a8e944",
+      "file:size": 176803389,
+      "file:checksum": "1220c7d97fdda54d4e664342390edefc90f72d202d870e3976efeb6749c12cc21e27",
       "proj:code": "EPSG:25830"
     },
     "visual": {
