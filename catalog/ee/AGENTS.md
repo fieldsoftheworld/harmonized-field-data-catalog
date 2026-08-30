@@ -1,6 +1,6 @@
 # Agent guidance — Field boundaries for Estonia
 
-Estonia field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Estonia field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 9 editions (2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -29,7 +29,15 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/ee/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2024 | 166508 | 938538.0
+-- 2016 | 165424 | 958191.0
+-- 2017 | 170560 | 964961.0
+-- 2018 | 172499 | 967565.0
+-- 2019 | 174284 | 970149.0
+-- 2020 | 175963 | 972681.0
+-- 2021 | 176117 | 973982.0
+-- 2022 | 175988 | 973659.0
+-- 2023 | 169930 | 943025.0
+-- ... 1 more rows
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):

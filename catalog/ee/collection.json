@@ -12,7 +12,7 @@
   ],
   "id": "ee",
   "title": "Field boundaries for Estonia",
-  "description": "Geospatial Aid Application Estonia Agricultural parcels.\nThe original dataset is provided by ARIB and obtained from the INSPIRE theme GSAA (specifically Geospaial Aid Application Estonia Agricultural parcels) through which the data layer Fields and Eco Areas (GSAA) is made available.\nThe data comes from ARIB's database of agricultural parcels.\n\nThis collection holds 1 edition (2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/ee/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:3301). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ee/AGENTS.md).",
+  "description": "Geospatial Aid Application Estonia Agricultural parcels.\nThe original dataset is provided by ARIB and obtained from the INSPIRE theme GSAA (specifically Geospaial Aid Application Estonia Agricultural parcels) through which the data layer Fields and Eco Areas (GSAA) is made available.\nThe data comes from ARIB's database of agricultural parcels.\n\nThis collection holds 9 editions (2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/ee/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:3301). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ee/AGENTS.md).",
   "keywords": [
     "Estonia",
     "GSAA",
@@ -45,17 +45,17 @@
     "spatial": {
       "bbox": [
         [
-          21.757601117191882,
-          57.481217090092194,
-          28.17978012475788,
-          59.62382987747699
+          21.691675274904675,
+          57.48109885126148,
+          28.181408432578376,
+          59.6368975740953
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2024-01-01T00:00:00Z",
+          "2016-01-01T00:00:00Z",
           "2024-01-01T00:00:00Z"
         ]
       ]
@@ -119,7 +119,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 9,
   "partition:glob": "s3://ftw/harmonized-field-data/ee/year=*/*.parquet",
   "assets": {
     "data": {
@@ -130,8 +130,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 279914192,
-      "file:checksum": "1220ae0c283fe0a1e7dbf52ba8210ba46dde68b8a8a690e94bf35e0d1bafbc5762b6",
+      "file:size": 279863046,
+      "file:checksum": "1220d78b5ea1919fa52050055b71da4af1ef33e4a156b726bd4e43373b7430935cb9",
       "proj:code": "EPSG:3301"
     },
     "style-hcat-crops": {
@@ -247,19 +247,67 @@
     },
     {
       "rel": "item",
+      "href": "./year=2016/ee-2016.json",
+      "type": "application/geo+json",
+      "title": "Estonia — 2016"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2017/ee-2017.json",
+      "type": "application/geo+json",
+      "title": "Estonia — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/ee-2018.json",
+      "type": "application/geo+json",
+      "title": "Estonia — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/ee-2019.json",
+      "type": "application/geo+json",
+      "title": "Estonia — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/ee-2020.json",
+      "type": "application/geo+json",
+      "title": "Estonia — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/ee-2021.json",
+      "type": "application/geo+json",
+      "title": "Estonia — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/ee-2022.json",
+      "type": "application/geo+json",
+      "title": "Estonia — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/ee-2023.json",
+      "type": "application/geo+json",
+      "title": "Estonia — 2023"
+    },
+    {
+      "rel": "item",
       "href": "./year=2024/ee-2024.json",
       "type": "application/geo+json",
       "title": "Estonia — 2024"
     }
   ],
-  "updated": "2026-08-28T18:45:39Z",
+  "updated": "2026-08-30T19:05:59Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "ee": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },

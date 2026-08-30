@@ -7,47 +7,47 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "ee-2024",
+  "id": "ee-2016",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          21.757601117191882,
-          57.481217090092194
+          21.747218279642784,
+          57.48109889247385
         ],
         [
-          28.17978012475788,
-          57.481217090092194
+          28.181349526705336,
+          57.48109889247385
         ],
         [
-          28.17978012475788,
-          59.62382987747699
+          28.181349526705336,
+          59.636662845394056
         ],
         [
-          21.757601117191882,
-          59.62382987747699
+          21.747218279642784,
+          59.636662845394056
         ],
         [
-          21.757601117191882,
-          57.481217090092194
+          21.747218279642784,
+          57.48109889247385
         ]
       ]
     ]
   },
   "bbox": [
-    21.757601117191882,
-    57.481217090092194,
-    28.17978012475788,
-    59.62382987747699
+    21.747218279642784,
+    57.48109889247385,
+    28.181349526705336,
+    59.636662845394056
   ],
   "properties": {
-    "title": "Estonia — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`ee-2024.parquet`, 166,508 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "title": "Estonia — 2016",
+    "description": "Field boundaries of the 2016 edition of this dataset, one GeoParquet file (`ee-2016.parquet`, 165,424 fields) and its PMTiles. Partition `year=2016` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2024-01-01T00:00:00Z",
-    "end_datetime": "2024-01-01T00:00:00Z",
-    "year": 2024,
+    "start_datetime": "2016-01-01T00:00:00Z",
+    "end_datetime": "2016-01-01T00:00:00Z",
+    "year": 2016,
     "proj:code": "EPSG:3301",
     "table:columns": [
       {
@@ -92,7 +92,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 166508,
+    "table:row_count": 165424,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -101,25 +101,15 @@
   "collection": "ee",
   "assets": {
     "data": {
-      "href": "./ee-2024.parquet",
+      "href": "./ee-2016.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Estonia 2024 (GeoParquet)",
+      "title": "Estonia 2016 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 279863046,
-      "file:checksum": "1220d78b5ea1919fa52050055b71da4af1ef33e4a156b726bd4e43373b7430935cb9",
+      "file:size": 170237389,
+      "file:checksum": "1220f94ed1a47eb18689559a85f8bc412b07e517b942a7f163165474bb613efa1f48",
       "proj:code": "EPSG:3301"
-    },
-    "visual": {
-      "href": "./ee-2024.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Estonia 2024 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 70592286,
-      "file:checksum": "1220f01d0684947e4b5bb607eb67441ac64b6f73b0f3e42ef30700cc9e47ff73025c"
     }
   },
   "links": [
