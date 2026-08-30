@@ -109,7 +109,7 @@ datasets:
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Germany, Mecklenburg-Western Pomerania, Feldblöcke, field blocks]
   ee:
-    years: ['2024']
+    years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"]
     keywords: [Estonia, GSAA, crop fields, INSPIRE]
   lv:
     year: 2026
