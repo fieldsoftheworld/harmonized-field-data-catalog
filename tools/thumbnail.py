@@ -40,7 +40,9 @@ from common import CATALOG_DIR, Manifest, duckdb_connect, quote, read_json
 PORT = int(os.environ.get("CHIITILER_PORT", "13579"))
 SIZE = 1024
 TARGET_ASPECT = 1.5
-BASEMAP_URL = "https://basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
+# Carto's keyless raster endpoints bake an "API KEY REQUIRED" watermark into
+# every tile (all zooms) since ~2026-09, so no basemap is loaded by default;
+# pass --basemap with a keyed or otherwise clean tile URL to get one.
 BASEMAP_OPACITY = 0.6
 R = 6378137.0
 EARTH_CIRC = 40075016.686
@@ -113,7 +115,7 @@ def densest_cluster(parquet: Path, crs: str, zoom: float, rank: int) -> tuple[fl
     return lon, lat, int(n)
 
 
-def build_styles(style: dict, pmtiles: Path, header: dict) -> tuple[dict, dict, dict]:
+def build_styles(style: dict, pmtiles: Path, header: dict, basemap_url: str | None) -> tuple[dict, dict, dict]:
     src = {
         "type": "vector",
         "tiles": [f"pmtiles://{pmtiles}/{{z}}/{{x}}/{{y}}"],
@@ -125,8 +127,10 @@ def build_styles(style: dict, pmtiles: Path, header: dict) -> tuple[dict, dict, 
     white = {"id": "background", "type": "background", "paint": {"background-color": "#ffffff"}}
     render = dict(style)
     render["sources"] = dict(sources)
-    render["sources"]["basemap"] = {"type": "raster", "tiles": [BASEMAP_URL], "tileSize": 256}
-    render["layers"] = [white, {"id": "basemap", "type": "raster", "source": "basemap", "paint": {"raster-opacity": BASEMAP_OPACITY}}, *layers]
+    render["layers"] = [white, *layers]
+    if basemap_url:
+        render["sources"]["basemap"] = {"type": "raster", "tiles": [basemap_url], "tileSize": 256}
+        render["layers"].insert(1, {"id": "basemap", "type": "raster", "source": "basemap", "paint": {"raster-opacity": BASEMAP_OPACITY}})
     probe = dict(style)
     probe["sources"] = sources
     probe["layers"] = [white, *layers]
@@ -148,6 +152,7 @@ def main() -> int:
     parser.add_argument("--zoom", type=float, help="window zoom (default: the archive's max zoom)")
     parser.add_argument("--rank", type=int, default=0, help="which densest cluster (0 = densest)")
     parser.add_argument("--center", help="lon,lat override for the window centre")
+    parser.add_argument("--basemap", help="raster tile URL template for a backdrop (default: none)")
     args = parser.parse_args()
 
     try:
@@ -178,7 +183,7 @@ def main() -> int:
         else:
             clon, clat, n = densest_cluster(parquet, crs, zoom, args.rank)
         bbox = window(clon, clat, zoom)
-        render, probe, blank = build_styles(style, pmtiles, header)
+        render, probe, blank = build_styles(style, pmtiles, header, args.basemap)
         image = clip(render, bbox, SIZE, "jpeg", 85)
         probe_png = clip(probe, bbox, 256, "png", 100)
         blank_png = clip(blank, bbox, 256, "png", 100)
