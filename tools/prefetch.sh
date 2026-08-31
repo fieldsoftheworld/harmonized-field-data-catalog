@@ -14,6 +14,7 @@
 set -u
 cd "$(dirname "$0")/.."
 mkdir -p cache
+[ -f "${1:-}" ] || { echo "FAILED: input list ${1:-<missing>} does not exist"; exit 1; }
 while IFS=$'\t' read -r name url; do
   [ -z "${name:-}" ] && continue
   case "$name" in \#*) continue;; esac
