@@ -7,13 +7,13 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "es_cb-2024",
+  "id": "es_cb-2020",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          -4.850426185740073,
+          -4.850426205271705,
           42.75845759469033
         ],
         [
@@ -25,29 +25,29 @@
           43.513152978504806
         ],
         [
-          -4.850426185740073,
+          -4.850426205271705,
           43.513152978504806
         ],
         [
-          -4.850426185740073,
+          -4.850426205271705,
           42.75845759469033
         ]
       ]
     ]
   },
   "bbox": [
-    -4.850426185740073,
+    -4.850426205271705,
     42.75845759469033,
     -3.149367315862803,
     43.513152978504806
   ],
   "properties": {
-    "title": "Spain Cantabria — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`es_cb-2024.parquet`, 605,149 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "title": "Spain Cantabria — 2020",
+    "description": "Field boundaries of the 2020 edition of this dataset, one GeoParquet file (`es_cb-2020.parquet`, 614,638 fields) and its PMTiles. Partition `year=2020` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2024-01-01T00:00:00Z",
-    "end_datetime": "2024-01-01T00:00:00Z",
-    "year": 2024,
+    "start_datetime": "2020-01-01T00:00:00Z",
+    "end_datetime": "2020-01-01T00:00:00Z",
+    "year": 2020,
     "proj:code": "EPSG:4326",
     "table:columns": [
       {
@@ -92,34 +92,24 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 605149,
+    "table:row_count": 614638,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.2.16"
     }
   },
   "collection": "es_cb",
   "assets": {
     "data": {
-      "href": "./es_cb-2024.parquet",
+      "href": "./es_cb-2020.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Spain Cantabria 2024 (GeoParquet)",
+      "title": "Spain Cantabria 2020 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 264375768,
-      "file:checksum": "12201b1f882eaf63710379e3ab59dfe15cf3acdc0a03ebf6760990323df5525f1086",
+      "file:size": 245843024,
+      "file:checksum": "122048ee76a54e521291cea91f8cfd1c47c6e822eaaa4aa835253ef650f97d8f95ac",
       "proj:code": "EPSG:4326"
-    },
-    "visual": {
-      "href": "./es_cb-2024.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Spain Cantabria 2024 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 92616040,
-      "file:checksum": "12207bba4682672705d9394e11a985900336bc809ee90821f54d82db5bace45fcc6f"
     }
   },
   "links": [

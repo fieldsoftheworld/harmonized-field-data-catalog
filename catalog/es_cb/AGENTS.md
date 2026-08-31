@@ -1,13 +1,13 @@
 # Agent guidance — Spain Cantabria Crop fields
 
-Spain Cantabria field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Spain Cantabria field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 16 editions (2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/es_cb/latest/es_cb.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/es_cb/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2024/es_cb-2024.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/es_cb/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2025/es_cb-2025.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/es_cb/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2024/es_cb-2024.pmtiles`, layer `es_cb`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2025/es_cb-2025.pmtiles`, layer `es_cb`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
@@ -15,7 +15,7 @@ Spain Cantabria field boundaries in the [fiboa](https://github.com/fiboa/specifi
 - **`metrics:area` is in square metres**, taken from the source column `DN_SURFACE`. Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `DN_OID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin_province_code` = `39`, `admin:country_code` = `ES`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv`, `admin:subdivision_code` = `CB`, `determination:datetime` = `2024-01-01T00:00:00Z` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin_province_code` = `39`, `admin:country_code` = `ES`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv`, `admin:subdivision_code` = `CB`, `determination:datetime` = `2025-01-01T00:00:00Z` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -28,7 +28,15 @@ SELECT year, count(*) AS fields, 0 AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/es_cb/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2024 | 605149 | 0
+-- 2010 | 604558 | 0
+-- 2011 | 602990 | 0
+-- 2012 | 618613 | 0
+-- 2013 | 612657 | 0
+-- 2014 | 602083 | 0
+-- 2015 | 607692 | 0
+-- 2016 | 603125 | 0
+-- 2017 | 600887 | 0
+-- ... 8 more rows
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -40,11 +48,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_cb/late
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(43.1358, -3.9999), 'EPSG:4326', 'EPSG:4326'), 500))
 LIMIT 5;
 -- id
--- 1364531829
--- 1364531834
--- 1364531836
--- 1364531832
--- 1364531833
+-- 514364527
+-- 1717022169
+-- 514364222
+-- 514364221
+-- 1717022181
 ```
 
 ## Related collections

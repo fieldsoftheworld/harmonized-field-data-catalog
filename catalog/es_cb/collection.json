@@ -12,7 +12,7 @@
   ],
   "id": "es_cb",
   "title": "Spain Cantabria Crop fields",
-  "description": "SIGPAC Crop fields of Spain - Cantabria\n\nThis collection holds 1 edition (2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/es_cb/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_cb/AGENTS.md).",
+  "description": "SIGPAC Crop fields of Spain - Cantabria\n\nThis collection holds 16 editions (2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/es_cb/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_cb/AGENTS.md).",
   "keywords": [
     "Cantabria",
     "Spain",
@@ -36,18 +36,18 @@
     "spatial": {
       "bbox": [
         [
-          -4.850426185740073,
-          42.75845759469033,
-          -3.149367315862803,
-          43.513152978504806
+          -4.850426205999952,
+          42.75845757628396,
+          -3.149311415347162,
+          43.51315297940519
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2024-01-01T00:00:00Z",
-          "2024-01-01T00:00:00Z"
+          "2010-01-01T00:00:00Z",
+          "2025-01-01T00:00:00Z"
         ]
       ]
     }
@@ -59,38 +59,38 @@
   },
   "table:columns": [
     {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "admin_municipality_code",
-      "type": "large_string",
+      "type": "string",
       "description": "Municipality ID (source column `MUNICIPIO`, per the fiboa data survey)"
     },
     {
       "name": "crop:name_en",
-      "type": "large_string",
+      "type": "string",
       "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
       "name": "collection",
-      "type": "large_string",
+      "type": "string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "crop:name",
-      "type": "large_string",
+      "type": "string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
@@ -100,7 +100,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 605149,
+  "table:row_count": 608752,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -110,19 +110,19 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 16,
   "partition:glob": "s3://ftw/harmonized-field-data/es_cb/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/es_cb.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Spain Cantabria — latest edition (2024) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2024/es_cb-2024.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "title": "Spain Cantabria — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/es_cb-2025.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 264375768,
-      "file:checksum": "12201b1f882eaf63710379e3ab59dfe15cf3acdc0a03ebf6760990323df5525f1086",
+      "file:size": 250024799,
+      "file:checksum": "122041cba9a17b76a6b5892e26c2869477d85466c21fd8a2447f3e7e69346939fb9b",
       "proj:code": "EPSG:4326"
     },
     "style-outline": {
@@ -135,17 +135,17 @@
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
       "file:size": 744,
-      "file:checksum": "12207ad54d8d08666322acdf9e0a77a5614b399f5f05845b60d9db5f5c86ba11fa33"
+      "file:checksum": "1220279b4b4109154429bed6a1af9250b0c8bcae2431cdaec3ed7593ad852e92727f"
     },
     "visual": {
-      "href": "./year=2024/es_cb-2024.pmtiles",
+      "href": "./year=2025/es_cb-2025.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Spain Cantabria — latest edition (2024) (PMTiles)",
+      "title": "Spain Cantabria — latest edition (2025) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 92616040,
-      "file:checksum": "12207bba4682672705d9394e11a985900336bc809ee90821f54d82db5bace45fcc6f"
+      "file:size": 92434403,
+      "file:checksum": "1220d786e87fcbf1da364810b781a82f1fbd2a273502daab28303213253cc166212a"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -189,7 +189,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2024/es_cb-2024.pmtiles",
+      "href": "./year=2025/es_cb-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -210,20 +210,110 @@
     },
     {
       "rel": "item",
+      "href": "./year=2010/es_cb-2010.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2010"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2011/es_cb-2011.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2011"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2012/es_cb-2012.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2012"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2013/es_cb-2013.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2013"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2014/es_cb-2014.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2014"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2015/es_cb-2015.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2015"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2016/es_cb-2016.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2016"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2017/es_cb-2017.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/es_cb-2018.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/es_cb-2019.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/es_cb-2020.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/es_cb-2021.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/es_cb-2022.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/es_cb-2023.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2023"
+    },
+    {
+      "rel": "item",
       "href": "./year=2024/es_cb-2024.json",
       "type": "application/geo+json",
       "title": "Spain Cantabria — 2024"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/es_cb-2025.json",
+      "type": "application/geo+json",
+      "title": "Spain Cantabria — 2025"
     }
   ],
-  "updated": "2026-08-28T18:53:09Z",
+  "updated": "2026-08-31T16:52:11Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_cb": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "©Government of Cantabria. Free information available at https://mapas.cantabria.es"
