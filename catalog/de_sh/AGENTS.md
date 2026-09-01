@@ -1,6 +1,6 @@
 # Agent guidance — Field boundaries for Schleswig-Holstein (SH), Germany
 
-Germany, Schleswig-Holstein field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Germany, Schleswig-Holstein field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 4 editions (2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -15,7 +15,7 @@ Germany, Schleswig-Holstein field boundaries in the [fiboa](https://github.com/f
 - **`metrics:area` is in square metres**, taken from the source column `Flaeche` (hectares × 10 000). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `FLIK`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `DE`, `admin:subdivision_code` = `SH` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2026-01-01T00:00:00Z`, `admin:country_code` = `DE`, `admin:subdivision_code` = `SH` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -24,27 +24,30 @@ Fields and hectares per edition, through the partition glob:
 ```sql
 INSTALL httpfs; LOAD httpfs;
 CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');
-SELECT year, count(*) AS fields, 0 AS hectares
+SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/de_sh/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2026 | 194503 | 0
+-- 2023 | 198614 | 985247.0
+-- 2024 | 197673 | 983108.0
+-- 2025 | 195747 | 979724.0
+-- 2026 | 194503 | 984410.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
-SELECT id
+SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_sh/latest/de_sh.parquet')
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(54.1960, 9.5981), 'EPSG:4326', 'EPSG:4647'), 500))
 LIMIT 5;
--- id
--- DESHLIH010400026
--- DESHLIH010400018
--- DESHLIH010400016
--- DESHLIH010400014
--- DESHLIH010400028
+-- id | m2
+-- DESHLIH010400016 | 5546.0
+-- DESHLIH010410034 | 14469.0
+-- DESHLIH010400025 | 42967.0
+-- DESHLIH010400026 | 12667.0
+-- DESHLIH010400027 | 17130.0
 ```
 
 ## Related collections

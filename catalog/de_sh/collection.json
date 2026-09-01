@@ -12,7 +12,7 @@
   ],
   "id": "de_sh",
   "title": "Field boundaries for Schleswig-Holstein (SH), Germany",
-  "description": "A field block (German: \"Feldblock\") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_sh/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:4647). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_sh/AGENTS.md).",
+  "description": "A field block (German: \"Feldblock\") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.\n\nThis collection holds 4 editions (2023, 2024, 2025, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_sh/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:4647). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_sh/AGENTS.md).",
   "keywords": [
     "Feldblöcke",
     "Germany",
@@ -45,7 +45,7 @@
       "bbox": [
         [
           7.84810926507402,
-          53.35021709947685,
+          53.350217099476836,
           11.348185901330078,
           55.04186394085969
         ]
@@ -54,8 +54,8 @@
     "temporal": {
       "interval": [
         [
-          "2026-01-01T00:00:00Z",
-          "2026-12-31T23:59:59Z"
+          "2015-01-01T00:00:00Z",
+          "2026-01-01T00:00:00Z"
         ]
       ]
     }
@@ -67,29 +67,34 @@
   },
   "table:columns": [
     {
+      "name": "collection",
+      "type": "string",
+      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "flik",
-      "type": "large_string",
+      "type": "string",
       "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
     },
     {
       "name": "hbn",
-      "type": "large_string",
+      "type": "string",
       "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
-    },
-    {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -108,7 +113,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 4,
   "partition:glob": "s3://ftw/harmonized-field-data/de_sh/year=*/*.parquet",
   "assets": {
     "data": {
@@ -119,17 +124,28 @@
       "roles": [
         "data"
       ],
-      "file:size": 82875042,
-      "file:checksum": "12201d87e3d2f93d3e776d357a1f2b9e64218bcd98198341ab245a97df6eda7cbb50",
+      "file:size": 64512339,
+      "file:checksum": "122012cf3b5ca44f9764ac75d0f2ebd109c2684f5a00b7db2a494c24ffccb31eca8f",
       "proj:code": "EPSG:4647"
+    },
+    "style-field-size": {
+      "href": "./styles/field-size.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field size (ha)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1196,
+      "file:checksum": "122098a73f2b2454345cabab37018a3f3990644d11e935cd87048cc86d534d7692b4"
     },
     "style-outline": {
       "href": "./styles/outline.json",
       "type": "application/vnd.mapbox.style+json",
       "title": "Field boundaries",
       "roles": [
-        "style",
-        "default"
+        "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
       "file:size": 756,
@@ -142,8 +158,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 23155130,
-      "file:checksum": "12204272e3a41bb49d59ccaa2104357e5f48fd260afb3dcc64a95e617296030fbaa6"
+      "file:size": 25944095,
+      "file:checksum": "1220becebc316497a985a3aaadee23309506961e1c7ad0ca6d8aa2aed4a05ba35a3b"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -214,20 +230,38 @@
     },
     {
       "rel": "item",
+      "href": "./year=2023/de_sh-2023.json",
+      "type": "application/geo+json",
+      "title": "Germany, Schleswig-Holstein — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/de_sh-2024.json",
+      "type": "application/geo+json",
+      "title": "Germany, Schleswig-Holstein — 2024"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/de_sh-2025.json",
+      "type": "application/geo+json",
+      "title": "Germany, Schleswig-Holstein — 2025"
+    },
+    {
+      "rel": "item",
       "href": "./year=2026/de_sh-2026.json",
       "type": "application/geo+json",
       "title": "Germany, Schleswig-Holstein — 2026"
     }
   ],
-  "updated": "2026-08-28T18:53:03Z",
+  "updated": "2026-09-01T15:10:02Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_sh": [
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml"
     ]
   }
 }

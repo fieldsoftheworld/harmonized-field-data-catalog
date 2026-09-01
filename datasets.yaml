@@ -51,7 +51,7 @@ datasets:
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Spain, Canary Islands, crop map]
   de_sh:
-    years: ['2026']
+    years: ['2023', '2024', '2025', '2026']
     keywords: [Germany, Schleswig-Holstein, Feldblöcke]
   de_bb:
     year: 2026

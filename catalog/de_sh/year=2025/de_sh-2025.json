@@ -7,18 +7,18 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "de_sh-2026",
+  "id": "de_sh-2025",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
           7.84810926507402,
-          53.35021709947685
+          53.350217099476836
         ],
         [
           11.348185901330078,
-          53.35021709947685
+          53.350217099476836
         ],
         [
           11.348185901330078,
@@ -30,24 +30,24 @@
         ],
         [
           7.84810926507402,
-          53.35021709947685
+          53.350217099476836
         ]
       ]
     ]
   },
   "bbox": [
     7.84810926507402,
-    53.35021709947685,
+    53.350217099476836,
     11.348185901330078,
     55.04186394085969
   ],
   "properties": {
-    "title": "Germany, Schleswig-Holstein — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_sh-2026.parquet`, 194,503 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "title": "Germany, Schleswig-Holstein — 2025",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`de_sh-2025.parquet`, 195,747 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2026-01-01T00:00:00Z",
-    "end_datetime": "2026-01-01T00:00:00Z",
-    "year": 2026,
+    "start_datetime": "2025-01-01T00:00:00Z",
+    "end_datetime": "2025-01-01T00:00:00Z",
+    "year": 2025,
     "proj:code": "EPSG:4647",
     "table:columns": [
       {
@@ -87,7 +87,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 194503,
+    "table:row_count": 195747,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -96,25 +96,15 @@
   "collection": "de_sh",
   "assets": {
     "data": {
-      "href": "./de_sh-2026.parquet",
+      "href": "./de_sh-2025.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Germany, Schleswig-Holstein 2026 (GeoParquet)",
+      "title": "Germany, Schleswig-Holstein 2025 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 64512339,
-      "file:checksum": "122012cf3b5ca44f9764ac75d0f2ebd109c2684f5a00b7db2a494c24ffccb31eca8f",
+      "file:size": 64691702,
+      "file:checksum": "1220bbfcd7e95674dac21f3c6911941efa8c79e1f7e1a4ceb9ce506022e96d275d5d",
       "proj:code": "EPSG:4647"
-    },
-    "visual": {
-      "href": "./de_sh-2026.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Germany, Schleswig-Holstein 2026 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 25944095,
-      "file:checksum": "1220becebc316497a985a3aaadee23309506961e1c7ad0ca6d8aa2aed4a05ba35a3b"
     }
   },
   "links": [
