@@ -146,7 +146,7 @@ datasets:
     years: ['2024']
     keywords: [Spain, Castilla-La Mancha, crop fields]
   es_ga:
-    years: ['2024']
+    years: ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"]
     keywords: [Spain, Galicia, crop fields]
   es_ib:
     years: ['2024']
