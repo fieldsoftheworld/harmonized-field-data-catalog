@@ -5,13 +5,15 @@ For every dataset (and every year in ``datasets.yaml``):
 
 1. ``fiboa publish <id> --variant <year>`` into ``staging/<id>/year=<year>/``
    — convert, validate, PMTiles, STAC; all conversion logic is fiboa-cli's.
-2. ``converter_meta.py`` dumps the converter's declared metadata.
-3. ``catalogize.py`` writes ``catalog/<id>/`` and regenerates the root.
-4. ``thumbnail.py`` renders the thumbnail when a chiitiler server is running
+2. a row-count check against the neighbouring editions, which warns when a
+   conversion quietly changed what it keeps (``--strict-row-counts`` to fail).
+3. ``converter_meta.py`` dumps the converter's declared metadata.
+4. ``catalogize.py`` writes ``catalog/<id>/`` and regenerates the root.
+5. ``thumbnail.py`` renders the thumbnail when a chiitiler server is running
    (skipped with a warning otherwise), then catalogize registers it.
-5. optionally ``upload_data.py`` sends the data files to the bucket.
+6. optionally ``upload_data.py`` sends the data files to the bucket.
 
-    python tools/build.py nl                 # steps 1-3
+    python tools/build.py nl                 # steps 1-4
     python tools/build.py nl --upload        # and upload the data
     python tools/build.py --all              # every dataset in the manifest
     python tools/build.py nl --year 2024     # one edition only
@@ -30,7 +32,14 @@ import shlex
 import subprocess
 import sys
 
-from common import ROOT, STAGING_DIR, Manifest, staging_year_dir
+from common import (
+    ROOT,
+    STAGING_DIR,
+    Manifest,
+    file_stem,
+    parquet_row_count,
+    staging_year_dir,
+)
 
 FIBOA_CMD = shlex.split(os.environ.get("FIBOA_CMD", "fiboa"))
 FIBOA_PYTHON = shlex.split(os.environ.get("FIBOA_PYTHON", "python"))
@@ -55,6 +64,42 @@ def publish(dataset_id: str, year: str, has_variants: bool, latest: bool = True)
     run(cmd)
 
 
+# an edition this far from its neighbour is reported; see check_row_counts
+DEFAULT_ROW_COUNT_TOLERANCE = 0.25
+
+
+def check_row_counts(dataset_id: str, years: list[str], tolerance: float) -> list[str]:
+    """Report editions whose row count jumps against the preceding one.
+
+    A conversion that quietly changes what it keeps still writes a valid file,
+    so no other step notices: es_ga 2022 came out 75% larger than 2023 because
+    Galicia had coded scrub as PR before it introduced MT, and that only showed
+    up by comparing finished editions. Comparing neighbours catches it in
+    seconds instead of after a whole backfill.
+
+    This warns rather than fails, because genuine changes of the same size do
+    happen (nl 2023 nearly doubled on a real BRP delineation change). A dataset
+    that legitimately jumps sets row_count_tolerance in datasets.yaml.
+    """
+    counts: list[tuple[str, int]] = []
+    for year in years:
+        parquet = staging_year_dir(dataset_id, year) / f"{file_stem(dataset_id, year)}.parquet"
+        if parquet.exists():
+            counts.append((year, parquet_row_count(parquet)))
+
+    warnings = []
+    for (prev_year, prev_rows), (year, rows) in zip(counts, counts[1:]):
+        if prev_rows == 0:
+            continue
+        change = (rows - prev_rows) / prev_rows
+        if abs(change) > tolerance:
+            warnings.append(
+                f"{dataset_id} {year}: {rows:,} rows vs {prev_rows:,} in {prev_year} "
+                f"({change:+.0%}, tolerance +/-{tolerance:.0%})"
+            )
+    return warnings
+
+
 def converter_meta(dataset_id: str) -> None:
     out = STAGING_DIR / dataset_id / "converter.json"
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -71,6 +116,7 @@ def main() -> int:
     parser.add_argument("--skip-thumbnail", action="store_true", help="do not render a thumbnail")
     parser.add_argument("--upload", action="store_true", help="upload the data files afterwards (dry run without --confirm)")
     parser.add_argument("--confirm", action="store_true", help="with --upload: actually upload")
+    parser.add_argument("--strict-row-counts", action="store_true", help="treat a row-count jump as a failure")
     args = parser.parse_args()
 
     manifest = Manifest.load()
@@ -79,6 +125,7 @@ def main() -> int:
         parser.error("name a dataset or pass --all")
 
     failures = []
+    row_count_warnings = []
     for dataset_id in ids:
         ds = manifest.datasets.get(dataset_id)
         if ds is None:
@@ -90,6 +137,20 @@ def main() -> int:
             if not args.skip_convert:
                 for year in years:
                     publish(dataset_id, year, has_variants, latest=(year == ds.years[-1]))
+            # compare against the whole series, not just the years built now: a
+            # single rebuilt edition is only suspicious next to its neighbours
+            jumps = check_row_counts(
+                dataset_id,
+                ds.years,
+                ds.row_count_tolerance
+                if ds.row_count_tolerance is not None
+                else DEFAULT_ROW_COUNT_TOLERANCE,
+            )
+            for msg in jumps:
+                print(f"row-count jump: {msg}", file=sys.stderr)
+            row_count_warnings += jumps
+            if jumps and args.strict_row_counts:
+                raise SystemExit(f"{dataset_id}: row-count jump with --strict-row-counts")
             converter_meta(dataset_id)
             run([sys.executable, str(ROOT / "tools" / "catalogize.py"), dataset_id])
             if not args.skip_thumbnail:
@@ -115,6 +176,10 @@ def main() -> int:
             failures.append(dataset_id)
             continue
 
+    if row_count_warnings:
+        print("\nrow-count jumps to check (set row_count_tolerance in datasets.yaml if real):", file=sys.stderr)
+        for msg in row_count_warnings:
+            print(f"  {msg}", file=sys.stderr)
     if failures:
         print("\nfailed: " + ", ".join(failures), file=sys.stderr)
         return 1

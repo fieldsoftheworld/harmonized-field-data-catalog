@@ -55,6 +55,10 @@ class Dataset:
     year_source: str | None = None
     notes: str | None = None
     thumbnail: dict = field(default_factory=dict)
+    # build.py warns when an edition's row count moves more than this against
+    # its neighbour; raise it for a dataset whose source really did change that
+    # much (a delineation change), so the check stays meaningful elsewhere.
+    row_count_tolerance: float | None = None
 
     @property
     def latest(self) -> str:
@@ -89,6 +93,7 @@ class Manifest:
                 year_source=spec.get("year_source"),
                 notes=spec.get("notes"),
                 thumbnail=dict(spec.get("thumbnail") or {}),
+                row_count_tolerance=spec.get("row_count_tolerance"),
             )
         return cls(catalog=raw["catalog"], host=raw["host"], datasets=datasets)
 
@@ -148,6 +153,12 @@ def duckdb_connect():
 
 def quote(path: Path | str) -> str:
     return "'" + str(path).replace("'", "''") + "'"
+
+
+def parquet_row_count(path: Path) -> int:
+    """Row count from the Parquet footer (no data pages are read)."""
+    con = duckdb_connect()
+    return int(con.execute(f"SELECT num_rows FROM parquet_file_metadata({quote(path)})").fetchone()[0])
 
 
 def parquet_crs(path: Path) -> str | None:
