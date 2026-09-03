@@ -100,6 +100,29 @@ datasets:
     year: 2026
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Romania, EuroCrops, crop fields]
+  ec_ee:
+    year: 2021
+    year_source: EuroCrops release year in the source file name (EE_2021).
+    keywords: [Estonia, EuroCrops, crop fields]
+  ec_lt:
+    year: 2021
+    year_source: EuroCrops release year in the source file name (LT_2021).
+    keywords: [Lithuania, EuroCrops, crop fields]
+  ec_lv:
+    year: 2021
+    year_source: EuroCrops release year in the source file name (LV_2021).
+    keywords: [Latvia, EuroCrops, crop fields]
+  ec_si:
+    year: 2021
+    year_source: EuroCrops release year in the source file name (SI_2021).
+    keywords: [Slovenia, EuroCrops, crop fields]
+  de_nds:
+    years: ['2025']
+    keywords: [Germany, Lower Saxony, Bremen, Hamburg, Schläge, crop fields]
+  de_nds_block:
+    year: 2026
+    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Germany, Lower Saxony, Bremen, Hamburg, Feldblöcke, field blocks]
   de_th:
     year: 2026
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
