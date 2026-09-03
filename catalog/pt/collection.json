@@ -12,7 +12,7 @@
   ],
   "id": "pt",
   "title": "Field boundaries for Portugal",
-  "description": "Open field boundaries (identificação de parcelas) from Portugal\n\nThis collection holds 1 edition (2023), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/pt/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2023). Geometries are kept in the source CRS (EPSG:3763). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md).",
+  "description": "Open field boundaries (identificação de parcelas) from Portugal\n\nThis collection holds 2 editions (2023, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/pt/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md).",
   "keywords": [
     "IFAP",
     "INSPIRE",
@@ -45,10 +45,10 @@
     "spatial": {
       "bbox": [
         [
-          -9.551854922295218,
-          36.991827533373424,
+          -31.266459564257445,
+          32.63587807681182,
           -6.173148404290481,
-          42.134449847013244
+          42.143204599812464
         ]
       ]
     },
@@ -56,61 +56,27 @@
       "interval": [
         [
           "2023-01-01T00:00:00Z",
-          "2023-01-01T00:00:00Z"
+          "2025-01-01T00:00:00Z"
         ]
       ]
     }
   },
   "summaries": {
     "proj:code": [
-      "EPSG:3763"
+      "EPSG:3763",
+      "EPSG:4326"
     ]
   },
   "table:columns": [
     {
       "name": "hcat:name_en",
-      "type": "large_string",
+      "type": "string",
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "crop:name",
-      "type": "large_string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:name",
-      "type": "large_string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "metrics:perimeter",
-      "type": "float",
-      "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "block_id",
-      "type": "int64",
-      "description": "Field block identifier (source column `CUL_ID`, per the fiboa data survey)"
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "metrics:area",
@@ -118,9 +84,39 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      "name": "metrics:perimeter",
+      "type": "float",
+      "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "collection",
+      "type": "string",
+      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "block_id",
+      "type": "int64",
+      "description": "Field block identifier (source column `CUL_ID`, per the fiboa data survey)"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -129,7 +125,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 4805469,
+  "table:row_count": 3571255,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -139,20 +135,20 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 2,
   "partition:glob": "s3://ftw/harmonized-field-data/pt/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/pt.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Portugal — latest edition (2023) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2023/pt-2023.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "title": "Portugal — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/pt-2025.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 1663201004,
-      "file:checksum": "12201bbaa4d02bb6cbf15a89698dad48f584acb457707ca3aef9c60087a95824aa3b",
-      "proj:code": "EPSG:3763"
+      "file:size": 1390299347,
+      "file:checksum": "12200a76bc3e36b934665e0fcc8529b9e352de13bbd35233233f8615f4b10bf3c737",
+      "proj:code": "EPSG:4326"
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",
@@ -164,7 +160,7 @@
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
       "file:size": 2380,
-      "file:checksum": "12201533f868255f03f512270d4df94ddedc20a4d90534e2a47321c8d9f4424ccf7e"
+      "file:checksum": "1220666fae34224d1046e4ab67693b85e3b9380d6c0e6bd6180637bf55a2eb83ef71"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -173,9 +169,9 @@
       "roles": [
         "style"
       ],
-      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 0.5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1182,
-      "file:checksum": "122079874431dab7b2eb77e9448a075a6ee1f7de5294e98d9b03365a353b9581804b"
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1178,
+      "file:checksum": "1220f8b5c3956cb7fe8d62a20e4dd4ef2e5af68be54b0b921b5a486fa5cde742cdf1"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -186,17 +182,17 @@
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
       "file:size": 728,
-      "file:checksum": "1220893d72e6edec934a2e6b75cc77b4a6201a4114e2c6203240c05d7c4b001c34b2"
+      "file:checksum": "1220bf96999c8f687301d2e0e1b2bd8bfd8b997fc7d370baab7898748ae43692fdf4"
     },
     "visual": {
-      "href": "./year=2023/pt-2023.pmtiles",
+      "href": "./year=2025/pt-2025.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Portugal — latest edition (2023) (PMTiles)",
+      "title": "Portugal — latest edition (2025) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 684452210,
-      "file:checksum": "1220ec9dd9dc0571f0ee9d72b5644c34121b2e5eda9bc5670d6494a57c039b1f3aa5"
+      "file:size": 566495999,
+      "file:checksum": "12203305449f4e7cf3767fa92397835dffe43cda22b3bbc0209afeaf152fc0bb50c1"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -246,7 +242,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2023/pt-2023.pmtiles",
+      "href": "./year=2025/pt-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -276,18 +272,24 @@
       "href": "./year=2023/pt-2023.json",
       "type": "application/geo+json",
       "title": "Portugal — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/pt-2025.json",
+      "type": "application/geo+json",
+      "title": "Portugal — 2025"
     }
   ],
-  "updated": "2026-08-28T18:49:43Z",
+  "updated": "2026-09-03T21:09:59Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "pt": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   }
 }

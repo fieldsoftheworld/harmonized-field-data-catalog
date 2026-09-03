@@ -42,7 +42,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 44 collections, GeoParqu
 - nl: BRP Crop Field Boundaries for The Netherlands (CAP-based) — https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet (license CC0-1.0, CRS EPSG:28992)
 - nl_block: Field blocks for The Netherlands — https://data.source.coop/ftw/harmonized-field-data/nl_block/latest/nl_block.parquet (license CC0-1.0, CRS EPSG:28992)
 - nz: Irrigated land area — https://data.source.coop/ftw/harmonized-field-data/nz/latest/nz.parquet (license CC-BY-4.0, CRS EPSG:2193)
-- pt: Field boundaries for Portugal — https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet (license other, CRS EPSG:3763)
+- pt: Field boundaries for Portugal — https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet (license other, CRS EPSG:3763, EPSG:4326)
 - si: Slovenia Crop Fields — https://data.source.coop/ftw/harmonized-field-data/si/latest/si.parquet (license other, CRS EPSG:3794)
 - sk: Slovakia Agricultural Land Identification System — https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet (license CC0-1.0, CRS EPSG:5514)
 - us_usda_cropland: U.S. Department of Agriculture Crop Sequence Boundaries — https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/latest/us_usda_cropland.parquet (license other, CRS )

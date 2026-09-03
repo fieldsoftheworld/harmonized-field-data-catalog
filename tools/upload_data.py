@@ -138,7 +138,9 @@ def main() -> int:
                     failed.append(u.key)
                     break
                 wait = min(2**attempt * 5, 120)
-                print(f"  retry {attempt}/{UPLOAD_ATTEMPTS - 1} in {wait}s  ({str(e)[:120]})", flush=True)
+                # boto3 puts the reason at the END of its message ("... An error
+                # occurred (520) when calling ..."), so keep the tail, not the head.
+                print(f"  retry {attempt}/{UPLOAD_ATTEMPTS - 1} in {wait}s  ({type(e).__name__}: ...{str(e)[-140:]})", flush=True)
                 time.sleep(wait)
 
     print(f"\nuploaded {len(changed) - len(failed)} file(s)")

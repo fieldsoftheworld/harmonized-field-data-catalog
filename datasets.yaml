@@ -193,3 +193,5 @@ datasets:
   pt:
     years: ['2023', '2025']
     keywords: [Portugal, IFAP, crop fields, INSPIRE]
+    row_count_tolerance: 0.3  # 2025 holds 3.57M parcels against 4.81M in 2023, upstream: the same
+                              # mainland area comes as 30% fewer, 21% larger parcels (avg 8,512 -> 10,335 m2)

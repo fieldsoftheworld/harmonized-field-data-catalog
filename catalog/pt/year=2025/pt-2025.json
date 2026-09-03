@@ -7,48 +7,48 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "pt-2023",
+  "id": "pt-2025",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          -9.551854922295218,
-          36.991827533373424
+          -31.266459564257445,
+          32.63587807681182
         ],
         [
-          -6.173148404290481,
-          36.991827533373424
+          -6.190849163558028,
+          32.63587807681182
         ],
         [
-          -6.173148404290481,
-          42.134449847013244
+          -6.190849163558028,
+          42.143204599812464
         ],
         [
-          -9.551854922295218,
-          42.134449847013244
+          -31.266459564257445,
+          42.143204599812464
         ],
         [
-          -9.551854922295218,
-          36.991827533373424
+          -31.266459564257445,
+          32.63587807681182
         ]
       ]
     ]
   },
   "bbox": [
-    -9.551854922295218,
-    36.991827533373424,
-    -6.173148404290481,
-    42.134449847013244
+    -31.266459564257445,
+    32.63587807681182,
+    -6.190849163558028,
+    42.143204599812464
   ],
   "properties": {
-    "title": "Portugal — 2023",
-    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`pt-2023.parquet`, 4,805,469 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "title": "Portugal — 2025",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`pt-2025.parquet`, 3,571,255 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2023-01-01T00:00:00Z",
-    "end_datetime": "2023-01-01T00:00:00Z",
-    "year": 2023,
-    "proj:code": "EPSG:3763",
+    "start_datetime": "2025-01-01T00:00:00Z",
+    "end_datetime": "2025-01-01T00:00:00Z",
+    "year": 2025,
+    "proj:code": "EPSG:4326",
     "table:columns": [
       {
         "name": "hcat:name_en",
@@ -107,7 +107,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 4805469,
+    "table:row_count": 3571255,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -116,25 +116,25 @@
   "collection": "pt",
   "assets": {
     "data": {
-      "href": "./pt-2023.parquet",
+      "href": "./pt-2025.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Portugal 2023 (GeoParquet)",
+      "title": "Portugal 2025 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 1663257444,
-      "file:checksum": "1220fef79fe61880254fd4f3351689b9013a8edaf722d6dad5ebbe9c513f49c7790f",
-      "proj:code": "EPSG:3763"
+      "file:size": 1390299347,
+      "file:checksum": "12200a76bc3e36b934665e0fcc8529b9e352de13bbd35233233f8615f4b10bf3c737",
+      "proj:code": "EPSG:4326"
     },
     "visual": {
-      "href": "./pt-2023.pmtiles",
+      "href": "./pt-2025.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Portugal 2023 (PMTiles)",
+      "title": "Portugal 2025 (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 684452210,
-      "file:checksum": "1220ec9dd9dc0571f0ee9d72b5644c34121b2e5eda9bc5670d6494a57c039b1f3aa5"
+      "file:size": 566495999,
+      "file:checksum": "12203305449f4e7cf3767fa92397835dffe43cda22b3bbc0209afeaf152fc0bb50c1"
     }
   },
   "links": [

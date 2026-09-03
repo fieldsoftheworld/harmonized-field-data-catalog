@@ -1,22 +1,22 @@
 # Agent guidance — Field boundaries for Portugal
 
-Portugal field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2023). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Portugal field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 2 editions (2023, 2025). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/pt/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/pt/year=2023/pt-2023.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/pt/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/pt/year=2025/pt-2025.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/pt/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/pt/year=2023/pt-2023.pmtiles`, layer `pt`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/pt/year=2025/pt-2025.pmtiles`, layer `pt`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
-- **CRS is EPSG:3763, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
+- **CRS is EPSG:4326, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `Shape_Area`. Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `OSA_ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/pt/pt.csv`) have `NULL`.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2023-01-01T00:00:00Z`, `admin:country_code` = `PT`, `crop:code_list` = `https://fiboa.org/code/pt/pt.csv` (2023 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `PT`, `determination:datetime` = `2025-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/pt/pt.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -30,6 +30,7 @@ FROM read_parquet('s3://ftw/harmonized-field-data/pt/year=*/*.parquet', hive_par
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
 -- 2023 | 4805469 | 4090352.0
+-- 2025 | 3571255 | 3622080.0
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
@@ -41,11 +42,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/pt/latest/
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330200 | pasture_meadow_grassland_grass | 1329949 | 1791305.0
--- 330606 | oak | 89219 | 371337.0
--- 330305 | olive_plantations | 400454 | 311097.0
--- 330101 | grain_maize_corn_popcorn | 257239 | 246962.0
--- 330306 | vineyards_wine_vine_rebland_grapes | 251631 | 126907.0
+-- 330200 | pasture_meadow_grassland_grass | 1494818 | 1885687.0
+-- 330606 | oak | 92091 | 368002.0
+-- 330305 | olive_plantations | 418832 | 327958.0
+-- 330101 | grain_maize_corn_popcorn | 229324 | 228891.0
+-- 330306 | vineyards_wine_vine_rebland_grapes | 260037 | 127728.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -54,14 +55,14 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(39.5631, -7.8625), 'EPSG:4326', 'EPSG:3763'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(37.3895, -18.7287), 'EPSG:4326', 'EPSG:4326'), 500))
 LIMIT 5;
 -- id | m2
--- 47855015 | 14627.0
--- 47855014 | 165.0
--- 47848875 | 15457.0
--- 1530922 | 849.0
--- 21382936 | 1781.0
+-- 40304636 | 6432.0
+-- 28001495 | 2202.0
+-- 45931150 | 2456.0
+-- 45931224 | 2370.0
+-- 30496114 | 4033.0
 ```
 
 ## Related collections
