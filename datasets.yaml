@@ -156,7 +156,7 @@ datasets:
     years: ['2025']
     keywords: [Spain, Andalusia, SIGPAC, crop fields]
   at:
-    years: ['2025']
+    years: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
     keywords: [Austria, Schläge, crop fields, INSPIRE]
   at_block:
     year: 2021
