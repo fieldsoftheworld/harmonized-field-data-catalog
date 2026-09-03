@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Official (non-AI) field boundaries harmonized to fiboa, 43 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Official (non-AI) field boundaries harmonized to fiboa, 44 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - at_block: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
@@ -26,6 +26,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 43 collections, GeoParqu
 - es_cl: Spain Castile and León Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cl/latest/es_cl.parquet (license other, CRS EPSG:4258)
 - es_cm: Spain Castilla-La Mancha Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cm/latest/es_cm.parquet (license CC-BY-SA-4.0, CRS EPSG:4326)
 - es_cn: Spain Crop fields of Canary Islands — https://data.source.coop/ftw/harmonized-field-data/es_cn/latest/es_cn.parquet (license CC-BY-4.0, CRS EPSG:32628)
+- es_ga: Spain Galicia Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_ga/latest/es_ga.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - es_md: Spain Madrid Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_md/latest/es_md.parquet (license CC0-1.0, CRS EPSG:4258)
 - es_pv: Spain Basque Country Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_pv/latest/es_pv.parquet (license CC-BY-4.0, CRS EPSG:25830)
 - es_vc: Spain Valencia Crop Fields — https://data.source.coop/ftw/harmonized-field-data/es_vc/latest/es_vc.parquet (license CC-BY-4.0, CRS EPSG:25830)

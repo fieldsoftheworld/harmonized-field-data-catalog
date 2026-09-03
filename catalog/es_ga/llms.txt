@@ -1,0 +1,9 @@
+# Spain Galicia Crop fields
+
+Spain Galicia field boundaries (2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Virtual Office for Rural Environment. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/es_ga/latest/es_ga.parquet
+- All editions: s3://ftw/harmonized-field-data/es_ga/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: id, crop:name, admin_province_code, geometry, collection, crop:name_en, metrics:area, admin_municipality_code, crop:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/es_ga/README.md, agent guide https://source.coop/ftw/harmonized-field-data/es_ga/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/es_ga/collection.json
