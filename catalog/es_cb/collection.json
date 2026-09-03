@@ -24,6 +24,14 @@
   "license": "CC-BY-NC-4.0",
   "providers": [
     {
+      "name": "Gobierno de Cantabria",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://mapas.cantabria.es"
+    },
+    {
       "name": "Fields of the World",
       "url": "https://fieldsofthe.world",
       "roles": [
@@ -150,12 +158,12 @@
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
-      "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "title": "Preview of the collection's default style.",
       "roles": [
         "thumbnail"
       ],
-      "file:size": 295795,
-      "file:checksum": "1220253dd7d5f5dfb229abe952f6207d2260a7d78453143a9d9c459f7212c732d7ca"
+      "file:size": 305509,
+      "file:checksum": "122069a71bc650a1b3c17d4a46f2974e43ee8b6f6891b1dbb81fddb34fd937d8a080"
     }
   },
   "links": [
@@ -195,6 +203,12 @@
       "pmtiles:layers": [
         "es_cb"
       ]
+    },
+    {
+      "rel": "via",
+      "href": "https://mapas.cantabria.es",
+      "type": "text/html",
+      "title": "Original source (publisher page)"
     },
     {
       "rel": "related",

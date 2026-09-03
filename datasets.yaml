@@ -14,6 +14,9 @@
 #   thumbnail: framing for tools/thumbnail.py — zoom, and center [lon, lat] or
 #             rank (n-th densest cluster); default is the densest cluster at
 #             the PMTiles max zoom. Record what you chose after looking at it.
+#             `basemap: none` records that the image has no backdrop, which is
+#             the default since Carto's keyless tiles gained a watermark; the
+#             asset title in the collection follows this.
 #
 # Scope: non-AI, officially published field boundary datasets, typically from
 # government bodies (IACS/LPIS, cadastre, agricultural statistics).
@@ -143,12 +146,14 @@ datasets:
   es_cb:
     years: ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"]
     keywords: [Spain, Cantabria, crop fields]
+    thumbnail: {basemap: none}  # re-rendered 2026-09-01, after the basemap became opt-in
   es_cm:
     years: ['2024']
     keywords: [Spain, Castilla-La Mancha, crop fields]
   es_ga:
     years: ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"]
     keywords: [Spain, Galicia, crop fields]
+    thumbnail: {center: [-8.46033, 42.12316], basemap: none}  # Rias Baixas minifundio; the densest cluster, denser than ranks 1-2
   es_ib:
     years: ['2024']
     keywords: [Spain, Balearic Islands, crop fields]

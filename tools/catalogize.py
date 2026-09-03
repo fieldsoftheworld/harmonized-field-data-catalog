@@ -374,7 +374,9 @@ def build_collection(
                 ]
             },
         },
-        "summaries": {"proj:code": sorted({y.crs for y in years if y.crs})},
+        # STAC rejects an empty summary, and a collection whose editions carry no
+        # CRS (us_usda_cropland) has nothing to summarize, so leave it out.
+        **({"summaries": {"proj:code": crs_values}} if (crs_values := sorted({y.crs for y in years if y.crs})) else {}),
         "table:columns": table_columns,
         "table:primary_geometry": "geometry",
         "table:row_count": latest.row_count,
@@ -437,10 +439,19 @@ def build_collection(
         import hashlib
 
         digest = hashlib.sha256(thumb.read_bytes()).hexdigest()
+        # Thumbnails rendered before ~2026-09 carry the Carto basemap; since then
+        # it is opt-in (their keyless tiles gained a watermark), so a collection
+        # that declares basemap: none in the manifest must not claim one here.
+        basemap = ds.thumbnail.get("basemap", "carto")
+        title = (
+            "Preview of the collection's default style."
+            if basemap in (None, "none")
+            else "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO."
+        )
         collection["assets"]["thumbnail"] = {
             "href": "./thumbnail.jpg",
             "type": "image/jpeg",
-            "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+            "title": title,
             "roles": ["thumbnail"],
             "file:size": thumb.stat().st_size,
             "file:checksum": "1220" + digest,

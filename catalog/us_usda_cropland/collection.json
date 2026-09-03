@@ -60,9 +60,6 @@
       ]
     }
   },
-  "summaries": {
-    "proj:code": []
-  },
   "table:columns": [
     {
       "name": "hcat:name_en",

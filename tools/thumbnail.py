@@ -33,6 +33,7 @@ import struct
 import sys
 from pathlib import Path
 
+import pyproj
 import requests
 
 from common import CATALOG_DIR, Manifest, duckdb_connect, quote, read_json
@@ -89,23 +90,31 @@ def pmtiles_header(path: Path) -> dict:
 def densest_cluster(parquet: Path, crs: str, zoom: float, rank: int) -> tuple[float, float, int]:
     """(lon, lat, count) of the rank-th densest window at this zoom, via the bbox column."""
     con = duckdb_connect()
-    cell_m = span_for_zoom(zoom, SIZE) / 2  # half a frame, in metres (source CRS assumed metric or close)
+    cell = span_for_zoom(zoom, SIZE) / 2  # half a frame, in metres
+    cell_x = cell_y = cell
+    if pyproj.CRS(crs).is_geographic:
+        # The grid is built in the source CRS, so a metre-sized cell floors every
+        # degree coordinate into one bucket and the "densest cluster" becomes the
+        # whole dataset. Size the cell in degrees instead, at the data's latitude.
+        mid_lat = con.execute(
+            f"SELECT avg((bbox.ymin + bbox.ymax) / 2) FROM read_parquet({quote(parquet)})"
+        ).fetchone()[0]
+        cell_y = cell / 110_540.0
+        cell_x = cell / max(111_320.0 * math.cos(math.radians(mid_lat or 0.0)), 1.0)
     # work in the source CRS using the per-feature bbox covering column
     rows = con.execute(
         f"""
         WITH c AS (
           SELECT (bbox.xmin + bbox.xmax) / 2 AS x, (bbox.ymin + bbox.ymax) / 2 AS y
           FROM read_parquet({quote(parquet)})
-        ), ext AS (
-          SELECT max(x) - min(x) AS w, max(y) - min(y) AS h FROM c
         ), g AS (
-          SELECT floor(x / {cell_m}) AS gx, floor(y / {cell_m}) AS gy, count(*) AS n FROM c GROUP BY 1, 2
+          SELECT floor(x / {cell_x}) AS gx, floor(y / {cell_y}) AS gy, count(*) AS n FROM c GROUP BY 1, 2
         ), top AS (
           SELECT gx, gy FROM g ORDER BY n DESC LIMIT 1 OFFSET {int(rank)}
         )
         SELECT count(*), avg(x), avg(y) FROM c, top
-        WHERE x BETWEEN (gx - 1) * {cell_m} AND (gx + 2) * {cell_m}
-          AND y BETWEEN (gy - 1) * {cell_m} AND (gy + 2) * {cell_m}
+        WHERE x BETWEEN (gx - 1) * {cell_x} AND (gx + 2) * {cell_x}
+          AND y BETWEEN (gy - 1) * {cell_y} AND (gy + 2) * {cell_y}
         """
     ).fetchone()
     n, x, y = rows
@@ -175,6 +184,8 @@ def main() -> int:
         pmtiles = (cdir / visual["href"]).resolve()
         parquet = (cdir / coll["assets"]["data"]["href"]).resolve()
         crs = coll["assets"]["data"].get("proj:code") or "EPSG:4326"
+        declared = manifest.datasets[dataset_id].thumbnail.get("basemap")
+        basemap = args.basemap or (None if declared in (None, "none") else declared)
         header = pmtiles_header(pmtiles)
         zoom = args.zoom if args.zoom is not None else float(header["max_zoom"])
         if args.center:
@@ -183,7 +194,7 @@ def main() -> int:
         else:
             clon, clat, n = densest_cluster(parquet, crs, zoom, args.rank)
         bbox = window(clon, clat, zoom)
-        render, probe, blank = build_styles(style, pmtiles, header, args.basemap)
+        render, probe, blank = build_styles(style, pmtiles, header, basemap)
         image = clip(render, bbox, SIZE, "jpeg", 85)
         probe_png = clip(probe, bbox, 256, "png", 100)
         blank_png = clip(blank, bbox, 256, "png", 100)
@@ -207,6 +218,7 @@ def main() -> int:
             "features_in_window": n,
             "bbox": [round(v, 6) for v in bbox],
             "gate1": gate,
+            "basemap": basemap or "none",
             "bytes": len(image),
         }
         print(json.dumps(record))

@@ -19,14 +19,14 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2017 | 7,660,547 | [2.8 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2017/us_usda_cropland-2017.parquet) | — | [us_usda_cropland-2017.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2017/us_usda_cropland-2017.json) |
-| 2018 | 7,517,019 | [2.8 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2018/us_usda_cropland-2018.parquet) | — | [us_usda_cropland-2018.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2018/us_usda_cropland-2018.json) |
-| 2019 | 7,677,349 | [2.8 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2019/us_usda_cropland-2019.parquet) | — | [us_usda_cropland-2019.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2019/us_usda_cropland-2019.json) |
-| 2020 | 7,595,821 | [2.8 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2020/us_usda_cropland-2020.parquet) | — | [us_usda_cropland-2020.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2020/us_usda_cropland-2020.json) |
-| 2021 | 7,590,146 | [2.8 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2021/us_usda_cropland-2021.parquet) | — | [us_usda_cropland-2021.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2021/us_usda_cropland-2021.json) |
-| 2022 | 7,659,738 | [2.8 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2022/us_usda_cropland-2022.parquet) | — | [us_usda_cropland-2022.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2022/us_usda_cropland-2022.json) |
-| 2023 | 7,637,878 | [2.8 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2023/us_usda_cropland-2023.parquet) | — | [us_usda_cropland-2023.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2023/us_usda_cropland-2023.json) |
-| 2024 | 7,522,713 | [2.8 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2024/us_usda_cropland-2024.parquet) | [658.3 MB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2024/us_usda_cropland-2024.pmtiles) | [us_usda_cropland-2024.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2024/us_usda_cropland-2024.json) |
+| 2017 | 7,660,547 | [3.9 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2017/us_usda_cropland-2017.parquet) | — | [us_usda_cropland-2017.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2017/us_usda_cropland-2017.json) |
+| 2018 | 7,517,019 | [3.8 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2018/us_usda_cropland-2018.parquet) | — | [us_usda_cropland-2018.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2018/us_usda_cropland-2018.json) |
+| 2019 | 7,677,349 | [3.9 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2019/us_usda_cropland-2019.parquet) | — | [us_usda_cropland-2019.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2019/us_usda_cropland-2019.json) |
+| 2020 | 7,595,821 | [3.9 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2020/us_usda_cropland-2020.parquet) | — | [us_usda_cropland-2020.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2020/us_usda_cropland-2020.json) |
+| 2021 | 7,590,146 | [3.9 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2021/us_usda_cropland-2021.parquet) | — | [us_usda_cropland-2021.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2021/us_usda_cropland-2021.json) |
+| 2022 | 7,659,738 | [3.9 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2022/us_usda_cropland-2022.parquet) | — | [us_usda_cropland-2022.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2022/us_usda_cropland-2022.json) |
+| 2023 | 7,637,878 | [3.9 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2023/us_usda_cropland-2023.parquet) | — | [us_usda_cropland-2023.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2023/us_usda_cropland-2023.json) |
+| 2024 | 7,522,713 | [3.9 GB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2024/us_usda_cropland-2024.parquet) | [658.3 MB](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2024/us_usda_cropland-2024.pmtiles) | [us_usda_cropland-2024.json](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/year=2024/us_usda_cropland-2024.json) |
 
 The latest edition is also available at a stable path: [us_usda_cropland/latest/us_usda_cropland.parquet](https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/latest/us_usda_cropland.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/us_usda_cropland/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/us_usda_cropland/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -34,15 +34,15 @@ The latest edition is also available at a stable path: [us_usda_cropland/latest/
 
 | Column | Type | Description |
 |---|---|---|
-| `hcat:name_en` | string | The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `administrative_area_level_2` | string | Carried over from the source column `CNTY`; the publisher documents no meaning for it. |
-| `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `hcat:name` | string | The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `hcat:name_en` | large_string | The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `administrative_area_level_2` | large_string | Carried over from the source column `CNTY`; the publisher documents no meaning for it. |
+| `crop:code` | large_string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `hcat:name` | large_string | The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `collection` | large_string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `hcat:code` | uint32 | The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
-| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `crop:name` | large_string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -66,14 +66,14 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 This catalog is a mirror: the data is produced and licensed by [United States Department of Agriculture](https://www.nass.usda.gov) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2017: converted 2026-08-25 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
-- 2018: converted 2026-08-25 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
-- 2019: converted 2026-08-25 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
-- 2020: converted 2026-08-25 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
-- 2021: converted 2026-08-26 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
-- 2022: converted 2026-08-26 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
-- 2023: converted 2026-08-26 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
-- 2024: converted 2026-08-26 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
+- 2017: converted 2026-08-28 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
+- 2018: converted 2026-08-28 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
+- 2019: converted 2026-08-28 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
+- 2020: converted 2026-08-28 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
+- 2021: converted 2026-08-28 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
+- 2022: converted 2026-08-28 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
+- 2023: converted 2026-08-28 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
+- 2024: converted 2026-08-28 from <https://www.nass.usda.gov/Research_and_Science/Crop-Sequence-Boundaries/datasets/NationalCSB_2017-2024_rev23.zip>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

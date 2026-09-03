@@ -2,7 +2,7 @@
 
 SIGPAC Crop fields of Spain - Cantabria
 
-- **Source data provider:** —
+- **Source data provider:** [Gobierno de Cantabria](https://mapas.cantabria.es)
 - **License:** CC-BY-NC-4.0
 - **Editions:** 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 (one GeoParquet per year)
 - **Fields in the latest edition (2025):** 608,752
@@ -69,7 +69,7 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by — and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
+This catalog is a mirror: the data is produced and licensed by [Gobierno de Cantabria](https://mapas.cantabria.es) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
 
 - 2010: converted 2026-08-31 from <REST>
 - 2011: converted 2026-08-31 from <REST>
