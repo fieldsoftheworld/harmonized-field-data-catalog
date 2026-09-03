@@ -191,5 +191,5 @@ datasets:
     years: ['2025']
     keywords: [Spain, FEGA, SIGPAC, declared crops, cultivo declarado]
   pt:
-    years: ['2023']
+    years: ['2023', '2025']
     keywords: [Portugal, IFAP, crop fields, INSPIRE]

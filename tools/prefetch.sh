@@ -28,10 +28,10 @@ while IFS=$'\t' read -r name url; do
     if [ "$rc" = 33 ]; then  # server does not support byte ranges: start over
       echo "$(date +%T) restart $name (no range support)"; rm -f "cache/$name.part"
     fi
-    echo "$(date +%T) retry   $name (attempt $attempt, rc $rc, $(stat -f%z "cache/$name.part" 2>/dev/null || echo 0) bytes)"
+    echo "$(date +%T) retry   $name (attempt $attempt, rc $rc, $(wc -c < "cache/$name.part" 2>/dev/null || echo 0) bytes)"
     sleep 15
   done
-  if [ "$ok" = 1 ]; then mv -f "cache/$name.part" "cache/$name"; echo "$(date +%T) done    $name $(stat -f%z "cache/$name") bytes"
+  if [ "$ok" = 1 ]; then mv -f "cache/$name.part" "cache/$name"; echo "$(date +%T) done    $name $(wc -c < "cache/$name") bytes"
   else echo "$(date +%T) FAILED  $name"; fi
 done < "${1:?usage: prefetch.sh <tsv>}"
 echo PREFETCH_DONE
