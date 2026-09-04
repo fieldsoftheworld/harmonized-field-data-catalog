@@ -106,21 +106,26 @@ datasets:
     keywords: [Estonia, EuroCrops, crop fields]
   ec_lt:
     year: 2021
+    thumbnail: {center: [23.12638, 54.60258], basemap: none}  # Dzukija, south of Kaunas; the densest cluster
     year_source: EuroCrops release year in the source file name (LT_2021).
     keywords: [Lithuania, EuroCrops, crop fields]
   ec_lv:
     year: 2021
+    thumbnail: {center: [26.26158, 56.01426], basemap: none}  # Latgale near Daugavpils; the densest cluster
     year_source: EuroCrops release year in the source file name (LV_2021).
     keywords: [Latvia, EuroCrops, crop fields]
   ec_si:
     year: 2021
+    thumbnail: {center: [16.27707, 46.59319], basemap: none}  # Prekmurje strip fields on the Hungarian border; the densest cluster
     year_source: EuroCrops release year in the source file name (SI_2021).
     keywords: [Slovenia, EuroCrops, crop fields]
   de_nds:
     years: ['2025']
+    thumbnail: {center: [7.80803, 53.34097], basemap: none}  # East Frisian marsh grassland; the densest cluster
     keywords: [Germany, Lower Saxony, Bremen, Hamburg, Schläge, crop fields]
   de_nds_block:
     year: 2026
+    thumbnail: {center: [7.81677, 53.35566], basemap: none}  # East Frisian marsh, the same ground as de_nds; the densest cluster
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Germany, Lower Saxony, Bremen, Hamburg, Feldblöcke, field blocks]
   de_th:
@@ -179,6 +184,7 @@ datasets:
     thumbnail: {center: [-8.46033, 42.12316], basemap: none}  # Rias Baixas minifundio; the densest cluster, denser than ranks 1-2
   es_ib:
     years: ['2024']
+    thumbnail: {center: [3.10067, 39.58600], basemap: none}  # Mallorca east of Palma; the densest cluster
     keywords: [Spain, Balearic Islands, crop fields]
   es_pv:
     years: ['2025']
