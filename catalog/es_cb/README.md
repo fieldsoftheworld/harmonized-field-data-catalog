@@ -3,7 +3,7 @@
 SIGPAC Crop fields of Spain - Cantabria
 
 - **Source data provider:** [Gobierno de Cantabria](https://mapas.cantabria.es)
-- **License:** CC-BY-NC-4.0
+- **License:** other — [Licencia de uso de datos del Gobierno de Cantabria (Decreto 87/2013)](https://www.territoriodecantabria.es/cartografia-sig/datos-abiertos-y-politica-de-licencias) (converter: `Licencia de uso de datos del Gobierno de Cantabria (Decreto 87/2013) <https://www.territoriodecantabria.es/cartografia-sig/datos-abiertos-y-politica-de-licencias>`)
 - **Editions:** 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 (one GeoParquet per year)
 - **Fields in the latest edition (2025):** 608,752
 - **Coordinate reference system:** EPSG:4326 (as published by the source; not reprojected)
@@ -30,7 +30,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 | 2021 | 605,256 | [229.8 MB](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2021/es_cb-2021.parquet) | — | [es_cb-2021.json](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2021/es_cb-2021.json) |
 | 2022 | 608,393 | [234.8 MB](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2022/es_cb-2022.parquet) | — | [es_cb-2022.json](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2022/es_cb-2022.json) |
 | 2023 | 608,302 | [235.1 MB](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2023/es_cb-2023.parquet) | — | [es_cb-2023.json](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2023/es_cb-2023.json) |
-| 2024 | 605,149 | [252.1 MB](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2024/es_cb-2024.parquet) | [88.3 MB](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2024/es_cb-2024.pmtiles) | [es_cb-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2024/es_cb-2024.json) |
+| 2024 | 605,149 | [238.9 MB](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2024/es_cb-2024.parquet) | [88.3 MB](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2024/es_cb-2024.pmtiles) | [es_cb-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2024/es_cb-2024.json) |
 | 2025 | 608,752 | [238.4 MB](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2025/es_cb-2025.parquet) | [88.2 MB](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2025/es_cb-2025.pmtiles) | [es_cb-2025.json](https://data.source.coop/ftw/harmonized-field-data/es_cb/year=2025/es_cb-2025.json) |
 
 The latest edition is also available at a stable path: [es_cb/latest/es_cb.parquet](https://data.source.coop/ftw/harmonized-field-data/es_cb/latest/es_cb.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/es_cb/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_cb/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
@@ -71,25 +71,25 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 This catalog is a mirror: the data is produced and licensed by [Gobierno de Cantabria](https://mapas.cantabria.es) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
 
-- 2010: converted 2026-08-31 from <REST>
-- 2011: converted 2026-08-31 from <REST>
-- 2012: converted 2026-08-31 from <REST>
-- 2013: converted 2026-08-31 from <REST>
-- 2014: converted 2026-08-31 from <REST>
-- 2015: converted 2026-08-31 from <REST>
-- 2016: converted 2026-08-30 from <REST>
-- 2017: converted 2026-08-31 from <REST>
-- 2018: converted 2026-08-30 from <REST>
-- 2019: converted 2026-08-30 from <REST>
-- 2020: converted 2026-08-30 from <REST>
-- 2021: converted 2026-08-30 from <REST>
-- 2022: converted 2026-08-31 from <REST>
-- 2023: converted 2026-08-30 from <REST>
-- 2024: converted 2026-08-28 from <REST>
-- 2025: converted 2026-08-31 from <REST>
+- 2010: converted 2026-09-06 from <REST>
+- 2011: converted 2026-09-06 from <REST>
+- 2012: converted 2026-09-06 from <REST>
+- 2013: converted 2026-09-06 from <REST>
+- 2014: converted 2026-09-06 from <REST>
+- 2015: converted 2026-09-06 from <REST>
+- 2016: converted 2026-09-06 from <REST>
+- 2017: converted 2026-09-06 from <REST>
+- 2018: converted 2026-09-06 from <REST>
+- 2019: converted 2026-09-06 from <REST>
+- 2020: converted 2026-09-06 from <REST>
+- 2021: converted 2026-09-06 from <REST>
+- 2022: converted 2026-09-06 from <REST>
+- 2023: converted 2026-09-06 from <REST>
+- 2024: converted 2026-09-06 from <REST>
+- 2025: converted 2026-09-06 from <REST>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 
 ## License
 
-CC-BY-NC-4.0. Attribution: ©Government of Cantabria. Free information available at https://mapas.cantabria.es
+other — [Licencia de uso de datos del Gobierno de Cantabria (Decreto 87/2013)](https://www.territoriodecantabria.es/cartografia-sig/datos-abiertos-y-politica-de-licencias) (converter: `Licencia de uso de datos del Gobierno de Cantabria (Decreto 87/2013) <https://www.territoriodecantabria.es/cartografia-sig/datos-abiertos-y-politica-de-licencias>`). Attribution: © Gobierno de Cantabria. Información gratuita disponible en https://mapas.cantabria.es

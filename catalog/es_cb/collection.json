@@ -21,7 +21,7 @@
     "fiboa",
     "field boundaries"
   ],
-  "license": "CC-BY-NC-4.0",
+  "license": "other",
   "providers": [
     {
       "name": "Gobierno de Cantabria",
@@ -129,8 +129,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 250024799,
-      "file:checksum": "122041cba9a17b76a6b5892e26c2869477d85466c21fd8a2447f3e7e69346939fb9b",
+      "file:size": 250025296,
+      "file:checksum": "122080ca9db79161d8b63f1fd0a9eb07241d3ea5d582aec8609d3933d8e9270d30bf",
       "proj:code": "EPSG:4326"
     },
     "style-outline": {
@@ -176,6 +176,12 @@
       "rel": "parent",
       "href": "../catalog.json",
       "type": "application/json"
+    },
+    {
+      "href": "https://www.territoriodecantabria.es/cartografia-sig/datos-abiertos-y-politica-de-licencias",
+      "title": "Licencia de uso de datos del Gobierno de Cantabria (Decreto 87/2013)",
+      "rel": "license",
+      "type": "text/html"
     },
     {
       "rel": "agents",
@@ -319,16 +325,16 @@
       "title": "Spain Cantabria — 2025"
     }
   ],
-  "updated": "2026-08-31T16:52:11Z",
+  "updated": "2026-09-06T22:47:14Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_cb": [
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "©Government of Cantabria. Free information available at https://mapas.cantabria.es"
+  "attribution": "© Gobierno de Cantabria. Información gratuita disponible en https://mapas.cantabria.es"
 }

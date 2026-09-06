@@ -95,7 +95,7 @@
     "table:row_count": 605149,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.2.16"
     }
   },
   "collection": "es_cb",
@@ -107,8 +107,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 264375768,
-      "file:checksum": "12201b1f882eaf63710379e3ab59dfe15cf3acdc0a03ebf6760990323df5525f1086",
+      "file:size": 250546386,
+      "file:checksum": "1220cfbf9d03b1110fedd46b4ba7b7846cad3c8d75dcd04571f66fa0aa9c6e3f7f5c",
       "proj:code": "EPSG:4326"
     },
     "visual": {
