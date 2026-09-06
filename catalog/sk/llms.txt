@@ -5,5 +5,5 @@ Slovakia field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fiel
 - Latest: https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet
 - All editions: s3://ftw/harmonized-field-data/sk/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
 - CRS EPSG:5514; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: municipality, hcat:name, collection, geometry, crop_group, hcat:name_en, block_id, metrics:area, crop:name, hcat:code, bbox
+- Columns: hcat:name_en, id, geometry, metrics:area, crop_group, hcat:code, municipality, crop:name, collection, hcat:name, block_id, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/sk/README.md, agent guide https://source.coop/ftw/harmonized-field-data/sk/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/sk/collection.json

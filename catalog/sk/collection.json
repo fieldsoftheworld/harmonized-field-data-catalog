@@ -67,39 +67,19 @@
   },
   "table:columns": [
     {
-      "name": "municipality",
-      "type": "large_string",
-      "description": "Municipality (source column `LOKALITA_N`, per the fiboa data survey)"
-    },
-    {
-      "name": "hcat:name",
-      "type": "large_string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop_group",
-      "type": "large_string",
-      "description": "Crop Group (source column `KULTURA_NA`, per the fiboa data survey)"
-    },
-    {
       "name": "hcat:name_en",
-      "type": "large_string",
+      "type": "string",
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "block_id",
-      "type": "large_string",
-      "description": "code KD (source column `KODKD`, per the fiboa data survey)"
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "metrics:area",
@@ -107,14 +87,39 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "crop:name",
-      "type": "large_string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      "name": "crop_group",
+      "type": "string",
+      "description": "Crop Group (source column `KULTURA_NA`, per the fiboa data survey)"
     },
     {
       "name": "hcat:code",
       "type": "uint32",
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "municipality",
+      "type": "string",
+      "description": "Municipality (source column `LOKALITA_N`, per the fiboa data survey)"
+    },
+    {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "collection",
+      "type": "string",
+      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "block_id",
+      "type": "string",
+      "description": "code KD (source column `KODKD`, per the fiboa data survey)"
     },
     {
       "name": "bbox",
@@ -144,8 +149,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 456923008,
-      "file:checksum": "12203bf6e29dc68273c745e6cc678f684a2a1180b9e479baf69c845a4ecd69db260a",
+      "file:size": 336355682,
+      "file:checksum": "1220422c36753a5e4ba5743c5c03bbbdc0196d3512b40c1eb144fbc3e1459b05abf8",
       "proj:code": "EPSG:5514"
     },
     "style-hcat-crops": {
@@ -189,8 +194,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 113479537,
-      "file:checksum": "122088c489fcd63ed83912197427299f4e35ada7168a394617dacccab0b93e90bca8"
+      "file:size": 121065558,
+      "file:checksum": "1220dc19b46678df0c6263e5306c6d19bd8261b26310ca617c7e8a3c3079a80681e0"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -266,16 +271,16 @@
       "title": "Slovakia — 2026"
     }
   ],
-  "updated": "2026-08-28T19:08:47Z",
+  "updated": "2026-09-06T20:35:53Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "sk": [
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   }
 }

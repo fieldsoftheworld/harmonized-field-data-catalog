@@ -51,39 +51,24 @@
     "proj:code": "EPSG:25833",
     "table:columns": [
       {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "farmer_id",
-        "type": "large_string",
-        "description": "Carried over from the source column `ref_ident`; the publisher documents no meaning for it."
-      },
-      {
         "name": "hcat:name_en",
-        "type": "large_string",
+        "type": "string",
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "large_string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "large_string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "determination:datetime",
@@ -91,14 +76,34 @@
         "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "crop:name",
-        "type": "large_string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "geometry",
-        "type": "large_binary",
+        "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "farmer_id",
+        "type": "string",
+        "description": "Carried over from the source column `ref_ident`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -110,7 +115,7 @@
     "table:row_count": 290688,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.2.16"
     }
   },
   "collection": "de_bb",
@@ -122,8 +127,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 123345886,
-      "file:checksum": "1220d10812e4e113749a7189f137e119e9492511d0aa963338d533d73533671a7807",
+      "file:size": 108235410,
+      "file:checksum": "122077a2e82d275ade7f4c1efab3324dc39ac72c8fd817a9077fff647502cfce8203",
       "proj:code": "EPSG:25833"
     },
     "visual": {
@@ -133,8 +138,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 51158781,
-      "file:checksum": "12204436fe4f52cc4064d2fa2737d3e7eddc2231592fc8badc5d06a9f37544cc9869"
+      "file:size": 56364324,
+      "file:checksum": "122033105acff922b8745f5c76d66f74104615e7b1d42643701ca0bc39089dccc963"
     }
   },
   "links": [

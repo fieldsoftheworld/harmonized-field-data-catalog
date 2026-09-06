@@ -14,7 +14,7 @@ Germany, Berlin/Brandenburg field boundaries in the [fiboa](https://github.com/f
 - **CRS is EPSG:25833, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `groesse` (hectares × 10 000). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`de.csv`) have `NULL`.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `DE`, `admin:subdivision_code` = `BB`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/de.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
@@ -49,6 +49,20 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+
+```sql
+INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
+SELECT id, round("metrics:area") AS m2
+FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_bb/latest/de_bb.parquet')
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.4376, 13.0003), 'EPSG:4326', 'EPSG:25833'), 500))
+LIMIT 5;
+-- id | m2
+-- 10980 | 227853.0
+-- 11066 | 2984.0
+-- 11062 | 2231.0
+-- 10963 | 121316.0
+-- 11119 | 5392.0
+```
 
 ## Related collections
 
