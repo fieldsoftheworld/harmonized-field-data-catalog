@@ -7,7 +7,7 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "at-2025",
+  "id": "at-2023",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
@@ -42,12 +42,12 @@
     48.96562897393914
   ],
   "properties": {
-    "title": "Austria — 2025",
-    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`at-2025.parquet`, 2,944,405 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
+    "title": "Austria — 2023",
+    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`at-2023.parquet`, 2,947,754 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2022-09-30T13:46:14Z",
-    "end_datetime": "2025-06-13T12:18:13Z",
-    "year": 2025,
+    "start_datetime": "2018-07-31T13:24:41Z",
+    "end_datetime": "2024-01-09T15:14:13Z",
+    "year": 2023,
     "proj:code": "EPSG:31287",
     "table:columns": [
       {
@@ -107,7 +107,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 2944405,
+    "table:row_count": 2947754,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -116,25 +116,15 @@
   "collection": "at",
   "assets": {
     "data": {
-      "href": "./at-2025.parquet",
+      "href": "./at-2023.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Austria 2025 (GeoParquet)",
+      "title": "Austria 2023 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 1025955824,
-      "file:checksum": "1220c68524241a09f1d8b448d1364dc3bafb59faeabfd0fa141fad78d402d047a97e",
+      "file:size": 847862505,
+      "file:checksum": "1220d12f75b9d613fb6bb5f21cae562e66260d4ffceb02a876267bcab423da522278",
       "proj:code": "EPSG:31287"
-    },
-    "visual": {
-      "href": "./at-2025.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Austria 2025 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 633418711,
-      "file:checksum": "1220cd9b11231eeb1f38f531ba36b1ef32015ee638368bdf445096f0c3e924b9e391"
     }
   },
   "links": [

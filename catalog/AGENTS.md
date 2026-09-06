@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-44 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
+51 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
 
 ## How to read it
 
@@ -25,7 +25,7 @@ GROUP BY 1 ORDER BY 1;
 -- cz | 415301
 -- de_bb | 290688
 -- de_bb_block | 90764
--- ... 36 more rows
+-- ... 43 more rows
 ```
 
 Every edition of every collection:
@@ -37,15 +37,15 @@ SELECT year, regexp_extract(filename, '/([^/]+)/year=', 1) AS collection, count(
 FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
+-- 2018 | at | 2523190
+-- 2019 | at | 2529896
+-- 2020 | at | 2614636
+-- 2021 | at | 2610511
+-- 2022 | at | 2600002
+-- 2023 | at | 2947754
+-- 2024 | at | 2956449
 -- 2025 | at | 2944405
--- 2021 | at_block | 1299755
--- 2023 | be_vlg | 588192
--- 2024 | be_vlg | 589749
--- 2025 | be_vlg | 594732
--- 2026 | be_vlg | 597088
--- 2022 | be_wal | 341968
--- 2025 | ch | 1350979
--- ... 130 more rows
+-- ... 144 more rows
 ```
 
 ## Join keys

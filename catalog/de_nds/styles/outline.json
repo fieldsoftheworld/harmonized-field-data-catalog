@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Germany, Lower Saxony/Bremen/Hamburg — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2025/de_nds-2025.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "de_nds",
+      "paint": {
+        "fill-color": "#4d4d4d",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "de_nds",
+      "paint": {
+        "line-color": "#4d4d4d",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

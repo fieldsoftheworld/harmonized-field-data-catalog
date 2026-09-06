@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Lithuania - Eurocrops 2021 — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2021/ec_lt.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "ec_lt",
+      "paint": {
+        "fill-color": "#d6604d",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "ec_lt",
+      "paint": {
+        "line-color": "#d6604d",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

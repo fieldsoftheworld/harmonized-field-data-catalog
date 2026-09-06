@@ -102,6 +102,7 @@ datasets:
     keywords: [Romania, EuroCrops, crop fields]
   ec_ee:
     year: 2021
+    thumbnail: {center: [26.52894, 57.84260], basemap: none}  # Vorumaa smallholdings; the densest cluster
     year_source: EuroCrops release year in the source file name (EE_2021).
     keywords: [Estonia, EuroCrops, crop fields]
   ec_lt:

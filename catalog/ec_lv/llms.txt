@@ -1,0 +1,9 @@
+# Field boundaries for Latvia - Eurocrops 2021
+
+Latvia - Eurocrops 2021 field boundaries (2021) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Lauku atbalsta dienests <https://www.lad.gov.lv/lv/lauku-registra-dati>, EuroCrops. License: CC-BY-SA-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/ec_lv/latest/ec_lv.parquet
+- All editions: s3://ftw/harmonized-field-data/ec_lv/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3059; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:code, id, subsidy_type, hcat:name, determination:datetime, geometry, hcat:name_en, metrics:area, parcel_id, hcat:code, EC_NUTS3, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/ec_lv/README.md, agent guide https://source.coop/ftw/harmonized-field-data/ec_lv/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/ec_lv/collection.json

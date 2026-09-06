@@ -1,0 +1,147 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "de_nds_block-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          6.6071263849957536,
+          51.279793575394315
+        ],
+        [
+          11.651879546500899,
+          51.279793575394315
+        ],
+        [
+          11.651879546500899,
+          53.90893481983809
+        ],
+        [
+          6.6071263849957536,
+          53.90893481983809
+        ],
+        [
+          6.6071263849957536,
+          51.279793575394315
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    6.6071263849957536,
+    51.279793575394315,
+    11.651879546500899,
+    53.90893481983809
+  ],
+  "properties": {
+    "title": "Germany, Lower Saxony/Bremen/Hamburg (parcels) — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_nds_block.parquet`, 539,834 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2026-12-31T23:59:59Z",
+    "year": 2026,
+    "proj:code": "EPSG:25832",
+    "table:columns": [
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bnk",
+        "type": "string",
+        "description": "Carried over from the source column `BNK`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bnk_txt",
+        "type": "string",
+        "description": "Carried over from the source column `BNK_TXT`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "metrics:perimeter",
+        "type": "float",
+        "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 539834,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.16"
+    }
+  },
+  "collection": "de_nds_block",
+  "assets": {
+    "data": {
+      "href": "./de_nds_block.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Germany, Lower Saxony/Bremen/Hamburg (parcels) 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 176550313,
+      "file:checksum": "1220c09b1c752c70a40c75e4ec6f30c255f70223275ffcf52a1c0cc027dde63b2c55",
+      "proj:code": "EPSG:25832"
+    },
+    "visual": {
+      "href": "./de_nds_block.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Germany, Lower Saxony/Bremen/Hamburg (parcels) 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 67926711,
+      "file:checksum": "122039bdb33f6a0cb0a17f213e79d501af4e37cac27b0353f756312bdd7892c62574"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

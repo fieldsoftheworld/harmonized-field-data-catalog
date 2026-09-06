@@ -1,6 +1,6 @@
 # Agent guidance — Field boundaries for Austria
 
-Austria field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2025). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Austria field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 8 editions (2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -29,6 +29,13 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/at/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
+-- 2018 | 2523190 | 3209297.0
+-- 2019 | 2529896 | 3200107.0
+-- 2020 | 2614636 | 3197674.0
+-- 2021 | 2610511 | 3187824.0
+-- 2022 | 2600002 | 3179671.0
+-- 2023 | 2947754 | 3154887.0
+-- 2024 | 2956449 | 3152873.0
 -- 2025 | 2944405 | 3150555.0
 ```
 

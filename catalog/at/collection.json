@@ -12,7 +12,7 @@
   ],
   "id": "at",
   "title": "Field boundaries for Austria",
-  "description": "**Crop Field boundaries for Austria - INVEKOS Schläge Österreich 2025.**\n\nThis layer includes all field uses recorded by the applicants, which serve as the basis for the funding process. A field\nis a contiguous area of a piece of land that is cultivated for a growing season with only one crop (field use type) and\nuniform management requirements or as a landscape element type in accordance with Annex 1 of the regulation of the responsible\nFederal Ministry with horizontal rules for the area of the Common Agricultural Policy (Horizontal CAP Regulation)\nStF: BGBl. II No. 100/2015 or is simply maintained in good agricultural and ecological condition in accordance with\nArt. 94 of Regulation (EU) No. 1306/2013 and is digitized in the GIS as a polygon or as a point.\n\nThis collection holds 1 edition (2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/at/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:31287). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/at/AGENTS.md).",
+  "description": "**Crop Field boundaries for Austria - INVEKOS Schläge Österreich 2025.**\n\nThis layer includes all field uses recorded by the applicants, which serve as the basis for the funding process. A field\nis a contiguous area of a piece of land that is cultivated for a growing season with only one crop (field use type) and\nuniform management requirements or as a landscape element type in accordance with Annex 1 of the regulation of the responsible\nFederal Ministry with horizontal rules for the area of the Common Agricultural Policy (Horizontal CAP Regulation)\nStF: BGBl. II No. 100/2015 or is simply maintained in good agricultural and ecological condition in accordance with\nArt. 94 of Regulation (EU) No. 1306/2013 and is digitized in the GIS as a polygon or as a point.\n\nThis collection holds 8 editions (2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/at/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:31287). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/at/AGENTS.md).",
   "keywords": [
     "Austria",
     "INSPIRE",
@@ -46,7 +46,7 @@
       "bbox": [
         [
           9.405290334050287,
-          46.34587803112473,
+          46.34587798618984,
           17.232237933779267,
           48.96562897393914
         ]
@@ -55,7 +55,7 @@
     "temporal": {
       "interval": [
         [
-          "2022-09-30T13:46:14Z",
+          "2018-07-30T16:26:12Z",
           "2025-06-13T12:18:13Z"
         ]
       ]
@@ -134,7 +134,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 8,
   "partition:glob": "s3://ftw/harmonized-field-data/at/year=*/*.parquet",
   "assets": {
     "data": {
@@ -145,8 +145,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 1026055915,
-      "file:checksum": "1220ccd9dba0f9e64b66e06019513bf107928472a14bdf3e9def6bafb5f4d41a72e5",
+      "file:size": 1025955824,
+      "file:checksum": "1220c68524241a09f1d8b448d1364dc3bafb59faeabfd0fa141fad78d402d047a97e",
       "proj:code": "EPSG:31287"
     },
     "style-hcat-crops": {
@@ -262,21 +262,63 @@
     },
     {
       "rel": "item",
+      "href": "./year=2018/at-2018.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/at-2019.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/at-2020.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/at-2021.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/at-2022.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/at-2023.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/at-2024.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2024"
+    },
+    {
+      "rel": "item",
       "href": "./year=2025/at-2025.json",
       "type": "application/geo+json",
       "title": "Austria — 2025"
     }
   ],
-  "updated": "2026-08-28T18:41:35Z",
+  "updated": "2026-09-04T00:28:51Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "at": [
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   }
 }

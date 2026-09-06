@@ -1,0 +1,9 @@
+# Field boundaries for Estonia - Eurocrops 2021
+
+Estonia - Eurocrops 2021 field boundaries (2021) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Põllumajanduse Registrite ja Informatsiooni Amet <http://data.europa.eu/88u/dataset/pria-pollud>, EuroCrops. License: CC-BY-SA-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/ec_ee/latest/ec_ee.parquet
+- All editions: s3://ftw/harmonized-field-data/ec_ee/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: metrics:area, viimase_muutmise_aeg, taotleja_nimi, hcat:name_en, crop:code, taotletud_toetus, taotleja_registrikood, id, hcat:code, hcat:name, geometry, taotletud_maakasutus, niitmise_tuvast_ajavahemik, niitmise_tuvastamise_staatus, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/ec_ee/README.md, agent guide https://source.coop/ftw/harmonized-field-data/ec_ee/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/ec_ee/collection.json

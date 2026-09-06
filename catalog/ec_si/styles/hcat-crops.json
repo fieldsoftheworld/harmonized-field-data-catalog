@@ -1,0 +1,95 @@
+{
+  "version": 8,
+  "name": "Slovenia - Eurocrops 2021 — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2021/ec_si.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "ec_si",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3302000000,
+            "Pasture meadow grassland grass",
+            3301010600,
+            "Grain maize corn popcorn",
+            3301010101,
+            "Winter common soft wheat",
+            3301010401,
+            "Winter barley",
+            3301090303,
+            "Clover",
+            3303060000,
+            "Vineyards wine vine rebland grapes",
+            3301090100,
+            "Temporary grass",
+            3301070000,
+            "Fresh vegetables",
+            3303010000,
+            "Orchards fruits",
+            3301010801,
+            "Winter triticale",
+            3301090301,
+            "Alfalfa lucerne",
+            3301060401,
+            "Winter rapeseed rape",
+            "Other"
+          ],
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Grain maize corn popcorn",
+          "#ccb732",
+          "Winter common soft wheat",
+          "#a6cee3",
+          "Winter barley",
+          "#1f78b4",
+          "Clover",
+          "#b2df8a",
+          "Vineyards wine vine rebland grapes",
+          "#fb9a99",
+          "Temporary grass",
+          "#e31a1c",
+          "Fresh vegetables",
+          "#fdbf6f",
+          "Orchards fruits",
+          "#ff7f00",
+          "Winter triticale",
+          "#6a3d9a",
+          "Alfalfa lucerne",
+          "#ffff99",
+          "Winter rapeseed rape",
+          "#b15928",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "ec_si",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

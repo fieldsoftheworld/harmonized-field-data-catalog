@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Official (non-AI) field boundaries harmonized to fiboa, 44 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Official (non-AI) field boundaries harmonized to fiboa, 51 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - at_block: Field boundaries for Austria — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
@@ -12,11 +12,17 @@ Official (non-AI) field boundaries harmonized to fiboa, 44 collections, GeoParqu
 - de_bb_block: Field boundaries for Berlin / Brandenburg, Germany — https://data.source.coop/ftw/harmonized-field-data/de_bb_block/latest/de_bb_block.parquet (license DL-DE-BY-2.0, CRS EPSG:25833)
 - de_by: Field boundaries for Bavaria, Germany — https://data.source.coop/ftw/harmonized-field-data/de_by/latest/de_by.parquet (license CC-BY-4.0, CRS EPSG:25832)
 - de_mv: Field boundaries for Mecklenburg-Western Pomerania, Germany — https://data.source.coop/ftw/harmonized-field-data/de_mv/latest/de_mv.parquet (license other, CRS EPSG:25833)
+- de_nds: Crop Fields for Lower Saxony / Bremen / Hamburg, Germany — https://data.source.coop/ftw/harmonized-field-data/de_nds/latest/de_nds.parquet (license DL-DE-BY-2.0, CRS EPSG:25832)
+- de_nds_block: Field boundaries for Lower Saxony / Bremen / Hamburg, Germany — https://data.source.coop/ftw/harmonized-field-data/de_nds_block/latest/de_nds_block.parquet (license DL-DE-BY-2.0, CRS EPSG:25832)
 - de_nrw: Field boundaries for North Rhine-Westphalia (NRW), Germany — https://data.source.coop/ftw/harmonized-field-data/de_nrw/latest/de_nrw.parquet (license DL-DE-BY-2.0, CRS EPSG:25832)
 - de_sh: Field boundaries for Schleswig-Holstein (SH), Germany — https://data.source.coop/ftw/harmonized-field-data/de_sh/latest/de_sh.parquet (license DL-DE-ZERO-2.0, CRS EPSG:4647)
 - de_th: Field boundaries for Thuringia, Germany — https://data.source.coop/ftw/harmonized-field-data/de_th/latest/de_th.parquet (license DL-DE-BY-2.0, CRS EPSG:25832)
 - dk: Denmark Crop Fields (Marker) — https://data.source.coop/ftw/harmonized-field-data/dk/latest/dk.parquet (license CC0-1.0, CRS EPSG:25832)
+- ec_ee: Field boundaries for Estonia - Eurocrops 2021 — https://data.source.coop/ftw/harmonized-field-data/ec_ee/latest/ec_ee.parquet (license CC-BY-SA-4.0, CRS EPSG:4326)
+- ec_lt: Field boundaries for Lithuania - Eurocrops 2021 — https://data.source.coop/ftw/harmonized-field-data/ec_lt/latest/ec_lt.parquet (license CC-BY-SA-4.0, CRS EPSG:4326)
+- ec_lv: Field boundaries for Latvia - Eurocrops 2021 — https://data.source.coop/ftw/harmonized-field-data/ec_lv/latest/ec_lv.parquet (license CC-BY-SA-4.0, CRS EPSG:3059)
 - ec_ro: Field boundaries for Romania - Eurocrops — https://data.source.coop/ftw/harmonized-field-data/ec_ro/latest/ec_ro.parquet (license CC-BY-SA-4.0, CRS EPSG:32635)
+- ec_si: Field boundaries for Slovenia - Eurocrops 2021 — https://data.source.coop/ftw/harmonized-field-data/ec_si/latest/ec_si.parquet (license CC-BY-SA-4.0, CRS EPSG:3794)
 - ee: Field boundaries for Estonia — https://data.source.coop/ftw/harmonized-field-data/ee/latest/ee.parquet (license CC-BY-SA-3.0, CRS EPSG:3301)
 - es: Spain Declared Crops (Cultivos Declarados SIGPAC) — https://data.source.coop/ftw/harmonized-field-data/es/latest/es.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - es_an: Spain Andalusia Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_an/latest/es_an.parquet (license other, CRS EPSG:25830)
@@ -27,6 +33,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 44 collections, GeoParqu
 - es_cm: Spain Castilla-La Mancha Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cm/latest/es_cm.parquet (license CC-BY-SA-4.0, CRS EPSG:4326)
 - es_cn: Spain Crop fields of Canary Islands — https://data.source.coop/ftw/harmonized-field-data/es_cn/latest/es_cn.parquet (license CC-BY-4.0, CRS EPSG:32628)
 - es_ga: Spain Galicia Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_ga/latest/es_ga.parquet (license CC-BY-4.0, CRS EPSG:4326)
+- es_ib: Spain Balearic Islands Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_ib/latest/es_ib.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - es_md: Spain Madrid Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_md/latest/es_md.parquet (license CC0-1.0, CRS EPSG:4258)
 - es_pv: Spain Basque Country Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_pv/latest/es_pv.parquet (license CC-BY-4.0, CRS EPSG:25830)
 - es_vc: Spain Valencia Crop Fields — https://data.source.coop/ftw/harmonized-field-data/es_vc/latest/es_vc.parquet (license CC-BY-4.0, CRS EPSG:25830)

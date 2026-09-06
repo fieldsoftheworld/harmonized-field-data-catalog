@@ -1,0 +1,9 @@
+# Field boundaries for Slovenia - Eurocrops 2021
+
+Slovenia - Eurocrops 2021 field boundaries (2021) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Ministrstvo za kmetijstvo, gozdarstvo in prehrano <https://rkg.gov.si/vstop/>, EuroCrops. License: CC-BY-SA-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/ec_si/latest/ec_si.parquet
+- All editions: s3://ftw/harmonized-field-data/ec_si/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3794; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: rastlina, metrics:area, geometry, color, hcat:name, gerk_pid, EC_NUTS3, hcat:name_en, id, crop_type_class, crop_lat_e, hcat:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/ec_si/README.md, agent guide https://source.coop/ftw/harmonized-field-data/ec_si/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/ec_si/collection.json

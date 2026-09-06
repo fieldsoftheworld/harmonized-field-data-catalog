@@ -1,0 +1,9 @@
+# Field boundaries for Lithuania - Eurocrops 2021
+
+Lithuania - Eurocrops 2021 field boundaries (2021) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Construction Sector Development Agency <https://www.geoportal.lt/geoportal/nacionaline-mokejimo-agentura-prie-zemes-ukio-ministerijos#savedSearchId={56542726-DC0B-461E-A32C-3E9A4A693E27}&collapsed=true>, EuroCrops. License: CC-BY-SA-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/ec_lt/latest/ec_lt.parquet
+- All editions: s3://ftw/harmonized-field-data/ec_lt/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:name, geometry, id, metrics:perimeter, hcat:name, hcat:name_en, metrics:area, hcat:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/ec_lt/README.md, agent guide https://source.coop/ftw/harmonized-field-data/ec_lt/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/ec_lt/collection.json

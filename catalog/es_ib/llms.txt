@@ -1,0 +1,9 @@
+# Spain Balearic Islands Crop fields
+
+Spain Balearic Islands field boundaries (2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Govern de les Illes Balears. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/es_ib/latest/es_ib.parquet
+- All editions: s3://ftw/harmonized-field-data/es_ib/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:name, admin_municipality_code, collection, id, crop:code, geometry, determination:datetime, crop:name_en, metrics:area, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/es_ib/README.md, agent guide https://source.coop/ftw/harmonized-field-data/es_ib/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/es_ib/collection.json

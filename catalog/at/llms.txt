@@ -1,6 +1,6 @@
 # Field boundaries for Austria
 
-Austria field boundaries (2025) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Agrarmarkt Austria. License: CC-BY-4.0.
+Austria field boundaries (2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Agrarmarkt Austria. License: CC-BY-4.0.
 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet
 - All editions: s3://ftw/harmonized-field-data/at/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)

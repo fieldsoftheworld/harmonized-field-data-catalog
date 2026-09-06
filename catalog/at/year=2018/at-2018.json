@@ -7,48 +7,48 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "at-2025",
+  "id": "at-2018",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          9.405290334050287,
-          46.34587803112473
+          9.405290337503184,
+          46.34587798618984
         ],
         [
-          17.232237933779267,
-          46.34587803112473
+          17.232237875796603,
+          46.34587798618984
         ],
         [
-          17.232237933779267,
-          48.96562897393914
+          17.232237875796603,
+          48.96562893083748
         ],
         [
-          9.405290334050287,
-          48.96562897393914
+          9.405290337503184,
+          48.96562893083748
         ],
         [
-          9.405290334050287,
-          46.34587803112473
+          9.405290337503184,
+          46.34587798618984
         ]
       ]
     ]
   },
   "bbox": [
-    9.405290334050287,
-    46.34587803112473,
-    17.232237933779267,
-    48.96562897393914
+    9.405290337503184,
+    46.34587798618984,
+    17.232237875796603,
+    48.96562893083748
   ],
   "properties": {
-    "title": "Austria — 2025",
-    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`at-2025.parquet`, 2,944,405 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
+    "title": "Austria — 2018",
+    "description": "Field boundaries of the 2018 edition of this dataset, one GeoParquet file (`at-2018.parquet`, 2,523,190 fields) and its PMTiles. Partition `year=2018` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2022-09-30T13:46:14Z",
-    "end_datetime": "2025-06-13T12:18:13Z",
-    "year": 2025,
-    "proj:code": "EPSG:31287",
+    "start_datetime": "2018-07-30T16:26:12Z",
+    "end_datetime": "2020-09-28T08:14:56Z",
+    "year": 2018,
+    "proj:code": null,
     "table:columns": [
       {
         "name": "geometry",
@@ -107,7 +107,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 2944405,
+    "table:row_count": 2523190,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -116,25 +116,15 @@
   "collection": "at",
   "assets": {
     "data": {
-      "href": "./at-2025.parquet",
+      "href": "./at-2018.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Austria 2025 (GeoParquet)",
+      "title": "Austria 2018 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 1025955824,
-      "file:checksum": "1220c68524241a09f1d8b448d1364dc3bafb59faeabfd0fa141fad78d402d047a97e",
-      "proj:code": "EPSG:31287"
-    },
-    "visual": {
-      "href": "./at-2025.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Austria 2025 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 633418711,
-      "file:checksum": "1220cd9b11231eeb1f38f531ba36b1ef32015ee638368bdf445096f0c3e924b9e391"
+      "file:size": 511710311,
+      "file:checksum": "1220a1af432226b25469507ad79a730cda7c83e87adaaf5f0a1d75e0f04025e4ecf3",
+      "proj:code": null
     }
   },
   "links": [
