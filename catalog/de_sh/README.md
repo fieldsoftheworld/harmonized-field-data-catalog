@@ -16,7 +16,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 194,503 | [60.5 MB](https://data.source.coop/ftw/harmonized-field-data/de_sh/year=2026/de_sh-2026.parquet) | [22.1 MB](https://data.source.coop/ftw/harmonized-field-data/de_sh/year=2026/de_sh-2026.pmtiles) | [de_sh-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_sh/year=2026/de_sh-2026.json) |
+| 2026 | 194,503 | [79.0 MB](https://data.source.coop/ftw/harmonized-field-data/de_sh/year=2026/de_sh-2026.parquet) | [22.1 MB](https://data.source.coop/ftw/harmonized-field-data/de_sh/year=2026/de_sh-2026.pmtiles) | [de_sh-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_sh/year=2026/de_sh-2026.json) |
 
 The latest edition is also available at a stable path: [de_sh/latest/de_sh.parquet](https://data.source.coop/ftw/harmonized-field-data/de_sh/latest/de_sh.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/de_sh/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_sh/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -24,11 +24,11 @@ The latest edition is also available at a stable path: [de_sh/latest/de_sh.parqu
 
 | Column | Type | Description |
 |---|---|---|
-| `flik` | string | The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md)) |
-| `hbn` | string | Category of main land use (see below) (source column `HBN`, per the fiboa data survey) |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `flik` | large_string | The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md)) |
+| `hbn` | large_string | Category of main land use (see below) (source column `HBN`, per the fiboa data survey) |
+| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `collection` | large_string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -51,7 +51,7 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 This catalog is a mirror: the data is produced and licensed by [Land Schleswig-Holstein](https://sh-mis.gdi-sh.de/catalog/#/datasets/iso/21f67269-780f-4f3c-8f66-03dde27acfe7) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2026: converted 2026-08-22 from <https://service.gdi-sh.de/SH_OpenGBD/feeds/Atom_SH_Feldblockfinder_OpenGBD/data/Feldbloecke_2026_GPKG.zip>
+- 2026: converted 2026-08-28 from <https://service.gdi-sh.de/SH_OpenGBD/feeds/Atom_SH_Feldblockfinder_OpenGBD/data/Feldbloecke_2026_GPKG.zip>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

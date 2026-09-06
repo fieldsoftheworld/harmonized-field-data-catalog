@@ -98,11 +98,35 @@ class YearInput:
         self.pmtiles = self.dir / Path(self.visual_asset["href"]).name if self.visual_asset else None
         if not self.parquet.exists():
             sys.exit(f"missing {self.parquet}")
+        self._check_sizes()
         self.row_count = self.data_asset.get("table:row_count")
         self.bbox = self.stac["extent"]["spatial"]["bbox"][0]
         self.interval = self.stac["extent"]["temporal"]["interval"][0]
         self.crs = parquet_crs(self.parquet)
         self.collection_props = parquet_collection_properties(self.parquet)
+
+
+    def _check_sizes(self):
+        """Refuse to describe a file with a size `fiboa publish` recorded earlier.
+
+        file:size and file:checksum are derived facts, but they are copied from
+        the staging collection.json rather than measured here. Anything that
+        rewrites a parquet after that file is written — the Hilbert re-sort, the
+        bbox covering fix — leaves the record behind, and every catalogize since
+        repeats it. jp's four editions were published 300 bytes larger than the
+        metadata said for a week that way, which only the live byte check saw.
+        """
+        for role, path in (("data", self.parquet), ("visual", self.pmtiles)):
+            asset = self.data_asset if role == "data" else self.visual_asset
+            if asset is None or path is None or not path.exists():
+                continue
+            actual, recorded = path.stat().st_size, asset.get("file:size")
+            if recorded is not None and actual != recorded:
+                sys.exit(
+                    f"{path}: {actual} bytes, but {self.stac_path} records {recorded}. "
+                    "The file changed after it was published; re-run `fiboa publish` "
+                    "for this edition so the record matches what it describes."
+                )
 
 
 def load_converter_meta(dataset_id: str) -> dict:

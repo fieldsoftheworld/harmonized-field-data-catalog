@@ -131,6 +131,14 @@ def main() -> int:
                 client.upload_file(str(u.local), bucket, u.key, ExtraArgs={"ContentType": u.content_type}, Config=transfer)
                 break
             except Exception as e:
+                if "ExpiredToken" in str(e) or "InvalidAccessKeyId" in str(e):
+                    # Not transient: the short-lived Source Cooperative credentials
+                    # ran out. Retrying burns 150 s per file to fail identically.
+                    sys.exit(
+                        f"credentials expired while uploading {u.key}; "
+                        "run `source-coop login`, push them again, and re-run "
+                        "(files already uploaded are skipped by checksum)"
+                    )
                 if attempt == UPLOAD_ATTEMPTS:
                     # Keep going: the files after this one are independent, and a
                     # re-run skips whatever landed, by checksum.

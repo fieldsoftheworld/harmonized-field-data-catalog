@@ -40,11 +40,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_sh/late
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(54.1960, 9.5981), 'EPSG:4326', 'EPSG:4647'), 500))
 LIMIT 5;
 -- id
--- DESHLIH010400026
--- DESHLIH010400018
 -- DESHLIH010400016
--- DESHLIH010400014
--- DESHLIH010400028
+-- DESHLIH010410034
+-- DESHLIH010400025
+-- DESHLIH010400026
+-- DESHLIH010400027
 ```
 
 ## Related collections
