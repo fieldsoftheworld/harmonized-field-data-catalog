@@ -1,6 +1,6 @@
 # Agent guidance — Croatian Field Boundaries
 
-Croatia field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Croatia field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 14 editions (2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -17,6 +17,7 @@ Croatia field boundaries in the [fiboa](https://github.com/fiboa/specification) 
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`hr_2020.csv`) have `NULL`.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `HR`, `determination:datetime` = `2024-01-01T00:00:00Z`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/hr_2020.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- `id` differs by edition: the dated editions (2011-2023) carry ARKOD's own parcel identifier, unique within the edition; the 2024 edition comes from the rolling `land_parcels.gpkg`, which ships no identifier, so there it is a row number. The editions also carry different attributes — 2011 has 17 of them, 2023 has 25, and `jpaid` exists only in 2024.
 
 ## Tested queries
 
@@ -29,7 +30,15 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/hr/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2024 | 1284769 | 1143805.0
+-- 2011 | 1293144 | 1009026.0
+-- 2012 | 1303512 | 1020858.0
+-- 2013 | 1313072 | 1017856.0
+-- 2014 | 1319621 | 1023316.0
+-- 2015 | 1283594 | 1095272.0
+-- 2016 | 1297604 | 1114089.0
+-- 2017 | 1333770 | 1124507.0
+-- 2018 | 1356429 | 1134369.0
+-- ... 6 more rows
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):

@@ -28,7 +28,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 51 collections, GeoParqu
 - es_an: Spain Andalusia Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_an/latest/es_an.parquet (license other, CRS EPSG:25830)
 - es_ar: Spain Aragon Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_ar/latest/es_ar.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - es_cat: Catalonia Crop Fields (Mapa de cultius) — https://data.source.coop/ftw/harmonized-field-data/es_cat/latest/es_cat.parquet (license other, CRS EPSG:25831)
-- es_cb: Spain Cantabria Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cb/latest/es_cb.parquet (license CC-BY-NC-4.0, CRS EPSG:4326)
+- es_cb: Spain Cantabria Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cb/latest/es_cb.parquet (license other, CRS EPSG:4326)
 - es_cl: Spain Castile and León Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cl/latest/es_cl.parquet (license other, CRS EPSG:4258)
 - es_cm: Spain Castilla-La Mancha Crop fields — https://data.source.coop/ftw/harmonized-field-data/es_cm/latest/es_cm.parquet (license CC-BY-SA-4.0, CRS EPSG:4326)
 - es_cn: Spain Crop fields of Canary Islands — https://data.source.coop/ftw/harmonized-field-data/es_cn/latest/es_cn.parquet (license CC-BY-4.0, CRS EPSG:32628)

@@ -155,6 +155,8 @@ datasets:
   hr:
     years: ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
     keywords: [Croatia, ARKOD, crop fields]
+    notes: "`id` differs by edition: the dated editions (2011-2023) carry ARKOD's own parcel identifier, unique within the edition; the 2024 edition comes from the rolling `land_parcels.gpkg`, which ships no identifier, so there it is a row number. The editions also carry different attributes — 2011 has 17 of them, 2023 has 25, and `jpaid` exists only in 2024."
+
   ie:
     years: ['2024']
     keywords: [Ireland, GSAA, crop fields, INSPIRE]

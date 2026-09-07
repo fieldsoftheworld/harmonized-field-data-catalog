@@ -12,7 +12,7 @@
   ],
   "id": "hr",
   "title": "Croatian Field Boundaries",
-  "description": "Field boundary data for Croatia, provided as part of national agricultural datasets.\n\nThis dataset contains spatial data related to agricultural land use in Croatia, including ARKOD parcel information,\nenvironmentally sensitive areas, High Nature Value Grasslands, protective buffer strips around watercourses, and vineyard\nclassifications. The data is crucial for managing agricultural activities, ensuring compliance with environmental regulations,\nand supporting sustainable land use practices.\n\nThis collection holds 1 edition (2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/hr/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:3765). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/hr/AGENTS.md).",
+  "description": "Field boundary data for Croatia, provided as part of national agricultural datasets.\n\nThis dataset contains spatial data related to agricultural land use in Croatia, including ARKOD parcel information,\nenvironmentally sensitive areas, High Nature Value Grasslands, protective buffer strips around watercourses, and vineyard\nclassifications. The data is crucial for managing agricultural activities, ensuring compliance with environmental regulations,\nand supporting sustainable land use practices.\n\nThis collection holds 14 editions (2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/hr/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:3765). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/hr/AGENTS.md).",
   "keywords": [
     "ARKOD",
     "Croatia",
@@ -44,17 +44,17 @@
     "spatial": {
       "bbox": [
         [
-          13.438328367540874,
-          42.38997322481944,
-          19.515798199251762,
-          46.49582712551485
+          13.438026338124326,
+          42.38953034296822,
+          19.5167792909209,
+          46.49994209491861
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2024-01-01T00:00:00Z",
+          "2011-01-01T00:00:00Z",
           "2024-01-01T00:00:00Z"
         ]
       ]
@@ -238,7 +238,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 14,
   "partition:glob": "s3://ftw/harmonized-field-data/hr/year=*/*.parquet",
   "assets": {
     "data": {
@@ -369,6 +369,84 @@
       "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/hr.py",
       "type": "text/html",
       "title": "Converter source code (fiboa-cli)"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2011/hr-2011.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2011"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2012/hr-2012.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2012"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2013/hr-2013.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2013"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2014/hr-2014.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2014"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2015/hr-2015.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2015"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2016/hr-2016.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2016"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2017/hr-2017.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/hr-2018.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/hr-2019.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/hr-2020.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/hr-2021.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/hr-2022.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/hr-2023.json",
+      "type": "application/geo+json",
+      "title": "Croatia — 2023"
     },
     {
       "rel": "item",
