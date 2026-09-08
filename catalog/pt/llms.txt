@@ -5,5 +5,5 @@ Portugal field boundaries (2023, 2025) as fiboa GeoParquet + PMTiles, mirrored b
 - Latest: https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet
 - All editions: s3://ftw/harmonized-field-data/pt/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
 - CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: hcat:name_en, crop:code, metrics:area, metrics:perimeter, geometry, hcat:name, collection, hcat:code, block_id, id, bbox
+- Columns: id, crop:code, geometry, metrics:area, hcat:name_en, hcat:name, hcat:code, metrics:perimeter, block_id, collection, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/pt/README.md, agent guide https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/pt/collection.json

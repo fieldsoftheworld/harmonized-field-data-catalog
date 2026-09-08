@@ -13,7 +13,7 @@ Spain Castilla y León field boundaries in the [fiboa](https://github.com/fiboa/
 
 - **CRS is EPSG:4258, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `DN_OID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `C_REFREC`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv`, `admin:subdivision_code` = `CL`, `determination:datetime` = `2025-01-01T00:00:00Z` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
@@ -27,7 +27,7 @@ SELECT year, count(*) AS fields, 0 AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/es_cl/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2025 | 9109136 | 0
+-- 2025 | 9109125 | 0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -39,11 +39,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_cl/late
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(41.6580, -4.4259), 'EPSG:4326', 'EPSG:4258'), 500))
 LIMIT 5;
 -- id
--- 0
--- 0
--- 0
--- 0
--- 0
+-- 37006000005010501000010
+-- 37006000005010501000017
+-- 37006000005010501000003
+-- 37006000005010501000009
+-- 37006000005010501000002
 ```
 
 ## Related collections

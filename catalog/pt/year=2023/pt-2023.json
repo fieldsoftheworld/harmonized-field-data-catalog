@@ -43,7 +43,7 @@
   ],
   "properties": {
     "title": "Portugal — 2023",
-    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`pt-2023.parquet`, 4,805,469 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`pt-2023.parquet`, 4,805,442 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2023-01-01T00:00:00Z",
     "end_datetime": "2023-01-01T00:00:00Z",
@@ -51,9 +51,9 @@
     "proj:code": "EPSG:3763",
     "table:columns": [
       {
-        "name": "hcat:name_en",
+        "name": "id",
         "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:code",
@@ -61,19 +61,19 @@
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "metrics:area",
         "type": "float",
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "metrics:perimeter",
-        "type": "float",
-        "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name",
@@ -81,24 +81,24 @@
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "block_id",
-        "type": "int64",
-        "description": "Field block identifier (source column `CUL_ID`, per the fiboa data survey)"
+        "name": "metrics:perimeter",
+        "type": "float",
+        "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "id",
+        "name": "block_id",
+        "type": "int64",
+        "description": "Crop field identifier (source column `OSA_ID`, per the fiboa data survey)"
+      },
+      {
+        "name": "collection",
         "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -107,7 +107,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 4805469,
+    "table:row_count": 4805442,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -122,19 +122,9 @@
       "roles": [
         "data"
       ],
-      "file:size": 1663257444,
-      "file:checksum": "1220fef79fe61880254fd4f3351689b9013a8edaf722d6dad5ebbe9c513f49c7790f",
+      "file:size": 1242593700,
+      "file:checksum": "1220e7669d9612a1a78e967e622259cf4994da4369fdc4f4a44f036b98b216cf6f41",
       "proj:code": "EPSG:3763"
-    },
-    "visual": {
-      "href": "./pt-2023.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Portugal 2023 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 684452210,
-      "file:checksum": "1220ec9dd9dc0571f0ee9d72b5644c34121b2e5eda9bc5670d6494a57c039b1f3aa5"
     }
   },
   "links": [

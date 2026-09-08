@@ -68,34 +68,34 @@
   },
   "table:columns": [
     {
-      "name": "crop:name",
-      "type": "large_string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "crop:name_en",
-      "type": "large_string",
-      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
       "name": "id",
-      "type": "large_string",
+      "type": "string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "crop:name_en",
+      "type": "string",
+      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "crop:code",
-      "type": "large_string",
+      "type": "string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "collection",
+      "type": "string",
+      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -104,7 +104,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 9109136,
+  "table:row_count": 9109125,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -125,8 +125,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 3003290110,
-      "file:checksum": "1220bcad31f9bffc304e6bd4bc9fa6f7848a0c8da7ee661c75519f354d4a06b55b20",
+      "file:size": 2650751288,
+      "file:checksum": "1220b3c2c1d027b7aa5cb1b7d87b3752542f33ddb4d54539c20887aefea769b577ea",
       "proj:code": "EPSG:4258"
     },
     "style-outline": {
@@ -148,8 +148,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 923324112,
-      "file:checksum": "1220a491024d826ea25b28753d9e9f997c450033904731a5084c30d8206037da5740"
+      "file:size": 1114283108,
+      "file:checksum": "1220aba03071822177a011d18dba5d6c089d771d2c2c071c036bfc1e6fe1b58c7b98"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -231,15 +231,15 @@
       "title": "Spain Castilla y León — 2025"
     }
   ],
-  "updated": "2026-08-28T18:34:55Z",
+  "updated": "2026-09-08T14:44:45Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_cl": [
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   }
 }

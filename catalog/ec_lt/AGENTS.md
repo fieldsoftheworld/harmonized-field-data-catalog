@@ -14,7 +14,7 @@ Lithuania - Eurocrops 2021 field boundaries in the [fiboa](https://github.com/fi
 - **CRS is EPSG:4326, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `Shape_Area`. Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `NMA_ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`lt_2021.csv`) have `NULL`.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/lt_2021.csv` (2021 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
@@ -57,11 +57,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_lt/late
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(55.1742, 23.9572), 'EPSG:4326', 'EPSG:4326'), 500))
 LIMIT 5;
 -- id | m2
--- 1968865 | 51494.0
--- 1968865 | 148013.0
--- 1968865 | 98905.0
--- 1968865 | 34961.0
--- 1968865 | 118523.0
+-- 378458 | 51494.0
+-- 378462 | 148013.0
+-- 378454 | 98905.0
+-- 378450 | 34961.0
+-- 378469 | 118523.0
 ```
 
 ## Related collections

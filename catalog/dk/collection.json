@@ -68,14 +68,14 @@
   },
   "table:columns": [
     {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "collection",
       "type": "string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:name",
-      "type": "string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "geometry",
@@ -83,19 +83,14 @@
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "hcat:name",
-      "type": "string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:name_en",
+      "name": "crop:name",
       "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "crop:code",
@@ -103,14 +98,19 @@
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -119,7 +119,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 604198,
+  "table:row_count": 604689,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -140,8 +140,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 482593865,
-      "file:checksum": "1220b086555dffbe4b739a80ce1454451de5295d3106633a471b2d55d290e633487e",
+      "file:size": 329381963,
+      "file:checksum": "1220fd47d239bcd6e3a9746d824cd9bedf45868f1ed94001c259b53d382fa7c5f071",
       "proj:code": "EPSG:25832"
     },
     "style-hcat-crops": {
@@ -185,8 +185,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 247612253,
-      "file:checksum": "12204599e0e22de720cd33b7a01d47afbd1cd8d02cc47cb32e08343c58736f9847f3"
+      "file:size": 255298606,
+      "file:checksum": "1220203d198defe43a177f22f798b64140a55e6c0bf3bca2463fec7967f855303808"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -370,16 +370,16 @@
       "title": "Denmark — 2026"
     }
   ],
-  "updated": "2026-08-28T18:00:31Z",
+  "updated": "2026-09-08T16:20:55Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "dk": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   }
 }

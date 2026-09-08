@@ -14,9 +14,10 @@ Denmark field boundaries in the [fiboa](https://github.com/fiboa/specification) 
 - **CRS is EPSG:25832, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `IMK_areal` (hectares × 10 000). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `Marknr`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`dk_2019.csv`) have `NULL`.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `DK`, `determination:datetime` = `2026-01-01T00:00:00Z`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/dk_2019.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- `id` differs by edition: from 2014 it is the application and the field number within it (`Journalnr:Marknr`), which identifies a field; before that the source names only the applicant, and that pair repeats — 5,124 keys cover 11,534 of the 678,347 fields of 2008 — so there `id` is a row number. A new application number is issued every year either way, so no id follows a field across editions. The older editions also carry fewer attributes: 2008 and 2009 name no crop at all, and the field block (`Markblok`) starts in 2016.
 
 ## Tested queries
 
@@ -29,14 +30,14 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/dk/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2008 | 678957 | 2751300.0
--- 2009 | 476088 | 2000904.0
--- 2010 | 644670 | 2731338.0
--- 2011 | 625273 | 2703844.0
--- 2012 | 618150 | 2690710.0
--- 2013 | 615237 | 2687338.0
+-- 2008 | 678972 | 2751365.0
+-- 2009 | 476108 | 2001068.0
+-- 2010 | 644685 | 2731393.0
+-- 2011 | 625291 | 2703892.0
+-- 2012 | 618151 | 2690711.0
+-- 2013 | 615238 | 2687338.0
 -- 2014 | 604312 | 2670783.0
--- 2015 | 599008 | 2675575.0
+-- 2015 | 598938 | 2675428.0
 -- ... 11 more rows
 ```
 
@@ -49,11 +50,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/dk/latest/
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330101 | spring_barley | 161476 | 1250832.0
--- 330109 | plants_harvested_green | 85970 | 416634.0
--- 330200 | pasture_meadow_grassland_grass | 135905 | 251577.0
--- 330106 | winter_rapeseed_rape | 19003 | 188662.0
--- 330111 | fallow_land_not_crop | 107834 | 138440.0
+-- 330101 | spring_barley | 161753 | 1251267.0
+-- 330109 | plants_harvested_green | 86224 | 417015.0
+-- 330200 | pasture_meadow_grassland_grass | 136023 | 251666.0
+-- 330106 | winter_rapeseed_rape | 19029 | 188761.0
+-- 330111 | fallow_land_not_crop | 107721 | 138174.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

@@ -14,7 +14,7 @@ Portugal field boundaries in the [fiboa](https://github.com/fiboa/specification)
 - **CRS is EPSG:4326, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `Shape_Area`. Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `OSA_ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `CUL_ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/pt/pt.csv`) have `NULL`.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `PT`, `determination:datetime` = `2025-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/pt/pt.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
@@ -29,7 +29,7 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/pt/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2023 | 4805469 | 4090352.0
+-- 2023 | 4805442 | 4090352.0
 -- 2025 | 3571255 | 3622080.0
 ```
 
@@ -58,11 +58,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/pt/latest/
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(37.3895, -18.7287), 'EPSG:4326', 'EPSG:4326'), 500))
 LIMIT 5;
 -- id | m2
--- 40304636 | 6432.0
--- 28001495 | 2202.0
--- 45931150 | 2456.0
--- 45931224 | 2370.0
--- 30496114 | 4033.0
+-- 203575 | 6432.0
+-- 8464487 | 2202.0
+-- 1080533 | 2456.0
+-- 1080532 | 2370.0
+-- 203574 | 4033.0
 ```
 
 ## Related collections
