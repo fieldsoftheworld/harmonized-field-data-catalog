@@ -741,12 +741,15 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     config = publish_config()
     s3_base = glob_base(config)
     n_fields = sum(c.get("table:row_count") or 0 for c in collections)
+    editions = [read_json(p) for p in sorted(CATALOG_DIR.glob("*/year=*/*.json"))]
+    n_field_years = sum(i.get("properties", {}).get("table:row_count") or 0 for i in editions)
     countries = sorted({c["id"].split("_")[0].upper() for c in collections})
     description = (
         f"Official, non-AI field boundary datasets — typically published by governments from their agricultural "
         f"subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa]({FIBOA_SPEC}) schema "
         f"with [fiboa-cli]({FIBOA_CLI_REPO}) and republished as cloud-native GeoParquet and PMTiles. "
-        f"{len(collections)} collections ({', '.join(countries)}), {fmt_int(n_fields)} fields in their latest editions. "
+        f"{len(collections)} collections ({', '.join(countries)}), {fmt_int(n_fields)} fields in their latest editions, "
+        f"and {fmt_int(n_field_years)} across all {len(editions)} editions together, counting a field once per edition it appears in. "
         f"Each collection is one source dataset, partitioned by edition year; `{s3_base}/*/latest/*.parquet` reads the newest "
         f"edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [{manifest.host['name']}]({manifest.host['url']}) on "
         f"[Source Cooperative]({human_base}); the metadata is maintained in the "
