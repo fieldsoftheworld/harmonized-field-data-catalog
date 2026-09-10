@@ -12,7 +12,7 @@
   ],
   "id": "fi",
   "title": "Finnish Crop Fields (Maatalousmaa)",
-  "description": "The Finnish Food Authority (FFA) since 2020 produces spatial data sets,\nmore specifically in this context the \"Field parcel register\" and \"Agricultural parcel containing spatial data\".\nA set called \"Agricultural land: arable land, permanent grassland or permanent crop (land use)\".\n\nThis collection holds 1 edition (2023), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/fi/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2023). Geometries are kept in the source CRS (EPSG:3067). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/fi/AGENTS.md).",
+  "description": "The Finnish Food Authority (FFA) since 2020 produces spatial data sets,\nmore specifically in this context the \"Field parcel register\" and \"Agricultural parcel containing spatial data\".\nA set called \"Agricultural land: arable land, permanent grassland or permanent crop (land use)\".\n\nThis collection holds 6 editions (2020, 2021, 2022, 2023, 2024, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/fi/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:3067). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/fi/AGENTS.md).",
   "keywords": [
     "Finland",
     "INSPIRE",
@@ -45,18 +45,18 @@
     "spatial": {
       "bbox": [
         [
-          15.960133318035275,
-          59.655825359597934,
-          32.87346857753195,
-          69.98920150875063
+          15.95833629020524,
+          59.655753413063884,
+          32.873483439125884,
+          69.98920405095586
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2023-01-01T00:00:00Z",
-          "2023-01-01T00:00:00Z"
+          "2020-01-01T00:00:00Z",
+          "2025-01-01T00:00:00Z"
         ]
       ]
     }
@@ -68,24 +68,9 @@
   },
   "table:columns": [
     {
-      "name": "block_id",
-      "type": "string",
-      "description": "Official Identifier (source column `PERUSLOHKOTUNNUS`, per the fiboa data survey)"
-    },
-    {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:name",
-      "type": "string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "geometry",
@@ -98,14 +83,24 @@
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "hcat:name_en",
-      "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "name": "collection",
+      "type": "string",
+      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "crop:code",
@@ -113,9 +108,14 @@
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "collection",
+      "name": "hcat:name_en",
       "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "block_id",
+      "type": "string",
+      "description": "Official Identifier (source column `PERUSLOHKOTUNNUS`, per the fiboa data survey)"
     },
     {
       "name": "bbox",
@@ -124,7 +124,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 1006588,
+  "table:row_count": 985486,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -134,19 +134,19 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 6,
   "partition:glob": "s3://ftw/harmonized-field-data/fi/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/fi.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Finland — latest edition (2023) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2023/fi.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "title": "Finland — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/fi-2025.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 287452424,
-      "file:checksum": "1220894a3678bf93f127209598c3110783cb8cf18939b8ca70a2494a342c74cde7ff",
+      "file:size": 286826199,
+      "file:checksum": "122073bbf64379098678d43218232fd80d0a3c6437d37f35b318eec6c4aa2bb33e70",
       "proj:code": "EPSG:3067"
     },
     "style-hcat-crops": {
@@ -158,8 +158,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2290,
-      "file:checksum": "1220f4611302ab38e91502809600c3ab65879127a7f6d00c01f0237b4c06126090bb"
+      "file:size": 2293,
+      "file:checksum": "12209cae54d3a099033d87b6188f197208bb72c20c85e55988ea474319c551e5981c"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -168,9 +168,9 @@
       "roles": [
         "style"
       ],
-      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1166,
-      "file:checksum": "12206eb145160e0daba9022022d64b8525730e920a068327e4b73a404c14709f87b4"
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1208,
+      "file:checksum": "12205395feda802d149f606152e4078aea65f28eeac28f38ac2e5ac0cd1c05607c89"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -180,18 +180,18 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 722,
-      "file:checksum": "12202c72a84c86dc67d334bb36ef98c2e85b82aee18d6364ea6de4f550a3818ee631"
+      "file:size": 727,
+      "file:checksum": "122005f6a81c1ae6f37684e2b2dd1b6bb14ddc5475c15b000b279c7e7662557782c0"
     },
     "visual": {
-      "href": "./year=2023/fi.pmtiles",
+      "href": "./year=2025/fi-2025.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Finland — latest edition (2023) (PMTiles)",
+      "title": "Finland — latest edition (2025) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 157941095,
-      "file:checksum": "1220ed1330920f6d9613dd7870856c473adc0d173ddb470559b584e06cfe03d1a0cf"
+      "file:size": 157441813,
+      "file:checksum": "122064afc291ba2534cc537d0263cbcc0800db59befec92cbc01a163d17d13f51adf"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -235,7 +235,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2023/fi.pmtiles",
+      "href": "./year=2025/fi-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -262,21 +262,51 @@
     },
     {
       "rel": "item",
+      "href": "./year=2020/fi-2020.json",
+      "type": "application/geo+json",
+      "title": "Finland — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/fi-2021.json",
+      "type": "application/geo+json",
+      "title": "Finland — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/fi-2022.json",
+      "type": "application/geo+json",
+      "title": "Finland — 2022"
+    },
+    {
+      "rel": "item",
       "href": "./year=2023/fi-2023.json",
       "type": "application/geo+json",
       "title": "Finland — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/fi-2024.json",
+      "type": "application/geo+json",
+      "title": "Finland — 2024"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/fi-2025.json",
+      "type": "application/geo+json",
+      "title": "Finland — 2025"
     }
   ],
-  "updated": "2026-09-08T06:47:55Z",
+  "updated": "2026-09-10T11:37:28Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "fi": [
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "Finnish Food Authority"

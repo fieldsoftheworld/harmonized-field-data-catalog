@@ -7,18 +7,18 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "fi-2023",
+  "id": "fi-2025",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
           15.960133318035275,
-          59.655825359597934
+          59.65585491405865
         ],
         [
           32.87346857753195,
-          59.655825359597934
+          59.65585491405865
         ],
         [
           32.87346857753195,
@@ -30,24 +30,24 @@
         ],
         [
           15.960133318035275,
-          59.655825359597934
+          59.65585491405865
         ]
       ]
     ]
   },
   "bbox": [
     15.960133318035275,
-    59.655825359597934,
+    59.65585491405865,
     32.87346857753195,
     69.98920150875063
   ],
   "properties": {
-    "title": "Finland — 2023",
-    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`fi-2023.parquet`, 1,006,588 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "title": "Finland — 2025",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`fi-2025.parquet`, 985,486 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2023-01-01T00:00:00Z",
-    "end_datetime": "2023-01-01T00:00:00Z",
-    "year": 2023,
+    "start_datetime": "2025-01-01T00:00:00Z",
+    "end_datetime": "2025-01-01T00:00:00Z",
+    "year": 2025,
     "proj:code": "EPSG:3067",
     "table:columns": [
       {
@@ -107,7 +107,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 1006588,
+    "table:row_count": 985486,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -116,15 +116,25 @@
   "collection": "fi",
   "assets": {
     "data": {
-      "href": "./fi-2023.parquet",
+      "href": "./fi-2025.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Finland 2023 (GeoParquet)",
+      "title": "Finland 2025 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 287452422,
-      "file:checksum": "1220361617fc1d115e5b1359f90e2b9bd153005852aa09679c51d570e0a9b7fc6900",
+      "file:size": 286826199,
+      "file:checksum": "122073bbf64379098678d43218232fd80d0a3c6437d37f35b318eec6c4aa2bb33e70",
       "proj:code": "EPSG:3067"
+    },
+    "visual": {
+      "href": "./fi-2025.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Finland 2025 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 157441813,
+      "file:checksum": "122064afc291ba2534cc537d0263cbcc0800db59befec92cbc01a163d17d13f51adf"
     }
   },
   "links": [

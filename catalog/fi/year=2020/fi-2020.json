@@ -7,47 +7,47 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "fi-2023",
+  "id": "fi-2020",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          15.960133318035275,
-          59.655825359597934
+          15.95833629020524,
+          59.66822024215352
         ],
         [
-          32.87346857753195,
-          59.655825359597934
+          32.873483439125884,
+          59.66822024215352
         ],
         [
-          32.87346857753195,
-          69.98920150875063
+          32.873483439125884,
+          69.98920405095586
         ],
         [
-          15.960133318035275,
-          69.98920150875063
+          15.95833629020524,
+          69.98920405095586
         ],
         [
-          15.960133318035275,
-          59.655825359597934
+          15.95833629020524,
+          59.66822024215352
         ]
       ]
     ]
   },
   "bbox": [
-    15.960133318035275,
-    59.655825359597934,
-    32.87346857753195,
-    69.98920150875063
+    15.95833629020524,
+    59.66822024215352,
+    32.873483439125884,
+    69.98920405095586
   ],
   "properties": {
-    "title": "Finland — 2023",
-    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`fi-2023.parquet`, 1,006,588 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "title": "Finland — 2020",
+    "description": "Field boundaries of the 2020 edition of this dataset, one GeoParquet file (`fi-2020.parquet`, 1,088,750 fields) and its PMTiles. Partition `year=2020` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2023-01-01T00:00:00Z",
-    "end_datetime": "2023-01-01T00:00:00Z",
-    "year": 2023,
+    "start_datetime": "2020-01-01T00:00:00Z",
+    "end_datetime": "2020-01-01T00:00:00Z",
+    "year": 2020,
     "proj:code": "EPSG:3067",
     "table:columns": [
       {
@@ -107,7 +107,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 1006588,
+    "table:row_count": 1088750,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -116,14 +116,14 @@
   "collection": "fi",
   "assets": {
     "data": {
-      "href": "./fi-2023.parquet",
+      "href": "./fi-2020.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Finland 2023 (GeoParquet)",
+      "title": "Finland 2020 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 287452422,
-      "file:checksum": "1220361617fc1d115e5b1359f90e2b9bd153005852aa09679c51d570e0a9b7fc6900",
+      "file:size": 299287701,
+      "file:checksum": "122023f010b3f530315c3046e0b65cfa00a7248b489e0e5ebf7f8d1429e58879e9e7",
       "proj:code": "EPSG:3067"
     }
   },
