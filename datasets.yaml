@@ -70,7 +70,7 @@ datasets:
     year_source: Year in the source download name (2022).
     keywords: [Belgium, Wallonia, parcellaire agricole anonyme, IACS]
   si:
-    years: ['2024']
+    years: ['2019', '2020', '2021', '2022', '2023', '2024']
     keywords: [Slovenia, GERK, crop fields]
   it_1:
     years: ['2023']
