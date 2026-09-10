@@ -1,13 +1,13 @@
 # Agent guidance — Lithuania crop fields
 
-Lithuania field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Lithuania field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 2 editions (2024, 2025). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/lt/latest/lt.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/lt/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/lt/year=2024/lt.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/lt/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/lt/year=2025/lt-2025.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/lt/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/lt/year=2024/lt.pmtiles`, layer `lt`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/lt/year=2025/lt-2025.pmtiles`, layer `lt`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
@@ -16,7 +16,8 @@ Lithuania field boundaries in the [fiboa](https://github.com/fiboa/specification
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `field_id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`lt_2021.csv`) have `NULL`.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/lt_2021.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2025-01-01T00:00:00Z`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/lt_2021.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- The source is the Harmonized IACS inventory of Europe-LAND (Jänicke et al. 2025), which republishes the Lithuanian GSA data; the national agency NMA is the producer. Version 1.3 of the inventory is the first to carry 2025.
 
 ## Tested queries
 
@@ -30,6 +31,7 @@ FROM read_parquet('s3://ftw/harmonized-field-data/lt/year=*/*.parquet', hive_par
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
 -- 2024 | 1213522 | 2912902.0
+-- 2025 | 1156767 | 2915116.0
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
@@ -41,11 +43,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/lt/latest/
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330101 | winter_unspecified_cereals | 377916 | 1531324.0
--- 330200 | pasture_meadow_grassland_grass | 454583 | 784434.0
--- 330106 | rapeseed_rape | 54668 | 340026.0
--- 330111 | fallow_land_not_crop | 25101 | 52481.0
--- 330199 | other_arable_land_crops | 47920 | 51897.0
+-- 330101 | winter_unspecified_cereals | 373055 | 1533190.0
+-- 330200 | pasture_meadow_grassland_grass | 455270 | 781350.0
+-- 330106 | rapeseed_rape | 61180 | 367204.0
+-- 330199 | other_arable_land_crops | 45789 | 52298.0
+-- 330115 | buckwheat | 12360 | 37970.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

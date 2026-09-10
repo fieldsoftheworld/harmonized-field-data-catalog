@@ -7,7 +7,7 @@
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2024/lt.pmtiles"
+      "url": "pmtiles://../year=2025/lt-2025.pmtiles"
     }
   },
   "layers": [
@@ -39,12 +39,12 @@
             "Oats",
             3301010600,
             "Grain maize corn popcorn",
-            3301110000,
-            "Fallow land not crop",
             3301990000,
             "Other arable land crops",
             3301150200,
             "Buckwheat",
+            3301110000,
+            "Fallow land not crop",
             3399000000,
             "Not known and other",
             3306000000,
@@ -65,11 +65,11 @@
           "#fb9a99",
           "Grain maize corn popcorn",
           "#e31a1c",
-          "Fallow land not crop",
-          "#fdbf6f",
           "Other arable land crops",
-          "#ff7f00",
+          "#fdbf6f",
           "Buckwheat",
+          "#ff7f00",
+          "Fallow land not crop",
           "#6a3d9a",
           "Not known and other",
           "#ffff99",
