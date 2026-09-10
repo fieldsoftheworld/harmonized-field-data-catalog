@@ -12,7 +12,7 @@
   ],
   "id": "pt",
   "title": "Field boundaries for Portugal",
-  "description": "Open field boundaries (identificação de parcelas) from Portugal\n\nThis collection holds 2 editions (2023, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/pt/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md).",
+  "description": "Open field boundaries (identificação de parcelas) from Portugal\n\nThis collection holds 5 editions (2020, 2021, 2022, 2023, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/pt/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md).",
   "keywords": [
     "IFAP",
     "INSPIRE",
@@ -46,16 +46,16 @@
       "bbox": [
         [
           -31.266459564257445,
-          32.63587807681182,
+          32.63478629055488,
           -6.173148404290481,
-          42.143204599812464
+          42.14320459987834
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2023-01-01T00:00:00Z",
+          "2020-01-01T00:00:00Z",
           "2025-01-01T00:00:00Z"
         ]
       ]
@@ -135,7 +135,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 2,
+  "partition:file_count": 5,
   "partition:glob": "s3://ftw/harmonized-field-data/pt/year=*/*.parquet",
   "assets": {
     "data": {
@@ -269,6 +269,24 @@
     },
     {
       "rel": "item",
+      "href": "./year=2020/pt-2020.json",
+      "type": "application/geo+json",
+      "title": "Portugal — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/pt-2021.json",
+      "type": "application/geo+json",
+      "title": "Portugal — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/pt-2022.json",
+      "type": "application/geo+json",
+      "title": "Portugal — 2022"
+    },
+    {
+      "rel": "item",
       "href": "./year=2023/pt-2023.json",
       "type": "application/geo+json",
       "title": "Portugal — 2023"
@@ -280,16 +298,16 @@
       "title": "Portugal — 2025"
     }
   ],
-  "updated": "2026-09-08T07:11:00Z",
+  "updated": "2026-09-09T16:17:19Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "pt": [
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   }
 }
