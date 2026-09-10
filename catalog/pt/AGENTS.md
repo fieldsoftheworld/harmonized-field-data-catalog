@@ -1,6 +1,6 @@
 # Agent guidance — Field boundaries for Portugal
 
-Portugal field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 2 editions (2023, 2025). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Portugal field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 5 editions (2020, 2021, 2022, 2023, 2025). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -17,6 +17,7 @@ Portugal field boundaries in the [fiboa](https://github.com/fiboa/specification)
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `CUL_ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/pt/pt.csv`) have `NULL`.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `PT`, `determination:datetime` = `2025-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/pt/pt.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- The 2020 edition carries no crop code for Madeira or the Azores (199,123 of its 4.77M fields): IFAP ships one crop table per campaign and the 2020 one covers the mainland only, so those fields join to nothing. The 2021 table does cover the islands (92% of their fields match), and 2022 carries the code on the layer itself.
 
 ## Tested queries
 
@@ -29,6 +30,9 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/pt/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
+-- 2020 | 4766789 | 4208349.0
+-- 2021 | 4882314 | 4230766.0
+-- 2022 | 4953834 | 4254173.0
 -- 2023 | 4805442 | 4090352.0
 -- 2025 | 3571255 | 3622080.0
 ```

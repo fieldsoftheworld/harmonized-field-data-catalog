@@ -35,7 +35,7 @@ host:
 
 datasets:
   be_vlg:
-    years: ["2023", "2024", "2025", "2026"]
+    years: ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"]
     keywords: [Belgium, Flanders, Landbouwgebruikspercelen, IACS, crop fields]
   de_nrw:
     year: 2026
@@ -224,7 +224,12 @@ datasets:
     years: ['2025']
     keywords: [Spain, FEGA, SIGPAC, declared crops, cultivo declarado]
   pt:
-    years: ['2023', '2025']
+    years: ['2020', '2021', '2022', '2023', '2025']
     keywords: [Portugal, IFAP, crop fields, INSPIRE]
+    notes: >-
+      The 2020 edition carries no crop code for Madeira or the Azores (199,123 of its
+      4.77M fields): IFAP ships one crop table per campaign and the 2020 one covers the
+      mainland only, so those fields join to nothing. The 2021 table does cover the
+      islands (92% of their fields match), and 2022 carries the code on the layer itself.
     row_count_tolerance: 0.3  # 2025 holds 3.57M parcels against 4.81M in 2023, upstream: the same
                               # mainland area comes as 30% fewer, 21% larger parcels (avg 8,512 -> 10,335 m2)

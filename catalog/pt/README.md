@@ -4,7 +4,7 @@ Open field boundaries (identificação de parcelas) from Portugal
 
 - **Source data provider:** [IPAP - Instituto de Financiamento da Agricultura e Pescas](https://www.ifap.pt/isip/ows/)
 - **License:** other — [No conditions apply](https://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply) (converter: `No conditions apply <https://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply>`)
-- **Editions:** 2023, 2025 (one GeoParquet per year)
+- **Editions:** 2020, 2021, 2022, 2023, 2025 (one GeoParquet per year)
 - **Fields in the latest edition (2025):** 3,571,255
 - **Coordinate reference system:** EPSG:4326 (as published by the source; not reprojected)
 - **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.16 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/pt.py))
@@ -16,6 +16,9 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
+| 2020 | 4,766,789 | [1.6 GB](https://data.source.coop/ftw/harmonized-field-data/pt/year=2020/pt-2020.parquet) | — | [pt-2020.json](https://data.source.coop/ftw/harmonized-field-data/pt/year=2020/pt-2020.json) |
+| 2021 | 4,882,314 | [1.6 GB](https://data.source.coop/ftw/harmonized-field-data/pt/year=2021/pt-2021.parquet) | — | [pt-2021.json](https://data.source.coop/ftw/harmonized-field-data/pt/year=2021/pt-2021.json) |
+| 2022 | 4,953,834 | [1.6 GB](https://data.source.coop/ftw/harmonized-field-data/pt/year=2022/pt-2022.parquet) | — | [pt-2022.json](https://data.source.coop/ftw/harmonized-field-data/pt/year=2022/pt-2022.json) |
 | 2023 | 4,805,442 | [1.2 GB](https://data.source.coop/ftw/harmonized-field-data/pt/year=2023/pt-2023.parquet) | — | [pt-2023.json](https://data.source.coop/ftw/harmonized-field-data/pt/year=2023/pt-2023.json) |
 | 2025 | 3,571,255 | [1.3 GB](https://data.source.coop/ftw/harmonized-field-data/pt/year=2025/pt-2025.parquet) | [540.0 MB](https://data.source.coop/ftw/harmonized-field-data/pt/year=2025/pt-2025.pmtiles) | [pt-2025.json](https://data.source.coop/ftw/harmonized-field-data/pt/year=2025/pt-2025.json) |
 
@@ -59,8 +62,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/pt/latest/
 
 This catalog is a mirror: the data is produced and licensed by [IPAP - Instituto de Financiamento da Agricultura e Pescas](https://www.ifap.pt/isip/ows/) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
 
-- 2023: converted 2026-09-08 from <https://www.ifap.pt/isip/ows/resources/2023/Continente.gpkg>
-- 2025: converted 2026-09-08 from <https://www.ifap.pt/isip/ows/resources/2025/culturas.gpkg>
+- 2020: converted 2026-09-08 from <https://www.ifap.pt/isip/ows/resources/2017-2020/2020.zip>
+- 2021: converted 2026-09-09 from <https://www.ifap.pt/isip/ows/resources/2021/2021.zip>
+- 2022: converted 2026-09-08 from <https://www.ifap.pt/isip/ows/resources/2022/2022.zip>
+- 2023: converted 2026-09-09 from <https://www.ifap.pt/isip/ows/resources/2023/Continente.gpkg>
+- 2025: converted 2026-09-09 from <https://www.ifap.pt/isip/ows/resources/2025/culturas.gpkg>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 
