@@ -94,9 +94,9 @@ datasets:
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Spain, Madrid, crop fields]
   lt:
-    year: 2024
-    year_source: Year in the source download name (2024).
+    years: ['2024', '2025']
     keywords: [Lithuania, crop fields, IACS]
+    notes: "The source is the Harmonized IACS inventory of Europe-LAND (Jänicke et al. 2025), which republishes the Lithuanian GSA data; the national agency NMA is the producer. Version 1.3 of the inventory is the first to carry 2025."
   ec_ro:
     year: 2026
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
