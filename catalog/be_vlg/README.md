@@ -19,7 +19,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 |---|---:|---|---|---|
 | 2018 | 515,747 | [85.5 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2018/be_vlg-2018.parquet) | — | [be_vlg-2018.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2018/be_vlg-2018.json) |
 | 2019 | 521,395 | [84.7 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2019/be_vlg-2019.parquet) | — | [be_vlg-2019.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2019/be_vlg-2019.json) |
-| 2020 | 525,851 | [91.9 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2020/be_vlg-2020.parquet) | — | [be_vlg-2020.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2020/be_vlg-2020.json) |
+| 2020 | 525,851 | [86.1 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2020/be_vlg-2020.parquet) | — | [be_vlg-2020.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2020/be_vlg-2020.json) |
 | 2021 | 591,899 | [91.3 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2021/be_vlg-2021.parquet) | — | [be_vlg-2021.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2021/be_vlg-2021.json) |
 | 2022 | 585,076 | [91.3 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2022/be_vlg-2022.parquet) | — | [be_vlg-2022.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2022/be_vlg-2022.json) |
 | 2023 | 588,192 | [91.3 MB](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2023/be_vlg-2023.parquet) | — | [be_vlg-2023.json](https://data.source.coop/ftw/harmonized-field-data/be_vlg/year=2023/be_vlg-2023.json) |
