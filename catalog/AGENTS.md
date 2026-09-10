@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2023 | at | 2947754
 -- 2024 | at | 2956449
 -- 2025 | at | 2944405
--- ... 160 more rows
+-- ... 165 more rows
 ```
 
 ## Join keys

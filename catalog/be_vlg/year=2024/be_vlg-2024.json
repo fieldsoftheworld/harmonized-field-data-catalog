@@ -51,29 +51,19 @@
     "proj:code": "EPSG:31370",
     "table:columns": [
       {
+        "name": "block_id",
+        "type": "string",
+        "description": "Unique identification number for the field. (source column `REF_ID`, per the fiboa data survey)"
+      },
+      {
         "name": "hcat:name",
-        "type": "large_string",
+        "type": "string",
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "id",
-        "type": "large_string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "large_string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "large_binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:code",
@@ -81,19 +71,34 @@
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "metrics:area",
         "type": "float",
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "crop:name",
-        "type": "large_string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "large_string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -105,7 +110,7 @@
     "table:row_count": 589749,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.2.16"
     }
   },
   "collection": "be_vlg",
@@ -117,19 +122,9 @@
       "roles": [
         "data"
       ],
-      "file:size": 118653504,
-      "file:checksum": "12206e2a7b1d23bccc00de356a732a53c9a27a3b9923e18d4f4963587102bba25c2f",
+      "file:size": 95460734,
+      "file:checksum": "1220e33decbd055f336a59e5087aecf01d18eeb3fa79b8b0bc5e3be7ae84d0b7435d",
       "proj:code": "EPSG:31370"
-    },
-    "visual": {
-      "href": "./be_vlg-2024.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Belgium, Flanders 2024 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 63036620,
-      "file:checksum": "12209361238a187988deab82d461bda3f375a7e22d16b9fd9499faa78e17ae9c63e4"
     }
   },
   "links": [

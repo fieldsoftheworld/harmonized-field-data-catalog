@@ -7,18 +7,18 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "be_vlg-2025",
+  "id": "be_vlg-2022",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
           2.531029700947351,
-          50.67421014655563
+          50.67421149464259
         ],
         [
           5.932736829503416,
-          50.67421014655563
+          50.67421149464259
         ],
         [
           5.932736829503416,
@@ -30,24 +30,24 @@
         ],
         [
           2.531029700947351,
-          50.67421014655563
+          50.67421149464259
         ]
       ]
     ]
   },
   "bbox": [
     2.531029700947351,
-    50.67421014655563,
+    50.67421149464259,
     5.932736829503416,
     51.49545715218194
   ],
   "properties": {
-    "title": "Belgium, Flanders — 2025",
-    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`be_vlg-2025.parquet`, 594,732 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
+    "title": "Belgium, Flanders — 2022",
+    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`be_vlg-2022.parquet`, 585,076 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2025-01-01T00:00:00Z",
-    "end_datetime": "2025-01-01T00:00:00Z",
-    "year": 2025,
+    "start_datetime": "2022-01-01T00:00:00Z",
+    "end_datetime": "2022-01-01T00:00:00Z",
+    "year": 2022,
     "proj:code": "EPSG:31370",
     "table:columns": [
       {
@@ -107,7 +107,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 594732,
+    "table:row_count": 585076,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -116,14 +116,14 @@
   "collection": "be_vlg",
   "assets": {
     "data": {
-      "href": "./be_vlg-2025.parquet",
+      "href": "./be_vlg-2022.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Belgium, Flanders 2025 (GeoParquet)",
+      "title": "Belgium, Flanders 2022 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 98395755,
-      "file:checksum": "122064e63620dff5f6b26fd00628d524e845f6af8f57562835de5e7d1c56e5dd4329",
+      "file:size": 95692939,
+      "file:checksum": "122090477d7d0351648752d9efd1e4cb0f91b9910dd2d33a6b05777029394ec334c5",
       "proj:code": "EPSG:31370"
     }
   },
