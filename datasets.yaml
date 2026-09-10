@@ -150,8 +150,7 @@ datasets:
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Latvia, Lauki, crop fields]
   fi:
-    year: 2023
-    year_source: Year in the source download name (2023).
+    years: ["2020", "2021", "2022", "2023", "2024", "2025"]
     keywords: [Finland, Maatalousmaa, crop fields, INSPIRE]
   hr:
     years: ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
