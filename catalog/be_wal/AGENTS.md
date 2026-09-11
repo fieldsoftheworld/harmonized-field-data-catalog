@@ -40,11 +40,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/be_wal/lat
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY fields DESC LIMIT 5;
 -- hcat_group | most_common_name | fields
--- 330200 | pasture_meadow_grassland_grass | 211473
--- 330101 | winter_common_soft_wheat | 51580
--- 330109 | green_silo_maize | 24064
--- 330103 | potatoes | 9902
--- 330129 | sugar_beet | 9507
+-- 330200 | pasture_meadow_grassland_grass | 211724
+-- 330101 | winter_common_soft_wheat | 55131
+-- 330109 | green_silo_maize | 26610
+-- 330103 | potatoes | 10061
+-- 330129 | sugar_beet | 9658
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

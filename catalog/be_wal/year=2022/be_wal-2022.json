@@ -17,11 +17,11 @@
           49.373050066309474
         ],
         [
-          6.467714341514046,
+          6.4677143415140534,
           49.373050066309474
         ],
         [
-          6.467714341514046,
+          6.4677143415140534,
           50.96552936628556
         ],
         [
@@ -38,7 +38,7 @@
   "bbox": [
     2.832560248361601,
     49.373050066309474,
-    6.467714341514046,
+    6.4677143415140534,
     50.96552936628556
   ],
   "properties": {
@@ -51,44 +51,44 @@
     "proj:code": "EPSG:3035",
     "table:columns": [
       {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "crop:code",
-        "type": "large_string",
+        "type": "string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "id",
-        "type": "large_string",
+        "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "geometry",
-        "type": "large_binary",
+        "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "hcat:name_en",
-        "type": "large_string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:name",
-        "type": "large_string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "large_string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -100,7 +100,7 @@
     "table:row_count": 341968,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.2.16"
     }
   },
   "collection": "be_wal",
@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 111495242,
-      "file:checksum": "12206678207d45a83d8981d80bb612cb8110d4756ca6919469cf2f588e11152b210c",
+      "file:size": 107607362,
+      "file:checksum": "122064e297c6e2587111d5d0984eee69711677d48971e569499b24567a61f9926ecd",
       "proj:code": "EPSG:3035"
     },
     "visual": {
@@ -123,8 +123,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 25420134,
-      "file:checksum": "1220c48c28a227b17e3ff02422d9d42499d93cf00af3d716a05c434f2dd0925a2f0e"
+      "file:size": 25425863,
+      "file:checksum": "1220fd95d9be7e0cadd0377ce8ce4a0b384e3d84a062c60b3f3a625edfc707700783"
     }
   },
   "links": [
