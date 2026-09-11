@@ -69,29 +69,14 @@
   },
   "table:columns": [
     {
-      "name": "group_code",
-      "type": "large_string",
-      "description": "Carried over from the source column `code_group`; the publisher documents no meaning for it."
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "geometry",
-      "type": "large_binary",
+      "type": "binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "hcat:code",
@@ -99,19 +84,39 @@
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "hcat:name_en",
-      "type": "large_string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
       "name": "hcat:name",
-      "type": "large_string",
+      "type": "string",
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "collection",
+      "type": "string",
+      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "group_code",
+      "type": "string",
+      "description": "Carried over from the source column `code_group`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "parcel_id",
+      "type": "string",
+      "description": "Source-specific column; the publisher documents no meaning for it."
     },
     {
       "name": "bbox",
@@ -141,8 +146,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 3398214205,
-      "file:checksum": "12204729756889904fc6f2202696fab6b81d0ca2a0e61334fd71fefef51db726f693",
+      "file:size": 2756572073,
+      "file:checksum": "122022828ce045d2cac9fbb049c31f310442561863981c45b8ee67c21bab9eeb254d",
       "proj:code": "EPSG:2154"
     },
     "style-hcat-crops": {
@@ -154,8 +159,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2426,
-      "file:checksum": "122039fd02a7ae1edb2f960ca431636be1462c5010d4ffb690491e0cae990f4f1133"
+      "file:size": 2398,
+      "file:checksum": "122030d53c7f018b38fb9f24beed552cec9ee55098840cd4bf10069f66f29f8072f2"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -186,8 +191,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 1175071406,
-      "file:checksum": "1220e9b9992abc18c282492478583ca614ba7691dc2a44e0626c074bc293631e9fbf"
+      "file:size": 1335741851,
+      "file:checksum": "12202784b9f278cbff10d8fe7328310cd8ad652839bb0dc8676292d91b8fa80f522d"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -305,16 +310,16 @@
       "title": "France — 2024"
     }
   ],
-  "updated": "2026-08-28T18:47:36Z",
+  "updated": "2026-09-11T04:06:33Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "fr": [
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "IGN - Original data from https://geoservices.ign.fr/rpg"

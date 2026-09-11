@@ -14,7 +14,7 @@ France field boundaries in the [fiboa](https://github.com/fiboa/specification) s
 - **CRS is EPSG:2154, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `surf_parc` (hectares × 10 000). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id_parcel`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`fr_2018.csv`) have `NULL`.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `FR`, `determination:datetime` = `2024-01-01T00:00:00Z`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/fr_2018.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
@@ -48,10 +48,10 @@ WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
 -- 330200 | pasture_meadow_grassland_grass | 3306744 | 9970448.0
--- 330101 | grain_maize_corn_popcorn | 2174756 | 9823933.0
--- 330106 | winter_rapeseed_rape | 429646 | 2354206.0
--- 330109 | temporary_grass | 924691 | 2085424.0
--- 330102 | legumes_dried_pulses_protein_crops | 195380 | 657069.0
+-- 330101 | grain_maize_corn_popcorn | 2176961 | 9828449.0
+-- 330106 | winter_rapeseed_rape | 444027 | 2386712.0
+-- 330109 | temporary_grass | 925684 | 2086899.0
+-- 330102 | legumes_dried_pulses_protein_crops | 237112 | 809699.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -63,11 +63,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/fr/latest/
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(46.0717, 2.5937), 'EPSG:4326', 'EPSG:2154'), 500))
 LIMIT 5;
 -- id | m2
--- 3562762 | 8100.0
--- 3631415 | 3300.0
--- 6755966 | 6800.0
--- 4696624 | 6800.0
--- 4552769 | 3600.0
+-- 55975 | 100.0
+-- 6275205 | 21800.0
+-- 5062293 | 13600.0
+-- 8665839 | 67300.0
+-- 3146542 | 5900.0
 ```
 
 ## Related collections
