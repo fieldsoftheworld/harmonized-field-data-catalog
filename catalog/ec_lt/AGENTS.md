@@ -15,8 +15,8 @@ Lithuania - Eurocrops 2021 field boundaries in the [fiboa](https://github.com/fi
 - **`metrics:area` is in square metres**, taken from the source column `Shape_Area`. Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`lt_2021.csv`) have `NULL`.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/lt_2021.csv` (2021 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/lt/lt_2021.csv`) have `NULL`.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `crop:code_list` = `https://fiboa.org/code/lt/lt_2021.csv` (2021 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -41,11 +41,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_lt/late
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330101 | winter_unspecified_cereals | 380345 | 1494753.0
+-- 330101 | winter_unspecified_cereals | 349080 | 1346739.0
+-- 330102 | legumes_dried_pulses_protein_crops | 31265 | 148014.0
 -- 330115 | buckwheat | 14811 | 50232.0
 -- 330107 | fresh_vegetables | 37020 | 15822.0
 -- 330129 | sugar_beet | 985 | 15766.0
--- 330302 | berries_berry_species | 6038 | 7350.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

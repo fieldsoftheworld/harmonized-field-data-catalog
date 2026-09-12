@@ -67,9 +67,24 @@
   },
   "table:columns": [
     {
-      "name": "hcat:name",
+      "name": "hcat:name_en",
       "type": "string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "metrics:perimeter",
+      "type": "float",
+      "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "geometry",
@@ -92,24 +107,9 @@
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "hcat:name_en",
+      "name": "hcat:name",
       "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "metrics:perimeter",
-      "type": "float",
-      "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -139,8 +139,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 210519340,
-      "file:checksum": "12206e849c9d31d1094ab88431f6028dea0ec67f216ede5114911561b4bc69ed030a",
+      "file:size": 210519587,
+      "file:checksum": "1220638e5d5cdfd2e570af336a535df8b092e427ec11b4736c43052a5c8ec77d2bdc",
       "proj:code": "EPSG:4326"
     },
     "style-hcat-crops": {
@@ -152,8 +152,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 9 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2066,
-      "file:checksum": "122048fdf01a9bfbd5fd01185bba26c4f70c53ffcd265cb7e1dca17cedd1d82cf7b2"
+      "file:size": 2082,
+      "file:checksum": "1220c48afe7b04ebe91faad2a8e1665dc8c1d81135d4e7bf148ee97e26b8fe0a3a71"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -184,8 +184,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 96203612,
-      "file:checksum": "1220d2c1f6274acb3408be57c355f3622f245c45c80455d264630a50cd4ec1d934d5"
+      "file:size": 95631439,
+      "file:checksum": "12206cc0ef6ab53fe4fb80b8ff7650b51253ac650b4df07a26fc9fd29ec81431ba14"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -255,7 +255,7 @@
       "title": "Lithuania - Eurocrops 2021 — 2021"
     }
   ],
-  "updated": "2026-09-08T06:38:00Z",
+  "updated": "2026-09-12T11:37:28Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
