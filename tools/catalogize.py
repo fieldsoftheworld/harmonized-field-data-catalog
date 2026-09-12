@@ -638,8 +638,12 @@ def collection_docs(
         lic_md += f" (converter: `{meta['license']}`)"
     glob = collection["partition:glob"]
     latest_url = f"{public_base}/{ds.id}/latest/{ds.id}.parquet"
-    columns = collection["table:columns"]
-    hcat_cols = any(c["name"] == "hcat:code" for c in columns)
+    columns = collection["table:columns"]  # the union over the editions
+    # the queries below read the latest edition, so they ask what it carries:
+    # a column an older edition has is not there to select
+    latest_columns = {c["name"] for c in latest.data_asset.get("table:columns", [])}
+    has_area = "metrics:area" in latest_columns
+    hcat_cols = "hcat:code" in latest_columns
     software = latest.data_asset.get("processing:software", {})
     software_md = ", ".join(f"{k} {v}" for k, v in software.items()) or "fiboa-cli"
 
@@ -673,7 +677,7 @@ def collection_docs(
         for k, v in latest.collection_props.items():
             lines.append(f"- `{k}`: `{v}`")
     lines += ["", "## Access", "", "Query the published files in place with DuckDB; nothing needs downloading first.", ""]
-    q1 = f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT count(*) AS fields, round(sum(\"metrics:area\") / 1e4) AS hectares\nFROM read_parquet('{latest_url}');" if any(c["name"] == "metrics:area" for c in columns) else f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT count(*) AS fields FROM read_parquet('{latest_url}');"
+    q1 = f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT count(*) AS fields, round(sum(\"metrics:area\") / 1e4) AS hectares\nFROM read_parquet('{latest_url}');" if has_area else f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT count(*) AS fields FROM read_parquet('{latest_url}');"
     lines += [md_query(q1, public_base), ""]
     lines += ["## Provenance", ""]
     lines.append(f"This catalog is a mirror: the data is produced and licensed by {prov_md} and republished here as cloud-native GeoParquet and PMTiles by {manifest.host['name']}. Each edition was downloaded from the source and converted with {software_md}:")
@@ -700,7 +704,7 @@ def collection_docs(
         a.append(f"- **`metrics:area` is in square metres** (source column `{area_src}`{', hectares × 10 000' if meta.get('area_is_in_ha') else ''}; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.")
     elif area_src:
         a.append(f"- **`metrics:area` is in square metres**, taken from the source column `{area_src}`{' (hectares × 10 000)' if meta.get('area_is_in_ha') else ''}. Divide by 10 000 for hectares.")
-    elif any(c["name"] == "metrics:area" for c in columns):
+    elif has_area:
         a.append("- **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.")
     a.append(f"- **`{PARTITION_KEY}` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.")
     id_src = reverse_columns(meta).get("id")
@@ -714,13 +718,12 @@ def collection_docs(
     a += ["", "## Tested queries", ""]
     a.append("Fields and hectares per edition, through the partition glob:")
     a.append("")
-    area_expr = 'round(sum("metrics:area") / 1e4) AS hectares' if any(c["name"] == "metrics:area" for c in columns) else "0 AS hectares"
+    area_expr = 'round(sum("metrics:area") / 1e4) AS hectares' if has_area else "0 AS hectares"
     q = f"{duckdb_s3_setup(config)}\nSELECT {PARTITION_KEY}, count(*) AS fields, {area_expr}\nFROM read_parquet('{glob}', hive_partitioning = true)\nGROUP BY {PARTITION_KEY} ORDER BY {PARTITION_KEY};"
     a += [md_query(q, public_base), ""]
     if hcat_cols:
         a.append("Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):")
         a.append("")
-        has_area = any(c["name"] == "metrics:area" for c in columns)
         measure = ', round(sum("metrics:area") / 1e4) AS hectares' if has_area else ""
         order = "hectares" if has_area else "fields"
         q = f"SELECT substr(CAST(\"hcat:code\" AS VARCHAR), 1, 6) AS hcat_group, mode(\"hcat:name\") AS most_common_name,\n       count(*) AS fields{measure}\nFROM read_parquet('{latest_url}')\nWHERE \"hcat:code\" IS NOT NULL\nGROUP BY 1 ORDER BY {order} DESC LIMIT 5;"
@@ -729,7 +732,7 @@ def collection_docs(
     a.append("")
     cx = (latest.bbox[0] + latest.bbox[2]) / 2
     cy = (latest.bbox[1] + latest.bbox[3]) / 2
-    sel = 'id, round("metrics:area") AS m2' if any(c["name"] == "metrics:area" for c in columns) else "id"
+    sel = 'id, round("metrics:area") AS m2' if has_area else "id"
     q = f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT {sel}\nFROM read_parquet('{latest_url}')\nWHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point({cy:.4f}, {cx:.4f}), 'EPSG:4326', '{latest.crs}'), 500))\nLIMIT 5;"
     try:
         a += [md_query(q, public_base), ""]
