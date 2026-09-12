@@ -1,6 +1,6 @@
 # Agent guidance — Field boundaries for Czech
 
-Czech field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Czech field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 8 editions (2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -29,7 +29,14 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/cz/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2026 | 415301 | 2527960.0
+-- 2019 | 292798 | 2605548.0
+-- 2020 | 312512 | 2780359.0
+-- 2021 | 331329 | 2935829.0
+-- 2022 | 327692 | 2856657.0
+-- 2023 | 397798 | 2585724.0
+-- 2024 | 426583 | 2574414.0
+-- 2025 | 411105 | 2539750.0
+-- 2026 | 415300 | 2527959.0
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
@@ -42,9 +49,9 @@ WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
 -- 330101 | winter_common_soft_wheat | 155383 | 1320484.0
--- 330109 | temporary_grass | 127677 | 535906.0
--- 330106 | winter_rapeseed_rape | 38644 | 400380.0
--- 330102 | peas | 13116 | 83593.0
+-- 330109 | temporary_grass | 127687 | 535929.0
+-- 330106 | winter_rapeseed_rape | 38950 | 402366.0
+-- 330102 | peas | 13117 | 83594.0
 -- 330129 | sugar_beet | 4877 | 56841.0
 ```
 
@@ -57,11 +64,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/cz/latest/
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(49.8093, 15.4774), 'EPSG:4326', 'EPSG:4258'), 500))
 LIMIT 5;
 -- id | m2
--- 61226246 | 3628.0
--- 61226247 | 64159.0
--- 61814815 | 2596.0
--- 61816413 | 159825.0
--- 61835022 | 18533.0
+-- 61893198 | 30000.0
+-- 61893195 | 176115.0
+-- 61893197 | 168999.0
+-- 61893194 | 3877.0
+-- 60930235 | 189747.0
 ```
 
 ## Related collections

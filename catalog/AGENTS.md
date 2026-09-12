@@ -22,10 +22,10 @@ GROUP BY 1 ORDER BY 1;
 -- be_vlg | 597088
 -- be_wal | 341968
 -- ch | 1350979
--- cz | 415301
+-- cz | 415300
 -- de_bb | 290688
 -- de_bb_block | 90764
--- ... 43 more rows
+-- ... 41 more rows
 ```
 
 Every edition of every collection:
@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2023 | at | 2947754
 -- 2024 | at | 2956449
 -- 2025 | at | 2944405
--- ... 176 more rows
+-- ... 163 more rows
 ```
 
 ## Join keys

@@ -7,21 +7,21 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "cz-2026",
+  "id": "cz-2025",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
           12.103852490000065,
-          48.57477874400007
+          48.57478019600006
         ],
         [
-          18.850927326000033,
-          48.57477874400007
+          18.854179730000055,
+          48.57478019600006
         ],
         [
-          18.850927326000033,
+          18.854179730000055,
           51.04386991000007
         ],
         [
@@ -30,24 +30,24 @@
         ],
         [
           12.103852490000065,
-          48.57477874400007
+          48.57478019600006
         ]
       ]
     ]
   },
   "bbox": [
     12.103852490000065,
-    48.57477874400007,
-    18.850927326000033,
+    48.57478019600006,
+    18.854179730000055,
     51.04386991000007
   ],
   "properties": {
-    "title": "Czech — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`cz-2026.parquet`, 415,300 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "title": "Czech — 2025",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`cz-2025.parquet`, 411,105 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2026-04-09T00:00:00Z",
-    "end_datetime": "2026-05-30T00:00:00Z",
-    "year": 2026,
+    "start_datetime": "2025-04-22T00:00:00Z",
+    "end_datetime": "2025-08-05T00:00:00Z",
+    "year": 2025,
     "proj:code": "EPSG:4258",
     "table:columns": [
       {
@@ -112,7 +112,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 415300,
+    "table:row_count": 411105,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -121,25 +121,15 @@
   "collection": "cz",
   "assets": {
     "data": {
-      "href": "./cz-2026.parquet",
+      "href": "./cz-2025.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Czech 2026 (GeoParquet)",
+      "title": "Czech 2025 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 337484102,
-      "file:checksum": "12206044c0cecda2b6f7f4a93820507f13bbb791b76ee0085fca8ab58e4cb7e88ab0",
+      "file:size": 332864238,
+      "file:checksum": "12200a70eac70137088eee9bc189c950173f055eb969bb4415fe41c3f57028ed38d5",
       "proj:code": "EPSG:4258"
-    },
-    "visual": {
-      "href": "./cz-2026.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Czech 2026 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 150407686,
-      "file:checksum": "1220f2ce381c232bff48172c99fe7154bf9f0fc2199fa195f8c2e28f9c9670882944"
     }
   },
   "links": [
