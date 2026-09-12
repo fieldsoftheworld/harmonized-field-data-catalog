@@ -51,19 +51,14 @@
     "proj:code": "EPSG:3765",
     "table:columns": [
       {
-        "name": "rp",
+        "name": "irrigation",
         "type": "int32",
-        "description": "RP flag (per the fiboa data survey)"
+        "description": "Irrigation flag (per the fiboa data survey)"
       },
       {
-        "name": "ot_nat",
-        "type": "int32",
-        "description": "Other nature flag (per the fiboa data survey)"
-      },
-      {
-        "name": "irrigation_source",
-        "type": "int32",
-        "description": "Irrigation source code (per the fiboa data survey)"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "slope",
@@ -71,79 +66,9 @@
         "description": "Average slope (per the fiboa data survey)"
       },
       {
-        "name": "natura2000_povs",
+        "name": "eligibility_coef",
         "type": "double",
-        "description": "Natura 2000 POVS overlap (per the fiboa data survey)"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "large_string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "large_string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "large_binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "anc_area",
-        "type": "double",
-        "description": "ANC area (per the fiboa data survey)"
-      },
-      {
-        "name": "irrigation_type",
-        "type": "int32",
-        "description": "Irrigation type code (per the fiboa data survey)"
-      },
-      {
-        "name": "crop:code",
-        "type": "large_string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "mines_year_removed",
-        "type": "int32",
-        "description": "Year mines were removed (per the fiboa data survey)"
-      },
-      {
-        "name": "home_name",
-        "type": "large_string",
-        "description": "Locality / home name (per the fiboa data survey)"
-      },
-      {
-        "name": "mines_status",
-        "type": "large_string",
-        "description": "Mine contamination status (per the fiboa data survey)"
-      },
-      {
-        "name": "water_protect_zone",
-        "type": "large_string",
-        "description": "Water protection zone code (per the fiboa data survey)"
-      },
-      {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "anc",
-        "type": "int32",
-        "description": "Area with Natural Constraints flag (per the fiboa data survey)"
-      },
-      {
-        "name": "natura2000",
-        "type": "double",
-        "description": "Natura 2000 overlap area (per the fiboa data survey)"
-      },
-      {
-        "name": "ot_nat_area",
-        "type": "double",
-        "description": "Other nature area (per the fiboa data survey)"
+        "description": "Eligibility coefficient (per the fiboa data survey)"
       },
       {
         "name": "metrics:area",
@@ -151,39 +76,49 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "natura2000_pop",
-        "type": "double",
-        "description": "Natura 2000 POP overlap (per the fiboa data survey)"
-      },
-      {
-        "name": "height",
-        "type": "double",
-        "description": "Average elevation (mapped to `height`) (source column `z_avg`, per the fiboa data survey)"
-      },
-      {
-        "name": "jpaid",
-        "type": "large_string",
-        "description": "Unique single application identifier (per the fiboa data survey)"
-      },
-      {
-        "name": "metrics:perimeter",
-        "type": "float",
-        "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "large_string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "irrigation",
+        "name": "rp",
         "type": "int32",
-        "description": "Irrigation flag (per the fiboa data survey)"
+        "description": "RP flag (per the fiboa data survey)"
+      },
+      {
+        "name": "mines_status",
+        "type": "string",
+        "description": "Mine contamination status (per the fiboa data survey)"
+      },
+      {
+        "name": "natura2000",
+        "type": "double",
+        "description": "Natura 2000 overlap area (per the fiboa data survey)"
+      },
+      {
+        "name": "mines_year_removed",
+        "type": "int32",
+        "description": "Year mines were removed (per the fiboa data survey)"
+      },
+      {
+        "name": "natura2000_povs",
+        "type": "double",
+        "description": "Natura 2000 POVS overlap (per the fiboa data survey)"
+      },
+      {
+        "name": "irrigation_type",
+        "type": "int32",
+        "description": "Irrigation type code (per the fiboa data survey)"
+      },
+      {
+        "name": "sanitary_protection_zone",
+        "type": "string",
+        "description": "Sanitary protection zone code (per the fiboa data survey)"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "tvpv",
@@ -191,19 +126,74 @@
         "description": "TVPV flag (per the fiboa data survey)"
       },
       {
-        "name": "eligibility_coef",
-        "type": "double",
-        "description": "Eligibility coefficient (per the fiboa data survey)"
-      },
-      {
         "name": "natura2000_ok",
-        "type": "large_string",
+        "type": "string",
         "description": "Natura 2000 status (per the fiboa data survey)"
       },
       {
-        "name": "sanitary_protection_zone",
-        "type": "large_string",
-        "description": "Sanitary protection zone code (per the fiboa data survey)"
+        "name": "anc",
+        "type": "int32",
+        "description": "Area with Natural Constraints flag (per the fiboa data survey)"
+      },
+      {
+        "name": "metrics:perimeter",
+        "type": "float",
+        "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "anc_area",
+        "type": "double",
+        "description": "ANC area (per the fiboa data survey)"
+      },
+      {
+        "name": "height",
+        "type": "double",
+        "description": "Average elevation (mapped to `height`) (source column `z_avg`, per the fiboa data survey)"
+      },
+      {
+        "name": "ot_nat",
+        "type": "int32",
+        "description": "Other nature flag (per the fiboa data survey)"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "water_protect_zone",
+        "type": "string",
+        "description": "Water protection zone code (per the fiboa data survey)"
+      },
+      {
+        "name": "natura2000_pop",
+        "type": "double",
+        "description": "Natura 2000 POP overlap (per the fiboa data survey)"
+      },
+      {
+        "name": "home_name",
+        "type": "string",
+        "description": "Locality / home name (per the fiboa data survey)"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "irrigation_source",
+        "type": "int32",
+        "description": "Irrigation source code (per the fiboa data survey)"
       },
       {
         "name": "bbox",

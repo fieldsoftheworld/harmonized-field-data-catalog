@@ -51,19 +51,9 @@
     "proj:code": "EPSG:4326",
     "table:columns": [
       {
-        "name": "id",
+        "name": "collection",
         "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "admin_municipality_code",
-        "type": "string",
-        "description": "Municipality ID (source column `MUNICIPIO`, per the fiboa data survey)"
-      },
-      {
-        "name": "crop:name_en",
-        "type": "string",
-        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:code",
@@ -71,9 +61,14 @@
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "collection",
+        "name": "crop:name_en",
         "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "geometry",

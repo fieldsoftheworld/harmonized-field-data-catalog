@@ -122,6 +122,11 @@
       "name": "bbox",
       "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
       "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "typology",
+      "type": "string",
+      "description": "Business type (economic specialization) (source column `BT_OMSCH`, per the fiboa data survey)"
     }
   ],
   "table:primary_geometry": "geometry",
