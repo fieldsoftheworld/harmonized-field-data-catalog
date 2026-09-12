@@ -86,9 +86,10 @@ datasets:
     years: ['2024']
     keywords: [Spain, Catalonia, Mapa de cultius, crop fields]
   sk:
-    year: 2026
-    year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    years: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026']
+    year_source: Campaign year of the source dataset ("Hranice užívania <year>" on data.slovensko.sk).
     keywords: [Slovakia, LPIS, field blocks]
+    notes: "The portal also publishes the 2016 and 2017 campaigns, but as 7-Zip archives, which the conversion pipeline cannot extract."
   es_md:
     year: 2026
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
