@@ -187,7 +187,8 @@ datasets:
     keywords: [Spain, Galicia, crop fields]
     thumbnail: {center: [-8.46033, 42.12316], basemap: none}  # Rias Baixas minifundio; the densest cluster, denser than ranks 1-2
   es_ib:
-    years: ['2024']
+    years: ['2022', '2023', '2024', '2025', '2026']
+    year_source: Campaign of the source layer; 2022-2025 are the yearly layers of the GOIB_SIGPAC_HISTORIC_IB service, 2026 is the current-state layer of GOIB_SIGPAC_IB (snapshot of May 2026).
     thumbnail: {center: [3.10067, 39.58600], basemap: none}  # Mallorca east of Palma; the densest cluster
     keywords: [Spain, Balearic Islands, crop fields]
   es_pv:
