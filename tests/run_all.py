@@ -16,6 +16,7 @@ TESTS = [
     "test_manifest.py",
     "test_links.py",
     "test_publish.py",
+    "test_columns.py",
     "test_stac_valid.py",
     "test_conformance.py",
 ]

@@ -255,10 +255,29 @@ def link_data_file(src: Path, dst: Path) -> None:
     dst.symlink_to(os.path.relpath(src, dst.parent))
 
 
-def build_items(ds: Dataset, meta: dict, years: list[YearInput], public_base: str, table_columns: list[dict]) -> list[dict]:
+def union_columns(items: list[dict]) -> list[dict]:
+    """Every column any edition carries, the newest edition's first.
+
+    The collection's asset is the glob over all editions, so it describes their
+    union: where an older edition carries a column the newest one collapsed into
+    constant metadata, reading them together needs union_by_name.
+    """
+    out, seen = [], set()
+    for item in reversed(items):
+        for column in item["properties"]["table:columns"]:
+            if column["name"] not in seen:
+                seen.add(column["name"])
+                out.append(column)
+    return out
+
+
+def build_items(ds: Dataset, meta: dict, years: list[YearInput], public_base: str, survey_props: dict[str, str]) -> list[dict]:
     items = []
     for y in years:
         stem = file_stem(ds.id, y.year)
+        # every edition describes its own file: a column that is constant in one
+        # edition collapses into the collection metadata and is not a column there
+        table_columns = describe_columns(y.data_asset.get("table:columns", []), meta, survey_props)
         start, end = year_interval(y.year, y.interval)
         parquet_name = y.parquet.name
         pmtiles_name = y.pmtiles.name if y.pmtiles else None
@@ -645,8 +664,10 @@ def collection_docs(
         lines.append(f"| {y.year} | {fmt_int(y.row_count)} | [{fmt_bytes(y.data_asset['file:size'])}]({base}/{y.parquet.name}) | {pm} | [{stem}.json]({base}/{stem}.json) |")
     lines += ["", f"The latest edition is also available at a stable path: [{ds.id}/latest/{ds.id}.parquet]({latest_url}). All editions together through the S3 glob `{glob}` (see the [AGENTS.md]({human_base}/{ds.id}/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).", ""]
     lines += ["## Columns", "", "| Column | Type | Description |", "|---|---|---|"]
+    in_latest = {c["name"] for c in latest.data_asset.get("table:columns", [])}
     for c in columns:
-        lines.append(f"| `{c['name']}` | {c['type']} | {c.get('description', '')} |")
+        note = "" if c["name"] in in_latest else f" *(not a column in the {latest.year} edition)*"
+        lines.append(f"| `{c['name']}` | {c['type']} | {c.get('description', '')}{note} |")
     if latest.collection_props:
         lines += ["", "Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):", ""]
         for k, v in latest.collection_props.items():
@@ -839,9 +860,9 @@ def catalogize(dataset_id: str, manifest: Manifest) -> None:
     link_data_file(latest_copy, CATALOG_DIR / ds.id / "latest" / f"{ds.id}.parquet")
 
     survey_url, survey_props = data_survey(ds.id)
-    table_columns = describe_columns(latest.data_asset.get("table:columns", []), meta, survey_props)
     style_assets, style_facts = build_styles(ds, meta, latest)
-    items = build_items(ds, meta, years, public_base, table_columns)
+    items = build_items(ds, meta, years, public_base, survey_props)
+    table_columns = union_columns(items)
     collection = build_collection(ds, meta, years, items, manifest, public_base, human_base, table_columns, style_assets, survey_url)
 
     for y, item in zip(years, items):
