@@ -98,7 +98,10 @@ datasets:
     year_source: Campaign year in the layer name (Agricultural_Land_<year>).
     keywords: [Bulgaria, физически блокове, field blocks, INSPIRE]
     holds: blocks
-    notes: "The agricultural part of the physical block register; the same service's Physical_Blocks layers carry forest, urban and transport land as well."
+    notes: "The agricultural part of the physical block register; the same service's Physical_Blocks layers carry forest, urban and transport land as well. The 2021 and 2022 layers are a different release: they carry the usage inside ELGIDENT and publish an area column the later ones do not."
+    # 2025 holds 226,592 blocks against 172,872 in 2024; the service reports those
+    # same counts, so the register split blocks rather than the conversion losing any
+    row_count_tolerance: 0.35
   sk:
     years: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026']
     year_source: Campaign year of the source dataset ("Hranice užívania <year>" on data.slovensko.sk).
