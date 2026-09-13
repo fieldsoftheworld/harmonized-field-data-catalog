@@ -89,6 +89,16 @@ datasets:
   es_cat:
     years: ['2024']
     keywords: [Spain, Catalonia, Mapa de cultius, crop fields]
+  se:
+    years: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+    year_source: Campaign year, the CQL filter on the WFS layer (arslager).
+    keywords: [Sweden, jordbruksskiften, crop fields, INSPIRE]
+  bg:
+    years: ['2021', '2022', '2023', '2024', '2025']
+    year_source: Campaign year in the layer name (Agricultural_Land_<year>).
+    keywords: [Bulgaria, физически блокове, field blocks, INSPIRE]
+    holds: blocks
+    notes: "The agricultural part of the physical block register; the same service's Physical_Blocks layers carry forest, urban and transport land as well."
   sk:
     years: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026']
     year_source: Campaign year of the source dataset ("Hranice užívania <year>" on data.slovensko.sk).
