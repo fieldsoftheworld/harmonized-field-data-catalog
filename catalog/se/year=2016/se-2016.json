@@ -1,0 +1,137 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "se-2016",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          60.08005880820808,
+          1.4260485929875664
+        ],
+        [
+          69.15399633623164,
+          1.4260485929875664
+        ],
+        [
+          69.15399633623164,
+          5.818775935209827
+        ],
+        [
+          60.08005880820808,
+          5.818775935209827
+        ],
+        [
+          60.08005880820808,
+          1.4260485929875664
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    60.08005880820808,
+    1.4260485929875664,
+    69.15399633623164,
+    5.818775935209827
+  ],
+  "properties": {
+    "title": "Sweden — 2016",
+    "description": "Field boundaries of the 2016 edition of this dataset, one GeoParquet file (`se-2016.parquet`, 1,127,793 fields) and its PMTiles. Partition `year=2016` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2016-01-01T00:00:00Z",
+    "end_datetime": "2016-01-01T00:00:00Z",
+    "year": 2016,
+    "proj:code": "EPSG:3006",
+    "table:columns": [
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 1127793,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.16"
+    }
+  },
+  "collection": "se",
+  "assets": {
+    "data": {
+      "href": "./se-2016.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Sweden 2016 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 278641631,
+      "file:checksum": "1220aa80f8342ec908c123c7012a1a94fadcdc5d1333ba4880319266f9bf650b877d",
+      "proj:code": "EPSG:3006"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

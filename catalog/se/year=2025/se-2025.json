@@ -1,0 +1,147 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "se-2025",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          60.08020039531568,
+          1.4258642962415031
+        ],
+        [
+          68.93098417655331,
+          1.4258642962415031
+        ],
+        [
+          68.93098417655331,
+          5.81873185675668
+        ],
+        [
+          60.08020039531568,
+          5.81873185675668
+        ],
+        [
+          60.08020039531568,
+          1.4258642962415031
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    60.08020039531568,
+    1.4258642962415031,
+    68.93098417655331,
+    5.81873185675668
+  ],
+  "properties": {
+    "title": "Sweden — 2025",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`se-2025.parquet`, 1,207,889 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2025-01-01T00:00:00Z",
+    "end_datetime": "2025-01-01T00:00:00Z",
+    "year": 2025,
+    "proj:code": "EPSG:3006",
+    "table:columns": [
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 1207889,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.16"
+    }
+  },
+  "collection": "se",
+  "assets": {
+    "data": {
+      "href": "./se-2025.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Sweden 2025 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 320100003,
+      "file:checksum": "12209405e0a2db770a0af15b513be060b548504e62980381b41e552f8367b8369eee",
+      "proj:code": "EPSG:3006"
+    },
+    "visual": {
+      "href": "./se-2025.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Sweden 2025 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 198780383,
+      "file:checksum": "122048f666f35dae5ac78a709ef3fb2fbc76af6612a6dbe8bc9668894fae6490ea51"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

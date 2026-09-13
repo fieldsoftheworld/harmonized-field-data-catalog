@@ -1,11 +1,12 @@
 # Harmonized Field Boundary Data
 
-Official (non-AI) field boundaries harmonized to fiboa, 51 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Official (non-AI) field boundaries harmonized to fiboa, 53 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — crop fields — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - at_block: Field blocks for Austria — field blocks — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - be_vlg: Field boundaries for Flanders, Belgium — crop fields — https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet (license other, CRS EPSG:31370)
 - be_wal: Belgium Wallonia: Parcellaire Agricole Anonyme — crop fields — https://data.source.coop/ftw/harmonized-field-data/be_wal/latest/be_wal.parquet (license other, CRS EPSG:3035)
+- bg: Field blocks for Bulgaria — field blocks — https://data.source.coop/ftw/harmonized-field-data/bg/latest/bg.parquet (license CC-BY-4.0, CRS EPSG:32635)
 - ch: Field boundaries for Switzerland — crop fields — https://data.source.coop/ftw/harmonized-field-data/ch/latest/ch.parquet (license other, CRS EPSG:2056)
 - cz: Field boundaries for Czech — crop fields — https://data.source.coop/ftw/harmonized-field-data/cz/latest/cz.parquet (license CC0-1.0, CRS EPSG:4258)
 - de_bb: Field boundaries for Berlin / Brandenburg, Germany — crop fields — https://data.source.coop/ftw/harmonized-field-data/de_bb/latest/de_bb.parquet (license DL-DE-BY-2.0, CRS EPSG:25833)
@@ -50,6 +51,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 51 collections, GeoParqu
 - nl_block: Field blocks for The Netherlands — field blocks — https://data.source.coop/ftw/harmonized-field-data/nl_block/latest/nl_block.parquet (license CC0-1.0, CRS EPSG:28992)
 - nz: Irrigated land area — crop fields — https://data.source.coop/ftw/harmonized-field-data/nz/latest/nz.parquet (license CC-BY-4.0, CRS EPSG:2193)
 - pt: Field boundaries for Portugal — crop fields — https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet (license other, CRS EPSG:3763, EPSG:4326)
+- se: Swedish Crop Fields (Jordbruksskiften) — crop fields — https://data.source.coop/ftw/harmonized-field-data/se/latest/se.parquet (license CC0-1.0, CRS EPSG:3006)
 - si: Slovenia Crop Fields — crop fields — https://data.source.coop/ftw/harmonized-field-data/si/latest/si.parquet (license other, CRS EPSG:3794)
 - sk: Slovakia Agricultural Land Identification System — crop fields — https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet (license CC0-1.0, CRS EPSG:5514)
 - us_usda_cropland: U.S. Department of Agriculture Crop Sequence Boundaries — crop fields — https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/latest/us_usda_cropland.parquet (license other, CRS )

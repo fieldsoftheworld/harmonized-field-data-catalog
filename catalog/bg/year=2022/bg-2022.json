@@ -1,0 +1,132 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "bg-2022",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          22.32342220146045,
+          41.19220204239111
+        ],
+        [
+          28.62327519702795,
+          41.19220204239111
+        ],
+        [
+          28.62327519702795,
+          44.28023084652323
+        ],
+        [
+          22.32342220146045,
+          44.28023084652323
+        ],
+        [
+          22.32342220146045,
+          41.19220204239111
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    22.32342220146045,
+    41.19220204239111,
+    28.62327519702795,
+    44.28023084652323
+  ],
+  "properties": {
+    "title": "Bulgaria — 2022",
+    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`bg-2022.parquet`, 199,819 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2022-01-01T00:00:00Z",
+    "end_datetime": "2022-01-01T00:00:00Z",
+    "year": 2022,
+    "proj:code": "EPSG:32635",
+    "table:columns": [
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name_en",
+        "type": "string",
+        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "block_id",
+        "type": "string",
+        "description": "Field identifier (source column `PHBIDENT`, per the fiboa data survey)"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 199819,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.16"
+    }
+  },
+  "collection": "bg",
+  "assets": {
+    "data": {
+      "href": "./bg-2022.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Bulgaria 2022 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 159304046,
+      "file:checksum": "122035a296d4fff2093e6779ed54950be5c256e9e460e98d170745689f0fef15f7ac",
+      "proj:code": "EPSG:32635"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

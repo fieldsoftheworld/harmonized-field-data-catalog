@@ -1,0 +1,9 @@
+# Swedish Crop Fields (Jordbruksskiften)
+
+Sweden field boundaries (2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Jordbruksverket (The Swedish Board of Agriculture). License: CC0-1.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/se/latest/se.parquet
+- All editions: s3://ftw/harmonized-field-data/se/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3006; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: metrics:area, hcat:name, crop:code, geometry, collection, hcat:name_en, id, hcat:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/se/README.md, agent guide https://source.coop/ftw/harmonized-field-data/se/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/se/collection.json
