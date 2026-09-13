@@ -667,6 +667,8 @@ def collection_docs(
         pm = f"[{fmt_bytes(y.visual_asset['file:size'])}]({base}/{y.pmtiles.name})" if y.visual_asset else "—"
         lines.append(f"| {y.year} | {fmt_int(y.row_count)} | [{fmt_bytes(y.data_asset['file:size'])}]({base}/{y.parquet.name}) | {pm} | [{stem}.json]({base}/{stem}.json) |")
     lines += ["", f"The latest edition is also available at a stable path: [{ds.id}/latest/{ds.id}.parquet]({latest_url}). All editions together through the S3 glob `{glob}` (see the [AGENTS.md]({human_base}/{ds.id}/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).", ""]
+    if ds.notes:
+        lines += [ds.notes, ""]
     lines += ["## Columns", "", "| Column | Type | Description |", "|---|---|---|"]
     in_latest = {c["name"] for c in latest.data_asset.get("table:columns", [])}
     for c in columns:
