@@ -11,7 +11,7 @@
     "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
   ],
   "id": "de_sh",
-  "title": "Field boundaries for Schleswig-Holstein (SH), Germany",
+  "title": "Field blocks for Schleswig-Holstein (SH), Germany",
   "description": "A field block (German: \"Feldblock\") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.\n\nThis collection holds 4 editions (2023, 2024, 2025, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_sh/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:4647). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_sh/AGENTS.md).",
   "keywords": [
     "Feldblöcke",
@@ -19,6 +19,7 @@
     "Schleswig-Holstein",
     "agriculture",
     "fiboa",
+    "field blocks",
     "field boundaries"
   ],
   "license": "DL-DE-ZERO-2.0",
@@ -72,6 +73,11 @@
       "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
     },
     {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "hbn",
       "type": "string",
       "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
@@ -80,11 +86,6 @@
       "name": "metrics:area",
       "type": "float",
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "geometry",
@@ -100,6 +101,11 @@
       "name": "bbox",
       "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
       "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "determination:datetime",
+      "type": "timestamp[ms, tz=UTC]",
+      "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     }
   ],
   "table:primary_geometry": "geometry",
@@ -124,8 +130,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 64512336,
-      "file:checksum": "122036c0ff702f45130cadc574a2192f873f130987b517d1f8935ece9c7010faace7",
+      "file:size": 64512320,
+      "file:checksum": "122051a382dd48f17c7ead6e460123e902be1446fc60f3a11423419d9910247b6535",
       "proj:code": "EPSG:4647"
     },
     "style-field-size": {
@@ -158,8 +164,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 26071375,
-      "file:checksum": "1220a1fae967d883d9018bc044618c3d161cd9b2373b92222389d853edc2f691d615"
+      "file:size": 26072031,
+      "file:checksum": "122072ad0e9c1163c8a0d27e57b6add632ba379a63377a26fcd836b99755ce63e133"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -253,15 +259,15 @@
       "title": "Germany, Schleswig-Holstein — 2026"
     }
   ],
-  "updated": "2026-09-09T17:04:51Z",
+  "updated": "2026-09-13T00:39:53Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_sh": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml"
     ]
   }
 }

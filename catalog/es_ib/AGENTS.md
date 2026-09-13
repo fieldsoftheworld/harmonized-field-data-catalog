@@ -1,13 +1,13 @@
 # Agent guidance — Spain Balearic Islands Crop fields
 
-Spain Balearic Islands field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Spain Balearic Islands field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 5 editions (2022, 2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/es_ib/latest/es_ib.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/es_ib/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2024/es_ib-2024.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/es_ib/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2026/es_ib-2026.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/es_ib/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2024/es_ib-2024.pmtiles`, layer `es_ib`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2026/es_ib-2026.pmtiles`, layer `es_ib`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
@@ -15,7 +15,7 @@ Spain Balearic Islands field boundaries in the [fiboa](https://github.com/fiboa/
 - **`metrics:area` is in square metres**, taken from the source column `DN_SURFACE`. Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `DN_OID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv`, `admin_province_code` = `07`, `admin:subdivision_code` = `IB` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv`, `admin_province_code` = `07`, `admin:subdivision_code` = `IB` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -28,7 +28,11 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/es_ib/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2024 | 349087 | 256441.0
+-- 2022 | 478041 | 342460.0
+-- 2023 | 463158 | 340795.0
+-- 2024 | 350857 | 294812.0
+-- 2025 | 415169 | 326684.0
+-- 2026 | 349087 | 256441.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

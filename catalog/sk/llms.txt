@@ -1,9 +1,9 @@
 # Slovakia Agricultural Land Identification System
 
-Slovakia field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Pôdohospodárska platobná agentúra. License: CC0-1.0.
+Slovakia field boundaries (2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Pôdohospodárska platobná agentúra. License: CC0-1.0.
 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet
 - All editions: s3://ftw/harmonized-field-data/sk/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
 - CRS EPSG:5514; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: hcat:name_en, id, geometry, metrics:area, crop_group, hcat:code, municipality, crop:name, collection, hcat:name, block_id, bbox
+- Columns: geometry, municipality, hcat:name, hcat:code, id, block_id, metrics:area, hcat:name_en, crop:name, crop_group, collection, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/sk/README.md, agent guide https://source.coop/ftw/harmonized-field-data/sk/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/sk/collection.json

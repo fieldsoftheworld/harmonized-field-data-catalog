@@ -4,8 +4,8 @@ SIGPAC Crop fields of Spain - Balearic Islands
 
 - **Source data provider:** [Govern de les Illes Balears](https://www.caib.es)
 - **License:** CC-BY-4.0
-- **Editions:** 2024 (one GeoParquet per year)
-- **Fields in the latest edition (2024):** 349,087
+- **Editions:** 2022, 2023, 2024, 2025, 2026 (one GeoParquet per year)
+- **Fields in the latest edition (2026):** 349,087
 - **Coordinate reference system:** EPSG:4326 (as published by the source; not reprojected)
 - **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.16 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/es_ib.py))
 
@@ -15,7 +15,11 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2024 | 349,087 | [132.7 MB](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2024/es_ib-2024.parquet) | [66.1 MB](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2024/es_ib-2024.pmtiles) | [es_ib-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2024/es_ib-2024.json) |
+| 2022 | 478,041 | [168.2 MB](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2022/es_ib-2022.parquet) | — | [es_ib-2022.json](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2022/es_ib-2022.json) |
+| 2023 | 463,158 | [166.8 MB](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2023/es_ib-2023.parquet) | — | [es_ib-2023.json](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2023/es_ib-2023.json) |
+| 2024 | 350,857 | [138.4 MB](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2024/es_ib-2024.parquet) | — | [es_ib-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2024/es_ib-2024.json) |
+| 2025 | 415,169 | [157.1 MB](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2025/es_ib-2025.parquet) | — | [es_ib-2025.json](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2025/es_ib-2025.json) |
+| 2026 | 349,087 | [132.7 MB](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2026/es_ib-2026.parquet) | [65.6 MB](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2026/es_ib-2026.pmtiles) | [es_ib-2026.json](https://data.source.coop/ftw/harmonized-field-data/es_ib/year=2026/es_ib-2026.json) |
 
 The latest edition is also available at a stable path: [es_ib/latest/es_ib.parquet](https://data.source.coop/ftw/harmonized-field-data/es_ib/latest/es_ib.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/es_ib/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_ib/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -23,15 +27,15 @@ The latest edition is also available at a stable path: [es_ib/latest/es_ib.parqu
 
 | Column | Type | Description |
 |---|---|---|
-| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `admin_municipality_code` | string | Carried over from the source column `MUNICIPIO`; the publisher documents no meaning for it. |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `determination:datetime` | timestamp[ms, tz=UTC] | The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `crop:name_en` | string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:name_en` | string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `admin_municipality_code` | string | Carried over from the source column `MUNICIPIO`; the publisher documents no meaning for it. |
+| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -57,7 +61,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_ib/late
 
 This catalog is a mirror: the data is produced and licensed by [Govern de les Illes Balears](https://www.caib.es) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
 
-- 2024: converted 2026-09-03 from <REST>
+- 2022: converted 2026-09-12 from <REST>
+- 2023: converted 2026-09-12 from <REST>
+- 2024: converted 2026-09-12 from <REST>
+- 2025: converted 2026-09-13 from <REST>
+- 2026: converted 2026-09-13 from <REST>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

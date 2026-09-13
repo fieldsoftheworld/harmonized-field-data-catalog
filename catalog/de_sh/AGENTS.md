@@ -1,4 +1,4 @@
-# Agent guidance — Field boundaries for Schleswig-Holstein (SH), Germany
+# Agent guidance — Field blocks for Schleswig-Holstein (SH), Germany
 
 Germany, Schleswig-Holstein field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 4 editions (2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 

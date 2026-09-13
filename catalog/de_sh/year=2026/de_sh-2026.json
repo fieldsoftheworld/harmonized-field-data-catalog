@@ -56,6 +56,11 @@
         "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
       },
       {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "hbn",
         "type": "string",
         "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
@@ -64,11 +69,6 @@
         "name": "metrics:area",
         "type": "float",
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "geometry",
@@ -102,8 +102,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 64512336,
-      "file:checksum": "122036c0ff702f45130cadc574a2192f873f130987b517d1f8935ece9c7010faace7",
+      "file:size": 64512320,
+      "file:checksum": "122051a382dd48f17c7ead6e460123e902be1446fc60f3a11423419d9910247b6535",
       "proj:code": "EPSG:4647"
     },
     "visual": {
@@ -113,8 +113,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 26071375,
-      "file:checksum": "1220a1fae967d883d9018bc044618c3d161cd9b2373b92222389d853edc2f691d615"
+      "file:size": 26072031,
+      "file:checksum": "122072ad0e9c1163c8a0d27e57b6add632ba379a63377a26fcd836b99755ce63e133"
     }
   },
   "links": [

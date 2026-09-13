@@ -51,6 +51,11 @@
     "proj:code": "EPSG:4647",
     "table:columns": [
       {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "flik",
         "type": "string",
         "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
@@ -59,11 +64,6 @@
         "name": "hbn",
         "type": "string",
         "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
-      },
-      {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
@@ -102,8 +102,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 64957289,
-      "file:checksum": "12208f222b1bf133f1ef4dbc7e024b0a9f10a7e63503ddc9faae87dd2138ba9366c3",
+      "file:size": 64957285,
+      "file:checksum": "12209272d4a732e5060d747a4185ba50b84e0aab8d72e0d9a864a7ae29e7430cf9a2",
       "proj:code": "EPSG:4647"
     }
   },

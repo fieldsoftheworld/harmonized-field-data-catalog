@@ -51,16 +51,6 @@
     "proj:code": "EPSG:4647",
     "table:columns": [
       {
-        "name": "flik",
-        "type": "string",
-        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hbn",
-        "type": "string",
-        "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
-      },
-      {
         "name": "metrics:area",
         "type": "float",
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -71,14 +61,29 @@
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "determination:datetime",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hbn",
+        "type": "string",
+        "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
+      },
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
       },
       {
         "name": "collection",
         "type": "string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -102,8 +107,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 64691696,
-      "file:checksum": "1220fd21a2e348d039537d1916d412762377336adbea564a031c35e104c1d9eb7e15",
+      "file:size": 64691674,
+      "file:checksum": "12208b561fdff96a0c26c5b97c6a8df52126a4f63470ffaf6881761cd53c56b30a25",
       "proj:code": "EPSG:4647"
     }
   },

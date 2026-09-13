@@ -7,13 +7,13 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "es_ib-2024",
+  "id": "es_ib-2023",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          1.2142638768882594,
+          1.2133388274669574,
           38.64095127663106
         ],
         [
@@ -25,35 +25,35 @@
           40.09333162675111
         ],
         [
-          1.2142638768882594,
+          1.2133388274669574,
           40.09333162675111
         ],
         [
-          1.2142638768882594,
+          1.2133388274669574,
           38.64095127663106
         ]
       ]
     ]
   },
   "bbox": [
-    1.2142638768882594,
+    1.2133388274669574,
     38.64095127663106,
     4.326674124179003,
     40.09333162675111
   ],
   "properties": {
-    "title": "Spain Balearic Islands — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`es_ib-2024.parquet`, 350,857 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "title": "Spain Balearic Islands — 2023",
+    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`es_ib-2023.parquet`, 463,158 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2024-02-01T00:00:00Z",
-    "end_datetime": "2024-02-01T00:00:00Z",
-    "year": 2024,
+    "start_datetime": "2023-02-01T00:00:00Z",
+    "end_datetime": "2023-02-01T00:00:00Z",
+    "year": 2023,
     "proj:code": "EPSG:4326",
     "table:columns": [
       {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:code",
@@ -66,19 +66,19 @@
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
+        "name": "admin_municipality_code",
+        "type": "string",
+        "description": "Carried over from the source column `MUNICIPIO`; the publisher documents no meaning for it."
+      },
+      {
         "name": "crop:name",
         "type": "string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:name_en",
@@ -86,9 +86,9 @@
         "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "admin_municipality_code",
-        "type": "string",
-        "description": "Carried over from the source column `MUNICIPIO`; the publisher documents no meaning for it."
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -97,7 +97,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 350857,
+    "table:row_count": 463158,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.2.16"
@@ -106,14 +106,14 @@
   "collection": "es_ib",
   "assets": {
     "data": {
-      "href": "./es_ib-2024.parquet",
+      "href": "./es_ib-2023.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Spain Balearic Islands 2024 (GeoParquet)",
+      "title": "Spain Balearic Islands 2023 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 145073561,
-      "file:checksum": "12200d01bd409e03390409d50241ae3d0810bb7a83e5cb4bbc89d09563af1b3e7a44",
+      "file:size": 174884609,
+      "file:checksum": "122022065e067f93f09ddd512f3ac5d0d517f666213dd74af731680db665eb03f691",
       "proj:code": "EPSG:4326"
     }
   },

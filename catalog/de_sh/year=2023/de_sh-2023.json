@@ -51,26 +51,6 @@
     "proj:code": "EPSG:4647",
     "table:columns": [
       {
-        "name": "flik",
-        "type": "string",
-        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hbn",
-        "type": "string",
-        "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
-      },
-      {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -79,6 +59,31 @@
         "name": "collection",
         "type": "string",
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hbn",
+        "type": "string",
+        "description": "Category of main land use (see below) (source column `HBN`, per the fiboa data survey)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      },
+      {
+        "name": "determination:datetime",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -102,8 +107,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 65092888,
-      "file:checksum": "1220f15e81758861997c75d7ae24065940d0eacb921ad412461941a83789e6b16fc4",
+      "file:size": 65092890,
+      "file:checksum": "1220ed52a4f8a03b7b015cf035858c3d8bd3f7abb52987647c70232fa8f7d510a270",
       "proj:code": "EPSG:4647"
     }
   },
