@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          60.0800448197657,
-          1.432400706444374
+          9.3349952569757,
+          55.17427113338902
         ],
         [
-          68.91942001692992,
-          1.432400706444374
+          25.101982881804506,
+          55.17427113338902
         ],
         [
-          68.91942001692992,
-          5.818770637177386
+          25.101982881804506,
+          68.51794949963019
         ],
         [
-          60.0800448197657,
-          5.818770637177386
+          9.3349952569757,
+          68.51794949963019
         ],
         [
-          60.0800448197657,
-          1.432400706444374
+          9.3349952569757,
+          55.17427113338902
         ]
       ]
     ]
   },
   "bbox": [
-    60.0800448197657,
-    1.432400706444374,
-    68.91942001692992,
-    5.818770637177386
+    9.3349952569757,
+    55.17427113338902,
+    25.101982881804506,
+    68.51794949963019
   ],
   "properties": {
     "title": "Sweden — 2022",
@@ -51,29 +51,9 @@
     "proj:code": "EPSG:3006",
     "table:columns": [
       {
-        "name": "hcat:name_en",
+        "name": "id",
         "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hcat:code",
@@ -86,9 +66,29 @@
         "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "id",
+        "name": "hcat:name",
         "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 363168619,
-      "file:checksum": "1220a60a3f262643503be6dc51c1f7ec01638fbcf755b70df5f03c75ecf6e0eee525",
+      "file:size": 360756962,
+      "file:checksum": "12200799a74d6d40f9160ce9f7f3d3e10ab5ea452e162a95f9d71fc7a61e954eb6aa",
       "proj:code": "EPSG:3006"
     }
   },

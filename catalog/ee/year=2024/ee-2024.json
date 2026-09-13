@@ -51,29 +51,24 @@
     "proj:code": "EPSG:3301",
     "table:columns": [
       {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "large_string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "large_string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "large_binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "id",
-        "type": "large_string",
+        "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:code",
@@ -82,8 +77,33 @@
       },
       {
         "name": "crop:name",
-        "type": "large_string",
+        "type": "string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "land_use",
+        "type": "string",
+        "description": "Carried over from the source column `taotletud_maakasutus`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "parcel_id",
+        "type": "int64",
+        "description": "Field identifier (source column `pollu_id`, per the fiboa data survey)"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -107,8 +127,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 279863046,
-      "file:checksum": "1220d78b5ea1919fa52050055b71da4af1ef33e4a156b726bd4e43373b7430935cb9",
+      "file:size": 263546040,
+      "file:checksum": "1220f1e5747b2f8b0608165d7581f31376e77ea4d110eebbe85351db3f18fa03c8ff",
       "proj:code": "EPSG:3301"
     },
     "visual": {
@@ -118,8 +138,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 70592286,
-      "file:checksum": "1220f01d0684947e4b5bb607eb67441ac64b6f73b0f3e42ef30700cc9e47ff73025c"
+      "file:size": 78131433,
+      "file:checksum": "122029a869d4d145f77347d65f4cf637782a15af2b1ac0f8c3a618960322a5516581"
     }
   },
   "links": [

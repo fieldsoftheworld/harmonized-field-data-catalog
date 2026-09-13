@@ -62,7 +62,7 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/se/latest/se.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(3.6223, 64.5056), 'EPSG:4326', 'EPSG:3006'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(61.8557, 17.2063), 'EPSG:4326', 'EPSG:3006'), 500))
 LIMIT 5;
 -- id | m2
 ```

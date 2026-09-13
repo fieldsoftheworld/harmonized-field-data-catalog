@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          60.08005880820808,
-          1.4260485929875664
+          9.241347749947842,
+          55.17419888840092
         ],
         [
-          69.15399633623164,
-          1.4260485929875664
+          25.28141413665115,
+          55.17419888840092
         ],
         [
-          69.15399633623164,
-          5.818775935209827
+          25.28141413665115,
+          68.91596387958512
         ],
         [
-          60.08005880820808,
-          5.818775935209827
+          9.241347749947842,
+          68.91596387958512
         ],
         [
-          60.08005880820808,
-          1.4260485929875664
+          9.241347749947842,
+          55.17419888840092
         ]
       ]
     ]
   },
   "bbox": [
-    60.08005880820808,
-    1.4260485929875664,
-    69.15399633623164,
-    5.818775935209827
+    9.241347749947842,
+    55.17419888840092,
+    25.28141413665115,
+    68.91596387958512
   ],
   "properties": {
     "title": "Sweden — 2016",
@@ -51,29 +51,9 @@
     "proj:code": "EPSG:3006",
     "table:columns": [
       {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "id",
         "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name_en",
@@ -81,14 +61,34 @@
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hcat:name",
         "type": "string",
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 278641631,
-      "file:checksum": "1220aa80f8342ec908c123c7012a1a94fadcdc5d1333ba4880319266f9bf650b877d",
+      "file:size": 276256378,
+      "file:checksum": "1220675e8f2dc785a55dd7a45502e9f672e50708b9b530c5073e44d60257ec6914b3",
       "proj:code": "EPSG:3006"
     }
   },

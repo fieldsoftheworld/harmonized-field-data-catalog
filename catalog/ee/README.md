@@ -18,29 +18,35 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2016 | 165,424 | [162.4 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2016/ee-2016.parquet) | — | [ee-2016.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2016/ee-2016.json) |
-| 2017 | 170,560 | [243.2 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2017/ee-2017.parquet) | — | [ee-2017.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2017/ee-2017.json) |
-| 2018 | 172,499 | [276.3 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2018/ee-2018.parquet) | — | [ee-2018.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2018/ee-2018.json) |
-| 2019 | 174,284 | [287.2 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2019/ee-2019.parquet) | — | [ee-2019.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2019/ee-2019.json) |
-| 2020 | 175,963 | [289.6 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2020/ee-2020.parquet) | — | [ee-2020.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2020/ee-2020.json) |
-| 2021 | 176,117 | [294.7 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2021/ee-2021.parquet) | — | [ee-2021.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2021/ee-2021.json) |
-| 2022 | 175,988 | [288.5 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2022/ee-2022.parquet) | — | [ee-2022.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2022/ee-2022.json) |
-| 2023 | 169,930 | [265.2 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2023/ee-2023.parquet) | — | [ee-2023.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2023/ee-2023.json) |
-| 2024 | 166,508 | [266.9 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2024/ee-2024.parquet) | [67.3 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2024/ee-2024.pmtiles) | [ee-2024.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2024/ee-2024.json) |
+| 2016 | 165,421 | [163.1 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2016/ee-2016.parquet) | — | [ee-2016.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2016/ee-2016.json) |
+| 2017 | 170,560 | [244.0 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2017/ee-2017.parquet) | — | [ee-2017.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2017/ee-2017.json) |
+| 2018 | 172,499 | [277.1 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2018/ee-2018.parquet) | — | [ee-2018.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2018/ee-2018.json) |
+| 2019 | 174,284 | [288.0 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2019/ee-2019.parquet) | — | [ee-2019.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2019/ee-2019.json) |
+| 2020 | 175,963 | [290.3 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2020/ee-2020.parquet) | — | [ee-2020.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2020/ee-2020.json) |
+| 2021 | 176,117 | [295.5 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2021/ee-2021.parquet) | — | [ee-2021.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2021/ee-2021.json) |
+| 2022 | 175,988 | [289.3 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2022/ee-2022.parquet) | — | [ee-2022.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2022/ee-2022.json) |
+| 2023 | 169,930 | [265.9 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2023/ee-2023.parquet) | — | [ee-2023.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2023/ee-2023.json) |
+| 2024 | 166,508 | [251.3 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2024/ee-2024.parquet) | [74.5 MB](https://data.source.coop/ftw/harmonized-field-data/ee/year=2024/ee-2024.pmtiles) | [ee-2024.json](https://data.source.coop/ftw/harmonized-field-data/ee/year=2024/ee-2024.json) |
 
 The latest edition is also available at a stable path: [ee/latest/ee.parquet](https://data.source.coop/ftw/harmonized-field-data/ee/latest/ee.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/ee/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ee/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
+
+**There is no `crop:code`, because PRIA publishes none.** The WFS carries the crop as free text (`taotletud_kultuur`) and no code column in any edition, so `hcat:code` is derived from that name. The source's own classification is `land_use` (arable, permanent grassland, restored grassland, permanent crops, black fallow).
 
 ## Columns
 
 | Column | Type | Description |
 |---|---|---|
-| `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `hcat:name` | large_string | The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
-| `hcat:name_en` | large_string | The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
-| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `hcat:name_en` | string | The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
 | `hcat:code` | uint32 | The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
-| `crop:name` | large_string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `land_use` | string | Carried over from the source column `taotletud_maakasutus`; the publisher documents no meaning for it. |
+| `parcel_id` | int64 | Field identifier (source column `pollu_id`, per the fiboa data survey) |
+| `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `hcat:name` | string | The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -64,15 +70,15 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ee/latest/
 
 This catalog is a mirror: the data is produced and licensed by [Põllumajanduse Registrite ja Informatsiooni Amet](http://data.europa.eu/88u/dataset/pria-pollud) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
 
-- 2016: converted 2026-08-30 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2016&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur>
-- 2017: converted 2026-08-30 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2017&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur>
-- 2018: converted 2026-08-30 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2018&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur>
-- 2019: converted 2026-08-30 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2019&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur>
-- 2020: converted 2026-08-30 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2020&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur>
-- 2021: converted 2026-08-30 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2021&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur>
-- 2022: converted 2026-08-30 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2022&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur>
-- 2023: converted 2026-08-30 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2023&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur>
-- 2024: converted 2026-08-30 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2024&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur>
+- 2016: converted 2026-09-13 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2016&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur,taotletud_maakasutus>
+- 2017: converted 2026-09-13 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2017&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur,taotletud_maakasutus>
+- 2018: converted 2026-09-13 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2018&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur,taotletud_maakasutus>
+- 2019: converted 2026-09-13 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2019&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur,taotletud_maakasutus>
+- 2020: converted 2026-09-13 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2020&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur,taotletud_maakasutus>
+- 2021: converted 2026-09-13 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2021&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur,taotletud_maakasutus>
+- 2022: converted 2026-09-13 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2022&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur,taotletud_maakasutus>
+- 2023: converted 2026-09-13 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2023&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur,taotletud_maakasutus>
+- 2024: converted 2026-09-13 from <https://kls.pria.ee/geoserver/inspire_gsaa/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=inspire_gsaa:LU.GSAA.AGRICULTURAL_PARCELS_2024&propertyName=geom,pollu_id,taotlusaasta,pindala_ha,taotletud_kultuur,taotletud_maakasutus>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

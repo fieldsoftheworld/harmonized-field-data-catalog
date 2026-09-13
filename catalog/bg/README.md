@@ -29,6 +29,8 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 The latest edition is also available at a stable path: [bg/latest/bg.parquet](https://data.source.coop/ftw/harmonized-field-data/bg/latest/bg.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/bg/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/bg/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
+The agricultural part of the physical block register; the same service's Physical_Blocks layers carry forest, urban and transport land as well. The 2021 and 2022 layers are a different release: they carry the usage inside ELGIDENT and publish an area column the later ones do not.
+
 ## Columns
 
 | Column | Type | Description |

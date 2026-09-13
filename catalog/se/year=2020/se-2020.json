@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          60.08005642231753,
-          1.4327245804190014
+          9.33647508486421,
+          55.17427113338902
         ],
         [
-          68.91942143537813,
-          1.4327245804190014
+          25.101983943537157,
+          55.17427113338902
         ],
         [
-          68.91942143537813,
-          5.818770637177386
+          25.101983943537157,
+          68.51800197989465
         ],
         [
-          60.08005642231753,
-          5.818770637177386
+          9.33647508486421,
+          68.51800197989465
         ],
         [
-          60.08005642231753,
-          1.4327245804190014
+          9.33647508486421,
+          55.17427113338902
         ]
       ]
     ]
   },
   "bbox": [
-    60.08005642231753,
-    1.4327245804190014,
-    68.91942143537813,
-    5.818770637177386
+    9.33647508486421,
+    55.17427113338902,
+    25.101983943537157,
+    68.51800197989465
   ],
   "properties": {
     "title": "Sweden — 2020",
@@ -51,19 +51,9 @@
     "proj:code": "EPSG:3006",
     "table:columns": [
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "id",
         "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "collection",
@@ -81,14 +71,24 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "hcat:name_en",
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
         "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 320514427,
-      "file:checksum": "1220bfd07dcfc1e9b3240689716a6bb58efef148341fa10d1acb98bb10edd2f40967",
+      "file:size": 316732094,
+      "file:checksum": "1220310da4f273b6cbe7ab834a20fecff994ff33470f2b13907cbef87c2cf42c8d1f",
       "proj:code": "EPSG:3006"
     }
   },

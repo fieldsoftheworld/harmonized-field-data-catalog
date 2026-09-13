@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          60.0800448197657,
-          1.4324839319570968
+          9.33601530320774,
+          55.17427113338902
         ],
         [
-          68.91702384777535,
-          1.4324839319570968
+          25.1001897014301,
+          55.17427113338902
         ],
         [
-          68.91702384777535,
-          5.818770637177386
+          25.1001897014301,
+          68.51389816141432
         ],
         [
-          60.0800448197657,
-          5.818770637177386
+          9.33601530320774,
+          68.51389816141432
         ],
         [
-          60.0800448197657,
-          1.4324839319570968
+          9.33601530320774,
+          55.17427113338902
         ]
       ]
     ]
   },
   "bbox": [
-    60.0800448197657,
-    1.4324839319570968,
-    68.91702384777535,
-    5.818770637177386
+    9.33601530320774,
+    55.17427113338902,
+    25.1001897014301,
+    68.51389816141432
   ],
   "properties": {
     "title": "Sweden — 2018",
@@ -51,9 +51,9 @@
     "proj:code": "EPSG:3006",
     "table:columns": [
       {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "metrics:area",
@@ -66,11 +66,6 @@
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "crop:code",
         "type": "string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
@@ -79,6 +74,11 @@
         "name": "hcat:name_en",
         "type": "string",
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 304469114,
-      "file:checksum": "1220edb2940dacd9d6fd51e8a99409ab121185cc87845b45d8a9803d64bafc5950be",
+      "file:size": 301222721,
+      "file:checksum": "122044bdd67f96798f38f9b53e097ec78f787a481864b3706626187b35170e273110",
       "proj:code": "EPSG:3006"
     }
   },

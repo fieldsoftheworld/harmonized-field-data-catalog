@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          60.07999362182231,
-          1.4325032362738517
+          9.336251844713964,
+          55.17419888840092
         ],
         [
-          68.91646804051936,
-          1.4325032362738517
+          25.099773873633392,
+          55.17419888840092
         ],
         [
-          68.91646804051936,
-          5.818775935209827
+          25.099773873633392,
+          68.51295845956726
         ],
         [
-          60.07999362182231,
-          5.818775935209827
+          9.336251844713964,
+          68.51295845956726
         ],
         [
-          60.07999362182231,
-          1.4325032362738517
+          9.336251844713964,
+          55.17419888840092
         ]
       ]
     ]
   },
   "bbox": [
-    60.07999362182231,
-    1.4325032362738517,
-    68.91646804051936,
-    5.818775935209827
+    9.336251844713964,
+    55.17419888840092,
+    25.099773873633392,
+    68.51295845956726
   ],
   "properties": {
     "title": "Sweden — 2017",
@@ -51,19 +51,9 @@
     "proj:code": "EPSG:3006",
     "table:columns": [
       {
-        "name": "hcat:name",
+        "name": "collection",
         "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "metrics:area",
@@ -76,19 +66,29 @@
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "id",
         "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "collection",
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
         "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 290414893,
-      "file:checksum": "12201f2b841c084ccd062f54ae04254eff0557e6009f4d0beba3c6c58f641123d6c2",
+      "file:size": 287676931,
+      "file:checksum": "1220c4a7913311956ad83315e50002c0dc4b322fd7778cab361cb7264ede9f6428bc",
       "proj:code": "EPSG:3006"
     }
   },

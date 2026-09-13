@@ -14,9 +14,10 @@ Estonia field boundaries in the [fiboa](https://github.com/fiboa/specification) 
 - **CRS is EPSG:3301, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `pindala_ha` (hectares × 10 000). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `pollu_id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/ee/ee.csv`) have `NULL`.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2024-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/ee/ee.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **There is no `crop:code`, because PRIA publishes none.** The WFS carries the crop as free text (`taotletud_kultuur`) and no code column in any edition, so `hcat:code` is derived from that name. The source's own classification is `land_use` (arable, permanent grassland, restored grassland, permanent crops, black fallow).
 
 ## Tested queries
 
@@ -29,7 +30,7 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/ee/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2016 | 165424 | 958191.0
+-- 2016 | 165421 | 958188.0
 -- 2017 | 170560 | 964961.0
 -- 2018 | 172499 | 967565.0
 -- 2019 | 174284 | 970149.0

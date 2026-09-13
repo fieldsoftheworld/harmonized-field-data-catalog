@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          60.0800448197657,
-          1.4324006571769772
+          9.334994653009394,
+          55.17427113338902
         ],
         [
-          68.91942143537813,
-          1.4324006571769772
+          25.101983943537157,
+          55.17427113338902
         ],
         [
-          68.91942143537813,
-          5.818770637177386
+          25.101983943537157,
+          68.51795189794849
         ],
         [
-          60.0800448197657,
-          5.818770637177386
+          9.334994653009394,
+          68.51795189794849
         ],
         [
-          60.0800448197657,
-          1.4324006571769772
+          9.334994653009394,
+          55.17427113338902
         ]
       ]
     ]
   },
   "bbox": [
-    60.0800448197657,
-    1.4324006571769772,
-    68.91942143537813,
-    5.818770637177386
+    9.334994653009394,
+    55.17427113338902,
+    25.101983943537157,
+    68.51795189794849
   ],
   "properties": {
     "title": "Sweden — 2019",
@@ -51,11 +51,6 @@
     "proj:code": "EPSG:3006",
     "table:columns": [
       {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "crop:code",
         "type": "string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
@@ -66,6 +61,26 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
+        "name": "collection",
+        "type": "string",
+        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -74,21 +89,6 @@
         "name": "hcat:name_en",
         "type": "string",
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 312915249,
-      "file:checksum": "1220842ac331e3e13f9ed7a1a9b5082bd1c5e0e2a099c2bbfa2ba53c3abcdcfa3721",
+      "file:size": 309349029,
+      "file:checksum": "1220b6a6697a0366780d60ed6beefd824504fc3cea73b6b449bf08e7d9df5e4031f9",
       "proj:code": "EPSG:3006"
     }
   },
