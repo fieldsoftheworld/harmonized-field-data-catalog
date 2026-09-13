@@ -26,6 +26,7 @@ pillow = ">=10"
 boto3 = ">=1.35"
 pyyaml = ">=6.0"
 requests = ">=2.32"
+nodejs = ">=26.8.2,<26.9"
 
 [tool.pixi.pypi-dependencies]
 # fiboa-cli is the single source of conversion logic. Until the release that
@@ -42,3 +43,4 @@ gates = "python tests/run_all.py"
 build = "python tools/build.py"
 upload = "python tools/upload_data.py"
 publish = "python tools/publish.py"
+thumbnail = "python tools/thumbnail.py"

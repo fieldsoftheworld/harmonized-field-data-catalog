@@ -87,7 +87,7 @@ source turns out to differ structurally from what the converter expects.
   data. Note it in the converter.
 - **Never delete from the bucket**; uploads are add/replace only.
 - **Thumbnails**: existing collections keep their thumbnail; nothing to do
-  during a backfill. New collections need one (see `tools/thumbnail.py`).
+  during a backfill. New collections need one (see `docs/thumbnails.md`).
 
 ## Known traps (all hit in production)
 
