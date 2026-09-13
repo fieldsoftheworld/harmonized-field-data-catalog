@@ -1,6 +1,6 @@
-# Agent guidance — Field boundaries for Berlin / Brandenburg, Germany
+# Agent guidance — Field blocks for Berlin / Brandenburg, Germany
 
-Germany, Berlin/Brandenburg (parcels) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Germany, Berlin/Brandenburg (blocks) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -42,9 +42,9 @@ LIMIT 5;
 -- id | m2
 -- DEBBLI0469902141 | 318333.0
 -- DEBBLI0469902236 | 123666.0
--- DEBBLI2469915617 | 11939.0
--- DEBBLI2169913704 | 13283.0
--- DEBBLI2169913703 | 753.0
+-- DEBBLI1969912514 | 5408.0
+-- DEBBLI0469902140 | 592866.0
+-- DEBBLI0469903046 | 177893.0
 ```
 
 ## Related collections

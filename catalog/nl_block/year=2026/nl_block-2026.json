@@ -42,7 +42,7 @@
     53.487756902892635
   ],
   "properties": {
-    "title": "Netherlands (parcels) — 2026",
+    "title": "Netherlands (blocks) — 2026",
     "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`nl_block.parquet`, 534,786 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2023-06-15T00:00:00Z",
@@ -88,7 +88,7 @@
     "data": {
       "href": "./nl_block.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Netherlands (parcels) 2026 (GeoParquet)",
+      "title": "Netherlands (blocks) 2026 (GeoParquet)",
       "roles": [
         "data"
       ],
@@ -99,7 +99,7 @@
     "visual": {
       "href": "./nl_block.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Netherlands (parcels) 2026 (PMTiles)",
+      "title": "Netherlands (blocks) 2026 (PMTiles)",
       "roles": [
         "visual"
       ],

@@ -1,4 +1,4 @@
-# Agent guidance — Field boundaries for North Rhine-Westphalia (NRW), Germany
+# Agent guidance — Field blocks for North Rhine-Westphalia (NRW), Germany
 
 Germany, North Rhine-Westphalia field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
@@ -57,11 +57,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_nrw/lat
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(51.4207, 7.6167), 'EPSG:4326', 'EPSG:25832'), 500))
 LIMIT 5;
 -- id | m2
--- 9785834 | 67185.0
--- 9288863 | 21123.0
+-- 9770853 | 45884.0
+-- 9288860 | 22125.0
+-- 9770851 | 31533.0
+-- 9770814 | 23273.0
 -- 9288855 | 54595.0
--- 9288851 | 14284.0
--- 9770860 | 11857.0
 ```
 
 ## Related collections

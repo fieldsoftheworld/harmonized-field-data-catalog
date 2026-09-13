@@ -1,6 +1,6 @@
-# Field boundaries for Lower Saxony / Bremen / Hamburg, Germany
+# Field blocks for Lower Saxony / Bremen / Hamburg, Germany
 
-Germany, Lower Saxony/Bremen/Hamburg (parcels) field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from ML/SLA Niedersachsen. License: DL-DE-BY-2.0.
+Germany, Lower Saxony/Bremen/Hamburg (blocks) field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from ML/SLA Niedersachsen. License: DL-DE-BY-2.0.
 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/de_nds_block/latest/de_nds_block.parquet
 - All editions: s3://ftw/harmonized-field-data/de_nds_block/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)

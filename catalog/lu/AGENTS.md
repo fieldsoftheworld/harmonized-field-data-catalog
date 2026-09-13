@@ -1,4 +1,4 @@
-# Agent guidance — Luxembourg FLIK Parcels
+# Agent guidance — Field blocks for Luxembourg
 
 Luxembourg field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
@@ -39,11 +39,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/lu/latest/
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(49.8155, 6.1347), 'EPSG:4326', 'EPSG:2169'), 500))
 LIMIT 5;
 -- id
--- 0001387
--- 0003682
--- 0001431
--- 0003310
--- 0003706
+-- 0003680
+-- 0003007
+-- 0001386
+-- 0001422
+-- 0003009
 ```
 
 ## Related collections

@@ -11,7 +11,7 @@
     "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
   ],
   "id": "de_nds_block",
-  "title": "Field boundaries for Lower Saxony / Bremen / Hamburg, Germany",
+  "title": "Field blocks for Lower Saxony / Bremen / Hamburg, Germany",
   "description": "A field block (German: \"Feldblock\") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_nds_block/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25832). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_nds_block/AGENTS.md).",
   "keywords": [
     "Bremen",
@@ -132,7 +132,7 @@
     "data": {
       "href": "./latest/de_nds_block.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Germany, Lower Saxony/Bremen/Hamburg (parcels) — latest edition (2026) (GeoParquet)",
+      "title": "Germany, Lower Saxony/Bremen/Hamburg (blocks) — latest edition (2026) (GeoParquet)",
       "description": "Byte-identical copy of `year=2026/de_nds_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
@@ -150,8 +150,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1231,
-      "file:checksum": "1220c3b687f449c15dec4ad8b301332bd25add3403bf9b9deb5595b0233e8cd6b9cd"
+      "file:size": 1230,
+      "file:checksum": "12207df91f9b5d02b53f68121ddbda2ab12fd6d04a7caa237b18dacbb5656c819df9"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -161,13 +161,13 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 791,
-      "file:checksum": "1220c845a8be60f8e7d871568170cbd2c95e93002489bc44b60b702af6d6a3db4d57"
+      "file:size": 790,
+      "file:checksum": "1220dc18edbd7fc5cde6a1aa33dabe8ec85d91cce4ac647eec6522450acddf45a0b7"
     },
     "visual": {
       "href": "./year=2026/de_nds_block.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Germany, Lower Saxony/Bremen/Hamburg (parcels) — latest edition (2026) (PMTiles)",
+      "title": "Germany, Lower Saxony/Bremen/Hamburg (blocks) — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
@@ -239,7 +239,7 @@
       "rel": "item",
       "href": "./year=2026/de_nds_block-2026.json",
       "type": "application/geo+json",
-      "title": "Germany, Lower Saxony/Bremen/Hamburg (parcels) — 2026"
+      "title": "Germany, Lower Saxony/Bremen/Hamburg (blocks) — 2026"
     }
   ],
   "updated": "2026-09-03T22:14:12Z",

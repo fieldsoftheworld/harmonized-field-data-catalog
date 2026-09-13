@@ -1,4 +1,4 @@
-# Field boundaries for Lower Saxony / Bremen / Hamburg, Germany
+# Field blocks for Lower Saxony / Bremen / Hamburg, Germany
 
 A field block (German: "Feldblock") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.
 

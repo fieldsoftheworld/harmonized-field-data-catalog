@@ -1,6 +1,6 @@
 {
   "version": 8,
-  "name": "Netherlands (parcels) — field boundaries",
+  "name": "Netherlands (blocks) — field boundaries",
   "metadata": {
     "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
   },

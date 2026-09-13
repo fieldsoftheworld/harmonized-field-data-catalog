@@ -1,6 +1,6 @@
-# Field boundaries for Berlin / Brandenburg, Germany
+# Field blocks for Berlin / Brandenburg, Germany
 
-Germany, Berlin/Brandenburg (parcels) field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Land Brandenburg. License: DL-DE-BY-2.0.
+Germany, Berlin/Brandenburg (blocks) field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Land Brandenburg. License: DL-DE-BY-2.0.
 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/de_bb_block/latest/de_bb_block.parquet
 - All editions: s3://ftw/harmonized-field-data/de_bb_block/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)

@@ -1,4 +1,4 @@
-# Field boundaries for Austria
+# Field blocks for Austria
 
 **Field boundaries for Austria - INVEKOS Referenzen Österreich 2021.**
 
@@ -19,7 +19,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2021 | 1,299,755 | [467.5 MB](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block.parquet) | [244.1 MB](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block.pmtiles) | [at_block-2021.json](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block-2021.json) |
+| 2021 | 1,299,755 | [727.9 MB](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block.parquet) | [244.1 MB](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block.pmtiles) | [at_block-2021.json](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block-2021.json) |
 
 The latest edition is also available at a stable path: [at_block/latest/at_block.parquet](https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/at_block/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/at_block/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -28,14 +28,14 @@ The latest edition is also available at a stable path: [at_block/latest/at_block
 | Column | Type | Description |
 |---|---|---|
 | `referenz_kennung` | uint64 | Carried over from the source column `REFERENZ_KENNUNG`; the publisher documents no meaning for it. |
-| `ref_art_bezeichnung` | string | Carried over from the source column `REF_ART_BEZEICHNUNG`; the publisher documents no meaning for it. |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `inspire:id` | string | INSPIRE-compliant ID, an absolute and fully resolvable URI. ([spec](https://github.com/fiboa/inspire-extension/blob/main/README.md)) |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `ref_art_bezeichnung` | large_string | Carried over from the source column `REF_ART_BEZEICHNUNG`; the publisher documents no meaning for it. |
+| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `inspire:id` | large_string | INSPIRE-compliant ID, an absolute and fully resolvable URI. ([spec](https://github.com/fiboa/inspire-extension/blob/main/README.md)) |
+| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `ref_art` | string | Carried over from the source column `REF_ART`; the publisher documents no meaning for it. |
+| `ref_art` | large_string | Carried over from the source column `REF_ART`; the publisher documents no meaning for it. |
 | `determination:datetime` | timestamp[ms, tz=UTC] | The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `collection` | large_string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -59,7 +59,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/at_block/l
 
 This catalog is a mirror: the data is produced and licensed by [Agrarmarkt Austria](https://geometadatensuche.inspire.gv.at/metadatensuche/inspire/api/records/9db8a0c3-e92a-4df4-9d55-8210e326a7ed) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2021: converted 2026-08-23 from <https://inspire.lfrz.gv.at/009501/ds/inspire_referenzen_2021_polygon.gpkg.zip>
+- 2021: converted 2026-08-28 from <https://inspire.lfrz.gv.at/009501/ds/inspire_referenzen_2021_polygon.gpkg.zip>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

@@ -42,7 +42,7 @@
     53.56446415731656
   ],
   "properties": {
-    "title": "Germany, Berlin/Brandenburg (parcels) — 2026",
+    "title": "Germany, Berlin/Brandenburg (blocks) — 2026",
     "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_bb_block.parquet`, 90,764 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2026-01-01T00:00:00Z",
@@ -113,7 +113,7 @@
     "data": {
       "href": "./de_bb_block.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Germany, Berlin/Brandenburg (parcels) 2026 (GeoParquet)",
+      "title": "Germany, Berlin/Brandenburg (blocks) 2026 (GeoParquet)",
       "roles": [
         "data"
       ],
@@ -124,7 +124,7 @@
     "visual": {
       "href": "./de_bb_block.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Germany, Berlin/Brandenburg (parcels) 2026 (PMTiles)",
+      "title": "Germany, Berlin/Brandenburg (blocks) 2026 (PMTiles)",
       "roles": [
         "visual"
       ],

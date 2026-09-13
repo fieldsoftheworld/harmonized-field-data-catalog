@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2023 | at | 2947754
 -- 2024 | at | 2956449
 -- 2025 | at | 2944405
--- ... 163 more rows
+-- ... 178 more rows
 ```
 
 ## Join keys
@@ -57,7 +57,7 @@ There are none. `id` is unique within one edition of one collection only; collec
 - Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.
 - `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.
 - Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.
-- Some sources publish field *blocks* (reference parcels) rather than crop fields; the collection description says which.
+- 9 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `de_bb_block`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sh`, `de_th`, `lu`, `nl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
 
 ## Structure
 

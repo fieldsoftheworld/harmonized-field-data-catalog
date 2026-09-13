@@ -1,4 +1,4 @@
-# Luxembourg FLIK Parcels
+# Field blocks for Luxembourg
 
 Luxembourg field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Administration des services techniques de l'agriculture. License: CC-BY-4.0.
 

@@ -110,7 +110,7 @@
     "data": {
       "href": "./latest/nl_block.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Netherlands (parcels) — latest edition (2026) (GeoParquet)",
+      "title": "Netherlands (blocks) — latest edition (2026) (GeoParquet)",
       "description": "Byte-identical copy of `year=2026/nl_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
@@ -128,8 +128,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.25, 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1237,
-      "file:checksum": "1220c29db7ad11f32e1ed2709f11be1bada4d064d9084a7fc41eaf14ad333b06e9bb"
+      "file:size": 1236,
+      "file:checksum": "12200fc5f0c768773a9c584d999bc361a8c18c7f173e44716aa104dff500c0730767"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -139,13 +139,13 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 754,
-      "file:checksum": "1220a0a8c62a25362309b44d118fbb8e5a6f9233b497962e228483f9ed555bc8ffb1"
+      "file:size": 753,
+      "file:checksum": "1220326af3e0778980d2ed681fc1969c346b6fe15cb6bb9c81fed7ec766b7e6dba97"
     },
     "visual": {
       "href": "./year=2026/nl_block.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Netherlands (parcels) — latest edition (2026) (PMTiles)",
+      "title": "Netherlands (blocks) — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
@@ -217,7 +217,7 @@
       "rel": "item",
       "href": "./year=2026/nl_block-2026.json",
       "type": "application/geo+json",
-      "title": "Netherlands (parcels) — 2026"
+      "title": "Netherlands (blocks) — 2026"
     }
   ],
   "updated": "2026-08-28T18:57:59Z",

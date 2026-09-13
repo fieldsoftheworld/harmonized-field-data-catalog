@@ -1,6 +1,6 @@
-# Agent guidance — Field boundaries for Lower Saxony / Bremen / Hamburg, Germany
+# Agent guidance — Field blocks for Lower Saxony / Bremen / Hamburg, Germany
 
-Germany, Lower Saxony/Bremen/Hamburg (parcels) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Germany, Lower Saxony/Bremen/Hamburg (blocks) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 

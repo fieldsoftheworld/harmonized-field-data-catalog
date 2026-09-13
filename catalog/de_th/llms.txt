@@ -1,4 +1,4 @@
-# Field boundaries for Thuringia, Germany
+# Field blocks for Thuringia, Germany
 
 Germany, Thuringia field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Thüringer Landesamt für Landwirtschaft und Ländlichen Raum. License: DL-DE-BY-2.0.
 

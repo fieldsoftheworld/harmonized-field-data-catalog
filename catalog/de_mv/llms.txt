@@ -1,4 +1,4 @@
-# Field boundaries for Mecklenburg-Western Pomerania, Germany
+# Field blocks for Mecklenburg-Western Pomerania, Germany
 
 Germany, Mecklenburg-Western Pomerania field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Ministerium für Landwirtschaft und Umwelt M-V. License: other.
 

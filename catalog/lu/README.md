@@ -1,4 +1,4 @@
-# Luxembourg FLIK Parcels
+# Field blocks for Luxembourg
 
 The Land Parcel Identification System (LPIS) is a reference database of the agriculture parcels used as a basis for area-related payments to farmers in relation to the Common Agricultural Policy (CAP). These payments are (co)financed by the European Agricultural Guarantee Fund (‘EAGF’) and the European Agricultural Fund for Rural Development (‘EAFRD’).
 
@@ -18,7 +18,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 87,997 | [20.4 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.parquet) | [9.8 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.pmtiles) | [lu-2026.json](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu-2026.json) |
+| 2026 | 87,997 | [28.8 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.parquet) | [9.8 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.pmtiles) | [lu-2026.json](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu-2026.json) |
 
 The latest edition is also available at a stable path: [lu/latest/lu.parquet](https://data.source.coop/ftw/harmonized-field-data/lu/latest/lu.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/lu/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lu/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -50,7 +50,7 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 This catalog is a mirror: the data is produced and licensed by [Administration des services techniques de l'agriculture](https://asta.etat.lu/en) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2026: converted 2026-08-23 from <https://data.public.lu/fr/datasets/r/b4ae6690-7e4c-4454-8b60-9fa33ba6a61b>
+- 2026: converted 2026-08-28 from <https://data.public.lu/fr/datasets/r/b4ae6690-7e4c-4454-8b60-9fa33ba6a61b>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

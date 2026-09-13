@@ -65,6 +65,17 @@ for dataset_id in sorted(built & declared):
     for required in ("README.md", "AGENTS.md", "llms.txt"):
         if not (CATALOG / dataset_id / required).is_file():
             err(f"{dataset_id}: missing {required}")
+    holds = (manifest["datasets"][dataset_id] or {}).get("holds", "fields")
+    if holds not in ("fields", "blocks"):
+        err(f"{dataset_id}: holds is {holds!r}, expected 'fields' or 'blocks'")
+    # a block collection says so where a reader sees it, not only in the manifest
+    if holds == "blocks":
+        if "field blocks" not in (coll.get("keywords") or []):
+            err(f"{dataset_id}: holds blocks but the keyword 'field blocks' is missing")
+        if not coll.get("title", "").lower().startswith("field blocks"):
+            err(f"{dataset_id}: holds blocks but the title reads {coll.get('title')!r}")
+    elif "field blocks" in (coll.get("keywords") or []):
+        err(f"{dataset_id}: keyword 'field blocks' on a collection that holds {holds}")
 
 if errors:
     print("\n".join(f"error  {e}" for e in errors))

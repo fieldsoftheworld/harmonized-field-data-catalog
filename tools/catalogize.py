@@ -764,16 +764,29 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     repo = cat["repository"]
     config = publish_config()
     s3_base = glob_base(config)
-    n_fields = sum(c.get("table:row_count") or 0 for c in collections)
+    # A field block (reference parcel) is a contiguous agricultural area bounded
+    # by permanent features; several farmers and several crops can share one, so
+    # blocks and crop fields are counted apart rather than added up.
+    blocks = {i for i, d in manifest.datasets.items() if d.holds == "blocks"}
     editions = [read_json(p) for p in sorted(CATALOG_DIR.glob("*/year=*/*.json"))]
-    n_field_years = sum(i.get("properties", {}).get("table:row_count") or 0 for i in editions)
+
+    def totals(ids):
+        latest = sum(c.get("table:row_count") or 0 for c in collections if c["id"] in ids)
+        years = [i for i in editions if i["collection"] in ids]
+        return latest, sum(i.get("properties", {}).get("table:row_count") or 0 for i in years), len(years)
+
+    field_ids = {c["id"] for c in collections} - blocks
+    n_fields, n_field_years, n_editions = totals(field_ids)
+    n_blocks, n_block_years, n_block_editions = totals(blocks)
     countries = sorted({c["id"].split("_")[0].upper() for c in collections})
     description = (
         f"Official, non-AI field boundary datasets — typically published by governments from their agricultural "
         f"subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa]({FIBOA_SPEC}) schema "
         f"with [fiboa-cli]({FIBOA_CLI_REPO}) and republished as cloud-native GeoParquet and PMTiles. "
-        f"{len(collections)} collections ({', '.join(countries)}), {fmt_int(n_fields)} fields in their latest editions, "
-        f"and {fmt_int(n_field_years)} across all {len(editions)} editions together, counting a field once per edition it appears in. "
+        f"{len(collections)} collections ({', '.join(countries)}). {len(field_ids)} hold crop fields — one declared crop on one parcel — "
+        f"{fmt_int(n_fields)} in their latest editions and {fmt_int(n_field_years)} across all {n_editions} editions together, "
+        f"counting a field once per edition it appears in. The other {len(blocks)} hold field blocks (reference parcels, which several "
+        f"fields can share): {fmt_int(n_blocks)} and {fmt_int(n_block_years)} over {n_block_editions} editions. The two are not added together. "
         f"Each collection is one source dataset, partitioned by edition year; `{s3_base}/*/latest/*.parquet` reads the newest "
         f"edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [{manifest.host['name']}]({manifest.host['url']}) on "
         f"[Source Cooperative]({human_base}); the metadata is maintained in the "
@@ -805,12 +818,13 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     write_json(CATALOG_DIR / "catalog.json", root)
 
     # README.md
-    r = [f"# {cat['title']}", "", description, "", "## Collections", "", "| Collection | Source data provider | Editions | Fields (latest) | License | Docs |", "|---|---|---|---:|---|---|"]
+    r = [f"# {cat['title']}", "", description, "", "## Collections", "", "| Collection | Holds | Source data provider | Editions | Rows (latest) | License | Docs |", "|---|---|---|---|---:|---|---|"]
     for c in collections:
         years = [str(link["title"]).rsplit(" ", 1)[-1] for link in c["links"] if link["rel"] == "item"]
         producer = next((p for p in c.get("providers", []) if "producer" in p.get("roles", [])), {})
         prov = f"[{producer.get('name', '—')}]({producer['url']})" if producer.get("url") else producer.get("name", "—")
-        r.append(f"| [{c['title']}]({human_base}/{c['id']}) | {prov} | {', '.join(years)} | {fmt_int(c.get('table:row_count'))} | {c['license']} | [README]({human_base}/{c['id']}/README.md) · [agents]({human_base}/{c['id']}/AGENTS.md) |")
+        kind = "field blocks" if c["id"] in blocks else "crop fields"
+        r.append(f"| [{c['title']}]({human_base}/{c['id']}) | {kind} | {prov} | {', '.join(years)} | {fmt_int(c.get('table:row_count'))} | {c['license']} | [README]({human_base}/{c['id']}/README.md) · [agents]({human_base}/{c['id']}/AGENTS.md) |")
     r += ["", "## Access", "", f"Everything is static files on object storage: query them in place with DuckDB, GeoPandas or any GeoParquet reader, and render the PMTiles with MapLibre. Single files are plain https URLs; globs use the S3 form of the same prefix through the Source Cooperative proxy (`{s3_base}`, endpoint `{config.get('endpoint_url')}`, anonymous), because `*` needs a listing that https does not provide. Newest edition of every collection:", ""]
     q = f"{duckdb_s3_setup(config)}\nSELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/latest/*.parquet', union_by_name = true, filename = true)\nGROUP BY 1 ORDER BY 1;"
     r += [md_query(q, public_base), ""]
@@ -824,14 +838,15 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     q2 = f"{duckdb_s3_setup(config)}\nSELECT {PARTITION_KEY}, regexp_extract(filename, '/([^/]+)/{PARTITION_KEY}=', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/{PARTITION_KEY}=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)\nGROUP BY 1, 2 ORDER BY 2, 1;"
     a += ["Every edition of every collection:", "", md_query(q2, public_base), ""]
     a += ["## Join keys", "", "There are none. `id` is unique within one edition of one collection only; collections do not share identifiers and editions are not tracked across years. Spatial joins are the only bridge, and each collection is in its own CRS (`proj:code` on the collection and the `data` asset), so transform before joining.", ""]
-    a += ["## Quirks that produce silently wrong answers", "", "- Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.", "- `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.", "- Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.", "- Some sources publish field *blocks* (reference parcels) rather than crop fields; the collection description says which.", ""]
+    a += ["## Quirks that produce silently wrong answers", "", "- Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.", "- `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.", "- Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.", f"- {len(blocks)} collections hold field *blocks* (reference parcels), not crop fields: {', '.join(f'`{b}`' for b in sorted(blocks))}. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.", ""]
     a += ["## Structure", "", f"Assets and structural links resolve relative to the object that carries them; catalogs carry no `self` link. Generated by [tools/catalogize.py]({repo}/blob/main/tools/catalogize.py); fix documentation there."]
     write_text(CATALOG_DIR / "AGENTS.md", "\n".join(a))
 
     # llms.txt
     l = [f"# {cat['title']}", "", f"Official (non-AI) field boundaries harmonized to fiboa, {len(collections)} collections, GeoParquet + PMTiles on Source Cooperative. Root: {public_base}/catalog.json. Agent guide: {human_base}/AGENTS.md.", ""]
     for c in collections:
-        l.append(f"- {c['id']}: {c['title']} — {public_base}/{c['id']}/latest/{c['id']}.parquet (license {c['license']}, CRS {', '.join(c.get('summaries', {}).get('proj:code', []))})")
+        kind = "field blocks" if c["id"] in blocks else "crop fields"
+        l.append(f"- {c['id']}: {c['title']} — {kind} — {public_base}/{c['id']}/latest/{c['id']}.parquet (license {c['license']}, CRS {', '.join(c.get('summaries', {}).get('proj:code', []))})")
     l += ["", f"Globs need S3 through the proxy (DuckDB: CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT '{config.get('endpoint_url', '').replace('https://', '')}', URL_STYLE 'path', REGION '{config.get('region', 'us-west-2')}')): all newest editions {s3_base}/*/latest/*.parquet (union_by_name=true); per-edition {s3_base}/<id>/year=*/*.parquet (hive_partitioning=true)."]
     write_text(CATALOG_DIR / "llms.txt", "\n".join(l))
 

@@ -11,7 +11,7 @@
     "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
   ],
   "id": "de_bb_block",
-  "title": "Field boundaries for Berlin / Brandenburg, Germany",
+  "title": "Field blocks for Berlin / Brandenburg, Germany",
   "description": "A field block (German: \"Feldblock\") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_bb_block/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25833). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_bb_block/AGENTS.md).",
   "keywords": [
     "Berlin",
@@ -136,7 +136,7 @@
     "data": {
       "href": "./latest/de_bb_block.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Germany, Berlin/Brandenburg (parcels) — latest edition (2026) (GeoParquet)",
+      "title": "Germany, Berlin/Brandenburg (blocks) — latest edition (2026) (GeoParquet)",
       "description": "Byte-identical copy of `year=2026/de_bb_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
@@ -154,8 +154,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 2, 5, 20 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1258,
-      "file:checksum": "1220de24ec68a4ef4f26213638551eefe9ae5e143c08c245cea2c0ef9649171e3c1f"
+      "file:size": 1257,
+      "file:checksum": "12204edb74bf77bb798c8f4172f04c9430162272717127024ab0c3854ef3df94edab"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -165,13 +165,13 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 779,
-      "file:checksum": "122034b12de6adf9afd0df286f4e20d12fa159dd8a745858d1dbae59ad739112d23d"
+      "file:size": 778,
+      "file:checksum": "1220dd4147c0678260a074bc737b760eaba0b0c7b211256e39c53e8f848857b10762"
     },
     "visual": {
       "href": "./year=2026/de_bb_block.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Germany, Berlin/Brandenburg (parcels) — latest edition (2026) (PMTiles)",
+      "title": "Germany, Berlin/Brandenburg (blocks) — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
@@ -243,7 +243,7 @@
       "rel": "item",
       "href": "./year=2026/de_bb_block-2026.json",
       "type": "application/geo+json",
-      "title": "Germany, Berlin/Brandenburg (parcels) — 2026"
+      "title": "Germany, Berlin/Brandenburg (blocks) — 2026"
     }
   ],
   "updated": "2026-08-28T18:52:38Z",

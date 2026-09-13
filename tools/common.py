@@ -51,6 +51,10 @@ class Dataset:
     id: str
     years: list[str]
     keywords: list[str] = field(default_factory=list)
+    # "fields" (one declared crop on one parcel) or "blocks" (a reference parcel
+    # bounded by permanent features, which several farmers and crops can share).
+    # The two are counted apart: a block is not a field.
+    holds: str = "fields"
     via: str | None = None
     year_source: str | None = None
     notes: str | None = None
@@ -89,6 +93,7 @@ class Manifest:
                 id=dataset_id,
                 years=years,
                 keywords=list(spec.get("keywords") or []),
+                holds=spec.get("holds", "fields"),
                 via=spec.get("via"),
                 year_source=spec.get("year_source"),
                 notes=spec.get("notes"),

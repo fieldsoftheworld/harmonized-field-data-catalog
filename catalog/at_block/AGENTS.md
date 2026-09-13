@@ -1,6 +1,6 @@
-# Agent guidance — Field boundaries for Austria
+# Agent guidance — Field blocks for Austria
 
-Austria (parcels) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2021). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Austria (blocks) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2021). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 

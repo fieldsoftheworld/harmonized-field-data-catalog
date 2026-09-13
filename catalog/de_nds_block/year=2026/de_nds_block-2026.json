@@ -42,7 +42,7 @@
     53.90893481983809
   ],
   "properties": {
-    "title": "Germany, Lower Saxony/Bremen/Hamburg (parcels) — 2026",
+    "title": "Germany, Lower Saxony/Bremen/Hamburg (blocks) — 2026",
     "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_nds_block.parquet`, 539,834 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2026-01-01T00:00:00Z",
@@ -108,7 +108,7 @@
     "data": {
       "href": "./de_nds_block.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Germany, Lower Saxony/Bremen/Hamburg (parcels) 2026 (GeoParquet)",
+      "title": "Germany, Lower Saxony/Bremen/Hamburg (blocks) 2026 (GeoParquet)",
       "roles": [
         "data"
       ],
@@ -119,7 +119,7 @@
     "visual": {
       "href": "./de_nds_block.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Germany, Lower Saxony/Bremen/Hamburg (parcels) 2026 (PMTiles)",
+      "title": "Germany, Lower Saxony/Bremen/Hamburg (blocks) 2026 (PMTiles)",
       "roles": [
         "visual"
       ],

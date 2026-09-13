@@ -1,4 +1,4 @@
-# Field boundaries for North Rhine-Westphalia (NRW), Germany
+# Field blocks for North Rhine-Westphalia (NRW), Germany
 
 Germany, North Rhine-Westphalia field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Land Nordrhein-Westfalen / Open.NRW. License: DL-DE-BY-2.0.
 

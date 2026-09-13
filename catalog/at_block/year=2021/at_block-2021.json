@@ -42,7 +42,7 @@
     48.96562892993612
   ],
   "properties": {
-    "title": "Austria (parcels) — 2021",
+    "title": "Austria (blocks) — 2021",
     "description": "Field boundaries of the 2021 edition of this dataset, one GeoParquet file (`at_block.parquet`, 1,299,755 fields) and its PMTiles. Partition `year=2021` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2017-01-23T22:16:00Z",
@@ -113,7 +113,7 @@
     "data": {
       "href": "./at_block.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Austria (parcels) 2021 (GeoParquet)",
+      "title": "Austria (blocks) 2021 (GeoParquet)",
       "roles": [
         "data"
       ],
@@ -124,7 +124,7 @@
     "visual": {
       "href": "./at_block.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Austria (parcels) 2021 (PMTiles)",
+      "title": "Austria (blocks) 2021 (PMTiles)",
       "roles": [
         "visual"
       ],

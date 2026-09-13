@@ -1,4 +1,4 @@
-# Agent guidance — Field boundaries for Mecklenburg-Western Pomerania, Germany
+# Agent guidance — Field blocks for Mecklenburg-Western Pomerania, Germany
 
 Germany, Mecklenburg-Western Pomerania field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
@@ -40,8 +40,8 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_mv/late
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(53.8876, 12.4291), 'EPSG:4326', 'EPSG:25833'), 500))
 LIMIT 5;
 -- id | m2
--- DEMVLI073BD10141 | 1075.0
 -- DEMVLI073BD10012 | 33767.0
+-- DEMVLI073BD10141 | 1075.0
 -- DEMVLI073BD10029 | 1876812.0
 ```
 

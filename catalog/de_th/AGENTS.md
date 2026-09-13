@@ -1,4 +1,4 @@
-# Agent guidance — Field boundaries for Thuringia, Germany
+# Agent guidance — Field blocks for Thuringia, Germany
 
 Germany, Thuringia field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
@@ -40,11 +40,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_th/late
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(50.9092, 11.2892), 'EPSG:4326', 'EPSG:25832'), 500))
 LIMIT 5;
 -- id | m2
--- GL50334S07 | 3697.0
--- GL50334S34 | 6086.0
--- GL50334X19 | 70652.0
--- GL50334X21 | 10070.0
+-- GL50334X06 | 26209.0
+-- AL50334X36 | 76457.0
 -- GL50334X02 | 29764.0
+-- GL50334X08 | 3605.0
+-- GL50334S39 | 8800.0
 ```
 
 ## Related collections
