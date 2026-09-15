@@ -134,6 +134,14 @@ datasets:
     thumbnail: {center: [26.26158, 56.01426], basemap: none}  # Latgale near Daugavpils; the densest cluster
     year_source: EuroCrops release year in the source file name (LV_2021).
     keywords: [Latvia, EuroCrops, crop fields]
+  ec_fr:
+    year: 2018
+    thumbnail: {center: [-0.31320, 45.61028], basemap: none}  # Charente/Dordogne; the densest cluster
+    year_source: EuroCrops release year in the source file name (FR_2018).
+    keywords: [France, EuroCrops, RPG, crop fields]
+    notes: 'The 2018 campaign of the Registre Parcellaire Graphique, which IGN publishes
+      no archive for: its downloads run 2017 and 2019 onwards. SURF_PARC is rounded to
+      0.01 ha, so 4,913 parcels under 50 m2 take their area from the geometry.'
   ec_si:
     year: 2021
     thumbnail: {center: [16.27707, 46.59319], basemap: none}  # Prekmurje strip fields on the Hungarian border; the densest cluster
