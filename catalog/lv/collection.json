@@ -12,7 +12,7 @@
   ],
   "id": "lv",
   "title": "Latvia Lauki Parcels",
-  "description": "Latvia offers parcel data on a [public map, available to any user](https://www.lad.gov.lv/lv/lauku-registra-dati).\n\nThe land register is a geographic information system (GIS) that gathers information about agricultural land eligible for state and European Union support from direct support scheme payments or environmental, climate, and rural landscape improvement payments.\n\nThe GIS of the field register contains a database of field blocks with interconnected spatial cartographic data and information of attributes subordinate to them: geographic attachment, identification numbers, and area information.\n\nRelevant datasets are: Country blocks (Lauku Bloki), Fields (Lauki), and Landscape elements.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/lv/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:3059). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lv/AGENTS.md).",
+  "description": "Latvia offers parcel data on a [public map, available to any user](https://www.lad.gov.lv/lv/lauku-registra-dati).\n\nThe land register is a geographic information system (GIS) that gathers information about agricultural land eligible for state and European Union support from direct support scheme payments or environmental, climate, and rural landscape improvement payments.\n\nThe GIS of the field register contains a database of field blocks with interconnected spatial cartographic data and information of attributes subordinate to them: geographic attachment, identification numbers, and area information.\n\nEach edition is the campaign the Rural Support Service published it for, taken from the\n`period_code` the files carry themselves.\n\nThis collection holds 11 editions (2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/lv/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:3059). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lv/AGENTS.md).",
   "keywords": [
     "Latvia",
     "Lauki",
@@ -44,18 +44,18 @@
     "spatial": {
       "bbox": [
         [
-          20.840484290140996,
-          55.633028806090024,
-          28.42497276168695,
-          58.04389796506207
+          20.838188672447817,
+          55.63221901731316,
+          28.42516595855106,
+          58.043900217870096
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2026-04-17T08:56:50Z",
-          "2026-08-20T19:43:17Z"
+          "2015-01-01T00:00:00Z",
+          "2025-01-01T00:00:00Z"
         ]
       ]
     }
@@ -68,23 +68,28 @@
   "table:columns": [
     {
       "name": "collection",
-      "type": "large_string",
+      "type": "string",
       "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "determination:datetime",
-      "type": "timestamp[ms, tz=UTC]",
-      "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "crop:name",
-      "type": "large_string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "parcel_id",
-      "type": "uint64",
-      "description": "identifier (source column `PARCEL_ID`, per the fiboa data survey)"
+      "name": "block_id",
+      "type": "string",
+      "description": "Carried over from the source column `block_number`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "metrics:area",
@@ -92,24 +97,14 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "metrics:perimeter",
+      "type": "float",
+      "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "hcat:name_en",
-      "type": "large_string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "hcat:name",
-      "type": "large_string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "hcat:code",
@@ -117,9 +112,14 @@
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -128,7 +128,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 413218,
+  "table:row_count": 417383,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -138,19 +138,19 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 11,
   "partition:glob": "s3://ftw/harmonized-field-data/lv/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/lv.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Latvia — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/lv.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "title": "Latvia — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/lv-2025.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 627522559,
-      "file:checksum": "1220330b94a16152a0ce3f3ce1e6ca4dc41caf6eaf1c8f6a2094c48ba3ad99a8e887",
+      "file:size": 434673455,
+      "file:checksum": "12208730f8e37b93d3f9f7b6ad706f4aff2497cf2752d417b0382181a764ae05cf44",
       "proj:code": "EPSG:3059"
     },
     "style-hcat-crops": {
@@ -162,8 +162,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2349,
-      "file:checksum": "1220af12f6a9c5d33a792bf8f2f153993f6e4d7b46d4a33e5b276ee026876eaf585e"
+      "file:size": 2312,
+      "file:checksum": "12208cf5bb81250867bbac7d7269049eec4fc4e1c9e8550b58cbcf9507bcf6743e96"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -173,8 +173,8 @@
         "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1202,
-      "file:checksum": "1220b67b7ba2baf15f6196c58c2e14dd7ef37ca62c0c7bd8f419fa2ad0aaa1968c95"
+      "file:size": 1207,
+      "file:checksum": "1220bb19996b2ffef9b117c6c13afbff3c96bbff1b9b7fb4fc32bc05a50febacc2ab"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -184,18 +184,18 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 721,
-      "file:checksum": "122061436c97b36615a5bbb37c641d273fa5b9de6e81eb2ed58595808b5778474489"
+      "file:size": 726,
+      "file:checksum": "122076cd5bd75c7992b6a3ad674a06a7be73904936965557b749461e99f6c71c12dc"
     },
     "visual": {
-      "href": "./year=2026/lv.pmtiles",
+      "href": "./year=2025/lv-2025.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Latvia — latest edition (2026) (PMTiles)",
+      "title": "Latvia — latest edition (2025) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 187563033,
-      "file:checksum": "12208bed7b7143fb62891a7335f4bfe85f95db90eee5064d38fc3be4f3f88aeda4ab"
+      "file:size": 205253547,
+      "file:checksum": "12208312211626e440e2b8d966fbd972a1630166b476a3cbedc3c04f10787971e1db"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -239,7 +239,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/lv.pmtiles",
+      "href": "./year=2025/lv-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -266,21 +266,81 @@
     },
     {
       "rel": "item",
-      "href": "./year=2026/lv-2026.json",
+      "href": "./year=2015/lv-2015.json",
       "type": "application/geo+json",
-      "title": "Latvia — 2026"
+      "title": "Latvia — 2015"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2016/lv-2016.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2016"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2017/lv-2017.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/lv-2018.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/lv-2019.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/lv-2020.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/lv-2021.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/lv-2022.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/lv-2023.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/lv-2024.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2024"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/lv-2025.json",
+      "type": "application/geo+json",
+      "title": "Latvia — 2025"
     }
   ],
-  "updated": "2026-08-28T19:07:56Z",
+  "updated": "2026-09-15T12:09:14Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "lv": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "Lauku atbalsta dienests"
