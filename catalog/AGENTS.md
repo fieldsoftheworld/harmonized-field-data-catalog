@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-54 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
+56 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
 
 ## How to read it
 
@@ -25,7 +25,7 @@ GROUP BY 1 ORDER BY 1;
 -- ch | 1350979
 -- cz | 415300
 -- de_bb | 290688
--- ... 44 more rows
+-- ... 46 more rows
 ```
 
 Every edition of every collection:
@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2023 | at | 2947754
 -- 2024 | at | 2956449
 -- 2025 | at | 2944405
--- ... 207 more rows
+-- ... 209 more rows
 ```
 
 ## Join keys
@@ -57,7 +57,7 @@ There are none. `id` is unique within one edition of one collection only; collec
 - Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.
 - `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.
 - Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.
-- 10 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `bg`, `de_bb_block`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sh`, `de_th`, `lu`, `nl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
+- 11 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `bg`, `de_bb_block`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sh`, `de_sl_block`, `de_th`, `lu`, `nl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
 
 ## Structure
 

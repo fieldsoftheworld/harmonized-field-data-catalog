@@ -1,0 +1,9 @@
+# Field boundaries for Saarland, Germany
+
+Germany, Saarland field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Ministerium für Umwelt, Klima, Mobilität, Agrar und Verbraucherschutz. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/de_sl/latest/de_sl.parquet
+- All editions: s3://ftw/harmonized-field-data/de_sl/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4258; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: id, flik, metrics:area, geometry, name, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/de_sl/README.md, agent guide https://source.coop/ftw/harmonized-field-data/de_sl/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/de_sl/collection.json

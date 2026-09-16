@@ -1,0 +1,132 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "de_sl-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          6.359202,
+          49.112314
+        ],
+        [
+          7.401559,
+          49.112314
+        ],
+        [
+          7.401559,
+          49.634718
+        ],
+        [
+          6.359202,
+          49.634718
+        ],
+        [
+          6.359202,
+          49.112314
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    6.359202,
+    49.112314,
+    7.401559,
+    49.634718
+  ],
+  "properties": {
+    "title": "Germany, Saarland — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_sl.parquet`, 54,460 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2026-12-31T23:59:59Z",
+    "year": 2026,
+    "proj:code": "EPSG:4258",
+    "table:columns": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 54460,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.18"
+    }
+  },
+  "collection": "de_sl",
+  "assets": {
+    "data": {
+      "href": "./de_sl.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Germany, Saarland 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 19836722,
+      "file:checksum": "122065b4feedbefe4a8f6c91ddf711df158e0e169de99bcaa13ad1f76f27672fcc63",
+      "proj:code": "EPSG:4258"
+    },
+    "visual": {
+      "href": "./de_sl.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Germany, Saarland 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 23689353,
+      "file:checksum": "1220865297ce552c3f73f0e73f36ae09320b2daa573a52173869d714874734ae9eaf"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}
