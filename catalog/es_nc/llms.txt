@@ -1,0 +1,9 @@
+# Spain Navarra Crop fields
+
+Spain Navarra field boundaries (2025, 2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Fondo Español de Garantía Agraria (FEGA). License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/es_nc/latest/es_nc.parquet
+- All editions: s3://ftw/harmonized-field-data/es_nc/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4258; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:code, crop:name, metrics:area, id, geometry, crop:name_en, admin_municipality_code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/es_nc/README.md, agent guide https://source.coop/ftw/harmonized-field-data/es_nc/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/es_nc/collection.json

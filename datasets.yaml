@@ -230,6 +230,21 @@ datasets:
   es_cm:
     years: ['2024']
     keywords: [Spain, Castilla-La Mancha, crop fields]
+  es_ex:
+    years: ['2025', '2026']
+    thumbnail: {center: [-5.87838, 40.11855], basemap: none}  # Campo Arañuelo, north of Cáceres; the densest cluster
+    year_source: SIGPAC campaign in the source file name (06_BADAJOZ_rec_2025_…).
+    keywords: [Spain, Extremadura, SIGPAC, recintos, crop fields]
+    notes: 'Extremadura''s own portal (sitex.gobex.es) has not answered since 2026-09-10,
+      so these editions come from FEGA''s national release of the same register, provinces
+      06 (Badajoz) and 10 (Cáceres).'
+  es_nc:
+    years: ['2025', '2026']
+    thumbnail: {center: [-1.73095, 42.04511], basemap: none}  # Ribera Alta, south of Pamplona; the densest cluster
+    year_source: SIGPAC campaign in the source file name (31_NAVARRA_rec_2025_…).
+    keywords: [Spain, Navarra, SIGPAC, recintos, crop fields]
+    notes: 'Navarra''s own portal (sigpac.navarra.es) has not answered since 2026-09-10, so
+      these editions come from FEGA''s national release of the same register, province 31.'
   es_ga:
     years: ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"]
     keywords: [Spain, Galicia, crop fields]

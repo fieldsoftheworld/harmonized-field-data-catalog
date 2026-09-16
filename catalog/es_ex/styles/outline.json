@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "Spain Extremadura — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/es_ex-2026.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "es_ex",
+      "paint": {
+        "fill-color": "#5e3c99",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "es_ex",
+      "paint": {
+        "line-color": "#5e3c99",
+        "line-width": 0.8
+      }
+    }
+  ]
+}
