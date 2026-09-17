@@ -262,6 +262,23 @@ def hcat_crops(path: Path) -> list[tuple[str, str | None, int, float]]:
     return [(r[0], r[1], int(r[2]), float(r[3] or 0)) for r in rows]
 
 
+def hcat_unmapped(path: Path) -> int | None:
+    """Rows whose ``hcat:code`` is empty, or None if the column is absent.
+
+    A reader filtering on crop is silently missing these, so every collection
+    publishes the number rather than leaving it to be measured.
+    """
+    if "hcat:code" not in parquet_columns(path):
+        return None
+    con = duckdb_connect()
+    return int(
+        con.execute(
+            'SELECT count(*) FROM read_parquet(' + quote(path) + ') '
+            'WHERE "hcat:code" IS NULL OR trim(CAST("hcat:code" AS VARCHAR)) = \'\''
+        ).fetchone()[0]
+    )
+
+
 def hcat_groups(path: Path, digits: int = 6) -> list[tuple[str, int, float]]:
     """(group code prefix, feature count, area in m²) per HCAT group, largest first.
 

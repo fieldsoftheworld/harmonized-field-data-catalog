@@ -15,7 +15,7 @@ Slovenia - Eurocrops 2021 field boundaries in the [fiboa](https://github.com/fib
 - **`metrics:area` is in square metres**, taken from the source column `AREA`. Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`si_2021.csv`) have `NULL`.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`si_2021.csv`) have `NULL`. 4 of the 828,263 rows of the 2021 edition (0.00%) have none, so a query that filters or groups on crop silently leaves them out.
 
 ## Tested queries
 

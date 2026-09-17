@@ -61,6 +61,7 @@ from common import (
     fmt_bytes,
     fmt_int,
     hcat_crops,
+    hcat_unmapped,
     parquet_collection_properties,
     parquet_crs,
     parse_link_str,
@@ -723,7 +724,15 @@ def collection_docs(
     id_src = reverse_columns(meta).get("id")
     a.append(f"- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is {'the source column `' + id_src + '`' if id_src else 'assigned by the converter'}). Whether an id persists across editions is not verified here; do not join editions on it without checking.")
     if hcat_cols:
-        a.append(f"- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`{meta.get('ec_mapping_csv')}`) have `NULL`.")
+        unmapped = hcat_unmapped(latest.parquet) or 0
+        share = (
+            f"All {fmt_int(latest.row_count)} rows of the {latest.year} edition carry one."
+            if not unmapped
+            else f"{fmt_int(unmapped)} of the {fmt_int(latest.row_count)} rows of the {latest.year} edition "
+            f"({unmapped / latest.row_count * 100:.2f}%) have none, so a query that filters or groups on "
+            f"crop silently leaves them out."
+        )
+        a.append(f"- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`{meta.get('ec_mapping_csv')}`) have `NULL`. {share}")
     if latest.collection_props:
         a.append("- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: " + ", ".join(f"`{k}` = `{v}`" for k, v in latest.collection_props.items()) + f" ({latest.year} edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.")
     if ds.notes:
