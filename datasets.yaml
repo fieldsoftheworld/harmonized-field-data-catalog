@@ -177,6 +177,12 @@ datasets:
     year: 2026
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Germany, Bavaria, land use, crop fields]
+  de_by_block:
+    year: 2026
+    thumbnail: {center: [10.097464, 49.897795], basemap: none}  # the Main valley above Würzburg; the densest cluster
+    year_source: Rolling WFS without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
+    keywords: [Germany, Bavaria, LPIS, Feldstücke, field blocks]
+    holds: blocks
   de_mv:
     year: 2026
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
