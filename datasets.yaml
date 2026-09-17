@@ -183,6 +183,12 @@ datasets:
     year_source: Rolling WFS without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Germany, Bavaria, LPIS, Feldstücke, field blocks]
     holds: blocks
+  de_he:
+    years: ['2023', '2024', '2025']
+    thumbnail: {center: [8.768172, 50.904699], basemap: none}  # the Lahn-Dill uplands; the densest cluster
+    year_source: The 2023 and 2024 layers publish neither a land cover class nor a declared area, so those editions carry geometry, id and area only.
+    keywords: [Germany, Hesse, Referenzparzellen, LPIS, field blocks]
+    holds: blocks
   de_mv:
     year: 2026
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.

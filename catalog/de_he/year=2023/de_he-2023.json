@@ -1,0 +1,117 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "de_he-2023",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          7.736603476873647,
+          49.3914152661616
+        ],
+        [
+          10.23983792749476,
+          49.3914152661616
+        ],
+        [
+          10.23983792749476,
+          51.651987784417514
+        ],
+        [
+          7.736603476873647,
+          51.651987784417514
+        ],
+        [
+          7.736603476873647,
+          49.3914152661616
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    7.736603476873647,
+    49.3914152661616,
+    10.23983792749476,
+    51.651987784417514
+  ],
+  "properties": {
+    "title": "Germany, Hesse — 2023",
+    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`de_he-2023.parquet`, 626,540 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2023-01-01T00:00:00Z",
+    "end_datetime": "2023-01-01T00:00:00Z",
+    "year": 2023,
+    "proj:code": "EPSG:25832",
+    "table:columns": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 626540,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.2.18"
+    }
+  },
+  "collection": "de_he",
+  "assets": {
+    "data": {
+      "href": "./de_he-2023.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Germany, Hesse 2023 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 123314379,
+      "file:checksum": "12206050b7ddf53697b3175aba1eb7190ebb1ce91143c03c288db615ccab2727dbd7",
+      "proj:code": "EPSG:25832"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

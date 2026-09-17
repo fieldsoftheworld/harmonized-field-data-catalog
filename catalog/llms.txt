@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Official (non-AI) field boundaries harmonized to fiboa, 59 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Official (non-AI) field boundaries harmonized to fiboa, 60 collections, GeoParquet + PMTiles on Source Cooperative. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — crop fields — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - at_block: Field blocks for Austria — field blocks — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
@@ -13,6 +13,7 @@ Official (non-AI) field boundaries harmonized to fiboa, 59 collections, GeoParqu
 - de_bb_block: Field blocks for Berlin / Brandenburg, Germany — field blocks — https://data.source.coop/ftw/harmonized-field-data/de_bb_block/latest/de_bb_block.parquet (license DL-DE-BY-2.0, CRS EPSG:25833)
 - de_by: Field boundaries for Bavaria, Germany — crop fields — https://data.source.coop/ftw/harmonized-field-data/de_by/latest/de_by.parquet (license CC-BY-4.0, CRS EPSG:25832)
 - de_by_block: Field blocks for Bavaria, Germany — field blocks — https://data.source.coop/ftw/harmonized-field-data/de_by_block/latest/de_by_block.parquet (license CC-BY-4.0, CRS EPSG:25832)
+- de_he: Field blocks for Hesse, Germany — field blocks — https://data.source.coop/ftw/harmonized-field-data/de_he/latest/de_he.parquet (license CC-BY-4.0, CRS EPSG:25832)
 - de_mv: Field blocks for Mecklenburg-Western Pomerania, Germany — field blocks — https://data.source.coop/ftw/harmonized-field-data/de_mv/latest/de_mv.parquet (license other, CRS EPSG:25833)
 - de_nds: Crop Fields for Lower Saxony / Bremen / Hamburg, Germany — crop fields — https://data.source.coop/ftw/harmonized-field-data/de_nds/latest/de_nds.parquet (license DL-DE-BY-2.0, CRS EPSG:25832)
 - de_nds_block: Field blocks for Lower Saxony / Bremen / Hamburg, Germany — field blocks — https://data.source.coop/ftw/harmonized-field-data/de_nds_block/latest/de_nds_block.parquet (license DL-DE-BY-2.0, CRS EPSG:25832)
