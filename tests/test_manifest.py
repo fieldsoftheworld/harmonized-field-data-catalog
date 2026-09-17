@@ -65,6 +65,14 @@ for dataset_id in sorted(built & declared):
     for required in ("README.md", "AGENTS.md", "llms.txt"):
         if not (CATALOG / dataset_id / required).is_file():
             err(f"{dataset_id}: missing {required}")
+    # the manifest's provenance has to reach the published collection, or a reader
+    # filtering on how a boundary was made is back to guessing
+    boundaries = (manifest["datasets"][dataset_id] or {}).get("boundaries")
+    if boundaries not in ("declared", "mapped", "inferred"):
+        err(f"{dataset_id}: boundaries is {boundaries!r}, expected declared, mapped or inferred")
+    elif coll.get("boundaries") != boundaries:
+        err(f"{dataset_id}: collection says boundaries {coll.get('boundaries')!r}, manifest says {boundaries!r}")
+
     holds = (manifest["datasets"][dataset_id] or {}).get("holds", "fields")
     if holds not in ("fields", "blocks"):
         err(f"{dataset_id}: holds is {holds!r}, expected 'fields' or 'blocks'")

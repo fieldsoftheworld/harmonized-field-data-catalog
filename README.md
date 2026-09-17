@@ -1,6 +1,6 @@
 # harmonized-field-data-catalog
 
-Git-backed [Portolan](https://www.portolan-sdi.org/) catalog of **harmonized field boundary data**: official, non-AI datasets — typically published by government bodies from their agricultural subsidy registers (IACS/LPIS), cadastres and statistics — converted to the [fiboa](https://fiboa.org/) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles.
+Git-backed [Portolan](https://www.portolan-sdi.org/) catalog of **harmonized field boundary data**: published by government bodies from their agricultural subsidy registers (IACS/LPIS), cadastres, statistics and mapping programmes, and marked with how each boundary came to exist — converted to the [fiboa](https://fiboa.org/) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles.
 
 **This repository holds the catalog *metadata* and the publication tooling.** The data lives on Source Cooperative and is never committed here.
 

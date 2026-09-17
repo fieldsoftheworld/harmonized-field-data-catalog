@@ -18,7 +18,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2024 | 6,453,236 | [2.3 GB](https://data.source.coop/ftw/harmonized-field-data/es_cm/year=2024/es_cm-2024.parquet) | [952.8 MB](https://data.source.coop/ftw/harmonized-field-data/es_cm/year=2024/es_cm-2024.pmtiles) | [es_cm-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_cm/year=2024/es_cm-2024.json) |
+| 2024 | 6,453,236 | [2.5 GB](https://data.source.coop/ftw/harmonized-field-data/es_cm/year=2024/es_cm-2024.parquet) | [952.8 MB](https://data.source.coop/ftw/harmonized-field-data/es_cm/year=2024/es_cm-2024.pmtiles) | [es_cm-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_cm/year=2024/es_cm-2024.json) |
 
 The latest edition is also available at a stable path: [es_cm/latest/es_cm.parquet](https://data.source.coop/ftw/harmonized-field-data/es_cm/latest/es_cm.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/es_cm/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_cm/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -27,14 +27,14 @@ The latest edition is also available at a stable path: [es_cm/latest/es_cm.parqu
 | Column | Type | Description |
 |---|---|---|
 | `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `crop:name_en` | string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `admin_municipality_code` | string | Carried over from the source column `MUNICIPIO`; the publisher documents no meaning for it. |
-| `admin_province_code` | string | Carried over from the source column `PROVINCIA`; the publisher documents no meaning for it. |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:name_en` | large_string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `collection` | large_string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:name` | large_string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `crop:code` | large_string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `admin_municipality_code` | large_string | Carried over from the source column `MUNICIPIO`; the publisher documents no meaning for it. |
+| `admin_province_code` | large_string | Carried over from the source column `PROVINCIA`; the publisher documents no meaning for it. |
+| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -60,7 +60,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_cm/late
 
 This catalog is a mirror: the data is produced and licensed by [Unidad de Cartografía. Secretaría General. Consejería de Agricultura, Ganadería y Desarrollo Rural.](https://datosabiertos.castillalamancha.es) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2024: converted 2026-08-23 from <REST>
+- 2024: converted 2026-08-28 from <REST>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

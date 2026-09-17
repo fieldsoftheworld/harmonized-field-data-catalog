@@ -41,8 +41,8 @@ WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(39.3130, -0.5154),
 LIMIT 5;
 -- id | m2
 -- 812612111.0 | 167086.0
--- 1063106203.0 | 605752.0
 -- 1063106207.0 | 1327387.0
+-- 1063106203.0 | 605752.0
 ```
 
 ## Related collections

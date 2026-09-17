@@ -16,7 +16,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2025 | 1,350,979 | [268.6 MB](https://data.source.coop/ftw/harmonized-field-data/ch/year=2025/ch.parquet) | [155.4 MB](https://data.source.coop/ftw/harmonized-field-data/ch/year=2025/ch.pmtiles) | [ch-2025.json](https://data.source.coop/ftw/harmonized-field-data/ch/year=2025/ch-2025.json) |
+| 2025 | 1,350,979 | [391.3 MB](https://data.source.coop/ftw/harmonized-field-data/ch/year=2025/ch.parquet) | [155.4 MB](https://data.source.coop/ftw/harmonized-field-data/ch/year=2025/ch.pmtiles) | [ch-2025.json](https://data.source.coop/ftw/harmonized-field-data/ch/year=2025/ch-2025.json) |
 
 The latest edition is also available at a stable path: [ch/latest/ch.parquet](https://data.source.coop/ftw/harmonized-field-data/ch/latest/ch.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/ch/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ch/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -57,7 +57,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ch/latest/
 
 This catalog is a mirror: the data is produced and licensed by [Konferenz der kantonalen Geoinformations- und Katasterstellen](https://www.kgk-cgc.ch) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2025: converted 2026-08-25 from a manually obtained file
+- 2025: converted 2026-08-28 from a manually obtained file
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

@@ -40,11 +40,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_an/late
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(37.3484, -4.5976), 'EPSG:4326', 'EPSG:25830'), 500))
 LIMIT 5;
 -- id | m2
--- 1472443134 | 164501.0
--- 1472449700 | 9301.0
--- 1472449504 | 1345.0
--- 1472449724 | 56900.0
--- 1472443131 | 2252.0
+-- 1472443362 | 13434.0
+-- 1472449128 | 105983.0
+-- 1472443360 | 1729.0
+-- 1472449146 | 143496.0
+-- 1472443372 | 72884.0
 ```
 
 ## Related collections

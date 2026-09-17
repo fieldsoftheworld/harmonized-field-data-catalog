@@ -25,7 +25,7 @@ GROUP BY 1 ORDER BY 1;
 -- ch | 1350979
 -- cz | 415300
 -- de_bb | 290688
--- ... 50 more rows
+-- ... 51 more rows
 ```
 
 Every edition of every collection:
@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2023 | at | 2947754
 -- 2024 | at | 2956449
 -- 2025 | at | 2944405
--- ... 217 more rows
+-- ... 230 more rows
 ```
 
 ## Join keys
@@ -58,6 +58,7 @@ There are none. `id` is unique within one edition of one collection only; collec
 - `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.
 - Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.
 - 13 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `bg`, `de_bb_block`, `de_by_block`, `de_he`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sh`, `de_sl_block`, `de_th`, `lu`, `nl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
+- Not every boundary was declared by anyone. `es_cn`, `jp`, `nz` are mapped by an authority from imagery or survey. `us_usda_cropland` is inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
 
 ## Structure
 

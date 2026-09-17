@@ -12,7 +12,8 @@
   ],
   "id": "de_by_block",
   "title": "Field blocks for Bavaria, Germany",
-  "description": "This dataset contains the field blocks (\"Feldstücke\") of Bavaria, the reference parcels of its Land\nParcel Identification System (LPIS). A Feldstück is a contiguous agricultural area belonging to a\nsingle farm operator; areas separated by roads, tracks or watercourses are not combined, and\ndiffering tenure, use or fertiliser planning do not split one. Delineation follows the area eligible\nfor support, which comprises agricultural area, agriculturally usable area and eligible landscape\nelements. The data is published in the \"IACS in INSPIRE\" (TG2) data model and republished twice a\nyear for the application procedure.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_by_block/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25832). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_by_block/AGENTS.md).",
+  "description": "This dataset contains the field blocks (\"Feldstücke\") of Bavaria, the reference parcels of its Land\nParcel Identification System (LPIS). A Feldstück is a contiguous agricultural area belonging to a\nsingle farm operator; areas separated by roads, tracks or watercourses are not combined, and\ndiffering tenure, use or fertiliser planning do not split one. Delineation follows the area eligible\nfor support, which comprises agricultural area, agriculturally usable area and eligible landscape\nelements. The data is published in the \"IACS in INSPIRE\" (TG2) data model and republished twice a\nyear for the application procedure.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_by_block/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25832). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_by_block/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
+  "boundaries": "declared",
   "keywords": [
     "Bavaria",
     "Feldstücke",
@@ -176,7 +177,7 @@
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
-      "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "title": "Preview of the collection's default style.",
       "roles": [
         "thumbnail"
       ],

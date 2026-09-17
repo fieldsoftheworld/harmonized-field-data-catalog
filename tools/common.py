@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parent.parent
 CATALOG_DIR = ROOT / "catalog"
 STAGING_DIR = ROOT / "staging"
 MANIFEST = ROOT / "datasets.yaml"
+# The provenance vocabulary; see Dataset.boundaries.
+BOUNDARIES = ("declared", "mapped", "inferred")
 TOOLS_DIR = Path(__file__).resolve().parent
 
 sys.path.insert(0, str(TOOLS_DIR))
@@ -50,6 +52,11 @@ def file_stem(dataset_id: str, year: str | int) -> str:
 class Dataset:
     id: str
     years: list[str]
+    # How the boundaries came to exist: "declared" by farmers in a subsidy
+    # application or held in the parcel register built on those declarations
+    # (the IACS/LPIS family), "mapped" by an authority from imagery or survey
+    # without a declaration behind it, or "inferred" from imagery by a model.
+    boundaries: str
     keywords: list[str] = field(default_factory=list)
     # "fields" (one declared crop on one parcel) or "blocks" (a reference parcel
     # bounded by permanent features, which several farmers and crops can share).
@@ -89,9 +96,15 @@ class Manifest:
                 sys.exit(f"datasets.yaml: {dataset_id} needs 'years' or 'year'")
             if years != sorted(years):
                 sys.exit(f"datasets.yaml: {dataset_id} years must be ascending, newest last")
+            boundaries = spec.get("boundaries")
+            if boundaries not in BOUNDARIES:
+                sys.exit(
+                    f"datasets.yaml: {dataset_id} needs boundaries: {' | '.join(BOUNDARIES)}"
+                )
             datasets[dataset_id] = Dataset(
                 id=dataset_id,
                 years=years,
+                boundaries=boundaries,
                 keywords=list(spec.get("keywords") or []),
                 holds=spec.get("holds", "fields"),
                 via=spec.get("via"),

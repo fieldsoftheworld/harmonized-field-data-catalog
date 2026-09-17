@@ -21,6 +21,8 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 The latest edition is also available at a stable path: [lt/latest/lt.parquet](https://data.source.coop/ftw/harmonized-field-data/lt/latest/lt.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/lt/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lt/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
+The source is the Harmonized IACS inventory of Europe-LAND (Jänicke et al. 2025), which republishes the Lithuanian GSA data; the national agency NMA is the producer. Version 1.3 of the inventory is the first to carry 2025.
+
 ## Columns
 
 | Column | Type | Description |

@@ -17,7 +17,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2024 | 723,039 | [282.4 MB](https://data.source.coop/ftw/harmonized-field-data/es_cat/year=2024/es_cat-2024.parquet) | [114.7 MB](https://data.source.coop/ftw/harmonized-field-data/es_cat/year=2024/es_cat-2024.pmtiles) | [es_cat-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_cat/year=2024/es_cat-2024.json) |
+| 2024 | 723,039 | [344.9 MB](https://data.source.coop/ftw/harmonized-field-data/es_cat/year=2024/es_cat-2024.parquet) | [114.7 MB](https://data.source.coop/ftw/harmonized-field-data/es_cat/year=2024/es_cat-2024.pmtiles) | [es_cat-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_cat/year=2024/es_cat-2024.json) |
 
 The latest edition is also available at a stable path: [es_cat/latest/es_cat.parquet](https://data.source.coop/ftw/harmonized-field-data/es_cat/latest/es_cat.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/es_cat/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_cat/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -25,13 +25,13 @@ The latest edition is also available at a stable path: [es_cat/latest/es_cat.par
 
 | Column | Type | Description |
 |---|---|---|
-| `crop:name_en` | string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `crop:name_en` | large_string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:name` | large_string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
 | `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:code` | large_string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `collection` | large_string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -55,7 +55,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_cat/lat
 
 This catalog is a mirror: the data is produced and licensed by [Catalonia Department of Agriculture, Livestock, Fisheries and Food](https://agricultura.gencat.cat/ca/ambits/desenvolupament-rural/sigpac/mapa-cultius/) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2024: converted 2026-08-22 from <https://analisi.transparenciacatalunya.cat/api/views/yh94-j2n9/files/d90f5fca-ddd8-405d-a0d5-90609985e98e?download=true&filename=Cultius_DUN2024_SHP.zip>
+- 2024: converted 2026-08-28 from <https://analisi.transparenciacatalunya.cat/api/views/yh94-j2n9/files/d90f5fca-ddd8-405d-a0d5-90609985e98e?download=true&filename=Cultius_DUN2024_SHP.zip>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

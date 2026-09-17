@@ -35,6 +35,8 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 The latest edition is also available at a stable path: [sk/latest/sk.parquet](https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/sk/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/sk/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
+The portal also publishes the 2016 and 2017 campaigns, but as 7-Zip archives, which the conversion pipeline cannot extract.
+
 ## Columns
 
 | Column | Type | Description |

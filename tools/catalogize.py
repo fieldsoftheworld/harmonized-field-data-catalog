@@ -34,6 +34,7 @@ import requests
 import yaml
 
 from common import (
+    BOUNDARIES,
     CATALOG_DIR,
     FILE_EXTENSION,
     PARQUET_TYPE,
@@ -382,6 +383,15 @@ def build_collection(
         f"tested queries are in the collection's [AGENTS.md]({collection_url}/AGENTS.md)."
     )
 
+    provenance = {
+        "declared": "\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the "
+        "parcel register built on those declarations.",
+        "mapped": "\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no "
+        "farmer's declaration behind them.",
+        "inferred": "\n\nBoundaries are inferred: a model derived them from satellite imagery, so they are an "
+        "estimate of where fields are, not a record of what anyone declared or surveyed.",
+    }[ds.boundaries]
+
     providers = list(base.get("providers") or [])
     if not providers and provider_name:
         providers = [{"name": provider_name, "roles": ["producer", "licensor"], **({"url": provider_url} if provider_url else {})}]
@@ -402,7 +412,8 @@ def build_collection(
         ],
         "id": ds.id,
         "title": meta["title"],
-        "description": meta["description"] + access,
+        "description": meta["description"] + access + provenance,
+        "boundaries": ds.boundaries,
         "keywords": sorted(set(["field boundaries", "agriculture", "fiboa", *ds.keywords])),
         "license": lic,
         "providers": providers,
@@ -781,11 +792,24 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     n_fields, n_field_years, n_editions = totals(field_ids)
     n_blocks, n_block_years, n_block_editions = totals(blocks)
     countries = sorted({c["id"].split("_")[0].upper() for c in collections})
+    by_boundaries = {b: sorted(i for i, d in manifest.datasets.items() if d.boundaries == b) for b in BOUNDARIES}
+    how = "; ".join(
+        f"{', '.join(f'`{i}`' for i in ids)} "
+        + ("is" if len(ids) == 1 else "are")
+        + (" mapped by an authority from imagery or survey" if b == "mapped" else " inferred from imagery by a model")
+        for b, ids in by_boundaries.items()
+        if b != "declared" and ids
+    )
+    provenance = (
+        f"In {len(by_boundaries['declared'])} collections the boundaries are declared — they come from farmers' "
+        f"subsidy applications, or from the parcel register built on those declarations. {how[0].upper() + how[1:]}. "
+        f"Each collection's `boundaries` field says which. "
+    )
     description = (
-        f"Official, non-AI field boundary datasets — typically published by governments from their agricultural "
-        f"subsidy registers (IACS/LPIS), cadastres and statistics — harmonized into the [fiboa]({FIBOA_SPEC}) schema "
+        f"Field boundary datasets published by government bodies — from their agricultural subsidy registers "
+        f"(IACS/LPIS), cadastres, statistics and mapping programmes — harmonized into the [fiboa]({FIBOA_SPEC}) schema "
         f"with [fiboa-cli]({FIBOA_CLI_REPO}) and republished as cloud-native GeoParquet and PMTiles. "
-        f"{len(collections)} collections ({', '.join(countries)}). {len(field_ids)} hold crop fields — one declared crop on one parcel — "
+        f"{len(collections)} collections ({', '.join(countries)}). {provenance}{len(field_ids)} hold crop fields — one declared crop on one parcel — "
         f"{fmt_int(n_fields)} in their latest editions and {fmt_int(n_field_years)} across all {n_editions} editions together, "
         f"counting a field once per edition it appears in. The other {len(blocks)} hold field blocks (reference parcels, which several "
         f"fields can share): {fmt_int(n_blocks)} and {fmt_int(n_block_years)} over {n_block_editions} editions. The two are not added together. "
@@ -834,18 +858,24 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     write_text(CATALOG_DIR / "README.md", "\n".join(r))
 
     # AGENTS.md
+    not_declared_agents = " ".join(
+        f"{', '.join(f'`{i}`' for i in ids)} " + ("is" if len(ids) == 1 else "are")
+        + (" mapped by an authority from imagery or survey." if b == "mapped" else " inferred from imagery by a model.")
+        for b, ids in by_boundaries.items()
+        if b != "declared" and ids
+    )
     a = [f"# Agent guidance — {cat['title']}", "", "**One rule survives every edit to this file.** Every claim here is quoted from a source or measured from the data; every query below was run before it was written down and its output follows as comments.", ""]
     a += ["## What this catalog holds", "", f"{len(collections)} collections, one per source dataset, all in the [fiboa]({FIBOA_SPEC}) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `{public_base}/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.", ""]
     a += ["## How to read it", "", f"Single files: plain https under `{public_base}/`. Globs: the S3 form of the same prefix, `{s3_base}/`, through the Source Cooperative proxy (endpoint `{config.get('endpoint_url')}`, path-style, no credentials) — `*` needs a listing and https has none. Newest edition of every collection in one query (schemas differ per source, hence `union_by_name`):", "", md_query(q, public_base), ""]
     q2 = f"{duckdb_s3_setup(config)}\nSELECT {PARTITION_KEY}, regexp_extract(filename, '/([^/]+)/{PARTITION_KEY}=', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/{PARTITION_KEY}=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)\nGROUP BY 1, 2 ORDER BY 2, 1;"
     a += ["Every edition of every collection:", "", md_query(q2, public_base), ""]
     a += ["## Join keys", "", "There are none. `id` is unique within one edition of one collection only; collections do not share identifiers and editions are not tracked across years. Spatial joins are the only bridge, and each collection is in its own CRS (`proj:code` on the collection and the `data` asset), so transform before joining.", ""]
-    a += ["## Quirks that produce silently wrong answers", "", "- Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.", "- `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.", "- Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.", f"- {len(blocks)} collections hold field *blocks* (reference parcels), not crop fields: {', '.join(f'`{b}`' for b in sorted(blocks))}. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.", ""]
+    a += ["## Quirks that produce silently wrong answers", "", "- Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.", "- `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.", "- Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.", f"- {len(blocks)} collections hold field *blocks* (reference parcels), not crop fields: {', '.join(f'`{b}`' for b in sorted(blocks))}. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.", f"- Not every boundary was declared by anyone. {not_declared_agents} Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.", ""]
     a += ["## Structure", "", f"Assets and structural links resolve relative to the object that carries them; catalogs carry no `self` link. Generated by [tools/catalogize.py]({repo}/blob/main/tools/catalogize.py); fix documentation there."]
     write_text(CATALOG_DIR / "AGENTS.md", "\n".join(a))
 
     # llms.txt
-    l = [f"# {cat['title']}", "", f"Official (non-AI) field boundaries harmonized to fiboa, {len(collections)} collections, GeoParquet + PMTiles on Source Cooperative. Root: {public_base}/catalog.json. Agent guide: {human_base}/AGENTS.md.", ""]
+    l = [f"# {cat['title']}", "", f"Government-published field boundaries harmonized to fiboa, {len(collections)} collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: {public_base}/catalog.json. Agent guide: {human_base}/AGENTS.md.", ""]
     for c in collections:
         kind = "field blocks" if c["id"] in blocks else "crop fields"
         l.append(f"- {c['id']}: {c['title']} — {kind} — {public_base}/{c['id']}/latest/{c['id']}.parquet (license {c['license']}, CRS {', '.join(c.get('summaries', {}).get('proj:code', []))})")

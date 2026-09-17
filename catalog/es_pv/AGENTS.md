@@ -39,11 +39,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_pv/late
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(42.9612, -2.5888), 'EPSG:4326', 'EPSG:25830'), 500))
 LIMIT 5;
 -- id
--- 5709
--- 5104
--- 5029
--- 5026
--- 5022
+-- 5110
+-- 5707
+-- 5703
+-- 5054
+-- 5060
 ```
 
 ## Related collections

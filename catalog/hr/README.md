@@ -38,6 +38,8 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 The latest edition is also available at a stable path: [hr/latest/hr.parquet](https://data.source.coop/ftw/harmonized-field-data/hr/latest/hr.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/hr/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/hr/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
+`id` differs by edition: the dated editions (2011-2023) carry ARKOD's own parcel identifier, unique within the edition; the 2024 edition comes from the rolling `land_parcels.gpkg`, which ships no identifier, so there it is a row number. The editions also carry different attributes — 2011 has 17 of them, 2023 has 25, and `jpaid` exists only in 2024.
+
 ## Columns
 
 | Column | Type | Description |

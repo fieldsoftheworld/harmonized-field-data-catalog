@@ -18,7 +18,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2024 | 2,319,893 | [969.3 MB](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.parquet) | [368.1 MB](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.pmtiles) | [es_vc-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.json) |
+| 2024 | 2,319,893 | [1.0 GB](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.parquet) | [368.1 MB](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.pmtiles) | [es_vc-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.json) |
 
 The latest edition is also available at a stable path: [es_vc/latest/es_vc.parquet](https://data.source.coop/ftw/harmonized-field-data/es_vc/latest/es_vc.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/es_vc/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_vc/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -60,7 +60,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_vc/late
 
 This catalog is a mirror: the data is produced and licensed by [Spanish Agricultural Guarantee Fund (FEGA) of the Ministry of Agriculture, Fisheries and Food](https://www.fega.gob.es/es/PwfGcp/es/el_fega/index.jsp) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2024: converted 2026-08-24 from <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PALI_SIGPAC_RECINTOS_25830_SHP.7z>, <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PCAS_SIGPAC_RECINTOS_25830_SHP.7z>, <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PVAL_SIGPAC_RECINTOS_25830_SHP.7z>
+- 2024: converted 2026-08-28 from <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PALI_SIGPAC_RECINTOS_25830_SHP.7z>, <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PCAS_SIGPAC_RECINTOS_25830_SHP.7z>, <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PVAL_SIGPAC_RECINTOS_25830_SHP.7z>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

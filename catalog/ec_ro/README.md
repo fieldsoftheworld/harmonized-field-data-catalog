@@ -19,7 +19,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 259,862 | [90.5 MB](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro.parquet) | [41.3 MB](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro.pmtiles) | [ec_ro-2026.json](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro-2026.json) |
+| 2026 | 259,862 | [125.4 MB](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro.parquet) | [41.3 MB](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro.pmtiles) | [ec_ro-2026.json](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro-2026.json) |
 
 The latest edition is also available at a stable path: [ec_ro/latest/ec_ro.parquet](https://data.source.coop/ftw/harmonized-field-data/ec_ro/latest/ec_ro.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/ec_ro/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ec_ro/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -27,14 +27,14 @@ The latest edition is also available at a stable path: [ec_ro/latest/ec_ro.parqu
 
 | Column | Type | Description |
 |---|---|---|
-| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `source` | string | Carried over from the source column `SOURCE`; the publisher documents no meaning for it. |
-| `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `hcat:name` | string | The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
-| `hcat:name_en` | string | The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `crop:name` | large_string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `collection` | large_string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `source` | large_string | Carried over from the source column `SOURCE`; the publisher documents no meaning for it. |
+| `crop:code` | large_string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `hcat:name` | large_string | The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `hcat:name_en` | large_string | The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
 | `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `hcat:code` | uint32 | The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
@@ -60,7 +60,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_ro/late
 
 This catalog is a mirror: the data is produced and licensed by [Ministry of Regional Development and Public Administration <http://spatial.mdrap.ro>, EuroCrops](https://github.com/maja601/EuroCrops) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2026: converted 2026-08-22 from <https://zenodo.org/records/14094196/files/RO_ny.zip?download=1>
+- 2026: converted 2026-08-28 from <https://zenodo.org/records/14094196/files/RO_ny.zip?download=1>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

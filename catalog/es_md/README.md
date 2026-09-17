@@ -16,7 +16,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 636,756 | [265.1 MB](https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md.parquet) | [96.6 MB](https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md.pmtiles) | [es_md-2026.json](https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md-2026.json) |
+| 2026 | 636,756 | [284.3 MB](https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md.parquet) | [96.6 MB](https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md.pmtiles) | [es_md-2026.json](https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md-2026.json) |
 
 The latest edition is also available at a stable path: [es_md/latest/es_md.parquet](https://data.source.coop/ftw/harmonized-field-data/es_md/latest/es_md.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/es_md/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_md/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -24,12 +24,12 @@ The latest edition is also available at a stable path: [es_md/latest/es_md.parqu
 
 | Column | Type | Description |
 |---|---|---|
-| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `crop:name_en` | string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:name` | large_string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:code` | large_string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `collection` | large_string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:name_en` | large_string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -54,7 +54,7 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 This catalog is a mirror: the data is produced and licensed by [Comunidad de Madrid](https://www.comunidad.madrid) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2026: converted 2026-08-22 from <https://idem.comunidad.madrid/recursos_cat_geo/Catalogo/recursos/UsoDelSuelo/spacm_sigpac.cm.zip>
+- 2026: converted 2026-08-28 from <https://idem.comunidad.madrid/recursos_cat_geo/Catalogo/recursos/UsoDelSuelo/spacm_sigpac.cm.zip>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

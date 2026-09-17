@@ -21,8 +21,8 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2017 | 32,762 | [8.6 MB](https://data.source.coop/ftw/harmonized-field-data/nz/year=2017/nz-2017.parquet) | — | [nz-2017.json](https://data.source.coop/ftw/harmonized-field-data/nz/year=2017/nz-2017.json) |
-| 2020 | 42,133 | [13.8 MB](https://data.source.coop/ftw/harmonized-field-data/nz/year=2020/nz-2020.parquet) | [9.3 MB](https://data.source.coop/ftw/harmonized-field-data/nz/year=2020/nz-2020.pmtiles) | [nz-2020.json](https://data.source.coop/ftw/harmonized-field-data/nz/year=2020/nz-2020.json) |
+| 2017 | 32,762 | [9.1 MB](https://data.source.coop/ftw/harmonized-field-data/nz/year=2017/nz-2017.parquet) | — | [nz-2017.json](https://data.source.coop/ftw/harmonized-field-data/nz/year=2017/nz-2017.json) |
+| 2020 | 42,133 | [14.7 MB](https://data.source.coop/ftw/harmonized-field-data/nz/year=2020/nz-2020.parquet) | [9.3 MB](https://data.source.coop/ftw/harmonized-field-data/nz/year=2020/nz-2020.pmtiles) | [nz-2020.json](https://data.source.coop/ftw/harmonized-field-data/nz/year=2020/nz-2020.json) |
 
 The latest edition is also available at a stable path: [nz/latest/nz.parquet](https://data.source.coop/ftw/harmonized-field-data/nz/latest/nz.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/nz/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/nz/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -30,12 +30,12 @@ The latest edition is also available at a stable path: [nz/latest/nz.parquet](ht
 
 | Column | Type | Description |
 |---|---|---|
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `admin:subdivision_code` | string | ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md)) |
+| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `admin:subdivision_code` | large_string | ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md)) |
 | `determination:datetime` | timestamp[ms, tz=UTC] | The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `type` | string | Irrigation type. Drip/micro, Rotorainer, Pivot, K-line/Long lateral, Unknown (per the fiboa data survey) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `type` | large_string | Irrigation type. Drip/micro, Rotorainer, Pivot, K-line/Long lateral, Unknown (per the fiboa data survey) |
+| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `collection` | large_string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
@@ -59,8 +59,8 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/nz/latest/
 
 This catalog is a mirror: the data is produced and licensed by [Aqualinc Research Limited](https://environment.govt.nz/publications/national-irrigated-land-spatial-dataset-2020-update) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
 
-- 2017: converted 2026-08-25 from <mfe-irrigated-land-area-2017-SHP.zip>
-- 2020: converted 2026-08-25 from <mfe-irrigated-land-area-raw-2020-update-SHP.zip>
+- 2017: converted 2026-08-28 from <mfe-irrigated-land-area-2017-SHP.zip>
+- 2020: converted 2026-08-28 from <mfe-irrigated-land-area-raw-2020-update-SHP.zip>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

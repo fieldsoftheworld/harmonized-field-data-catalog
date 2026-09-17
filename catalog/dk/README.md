@@ -38,6 +38,8 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 The latest edition is also available at a stable path: [dk/latest/dk.parquet](https://data.source.coop/ftw/harmonized-field-data/dk/latest/dk.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/dk/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/dk/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
+`id` differs by edition: from 2014 it is the application and the field number within it (`Journalnr:Marknr`), which identifies a field; before that the source names only the applicant, and that pair repeats — 5,124 keys cover 11,534 of the 678,347 fields of 2008 — so there `id` is a row number. A new application number is issued every year either way, so no id follows a field across editions. The older editions also carry fewer attributes: 2008 and 2009 name no crop at all, and the field block (`Markblok`) starts in 2016.
+
 ## Columns
 
 | Column | Type | Description |
