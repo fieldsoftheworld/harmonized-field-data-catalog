@@ -5,5 +5,5 @@ Netherlands (Crops) field boundaries (2009, 2010, 2011, 2012, 2013, 2014, 2015, 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet
 - All editions: s3://ftw/harmonized-field-data/nl/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
 - CRS EPSG:28992; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: collection, hcat:code, crop:name, hcat:name_en, id, coverage, geometry, metrics:area, hcat:name, crop:code, bbox
+- Columns: geometry, crop:code, id, hcat:code, metrics:area, hcat:name, crop:name, coverage, hcat:name_en, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/nl/README.md, agent guide https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/nl/collection.json

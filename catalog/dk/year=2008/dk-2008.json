@@ -46,7 +46,7 @@
     "description": "Field boundaries of the 2008 edition of this dataset, one GeoParquet file (`dk-2008.parquet`, 678,972 fields) and its PMTiles. Partition `year=2008` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2008-01-01T00:00:00Z",
-    "end_datetime": "2008-01-01T00:00:00Z",
+    "end_datetime": "2008-12-31T23:59:59Z",
     "year": 2008,
     "proj:code": "EPSG:25832",
     "table:columns": [
@@ -59,11 +59,6 @@
         "name": "id",
         "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "geometry",
@@ -80,7 +75,7 @@
     "table:row_count": 678972,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "vecorel-cli": "0.2.18"
     }
   },
   "collection": "dk",
@@ -92,8 +87,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 188378503,
-      "file:checksum": "1220aa4b4edfa04458fd0b04f2f5a7fa5e5d8336465f69b1b1c039bcb490f3d55db7",
+      "file:size": 188372234,
+      "file:checksum": "12204ebd109f36be51e94a91ac47187006bd4d0a13dc46aeb4c87c846749c7cc3c8c",
       "proj:code": "EPSG:25832"
     }
   },

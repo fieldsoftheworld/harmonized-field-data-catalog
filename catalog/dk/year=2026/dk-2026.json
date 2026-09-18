@@ -46,30 +46,10 @@
     "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`dk-2026.parquet`, 604,689 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2026-01-01T00:00:00Z",
-    "end_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2026-12-31T23:59:59Z",
     "year": 2026,
     "proj:code": "EPSG:25832",
     "table:columns": [
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
       {
         "name": "crop:name",
         "type": "string",
@@ -79,6 +59,16 @@
         "name": "crop:code",
         "type": "string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "metrics:area",
@@ -91,9 +81,14 @@
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -105,7 +100,7 @@
     "table:row_count": 604689,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "vecorel-cli": "0.2.18"
     }
   },
   "collection": "dk",
@@ -117,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 329381963,
-      "file:checksum": "1220fd47d239bcd6e3a9746d824cd9bedf45868f1ed94001c259b53d382fa7c5f071",
+      "file:size": 329318924,
+      "file:checksum": "12204a62414cef53dcbc56197b02323683f254cc3649977828d9bed5b5dc1927e0d7",
       "proj:code": "EPSG:25832"
     },
     "visual": {
@@ -128,8 +123,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 255298606,
-      "file:checksum": "1220203d198defe43a177f22f798b64140a55e6c0bf3bca2463fec7967f855303808"
+      "file:size": 252883366,
+      "file:checksum": "1220c26af86ca7d7ea143ec3ed388b638c370bde479b147733937a8538dac8fc5aa9"
     }
   },
   "links": [

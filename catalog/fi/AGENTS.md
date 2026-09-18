@@ -15,7 +15,7 @@ Finland field boundaries in the [fiboa](https://github.com/fiboa/specification) 
 - **`metrics:area` is in square metres** (source column `area`; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/fi/fi_2023.csv`) have `NULL`. 1,314 of the 985,486 rows of the 2025 edition (0.13%) have none, so a query that filters or groups on crop silently leaves them out.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/fi/fi_2023.csv`) have `NULL`. 258 of the 985,486 rows of the 2025 edition (0.03%) have none, so a query that filters or groups on crop silently leaves them out.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2025-01-01T00:00:00Z`, `admin:country_code` = `FI`, `crop:code_list` = `https://fiboa.org/code/fi/fi_2023.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
@@ -46,11 +46,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/fi/latest/
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330101 | barley | 312443 | 994514.0
+-- 330101 | barley | 313477 | 998535.0
 -- 330200 | pasture_meadow_grassland_grass | 486992 | 918438.0
 -- 339900 | not_known_and_other | 61620 | 100931.0
 -- 330106 | spring_rapeseed_rape | 27073 | 86198.0
--- 330102 | peas | 20540 | 63981.0
+-- 330102 | peas | 20562 | 64027.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

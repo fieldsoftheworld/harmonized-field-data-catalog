@@ -69,19 +69,9 @@
   },
   "table:columns": [
     {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:name",
+      "name": "id",
       "type": "string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "metrics:area",
@@ -89,14 +79,24 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "collection",
-      "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "id",
+      "name": "crop:name",
       "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "block_id",
+      "type": "string",
+      "description": "Official Identifier (source column `PERUSLOHKOTUNNUS`, per the fiboa data survey)"
+    },
+    {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "hcat:name",
@@ -109,14 +109,9 @@
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "hcat:name_en",
-      "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "block_id",
-      "type": "string",
-      "description": "Official Identifier (source column `PERUSLOHKOTUNNUS`, per the fiboa data survey)"
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -146,8 +141,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 286826199,
-      "file:checksum": "122073bbf64379098678d43218232fd80d0a3c6437d37f35b318eec6c4aa2bb33e70",
+      "file:size": 286815787,
+      "file:checksum": "122005d6e4e958145d6e8b1fa2fc77740f165200ea0d6b354fefa69290bcc18bc4ec",
       "proj:code": "EPSG:3067"
     },
     "style-hcat-crops": {
@@ -191,8 +186,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 157441813,
-      "file:checksum": "122064afc291ba2534cc537d0263cbcc0800db59befec92cbc01a163d17d13f51adf"
+      "file:size": 156571917,
+      "file:checksum": "122097d7344e88a32d7dde5e1623117d14e3bc12605594c6e16ca525a07135b76b86"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -298,16 +293,16 @@
       "title": "Finland — 2025"
     }
   ],
-  "updated": "2026-09-10T11:37:28Z",
+  "updated": "2026-09-17T22:36:57Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "fi": [
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "Finnish Food Authority"

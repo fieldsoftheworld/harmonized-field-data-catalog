@@ -46,19 +46,14 @@
     "description": "Field boundaries of the 2019 edition of this dataset, one GeoParquet file (`be_vlg-2019.parquet`, 521,395 fields) and its PMTiles. Partition `year=2019` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2019-01-01T00:00:00Z",
-    "end_datetime": "2019-01-01T00:00:00Z",
+    "end_datetime": "2019-12-31T23:59:59Z",
     "year": 2019,
     "proj:code": "EPSG:31370",
     "table:columns": [
       {
-        "name": "hcat:name_en",
+        "name": "crop:code",
         "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "metrics:area",
@@ -66,14 +61,9 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "block_id",
+        "name": "hcat:name",
         "type": "string",
-        "description": "Unique identification number for the field. (source column `REF_ID`, per the fiboa data survey)"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "crop:name",
@@ -81,14 +71,9 @@
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "hcat:name",
+        "name": "hcat:name_en",
         "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:code",
@@ -101,6 +86,16 @@
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "block_id",
+        "type": "string",
+        "description": "Unique identification number for the field. (source column `REF_ID`, per the fiboa data survey)"
+      },
+      {
         "name": "bbox",
         "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
         "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -110,7 +105,7 @@
     "table:row_count": 521395,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "vecorel-cli": "0.2.18"
     }
   },
   "collection": "be_vlg",
@@ -122,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 88786876,
-      "file:checksum": "12203e8952eb5e642fed806e0ae45cf27d5dad556e03e938e05863464d3d2bed51b0",
+      "file:size": 88780132,
+      "file:checksum": "1220c890d069d6887ed92603aed5047136c64f2be04e61552448e7c94e3df323995d",
       "proj:code": "EPSG:31370"
     }
   },

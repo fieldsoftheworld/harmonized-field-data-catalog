@@ -51,9 +51,29 @@
     "proj:code": "EPSG:28992",
     "table:columns": [
       {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "crop:name",
         "type": "string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "coverage",
+        "type": "string",
+        "description": "Land-cover category (Grass land, Arable field, Ditch, Landscape element) (source column `category`, per the fiboa data survey)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:code",
@@ -66,34 +86,9 @@
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "coverage",
-        "type": "string",
-        "description": "Land-cover category (Grass land, Arable field, Ditch, Landscape element) (source column `category`, per the fiboa data survey)"
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hcat:code",
@@ -110,7 +105,7 @@
     "table:row_count": 1293962,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.2.18"
     }
   },
   "collection": "nl",
@@ -122,19 +117,9 @@
       "roles": [
         "data"
       ],
-      "file:size": 1013283336,
-      "file:checksum": "122097517438a001af6a3c222025aa2d1bf418771813d2cbaad7cae4d8ccbd4c3835",
+      "file:size": 756444647,
+      "file:checksum": "1220c7569f34539969549ed8da38c2b35730f43ff7fff8728aa9c10c88abfd6859a9",
       "proj:code": "EPSG:28992"
-    },
-    "visual": {
-      "href": "./nl-2025.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Netherlands (Crops) 2025 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 532094547,
-      "file:checksum": "1220dd7dd31157cc75f57c261b40968c1a14304ce12bb4fb8c36016e786b2806ac54"
     }
   },
   "links": [

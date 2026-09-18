@@ -15,8 +15,8 @@ Denmark field boundaries in the [fiboa](https://github.com/fiboa/specification) 
 - **`metrics:area` is in square metres**, taken from the source column `IMK_areal` (hectares × 10 000). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`dk_2019.csv`) have `NULL`. 17,612 of the 604,689 rows of the 2026 edition (2.91%) have none, so a query that filters or groups on crop silently leaves them out.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `DK`, `determination:datetime` = `2026-01-01T00:00:00Z`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/dk_2019.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`dk_2019.csv`) have `NULL`. 341 of the 604,689 rows of the 2026 edition (0.06%) have none, so a query that filters or groups on crop silently leaves them out.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `DK`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/dk_2019.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 - `id` differs by edition: from 2014 it is the application and the field number within it (`Journalnr:Marknr`), which identifies a field; before that the source names only the applicant, and that pair repeats — 5,124 keys cover 11,534 of the 678,347 fields of 2008 — so there `id` is a row number. A new application number is issued every year either way, so no id follows a field across editions. The older editions also carry fewer attributes: 2008 and 2009 name no crop at all, and the field block (`Markblok`) starts in 2016.
 
 ## Tested queries
@@ -50,11 +50,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/dk/latest/
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330101 | spring_barley | 161753 | 1251267.0
--- 330109 | plants_harvested_green | 86224 | 417015.0
+-- 330101 | spring_barley | 162428 | 1254300.0
+-- 330109 | plants_harvested_green | 97902 | 502945.0
 -- 330200 | pasture_meadow_grassland_grass | 136023 | 251666.0
--- 330106 | winter_rapeseed_rape | 19029 | 188761.0
--- 330111 | fallow_land_not_crop | 107721 | 138174.0
+-- 330106 | winter_rapeseed_rape | 19044 | 188796.0
+-- 330111 | fallow_land_not_crop | 108044 | 138280.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

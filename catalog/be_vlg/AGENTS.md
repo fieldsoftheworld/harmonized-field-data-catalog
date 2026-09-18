@@ -15,8 +15,8 @@ Belgium, Flanders field boundaries in the [fiboa](https://github.com/fiboa/speci
 - **`metrics:area` is in square metres**, taken from the source column `GRAF_OPP` (hectares × 10 000). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`be_vlg_2021.csv`) have `NULL`. 3,801 of the 597,088 rows of the 2026 edition (0.64%) have none, so a query that filters or groups on crop silently leaves them out.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `typology` = `None`, `admin:country_code` = `BE`, `admin:subdivision_code` = `VLG`, `determination:datetime` = `2026-01-01T00:00:00Z`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/be_vlg_2021.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`be_vlg_2021.csv`) have `NULL`. 705 of the 597,088 rows of the 2026 edition (0.12%) have none, so a query that filters or groups on crop silently leaves them out.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `typology` = `None`, `admin:country_code` = `BE`, `admin:subdivision_code` = `VLG`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/be_vlg_2021.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -51,9 +51,9 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
 -- 330200 | pasture_meadow_grassland_grass | 231205 | 237309.0
 -- 330109 | green_silo_maize | 88753 | 142715.0
--- 330101 | grain_maize_corn_popcorn | 73378 | 130982.0
--- 330103 | potatoes | 19707 | 46044.0
--- 330129 | sugar_beet | 10469 | 23780.0
+-- 330101 | grain_maize_corn_popcorn | 74221 | 132500.0
+-- 330103 | potatoes | 20184 | 47509.0
+-- 330129 | sugar_beet | 10473 | 23789.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
