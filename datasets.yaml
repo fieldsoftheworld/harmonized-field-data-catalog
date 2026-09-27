@@ -377,3 +377,41 @@ datasets:
       islands (92% of their fields match), and 2022 carries the code on the layer itself.
     row_count_tolerance: 0.3  # 2025 holds 3.57M parcels against 4.81M in 2023, upstream: the same
                               # mainland area comes as 30% fewer, 21% larger parcels (avg 8,512 -> 10,335 m2)
+  ie_lpis:
+    years: ['2017', '2018', '2019', '2020', '2021', '2022', '2025']
+    boundaries: declared
+    keywords: [Ireland, DAFM, LPIS, Anonymous LPIS, IACS, crop fields]
+  pl:
+    years: ['2025', '2026']
+    boundaries: declared
+    keywords: [Poland, ARiMR, crop fields, declared crops, IACS]
+  pl_block:
+    year: 2026
+    boundaries: declared
+    year_source: The shapefile's date inside the downloaded archive, which the converter records as determination:datetime.
+    keywords: [Poland, ARiMR, LPIS, MKO, maximum eligible area, field blocks]
+    holds: blocks
+  de_bw:
+    years: ['2018', '2019', '2020', '2021', '2022']
+    boundaries: declared
+    keywords: [Germany, Baden-Württemberg, GISELa, LPIS, reference parcels, IACS]
+  de_st:
+    years: ['2021', '2022', '2023']
+    boundaries: declared
+    keywords: [Germany, Saxony-Anhalt, INSPIRE, LPIS, field blocks]
+    holds: blocks
+  de_sax:
+    year: 2026
+    boundaries: declared
+    year_source: The source serves only the current year (gesamt_2026_RE.zip; 2023-2025 return 404), and its JAHR column says 2026.
+    keywords: [Germany, Saxony, Feldblöcke, LPIS, field blocks]
+    holds: blocks
+  it_bz:
+    year: 2026
+    boundaries: declared
+    year_source: BEGIN_DATE of most features.
+    keywords: [Italy, South Tyrol, Alto Adige, LAFIS, crop fields]
+  us_ca_scm:
+    years: ['2022', '2023']
+    boundaries: mapped
+    keywords: [United States, California, DWR, Statewide Crop Mapping, crop fields]
