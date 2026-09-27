@@ -18,6 +18,15 @@ FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- es | 17844643
+-- at | 2944405
+-- at_block | 1299755
+-- be_vlg | 597088
+-- be_wal | 341968
+-- bg | 226592
+-- ch | 1350979
+-- cz | 415300
+-- de_bb | 290688
+-- ... 52 more rows
 ```
 
 Every edition of every collection:
@@ -30,6 +39,15 @@ FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_part
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
 -- 2025 | es | 17844643
+-- 2018 | at | 2523190
+-- 2019 | at | 2529896
+-- 2020 | at | 2614636
+-- 2021 | at | 2610511
+-- 2022 | at | 2600002
+-- 2023 | at | 2947754
+-- 2024 | at | 2956449
+-- 2025 | at | 2944405
+-- ... 238 more rows
 ```
 
 ## Join keys

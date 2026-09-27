@@ -367,13 +367,19 @@ datasets:
     boundaries: declared
     keywords: [Spain, FEGA, SIGPAC, declared crops, cultivo declarado]
   pt:
-    years: ['2020', '2021', '2022', '2023', '2025']
+    years: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2025']
     boundaries: declared
     keywords: [Portugal, IFAP, crop fields, INSPIRE]
     notes: >-
-      The 2020 edition carries no crop code for Madeira or the Azores (199,123 of its
-      4.77M fields): IFAP ships one crop table per campaign and the 2020 one covers the
-      mainland only, so those fields join to nothing. The 2021 table does cover the
-      islands (92% of their fields match), and 2022 carries the code on the layer itself.
+      No crop code for a fifth to a third of the fields in every edition before 2025
+      (22.8% of 2017, 18.7% of 2018, 20.9% of 2019, 29.4-33.4% of 2020-2023): mostly IFAP
+      recorded a land cover class and declared no crop. It is written as an empty string
+      rather than null, because crop:code is required and the writer rejects nulls; in
+      2023 it is a single space, so test with strip(). 2020 is worse for the islands
+      specifically (199,123 fields), its crop table covering the mainland only; 2021's
+      does cover them and 2022 carries the code on the layer. 2017 publishes no identifier
+      for Madeira or the Azores, so those 177,614 fields carry ids synthesised from 10^12
+      upward, a sort position rather than a provider key. 2018 ships the north twice; the
+      154,980 duplicated fields are dropped, leaving 3,798,241.
     row_count_tolerance: 0.3  # 2025 holds 3.57M parcels against 4.81M in 2023, upstream: the same
                               # mainland area comes as 30% fewer, 21% larger parcels (avg 8,512 -> 10,335 m2)

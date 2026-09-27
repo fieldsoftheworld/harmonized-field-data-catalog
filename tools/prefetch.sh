@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pre-download source files into cache/ so `fiboa publish` finds them.
+# Pre-download source files into cache/ so `fiboa convert` finds them.
 #
 # vecorel-cli's downloader gives up after ~300 s, which multi-GB sources and
 # slow servers exceed, and it keeps the truncated file. This fetches each

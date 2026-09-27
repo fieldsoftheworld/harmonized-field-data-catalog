@@ -61,7 +61,7 @@ Field boundary datasets published by government bodies — from their agricultur
 | [BRP Crop Field Boundaries for The Netherlands (CAP-based)](https://source.coop/ftw/harmonized-field-data/nl) | crop fields | [RVO / PDOK](https://www.pdok.nl/introductie/-/article/basisregistratie-gewaspercelen-brp-) | 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 | 1,265,023 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/nl/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md) |
 | [Field blocks for The Netherlands](https://source.coop/ftw/harmonized-field-data/nl_block) | field blocks | [RVO / PDOK](https://www.pdok.nl/introductie/-/article/referentiepercelen) | 2026 | 534,786 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/nl_block/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/nl_block/AGENTS.md) |
 | [Irrigated land area](https://source.coop/ftw/harmonized-field-data/nz) | crop fields | [Aqualinc Research Limited](https://environment.govt.nz/publications/national-irrigated-land-spatial-dataset-2020-update) | 2017, 2020 | 42,133 | CC-BY-4.0 | [README](https://source.coop/ftw/harmonized-field-data/nz/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/nz/AGENTS.md) |
-| [Field boundaries for Portugal](https://source.coop/ftw/harmonized-field-data/pt) | crop fields | [IPAP - Instituto de Financiamento da Agricultura e Pescas](https://www.ifap.pt/isip/ows/) | 2020, 2021, 2022, 2023, 2025 | 3,571,255 | other | [README](https://source.coop/ftw/harmonized-field-data/pt/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md) |
+| [Field boundaries for Portugal](https://source.coop/ftw/harmonized-field-data/pt) | crop fields | [IPAP - Instituto de Financiamento da Agricultura e Pescas](https://www.ifap.pt/isip/ows/) | 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2025 | 3,571,255 | other | [README](https://source.coop/ftw/harmonized-field-data/pt/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md) |
 | [Swedish Crop Fields (Jordbruksskiften)](https://source.coop/ftw/harmonized-field-data/se) | crop fields | [Jordbruksverket (The Swedish Board of Agriculture)](https://jordbruksverket.se) | 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 | 1,207,889 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/se/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/se/AGENTS.md) |
 | [Slovenia Crop Fields](https://source.coop/ftw/harmonized-field-data/si) | crop fields | [Ministry of Agriculture, Forestry and Food (Ministrstvo za kmetijstvo, gozdarstvo in prehrano)](https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-kmetijstvo-gozdarstvo-in-prehrano/) | 2019, 2020, 2021, 2022, 2023, 2024 | 809,044 | other | [README](https://source.coop/ftw/harmonized-field-data/si/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/si/AGENTS.md) |
 | [Slovakia Agricultural Land Identification System](https://source.coop/ftw/harmonized-field-data/sk) | crop fields | [Pôdohospodárska platobná agentúra](https://www.apa.sk) | 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 | 271,807 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/sk/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/sk/AGENTS.md) |
@@ -78,7 +78,15 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
--- es | 17844643
+-- at | 2944405
+-- at_block | 1299755
+-- be_vlg | 597088
+-- be_wal | 341968
+-- bg | 226592
+-- ch | 1350979
+-- cz | 415300
+-- de_bb | 290688
+-- ... 52 more rows
 ```
 
 ## License

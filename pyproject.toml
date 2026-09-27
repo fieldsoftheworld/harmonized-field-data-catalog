@@ -12,7 +12,7 @@ platforms = ["osx-arm64", "osx-64", "linux-64"]
 
 [tool.pixi.dependencies]
 python = ">=3.11,<3.14"
-# Conversion toolchain used by `fiboa publish`
+# Tiles for the staging step in tools/build.py (ogr2ogr reads the GeoParquet)
 libgdal-arrow-parquet = ">=3.8"
 tippecanoe = ">=2.70"
 unrar = ">=0.4"
@@ -29,10 +29,10 @@ requests = ">=2.32"
 nodejs = ">=26.8.2,<26.9"
 
 [tool.pixi.pypi-dependencies]
-# fiboa-cli is the single source of conversion logic. Until the release that
-# carries the simplified `fiboa publish` (fiboa/cli branch publish-portolan) is
-# on PyPI, tools/build.py calls the `fiboa` executable named by $FIBOA_CMD
-# (default: `fiboa` on PATH) and records its version in every collection.
+# fiboa-cli is the single source of conversion logic. tools/build.py calls its
+# convert, validate and create-stac-collection through $FIBOA_CMD (default:
+# `fiboa` on PATH), so a checkout with unreleased converter fixes can be used,
+# and records its version in every collection.
 # TODO(pin): fiboa-cli = "==0.22.0" once released, and drop FIBOA_CMD.
 # Validators, pinned to what CI runs (.github/workflows/ci.yml).
 rashid = "==0.1.7"
