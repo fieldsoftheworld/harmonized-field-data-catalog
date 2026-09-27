@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the published metadata for one dataset (or the catalog root).
 
-Input is what ``fiboa publish`` left in ``staging/<id>/year=<Y>/`` — the
+Input is what ``build.py`` staged in ``staging/<id>/year=<Y>/`` — the
 GeoParquet, the PMTiles and a ``collection.json`` with relative links — plus
 ``staging/<id>/converter.json`` (``converter_meta.py``) and the manifest
 ``datasets.yaml``. Output is everything under ``catalog/<id>/``:
@@ -91,11 +91,11 @@ class YearInput:
         self.dir = staging_year_dir(dataset_id, year)
         self.stac_path = self.dir / "collection.json"
         if not self.stac_path.exists():
-            sys.exit(f"missing {self.stac_path}: run `fiboa publish {dataset_id} --variant {year}` first")
+            sys.exit(f"missing {self.stac_path}: run `tools/build.py {dataset_id} --year {year}` first")
         self.stac = read_json(self.stac_path)
         self.data_asset = self.stac["assets"]["data"]
         self.visual_asset = self.stac["assets"].get("visual")
-        # fiboa publish names files <id>[-<variant>]; take the names it wrote
+        # staged files are named <id>[-<variant>]; take the names the record holds
         self.parquet = self.dir / Path(self.data_asset["href"]).name
         self.pmtiles = self.dir / Path(self.visual_asset["href"]).name if self.visual_asset else None
         if not self.parquet.exists():
@@ -109,7 +109,7 @@ class YearInput:
 
 
     def _check_sizes(self):
-        """Refuse to describe a file with a size `fiboa publish` recorded earlier.
+        """Refuse to describe a file with a size staging recorded earlier.
 
         file:size and file:checksum are derived facts, but they are copied from
         the staging collection.json rather than measured here. Anything that
@@ -126,7 +126,7 @@ class YearInput:
             if recorded is not None and actual != recorded:
                 sys.exit(
                     f"{path}: {actual} bytes, but {self.stac_path} records {recorded}. "
-                    "The file changed after it was published; re-run `fiboa publish` "
+                    "The file changed after it was published; re-run `tools/build.py` "
                     "for this edition so the record matches what it describes."
                 )
 

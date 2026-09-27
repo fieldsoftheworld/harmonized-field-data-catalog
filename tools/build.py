@@ -3,8 +3,9 @@
 
 For every dataset (and every year in ``datasets.yaml``):
 
-1. ``fiboa publish <id> --variant <year>`` into ``staging/<id>/year=<year>/``
-   — convert, validate, PMTiles, STAC; all conversion logic is fiboa-cli's.
+1. ``stage()`` fills ``staging/<id>/year=<year>/``: ``fiboa convert`` and
+   ``fiboa validate`` (all conversion logic is fiboa-cli's), PMTiles with
+   ogr2ogr and tippecanoe, and the ``collection.json`` catalogize reads.
 2. a row-count check against the neighbouring editions, which warns when a
    conversion quietly changed what it keeps (``--strict-row-counts`` to fail).
 3. ``converter_meta.py`` dumps the converter's declared metadata.
@@ -27,18 +28,25 @@ delete them to reconvert.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 import shlex
 import subprocess
 import sys
+from pathlib import Path
 
 from common import (
+    FILE_EXTENSION,
+    PMTILES_TYPE,
     ROOT,
     STAGING_DIR,
+    WEB_MAP_LINKS_EXTENSION,
     Manifest,
     file_stem,
     parquet_row_count,
+    read_json,
     staging_year_dir,
+    write_json,
 )
 
 FIBOA_CMD = shlex.split(os.environ.get("FIBOA_CMD", "fiboa"))
@@ -51,17 +59,74 @@ def run(cmd: list[str], **kwargs) -> None:
     subprocess.run(cmd, check=True, cwd=ROOT, **kwargs)
 
 
-def publish(dataset_id: str, year: str, has_variants: bool, latest: bool = True) -> None:
+TIPPECANOE_OPTS = ["-zg", "--drop-densest-as-needed", "--extend-zooms-if-still-dropping"]
+
+
+def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True) -> None:
     out = staging_year_dir(dataset_id, year)
     out.mkdir(parents=True, exist_ok=True)
-    cmd = [*FIBOA_CMD, "publish", dataset_id, "-c", str(CACHE_DIR), "-o", str(out)]
-    if not latest:
-        # only the newest edition is rendered in the browser; tiles for older
-        # editions would double the storage without ever being seen
-        cmd += ["--no-pmtiles"]
-    if has_variants:
-        cmd += ["--variant", year]
-    run(cmd)
+    # an edition that is only a label, not a converter variant, is published as <id>
+    stem = file_stem(dataset_id, year) if has_variants else dataset_id
+    parquet, pmtiles = out / f"{stem}.parquet", out / f"{stem}.pmtiles"
+
+    if not parquet.exists():
+        cmd = [*FIBOA_CMD, "convert", dataset_id, "-c", str(CACHE_DIR), "-o", str(parquet)]
+        if has_variants:
+            cmd += ["--variant", year]
+        run(cmd)
+    run([*FIBOA_CMD, "validate", "-n", "-1", str(parquet)])
+
+    # only the newest edition is rendered in the browser; tiles for older
+    # editions would double the storage without ever being seen
+    if latest and not pmtiles.exists():
+        make_pmtiles(parquet, pmtiles, dataset_id)
+    describe(dataset_id, parquet, pmtiles if pmtiles.exists() else None, out / "collection.json")
+
+
+def make_pmtiles(parquet: Path, pmtiles: Path, layer: str) -> None:
+    # tippecanoe ignores $TMPDIR and spills into /tmp, which is often a small partition
+    tmp = ["-t", os.environ["TMPDIR"]] if os.environ.get("TMPDIR") else []
+    ogr = ["ogr2ogr", "-t_srs", "EPSG:4326", "-f", "GeoJSONSeq", "/vsistdout/", str(parquet)]
+    tippecanoe = ["tippecanoe", *tmp, *TIPPECANOE_OPTS, "--projection=EPSG:4326", "-o", str(pmtiles), "-l", layer]
+    print(f"$ {shlex.join(ogr)} | {shlex.join(tippecanoe)}", flush=True)
+    source = subprocess.Popen(ogr, stdout=subprocess.PIPE)
+    tiles = subprocess.run(tippecanoe, stdin=source.stdout)
+    source.stdout.close()
+    if source.wait() != 0 or tiles.returncode != 0:
+        pmtiles.unlink(missing_ok=True)
+        raise subprocess.CalledProcessError(tiles.returncode or source.returncode, tippecanoe)
+
+
+def describe(dataset_id: str, parquet: Path, pmtiles: Path | None, stac_file: Path) -> None:
+    """The collection.json catalogize reads: fiboa's STAC with relative hrefs, sizes and checksums."""
+    newest = max(p.stat().st_mtime for p in (parquet, pmtiles) if p is not None)
+    if stac_file.exists() and stac_file.stat().st_mtime >= newest:
+        return
+    run([*FIBOA_CMD, "create-stac-collection", str(parquet), "-o", str(stac_file)])
+    data = read_json(stac_file)
+    if data["id"] != dataset_id:
+        stac_file.unlink()
+        raise SystemExit(f"{parquet}: collection id {data['id']!r}, expected {dataset_id!r}")
+
+    extensions = data.setdefault("stac_extensions", [])
+    extensions += [e for e in (FILE_EXTENSION, WEB_MAP_LINKS_EXTENSION if pmtiles else None) if e and e not in extensions]
+    title = data.get("title") or dataset_id
+    asset = data["assets"]["data"]
+    asset.update({"href": f"./{parquet.name}", "title": f"{title} (GeoParquet)", **file_facts(parquet)})
+    data["links"] = [link for link in data.get("links", []) if link.get("rel") != "pmtiles"]
+    if pmtiles:
+        href = f"./{pmtiles.name}"
+        data["links"].append({"rel": "pmtiles", "href": href, "type": PMTILES_TYPE, "title": "Web map tiles", "pmtiles:layers": [dataset_id]})
+        data["assets"]["visual"] = {"href": href, "type": PMTILES_TYPE, "title": f"{title} (PMTiles)", "roles": ["visual"], **file_facts(pmtiles)}
+    write_json(stac_file, data)
+
+
+def file_facts(path: Path) -> dict:
+    digest = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            digest.update(chunk)
+    return {"file:size": path.stat().st_size, "file:checksum": "1220" + digest.hexdigest()}
 
 
 # an edition this far from its neighbour is reported; see check_row_counts
@@ -112,7 +177,7 @@ def main() -> int:
     parser.add_argument("datasets", nargs="*", help="dataset ids from datasets.yaml")
     parser.add_argument("--all", action="store_true", help="build every dataset in the manifest")
     parser.add_argument("--year", help="build only this edition")
-    parser.add_argument("--skip-convert", action="store_true", help="skip fiboa publish (staging must exist)")
+    parser.add_argument("--skip-convert", action="store_true", help="skip the staging step (staging must exist)")
     parser.add_argument("--skip-thumbnail", action="store_true", help="do not render a thumbnail")
     parser.add_argument("--upload", action="store_true", help="upload the data files afterwards (dry run without --confirm)")
     parser.add_argument("--confirm", action="store_true", help="with --upload: actually upload")
@@ -136,7 +201,7 @@ def main() -> int:
         try:
             if not args.skip_convert:
                 for year in years:
-                    publish(dataset_id, year, has_variants, latest=(year == ds.years[-1]))
+                    stage(dataset_id, year, has_variants, latest=(year == ds.years[-1]))
             # compare against the whole series, not just the years built now: a
             # single rebuilt edition is only suspicious next to its neighbours
             jumps = check_row_counts(
