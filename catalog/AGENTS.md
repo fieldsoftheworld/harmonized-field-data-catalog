@@ -25,7 +25,7 @@ GROUP BY 1 ORDER BY 1;
 -- ch | 1350979
 -- cz | 415300
 -- de_bb | 290688
--- ... 51 more rows
+-- ... 52 more rows
 ```
 
 Every edition of every collection:
@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2023 | at | 2947754
 -- 2024 | at | 2956449
 -- 2025 | at | 2944405
--- ... 230 more rows
+-- ... 238 more rows
 ```
 
 ## Join keys
