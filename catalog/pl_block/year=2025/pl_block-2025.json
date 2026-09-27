@@ -1,0 +1,132 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "pl_block-2025",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          13.900535549811666,
+          48.97234662311487
+        ],
+        [
+          24.62102685599643,
+          48.97234662311487
+        ],
+        [
+          24.62102685599643,
+          54.72992411463285
+        ],
+        [
+          13.900535549811666,
+          54.72992411463285
+        ],
+        [
+          13.900535549811666,
+          48.97234662311487
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    13.900535549811666,
+    48.97234662311487,
+    24.62102685599643,
+    54.72992411463285
+  ],
+  "properties": {
+    "title": "Poland (blocks) — 2025",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`pl_block.parquet`, 12,955,563 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2025-11-25T00:00:00Z",
+    "end_datetime": "2025-11-25T00:00:00Z",
+    "year": 2025,
+    "proj:code": "EPSG:2180",
+    "table:columns": [
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "admin:subdivision_code",
+        "type": "string",
+        "description": "ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
+      },
+      {
+        "name": "parcel_id",
+        "type": "string",
+        "description": "Carried over from the source column `id_ewidenc`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 12955563,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.3.1"
+    }
+  },
+  "collection": "pl_block",
+  "assets": {
+    "data": {
+      "href": "./pl_block.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Poland (blocks) 2025 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 1588381370,
+      "file:checksum": "1220451bcfbf55da677d2ba32fc86842536451bc963e9317ad0f2b61114952c846ab",
+      "proj:code": "EPSG:2180"
+    },
+    "visual": {
+      "href": "./pl_block.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Poland (blocks) 2025 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 986529721,
+      "file:checksum": "12206e1549281ccfd2228e8b0907bcd78bfc72ee1d32d910980c5f4d5bd0773d34b4"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

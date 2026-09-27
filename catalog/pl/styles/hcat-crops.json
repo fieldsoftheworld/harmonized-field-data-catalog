@@ -1,0 +1,95 @@
+{
+  "version": 8,
+  "name": "Poland — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2026/pl-2026.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "pl",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3302000000,
+            "Pasture meadow grassland grass",
+            3301010101,
+            "Winter common soft wheat",
+            3301010600,
+            "Grain maize corn popcorn",
+            3301010801,
+            "Winter triticale",
+            3301060401,
+            "Winter rapeseed rape",
+            3301090400,
+            "Green silo maize",
+            3301010301,
+            "Winter rye",
+            3301010500,
+            "Oats",
+            3301010401,
+            "Winter barley",
+            3301090100,
+            "Temporary grass",
+            3301010402,
+            "Spring barley",
+            3301290700,
+            "Sugar beet",
+            "Other"
+          ],
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Winter common soft wheat",
+          "#cda737",
+          "Grain maize corn popcorn",
+          "#a6cee3",
+          "Winter triticale",
+          "#1f78b4",
+          "Winter rapeseed rape",
+          "#b2df8a",
+          "Green silo maize",
+          "#fb9a99",
+          "Winter rye",
+          "#e31a1c",
+          "Oats",
+          "#fdbf6f",
+          "Winter barley",
+          "#ff7f00",
+          "Temporary grass",
+          "#6a3d9a",
+          "Spring barley",
+          "#ffff99",
+          "Sugar beet",
+          "#cc324c",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "pl",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

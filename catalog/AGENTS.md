@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-60 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
+67 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
 
 ## How to read it
 
@@ -17,16 +17,14 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
+-- de_bw | 4363087
+-- de_sax | 95305
+-- de_st | 78714
 -- es | 17844643
--- at | 2944405
--- at_block | 1299755
--- be_vlg | 597088
--- be_wal | 341968
--- bg | 226592
--- ch | 1350979
--- cz | 415300
--- de_bb | 290688
--- ... 52 more rows
+-- ie_lpis | 1454480
+-- it_bz | 152990
+-- pl | 10653830
+-- pl_block | 12955563
 ```
 
 Every edition of every collection:
@@ -38,16 +36,15 @@ SELECT year, regexp_extract(filename, '/([^/]+)/year=', 1) AS collection, count(
 FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
--- 2025 | es | 17844643
--- 2018 | at | 2523190
--- 2019 | at | 2529896
--- 2020 | at | 2614636
--- 2021 | at | 2610511
--- 2022 | at | 2600002
--- 2023 | at | 2947754
--- 2024 | at | 2956449
--- 2025 | at | 2944405
--- ... 238 more rows
+-- 2018 | de_bw | 4391775
+-- 2019 | de_bw | 4402311
+-- 2020 | de_bw | 4391377
+-- 2021 | de_bw | 4380418
+-- 2022 | de_bw | 4363087
+-- 2026 | de_sax | 95305
+-- 2021 | de_st | 78722
+-- 2022 | de_st | 78689
+-- ... 13 more rows
 ```
 
 ## Join keys
@@ -59,7 +56,7 @@ There are none. `id` is unique within one edition of one collection only; collec
 - Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.
 - `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.
 - Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.
-- 13 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `bg`, `de_bb_block`, `de_by_block`, `de_he`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sh`, `de_sl_block`, `de_th`, `lu`, `nl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
+- 16 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `bg`, `de_bb_block`, `de_by_block`, `de_he`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sax`, `de_sh`, `de_sl_block`, `de_st`, `de_th`, `lu`, `nl_block`, `pl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
 - Not every boundary was declared by anyone. `es_cn`, `jp`, `nz` are mapped by an authority from imagery or survey. `us_usda_cropland` is inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
 
 ## Structure

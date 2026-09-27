@@ -1,0 +1,9 @@
+# Field boundaries for Baden-Württemberg, Germany
+
+Germany, Baden-Württemberg field boundaries (2018, 2019, 2020, 2021, 2022) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Ministerium für Ländlichen Raum und Verbraucherschutz Baden-Württemberg. License: DL-DE-BY-2.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/de_bw/latest/de_bw.parquet
+- All editions: s3://ftw/harmonized-field-data/de_bw/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:25832; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: crop:code, crop:name_en, metrics:area, id, crop:name, flik, geometry, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/de_bw/README.md, agent guide https://source.coop/ftw/harmonized-field-data/de_bw/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/de_bw/collection.json
