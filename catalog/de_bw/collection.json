@@ -48,10 +48,10 @@
     "spatial": {
       "bbox": [
         [
-          7.451008392198752,
-          47.531302111059794,
-          10.51569193662439,
-          49.78319914672435
+          7.513796125188861,
+          47.533418542546606,
+          10.483133050559513,
+          49.7912962832357
         ]
       ]
     },
@@ -273,9 +273,9 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_bw": [
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]

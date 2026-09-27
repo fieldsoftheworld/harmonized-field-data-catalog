@@ -47,10 +47,10 @@
     "spatial": {
       "bbox": [
         [
-          10.373226823084874,
-          46.19310419660448,
-          12.503684648498423,
-          47.120948383131115
+          10.384493205668818,
+          46.22380701377301,
+          12.477967707469041,
+          47.084961995752536
         ]
       ]
     },
@@ -238,10 +238,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "it_bz": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "© Autonome Provinz Bozen - Südtirol"

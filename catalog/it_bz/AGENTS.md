@@ -37,14 +37,14 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/it_bz/latest/it_bz.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(46.6570, 11.4385), 'EPSG:4326', 'EPSG:25832'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(46.6544, 11.4312), 'EPSG:4326', 'EPSG:25832'), 500))
 LIMIT 5;
 -- id | m2
--- 446698 | 1523051.0
--- 486125 | 6637.0
--- 514195 | 8249.0
--- 552906 | 2700.0
--- 486214 | 4553.0
+-- 584774 | 1546958.0
+-- 486127 | 159098.0
+-- 584576 | 269406.0
+-- 584251 | 57937.0
+-- 584038 | 28932.0
 ```
 
 ## Related collections

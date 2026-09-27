@@ -47,10 +47,10 @@
     "spatial": {
       "bbox": [
         [
-          11.797890894159973,
-          50.16141753033804,
-          15.042120116850361,
-          51.704349936884576
+          11.874736302477823,
+          50.17195588737606,
+          15.04172440329609,
+          51.68458789805254
         ]
       ]
     },
@@ -318,10 +318,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_sax": [
-      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "Sächsisches Landesamt für Umwelt, Landwirtschaft und Geologie"

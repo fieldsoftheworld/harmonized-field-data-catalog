@@ -48,10 +48,10 @@
     "spatial": {
       "bbox": [
         [
-          13.900535549811666,
-          48.97234662311487,
-          24.62102685599643,
-          54.72992411463285
+          14.124993574039099,
+          49.012937957241896,
+          24.14578111496658,
+          54.83526763362545
         ]
       ]
     },
@@ -239,9 +239,9 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "pl_block": [
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "© ARiMR"
