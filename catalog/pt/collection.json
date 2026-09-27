@@ -12,7 +12,7 @@
   ],
   "id": "pt",
   "title": "Field boundaries for Portugal",
-  "description": "Open field boundaries (identificação de parcelas) from Portugal\n\nThis collection holds 5 editions (2020, 2021, 2022, 2023, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/pt/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
+  "description": "Open field boundaries (identificação de parcelas) from Portugal\n\nThis collection holds 8 editions (2017, 2018, 2019, 2020, 2021, 2022, 2023, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/pt/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
   "boundaries": "declared",
   "keywords": [
     "IFAP",
@@ -47,16 +47,16 @@
       "bbox": [
         [
           -31.266459564257445,
-          32.63478629055488,
+          32.634781260562576,
           -6.173148404290481,
-          42.14320459987834
+          42.151416813783506
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2020-01-01T00:00:00Z",
+          "2017-01-01T00:00:00Z",
           "2025-01-01T00:00:00Z"
         ]
       ]
@@ -123,6 +123,11 @@
       "name": "bbox",
       "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
       "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     }
   ],
   "table:primary_geometry": "geometry",
@@ -136,7 +141,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 5,
+  "partition:file_count": 8,
   "partition:glob": "s3://ftw/harmonized-field-data/pt/year=*/*.parquet",
   "assets": {
     "data": {
@@ -267,6 +272,24 @@
       "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/pt.py",
       "type": "text/html",
       "title": "Converter source code (fiboa-cli)"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2017/pt-2017.json",
+      "type": "application/geo+json",
+      "title": "Portugal — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/pt-2018.json",
+      "type": "application/geo+json",
+      "title": "Portugal — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/pt-2019.json",
+      "type": "application/geo+json",
+      "title": "Portugal — 2019"
     },
     {
       "rel": "item",

@@ -70,39 +70,24 @@
   },
   "table:columns": [
     {
-      "name": "collection",
-      "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
       "name": "irrigation_system",
       "type": "string",
       "description": "Carried over from the source column `parc_sistexp`; the publisher documents no meaning for it."
     },
     {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "cultivation_surface",
+      "type": "int32",
+      "description": "Carried over from the source column `parc_supcult`; the publisher documents no meaning for it."
     },
     {
       "name": "id",
       "type": "string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:code",
-      "type": "string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:name_en",
-      "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "hcat:name",
@@ -115,13 +100,38 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "admin_municipality_code",
+      "type": "string",
+      "description": "Carried over from the source column `municipio`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "admin_province_code",
+      "type": "string",
+      "description": "Carried over from the source column `provincia`; the publisher documents no meaning for it."
+    },
+    {
       "name": "bbox",
       "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
       "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 17857146,
+  "table:row_count": 17844643,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -142,8 +152,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 11135521765,
-      "file:checksum": "12202169ec57d27053f88df775ecb7a6acf41e4c6e4123f2ebda080327353f51f69d",
+      "file:size": 10461993678,
+      "file:checksum": "1220213800871b7b72759765f0398361b91c0491b8e26232cbc4fea8de0ea15330f8",
       "proj:code": "EPSG:4258"
     },
     "style-hcat-crops": {
@@ -187,8 +197,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 3970874545,
-      "file:checksum": "122069618b169db3a25235967153f95dac72dcfe1d4fccca70222d29557f16a09fa1"
+      "file:size": 4232930564,
+      "file:checksum": "1220d5ce0ec11b3a846eb1abe01390625b3d2f971cf1dc0e638bb28ea4cde0d75cc3"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -264,15 +274,15 @@
       "title": "Spain — 2025"
     }
   ],
-  "updated": "2026-08-24T13:08:04Z",
+  "updated": "2026-09-26T22:05:18Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es": [
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   },
