@@ -17,6 +17,7 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
+-- es | 17844643
 -- at | 2944405
 -- at_block | 1299755
 -- be_vlg | 597088
@@ -37,6 +38,7 @@ SELECT year, regexp_extract(filename, '/([^/]+)/year=', 1) AS collection, count(
 FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
+-- 2025 | es | 17844643
 -- 2018 | at | 2523190
 -- 2019 | at | 2529896
 -- 2020 | at | 2614636
