@@ -386,9 +386,9 @@ datasets:
     boundaries: declared
     keywords: [Poland, ARiMR, crop fields, declared crops, IACS]
   pl_block:
-    year: 2026
+    year: 2025
     boundaries: declared
-    year_source: The shapefile's date inside the downloaded archive, which the converter records as determination:datetime.
+    year_source: The shapefile's date inside the downloaded archive (2025-11-25), which the converter records as determination:datetime.
     keywords: [Poland, ARiMR, LPIS, MKO, maximum eligible area, field blocks]
     holds: blocks
   de_bw:
@@ -409,9 +409,5 @@ datasets:
   it_bz:
     year: 2026
     boundaries: declared
-    year_source: BEGIN_DATE of most features.
+    year_source: BEGIN_DATE, the same for every feature (2026-09-24), the date of the snapshot.
     keywords: [Italy, South Tyrol, Alto Adige, LAFIS, crop fields]
-  us_ca_scm:
-    years: ['2022', '2023']
-    boundaries: mapped
-    keywords: [United States, California, DWR, Statewide Crop Mapping, crop fields]
