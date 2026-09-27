@@ -55,7 +55,7 @@ newest first:
 4. Build with `python tools/build.py <DATASET>` (use the pixi env's python;
    note `fi` is a pixi-shell reserved word — call the env python directly).
    Already-built years are skipped; only the newest edition gets PMTiles
-   (build.py passes --no-pmtiles for the rest automatically). Export
+   (build.py skips the tiles for the rest automatically). Export
    TMPDIR to a partition with >50 GB free — tippecanoe fills /tmp otherwise.
    Long conversions belong in `screen`/`tmux` with output to a log file.
 5. Sanity-check every new parquet: row count is plausible against the latest

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build many datasets one after another, never stopping on a failure.
 #
-#   tools/batch.sh lu es_cn de_sh ...      # build each (fiboa publish → catalogize → thumbnail)
+#   tools/batch.sh lu es_cn de_sh ...      # build each (stage → catalogize → thumbnail)
 #   BATCH_UPLOAD=1 tools/batch.sh ...      # and upload each dataset's data when it succeeds
 #
 # Per-dataset logs go to staging/logs/<id>.log; a one-line verdict per dataset

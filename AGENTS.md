@@ -21,7 +21,7 @@ Every sentence in the generated documentation is one of three kinds, and stays t
 ## Build, check, publish
 
 ```bash
-pixi run python tools/build.py <id>        # fiboa publish → catalogize → thumbnail → catalogize
+pixi run python tools/build.py <id>        # stage (fiboa convert, validate, tiles) → catalogize → thumbnail → catalogize
 pixi run python tests/run_all.py           # manifest, links, publish contract, stac-check, rashid
 pixi run rashid check catalog              # full pass incl. byte checks (CI runs --no-data)
 pixi run python tools/upload_data.py <id> --confirm
