@@ -96,7 +96,7 @@ def catalogize_parts(ds: Dataset, manifest: Manifest) -> None:
     for y, item in zip(inputs, items):
         write_json(catalog_year_dir(ds.id, y.year) / f"{item['id']}.json", item)
     write_json(common.CATALOG_DIR / ds.id / "collection.json", collection)
-    parts_docs(ds, metas, inputs, latest, collection, manifest, public_base, human_base, survey_url)
+    parts_docs(ds, metas, inputs, latest, collection, manifest, public_base, human_base, survey_url, overview)
     print(f"catalogized {ds.id}: {len(ds.parts)} part(s), {len(inputs)} edition(s), {len(style_assets)} style(s), {len(table_columns)} columns")
 
 
@@ -355,6 +355,7 @@ def parts_docs(
     public_base: str,
     human_base: str,
     survey_url: str | None,
+    overview: str,
 ) -> None:
     cdir = common.CATALOG_DIR / ds.id
     config = publish_config()
@@ -374,7 +375,6 @@ def parts_docs(
     software_md = ", ".join(software) or "fiboa-cli"
     crs = ", ".join(collection.get("summaries", {}).get("proj:code", []))
     total = collection["table:row_count"]
-    overview = collection["description"].split("\n\n")[0]
     part_lines = []
     for part_id, y in latest.items():
         prov_name, prov_url = parse_link_str(metas[part_id].get("provider"))
