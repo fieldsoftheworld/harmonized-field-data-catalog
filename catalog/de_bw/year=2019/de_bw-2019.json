@@ -1,0 +1,132 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "de_bw-2019",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          7.513796127802427,
+          47.53341854622057
+        ],
+        [
+          10.483133050559513,
+          47.53341854622057
+        ],
+        [
+          10.483133050559513,
+          49.7912962832357
+        ],
+        [
+          7.513796127802427,
+          49.7912962832357
+        ],
+        [
+          7.513796127802427,
+          47.53341854622057
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    7.513796127802427,
+    47.53341854622057,
+    10.483133050559513,
+    49.7912962832357
+  ],
+  "properties": {
+    "title": "Germany, Baden-Württemberg — 2019",
+    "description": "Field boundaries of the 2019 edition of this dataset, one GeoParquet file (`de_bw-2019.parquet`, 4,402,311 fields) and its PMTiles. Partition `year=2019` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2019-01-01T00:00:00Z",
+    "end_datetime": "2019-01-01T00:00:00Z",
+    "year": 2019,
+    "proj:code": "EPSG:25832",
+    "table:columns": [
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name_en",
+        "type": "string",
+        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 4402311,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.3.1"
+    }
+  },
+  "collection": "de_bw",
+  "assets": {
+    "data": {
+      "href": "./de_bw-2019.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Germany, Baden-Württemberg 2019 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 640492448,
+      "file:checksum": "1220c1ca4cac6e312f9f3794fb55528738a7b93b3cb1954dd1f53e0cbda7e36f3fa7",
+      "proj:code": "EPSG:25832"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}
