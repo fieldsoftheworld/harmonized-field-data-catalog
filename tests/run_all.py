@@ -19,6 +19,7 @@ TESTS = [
     "test_columns.py",
     "test_stac_valid.py",
     "test_conformance.py",
+    "test_parts.py",
 ]
 
 failed = []
