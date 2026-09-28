@@ -367,7 +367,7 @@ datasets:
     boundaries: declared
     keywords: [Switzerland, LWB, Nutzungsflaechen, crop fields, geodienste.ch]
     via: https://www.geodienste.ch/services/lwb_nutzungsflaechen
-    # the 19 cantons geodienste.ch serves openly; BL's file holds BS
+    # the 20 cantons geodienste.ch serves openly; BL's file also holds BS
     parts:
       ch_ag:
       ch_ai:
