@@ -367,6 +367,7 @@ datasets:
     boundaries: declared
     keywords: [Switzerland, LWB, Nutzungsflaechen, crop fields, geodienste.ch]
     via: https://www.geodienste.ch/services/lwb_nutzungsflaechen
+    row_count_tolerance: 0.6  # ZH 2017 and 2018 cover only part of the canton, recorded step by step (64k -> 102k in 2019)
     # the 20 cantons geodienste.ch serves openly; BL's file also holds BS
     parts:
       ch_ag:
