@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-67 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.
+67 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`. `ch` is fed by several sources, each with its own converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one `<collection>/latest/<converter>.parquet` per source, and each item carries its source's license.
 
 ## How to read it
 
@@ -17,6 +17,7 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
+-- ch | 1520805
 -- de_bw | 4363087
 -- de_sax | 95305
 -- de_st | 78714
@@ -24,7 +25,7 @@ GROUP BY 1 ORDER BY 1;
 -- ie_lpis | 1454480
 -- it_bz | 152990
 -- pl | 10653830
--- pl_block | 12955563
+-- ... 1 more rows
 ```
 
 Every edition of every collection:
@@ -36,15 +37,15 @@ SELECT year, regexp_extract(filename, '/([^/]+)/year=', 1) AS collection, count(
 FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
--- 2018 | de_bw | 4391775
--- 2019 | de_bw | 4402311
--- 2020 | de_bw | 4391377
--- 2021 | de_bw | 4380418
--- 2022 | de_bw | 4363087
--- 2026 | de_sax | 95305
--- 2021 | de_st | 78722
--- 2022 | de_st | 78689
--- ... 13 more rows
+-- 2017 | ch | 21296
+-- 2018 | ch | 73682
+-- 2019 | ch | 111309
+-- 2020 | ch | 115884
+-- 2021 | ch | 137395
+-- 2022 | ch | 181046
+-- 2023 | ch | 184918
+-- 2024 | ch | 187743
+-- ... 23 more rows
 ```
 
 ## Join keys

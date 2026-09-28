@@ -1,9 +1,9 @@
 # Field boundaries for Switzerland
 
-Switzerland field boundaries (2025) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Konferenz der kantonalen Geoinformations- und Katasterstellen. License: other.
+Field boundaries from 20 sources (2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World. License: other — each source's own, on its STAC items.
 
-- Latest: https://data.source.coop/ftw/harmonized-field-data/ch/latest/ch.parquet
-- All editions: s3://ftw/harmonized-field-data/ch/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
-- CRS EPSG:2056; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: collection, crop:name, hcat:name, hcat:name_en, admin:subdivision_code, id, geometry, hcat:code, metrics:area, determination:datetime, bbox
+- Newest per source: https://data.source.coop/ftw/harmonized-field-data/ch/latest/<converter>.parquet, converters ch_ag, ch_ai, ch_ar, ch_be, ch_bl, ch_fr, ch_ge, ch_gl, ch_gr, ch_ju, ch_lu, ch_sg, ch_sh, ch_so, ch_sz, ch_tg, ch_ur, ch_vs, ch_zg, ch_zh
+- All newest: s3://ftw/harmonized-field-data/ch/latest/*.parquet; all editions: s3://ftw/harmonized-field-data/ch/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; union_by_name=true, filename=true; hive_partitioning=true adds `year`)
+- CRS EPSG:2056; `metrics:area` in m²; `year` = edition, `id` unique per file only.
+- Columns: id, metrics:area, crop:name, hcat:code, hcat:name_en, crop:code, geometry, hcat:name, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/ch/README.md, agent guide https://source.coop/ftw/harmonized-field-data/ch/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/ch/collection.json

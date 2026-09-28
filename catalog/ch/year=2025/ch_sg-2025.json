@@ -1,0 +1,167 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "ch_sg-2025",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          6.855542713355739,
+          46.21121150294654
+        ],
+        [
+          9.71347288064864,
+          46.21121150294654
+        ],
+        [
+          9.71347288064864,
+          47.61532583350617
+        ],
+        [
+          6.855542713355739,
+          47.61532583350617
+        ],
+        [
+          6.855542713355739,
+          46.21121150294654
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    6.855542713355739,
+    46.21121150294654,
+    9.71347288064864,
+    47.61532583350617
+  ],
+  "properties": {
+    "title": "Switzerland, St. Gallen — 2025",
+    "description": "Switzerland, St. Gallen, 2025 edition: one GeoParquet file (`ch_sg-2025.parquet`, 105,091 fields) converted with the fiboa-cli converter `ch_sg`. Partition `year=2025` of the collection's hive layout. The terms are this source's own: see `license`, `attribution` and `providers` on this item.",
+    "datetime": null,
+    "start_datetime": "2025-01-01T00:00:00Z",
+    "end_datetime": "2025-01-01T00:00:00Z",
+    "year": 2025,
+    "proj:code": "EPSG:2056",
+    "table:columns": [
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 105091,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.3.1"
+    },
+    "license": "other",
+    "attribution": "Kanton St.Gallen — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen",
+    "providers": [
+      {
+        "name": "Kanton St. Gallen, via geodienste.ch",
+        "roles": [
+          "producer",
+          "licensor"
+        ],
+        "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+      }
+    ]
+  },
+  "collection": "ch",
+  "assets": {
+    "data": {
+      "href": "./ch_sg-2025.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, St. Gallen 2025 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 55605545,
+      "file:checksum": "1220f17b30ce64f2914533e799b7e08787fe245ade60f970895cf5618b7f6c514d89",
+      "proj:code": "EPSG:2056"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "href": "https://www.sg.ch/bauen/geoinformation/datenbezug/agb.html",
+      "title": "Nutzungsbedingungen für Geodaten",
+      "rel": "license",
+      "type": "text/html"
+    },
+    {
+      "rel": "via",
+      "href": "https://www.geodienste.ch/services/lwb_nutzungsflaechen",
+      "type": "text/html",
+      "title": "Original source (publisher page)"
+    },
+    {
+      "rel": "related",
+      "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ch_sg.py",
+      "type": "text/html",
+      "title": "Converter source code (fiboa-cli)"
+    }
+  ]
+}

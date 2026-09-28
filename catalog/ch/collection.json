@@ -12,26 +12,179 @@
   ],
   "id": "ch",
   "title": "Field boundaries for Switzerland",
-  "description": "The cropfields of Switzerland (Nutzungsflächen) are published per administrative subdivision called Canton.\n\nThis collection holds 1 edition (2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/ch/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:2056). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ch/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
+  "description": "The agricultural usage areas of Switzerland (\"Nutzungsflächen\", federal model 153.1) are the plots whose use each canton records as the basis for direct payments. Every canton publishes its own data under its own terms; geodienste.ch distributes them as one GeoPackage per canton in the shared model, current state only. Three cantons keep earlier years on their own portals: [Zürich](https://github.com/fiboa/data-survey/blob/main/data/CH-ZH.md) (2017–2025), [Geneva](https://github.com/fiboa/data-survey/blob/main/data/CH-GE.md) (2017–2026) and [Schwyz](https://github.com/fiboa/data-survey/blob/main/data/CH-SZ.md) (2022–2024).\n\nThis collection is fed by 20 fiboa-cli converters, one per source: Switzerland, Aargau (`ch_ag`), Switzerland, Appenzell Innerrhoden (`ch_ai`), Switzerland, Appenzell Ausserrhoden (`ch_ar`), Switzerland, Bern (`ch_be`), Switzerland, Basel-Landschaft (`ch_bl`), Switzerland, Fribourg (`ch_fr`), Switzerland, Geneva (`ch_ge`), Switzerland, Glarus (`ch_gl`), Switzerland, Graubünden (`ch_gr`), Switzerland, Jura (`ch_ju`), Switzerland, Luzern (`ch_lu`), Switzerland, St. Gallen (`ch_sg`), Switzerland, Schaffhausen (`ch_sh`), Switzerland, Solothurn (`ch_so`), Switzerland, Schwyz (`ch_sz`), Switzerland, Thurgau (`ch_tg`), Switzerland, Uri (`ch_ur`), Switzerland, Valais (`ch_vs`), Switzerland, Zug (`ch_zg`), Switzerland, Zürich (`ch_zh`). It holds 40 editions (2017–2026), one GeoParquet file and one STAC item per source and year: `year=<year>/<converter>-<year>.parquet`. The sources publish under different terms, so the collection's license is `other` with a link to each, and every item carries its own source's `license`, `attribution` and `providers`.\n\nRead every edition at once with the partition glob `s3://ftw/harmonized-field-data/ch/year=*/*.parquet`, or the newest edition of every source with `s3://ftw/harmonized-field-data/ch/latest/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`; the files differ in columns, so read them with `union_by_name = true`). Geometries are kept in the source CRS (EPSG:2056). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ch/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
   "boundaries": "declared",
   "keywords": [
-    "Fude Polygons",
-    "Japan",
-    "MAFF",
+    "LWB",
+    "Nutzungsflaechen",
+    "Switzerland",
     "agriculture",
+    "crop fields",
     "fiboa",
     "field boundaries",
-    "rice fields"
+    "geodienste.ch"
   ],
   "license": "other",
   "providers": [
     {
-      "name": "Konferenz der kantonalen Geoinformations- und Katasterstellen",
+      "name": "Kanton Aargau, via geodienste.ch",
       "roles": [
         "producer",
         "licensor"
       ],
-      "url": "https://www.kgk-cgc.ch"
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Appenzell Innerrhoden, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Appenzell Ausserrhoden, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Bern, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Basel-Landschaft, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Fribourg, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "État de Genève, Office cantonal de l'agriculture et de la nature",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://ge.ch/sitg/"
+    },
+    {
+      "name": "Kanton Glarus, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Graubünden, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Jura, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Luzern, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton St. Gallen, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Schaffhausen, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Solothurn, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Schwyz, Amt für Landwirtschaft",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.sz.ch/landwirtschaft"
+    },
+    {
+      "name": "Kanton Thurgau, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Uri, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Valais, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Zug, via geodienste.ch",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+    },
+    {
+      "name": "Kanton Zürich, Amt für Landschaft und Natur",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.zh.ch/de/umwelt-tiere/landwirtschaft.html"
     },
     {
       "name": "Fields of the World",
@@ -46,17 +199,17 @@
     "spatial": {
       "bbox": [
         [
-          5.877849689914085,
-          45.789326319067555,
-          10.536205524189402,
-          47.802165721678286
+          5.916373453755004,
+          45.85786741920237,
+          10.519662120603845,
+          47.80862572655186
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2025-01-01T00:00:00Z",
+          "2017-01-01T00:00:00Z",
           "2026-01-01T00:00:00Z"
         ]
       ]
@@ -69,44 +222,9 @@
   },
   "table:columns": [
     {
-      "name": "collection",
-      "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:name",
-      "type": "string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "hcat:name",
-      "type": "string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "hcat:name_en",
-      "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "admin:subdivision_code",
-      "type": "string",
-      "description": "ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
-    },
-    {
       "name": "id",
       "type": "string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "metrics:area",
@@ -114,9 +232,34 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "determination:datetime",
-      "type": "timestamp[ms, tz=UTC]",
-      "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -125,30 +268,268 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 1350979,
+  "table:row_count": 1520805,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "Edition year of the source dataset: the converter variant, or for a source without variants the most frequent year of `determination:datetime` in the file. Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 40,
   "partition:glob": "s3://ftw/harmonized-field-data/ch/year=*/*.parquet",
   "assets": {
-    "data": {
-      "href": "./latest/ch.parquet",
+    "data-ch_ag": {
+      "href": "./latest/ch_ag.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Switzerland — latest edition (2025) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2025/ch.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "title": "Switzerland, Aargau — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_ag-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
       "roles": [
         "data"
       ],
-      "file:size": 410309342,
-      "file:checksum": "12208261fd2a88417b5052298b4e260b0d7425f03e946b9af8dfd4c27ef990b3518e",
+      "file:size": 18702843,
+      "file:checksum": "1220e828decbcdc0a587bbaebbd3496bfbf6ffd0f358ad6492dcffa8b53c7b70bdea",
       "proj:code": "EPSG:2056"
+    },
+    "data-ch_ai": {
+      "href": "./latest/ch_ai.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Appenzell Innerrhoden — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_ai-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 5879538,
+      "file:checksum": "12203be301d15acf155690421b626ecb91fa5b5bf32b898fb45506aa9d8b2f514d9f",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_ar": {
+      "href": "./latest/ch_ar.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Appenzell Ausserrhoden — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_ar-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 6219091,
+      "file:checksum": "12201e366c2e42e0e4279dedc26c540ddd5a26c3314966d57dbdb656dc5b52aac66c",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_be": {
+      "href": "./latest/ch_be.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Bern — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_be-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 49626529,
+      "file:checksum": "1220434d543d4c67bfe5c615e4226b3120d4e923095dbdba11c9c2ece590bf7e8e59",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_bl": {
+      "href": "./latest/ch_bl.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Basel-Landschaft — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_bl-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 7273336,
+      "file:checksum": "12208f1c8977458a64281c11ea5f55b8c1969290a60864e8f698b2c0236bcbcb8f07",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_fr": {
+      "href": "./latest/ch_fr.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Fribourg — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_fr-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 14482933,
+      "file:checksum": "122042c349aad81965df486b8736465ce1aa78b5bb04e79a2c87ff54b9a1c1315750",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_ge": {
+      "href": "./latest/ch_ge.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Geneva — latest edition (2026) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2026/ch_ge-2026.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 2406438,
+      "file:checksum": "1220742322f46d0d477f120de1bec9bd84deacfcf4c94e48eba6a96559b5a30322f0",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_gl": {
+      "href": "./latest/ch_gl.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Glarus — latest edition (2026) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2026/ch_gl-2026.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 4874115,
+      "file:checksum": "12202df17482e0f0ef19260cc67a7342778c3ba869227040684edbe3367c7095904e",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_gr": {
+      "href": "./latest/ch_gr.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Graubünden — latest edition (2026) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2026/ch_gr-2026.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 46449916,
+      "file:checksum": "1220a10cc2ff4d244caf0f38c565abe840d8f9ca0c086bfdc8543ecaa66172b46204",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_ju": {
+      "href": "./latest/ch_ju.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Jura — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_ju-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 8364600,
+      "file:checksum": "1220078b7f46287f1cb8477c2f55ea6aa2b4e26fe859b8c12e285ed6e3d8a27706a2",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_lu": {
+      "href": "./latest/ch_lu.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Luzern — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_lu-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 36593158,
+      "file:checksum": "1220102de8b5b8636ba1e6b8e83bcfb31901d4dc658ee3181ec36ec6c52ca1f27399",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_sg": {
+      "href": "./latest/ch_sg.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, St. Gallen — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_sg-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 55605545,
+      "file:checksum": "1220f17b30ce64f2914533e799b7e08787fe245ade60f970895cf5618b7f6c514d89",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_sh": {
+      "href": "./latest/ch_sh.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Schaffhausen — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_sh-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 4384467,
+      "file:checksum": "1220f43f8d469f278f2cbefcd26d92da5db235208fc4058d19d714308ee826b63d65",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_so": {
+      "href": "./latest/ch_so.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Solothurn — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_so-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 8453848,
+      "file:checksum": "12207a6c854cc481b09b73f56c5fa9804f44aec04c918bd7ccc2571c6adb5b40ee23",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_sz": {
+      "href": "./latest/ch_sz.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Schwyz — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_sz-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 11374651,
+      "file:checksum": "1220ab5b9f00474d66131207689fd1353457763a445c7bfc2c62de2c87fab07acaf1",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_tg": {
+      "href": "./latest/ch_tg.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Thurgau — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_tg-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 14775421,
+      "file:checksum": "1220e96652c3949ed6f1b472684093206462d180db673c9783a181d04663f003c1bd",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_ur": {
+      "href": "./latest/ch_ur.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Uri — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_ur-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 11489134,
+      "file:checksum": "12208ed529b8f37f0fd62c4b0d791bb0f59d761a796905c126fb504b4ece05e93742",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_vs": {
+      "href": "./latest/ch_vs.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Valais — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_vs-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 41255481,
+      "file:checksum": "1220bcf3615920dcc4cf826617d052e9696b94e26d7250da096d2614249a14615a2f",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_zg": {
+      "href": "./latest/ch_zg.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Zug — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_zg-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 7428469,
+      "file:checksum": "1220ba522935b7357ae43e5cb044821d1e798ad7ebf6c8de1c373b2e0bf04f347d2f",
+      "proj:code": "EPSG:2056"
+    },
+    "data-ch_zh": {
+      "href": "./latest/ch_zh.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Switzerland, Zürich — latest edition (2025) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2025/ch_zh-2025.parquet`, kept at a stable path so `ch/latest/*.parquet` selects the newest edition of every source.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 41226089,
+      "file:checksum": "12202bb678ebea12a875c7a3018383bad7bb1bb4be9f66b50ee01f0aa3b23c6469e8",
+      "proj:code": "EPSG:2056"
+    },
+    "visual": {
+      "href": "./latest/ch.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Field boundaries for Switzerland — latest edition of every source (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 317257383,
+      "file:checksum": "122070af3207972a50886d40185ec71e37459ffa03d82801f87effb010d82afadf36"
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",
@@ -159,8 +540,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2388,
-      "file:checksum": "122079e901a48ae493459ca373eeb9e93f752d2f29d6f9a23d8ca3cf19439460d901"
+      "file:size": 2370,
+      "file:checksum": "12204881dfc016795b1534bf7c234afc970cb3d71da8a563dca00f6488a1c47adfa3"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -170,8 +551,8 @@
         "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1176,
-      "file:checksum": "12205c1cd94671683a771288d956276391620439955c677122c4c74e349758aa13f5"
+      "file:size": 1194,
+      "file:checksum": "12206666ee817fe7876e8937934e4f425f9a59b8a9d39604ba6c3b61a89ac6621c73"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -181,18 +562,8 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 726,
-      "file:checksum": "122042078f05a9eb1faa5d996725b191525ad17259d23c3951f1107a036647cd73d9"
-    },
-    "visual": {
-      "href": "./year=2025/ch.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Switzerland — latest edition (2025) (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 162959384,
-      "file:checksum": "12204284f3c5ea73a944b24cc51905ff5c93336ba0bf0f0825b3c1126b5df12184c8"
+      "file:size": 744,
+      "file:checksum": "1220e2cfab4691b8c6f6bcc5cbb72123a649d6974c9b4fd1ab0cf7f0cf50060595b8"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -217,8 +588,26 @@
       "type": "application/json"
     },
     {
-      "href": "https://opendata.swiss/en/terms-of-use",
-      "title": "opendata.swiss terms of use",
+      "rel": "license",
+      "href": "https://spdx.org/licenses/CC-BY-4.0.html",
+      "type": "text/html",
+      "title": "CC-BY-4.0"
+    },
+    {
+      "rel": "license",
+      "href": "https://spdx.org/licenses/CC0-1.0.html",
+      "type": "text/html",
+      "title": "CC0-1.0"
+    },
+    {
+      "href": "https://www.sg.ch/bauen/geoinformation/datenbezug/agb.html",
+      "title": "Nutzungsbedingungen für Geodaten",
+      "rel": "license",
+      "type": "text/html"
+    },
+    {
+      "href": "https://geo.gr.ch/geodaten/nutzungsbedingungen",
+      "title": "Nutzungsbestimmungen für Geodaten",
       "rel": "license",
       "type": "text/html"
     },
@@ -242,7 +631,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2025/ch.pmtiles",
+      "href": "./latest/ch.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -251,7 +640,7 @@
     },
     {
       "rel": "via",
-      "href": "https://www.kgk-cgc.ch",
+      "href": "https://www.geodienste.ch/services/lwb_nutzungsflaechen",
       "type": "text/html",
       "title": "Original source (publisher page)"
     },
@@ -262,28 +651,248 @@
       "title": "fiboa data survey entry for this source"
     },
     {
-      "rel": "related",
-      "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ch.py",
-      "type": "text/html",
-      "title": "Converter source code (fiboa-cli)"
+      "rel": "item",
+      "href": "./year=2017/ch_ge-2017.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2017"
     },
     {
       "rel": "item",
-      "href": "./year=2025/ch-2025.json",
+      "href": "./year=2017/ch_zh-2017.json",
       "type": "application/geo+json",
-      "title": "Switzerland — 2025"
+      "title": "Switzerland, Zürich — 2017"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/ch_ge-2018.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/ch_zh-2018.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Zürich — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/ch_ge-2019.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/ch_zh-2019.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Zürich — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/ch_ge-2020.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/ch_zh-2020.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Zürich — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/ch_ge-2021.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/ch_zh-2021.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Zürich — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/ch_ge-2022.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/ch_sz-2022.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Schwyz — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/ch_zh-2022.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Zürich — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/ch_ge-2023.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/ch_sz-2023.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Schwyz — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/ch_zh-2023.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Zürich — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/ch_ge-2024.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2024"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/ch_sz-2024.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Schwyz — 2024"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/ch_zh-2024.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Zürich — 2024"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_ag-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Aargau — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_ai-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Appenzell Innerrhoden — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_ar-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Appenzell Ausserrhoden — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_be-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Bern — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_bl-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Basel-Landschaft — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_fr-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Fribourg — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_ge-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_ju-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Jura — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_lu-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Luzern — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_sg-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, St. Gallen — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_sh-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Schaffhausen — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_so-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Solothurn — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_sz-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Schwyz — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_tg-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Thurgau — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_ur-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Uri — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_vs-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Valais — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_zg-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Zug — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/ch_zh-2025.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Zürich — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2026/ch_ge-2026.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Geneva — 2026"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2026/ch_gl-2026.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Glarus — 2026"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2026/ch_gr-2026.json",
+      "type": "application/geo+json",
+      "title": "Switzerland, Graubünden — 2026"
     }
   ],
-  "updated": "2026-08-28T18:01:46Z",
+  "updated": "2026-09-28T17:18:53Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
-  "vecorel_extensions": {
-    "ch": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
-    ]
-  }
+  "attribution": "Daten des Kantons Aargau — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Grundlage/Quelle: Geodaten Kanton/Bezirke Appenzell I.Rh. — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Kanton Appenzell Ausserrhoden — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Kanton Bern, Amt für Geoinformation — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Kanton Basel-Landschaft — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; État de Fribourg / Kanton Freiburg — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Données SITG, État de Genève — Surfaces agricoles recensées, https://ge.ch/sitg/geodata/SITG/OPENDATA/AGR_SURFACE_AGRICOLE_RECENSEE-SHP.zip; Kanton Glarus — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Quelle: Landwirtschaftliche Nutzungsflächen, Kanton Graubünden, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Géodonnées de la République et Canton du Jura — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Kanton Luzern — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Kanton St.Gallen — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Kanton Schaffhausen — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Kanton Solothurn — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Amt für Landwirtschaft (AFL), Kanton Schwyz — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Kanton Thurgau — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Quelle: Lisag AG (GIS Uri) — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Canton du Valais / Kanton Wallis — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Quelle: GIS Kanton Zug — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen; Kanton Zürich, Amt für Landschaft und Natur — Landwirtschaftliche Kulturflächen, https://maps.zh.ch/wfs/OGDZHWFS"
 }

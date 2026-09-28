@@ -7,59 +7,49 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "ch-2025",
+  "id": "ch_lu-2025",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          5.877849689914085,
-          45.789326319067555
+          6.373542094883425,
+          46.24939668470208
         ],
         [
-          10.536205524189402,
-          45.789326319067555
+          9.729651319902406,
+          46.24939668470208
         ],
         [
-          10.536205524189402,
-          47.802165721678286
+          9.729651319902406,
+          47.65863622614825
         ],
         [
-          5.877849689914085,
-          47.802165721678286
+          6.373542094883425,
+          47.65863622614825
         ],
         [
-          5.877849689914085,
-          45.789326319067555
+          6.373542094883425,
+          46.24939668470208
         ]
       ]
     ]
   },
   "bbox": [
-    5.877849689914085,
-    45.789326319067555,
-    10.536205524189402,
-    47.802165721678286
+    6.373542094883425,
+    46.24939668470208,
+    9.729651319902406,
+    47.65863622614825
   ],
   "properties": {
-    "title": "Switzerland — 2025",
-    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`ch.parquet`, 1,350,979 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
+    "title": "Switzerland, Luzern — 2025",
+    "description": "Switzerland, Luzern, 2025 edition: one GeoParquet file (`ch_lu-2025.parquet`, 99,839 fields) converted with the fiboa-cli converter `ch_lu`. Partition `year=2025` of the collection's hive layout. The terms are this source's own: see `license`, `attribution` and `providers` on this item.",
     "datetime": null,
     "start_datetime": "2025-01-01T00:00:00Z",
-    "end_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2025-01-01T00:00:00Z",
     "year": 2025,
     "proj:code": "EPSG:2056",
     "table:columns": [
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "crop:name",
-        "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
       {
         "name": "hcat:name",
         "type": "string",
@@ -69,16 +59,6 @@
         "name": "hcat:name_en",
         "type": "string",
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "admin:subdivision_code",
-        "type": "string",
-        "description": "ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "geometry",
@@ -96,9 +76,19 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "determination:datetime",
-        "type": "timestamp[ms, tz=UTC]",
-        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -107,34 +97,36 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 1350979,
+    "table:row_count": 99839,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
-    }
+      "vecorel-cli": "0.3.1"
+    },
+    "license": "CC-BY-4.0",
+    "attribution": "Kanton Luzern — Landwirtschaftliche Nutzungsflächen, https://www.geodienste.ch/services/lwb_nutzungsflaechen",
+    "providers": [
+      {
+        "name": "Kanton Luzern, via geodienste.ch",
+        "roles": [
+          "producer",
+          "licensor"
+        ],
+        "url": "https://www.geodienste.ch/services/lwb_nutzungsflaechen"
+      }
+    ]
   },
   "collection": "ch",
   "assets": {
     "data": {
-      "href": "./ch.parquet",
+      "href": "./ch_lu-2025.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Switzerland 2025 (GeoParquet)",
+      "title": "Switzerland, Luzern 2025 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 410309342,
-      "file:checksum": "12208261fd2a88417b5052298b4e260b0d7425f03e946b9af8dfd4c27ef990b3518e",
+      "file:size": 36593158,
+      "file:checksum": "1220102de8b5b8636ba1e6b8e83bcfb31901d4dc658ee3181ec36ec6c52ca1f27399",
       "proj:code": "EPSG:2056"
-    },
-    "visual": {
-      "href": "./ch.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Switzerland 2025 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 162959384,
-      "file:checksum": "12204284f3c5ea73a944b24cc51905ff5c93336ba0bf0f0825b3c1126b5df12184c8"
     }
   },
   "links": [
@@ -152,6 +144,24 @@
       "rel": "collection",
       "href": "../collection.json",
       "type": "application/json"
+    },
+    {
+      "rel": "license",
+      "href": "https://spdx.org/licenses/CC-BY-4.0.html",
+      "type": "text/html",
+      "title": "CC-BY-4.0"
+    },
+    {
+      "rel": "via",
+      "href": "https://www.geodienste.ch/services/lwb_nutzungsflaechen",
+      "type": "text/html",
+      "title": "Original source (publisher page)"
+    },
+    {
+      "rel": "related",
+      "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ch_lu.py",
+      "type": "text/html",
+      "title": "Converter source code (fiboa-cli)"
     }
   ]
 }
