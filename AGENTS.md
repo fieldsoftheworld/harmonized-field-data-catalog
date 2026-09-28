@@ -10,7 +10,7 @@ Developer and agent guide for `harmonized-field-data-catalog`. The published cat
 
 ## Edit the generator, not the output
 
-`tools/catalogize.py` writes every file under `catalog/<id>/` and the root documents. A hand edit there is overwritten on the next build. Change the template code, the manifest, `tools/field_descriptions.yaml` (specification wording for fiboa columns, each with its source), or the upstream facts (converter, data survey).
+`tools/catalogize.py` writes every file under `catalog/<id>/` and the root documents (`tools/catalogize_parts.py` for a collection with `parts` in the manifest: one collection fed by several converters, each part edition an item with its own license). A hand edit there is overwritten on the next build. Change the template code, the manifest, `tools/field_descriptions.yaml` (specification wording for fiboa columns, each with its source), or the upstream facts (converter, data survey).
 
 Every sentence in the generated documentation is one of three kinds, and stays that way:
 
