@@ -5,6 +5,7 @@ Nothing here writes to ``catalog/``; that is ``catalogize.py``'s job.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -48,9 +49,23 @@ def file_stem(dataset_id: str, year: str | int) -> str:
     return f"{dataset_id}-{year}"
 
 
+PART_KEYS = {"years", "notes"}
+
+
+@dataclass
+class Part:
+    """One converter of a collection that several converters feed (a canton of ``ch``)."""
+
+    id: str
+    # converter variants, newest last; empty: converted once, the year read from the data
+    years: list[str] = field(default_factory=list)
+    notes: str | None = None
+
+
 @dataclass
 class Dataset:
     id: str
+    # empty for a parts collection, whose editions are per part (see editions())
     years: list[str]
     # How the boundaries came to exist: "declared" by farmers in a subsidy
     # application or held in the parcel register built on those declarations
@@ -70,10 +85,39 @@ class Dataset:
     # its neighbour; raise it for a dataset whose source really did change that
     # much (a delineation change), so the check stays meaningful elsewhere.
     row_count_tolerance: float | None = None
+    # the years are converter variants (`years:`), not a label (`year:`)
+    has_variants: bool = False
+    # converter id -> Part, in manifest order; set instead of years
+    parts: dict[str, Part] = field(default_factory=dict)
+    # a parts collection's title, as no single converter speaks for it
+    title: str | None = None
 
     @property
     def latest(self) -> str:
         return self.years[-1]
+
+    @property
+    def is_parts(self) -> bool:
+        return bool(self.parts)
+
+    def editions(self) -> list[tuple[str, str]]:
+        """(part id, year) of every edition of a parts collection, by year, then part.
+
+        A part with years has those; a part without has what build.py staged,
+        as its year is only known once the data is converted.
+        """
+        order = list(self.parts)
+        out = []
+        for part in self.parts.values():
+            out += [(part.id, year) for year in part.years or staged_part_years(self.id, part.id)]
+        return sorted(out, key=lambda e: (e[1], order.index(e[0])))
+
+    def latest_per_part(self) -> dict[str, str]:
+        """part id -> newest year, for the parts that have an edition, in manifest order."""
+        latest: dict[str, str] = {}
+        for part_id, year in self.editions():
+            latest[part_id] = year  # editions() is ascending by year
+        return {p: latest[p] for p in self.parts if p in latest}
 
 
 @dataclass
@@ -88,14 +132,24 @@ class Manifest:
         datasets = {}
         for dataset_id, spec in (raw.get("datasets") or {}).items():
             spec = spec or {}
+            dated = "years" in spec or "year" in spec
+            if dated and "parts" in spec:
+                sys.exit(f"datasets.yaml: {dataset_id} has 'parts' and 'years'/'year'; a part carries its own years")
             if "years" in spec:
                 years = [str(y) for y in spec["years"]]
             elif "year" in spec:
                 years = [str(spec["year"])]
+            elif "parts" in spec:
+                years = []
             else:
-                sys.exit(f"datasets.yaml: {dataset_id} needs 'years' or 'year'")
+                sys.exit(f"datasets.yaml: {dataset_id} needs 'years', 'year' or 'parts'")
             if years != sorted(years):
                 sys.exit(f"datasets.yaml: {dataset_id} years must be ascending, newest last")
+            parts = load_parts(dataset_id, spec.get("parts")) if "parts" in spec else {}
+            if parts and not spec.get("title"):
+                sys.exit(f"datasets.yaml: {dataset_id} has parts and needs a 'title'")
+            if spec.get("title") and not parts:
+                sys.exit(f"datasets.yaml: {dataset_id}: 'title' is for a parts collection; the converter titles the others")
             boundaries = spec.get("boundaries")
             if boundaries not in BOUNDARIES:
                 sys.exit(
@@ -112,8 +166,27 @@ class Manifest:
                 notes=spec.get("notes"),
                 thumbnail=dict(spec.get("thumbnail") or {}),
                 row_count_tolerance=spec.get("row_count_tolerance"),
+                has_variants="years" in spec,
+                parts=parts,
+                title=spec.get("title"),
             )
         return cls(catalog=raw["catalog"], host=raw["host"], datasets=datasets)
+
+
+def load_parts(dataset_id: str, raw: dict | None) -> dict[str, Part]:
+    if not isinstance(raw, dict) or not raw:
+        sys.exit(f"datasets.yaml: {dataset_id} parts must map converter ids to {{years, notes}}")
+    parts = {}
+    for part_id, spec in raw.items():
+        spec = spec or {}
+        unknown = set(spec) - PART_KEYS
+        if unknown:
+            sys.exit(f"datasets.yaml: {dataset_id}.{part_id} has unknown keys {sorted(unknown)}; a part takes {sorted(PART_KEYS)}")
+        years = [str(y) for y in spec.get("years") or []]
+        if years != sorted(years):
+            sys.exit(f"datasets.yaml: {dataset_id}.{part_id} years must be ascending, newest last")
+        parts[part_id] = Part(id=part_id, years=years, notes=spec.get("notes"))
+    return parts
 
 
 def publish_config() -> dict[str, str]:
@@ -142,6 +215,43 @@ def staging_year_dir(dataset_id: str, year: str) -> Path:
 
 def catalog_year_dir(dataset_id: str, year: str) -> Path:
     return CATALOG_DIR / dataset_id / partition_dir(year)
+
+
+# A parts collection keeps one staged record per edition beside its file:
+#   staging/<id>/year=<Y>/<part>-<Y>.parquet
+#   staging/<id>/year=<Y>/<part>-<Y>.collection.json
+#   staging/<id>/converters/<part>.json
+#   staging/<id>/latest/<part>.parquet, staging/<id>/latest/<id>.pmtiles (all parts)
+PART_STAC_SUFFIX = ".collection.json"
+
+
+def staging_part_stac(dataset_id: str, part_id: str, year: str) -> Path:
+    return staging_year_dir(dataset_id, year) / f"{file_stem(part_id, year)}{PART_STAC_SUFFIX}"
+
+
+def staging_converter_meta(dataset_id: str, part_id: str | None = None) -> Path:
+    if part_id is None:
+        return STAGING_DIR / dataset_id / "converter.json"
+    return STAGING_DIR / dataset_id / "converters" / f"{part_id}.json"
+
+
+def staged_part_years(dataset_id: str, part_id: str) -> list[str]:
+    """Years staged for a part, from its records under staging/<id>/year=*/."""
+    pattern = re.compile(rf"^{re.escape(part_id)}-(\d{{4}}){re.escape(PART_STAC_SUFFIX)}$")
+    years = []
+    for path in (STAGING_DIR / dataset_id).glob(f"{PARTITION_KEY}=*/{part_id}-*{PART_STAC_SUFFIX}"):
+        m = pattern.match(path.name)
+        if m and path.parent.name == partition_dir(m.group(1)):
+            years.append(m.group(1))
+    return sorted(years)
+
+
+def file_facts(path: Path) -> dict:
+    digest = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            digest.update(chunk)
+    return {"file:size": path.stat().st_size, "file:checksum": "1220" + digest.hexdigest()}
 
 
 def read_json(path: Path) -> dict:
@@ -215,13 +325,37 @@ def parquet_collection_properties(path: Path) -> dict:
     return {}
 
 
-def parquet_columns(path: Path) -> list[str]:
+def parquet_scan(path: Path | str) -> str:
+    """``read_parquet`` over one file, or over a glob whose files may differ in columns."""
+    if "*" in str(path):
+        return f"read_parquet({quote(path)}, union_by_name = true)"
+    return f"read_parquet({quote(path)})"
+
+
+def determination_years(path: Path) -> list[tuple[str, int]]:
+    """(year of ``determination:datetime``, rows) for a file, most rows first.
+
+    A value that is the same for every row is stored once in the ``collection``
+    metadata instead of as a column, so both places are read.
+    """
+    if "determination:datetime" in parquet_columns(path):
+        con = duckdb_connect()
+        rows = con.execute(
+            f'SELECT CAST(year("determination:datetime") AS VARCHAR) AS y, count(*) FROM {parquet_scan(path)} '
+            'WHERE "determination:datetime" IS NOT NULL GROUP BY y ORDER BY 2 DESC, 1 DESC'
+        ).fetchall()
+        return [(r[0], int(r[1])) for r in rows]
+    value = parquet_collection_properties(path).get("determination:datetime")
+    return [(str(value)[:4], parquet_row_count(path))] if value else []
+
+
+def parquet_columns(path: Path | str) -> list[str]:
     con = duckdb_connect()
-    rows = con.execute(f"DESCRIBE SELECT * FROM read_parquet({quote(path)})").fetchall()
+    rows = con.execute(f"DESCRIBE SELECT * FROM {parquet_scan(path)}").fetchall()
     return [r[0] for r in rows]
 
 
-def column_stats(path: Path, column: str) -> dict | None:
+def column_stats(path: Path | str, column: str) -> dict | None:
     """count / min / quantiles for a numeric column, or None if absent."""
     if column not in parquet_columns(path):
         return None
@@ -231,7 +365,7 @@ def column_stats(path: Path, column: str) -> dict | None:
         f"SELECT count({q}), min({q}), max({q}), "
         f"quantile_cont({q}, 0.2), quantile_cont({q}, 0.4), quantile_cont({q}, 0.5), "
         f"quantile_cont({q}, 0.6), quantile_cont({q}, 0.8), quantile_cont({q}, 0.95) "
-        f"FROM read_parquet({quote(path)})"
+        f"FROM {parquet_scan(path)}"
     ).fetchone()
     return {
         "count": row[0],
@@ -246,7 +380,7 @@ def column_stats(path: Path, column: str) -> dict | None:
     }
 
 
-def hcat_crops(path: Path) -> list[tuple[str, str | None, int, float]]:
+def hcat_crops(path: Path | str) -> list[tuple[str, str | None, int, float]]:
     """(hcat:code, hcat:name, feature count, area in m²) per crop, largest area first."""
     columns = parquet_columns(path)
     if "hcat:code" not in columns:
@@ -256,13 +390,13 @@ def hcat_crops(path: Path) -> list[tuple[str, str | None, int, float]]:
     name = 'any_value("hcat:name")' if "hcat:name" in columns else "NULL"
     rows = con.execute(
         f'SELECT CAST("hcat:code" AS VARCHAR) AS c, {name}, count(*), {area} '
-        f'FROM read_parquet({quote(path)}) WHERE "hcat:code" IS NOT NULL '
+        f'FROM {parquet_scan(path)} WHERE "hcat:code" IS NOT NULL '
         f"GROUP BY c ORDER BY 4 DESC, 3 DESC"
     ).fetchall()
     return [(r[0], r[1], int(r[2]), float(r[3] or 0)) for r in rows]
 
 
-def hcat_unmapped(path: Path) -> int | None:
+def hcat_unmapped(path: Path | str) -> int | None:
     """Rows whose ``hcat:code`` is empty, or None if the column is absent.
 
     A reader filtering on crop is silently missing these, so every collection
@@ -273,13 +407,13 @@ def hcat_unmapped(path: Path) -> int | None:
     con = duckdb_connect()
     return int(
         con.execute(
-            'SELECT count(*) FROM read_parquet(' + quote(path) + ') '
+            'SELECT count(*) FROM ' + parquet_scan(path) + ' '
             'WHERE "hcat:code" IS NULL OR trim(CAST("hcat:code" AS VARCHAR)) = \'\''
         ).fetchone()[0]
     )
 
 
-def hcat_groups(path: Path, digits: int = 6) -> list[tuple[str, int, float]]:
+def hcat_groups(path: Path | str, digits: int = 6) -> list[tuple[str, int, float]]:
     """(group code prefix, feature count, area in m²) per HCAT group, largest first.
 
     The group is the first ``digits`` digits of the 10-digit ``hcat:code``.
@@ -291,18 +425,18 @@ def hcat_groups(path: Path, digits: int = 6) -> list[tuple[str, int, float]]:
     area = 'sum("metrics:area")' if "metrics:area" in columns else "0"
     rows = con.execute(
         f'SELECT substr(CAST("hcat:code" AS VARCHAR), 1, {digits}) AS g, count(*), {area} '
-        f'FROM read_parquet({quote(path)}) WHERE "hcat:code" IS NOT NULL '
+        f'FROM {parquet_scan(path)} WHERE "hcat:code" IS NOT NULL '
         f"GROUP BY g ORDER BY 3 DESC, 2 DESC"
     ).fetchall()
     return [(r[0], int(r[1]), float(r[2] or 0)) for r in rows]
 
 
-def value_counts(path: Path, column: str, limit: int = 12) -> list[tuple[str, int]]:
+def value_counts(path: Path | str, column: str, limit: int = 12) -> list[tuple[str, int]]:
     if column not in parquet_columns(path):
         return []
     con = duckdb_connect()
     rows = con.execute(
-        f'SELECT CAST("{column}" AS VARCHAR), count(*) FROM read_parquet({quote(path)}) '
+        f'SELECT CAST("{column}" AS VARCHAR), count(*) FROM {parquet_scan(path)} '
         f'WHERE "{column}" IS NOT NULL GROUP BY 1 ORDER BY 2 DESC LIMIT {int(limit)}'
     ).fetchall()
     return [(r[0], int(r[1])) for r in rows]

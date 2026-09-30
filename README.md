@@ -34,9 +34,9 @@ Single files are plain https URLs under `https://data.source.coop/ftw/harmonized
 | What | Where | Notes |
 |---|---|---|
 | How a dataset is converted | [fiboa-cli](https://github.com/fiboa/cli), `fiboa_cli/datasets/<id>.py` | **All conversion logic.** Fix column mappings, sources, licenses there; never here. |
-| What is published | [`datasets.yaml`](datasets.yaml) | converter ids, the editions (years) to publish, keywords |
+| What is published | [`datasets.yaml`](datasets.yaml) | converter ids, the editions (years) to publish, keywords; `parts` for one collection fed by several converters (the cantons of `ch`), one item and license per part |
 | The published catalog | [`catalog/`](catalog/) | synced 1:1 to the bucket; everything in it is public, nothing outside it is |
-| Generators | [`tools/`](tools/) | `build.py` orchestrates; `catalogize.py` writes STAC + docs; `styles.py`, `thumbnail.py`; `upload_data.py` (data), `publish.py` (metadata) |
+| Generators | [`tools/`](tools/) | `build.py` orchestrates; `catalogize.py` writes STAC + docs (`catalogize_parts.py` for a collection with `parts`); `styles.py`, `thumbnail.py`; `upload_data.py` (data), `publish.py` (metadata) |
 | Gates | [`tests/`](tests/) | links, publish contract, manifest ↔ catalog, stac-check, rashid (Portolan conformance); CI runs them on every push and PR |
 | Accepted conformance deviations | [`docs/conformance.md`](docs/conformance.md) | empty, and meant to stay that way |
 

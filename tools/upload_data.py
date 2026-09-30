@@ -10,6 +10,12 @@ script into the *same* prefix, beside the metadata that describes them:
     staging/<id>/year=<Y>/<id>-<Y>.pmtiles  ->  <write_prefix>/<id>/year=<Y>/<id>-<Y>.pmtiles
     staging/<id>/latest/<id>.parquet        ->  <write_prefix>/<id>/latest/<id>.parquet
 
+and for a collection with parts (``ch``), per part and for the tiles of all parts:
+
+    staging/<id>/year=<Y>/<part>-<Y>.parquet  ->  <write_prefix>/<id>/year=<Y>/<part>-<Y>.parquet
+    staging/<id>/latest/<part>.parquet        ->  <write_prefix>/<id>/latest/<part>.parquet
+    staging/<id>/latest/<id>.pmtiles          ->  <write_prefix>/<id>/latest/<id>.pmtiles
+
 Scope is an allow-list of suffixes (``ALLOWED``) under an allow-list of
 directories (``year=*`` and ``latest``). ``collection.json``, ``converter.json``
 and anything else in staging never upload from here; the STAC comes from
