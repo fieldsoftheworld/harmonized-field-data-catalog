@@ -134,11 +134,11 @@ This catalog is a mirror: the data is produced and licensed by the sources liste
 - 2018, Switzerland, Geneva: converted 2026-09-28 from <https://ge.ch/sitg/geodata/SITG/OPENDATA/AGR_SURFACE_AGRICOLE_RECENSEE-SHP.zip>
 - 2018, Switzerland, Zürich: converted 2026-09-28 from <https://maps.zh.ch/wfs/OGDZHWFS?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Aogd-0170_giszhpub_lw_nutzungsflaechen_2018_f&count=1000000&startIndex=0>
 - 2019, Switzerland, Geneva: converted 2026-09-28 from <https://ge.ch/sitg/geodata/SITG/OPENDATA/AGR_SURFACE_AGRICOLE_RECENSEE-SHP.zip>
-- 2019, Switzerland, Zürich: converted 2026-09-28 from <https://maps.zh.ch/wfs/OGDZHWFS?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Aogd-0170_giszhpub_lw_nutzungsflaechen_2019_f&count=1000000&startIndex=0>
+- 2019, Switzerland, Zürich: converted 2026-09-29 from <https://maps.zh.ch/wfs/OGDZHWFS?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Aogd-0170_giszhpub_lw_nutzungsflaechen_2019_f&count=1000000&startIndex=0>
 - 2020, Switzerland, Geneva: converted 2026-09-28 from <https://ge.ch/sitg/geodata/SITG/OPENDATA/AGR_SURFACE_AGRICOLE_RECENSEE-SHP.zip>
-- 2020, Switzerland, Zürich: converted 2026-09-28 from <https://maps.zh.ch/wfs/OGDZHWFS?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Aogd-0170_giszhpub_lw_nutzungsflaechen_2020_f&count=1000000&startIndex=0>
+- 2020, Switzerland, Zürich: converted 2026-09-29 from <https://maps.zh.ch/wfs/OGDZHWFS?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Aogd-0170_giszhpub_lw_nutzungsflaechen_2020_f&count=1000000&startIndex=0>
 - 2021, Switzerland, Geneva: converted 2026-09-28 from <https://ge.ch/sitg/geodata/SITG/OPENDATA/AGR_SURFACE_AGRICOLE_RECENSEE-SHP.zip>
-- 2021, Switzerland, Zürich: converted 2026-09-28 from <https://maps.zh.ch/wfs/OGDZHWFS?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Aogd-0170_giszhpub_lw_nutzungsflaechen_2021_f&count=1000000&startIndex=0>
+- 2021, Switzerland, Zürich: converted 2026-09-29 from <https://maps.zh.ch/wfs/OGDZHWFS?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Aogd-0170_giszhpub_lw_nutzungsflaechen_2021_f&count=1000000&startIndex=0>
 - 2022, Switzerland, Geneva: converted 2026-09-28 from <https://ge.ch/sitg/geodata/SITG/OPENDATA/AGR_SURFACE_AGRICOLE_RECENSEE-SHP.zip>
 - 2022, Switzerland, Schwyz: converted 2026-09-28 from <https://map.geo.sz.ch/mapserv_proxy?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Ach.sz.a002a.nutzung.2022&sortBy=nutzungsid&count=20000&startIndex=0>, <https://map.geo.sz.ch/mapserv_proxy?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Ach.sz.a002a.nutzung.2022&sortBy=nutzungsid&count=20000&startIndex=20000>
 - 2022, Switzerland, Zürich: converted 2026-09-28 from <https://maps.zh.ch/wfs/OGDZHWFS?service=WFS&version=2.0.0&request=GetFeature&typeNames=ms%3Aogd-0170_giszhpub_lw_nutzungsflaechen_2022_f&count=1000000&startIndex=0>

@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          8.157599787176748,
-          47.15310422292327
+          8.16217805681611,
+          47.15834817892808
         ],
         [
-          9.034311037918515,
-          47.15310422292327
+          9.030947776551505,
+          47.15834817892808
         ],
         [
-          9.034311037918515,
-          47.714655618145386
+          9.030947776551505,
+          47.71073462854579
         ],
         [
-          8.157599787176748,
-          47.714655618145386
+          8.16217805681611,
+          47.71073462854579
         ],
         [
-          8.157599787176748,
-          47.15310422292327
+          8.16217805681611,
+          47.15834817892808
         ]
       ]
     ]
   },
   "bbox": [
-    8.157599787176748,
-    47.15310422292327,
-    9.034311037918515,
-    47.714655618145386
+    8.16217805681611,
+    47.15834817892808,
+    9.030947776551505,
+    47.71073462854579
   ],
   "properties": {
     "title": "Switzerland, Zürich — 2019",
@@ -51,31 +51,6 @@
     "proj:code": "EPSG:2056",
     "table:columns": [
       {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:name",
-        "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -86,9 +61,34 @@
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -124,8 +124,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 35172494,
-      "file:checksum": "12207caa92bdf33d5c0b34762b86dfc5298dfa634193fbd7e2a0877272b6aa3882c7",
+      "file:size": 35174866,
+      "file:checksum": "12204f5320ed7c4025504d6cfbaf99ae1f06fc4f7109be82e80e581d4cf455b54f87",
       "proj:code": "EPSG:2056"
     }
   },

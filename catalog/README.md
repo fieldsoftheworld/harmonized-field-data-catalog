@@ -87,13 +87,13 @@ GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- ch | 1520805
 -- de_bw | 4363087
+-- de_mv | 20000
 -- de_sax | 95305
 -- de_st | 78714
 -- es | 17844643
 -- ie_lpis | 1454480
 -- it_bz | 152990
--- pl | 10653830
--- ... 1 more rows
+-- ... 2 more rows
 ```
 
 ## License
