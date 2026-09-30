@@ -32,7 +32,6 @@ import catalogize as cz
 import common
 from common import (
     FILE_EXTENSION,
-    PARQUET_TYPE,
     PARTITION_EXTENSION,
     PARTITION_KEY,
     PMTILES_TYPE,
@@ -289,20 +288,9 @@ def parts_collection(
         ],
         "partition:file_count": len(inputs),
         "partition:glob": glob,
+        # No data asset: each source's files are its items' assets, and a collection-level
+        # asset per source would be judged against the extent of the whole collection
         "assets": {
-            **{
-                f"data-{part_id}": {
-                    "href": f"./latest/{part_id}.parquet",
-                    "type": PARQUET_TYPE,
-                    "title": f"{metas[part_id]['short_name']} — latest edition ({y.year}) (GeoParquet)",
-                    "description": f"Byte-identical copy of `{partition_dir(y.year)}/{y.parquet.name}`, kept at a stable path so `{ds.id}/latest/*.parquet` selects the newest edition of every source.",
-                    "roles": ["data"],
-                    "file:size": y.data_asset["file:size"],
-                    "file:checksum": y.data_asset["file:checksum"],
-                    "proj:code": y.crs,
-                }
-                for part_id, y in latest.items()
-            },
             "visual": {
                 "href": f"./latest/{pmtiles.name}",
                 "type": PMTILES_TYPE,

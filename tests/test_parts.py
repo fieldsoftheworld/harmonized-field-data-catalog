@@ -186,7 +186,7 @@ try:
     check("fed by 2 fiboa-cli converters" in coll["description"], "description does not say how many sources")
     check(coll["assets"]["visual"]["href"] == "./latest/ch.pmtiles", "visual asset")
     check(any(link["rel"] == "pmtiles" and link["href"] == "./latest/ch.pmtiles" for link in coll["links"]), "pmtiles link")
-    check({k: a["href"] for k, a in coll["assets"].items() if k.startswith("data-")} == {"data-ch_aa": "./latest/ch_aa.parquet", "data-ch_bb": "./latest/ch_bb.parquet"}, "data assets per part")
+    check(not any("data" in a.get("roles", []) for a in coll["assets"].values()), "the collection carries no data asset; its items do")
     check(coll["table:row_count"] == 6 + 5, f"row count of the newest editions: {coll['table:row_count']}")
     check(len([link for link in coll["links"] if link["rel"] == "item"]) == 3, "item links")
     check(coll.get("via") is None and {"rel": "via", "href": "https://example.org/geodienste", "type": "text/html", "title": "Original source (publisher page)"} in coll["links"], "collection via")
