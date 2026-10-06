@@ -417,6 +417,12 @@
       "title": "U.S. Department of Agriculture Crop Sequence Boundaries"
     },
     {
+      "rel": "icon",
+      "href": "./_assets/ftw-logo.svg",
+      "type": "image/svg+xml",
+      "title": "Fields of the World"
+    },
+    {
       "rel": "about",
       "href": "https://source.coop/ftw/harmonized-field-data",
       "type": "text/html",
