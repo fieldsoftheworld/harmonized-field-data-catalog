@@ -51,6 +51,9 @@ def check(ok: bool, what: str) -> None:
 
 
 TERMS = "https://example.org/bb/terms"
+FIBOA = "https://fiboa.org/specification/v0.3.0/schema.yaml"
+HCAT = "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
+CROP = "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
 PARTS = {
     # a source without variants: its current state, mostly 2026 with some 2025
     "ch_aa": {
@@ -59,6 +62,7 @@ PARTS = {
         "meta": converter_meta("ch_aa", "Switzerland, Aa", "Kanton Aa, via geodienste.ch <https://example.org/aa>", "Kanton Aa — Nutzungsflächen", "CC-BY-4.0"),
         "provider": {"name": "Kanton Aa, via geodienste.ch", "roles": ["producer", "licensor"], "url": "https://example.org/aa"},
         "license": ("CC-BY-4.0", None),
+        "extensions": [HCAT, FIBOA],
     },
     # a source with variants and its own terms; a year that is the same for
     # every row is stored in the file metadata, not as a column
@@ -67,6 +71,7 @@ PARTS = {
         "meta": converter_meta("ch_bb", "Switzerland, Bb", "Kanton Bb <https://example.org/bb>", "Quelle: Kanton Bb", f"Terms of use <{TERMS}>"),
         "provider": {"name": "Kanton Bb", "roles": ["producer", "licensor"], "url": "https://example.org/bb"},
         "license": ("other", TERMS),
+        "extensions": [FIBOA, CROP],
     },
 }
 SURVEY = """# Switzerland
@@ -111,7 +116,7 @@ try:
 
     def fake_describe(part_id, parquet, pmtiles, stac_file):
         lic, link = PARTS[part_id]["license"]
-        write_staged_stac(stac_file, part_id, parquet, lic, PARTS[part_id]["provider"], link)
+        write_staged_stac(stac_file, part_id, parquet, lic, PARTS[part_id]["provider"], link, PARTS[part_id]["extensions"])
 
     def fake_meta(converter_id, out):
         write_json(out, PARTS[converter_id]["meta"])
@@ -187,6 +192,8 @@ try:
     check(coll["assets"]["visual"]["href"] == "./latest/ch.pmtiles", "visual asset")
     check(any(link["rel"] == "pmtiles" and link["href"] == "./latest/ch.pmtiles" for link in coll["links"]), "pmtiles link")
     check(not any("data" in a.get("roles", []) for a in coll["assets"].values()), "the collection carries no data asset; its items do")
+    extensions = coll.get("vecorel_extensions")
+    check(extensions == {"ch": sorted([CROP, FIBOA, HCAT])}, f"the extensions of every part, under the collection id: {extensions}")
     check(coll["table:row_count"] == 6 + 5, f"row count of the newest editions: {coll['table:row_count']}")
     check(len([link for link in coll["links"] if link["rel"] == "item"]) == 3, "item links")
     check(coll.get("via") is None and {"rel": "via", "href": "https://example.org/geodienste", "type": "text/html", "title": "Original source (publisher page)"} in coll["links"], "collection via")

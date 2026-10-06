@@ -41,7 +41,7 @@ def write_parquet(path: Path, x0: float, years: list[int], hoist_year: bool = Fa
     return path
 
 
-def write_staged_stac(path: Path, collection_id: str, parquet: Path, license: str, provider: dict, license_link: str | None = None) -> None:
+def write_staged_stac(path: Path, collection_id: str, parquet: Path, license: str, provider: dict, license_link: str | None = None, extensions: list[str] | None = None) -> None:
     """The record build.describe() leaves beside a staged file."""
     con = duckdb_connect()
     columns = [{"name": r[0], "type": r[1].lower()} for r in con.execute(f"DESCRIBE SELECT * FROM read_parquet({quote(parquet)}, hive_partitioning = false)").fetchall()]
@@ -58,6 +58,7 @@ def write_staged_stac(path: Path, collection_id: str, parquet: Path, license: st
         "extent": {"spatial": {"bbox": [[xmin, ymin, xmax, ymax]]}, "temporal": {"interval": [[None, None]]}},
         "links": links,
         "fiboa_version": "0.3.0",
+        **({"vecorel_extensions": {collection_id: extensions}} if extensions else {}),
         "assets": {
             "data": {
                 "href": f"./{parquet.name}",

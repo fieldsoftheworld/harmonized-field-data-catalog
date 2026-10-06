@@ -314,6 +314,10 @@ def parts_collection(
     for key in ("fiboa_version", "vecorel_version"):
         if key in base:
             collection[key] = base[key]
+    # each part's record keys its extensions by the part id
+    extensions = {e for y in inputs for part in y.stac.get("vecorel_extensions", {}).values() for e in part}
+    if extensions:
+        collection["vecorel_extensions"] = {ds.id: sorted(extensions)}
     attributions = [metas[p].get("attribution") for p in latest if metas[p].get("attribution")]
     if attributions:
         collection["attribution"] = "; ".join(dict.fromkeys(attributions))
