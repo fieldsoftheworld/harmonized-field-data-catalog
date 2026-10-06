@@ -841,6 +841,7 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
                 {"rel": "child", "href": f"./{c['id']}/collection.json", "type": "application/json", "title": c["title"]}
                 for c in collections
             ],
+            {"rel": "icon", "href": "./_assets/ftw-logo.svg", "type": "image/svg+xml", "title": "Fields of the World"},
             {"rel": "about", "href": human_base, "type": "text/html", "title": "Dataset home page on Source Cooperative"},
             {"rel": "vcs", "href": repo, "type": "text/html", "title": "Source repository"},
             {"rel": "issues", "href": f"{repo}/issues", "type": "text/html", "title": "Issue tracker"},
