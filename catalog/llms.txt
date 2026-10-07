@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Government-published field boundaries harmonized to fiboa, 67 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Government-published field boundaries harmonized to fiboa, 68 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — crop fields — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - at_block: Field blocks for Austria — field blocks — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
@@ -68,6 +68,7 @@ Government-published field boundaries harmonized to fiboa, 67 collections, GeoPa
 - se: Swedish Crop Fields (Jordbruksskiften) — crop fields — https://data.source.coop/ftw/harmonized-field-data/se/latest/se.parquet (license CC0-1.0, CRS EPSG:3006)
 - si: Slovenia Crop Fields — crop fields — https://data.source.coop/ftw/harmonized-field-data/si/latest/si.parquet (license other, CRS EPSG:3794)
 - sk: Slovakia Agricultural Land Identification System — crop fields — https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet (license CC0-1.0, CRS EPSG:5514)
+- us_ca_scm: California (US) Statewide Crop Mapping — crop fields — https://data.source.coop/ftw/harmonized-field-data/us_ca_scm/latest/us_ca_scm.parquet (license CC0-1.0, CRS EPSG:3857, EPSG:4269)
 - us_usda_cropland: U.S. Department of Agriculture Crop Sequence Boundaries — crop fields — https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/latest/us_usda_cropland.parquet (license other, CRS )
 
 Globs need S3 through the proxy (DuckDB: CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2')): all newest editions s3://ftw/harmonized-field-data/*/latest/*.parquet (union_by_name=true); per-edition s3://ftw/harmonized-field-data/<id>/year=*/*.parquet (hive_partitioning=true).
