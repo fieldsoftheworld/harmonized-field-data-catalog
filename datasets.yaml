@@ -9,6 +9,11 @@
 #             hive partition `year=<Y>/` and a STAC item.
 #   year:     for converters without variants: the reference year of the data,
 #             with `year_source` saying where that year comes from.
+#   parts:    instead of years/year: one collection fed by several converters
+#             (the cantons of `ch`), converter id -> {years, notes}. Each part
+#             edition is `year=<Y>/<part>-<Y>.parquet` with its own item and
+#             license; a part without `years` is converted once and its year is
+#             the most frequent year of `determination:datetime`. Needs `title`.
 #   boundaries: how the boundaries came to exist -- `declared` by farmers in a
 #             subsidy application, or held in the parcel register built on those
 #             declarations (the IACS/LPIS family); `mapped` by an authority from
@@ -352,16 +357,43 @@ datasets:
   jp:
     years: ['2021', '2022', '2023', '2024']
     boundaries: mapped
+    keywords: [Japan, Fude Polygons, MAFF, rice fields]
   nz:
     years: ['2017', '2020']
     boundaries: mapped
     keywords: [New Zealand, irrigated land, Aqualinc, MfE]
   ch:
-    year: 2025
+    title: Field boundaries for Switzerland
     boundaries: declared
-    year_source: bezugsjahr of most features (1,141,698 of 1,350,476 are 2025, the rest 2026).
     keywords: [Switzerland, LWB, Nutzungsflaechen, crop fields, geodienste.ch]
-    keywords: [Japan, Fude Polygons, MAFF, rice fields]
+    via: https://www.geodienste.ch/services/lwb_nutzungsflaechen
+    row_count_tolerance: 0.6  # ZH 2017 and 2018 cover only part of the canton, recorded step by step (64k -> 102k in 2019)
+    # the 20 cantons geodienste.ch serves openly; BL's file also holds BS
+    parts:
+      ch_ag:
+      ch_ai:
+      ch_ar:
+      ch_be:
+      ch_bl:
+      ch_fr:
+      ch_ge:
+        years: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026']
+        notes: The current year (2026) is provisional until December.
+      ch_gl:
+      ch_gr:
+      ch_ju:
+      ch_lu:
+      ch_sg:
+      ch_sh:
+      ch_so:
+      ch_sz:
+        years: ['2022', '2023', '2024', '2025']
+      ch_tg:
+      ch_ur:
+      ch_vs:
+      ch_zg:
+      ch_zh:
+        years: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
   es:
     years: ['2025']
     boundaries: declared

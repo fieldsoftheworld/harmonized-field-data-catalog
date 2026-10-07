@@ -7,7 +7,7 @@ Government-published field boundaries harmonized to fiboa, 67 collections, GeoPa
 - be_vlg: Field boundaries for Flanders, Belgium — crop fields — https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet (license other, CRS EPSG:31370)
 - be_wal: Belgium Wallonia: Parcellaire Agricole Anonyme — crop fields — https://data.source.coop/ftw/harmonized-field-data/be_wal/latest/be_wal.parquet (license other, CRS EPSG:3035)
 - bg: Field blocks for Bulgaria — field blocks — https://data.source.coop/ftw/harmonized-field-data/bg/latest/bg.parquet (license CC-BY-4.0, CRS EPSG:32635)
-- ch: Field boundaries for Switzerland — crop fields — https://data.source.coop/ftw/harmonized-field-data/ch/latest/ch.parquet (license other, CRS EPSG:2056)
+- ch: Field boundaries for Switzerland — crop fields — https://data.source.coop/ftw/harmonized-field-data/ch/latest/<converter>.parquet, one per source (license other, CRS EPSG:2056)
 - cz: Field boundaries for Czech — crop fields — https://data.source.coop/ftw/harmonized-field-data/cz/latest/cz.parquet (license CC0-1.0, CRS EPSG:4258)
 - de_bb: Field boundaries for Berlin / Brandenburg, Germany — crop fields — https://data.source.coop/ftw/harmonized-field-data/de_bb/latest/de_bb.parquet (license DL-DE-BY-2.0, CRS EPSG:25833)
 - de_bb_block: Field blocks for Berlin / Brandenburg, Germany — field blocks — https://data.source.coop/ftw/harmonized-field-data/de_bb_block/latest/de_bb_block.parquet (license DL-DE-BY-2.0, CRS EPSG:25833)

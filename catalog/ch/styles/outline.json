@@ -1,13 +1,13 @@
 {
   "version": 8,
-  "name": "Switzerland — field boundaries",
+  "name": "Field boundaries for Switzerland — field boundaries",
   "metadata": {
     "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
   },
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2025/ch.pmtiles"
+      "url": "pmtiles://../latest/ch.pmtiles"
     }
   },
   "layers": [

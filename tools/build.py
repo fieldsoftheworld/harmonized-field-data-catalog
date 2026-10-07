@@ -19,6 +19,13 @@ For every dataset (and every year in ``datasets.yaml``):
     python tools/build.py --all              # every dataset in the manifest
     python tools/build.py nl --year 2024     # one edition only
 
+A collection with ``parts`` (``ch``) stages each part with its own converter as
+``year=<Y>/<part>-<Y>.parquet`` beside ``<part>-<Y>.collection.json``, keeps
+each part's converter metadata in ``converters/<part>.json``, and tiles the
+newest edition of every part into one ``latest/<id>.pmtiles``. A part without
+years is converted once into ``tmp/`` and filed under the most frequent year of
+its ``determination:datetime``. The row-count check runs per part.
+
 fiboa-cli is found through $FIBOA_CMD (default ``fiboa``) and the interpreter
 that has it installed through $FIBOA_PYTHON (default ``python``). Set both to
 e.g. ``pixi run -e dev --manifest-path ../cli/pyproject.toml fiboa`` to use a
@@ -28,7 +35,6 @@ delete them to reconvert.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import os
 import shlex
 import subprocess
@@ -41,10 +47,16 @@ from common import (
     ROOT,
     STAGING_DIR,
     WEB_MAP_LINKS_EXTENSION,
+    Dataset,
     Manifest,
+    determination_years,
+    file_facts,
     file_stem,
     parquet_row_count,
     read_json,
+    staged_part_years,
+    staging_converter_meta,
+    staging_part_stac,
     staging_year_dir,
     write_json,
 )
@@ -62,6 +74,14 @@ def run(cmd: list[str], **kwargs) -> None:
 TIPPECANOE_OPTS = ["-zg", "--drop-densest-as-needed", "--extend-zooms-if-still-dropping"]
 
 
+def convert(converter_id: str, parquet: Path, variant: str | None = None) -> None:
+    parquet.parent.mkdir(parents=True, exist_ok=True)
+    cmd = [*FIBOA_CMD, "convert", converter_id, "-c", str(CACHE_DIR), "-o", str(parquet)]
+    if variant:
+        cmd += ["--variant", variant]
+    run(cmd)
+
+
 def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True) -> None:
     out = staging_year_dir(dataset_id, year)
     out.mkdir(parents=True, exist_ok=True)
@@ -70,10 +90,7 @@ def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True) -
     parquet, pmtiles = out / f"{stem}.parquet", out / f"{stem}.pmtiles"
 
     if not parquet.exists():
-        cmd = [*FIBOA_CMD, "convert", dataset_id, "-c", str(CACHE_DIR), "-o", str(parquet)]
-        if has_variants:
-            cmd += ["--variant", year]
-        run(cmd)
+        convert(dataset_id, parquet, year if has_variants else None)
     run([*FIBOA_CMD, "validate", "-n", "-1", str(parquet)])
 
     # only the newest edition is rendered in the browser; tiles for older
@@ -83,18 +100,91 @@ def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True) -
     describe(dataset_id, parquet, pmtiles if pmtiles.exists() else None, out / "collection.json")
 
 
-def make_pmtiles(parquet: Path, pmtiles: Path, layer: str) -> None:
+def stage_part(dataset_id: str, part_id: str, year: str) -> None:
+    """One edition of a part: a converter variant, staged as <part>-<year>."""
+    parquet = staging_year_dir(dataset_id, year) / f"{file_stem(part_id, year)}.parquet"
+    if not parquet.exists():
+        convert(part_id, parquet, year)
+    run([*FIBOA_CMD, "validate", "-n", "-1", str(parquet)])
+    describe(part_id, parquet, None, staging_part_stac(dataset_id, part_id, year))
+
+
+def stage_part_snapshot(dataset_id: str, part_id: str) -> None:
+    """A part without variants: convert once, and file it under the year the data holds.
+
+    The source is the part's current state, so its year is read from the file:
+    the most frequent year of ``determination:datetime``. catalogize notes a
+    file that holds other years too. A staged edition is reused; delete it to
+    take a new snapshot.
+    """
+    years = staged_part_years(dataset_id, part_id)
+    if not years:
+        parquet = STAGING_DIR / dataset_id / "tmp" / f"{part_id}.parquet"
+        if not parquet.exists():
+            convert(part_id, parquet)
+        counts = determination_years(parquet)
+        if not counts:
+            raise SystemExit(f"{part_id}: no determination:datetime in {parquet}, so no year to file it under")
+        year = counts[0][0]
+        target = staging_year_dir(dataset_id, year) / f"{file_stem(part_id, year)}.parquet"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        print(f"{part_id}: {', '.join(f'{y}: {n:,}' for y, n in counts)} rows by year; filed under {year}", flush=True)
+        os.replace(parquet, target)
+        years = [year]
+    for year in years:
+        stage_part(dataset_id, part_id, year)
+
+
+def stage_parts(ds: Dataset, only_year: str | None) -> None:
+    for part in ds.parts.values():
+        if part.years:
+            for year in part.years:
+                if only_year in (None, year):
+                    stage_part(ds.id, part.id, year)
+        elif only_year is None:
+            stage_part_snapshot(ds.id, part.id)
+        else:
+            print(f"{part.id}: no years in the manifest, skipped with --year", flush=True)
+
+
+def stage_parts_pmtiles(ds: Dataset) -> None:
+    """One PMTiles for the collection, from the newest edition of every part.
+
+    The editions are tiled as one layer named after the collection; the tiles'
+    attribution names every part, since the map shows them together. Older
+    editions get no tiles, as for any other collection.
+    """
+    latest = ds.latest_per_part()
+    sources = [staging_year_dir(ds.id, y) / f"{file_stem(p, y)}.parquet" for p, y in latest.items()]
+    pmtiles = STAGING_DIR / ds.id / "latest" / f"{ds.id}.pmtiles"
+    if pmtiles.exists() and pmtiles.stat().st_mtime >= max(s.stat().st_mtime for s in sources):
+        return
+    attributions = []
+    for part_id in latest:
+        meta = read_json(staging_converter_meta(ds.id, part_id))
+        attributions.append(meta.get("attribution") or meta.get("provider") or part_id)
+    make_pmtiles(sources, pmtiles, ds.id, attribution="; ".join(attributions))
+
+
+def make_pmtiles(sources: Path | list[Path], pmtiles: Path, layer: str, attribution: str | None = None) -> None:
+    """Tile one or more GeoParquet files into one layer (ogr2ogr, one after another, into tippecanoe)."""
+    sources = [sources] if isinstance(sources, Path) else sources
+    pmtiles.parent.mkdir(parents=True, exist_ok=True)
     # tippecanoe ignores $TMPDIR and spills into /tmp, which is often a small partition
     tmp = ["-t", os.environ["TMPDIR"]] if os.environ.get("TMPDIR") else []
-    ogr = ["ogr2ogr", "-t_srs", "EPSG:4326", "-f", "GeoJSONSeq", "/vsistdout/", str(parquet)]
-    tippecanoe = ["tippecanoe", *tmp, *TIPPECANOE_OPTS, "--projection=EPSG:4326", "-o", str(pmtiles), "-l", layer]
-    print(f"$ {shlex.join(ogr)} | {shlex.join(tippecanoe)}", flush=True)
-    source = subprocess.Popen(ogr, stdout=subprocess.PIPE)
-    tiles = subprocess.run(tippecanoe, stdin=source.stdout)
-    source.stdout.close()
-    if source.wait() != 0 or tiles.returncode != 0:
+    extra = ["--attribution", attribution] if attribution else []
+    tippecanoe = ["tippecanoe", *tmp, *TIPPECANOE_OPTS, "--projection=EPSG:4326", *extra, "-o", str(pmtiles), "-l", layer]
+    print(f"$ {shlex.join(tippecanoe)}", flush=True)
+    tiles = subprocess.Popen(tippecanoe, stdin=subprocess.PIPE)
+    failed = 0
+    for parquet in sources:
+        ogr = ["ogr2ogr", "-t_srs", "EPSG:4326", "-f", "GeoJSONSeq", "/vsistdout/", str(parquet)]
+        print(f"  <- {shlex.join(ogr)}", flush=True)
+        failed = failed or subprocess.run(ogr, stdout=tiles.stdin).returncode
+    tiles.stdin.close()
+    if tiles.wait() != 0 or failed:
         pmtiles.unlink(missing_ok=True)
-        raise subprocess.CalledProcessError(tiles.returncode or source.returncode, tippecanoe)
+        raise subprocess.CalledProcessError(tiles.returncode or failed, tippecanoe)
 
 
 def describe(dataset_id: str, parquet: Path, pmtiles: Path | None, stac_file: Path) -> None:
@@ -121,19 +211,11 @@ def describe(dataset_id: str, parquet: Path, pmtiles: Path | None, stac_file: Pa
     write_json(stac_file, data)
 
 
-def file_facts(path: Path) -> dict:
-    digest = hashlib.sha256()
-    with path.open("rb") as f:
-        for chunk in iter(lambda: f.read(1 << 20), b""):
-            digest.update(chunk)
-    return {"file:size": path.stat().st_size, "file:checksum": "1220" + digest.hexdigest()}
-
-
 # an edition this far from its neighbour is reported; see check_row_counts
 DEFAULT_ROW_COUNT_TOLERANCE = 0.25
 
 
-def check_row_counts(dataset_id: str, years: list[str], tolerance: float) -> list[str]:
+def check_row_counts(dataset_id: str, years: list[str], tolerance: float, part_id: str | None = None) -> list[str]:
     """Report editions whose row count jumps against the preceding one.
 
     A conversion that quietly changes what it keeps still writes a valid file,
@@ -145,10 +227,12 @@ def check_row_counts(dataset_id: str, years: list[str], tolerance: float) -> lis
     This warns rather than fails, because genuine changes of the same size do
     happen (nl 2023 nearly doubled on a real BRP delineation change). A dataset
     that legitimately jumps sets row_count_tolerance in datasets.yaml.
+    In a parts collection each part is its own series.
     """
+    label = f"{dataset_id}/{part_id}" if part_id else dataset_id
     counts: list[tuple[str, int]] = []
     for year in years:
-        parquet = staging_year_dir(dataset_id, year) / f"{file_stem(dataset_id, year)}.parquet"
+        parquet = staging_year_dir(dataset_id, year) / f"{file_stem(part_id or dataset_id, year)}.parquet"
         if parquet.exists():
             counts.append((year, parquet_row_count(parquet)))
 
@@ -159,17 +243,47 @@ def check_row_counts(dataset_id: str, years: list[str], tolerance: float) -> lis
         change = (rows - prev_rows) / prev_rows
         if abs(change) > tolerance:
             warnings.append(
-                f"{dataset_id} {year}: {rows:,} rows vs {prev_rows:,} in {prev_year} "
+                f"{label} {year}: {rows:,} rows vs {prev_rows:,} in {prev_year} "
                 f"({change:+.0%}, tolerance +/-{tolerance:.0%})"
             )
     return warnings
 
 
-def converter_meta(dataset_id: str) -> None:
-    out = STAGING_DIR / dataset_id / "converter.json"
+def converter_meta(converter_id: str, out: Path) -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("w", encoding="utf-8") as f:
-        run([*FIBOA_PYTHON, str(ROOT / "tools" / "converter_meta.py"), dataset_id], stdout=f)
+        run([*FIBOA_PYTHON, str(ROOT / "tools" / "converter_meta.py"), converter_id], stdout=f)
+
+
+def row_count_tolerance(ds: Dataset) -> float:
+    return ds.row_count_tolerance if ds.row_count_tolerance is not None else DEFAULT_ROW_COUNT_TOLERANCE
+
+
+def prepare(ds: Dataset, only_year: str | None, skip_convert: bool) -> list[str]:
+    """Staging, row-count check and converter metadata; returns the row-count warnings."""
+    if ds.is_parts:
+        if not skip_convert:
+            stage_parts(ds, only_year)
+        for part_id in ds.parts:
+            converter_meta(part_id, staging_converter_meta(ds.id, part_id))
+        if not skip_convert:
+            stage_parts_pmtiles(ds)
+        editions = ds.editions()
+        return [
+            jump
+            for part_id in ds.parts
+            for jump in check_row_counts(
+                ds.id, [y for p, y in editions if p == part_id], row_count_tolerance(ds), part_id
+            )
+        ]
+    if not skip_convert:
+        for year in [only_year] if only_year else ds.years:
+            stage(ds.id, year, ds.has_variants, latest=(year == ds.years[-1]))
+    # compare against the whole series, not just the years built now: a
+    # single rebuilt edition is only suspicious next to its neighbours
+    jumps = check_row_counts(ds.id, ds.years, row_count_tolerance(ds))
+    converter_meta(ds.id, staging_converter_meta(ds.id))
+    return jumps
 
 
 def main() -> int:
@@ -195,28 +309,13 @@ def main() -> int:
         ds = manifest.datasets.get(dataset_id)
         if ds is None:
             sys.exit(f"{dataset_id} is not in datasets.yaml")
-        years = [args.year] if args.year else ds.years
-        # the manifest knows whether the year is a converter variant or only a label
-        has_variants = "years" in (__import__("yaml").safe_load(open(ROOT / "datasets.yaml"))["datasets"][dataset_id] or {})
         try:
-            if not args.skip_convert:
-                for year in years:
-                    stage(dataset_id, year, has_variants, latest=(year == ds.years[-1]))
-            # compare against the whole series, not just the years built now: a
-            # single rebuilt edition is only suspicious next to its neighbours
-            jumps = check_row_counts(
-                dataset_id,
-                ds.years,
-                ds.row_count_tolerance
-                if ds.row_count_tolerance is not None
-                else DEFAULT_ROW_COUNT_TOLERANCE,
-            )
+            jumps = prepare(ds, args.year, args.skip_convert)
             for msg in jumps:
                 print(f"row-count jump: {msg}", file=sys.stderr)
             row_count_warnings += jumps
             if jumps and args.strict_row_counts:
                 raise SystemExit(f"{dataset_id}: row-count jump with --strict-row-counts")
-            converter_meta(dataset_id)
             run([sys.executable, str(ROOT / "tools" / "catalogize.py"), dataset_id])
             if not args.skip_thumbnail:
                 try:

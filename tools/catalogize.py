@@ -12,6 +12,7 @@ GeoParquet, the PMTiles and a ``collection.json`` with relative links — plus
     README.md, AGENTS.md, llms.txt
 
 and, with ``--root``, the catalog root (``catalog.json``, README, AGENTS, llms).
+A collection with ``parts`` in the manifest is written by ``catalogize_parts.py``.
 
 Every sentence written here is either copied from the converter / the fiboa
 data survey / the specification (attested), or measured from the files
@@ -24,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import os
 import re
 import shutil
@@ -68,6 +70,8 @@ from common import (
     partition_dir,
     publish_config,
     read_json,
+    staging_converter_meta,
+    staging_part_stac,
     staging_year_dir,
     write_json,
     write_text,
@@ -86,10 +90,11 @@ CACHE_DIR = ROOT / "cache" / "data-survey"
 
 
 class YearInput:
-    def __init__(self, dataset_id: str, year: str):
+    def __init__(self, dataset_id: str, year: str, part_id: str | None = None):
         self.year = year
+        self.part_id = part_id
         self.dir = staging_year_dir(dataset_id, year)
-        self.stac_path = self.dir / "collection.json"
+        self.stac_path = staging_part_stac(dataset_id, part_id, year) if part_id else self.dir / "collection.json"
         if not self.stac_path.exists():
             sys.exit(f"missing {self.stac_path}: run `tools/build.py {dataset_id} --year {year}` first")
         self.stac = read_json(self.stac_path)
@@ -131,19 +136,15 @@ class YearInput:
                 )
 
 
-def load_converter_meta(dataset_id: str) -> dict:
-    path = STAGING_DIR / dataset_id / "converter.json"
+def load_converter_meta(dataset_id: str, part_id: str | None = None) -> dict:
+    path = staging_converter_meta(dataset_id, part_id)
     if not path.exists():
         sys.exit(f"missing {path}: run tools/build.py (it calls converter_meta.py)")
     return read_json(path)
 
 
-def data_survey(dataset_id: str) -> tuple[str | None, dict[str, str]]:
-    """(survey page URL, {source column: description}) from fiboa/data-survey.
-
-    The survey's property tables describe the *source* columns; they are mapped
-    to fiboa names through the converter's ``columns``. Cached under cache/.
-    """
+def survey_text(dataset_id: str) -> tuple[str | None, str | None]:
+    """(survey page URL, markdown) of the dataset's fiboa/data-survey entry. Cached under cache/."""
     base = dataset_id.replace("_", "-").upper()
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     cached = CACHE_DIR / f"{base}.md"
@@ -159,7 +160,33 @@ def data_survey(dataset_id: str) -> tuple[str | None, dict[str, str]]:
         except requests.RequestException:
             text = None
     if text is None:
+        return None, None
+    return DATA_SURVEY_PAGE.format(base=base), text
+
+
+def survey_overview(text: str, survey_url: str) -> str | None:
+    """The survey's ``## Overview`` section as one paragraph per blank line, links made absolute."""
+    m = re.search(r"^## Overview\s*\n(.*?)(?=^## |\Z)", text, re.S | re.M)
+    if not m:
+        return None
+    paragraphs = [" ".join(p.split()) for p in m.group(1).strip().split("\n\n") if p.strip()]
+    base = survey_url.rsplit("/", 1)[0]
+    return re.sub(r"\]\((?!https?://)([^)]+\.md)\)", rf"]({base}/\1)", "\n\n".join(paragraphs))
+
+
+def data_survey(dataset_id: str) -> tuple[str | None, dict[str, str]]:
+    """(survey page URL, {source column: description}) from fiboa/data-survey.
+
+    The survey's property tables describe the *source* columns; they are mapped
+    to fiboa names through the converter's ``columns``.
+    """
+    url, text = survey_text(dataset_id)
+    if text is None:
         return None, {}
+    return url, survey_properties(text)
+
+
+def survey_properties(text: str) -> dict[str, str]:
     props: dict[str, str] = {}
     for line in text.splitlines():
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
@@ -168,7 +195,7 @@ def data_survey(dataset_id: str) -> tuple[str | None, dict[str, str]]:
             desc = cells[-1]
             if desc and name not in props:
                 props[name] = desc
-    return DATA_SURVEY_PAGE.format(base=base), props
+    return props
 
 
 def reverse_columns(meta: dict) -> dict[str, str]:
@@ -257,6 +284,14 @@ def link_data_file(src: Path, dst: Path) -> None:
     dst.symlink_to(os.path.relpath(src, dst.parent))
 
 
+def copy_latest(src: Path, dst: Path) -> None:
+    """The byte-identical ``latest/`` copy of an edition in staging/ (a hard link)."""
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    if dst.exists() or dst.is_symlink():
+        dst.unlink()
+    os.link(src, dst)
+
+
 def union_columns(items: list[dict]) -> list[dict]:
     """Every column any edition carries, the newest edition's first.
 
@@ -276,66 +311,70 @@ def union_columns(items: list[dict]) -> list[dict]:
 def build_items(ds: Dataset, meta: dict, years: list[YearInput], public_base: str, survey_props: dict[str, str]) -> list[dict]:
     items = []
     for y in years:
-        stem = file_stem(ds.id, y.year)
-        # every edition describes its own file: a column that is constant in one
-        # edition collapses into the collection metadata and is not a column there
-        table_columns = describe_columns(y.data_asset.get("table:columns", []), meta, survey_props)
-        start, end = year_interval(y.year, y.interval)
-        parquet_name = y.parquet.name
-        pmtiles_name = y.pmtiles.name if y.pmtiles else None
-        item = {
-            "type": "Feature",
-            "stac_version": "1.1.0",
-            "stac_extensions": [FILE_EXTENSION, TABLE_EXTENSION, PROJECTION_EXTENSION, PROCESSING_EXTENSION],
-            "id": stem,
-            "geometry": bbox_polygon(y.bbox),
-            "bbox": y.bbox,
-            "properties": {
-                "title": f"{meta['short_name']} — {y.year}",
-                "description": (
-                    f"Field boundaries of the {y.year} edition of this dataset, one GeoParquet file "
-                    f"(`{parquet_name}`, {fmt_int(y.row_count)} fields) and its PMTiles. "
-                    f"Partition `{PARTITION_KEY}={y.year}` of the collection's hive layout."
-                ),
-                "datetime": None,
-                "start_datetime": start,
-                "end_datetime": end,
-                PARTITION_KEY: int(y.year),
-                "proj:code": y.crs,
-                "table:columns": table_columns,
-                "table:primary_geometry": "geometry",
-                "table:row_count": y.row_count,
-                "processing:software": y.data_asset.get("processing:software", {}),
-            },
-            "collection": ds.id,
-            "assets": {
-                "data": {
-                    "href": f"./{parquet_name}",
-                    "type": PARQUET_TYPE,
-                    "title": f"{meta['short_name']} {y.year} (GeoParquet)",
-                    "roles": ["data"],
-                    "file:size": y.data_asset["file:size"],
-                    "file:checksum": y.data_asset["file:checksum"],
-                    "proj:code": y.crs,
-                },
-            },
-            "links": [
-                {"rel": "root", "href": "../../catalog.json", "type": "application/json"},
-                {"rel": "parent", "href": "../collection.json", "type": "application/json"},
-                {"rel": "collection", "href": "../collection.json", "type": "application/json"},
-            ],
-        }
-        if y.visual_asset:
-            item["assets"]["visual"] = {
-                "href": f"./{pmtiles_name}",
-                "type": PMTILES_TYPE,
-                "title": f"{meta['short_name']} {y.year} (PMTiles)",
-                "roles": ["visual"],
-                "file:size": y.visual_asset["file:size"],
-                "file:checksum": y.visual_asset["file:checksum"],
-            }
-        items.append(item)
+        description = (
+            f"Field boundaries of the {y.year} edition of this dataset, one GeoParquet file "
+            f"(`{y.parquet.name}`, {fmt_int(y.row_count)} fields) and its PMTiles. "
+            f"Partition `{PARTITION_KEY}={y.year}` of the collection's hive layout."
+        )
+        items.append(build_item(ds.id, file_stem(ds.id, y.year), meta, y, survey_props, description))
     return items
+
+
+def build_item(collection_id: str, stem: str, meta: dict, y: YearInput, survey_props: dict[str, str], description: str) -> dict:
+    # every edition describes its own file: a column that is constant in one
+    # edition collapses into the collection metadata and is not a column there
+    table_columns = describe_columns(y.data_asset.get("table:columns", []), meta, survey_props)
+    start, end = year_interval(y.year, y.interval)
+    parquet_name = y.parquet.name
+    pmtiles_name = y.pmtiles.name if y.pmtiles else None
+    item = {
+        "type": "Feature",
+        "stac_version": "1.1.0",
+        "stac_extensions": [FILE_EXTENSION, TABLE_EXTENSION, PROJECTION_EXTENSION, PROCESSING_EXTENSION],
+        "id": stem,
+        "geometry": bbox_polygon(y.bbox),
+        "bbox": y.bbox,
+        "properties": {
+            "title": f"{meta['short_name']} — {y.year}",
+            "description": description,
+            "datetime": None,
+            "start_datetime": start,
+            "end_datetime": end,
+            PARTITION_KEY: int(y.year),
+            "proj:code": y.crs,
+            "table:columns": table_columns,
+            "table:primary_geometry": "geometry",
+            "table:row_count": y.row_count,
+            "processing:software": y.data_asset.get("processing:software", {}),
+        },
+        "collection": collection_id,
+        "assets": {
+            "data": {
+                "href": f"./{parquet_name}",
+                "type": PARQUET_TYPE,
+                "title": f"{meta['short_name']} {y.year} (GeoParquet)",
+                "roles": ["data"],
+                "file:size": y.data_asset["file:size"],
+                "file:checksum": y.data_asset["file:checksum"],
+                "proj:code": y.crs,
+            },
+        },
+        "links": [
+            {"rel": "root", "href": "../../catalog.json", "type": "application/json"},
+            {"rel": "parent", "href": "../collection.json", "type": "application/json"},
+            {"rel": "collection", "href": "../collection.json", "type": "application/json"},
+        ],
+    }
+    if y.visual_asset:
+        item["assets"]["visual"] = {
+            "href": f"./{pmtiles_name}",
+            "type": PMTILES_TYPE,
+            "title": f"{meta['short_name']} {y.year} (PMTiles)",
+            "roles": ["visual"],
+            "file:size": y.visual_asset["file:size"],
+            "file:checksum": y.visual_asset["file:checksum"],
+        }
+    return item
 
 
 def license_fields(base: dict) -> tuple[str, list[dict]]:
@@ -350,6 +389,40 @@ def license_fields(base: dict) -> tuple[str, list[dict]]:
         else:
             lic = lic.upper() if lic.lower().startswith(("cc", "dl-de")) else lic
     return lic, links
+
+
+PROVENANCE = {
+    "declared": "\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the "
+    "parcel register built on those declarations.",
+    "mapped": "\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no "
+    "farmer's declaration behind them.",
+    "inferred": "\n\nBoundaries are inferred: a model derived them from satellite imagery, so they are an "
+    "estimate of where fields are, not a record of what anyone declared or surveyed.",
+}
+
+
+def thumbnail_asset(ds: Dataset) -> dict | None:
+    thumb = CATALOG_DIR / ds.id / "thumbnail.jpg"
+    if not thumb.exists():
+        return None
+    digest = hashlib.sha256(thumb.read_bytes()).hexdigest()
+    # Thumbnails rendered before ~2026-09 carry the Carto basemap; since then
+    # it is opt-in (their keyless tiles gained a watermark), so a collection
+    # that declares basemap: none in the manifest must not claim one here.
+    basemap = ds.thumbnail.get("basemap", "carto")
+    title = (
+        "Preview of the collection's default style."
+        if basemap in (None, "none")
+        else "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO."
+    )
+    return {
+        "href": "./thumbnail.jpg",
+        "type": "image/jpeg",
+        "title": title,
+        "roles": ["thumbnail"],
+        "file:size": thumb.stat().st_size,
+        "file:checksum": "1220" + digest,
+    }
 
 
 def build_collection(
@@ -384,14 +457,7 @@ def build_collection(
         f"tested queries are in the collection's [AGENTS.md]({collection_url}/AGENTS.md)."
     )
 
-    provenance = {
-        "declared": "\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the "
-        "parcel register built on those declarations.",
-        "mapped": "\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no "
-        "farmer's declaration behind them.",
-        "inferred": "\n\nBoundaries are inferred: a model derived them from satellite imagery, so they are an "
-        "estimate of where fields are, not a record of what anyone declared or surveyed.",
-    }[ds.boundaries]
+    provenance = PROVENANCE[ds.boundaries]
 
     providers = list(base.get("providers") or [])
     if not providers and provider_name:
@@ -489,28 +555,9 @@ def build_collection(
             {"rel": "pmtiles", "href": pm, "type": PMTILES_TYPE, "title": "Web map tiles", "pmtiles:layers": [ds.id]}
         )
 
-    thumb = CATALOG_DIR / ds.id / "thumbnail.jpg"
-    if thumb.exists():
-        import hashlib
-
-        digest = hashlib.sha256(thumb.read_bytes()).hexdigest()
-        # Thumbnails rendered before ~2026-09 carry the Carto basemap; since then
-        # it is opt-in (their keyless tiles gained a watermark), so a collection
-        # that declares basemap: none in the manifest must not claim one here.
-        basemap = ds.thumbnail.get("basemap", "carto")
-        title = (
-            "Preview of the collection's default style."
-            if basemap in (None, "none")
-            else "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO."
-        )
-        collection["assets"]["thumbnail"] = {
-            "href": "./thumbnail.jpg",
-            "type": "image/jpeg",
-            "title": title,
-            "roles": ["thumbnail"],
-            "file:size": thumb.stat().st_size,
-            "file:checksum": "1220" + digest,
-        }
+    thumbnail = thumbnail_asset(ds)
+    if thumbnail:
+        collection["assets"]["thumbnail"] = thumbnail
 
     if via:
         collection["links"].append({"rel": "via", "href": via, "type": "text/html", "title": "Original source (publisher page)"})
@@ -533,17 +580,21 @@ def build_styles(ds: Dataset, meta: dict, latest: YearInput) -> tuple[dict, dict
     """Write styles/, return (style assets, facts used for the docs)."""
     if not latest.visual_asset:
         return {}, {}
+    pm_rel = f"../{partition_dir(latest.year)}/{latest.pmtiles.name}"
+    return write_styles(ds, meta["short_name"], latest.parquet, pm_rel)
+
+
+def write_styles(ds: Dataset, title: str, source: Path | str, pm_rel: str) -> tuple[dict, dict]:
+    """Styles for the tiles at ``pm_rel`` (layer ``ds.id``), classed on ``source`` (a file or a glob)."""
     styles_dir = CATALOG_DIR / ds.id / "styles"
     if styles_dir.exists():
         shutil.rmtree(styles_dir)
-    pm_rel = f"../{partition_dir(latest.year)}/{latest.pmtiles.name}"
-    title = meta["short_name"]
     assets: dict = {}
     facts: dict = {}
 
-    crops = hcat_crops(latest.parquet)
+    crops = hcat_crops(source)
     hcat = hcat_style(crops, ds.id, pm_rel, title)
-    area = column_stats(latest.parquet, "metrics:area")
+    area = column_stats(source, "metrics:area")
 
     default_key = None
     if hcat:
@@ -584,8 +635,6 @@ def build_styles(ds: Dataset, meta: dict, latest: YearInput) -> tuple[dict, dict
 
     for key, asset in assets.items():
         path = styles_dir / Path(asset["href"]).name
-        import hashlib
-
         asset["file:size"] = path.stat().st_size
         asset["file:checksum"] = "1220" + hashlib.sha256(path.read_bytes()).hexdigest()
     return assets, facts
@@ -776,6 +825,11 @@ def collection_docs(
 # --- root -------------------------------------------------------------------------------
 
 
+def is_parts_collection(collection: dict) -> bool:
+    """A parts collection has a data asset per source instead of one ``data``."""
+    return "data" not in collection.get("assets", {})
+
+
 def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     collections = []
     for path in sorted(CATALOG_DIR.glob("*/collection.json")):
@@ -811,7 +865,7 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     )
     provenance = (
         f"In {len(by_boundaries['declared'])} collections the boundaries are declared — they come from farmers' "
-        f"subsidy applications, or from the parcel register built on those declarations. {how[0].upper() + how[1:]}. "
+        f"subsidy applications, or from the parcel register built on those declarations. {how[:1].upper() + how[1:] + '. ' if how else ''}"
         f"Each collection's `boundaries` field says which. "
     )
     description = (
@@ -856,9 +910,13 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     # README.md
     r = [f"# {cat['title']}", "", description, "", "## Collections", "", "| Collection | Holds | Source data provider | Editions | Rows (latest) | License | Docs |", "|---|---|---|---|---:|---|---|"]
     for c in collections:
-        years = [str(link["title"]).rsplit(" ", 1)[-1] for link in c["links"] if link["rel"] == "item"]
+        # a parts collection has an item per part and year, so a year can repeat
+        years = list(dict.fromkeys(str(link["title"]).rsplit(" ", 1)[-1] for link in c["links"] if link["rel"] == "item"))
         producer = next((p for p in c.get("providers", []) if "producer" in p.get("roles", [])), {})
         prov = f"[{producer.get('name', '—')}]({producer['url']})" if producer.get("url") else producer.get("name", "—")
+        if is_parts_collection(c):
+            producers = [p for p in c.get("providers", []) if "producer" in p.get("roles", [])]
+            prov = f"{len(producers)} sources, see the [README]({human_base}/{c['id']}/README.md)"
         kind = "field blocks" if c["id"] in blocks else "crop fields"
         r.append(f"| [{c['title']}]({human_base}/{c['id']}) | {kind} | {prov} | {', '.join(years)} | {fmt_int(c.get('table:row_count'))} | {c['license']} | [README]({human_base}/{c['id']}/README.md) · [agents]({human_base}/{c['id']}/AGENTS.md) |")
     r += ["", "## Access", "", f"Everything is static files on object storage: query them in place with DuckDB, GeoPandas or any GeoParquet reader, and render the PMTiles with MapLibre. Single files are plain https URLs; globs use the S3 form of the same prefix through the Source Cooperative proxy (`{s3_base}`, endpoint `{config.get('endpoint_url')}`, anonymous), because `*` needs a listing that https does not provide. Newest edition of every collection:", ""]
@@ -874,8 +932,16 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
         for b, ids in by_boundaries.items()
         if b != "declared" and ids
     )
+    parts = [c["id"] for c in collections if is_parts_collection(c)]
+    parts_note = (
+        f" {', '.join(f'`{i}`' for i in parts)} {'is' if len(parts) == 1 else 'are'} fed by several sources, each with its own "
+        "converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one "
+        "`<collection>/latest/<converter>.parquet` per source, and each item carries its source's license."
+        if parts
+        else ""
+    )
     a = [f"# Agent guidance — {cat['title']}", "", "**One rule survives every edit to this file.** Every claim here is quoted from a source or measured from the data; every query below was run before it was written down and its output follows as comments.", ""]
-    a += ["## What this catalog holds", "", f"{len(collections)} collections, one per source dataset, all in the [fiboa]({FIBOA_SPEC}) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `{public_base}/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`.", ""]
+    a += ["## What this catalog holds", "", f"{len(collections)} collections, one per source dataset, all in the [fiboa]({FIBOA_SPEC}) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `{public_base}/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`." + parts_note, ""]
     a += ["## How to read it", "", f"Single files: plain https under `{public_base}/`. Globs: the S3 form of the same prefix, `{s3_base}/`, through the Source Cooperative proxy (endpoint `{config.get('endpoint_url')}`, path-style, no credentials) — `*` needs a listing and https has none. Newest edition of every collection in one query (schemas differ per source, hence `union_by_name`):", "", md_query(q, public_base), ""]
     q2 = f"{duckdb_s3_setup(config)}\nSELECT {PARTITION_KEY}, regexp_extract(filename, '/([^/]+)/{PARTITION_KEY}=', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/{PARTITION_KEY}=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)\nGROUP BY 1, 2 ORDER BY 2, 1;"
     a += ["Every edition of every collection:", "", md_query(q2, public_base), ""]
@@ -888,7 +954,8 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     l = [f"# {cat['title']}", "", f"Government-published field boundaries harmonized to fiboa, {len(collections)} collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: {public_base}/catalog.json. Agent guide: {human_base}/AGENTS.md.", ""]
     for c in collections:
         kind = "field blocks" if c["id"] in blocks else "crop fields"
-        l.append(f"- {c['id']}: {c['title']} — {kind} — {public_base}/{c['id']}/latest/{c['id']}.parquet (license {c['license']}, CRS {', '.join(c.get('summaries', {}).get('proj:code', []))})")
+        newest = f"{public_base}/{c['id']}/latest/<converter>.parquet, one per source" if is_parts_collection(c) else f"{public_base}/{c['id']}/latest/{c['id']}.parquet"
+        l.append(f"- {c['id']}: {c['title']} — {kind} — {newest} (license {c['license']}, CRS {', '.join(c.get('summaries', {}).get('proj:code', []))})")
     l += ["", f"Globs need S3 through the proxy (DuckDB: CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT '{config.get('endpoint_url', '').replace('https://', '')}', URL_STYLE 'path', REGION '{config.get('region', 'us-west-2')}')): all newest editions {s3_base}/*/latest/*.parquet (union_by_name=true); per-edition {s3_base}/<id>/year=*/*.parquet (hive_partitioning=true)."]
     write_text(CATALOG_DIR / "llms.txt", "\n".join(l))
 
@@ -900,6 +967,12 @@ def catalogize(dataset_id: str, manifest: Manifest) -> None:
     if dataset_id not in manifest.datasets:
         sys.exit(f"{dataset_id} is not in datasets.yaml")
     ds = manifest.datasets[dataset_id]
+    if ds.is_parts:
+        # imported here: catalogize_parts builds on this module
+        from catalogize_parts import catalogize_parts
+
+        catalogize_parts(ds, manifest)
+        return
     config = publish_config()
     public_base = config["public_base"].rstrip("/")
     human_base = manifest.catalog["human_base"].rstrip("/")
@@ -913,10 +986,7 @@ def catalogize(dataset_id: str, manifest: Manifest) -> None:
         if y.visual_asset:
             link_data_file(y.pmtiles, catalog_year_dir(ds.id, y.year) / y.pmtiles.name)
     latest_copy = STAGING_DIR / ds.id / "latest" / f"{ds.id}.parquet"
-    latest_copy.parent.mkdir(parents=True, exist_ok=True)
-    if latest_copy.exists() or latest_copy.is_symlink():
-        latest_copy.unlink()
-    os.link(latest.parquet, latest_copy)
+    copy_latest(latest.parquet, latest_copy)
     link_data_file(latest_copy, CATALOG_DIR / ds.id / "latest" / f"{ds.id}.parquet")
 
     survey_url, survey_props = data_survey(ds.id)

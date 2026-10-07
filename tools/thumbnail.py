@@ -36,7 +36,7 @@ from pathlib import Path
 import pyproj
 import requests
 
-from common import CATALOG_DIR, Manifest, duckdb_connect, quote, read_json
+from common import CATALOG_DIR, Manifest, duckdb_connect, parquet_scan, read_json
 
 PORT = int(os.environ.get("CHIITILER_PORT", "13579"))
 SIZE = 1024
@@ -87,7 +87,7 @@ def pmtiles_header(path: Path) -> dict:
     return {"min_zoom": h[100], "max_zoom": h[101], "center": [clon, clat, h[118]], "bounds": bounds}
 
 
-def densest_cluster(parquet: Path, crs: str, zoom: float, rank: int) -> tuple[float, float, int]:
+def densest_cluster(parquet: Path | str, crs: str, zoom: float, rank: int) -> tuple[float, float, int]:
     """(lon, lat, count) of the rank-th densest window at this zoom, via the bbox column."""
     con = duckdb_connect()
     cell = span_for_zoom(zoom, SIZE) / 2  # half a frame, in metres
@@ -97,7 +97,7 @@ def densest_cluster(parquet: Path, crs: str, zoom: float, rank: int) -> tuple[fl
         # degree coordinate into one bucket and the "densest cluster" becomes the
         # whole dataset. Size the cell in degrees instead, at the data's latitude.
         mid_lat = con.execute(
-            f"SELECT avg((bbox.ymin + bbox.ymax) / 2) FROM read_parquet({quote(parquet)})"
+            f"SELECT avg((bbox.ymin + bbox.ymax) / 2) FROM {parquet_scan(parquet)}"
         ).fetchone()[0]
         cell_y = cell / 110_540.0
         cell_x = cell / max(111_320.0 * math.cos(math.radians(mid_lat or 0.0)), 1.0)
@@ -106,7 +106,7 @@ def densest_cluster(parquet: Path, crs: str, zoom: float, rank: int) -> tuple[fl
         f"""
         WITH c AS (
           SELECT (bbox.xmin + bbox.xmax) / 2 AS x, (bbox.ymin + bbox.ymax) / 2 AS y
-          FROM read_parquet({quote(parquet)})
+          FROM {parquet_scan(parquet)}
         ), g AS (
           SELECT floor(x / {cell_x}) AS gx, floor(y / {cell_y}) AS gy, count(*) AS n FROM c GROUP BY 1, 2
         ), top AS (
@@ -182,8 +182,13 @@ def main() -> int:
             continue
         style = read_json(cdir / style_asset["href"])
         pmtiles = (cdir / visual["href"]).resolve()
-        parquet = (cdir / coll["assets"]["data"]["href"]).resolve()
-        crs = coll["assets"]["data"].get("proj:code") or "EPSG:4326"
+        data = [a for a in coll["assets"].values() if "data" in a.get("roles", [])]
+        crs_values = {a.get("proj:code") or "EPSG:4326" for a in data}
+        if len(crs_values) != 1:
+            print(f"{dataset_id}: data assets in {sorted(crs_values)}; the densest cluster needs one CRS, pass --center")
+        crs = sorted(crs_values)[0]
+        # a parts collection has one data asset per part, all under latest/
+        parquet = (cdir / coll["assets"]["data"]["href"]).resolve() if "data" in coll["assets"] else str(cdir / "latest" / "*.parquet")
         declared = manifest.datasets[dataset_id].thumbnail.get("basemap")
         basemap = args.basemap or (None if declared in (None, "none") else declared)
         header = pmtiles_header(pmtiles)
