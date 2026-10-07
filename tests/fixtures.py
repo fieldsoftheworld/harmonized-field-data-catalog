@@ -100,3 +100,5 @@ def point_tooling_at(root: Path, *modules) -> None:
             module.STAGING_DIR = root / "staging"
         if hasattr(module, "CATALOG_DIR"):
             module.CATALOG_DIR = root / "catalog"
+        if hasattr(module, "ROOT_TILES_FACTS"):
+            module.ROOT_TILES_FACTS = root / "root_tiles.json"
