@@ -1,0 +1,9 @@
+# California (US) Statewide Crop Mapping
+
+US, California (SCM) field boundaries (2014, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from California Department of Water Resources. License: CC0-1.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/us_ca_scm/latest/us_ca_scm.parquet
+- All editions: s3://ftw/harmonized-field-data/us_ca_scm/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4269; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: hcat:code, admin_level_2, id, hcat:name, geometry, crop:name, hcat:name_en, metrics:area, crop:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/us_ca_scm/README.md, agent guide https://source.coop/ftw/harmonized-field-data/us_ca_scm/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/us_ca_scm/collection.json

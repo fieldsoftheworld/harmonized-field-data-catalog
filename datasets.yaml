@@ -354,6 +354,12 @@ datasets:
     years: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
     boundaries: inferred
     keywords: [United States, USDA, Crop Sequence Boundaries]
+  us_ca_scm:
+    years: ['2014', '2016', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
+    boundaries: mapped
+    keywords: [United States, California, DWR, Statewide Crop Mapping, Land IQ, land use]
+    via: https://data.cnra.ca.gov/dataset/statewide-crop-mapping
+    notes: "2024 is provisional (DWR release of 2025-12-08) until DWR publishes the final edition. The crop column differs by edition: from 2019 the source's `MAIN_CROP`; in 2016 and 2018 the main-season `CROPTYP2`; 2014 names its crops only, and `crop:code` there comes from the names' codes in 2016. 2014 and 2016 carry no identifier, so there `id` is a row number. DWR maps the whole state; its urban mask (`U`, or `****` in 2020–2022: some 1,600 to 6,800 polygons per edition covering about 2 million ha, the largest close to 590,000 ha), urban landscape (`UL2`) and riparian vegetation (`NR`) are left out, as they are not fields."
   jp:
     years: ['2021', '2022', '2023', '2024']
     boundaries: mapped

@@ -9,7 +9,8 @@ and one parts collection (lon/lat, no crop columns, two parts), and checks:
   column NULL and a missing ``collection`` the collection id;
 - tylertoo tiles them into one archive, and root_tiles.json records it;
 - catalogize links it from the root (a pmtiles link; no asset, which Portolan
-  forbids on a catalog) and writes the README section from those facts;
+  forbids on a catalog) and writes the README section from those facts,
+  naming a collection added after the build as missing from it;
 - upload_data.py --root uploads exactly that one file, to the prefix root.
 
 Needs duckdb with the spatial extension and tylertoo, so it SKIPs where those
@@ -93,11 +94,13 @@ with tempfile.TemporaryDirectory() as tmp:
     check(facts["features"] == 100 and [i["rows"] for i in facts["inputs"]] == [50, 20, 30], f"facts: {facts['features']} features, {facts['inputs']}")
 
     catalog = {"stac_extensions": [], "links": []}
-    readme = catalogize.root_tiles(catalog, "https://example.org/hfd", "https://example.org/repo")
+    readme = catalogize.root_tiles(catalog, "https://example.org/hfd", "https://example.org/repo", ["aa", "pp"])
     check("assets" not in catalog, "no asset on the catalog (rashid PTL-AST-005)")
     check([(link["href"], link["pmtiles:layers"]) for link in catalog["links"] if link["rel"] == "pmtiles"] == [(f"./{ROOT_TILES}", ["fields"])], "pmtiles link with layer fields")
     check((root / "catalog" / ROOT_TILES).is_symlink(), "archive linked into catalog/ for the link gate")
-    check(any("2 collections (3 files)" in line and "100 features" in line for line in readme), f"README section from the facts: {readme[:3]}")
+    check(any("all 2 collections (3 files)" in line and "100 features" in line for line in readme), f"README section from the facts: {readme[:3]}")
+    later = catalogize.root_tiles({"stac_extensions": [], "links": []}, "https://example.org/hfd", "https://example.org/repo", ["aa", "new", "pp"])
+    check(any("2 of the 3 collections (3 files; not yet `new`" in line for line in later), f"a collection added after the build is named: {later[2][:160]}")
 
     uploads = upload_data.collect_root("hfd")
     check([u.key for u in uploads] == [f"hfd/{ROOT_TILES}"], f"upload --root: {[u.key for u in uploads]}")
