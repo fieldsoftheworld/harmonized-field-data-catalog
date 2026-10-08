@@ -1,0 +1,9 @@
+# Brazil Crop Fields (CONAB)
+
+Conab field boundaries (2026) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Conab. License: CC-BY-NC-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/br_conab/latest/br_conab.parquet
+- All editions: s3://ftw/harmonized-field-data/br_conab/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4674; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: admin_municipality_code, metrics:area, id, admin_municipality_name, geometry, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/br_conab/README.md, agent guide https://source.coop/ftw/harmonized-field-data/br_conab/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/br_conab/collection.json

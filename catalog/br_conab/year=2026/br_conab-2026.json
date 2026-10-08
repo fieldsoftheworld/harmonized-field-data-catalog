@@ -1,0 +1,132 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "br_conab-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -57.573012311771095,
+          -33.67341213187876
+        ],
+        [
+          -39.01882177997186,
+          -33.67341213187876
+        ],
+        [
+          -39.01882177997186,
+          -6.3782529999999955
+        ],
+        [
+          -57.573012311771095,
+          -6.3782529999999955
+        ],
+        [
+          -57.573012311771095,
+          -33.67341213187876
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -57.573012311771095,
+    -33.67341213187876,
+    -39.01882177997186,
+    -6.3782529999999955
+  ],
+  "properties": {
+    "title": "Conab — 2026",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`br_conab.parquet`, 390,805 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2026-01-01T00:00:00Z",
+    "end_datetime": "2026-12-31T23:59:59Z",
+    "year": 2026,
+    "proj:code": "EPSG:4674",
+    "table:columns": [
+      {
+        "name": "admin_municipality_code",
+        "type": "string",
+        "description": "Municipality code (source column `cd_mun`, per the fiboa data survey)"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "admin_municipality_name",
+        "type": "string",
+        "description": "Municipality name (source column `nm_mun`, per the fiboa data survey)"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 390805,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.4.0"
+    }
+  },
+  "collection": "br_conab",
+  "assets": {
+    "data": {
+      "href": "./br_conab.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Conab 2026 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 212324727,
+      "file:checksum": "12203a372cf13a2eba7a27d09408f752090c5d4611a3f832d26d8f8d17104a5dafc3",
+      "proj:code": "EPSG:4674"
+    },
+    "visual": {
+      "href": "./br_conab.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Conab 2026 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 111992238,
+      "file:checksum": "12209ab4ac2dc1be9ee995dcd6cd214b5112bed09ee5707ba5aba5b9c89abc605dc8"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

@@ -360,6 +360,12 @@ datasets:
     keywords: [United States, California, DWR, Statewide Crop Mapping, Land IQ, land use]
     via: https://data.cnra.ca.gov/dataset/statewide-crop-mapping
     notes: "2024 is provisional (DWR release of 2025-12-08) until DWR publishes the final edition. The crop column differs by edition: from 2019 the source's `MAIN_CROP`; in 2016 and 2018 the main-season `CROPTYP2`; 2014 names its crops only, and `crop:code` there comes from the names' codes in 2016. 2014 and 2016 carry no identifier, so there `id` is a row number. DWR maps the whole state; its urban mask (`U`, or `****` in 2020–2022: some 1,600 to 6,800 polygons per edition covering about 2 million ha, the largest close to 590,000 ha), urban landscape (`UL2`) and riparian vegetation (`NR`) are left out, as they are not fields."
+  br_conab:
+    year: 2026
+    boundaries: mapped
+    year_source: "A compilation of 29 crop mappings for harvests from 2010/11 to 2023/24 (cotton, irrigated rice, sugarcane, coffee, summer crops), each for one state; the edition year is the year the set was downloaded. Each field's harvest is in its `id`, which carries the source file name."
+    keywords: [Brazil, Conab, mapeamento agrícola, coffee, irrigated rice, cotton, sugarcane]
+    notes: "Licensed CC-BY-NC-4.0: Conab authorises reproduction without profit motive, citing the source. The 29 files are the mappings that, on inspection, hold hand-drawn field boundaries; Conab publishes more (259 downloads in 2026). Minas Gerais coffee (2017) holds most of the fields. Polygons under 100 m² are left out as digitising slivers: some 74,800, nearly all in Minas Gerais, where they are a fifth of the polygons. There is no crop column: the crop is the mapping's subject, named in `id`."
   jp:
     years: ['2021', '2022', '2023', '2024']
     boundaries: mapped
