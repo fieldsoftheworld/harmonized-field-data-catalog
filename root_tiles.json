@@ -1,0 +1,534 @@
+{
+  "built": "2026-10-07T06:43:44Z",
+  "tylertoo": "0.7.1",
+  "options": {
+    "max_zoom": 14,
+    "row_group_size": 50000
+  },
+  "layer": "fields",
+  "columns": [
+    "collection",
+    "id",
+    "metrics:area",
+    "crop:code",
+    "crop:name",
+    "hcat:code",
+    "hcat:name_en"
+  ],
+  "inputs": [
+    {
+      "collection": "at",
+      "file": "at.parquet",
+      "rows": 2944405
+    },
+    {
+      "collection": "at_block",
+      "file": "at_block.parquet",
+      "rows": 1299755
+    },
+    {
+      "collection": "be_vlg",
+      "file": "be_vlg.parquet",
+      "rows": 597088
+    },
+    {
+      "collection": "be_wal",
+      "file": "be_wal.parquet",
+      "rows": 341968
+    },
+    {
+      "collection": "bg",
+      "file": "bg.parquet",
+      "rows": 226592
+    },
+    {
+      "collection": "ch",
+      "file": "ch_ag.parquet",
+      "rows": 97527
+    },
+    {
+      "collection": "ch",
+      "file": "ch_ai.parquet",
+      "rows": 6972
+    },
+    {
+      "collection": "ch",
+      "file": "ch_ar.parquet",
+      "rows": 18125
+    },
+    {
+      "collection": "ch",
+      "file": "ch_be.parquet",
+      "rows": 241573
+    },
+    {
+      "collection": "ch",
+      "file": "ch_bl.parquet",
+      "rows": 29488
+    },
+    {
+      "collection": "ch",
+      "file": "ch_fr.parquet",
+      "rows": 69430
+    },
+    {
+      "collection": "ch",
+      "file": "ch_ge.parquet",
+      "rows": 10201
+    },
+    {
+      "collection": "ch",
+      "file": "ch_gl.parquet",
+      "rows": 13878
+    },
+    {
+      "collection": "ch",
+      "file": "ch_gr.parquet",
+      "rows": 175057
+    },
+    {
+      "collection": "ch",
+      "file": "ch_ju.parquet",
+      "rows": 28203
+    },
+    {
+      "collection": "ch",
+      "file": "ch_lu.parquet",
+      "rows": 99839
+    },
+    {
+      "collection": "ch",
+      "file": "ch_sg.parquet",
+      "rows": 105091
+    },
+    {
+      "collection": "ch",
+      "file": "ch_sh.parquet",
+      "rows": 22228
+    },
+    {
+      "collection": "ch",
+      "file": "ch_so.parquet",
+      "rows": 36731
+    },
+    {
+      "collection": "ch",
+      "file": "ch_sz.parquet",
+      "rows": 30451
+    },
+    {
+      "collection": "ch",
+      "file": "ch_tg.parquet",
+      "rows": 57780
+    },
+    {
+      "collection": "ch",
+      "file": "ch_ur.parquet",
+      "rows": 11551
+    },
+    {
+      "collection": "ch",
+      "file": "ch_vs.parquet",
+      "rows": 307027
+    },
+    {
+      "collection": "ch",
+      "file": "ch_zg.parquet",
+      "rows": 13318
+    },
+    {
+      "collection": "ch",
+      "file": "ch_zh.parquet",
+      "rows": 146335
+    },
+    {
+      "collection": "cz",
+      "file": "cz.parquet",
+      "rows": 415300
+    },
+    {
+      "collection": "de_bb",
+      "file": "de_bb.parquet",
+      "rows": 290688
+    },
+    {
+      "collection": "de_bb_block",
+      "file": "de_bb_block.parquet",
+      "rows": 90764
+    },
+    {
+      "collection": "de_bw",
+      "file": "de_bw.parquet",
+      "rows": 4363087
+    },
+    {
+      "collection": "de_by",
+      "file": "de_by.parquet",
+      "rows": 1296105
+    },
+    {
+      "collection": "de_by_block",
+      "file": "de_by_block.parquet",
+      "rows": 1691708
+    },
+    {
+      "collection": "de_he",
+      "file": "de_he.parquet",
+      "rows": 618218
+    },
+    {
+      "collection": "de_mv",
+      "file": "de_mv.parquet",
+      "rows": 20000
+    },
+    {
+      "collection": "de_nds",
+      "file": "de_nds.parquet",
+      "rows": 881956
+    },
+    {
+      "collection": "de_nds_block",
+      "file": "de_nds_block.parquet",
+      "rows": 539834
+    },
+    {
+      "collection": "de_nrw",
+      "file": "de_nrw.parquet",
+      "rows": 742010
+    },
+    {
+      "collection": "de_sax",
+      "file": "de_sax.parquet",
+      "rows": 95305
+    },
+    {
+      "collection": "de_sh",
+      "file": "de_sh.parquet",
+      "rows": 194503
+    },
+    {
+      "collection": "de_sl",
+      "file": "de_sl.parquet",
+      "rows": 54460
+    },
+    {
+      "collection": "de_sl_block",
+      "file": "de_sl_block.parquet",
+      "rows": 62981
+    },
+    {
+      "collection": "de_st",
+      "file": "de_st.parquet",
+      "rows": 78714
+    },
+    {
+      "collection": "de_th",
+      "file": "de_th.parquet",
+      "rows": 102076
+    },
+    {
+      "collection": "dk",
+      "file": "dk.parquet",
+      "rows": 604689
+    },
+    {
+      "collection": "ec_ee",
+      "file": "ec_ee.parquet",
+      "rows": 176066
+    },
+    {
+      "collection": "ec_fr",
+      "file": "ec_fr.parquet",
+      "rows": 9517891
+    },
+    {
+      "collection": "ec_lt",
+      "file": "ec_lt.parquet",
+      "rows": 439199
+    },
+    {
+      "collection": "ec_lv",
+      "file": "ec_lv.parquet",
+      "rows": 432188
+    },
+    {
+      "collection": "ec_ro",
+      "file": "ec_ro.parquet",
+      "rows": 259862
+    },
+    {
+      "collection": "ec_si",
+      "file": "ec_si.parquet",
+      "rows": 828263
+    },
+    {
+      "collection": "ee",
+      "file": "ee.parquet",
+      "rows": 166508
+    },
+    {
+      "collection": "es",
+      "file": "es.parquet",
+      "rows": 17844643
+    },
+    {
+      "collection": "es_an",
+      "file": "es_an.parquet",
+      "rows": 4415113
+    },
+    {
+      "collection": "es_ar",
+      "file": "es_ar.parquet",
+      "rows": 2585753
+    },
+    {
+      "collection": "es_cat",
+      "file": "es_cat.parquet",
+      "rows": 723039
+    },
+    {
+      "collection": "es_cb",
+      "file": "es_cb.parquet",
+      "rows": 608752
+    },
+    {
+      "collection": "es_cl",
+      "file": "es_cl.parquet",
+      "rows": 9109125
+    },
+    {
+      "collection": "es_cm",
+      "file": "es_cm.parquet",
+      "rows": 6453236
+    },
+    {
+      "collection": "es_cn",
+      "file": "es_cn.parquet",
+      "rows": 461729
+    },
+    {
+      "collection": "es_ex",
+      "file": "es_ex.parquet",
+      "rows": 1549765
+    },
+    {
+      "collection": "es_ga",
+      "file": "es_ga.parquet",
+      "rows": 4978799
+    },
+    {
+      "collection": "es_ib",
+      "file": "es_ib.parquet",
+      "rows": 349087
+    },
+    {
+      "collection": "es_md",
+      "file": "es_md.parquet",
+      "rows": 636756
+    },
+    {
+      "collection": "es_nc",
+      "file": "es_nc.parquet",
+      "rows": 663167
+    },
+    {
+      "collection": "es_pv",
+      "file": "es_pv.parquet",
+      "rows": 562040
+    },
+    {
+      "collection": "es_vc",
+      "file": "es_vc.parquet",
+      "rows": 2319893
+    },
+    {
+      "collection": "fi",
+      "file": "fi.parquet",
+      "rows": 985486
+    },
+    {
+      "collection": "fr",
+      "file": "fr.parquet",
+      "rows": 9678595
+    },
+    {
+      "collection": "hr",
+      "file": "hr.parquet",
+      "rows": 1284769
+    },
+    {
+      "collection": "ie",
+      "file": "ie.parquet",
+      "rows": 1119949
+    },
+    {
+      "collection": "ie_lpis",
+      "file": "ie_lpis.parquet",
+      "rows": 1454480
+    },
+    {
+      "collection": "it_1",
+      "file": "it_1.parquet",
+      "rows": 623666
+    },
+    {
+      "collection": "it_bz",
+      "file": "it_bz.parquet",
+      "rows": 152990
+    },
+    {
+      "collection": "jp",
+      "file": "jp.parquet",
+      "rows": 29418076
+    },
+    {
+      "collection": "lt",
+      "file": "lt.parquet",
+      "rows": 1156767
+    },
+    {
+      "collection": "lu",
+      "file": "lu.parquet",
+      "rows": 87997
+    },
+    {
+      "collection": "lv",
+      "file": "lv.parquet",
+      "rows": 417383
+    },
+    {
+      "collection": "nl",
+      "file": "nl.parquet",
+      "rows": 1265023
+    },
+    {
+      "collection": "nl_block",
+      "file": "nl_block.parquet",
+      "rows": 534786
+    },
+    {
+      "collection": "nz",
+      "file": "nz.parquet",
+      "rows": 42133
+    },
+    {
+      "collection": "pl",
+      "file": "pl.parquet",
+      "rows": 10653830
+    },
+    {
+      "collection": "pl_block",
+      "file": "pl_block.parquet",
+      "rows": 12955563
+    },
+    {
+      "collection": "pt",
+      "file": "pt.parquet",
+      "rows": 3571255
+    },
+    {
+      "collection": "se",
+      "file": "se.parquet",
+      "rows": 1207889
+    },
+    {
+      "collection": "si",
+      "file": "si.parquet",
+      "rows": 809044
+    },
+    {
+      "collection": "sk",
+      "file": "sk.parquet",
+      "rows": 271807
+    },
+    {
+      "collection": "us_usda_cropland",
+      "file": "us_usda_cropland.parquet",
+      "rows": 7522713
+    }
+  ],
+  "features": 169368086,
+  "empty_zooms": [
+    0,
+    1,
+    2
+  ],
+  "zooms": [
+    {
+      "zoom": 3,
+      "tile_count": 7,
+      "level_feature_count": 40,
+      "oversized_tiles": 0
+    },
+    {
+      "zoom": 4,
+      "tile_count": 14,
+      "level_feature_count": 2552,
+      "oversized_tiles": 0
+    },
+    {
+      "zoom": 5,
+      "tile_count": 40,
+      "level_feature_count": 98664,
+      "oversized_tiles": 4
+    },
+    {
+      "zoom": 6,
+      "tile_count": 132,
+      "level_feature_count": 995181,
+      "oversized_tiles": 33
+    },
+    {
+      "zoom": 7,
+      "tile_count": 406,
+      "level_feature_count": 3826819,
+      "oversized_tiles": 143
+    },
+    {
+      "zoom": 8,
+      "tile_count": 1333,
+      "level_feature_count": 7625837,
+      "oversized_tiles": 391
+    },
+    {
+      "zoom": 9,
+      "tile_count": 4625,
+      "level_feature_count": 13266557,
+      "oversized_tiles": 622
+    },
+    {
+      "zoom": 10,
+      "tile_count": 16343,
+      "level_feature_count": 22345416,
+      "oversized_tiles": 520
+    },
+    {
+      "zoom": 11,
+      "tile_count": 57332,
+      "level_feature_count": 37369354,
+      "oversized_tiles": 71
+    },
+    {
+      "zoom": 12,
+      "tile_count": 199997,
+      "level_feature_count": 61936879,
+      "oversized_tiles": 0
+    },
+    {
+      "zoom": 13,
+      "tile_count": 696158,
+      "level_feature_count": 102250887,
+      "oversized_tiles": 0
+    },
+    {
+      "zoom": 14,
+      "tile_count": 2406901,
+      "level_feature_count": 169368086,
+      "oversized_tiles": 28
+    }
+  ],
+  "tiles": 3383288,
+  "oversized_tiles": 1812,
+  "file:size": 28787564125,
+  "file:checksum": "1220e2909746e982e46c3838677bf59cb2712928ca1a6122cb369a25675bb53b22b6"
+}

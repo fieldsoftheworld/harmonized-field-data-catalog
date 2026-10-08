@@ -40,6 +40,12 @@ STYLE_TYPE = "application/vnd.mapbox.style+json"
 # Year partitions are written as hive directories: <id>/year=<Y>/<id>-<Y>.parquet
 PARTITION_KEY = "year"
 
+# The newest edition of every collection, tiled into one archive at the catalog
+# root by tools/root_tiles.py; the facts file holds what catalogize says about it.
+ROOT_TILES = "harmonized-field-data.pmtiles"
+ROOT_TILES_LAYER = "fields"
+ROOT_TILES_FACTS = ROOT / "root_tiles.json"
+
 
 def partition_dir(year: str | int) -> str:
     return f"{PARTITION_KEY}={year}"

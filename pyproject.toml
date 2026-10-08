@@ -36,6 +36,8 @@ nodejs = ">=26.8.2,<26.9"
 # TODO(pin): fiboa-cli = "==0.22.0" once released, and drop FIBOA_CMD.
 # Validators, pinned to what CI runs (.github/workflows/ci.yml).
 rashid = "==0.1.7"
+# One archive of every collection's newest edition at the catalog root (tools/root_tiles.py)
+tylertoo = "==0.7.1"
 stac-check = ">=1.6"
 
 [tool.pixi.tasks]

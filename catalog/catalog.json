@@ -2,7 +2,8 @@
   "type": "Catalog",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json"
+    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json"
   ],
   "id": "harmonized-field-data",
   "title": "Harmonized Field Boundary Data",
@@ -463,6 +464,15 @@
       "href": "./llms.txt",
       "type": "text/markdown",
       "title": "Agent/LLM usage guide"
+    },
+    {
+      "rel": "pmtiles",
+      "href": "./harmonized-field-data.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Web map tiles: the newest edition of 67 collections (2026-10-07)",
+      "pmtiles:layers": [
+        "fields"
+      ]
     }
   ],
   "updated": "2026-10-07T03:32:55Z"

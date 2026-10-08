@@ -16,14 +16,19 @@ and for a collection with parts (``ch``), per part and for the tiles of all part
     staging/<id>/latest/<part>.parquet        ->  <write_prefix>/<id>/latest/<part>.parquet
     staging/<id>/latest/<id>.pmtiles          ->  <write_prefix>/<id>/latest/<id>.pmtiles
 
+and with ``--root``, the one archive of every newest edition (``root_tiles.py``):
+
+    staging/harmonized-field-data.pmtiles     ->  <write_prefix>/harmonized-field-data.pmtiles
+
 Scope is an allow-list of suffixes (``ALLOWED``) under an allow-list of
-directories (``year=*`` and ``latest``). ``collection.json``, ``converter.json``
-and anything else in staging never upload from here; the STAC comes from
-``catalog/`` through publish.py.
+directories (``year=*`` and ``latest``), plus that one root file.
+``collection.json``, ``converter.json`` and anything else in staging never
+upload from here; the STAC comes from ``catalog/`` through publish.py.
 
     python tools/upload_data.py nl             # dry run: per-suffix breakdown
     python tools/upload_data.py nl --confirm   # upload (source-coop login first)
     python tools/upload_data.py --all --confirm
+    python tools/upload_data.py --root --confirm
 
 Change detection, content types, the sentinel guard and the S3 client are
 imported from publish.py so the two uploaders cannot drift.
@@ -36,7 +41,7 @@ import sys
 import time
 from collections import Counter
 
-from common import STAGING_DIR, Manifest
+from common import ROOT_TILES, STAGING_DIR, Manifest
 from publish import (
     Upload,
     content_type_for,
@@ -75,10 +80,18 @@ def collect(dataset_id: str, prefix: str) -> list[Upload]:
     return uploads
 
 
+def collect_root(prefix: str) -> list[Upload]:
+    path = STAGING_DIR / ROOT_TILES
+    if not path.is_file():
+        sys.exit(f"no {path}: run tools/root_tiles.py first")
+    return [Upload(path, "/".join(p for p in (prefix, ROOT_TILES) if p), content_type_for(path))]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("datasets", nargs="*")
     parser.add_argument("--all", action="store_true")
+    parser.add_argument("--root", action="store_true", help=f"the archive of every newest edition, {ROOT_TILES}")
     parser.add_argument("--confirm", action="store_true", help="actually upload")
     parser.add_argument("--force", action="store_true", help="re-upload everything")
     args = parser.parse_args()
@@ -90,11 +103,11 @@ def main() -> int:
         return 1
     manifest = Manifest.load()
     ids = list(manifest.datasets) if args.all else args.datasets
-    if not ids:
-        parser.error("name a dataset or pass --all")
+    if not ids and not args.root:
+        parser.error("name a dataset, or pass --all or --root")
 
     bucket, prefix = split_s3_uri(config["write_prefix"])
-    uploads: list[Upload] = []
+    uploads: list[Upload] = collect_root(prefix) if args.root else []
     for dataset_id in ids:
         if dataset_id not in manifest.datasets:
             sys.exit(f"{dataset_id} is not in datasets.yaml")

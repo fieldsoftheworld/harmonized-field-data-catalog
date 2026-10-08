@@ -196,6 +196,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/be/13/94b8bc8ebe9be748b42d3c62cc87932c9afb1aced3f789cbf62ea3c22b9b/stac_check-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/3e/a6/b7a3774c13236af1099234edc13aae4aa3dc26bfe8f570beee6e1ddb9f7d/stac_valid-4.2.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f9/1c/01bfd571a64e7f270e6bab5e33777debe0edc56759233ce84f27dec92d14/tqdm-4.70.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/00/b2/70353869dbac640e29b234e366a64cad9897e1f8e1d6e8f49c58cd3ab6ae/tylertoo-0.7.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       osx-64:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/_openmp_mutex-4.5-7_kmp_llvm.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/affine-3.0.0-pyhd8ed1ab_0.conda
@@ -380,6 +381,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/be/13/94b8bc8ebe9be748b42d3c62cc87932c9afb1aced3f789cbf62ea3c22b9b/stac_check-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/3e/a6/b7a3774c13236af1099234edc13aae4aa3dc26bfe8f570beee6e1ddb9f7d/stac_valid-4.2.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f9/1c/01bfd571a64e7f270e6bab5e33777debe0edc56759233ce84f27dec92d14/tqdm-4.70.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/dc/d2/63862610144f58dae935819571a6334b546552a673c4e13f3f663346bae9/tylertoo-0.7.1-cp39-abi3-macosx_10_12_x86_64.whl
       osx-arm64:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/_openmp_mutex-4.5-7_kmp_llvm.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/affine-3.0.0-pyhd8ed1ab_0.conda
@@ -564,6 +566,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/be/13/94b8bc8ebe9be748b42d3c62cc87932c9afb1aced3f789cbf62ea3c22b9b/stac_check-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/3e/a6/b7a3774c13236af1099234edc13aae4aa3dc26bfe8f570beee6e1ddb9f7d/stac_valid-4.2.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f9/1c/01bfd571a64e7f270e6bab5e33777debe0edc56759233ce84f27dec92d14/tqdm-4.70.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/6a/97/fa5f59f448e494154e88d8c9ca073e0fef4bc101bc3a31feaba51fb6086c/tylertoo-0.7.1-cp39-abi3-macosx_11_0_arm64.whl
 packages:
 - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-20_gnu.conda
   build_number: 20
@@ -6828,6 +6831,33 @@ packages:
   - envwrap ; extra == 'telegram'
   - ipywidgets>=6 ; extra == 'notebook'
   requires_python: '>=3.8'
+- pypi: https://files.pythonhosted.org/packages/00/b2/70353869dbac640e29b234e366a64cad9897e1f8e1d6e8f49c58cd3ab6ae/tylertoo-0.7.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+  name: tylertoo
+  version: 0.7.1
+  sha256: 023eaa85492d2d019dd9f8945096f564470c44c2a35cb48218c39f1790cd6121
+  requires_dist:
+  - pytest>=8.0 ; extra == 'dev'
+  - pytest-cov ; extra == 'dev'
+  - ruff ; extra == 'dev'
+  requires_python: '>=3.9'
+- pypi: https://files.pythonhosted.org/packages/6a/97/fa5f59f448e494154e88d8c9ca073e0fef4bc101bc3a31feaba51fb6086c/tylertoo-0.7.1-cp39-abi3-macosx_11_0_arm64.whl
+  name: tylertoo
+  version: 0.7.1
+  sha256: 6d487fcac2a1f17a3f80a269c8704b6292919b3bf3aea2ef6394bdeaa8630647
+  requires_dist:
+  - pytest>=8.0 ; extra == 'dev'
+  - pytest-cov ; extra == 'dev'
+  - ruff ; extra == 'dev'
+  requires_python: '>=3.9'
+- pypi: https://files.pythonhosted.org/packages/dc/d2/63862610144f58dae935819571a6334b546552a673c4e13f3f663346bae9/tylertoo-0.7.1-cp39-abi3-macosx_10_12_x86_64.whl
+  name: tylertoo
+  version: 0.7.1
+  sha256: 4c0a0853d028bc4752fb6f380045a367556c0fae0dbef2a5d5a0ac60597fe3b6
+  requires_dist:
+  - pytest>=8.0 ; extra == 'dev'
+  - pytest-cov ; extra == 'dev'
+  - ruff ; extra == 'dev'
+  requires_python: '>=3.9'
 - conda: https://conda.anaconda.org/conda-forge/noarch/typing-extensions-4.16.0-h69aa097_0.conda
   sha256: b141933ece3518f6d7b75dfb59451e2f26b405a44c18e2518a83e9a02e09315c
   md5: c680b5747e8c4c8f23dca0bb7042a8fc

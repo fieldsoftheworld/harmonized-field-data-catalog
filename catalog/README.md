@@ -86,16 +86,45 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
+-- at | 2944405
+-- at_block | 1299755
+-- be_vlg | 597088
+-- be_wal | 341968
+-- bg | 226592
 -- ch | 1520805
--- de_bw | 4363087
--- de_mv | 20000
--- de_sax | 95305
--- de_st | 78714
--- es | 17844643
--- ie_lpis | 1454480
--- it_bz | 152990
--- ... 3 more rows
+-- cz | 415300
+-- de_bb | 290688
+-- ... 60 more rows
 ```
+
+## Map tiles of every collection
+
+[`harmonized-field-data.pmtiles`](https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles) (26.8 GB) tiles the newest edition of 67 of the 68 collections (86 files; not yet `us_ca_scm`, added after it was built) into one layer, `fields`: 169,368,086 features, 3,383,288 tiles from zoom 3 to 14, built 2026-10-07. Each collection's own PMTiles keep all its columns; this archive reprojects every file to lon/lat and keeps only the columns they share, so they fit one schema:
+
+`collection`, `id`, `metrics:area`, `crop:code`, `crop:name`, `hcat:code`, `hcat:name_en`.
+
+A column a collection does not have is empty for its fields, and `collection` names the collection a field came from.
+
+Zoom 0, 1, 2 are empty: tylertoo's visibility gate drops every field at that scale.
+
+1,812 tiles exceeded tylertoo's 500 KB tile cap and dropped features to fit.
+
+Built with [tylertoo](https://github.com/geoparquet-io/tylertoo) 0.7.1 (`max_zoom=14`, `row_group_size=50000`) by [tools/root_tiles.py](https://github.com/fieldsoftheworld/harmonized-field-data-catalog/blob/main/tools/root_tiles.py).
+
+| Zoom | Tiles | Features at this zoom |
+|---:|---:|---:|
+| 3 | 7 | 40 |
+| 4 | 14 | 2,552 |
+| 5 | 40 | 98,664 |
+| 6 | 132 | 995,181 |
+| 7 | 406 | 3,826,819 |
+| 8 | 1,333 | 7,625,837 |
+| 9 | 4,625 | 13,266,557 |
+| 10 | 16,343 | 22,345,416 |
+| 11 | 57,332 | 37,369,354 |
+| 12 | 199,997 | 61,936,879 |
+| 13 | 696,158 | 102,250,887 |
+| 14 | 2,406,901 | 169,368,086 |
 
 ## License
 

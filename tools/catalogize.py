@@ -47,6 +47,9 @@ from common import (
     PROCESSING_EXTENSION,
     PROJECTION_EXTENSION,
     ROOT,
+    ROOT_TILES,
+    ROOT_TILES_FACTS,
+    ROOT_TILES_LAYER,
     STAGING_DIR,
     STYLE_TYPE,
     TABLE_EXTENSION,
@@ -830,6 +833,67 @@ def is_parts_collection(collection: dict) -> bool:
     return "data" not in collection.get("assets", {})
 
 
+def root_tiles(root: dict, public_base: str, repo: str, catalog_ids: list[str]) -> list[str]:
+    """Link the archive of every newest edition (tools/root_tiles.py) from the root
+    catalog, and return its README section. Every number is from ``root_tiles.json``;
+    a collection added since the archive was built is named as missing from it.
+
+    A link, not an asset: Portolan keeps data files at collection or item level
+    (rashid PTL-AST-005), and the web-map-links ``pmtiles`` link is what map
+    clients read anyway."""
+    if not ROOT_TILES_FACTS.exists():
+        return []
+    facts = read_json(ROOT_TILES_FACTS)
+    link_data_file(STAGING_DIR / ROOT_TILES, CATALOG_DIR / ROOT_TILES)
+    collections = list(dict.fromkeys(i["collection"] for i in facts["inputs"]))
+    missing = [c for c in catalog_ids if c not in collections]
+    scope = f"{len(collections)} of the {len(catalog_ids)} collections" if missing else f"all {len(collections)} collections"
+    files = f"{len(facts['inputs'])} files" + (f"; not yet {', '.join(f'`{c}`' for c in missing)}, added after it was built" if missing else "")
+    root["stac_extensions"].append(WEB_MAP_LINKS_EXTENSION)
+    root["links"].append({
+        "rel": "pmtiles",
+        "href": f"./{ROOT_TILES}",
+        "type": PMTILES_TYPE,
+        "title": f"Web map tiles: the newest edition of {len(collections)} collections ({facts['built'][:10]})",
+        "pmtiles:layers": [ROOT_TILES_LAYER],
+    })
+
+    zooms = [z for z in facts["zooms"] if z["tile_count"]]
+    empty = facts["empty_zooms"]
+    lines = [
+        "## Map tiles of every collection",
+        "",
+        (
+            f"[`{ROOT_TILES}`]({public_base}/{ROOT_TILES}) ({fmt_bytes(facts['file:size'])}) tiles the newest edition of "
+            f"{scope} ({files}) into one layer, `{ROOT_TILES_LAYER}`: "
+            f"{fmt_int(facts['features'])} features, {fmt_int(facts['tiles'])} tiles from zoom {zooms[0]['zoom']} to {zooms[-1]['zoom']}, "
+            f"built {facts['built'][:10]}. Each collection's own PMTiles keep all its columns; this archive "
+            "reprojects every file to lon/lat and keeps only the columns they share, so they fit one schema:"
+        ),
+        "",
+        ", ".join(f"`{c}`" for c in facts["columns"]) + ".",
+        "",
+        "A column a collection does not have is empty for its fields, and `collection` names the collection a field came from.",
+    ]
+    if empty:
+        lines += ["", f"Zoom {', '.join(str(z) for z in empty)} {'is' if len(empty) == 1 else 'are'} empty: tylertoo's visibility gate drops every field at that scale."]
+    if facts["oversized_tiles"]:
+        lines += ["", f"{fmt_int(facts['oversized_tiles'])} tiles exceeded tylertoo's 500 KB tile cap and dropped features to fit."]
+    lines += [
+        "",
+        (
+            f"Built with [tylertoo](https://github.com/geoparquet-io/tylertoo) {facts['tylertoo']} "
+            f"({', '.join(f'`{k}={v}`' for k, v in facts['options'].items())}) by [tools/root_tiles.py]({repo}/blob/main/tools/root_tiles.py)."
+        ),
+        "",
+        "| Zoom | Tiles | Features at this zoom |",
+        "|---:|---:|---:|",
+        *[f"| {z['zoom']} | {fmt_int(z['tile_count'])} | {fmt_int(z['level_feature_count'])} |" for z in zooms],
+        "",
+    ]
+    return lines
+
+
 def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     collections = []
     for path in sorted(CATALOG_DIR.glob("*/collection.json")):
@@ -905,6 +969,7 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
         ],
         "updated": max([c.get("updated", "") for c in collections] or [dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")]),
     }
+    tiles = root_tiles(root, public_base, repo, [c["id"] for c in collections])
     write_json(CATALOG_DIR / "catalog.json", root)
 
     # README.md
@@ -922,6 +987,7 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     r += ["", "## Access", "", f"Everything is static files on object storage: query them in place with DuckDB, GeoPandas or any GeoParquet reader, and render the PMTiles with MapLibre. Single files are plain https URLs; globs use the S3 form of the same prefix through the Source Cooperative proxy (`{s3_base}`, endpoint `{config.get('endpoint_url')}`, anonymous), because `*` needs a listing that https does not provide. Newest edition of every collection:", ""]
     q = f"{duckdb_s3_setup(config)}\nSELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/latest/*.parquet', union_by_name = true, filename = true)\nGROUP BY 1 ORDER BY 1;"
     r += [md_query(q, public_base), ""]
+    r += tiles
     r += ["## License", "", "Each collection carries the license of its source data provider (see the table and each `collection.json`). The catalog metadata, styles and tooling are Apache-2.0, in the [repository]({0}).".format(repo), "", "## Provenance", "", f"A mirror: every collection links its original source (`rel: via`) and the fiboa data survey entry describing it, and records the fiboa-cli version that converted it. Conversion logic lives in [fiboa-cli]({FIBOA_CLI_REPO}); this repository only orchestrates publication. Previously published at [source.coop/fiboa/data](https://source.coop/fiboa/data)."]
     write_text(CATALOG_DIR / "README.md", "\n".join(r))
 
@@ -945,6 +1011,8 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     a += ["## How to read it", "", f"Single files: plain https under `{public_base}/`. Globs: the S3 form of the same prefix, `{s3_base}/`, through the Source Cooperative proxy (endpoint `{config.get('endpoint_url')}`, path-style, no credentials) — `*` needs a listing and https has none. Newest edition of every collection in one query (schemas differ per source, hence `union_by_name`):", "", md_query(q, public_base), ""]
     q2 = f"{duckdb_s3_setup(config)}\nSELECT {PARTITION_KEY}, regexp_extract(filename, '/([^/]+)/{PARTITION_KEY}=', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/{PARTITION_KEY}=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)\nGROUP BY 1, 2 ORDER BY 2, 1;"
     a += ["Every edition of every collection:", "", md_query(q2, public_base), ""]
+    if tiles:
+        a += [f"For a map rather than a query: `{public_base}/{ROOT_TILES}` tiles the newest editions into one layer `{ROOT_TILES_LAYER}`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.", ""]
     a += ["## Join keys", "", "There are none. `id` is unique within one edition of one collection only; collections do not share identifiers and editions are not tracked across years. Spatial joins are the only bridge, and each collection is in its own CRS (`proj:code` on the collection and the `data` asset), so transform before joining.", ""]
     a += ["## Quirks that produce silently wrong answers", "", "- Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.", "- `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.", "- Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.", f"- {len(blocks)} collections hold field *blocks* (reference parcels), not crop fields: {', '.join(f'`{b}`' for b in sorted(blocks))}. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.", f"- Not every boundary was declared by anyone. {not_declared_agents} Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.", ""]
     a += ["## Structure", "", f"Assets and structural links resolve relative to the object that carries them; catalogs carry no `self` link. Generated by [tools/catalogize.py]({repo}/blob/main/tools/catalogize.py); fix documentation there."]
@@ -956,6 +1024,8 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
         kind = "field blocks" if c["id"] in blocks else "crop fields"
         newest = f"{public_base}/{c['id']}/latest/<converter>.parquet, one per source" if is_parts_collection(c) else f"{public_base}/{c['id']}/latest/{c['id']}.parquet"
         l.append(f"- {c['id']}: {c['title']} — {kind} — {newest} (license {c['license']}, CRS {', '.join(c.get('summaries', {}).get('proj:code', []))})")
+    if tiles:
+        l += ["", f"Map tiles of the collections' newest editions (README says which), one layer `{ROOT_TILES_LAYER}`, shared columns only: {public_base}/{ROOT_TILES}"]
     l += ["", f"Globs need S3 through the proxy (DuckDB: CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT '{config.get('endpoint_url', '').replace('https://', '')}', URL_STYLE 'path', REGION '{config.get('region', 'us-west-2')}')): all newest editions {s3_base}/*/latest/*.parquet (union_by_name=true); per-edition {s3_base}/<id>/year=*/*.parquet (hive_partitioning=true)."]
     write_text(CATALOG_DIR / "llms.txt", "\n".join(l))
 

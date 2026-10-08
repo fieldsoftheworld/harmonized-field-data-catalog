@@ -4,7 +4,7 @@ Developer and agent guide for `harmonized-field-data-catalog`. The published cat
 
 ## The two boundaries
 
-**`catalog/` is the published catalog.** Everything in it is synced 1:1 to `s3://ftw/harmonized-field-data/` by `tools/publish.py`, and nothing outside it ever is. Do not move a file into `catalog/` to make it publish, and do not widen the walk in `publish.py`. Data files are gitignored (`*.parquet`, `*.pmtiles`); locally they appear under `catalog/` only as symlinks into `staging/`, created by `catalogize.py` so the link gate can resolve them. They are uploaded from `staging/` by `tools/upload_data.py`, which is scoped by directory (`year=*`, `latest`) and suffix.
+**`catalog/` is the published catalog.** Everything in it is synced 1:1 to `s3://ftw/harmonized-field-data/` by `tools/publish.py`, and nothing outside it ever is. Do not move a file into `catalog/` to make it publish, and do not widen the walk in `publish.py`. Data files are gitignored (`*.parquet`, `*.pmtiles`); locally they appear under `catalog/` only as symlinks into `staging/`, created by `catalogize.py` so the link gate can resolve them. They are uploaded from `staging/` by `tools/upload_data.py`, which is scoped by directory (`year=*`, `latest`) and suffix, plus one root file with `--root`: `harmonized-field-data.pmtiles`, the newest edition of every collection tiled by `tools/root_tiles.py`, whose facts (`root_tiles.json`, in git) catalogize turns into the root's `rel: pmtiles` link and README section (a link, not an asset: Portolan allows no assets on a catalog).
 
 **Conversion logic lives in fiboa-cli.** This repository never transforms data. If a column is mapped wrongly, a source URL moved, a license string is off, or a year is missing, the fix goes to `fiboa_cli/datasets/<id>.py` in [fiboa/cli](https://github.com/fiboa/cli); this repository only chooses what to publish (`datasets.yaml`) and wraps the converter's output in Portolan metadata.
 
@@ -25,6 +25,8 @@ pixi run python tools/build.py <id>        # stage (fiboa convert, validate, til
 pixi run python tests/run_all.py           # manifest, links, publish contract, stac-check, rashid
 pixi run rashid check catalog              # full pass incl. byte checks (CI runs --no-data)
 pixi run python tools/upload_data.py <id> --confirm
+pixi run python tools/root_tiles.py         # after the collections: one archive of every newest edition (hours)
+pixi run python tools/upload_data.py --root --confirm
 pixi run python tools/publish.py --confirm
 pixi run rashid check catalog --live --live-base-url https://data.source.coop/ftw/harmonized-field-data
 ```
