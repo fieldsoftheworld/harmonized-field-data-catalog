@@ -2,12 +2,12 @@
   "version": 8,
   "name": "Italy, Tuscany — field size (ha)",
   "metadata": {
-    "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 0.5, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields."
+    "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.5, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields."
   },
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2023/it_1-2023.pmtiles"
+      "url": "pmtiles://../year=2022/it_1-2022.pmtiles"
     }
   },
   "layers": [
@@ -30,12 +30,10 @@
           "#f7fcf5",
           0.1,
           "#c7e9c0",
-          0.25,
-          "#74c476",
           0.5,
-          "#238b45",
+          "#74c476",
           1,
-          "#00441b"
+          "#238b45"
         ],
         "fill-opacity": 0.8
       }

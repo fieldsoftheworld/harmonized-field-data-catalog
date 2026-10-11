@@ -112,9 +112,10 @@ datasets:
     boundaries: declared
     keywords: [Slovenia, GERK, crop fields]
   it_1:
-    years: ['2023']
+    years: ['2016', '2018', '2019', '2020', '2022']
     boundaries: declared
     keywords: [Italy, Tuscany, EuroCropsV2, JRC]
+    notes: "EuroCrops V2 also has 2017, 2021 and 2023, but they repeat an earlier year (2016, 2020 and 2019): the same parcels with the same crops. They are left out."
   cz:
     years: ['2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026']
     boundaries: declared
