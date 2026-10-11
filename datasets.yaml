@@ -14,6 +14,11 @@
 #             edition is `year=<Y>/<part>-<Y>.parquet` with its own item and
 #             license; a part without `years` is converted once and its year is
 #             the most frequent year of `determination:datetime`. Needs `title`.
+#   backfill: with years: editions another converter supplies, for years the
+#             dataset's own source does not offer, converter id -> {years, notes}.
+#             They are filed like the dataset's own editions (`<id>-<Y>.parquet`)
+#             and `latest` stays the newest year; each such item carries its own
+#             source's license, attribution and providers.
 #   boundaries: how the boundaries came to exist -- `declared` by farmers in a
 #             subsidy application, or held in the parcel register built on those
 #             declarations (the IACS/LPIS family); `mapped` by an authority from

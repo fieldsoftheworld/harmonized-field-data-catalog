@@ -97,6 +97,13 @@ class Dataset:
     parts: dict[str, Part] = field(default_factory=dict)
     # a parts collection's title, as no single converter speaks for it
     title: str | None = None
+    # converter id -> Part: editions another converter supplies (years the
+    # dataset's own source no longer offers); their years are in `years` too
+    backfill: dict[str, Part] = field(default_factory=dict)
+
+    def converter(self, year: str) -> str:
+        """The converter of an edition: the dataset's own, or the one that backfills that year."""
+        return next((p.id for p in self.backfill.values() if year in p.years), self.id)
 
     @property
     def latest(self) -> str:
@@ -152,6 +159,19 @@ class Manifest:
             if years != sorted(years):
                 sys.exit(f"datasets.yaml: {dataset_id} years must be ascending, newest last")
             parts = load_parts(dataset_id, spec.get("parts")) if "parts" in spec else {}
+            backfill = load_parts(dataset_id, spec.get("backfill")) if "backfill" in spec else {}
+            if backfill:
+                if "years" not in spec:
+                    sys.exit(f"datasets.yaml: {dataset_id} has 'backfill', which needs 'years' (converter variants)")
+                for part in backfill.values():
+                    if not part.years:
+                        sys.exit(f"datasets.yaml: {dataset_id}.backfill.{part.id} needs years")
+                    if set(part.years) & set(years):
+                        sys.exit(f"datasets.yaml: {dataset_id}.backfill.{part.id} repeats a year of {dataset_id} itself")
+                filled = [y for part in backfill.values() for y in part.years]
+                if len(filled) != len(set(filled)):
+                    sys.exit(f"datasets.yaml: {dataset_id} backfills a year twice")
+                years = sorted(years + filled)
             if parts and not spec.get("title"):
                 sys.exit(f"datasets.yaml: {dataset_id} has parts and needs a 'title'")
             if spec.get("title") and not parts:
@@ -175,6 +195,7 @@ class Manifest:
                 has_variants="years" in spec,
                 parts=parts,
                 title=spec.get("title"),
+                backfill=backfill,
             )
         return cls(catalog=raw["catalog"], host=raw["host"], datasets=datasets)
 
