@@ -53,10 +53,17 @@ host:
 datasets:
   be_vlg:
     years: ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"]
+    backfill:
+      ec_be_vlg:
+        years: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
+        notes: "Buildings (codes 1 and 2), which the source maps as parcels of their own, are left out."
     boundaries: declared
     keywords: [Belgium, Flanders, Landbouwgebruikspercelen, IACS, crop fields]
   de_nrw:
-    year: 2026
+    years: ['2026']
+    backfill:
+      ec_de_nrw:
+        years: ['2019', '2020', '2021', '2022', '2023']
     boundaries: declared
     year_source: "The source is a rolling download without a vintage in its URL (LWK-TSCHLAG_EPSG25832_Shape.zip); the edition year is the year the snapshot was downloaded and converted."
     keywords: [Germany, North Rhine-Westphalia, INSPIRE, field blocks]
@@ -97,7 +104,11 @@ datasets:
     keywords: [Germany, Schleswig-Holstein, Feldblöcke, field blocks]
     holds: blocks
   de_bb:
-    year: 2026
+    years: ['2026']
+    backfill:
+      ec_de_bb:
+        years: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']
+        notes: "Landscape elements (hedges, tree rows, copses, wetlands, single trees, stone walls), which the source maps as polygons of their own from 2018, are left out. From 2020 about a quarter of the fields carry code 12170 'Unknown'."
     boundaries: declared
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Germany, Berlin, Brandenburg, crop fields, IACS]
@@ -108,7 +119,10 @@ datasets:
     keywords: [Germany, Berlin, Brandenburg, field blocks, Feldblöcke]
     holds: blocks
   be_wal:
-    year: 2022
+    years: ['2022']
+    backfill:
+      ec_be_wal:
+        years: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2023']
     boundaries: declared
     year_source: Year in the source download name (2022).
     keywords: [Belgium, Wallonia, parcellaire agricole anonyme, IACS]
@@ -169,12 +183,6 @@ datasets:
     boundaries: declared
     year_source: Rolling download without a vintage in its URL; the edition year is the year the snapshot was downloaded and converted.
     keywords: [Romania, EuroCrops, crop fields]
-  ec_ee:
-    year: 2021
-    boundaries: declared
-    thumbnail: {center: [26.52894, 57.84260], basemap: none}  # Vorumaa smallholdings; the densest cluster
-    year_source: EuroCrops release year in the source file name (EE_2021).
-    keywords: [Estonia, EuroCrops, crop fields]
   ec_lt:
     year: 2021
     boundaries: declared
@@ -187,15 +195,6 @@ datasets:
     thumbnail: {center: [26.26158, 56.01426], basemap: none}  # Latgale near Daugavpils; the densest cluster
     year_source: EuroCrops release year in the source file name (LV_2021).
     keywords: [Latvia, EuroCrops, crop fields]
-  ec_fr:
-    year: 2018
-    boundaries: declared
-    thumbnail: {center: [-0.31320, 45.61028], basemap: none}  # Charente/Dordogne; the densest cluster
-    year_source: EuroCrops release year in the source file name (FR_2018).
-    keywords: [France, EuroCrops, RPG, crop fields]
-    notes: 'The 2018 campaign of the Registre Parcellaire Graphique, which IGN publishes
-      no archive for: its downloads run 2017 and 2019 onwards. SURF_PARC is rounded to
-      0.01 ha, so 4,913 parcels under 50 m2 take their area from the geometry.'
   ec_si:
     year: 2021
     boundaries: declared
@@ -247,6 +246,10 @@ datasets:
     holds: blocks
   ee:
     years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"]
+    backfill:
+      ec_ee:
+        years: ['2015']
+        notes: "EuroCrops V2 carries a crop code, which PRIA does not; `crop:code` is still derived from the crop name, as in the other editions."
     boundaries: declared
     keywords: [Estonia, GSAA, crop fields, INSPIRE]
     notes: "**There is no `crop:code`, because PRIA publishes none.** The WFS carries the crop as free text (`taotletud_kultuur`) and no code column in any edition, so `hcat:code` is derived from that name. The source's own classification is `land_use` (arable, permanent grassland, restored grassland, permanent crops, black fallow)."
@@ -282,6 +285,9 @@ datasets:
     keywords: [Spain, Andalusia, SIGPAC, crop fields]
   at:
     years: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+    backfill:
+      ec_at:
+        years: ['2015', '2016', '2017']
     boundaries: declared
     keywords: [Austria, Schläge, crop fields, INSPIRE]
   at_block:
@@ -342,6 +348,10 @@ datasets:
     keywords: [Spain, Valencia, crop fields]
   fr:
     years: ['2017', '2019', '2020', '2021', '2022', '2023', '2024']
+    backfill:
+      ec_fr:
+        years: ['2015', '2016', '2018']
+        notes: "IGN's RPG downloads run 2017 and 2019 onwards, so 2018 comes from EuroCrops V2 too."
     boundaries: declared
     keywords: [France, RPG, Registre Parcellaire Graphique, crop fields]
   es_cl:
@@ -413,6 +423,9 @@ datasets:
         years: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
   es:
     years: ['2025']
+    backfill:
+      ec_es:
+        years: ['2021', '2022', '2023']
     boundaries: declared
     keywords: [Spain, FEGA, SIGPAC, declared crops, cultivo declarado]
   pt:
