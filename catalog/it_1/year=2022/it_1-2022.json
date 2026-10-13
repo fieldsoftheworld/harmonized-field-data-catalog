@@ -7,58 +7,58 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "it_1-2023",
+  "id": "it_1-2022",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          9.717008450430813,
-          42.300870309279134
+          9.716802279820843,
+          42.324060405741925
         ],
         [
-          12.401313267431654,
-          42.300870309279134
+          12.370716136951891,
+          42.324060405741925
         ],
         [
-          12.401313267431654,
-          44.47099364231952
+          12.370716136951891,
+          44.47135509208536
         ],
         [
-          9.717008450430813,
-          44.47099364231952
+          9.716802279820843,
+          44.47135509208536
         ],
         [
-          9.717008450430813,
-          42.300870309279134
+          9.716802279820843,
+          42.324060405741925
         ]
       ]
     ]
   },
   "bbox": [
-    9.717008450430813,
-    42.300870309279134,
-    12.401313267431654,
-    44.47099364231952
+    9.716802279820843,
+    42.324060405741925,
+    12.370716136951891,
+    44.47135509208536
   ],
   "properties": {
-    "title": "Italy, Tuscany — 2023",
-    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`it_1-2023.parquet`, 623,666 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "title": "Italy, Tuscany — 2022",
+    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`it_1-2022.parquet`, 667,107 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
     "datetime": null,
-    "start_datetime": "2023-01-01T00:00:00Z",
-    "end_datetime": "2023-12-31T23:59:59Z",
-    "year": 2023,
+    "start_datetime": "2022-01-01T00:00:00Z",
+    "end_datetime": "2022-01-01T00:00:00Z",
+    "year": 2022,
     "proj:code": "EPSG:3035",
     "table:columns": [
       {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "large_binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "metrics:area",
@@ -66,29 +66,24 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "crop:code",
-        "type": "large_string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "large_string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "large_string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "large_string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -97,34 +92,34 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 623666,
+    "table:row_count": 667107,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.4.0"
     }
   },
   "collection": "it_1",
   "assets": {
     "data": {
-      "href": "./it_1-2023.parquet",
+      "href": "./it_1-2022.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Italy, Tuscany 2023 (GeoParquet)",
+      "title": "Italy, Tuscany 2022 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 202260070,
-      "file:checksum": "122063ac58be478af8942fdfbca9e3e536959a397ecac333e90b1c64dcb327bd061b",
+      "file:size": 233587203,
+      "file:checksum": "122079a3c9ebf24dac76c37dea31065003162b8bfc25772407f5d54bb4422ce32904",
       "proj:code": "EPSG:3035"
     },
     "visual": {
-      "href": "./it_1-2023.pmtiles",
+      "href": "./it_1-2022.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Italy, Tuscany 2023 (PMTiles)",
+      "title": "Italy, Tuscany 2022 (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 67558279,
-      "file:checksum": "12209c409fcdccaa23ebade514e76073b0b2b2dfa2f8bbec4c2f5f2deaf812f41db1"
+      "file:size": 115293436,
+      "file:checksum": "12206ffd61f1a6f754c875a8b724668800b0a1e86009fcf88e5fa6aa9cb1ec409635"
     }
   },
   "links": [

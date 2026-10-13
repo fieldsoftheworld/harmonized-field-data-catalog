@@ -12,7 +12,7 @@
   ],
   "id": "it_1",
   "title": "Italy Tuscany (ITI1) Crop Fields — EuroCropsV2",
-  "description": "EuroCropsV2 harmonised Geo-Spatial Application (GSA) declarations for Tuscany (NUTS-2: ITI1), Italy. Produced by\nthe JRC, EUROSTAT and Technical University of Munich from the Italian paying agency's parcel-level crop\ndeclarations.\n\nThe source is distributed as one GeoParquet per year (2016-2023) in EPSG:3035 (LAEA Europe). HCAT3 names and\ncodes are joined in from the EuroCropsV2 NUTS mapping table at conversion time.\n\nThis collection holds 1 edition (2023), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/it_1/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2023). Geometries are kept in the source CRS (EPSG:3035). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/it_1/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
+  "description": "EuroCropsV2 harmonised Geo-Spatial Application (GSA) declarations for Tuscany (NUTS-2: ITI1), Italy. Produced by\nthe JRC, EUROSTAT and Technical University of Munich from the Italian paying agency's parcel-level crop\ndeclarations.\n\nThe source is distributed as one GeoParquet per year (2016-2023) in EPSG:3035 (LAEA Europe). HCAT3 names and\ncodes are joined in from the EuroCropsV2 NUTS mapping table at conversion time.\n\nThis collection holds 5 editions (2016, 2018, 2019, 2020, 2022), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/it_1/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2022). Geometries are kept in the source CRS (EPSG:3035). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/it_1/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
   "boundaries": "declared",
   "keywords": [
     "EuroCropsV2",
@@ -46,18 +46,18 @@
     "spatial": {
       "bbox": [
         [
-          9.717008450430813,
-          42.300870309279134,
-          12.401313267431654,
-          44.47099364231952
+          9.716802278952992,
+          42.32328095645883,
+          12.370716136951891,
+          44.47135509208536
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2023-01-01T00:00:00Z",
-          "2023-12-31T23:59:59Z"
+          "2016-01-01T00:00:00Z",
+          "2022-01-01T00:00:00Z"
         ]
       ]
     }
@@ -69,14 +69,14 @@
   },
   "table:columns": [
     {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "metrics:area",
@@ -84,29 +84,24 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:name_en",
-      "type": "large_string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "hcat:name",
-      "type": "large_string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
       "name": "hcat:code",
       "type": "uint32",
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -115,7 +110,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 623666,
+  "table:row_count": 667107,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -125,19 +120,19 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 5,
   "partition:glob": "s3://ftw/harmonized-field-data/it_1/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/it_1.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Italy, Tuscany — latest edition (2023) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2023/it_1-2023.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "title": "Italy, Tuscany — latest edition (2022) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2022/it_1-2022.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 202260070,
-      "file:checksum": "122063ac58be478af8942fdfbca9e3e536959a397ecac333e90b1c64dcb327bd061b",
+      "file:size": 233587203,
+      "file:checksum": "122079a3c9ebf24dac76c37dea31065003162b8bfc25772407f5d54bb4422ce32904",
       "proj:code": "EPSG:3035"
     },
     "style-hcat-crops": {
@@ -149,8 +144,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2350,
-      "file:checksum": "1220f62887ff782589e29d24a6fff88bce3261768fc03975fa8f7c80ee3b8f05b911"
+      "file:size": 2356,
+      "file:checksum": "1220f06b2c57322ea7f5d76bfe1e2769ffaf6f1fd3ace46335d802be1f1ca3b32493"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -159,9 +154,9 @@
       "roles": [
         "style"
       ],
-      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 0.5, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1231,
-      "file:checksum": "12207e97a49d682364d7f858655d90aabd2b90c55ed1145cd14aee4d78c93e47e23e"
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.5, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1188,
+      "file:checksum": "122006173918d836ca0f73477b689fb6bb3d6f7dcadf87a44265abcbea0093a5562f"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -172,17 +167,17 @@
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
       "file:size": 740,
-      "file:checksum": "1220c4117d2ba7d4c07e16229380dc8ea3b63d8d8519040bfec1a4384466aea24ef0"
+      "file:checksum": "122089958024f42d9e1d1cae922350873384328d60321d7d49369ab00a485ccd116b"
     },
     "visual": {
-      "href": "./year=2023/it_1-2023.pmtiles",
+      "href": "./year=2022/it_1-2022.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Italy, Tuscany — latest edition (2023) (PMTiles)",
+      "title": "Italy, Tuscany — latest edition (2022) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 67558279,
-      "file:checksum": "12209c409fcdccaa23ebade514e76073b0b2b2dfa2f8bbec4c2f5f2deaf812f41db1"
+      "file:size": 115293436,
+      "file:checksum": "12206ffd61f1a6f754c875a8b724668800b0a1e86009fcf88e5fa6aa9cb1ec409635"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -191,8 +186,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 379327,
-      "file:checksum": "1220b039ad8e2a961ffe4b28df2eba69fdd6e7b0ca681a6b6d322cdb5bfe43a8292d"
+      "file:size": 332555,
+      "file:checksum": "122037c43da065bd3823e1789eb62df4a7124cc6cc9ba17759b5160005dc16e4975e"
     }
   },
   "links": [
@@ -226,7 +221,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2023/it_1-2023.pmtiles",
+      "href": "./year=2022/it_1-2022.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -247,21 +242,45 @@
     },
     {
       "rel": "item",
-      "href": "./year=2023/it_1-2023.json",
+      "href": "./year=2016/it_1-2016.json",
       "type": "application/geo+json",
-      "title": "Italy, Tuscany — 2023"
+      "title": "Italy, Tuscany — 2016"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2018/it_1-2018.json",
+      "type": "application/geo+json",
+      "title": "Italy, Tuscany — 2018"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2019/it_1-2019.json",
+      "type": "application/geo+json",
+      "title": "Italy, Tuscany — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/it_1-2020.json",
+      "type": "application/geo+json",
+      "title": "Italy, Tuscany — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/it_1-2022.json",
+      "type": "application/geo+json",
+      "title": "Italy, Tuscany — 2022"
     }
   ],
-  "updated": "2026-08-28T19:06:51Z",
+  "updated": "2026-10-11T10:55:49Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "it_1": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "European Commission, Joint Research Centre — EuroCropsV2"
