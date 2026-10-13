@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          -5.295483214443517,
-          41.316623851318525
+          -4.911186641498378,
+          41.36604206608607
         ],
         [
-          10.69427103792096,
-          41.316623851318525
+          9.55961872699482,
+          41.36604206608607
         ],
         [
-          10.69427103792096,
-          50.83874877138514
+          9.55961872699482,
+          51.075100624025524
         ],
         [
-          -5.295483214443517,
-          50.83874877138514
+          -4.911186641498378,
+          51.075100624025524
         ],
         [
-          -5.295483214443517,
-          41.316623851318525
+          -4.911186641498378,
+          41.36604206608607
         ]
       ]
     ]
   },
   "bbox": [
-    -5.295483214443517,
-    41.316623851318525,
-    10.69427103792096,
-    50.83874877138514
+    -4.911186641498378,
+    41.36604206608607,
+    9.55961872699482,
+    51.075100624025524
   ],
   "properties": {
     "title": "France — 2020",
-    "description": "Field boundaries of the 2020 edition of this dataset, one GeoParquet file (`fr-2020.parquet`, 9,772,794 fields) and its PMTiles. Partition `year=2020` of the collection's hive layout.",
+    "description": "Field boundaries of the 2020 edition of this dataset, one GeoParquet file (`fr-2020.parquet`, 9,772,765 fields) and its PMTiles. Partition `year=2020` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2020-01-01T00:00:00Z",
     "end_datetime": "2020-01-01T00:00:00Z",
@@ -51,29 +51,9 @@
     "proj:code": "EPSG:2154",
     "table:columns": [
       {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "metrics:area",
         "type": "float",
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "group_code",
-        "type": "string",
-        "description": "Carried over from the source column `code_group`; the publisher documents no meaning for it."
       },
       {
         "name": "hcat:name",
@@ -81,14 +61,9 @@
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "collection",
+        "name": "parcel_id",
         "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "description": "Source-specific column; the publisher documents no meaning for it."
       },
       {
         "name": "geometry",
@@ -96,9 +71,29 @@
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "parcel_id",
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "group_code",
         "type": "string",
-        "description": "Source-specific column; the publisher documents no meaning for it."
+        "description": "Carried over from the source column `code_group`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -107,10 +102,10 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 9772794,
+    "table:row_count": 9772765,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "vecorel-cli": "0.4.0"
     }
   },
   "collection": "fr",
@@ -122,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 2923445159,
-      "file:checksum": "1220e6bbe8a9c110858f0148d08a7405ef7e9101c8ffc9eb829fd7220f5aded9487b",
+      "file:size": 2923217977,
+      "file:checksum": "1220d43ee4c6708464164812bfd2e569d46c746619f2300f5c6955f18cce6a7eda23",
       "proj:code": "EPSG:2154"
     }
   },

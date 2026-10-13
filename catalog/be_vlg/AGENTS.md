@@ -1,6 +1,6 @@
 # Agent guidance — Field boundaries for Flanders, Belgium
 
-Belgium, Flanders field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 9 editions (2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Belgium, Flanders field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 19 editions (2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -12,11 +12,12 @@ Belgium, Flanders field boundaries in the [fiboa](https://github.com/fiboa/speci
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:31370, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres**, taken from the source column `GRAF_OPP` (hectares × 10 000). Divide by 10 000 for hectares.
+- **`metrics:area` is in square metres** (source column `GRAF_OPP`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`be_vlg_2021.csv`) have `NULL`. 705 of the 597,088 rows of the 2026 edition (0.12%) have none, so a query that filters or groups on crop silently leaves them out.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. 705 of the 597,088 rows of the 2026 edition (0.12%) have none, so a query that filters or groups on crop silently leaves them out.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `typology` = `None`, `admin:country_code` = `BE`, `admin:subdivision_code` = `VLG`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/be_vlg_2021.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **Not every edition comes from the same source.** The 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016 and 2017 editions, which the source above does not offer, come from Field boundaries for Flanders, Belgium — EuroCrops V2 (Joint Research Centre, European Commission, converter `ec_be_vlg`), under CC-BY-4.0; attribution: European Commission, Joint Research Centre — EuroCropsV2; their items carry those terms.
 
 ## Tested queries
 
@@ -29,15 +30,15 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/be_vlg/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2018 | 515747 | 689328.0
--- 2019 | 521395 | 691592.0
--- 2020 | 525851 | 690234.0
--- 2021 | 591899 | 678631.0
--- 2022 | 585076 | 674833.0
--- 2023 | 588192 | 672046.0
--- 2024 | 589749 | 669055.0
--- 2025 | 594732 | 672201.0
--- ... 1 more rows
+-- 2008 | 463167 | 692555.0
+-- 2009 | 462064 | 683842.0
+-- 2010 | 466704 | 685285.0
+-- 2011 | 472422 | 684727.0
+-- 2012 | 477585 | 685366.0
+-- 2013 | 482799 | 681166.0
+-- 2014 | 485244 | 681405.0
+-- 2015 | 490792 | 680115.0
+-- ... 11 more rows
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):

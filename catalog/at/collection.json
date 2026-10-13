@@ -12,7 +12,7 @@
   ],
   "id": "at",
   "title": "Field boundaries for Austria",
-  "description": "**Crop Field boundaries for Austria - INVEKOS Schläge Österreich 2025.**\n\nThis layer includes all field uses recorded by the applicants, which serve as the basis for the funding process. A field\nis a contiguous area of a piece of land that is cultivated for a growing season with only one crop (field use type) and\nuniform management requirements or as a landscape element type in accordance with Annex 1 of the regulation of the responsible\nFederal Ministry with horizontal rules for the area of the Common Agricultural Policy (Horizontal CAP Regulation)\nStF: BGBl. II No. 100/2015 or is simply maintained in good agricultural and ecological condition in accordance with\nArt. 94 of Regulation (EU) No. 1306/2013 and is digitized in the GIS as a polygon or as a point.\n\nThis collection holds 8 editions (2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/at/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:31287). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/at/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
+  "description": "**Crop Field boundaries for Austria - INVEKOS Schläge Österreich 2025.**\n\nThis layer includes all field uses recorded by the applicants, which serve as the basis for the funding process. A field\nis a contiguous area of a piece of land that is cultivated for a growing season with only one crop (field use type) and\nuniform management requirements or as a landscape element type in accordance with Annex 1 of the regulation of the responsible\nFederal Ministry with horizontal rules for the area of the Common Agricultural Policy (Horizontal CAP Regulation)\nStF: BGBl. II No. 100/2015 or is simply maintained in good agricultural and ecological condition in accordance with\nArt. 94 of Regulation (EU) No. 1306/2013 and is digitized in the GIS as a polygon or as a point.\n\nThis collection holds 11 editions (2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/at/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:31287). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/at/AGENTS.md).\n\nThe 2015, 2016 and 2017 editions, which the source above does not offer, come from Field boundaries for Austria — EuroCrops V2 (Joint Research Centre, European Commission, converter `ec_at`), under CC-BY-4.0; attribution: European Commission, Joint Research Centre — EuroCropsV2; their items carry those terms.\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
   "boundaries": "declared",
   "keywords": [
     "Austria",
@@ -34,6 +34,14 @@
       "url": "https://geometadatensuche.inspire.gv.at/metadatensuche/inspire/api/records/9db8a0c3-e92a-4df4-9d55-8210e326a7ed"
     },
     {
+      "name": "Joint Research Centre, European Commission",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://data.jrc.ec.europa.eu/dataset/b9fb9e67-78a9-4327-9d59-39a928d812d3"
+    },
+    {
       "name": "Fields of the World",
       "url": "https://fieldsofthe.world",
       "roles": [
@@ -49,14 +57,14 @@
           9.405290334050287,
           46.34587798618984,
           17.232237933779267,
-          48.96562897393914
+          49.01793115514
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2018-07-30T16:26:12Z",
+          "2015-01-01T00:00:00Z",
           "2025-06-13T12:18:13Z"
         ]
       ]
@@ -64,54 +72,15 @@
   },
   "summaries": {
     "proj:code": [
+      "EPSG:3035",
       "EPSG:31287"
     ]
   },
   "table:columns": [
     {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
       "name": "hcat:code",
       "type": "uint32",
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "hcat:name",
-      "type": "large_string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "crop:name",
-      "type": "large_string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "hcat:name_en",
-      "type": "large_string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "determination:datetime",
@@ -119,13 +88,53 @@
       "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "bbox",
       "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
       "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "collection",
+      "type": "string",
+      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 2944405,
+  "table:row_count": 2944397,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -135,7 +144,7 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 8,
+  "partition:file_count": 11,
   "partition:glob": "s3://ftw/harmonized-field-data/at/year=*/*.parquet",
   "assets": {
     "data": {
@@ -146,8 +155,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 1025955824,
-      "file:checksum": "1220c68524241a09f1d8b448d1364dc3bafb59faeabfd0fa141fad78d402d047a97e",
+      "file:size": 851633489,
+      "file:checksum": "1220c7e97c3d26e7e8dc3b5a9300d0cb07eaf079fdaec5047c07a4a04daea314990a",
       "proj:code": "EPSG:31287"
     },
     "style-hcat-crops": {
@@ -191,8 +200,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 633418711,
-      "file:checksum": "1220cd9b11231eeb1f38f531ba36b1ef32015ee638368bdf445096f0c3e924b9e391"
+      "file:size": 642899274,
+      "file:checksum": "12202f4e7bce488715e8b19184d535b77f36621a7313b83a0aeac0d9c551072b4459"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -201,8 +210,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 285820,
-      "file:checksum": "1220b04056a0666ed9b7270b8d627655ba126e3f5419a7160e57c044d08911b5dfd5"
+      "file:size": 269887,
+      "file:checksum": "1220740f981cf0266a65767568cd5a759febf2d1252fb9501dac304c1e0c85e6d1d7"
     }
   },
   "links": [
@@ -263,6 +272,24 @@
     },
     {
       "rel": "item",
+      "href": "./year=2015/at-2015.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2015"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2016/at-2016.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2016"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2017/at-2017.json",
+      "type": "application/geo+json",
+      "title": "Austria — 2017"
+    },
+    {
+      "rel": "item",
       "href": "./year=2018/at-2018.json",
       "type": "application/geo+json",
       "title": "Austria — 2018"
@@ -310,16 +337,16 @@
       "title": "Austria — 2025"
     }
   ],
-  "updated": "2026-09-04T00:28:51Z",
+  "updated": "2026-10-12T15:37:35Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "at": [
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   }
 }
