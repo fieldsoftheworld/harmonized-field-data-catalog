@@ -26,6 +26,10 @@ newest edition of every part into one ``latest/<id>.pmtiles``. A part without
 years is converted once into ``tmp/`` and filed under the most frequent year of
 its ``determination:datetime``. The row-count check runs per part.
 
+A dataset with ``backfill`` converts the years its own source lacks with
+another converter, filed like its own editions (``year=<Y>/<id>-<Y>.parquet``);
+that converter's metadata goes to ``converters/<converter>.json``.
+
 fiboa-cli is found through $FIBOA_CMD (default ``fiboa``) and the interpreter
 that has it installed through $FIBOA_PYTHON (default ``python``). Set both to
 e.g. ``pixi run -e dev --manifest-path ../cli/pyproject.toml fiboa`` to use a
@@ -82,7 +86,9 @@ def convert(converter_id: str, parquet: Path, variant: str | None = None) -> Non
     run(cmd)
 
 
-def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True) -> None:
+def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True, converter_id: str | None = None) -> None:
+    """One edition, filed as <id>-<year> also when another converter backfills it."""
+    converter_id = converter_id or dataset_id
     out = staging_year_dir(dataset_id, year)
     out.mkdir(parents=True, exist_ok=True)
     # an edition that is only a label, not a converter variant, is published as <id>
@@ -90,14 +96,14 @@ def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True) -
     parquet, pmtiles = out / f"{stem}.parquet", out / f"{stem}.pmtiles"
 
     if not parquet.exists():
-        convert(dataset_id, parquet, year if has_variants else None)
+        convert(converter_id, parquet, year if has_variants else None)
     run([*FIBOA_CMD, "validate", "-n", "-1", str(parquet)])
 
     # only the newest edition is rendered in the browser; tiles for older
     # editions would double the storage without ever being seen
     if latest and not pmtiles.exists():
         make_pmtiles(parquet, pmtiles, dataset_id)
-    describe(dataset_id, parquet, pmtiles if pmtiles.exists() else None, out / "collection.json")
+    describe(converter_id, parquet, pmtiles if pmtiles.exists() else None, out / "collection.json", layer=dataset_id)
 
 
 def stage_part(dataset_id: str, part_id: str, year: str) -> None:
@@ -187,8 +193,11 @@ def make_pmtiles(sources: Path | list[Path], pmtiles: Path, layer: str, attribut
         raise subprocess.CalledProcessError(tiles.returncode or failed, tippecanoe)
 
 
-def describe(dataset_id: str, parquet: Path, pmtiles: Path | None, stac_file: Path) -> None:
-    """The collection.json catalogize reads: fiboa's STAC with relative hrefs, sizes and checksums."""
+def describe(dataset_id: str, parquet: Path, pmtiles: Path | None, stac_file: Path, layer: str | None = None) -> None:
+    """The collection.json catalogize reads: fiboa's STAC with relative hrefs, sizes and checksums.
+
+    ``dataset_id`` is the converter that wrote the file; ``layer`` the PMTiles layer, if not that.
+    """
     newest = max(p.stat().st_mtime for p in (parquet, pmtiles) if p is not None)
     if stac_file.exists() and stac_file.stat().st_mtime >= newest:
         return
@@ -206,7 +215,7 @@ def describe(dataset_id: str, parquet: Path, pmtiles: Path | None, stac_file: Pa
     data["links"] = [link for link in data.get("links", []) if link.get("rel") != "pmtiles"]
     if pmtiles:
         href = f"./{pmtiles.name}"
-        data["links"].append({"rel": "pmtiles", "href": href, "type": PMTILES_TYPE, "title": "Web map tiles", "pmtiles:layers": [dataset_id]})
+        data["links"].append({"rel": "pmtiles", "href": href, "type": PMTILES_TYPE, "title": "Web map tiles", "pmtiles:layers": [layer or dataset_id]})
         data["assets"]["visual"] = {"href": href, "type": PMTILES_TYPE, "title": f"{title} (PMTiles)", "roles": ["visual"], **file_facts(pmtiles)}
     write_json(stac_file, data)
 
@@ -278,11 +287,13 @@ def prepare(ds: Dataset, only_year: str | None, skip_convert: bool) -> list[str]
         ]
     if not skip_convert:
         for year in [only_year] if only_year else ds.years:
-            stage(ds.id, year, ds.has_variants, latest=(year == ds.years[-1]))
+            stage(ds.id, year, ds.has_variants, latest=(year == ds.years[-1]), converter_id=ds.converter(year))
     # compare against the whole series, not just the years built now: a
     # single rebuilt edition is only suspicious next to its neighbours
     jumps = check_row_counts(ds.id, ds.years, row_count_tolerance(ds))
     converter_meta(ds.id, staging_converter_meta(ds.id))
+    for part_id in ds.backfill:
+        converter_meta(part_id, staging_converter_meta(ds.id, part_id))
     return jumps
 
 

@@ -311,7 +311,7 @@ def union_columns(items: list[dict]) -> list[dict]:
     return out
 
 
-def build_items(ds: Dataset, meta: dict, years: list[YearInput], public_base: str, survey_props: dict[str, str]) -> list[dict]:
+def build_items(ds: Dataset, meta: dict, years: list[YearInput], public_base: str, survey_props: dict[str, str], backfill: dict[str, dict] | None = None) -> list[dict]:
     items = []
     for y in years:
         description = (
@@ -319,8 +319,56 @@ def build_items(ds: Dataset, meta: dict, years: list[YearInput], public_base: st
             f"(`{y.parquet.name}`, {fmt_int(y.row_count)} fields) and its PMTiles. "
             f"Partition `{PARTITION_KEY}={y.year}` of the collection's hive layout."
         )
-        items.append(build_item(ds.id, file_stem(ds.id, y.year), meta, y, survey_props, description))
+        converter_id = ds.converter(y.year)
+        if converter_id == ds.id:
+            items.append(build_item(ds.id, file_stem(ds.id, y.year), meta, y, survey_props, description))
+        else:
+            items.append(backfill_item(ds, meta, (backfill or {})[converter_id], y, survey_props, description))
     return items
+
+
+def backfill_item(ds: Dataset, meta: dict, part_meta: dict, y: YearInput, survey_props: dict[str, str], description: str) -> dict:
+    """An edition another converter supplies: it carries that source's terms, as a part's item does."""
+    # imported here: catalogize_parts builds on this module
+    from catalogize_parts import converter_url, part_license, part_providers
+
+    part_id = part_meta["cli_id"]
+    description += (
+        f" The dataset's own source has no {y.year} edition; this one is {part_meta['title']}, converted with "
+        f"`{part_id}`. The terms are that source's own: see `license`, `attribution` and `providers` on this item."
+    )
+    notes = ds.backfill[part_id].notes
+    if notes:
+        description += f" {notes}"
+    item = build_item(ds.id, file_stem(ds.id, y.year), meta, y, survey_props, description)
+    props = item["properties"]
+    props["license"], license_links = part_license(y)
+    if part_meta.get("attribution"):
+        props["attribution"] = part_meta["attribution"]
+    props["providers"] = part_providers(y.stac, part_meta)
+    item["links"] += [dict(link) for link in license_links]
+    _, via = parse_link_str(part_meta.get("provider"))
+    if via:
+        item["links"].append({"rel": "via", "href": via, "type": "text/html", "title": "Original source (publisher page)"})
+    item["links"].append({"rel": "related", "href": converter_url(part_id), "type": "text/html", "title": "Converter source code (fiboa-cli)"})
+    return item
+
+
+def backfill_text(ds: Dataset, backfill: dict[str, dict] | None) -> str:
+    """Which editions other sources supply, and on what terms; '' when none do."""
+    out = []
+    for part_id, part in ds.backfill.items():
+        part_meta = (backfill or {})[part_id]
+        name, _ = parse_link_str(part_meta.get("provider"))
+        years = ", ".join(part.years[:-1]) + " and " + part.years[-1] if len(part.years) > 1 else part.years[0]
+        terms = part_meta.get("license") or "its own license"
+        attribution = f"; attribution: {part_meta['attribution']}" if part_meta.get("attribution") else ""
+        out.append(
+            f"The {years} edition{'s' if len(part.years) > 1 else ''}, which the source above does not offer, "
+            f"come{'' if len(part.years) > 1 else 's'} from {part_meta['title']} ({name or part_id}, converter `{part_id}`), "
+            f"under {terms}{attribution}; {'their items carry' if len(part.years) > 1 else 'its item carries'} those terms."
+        )
+    return " ".join(out)
 
 
 def build_item(collection_id: str, stem: str, meta: dict, y: YearInput, survey_props: dict[str, str], description: str) -> dict:
@@ -439,6 +487,7 @@ def build_collection(
     table_columns: list[dict],
     style_assets: dict,
     survey_url: str | None,
+    backfill: dict[str, dict] | None = None,
 ) -> dict:
     latest = years[-1]
     base = latest.stac
@@ -465,6 +514,13 @@ def build_collection(
     providers = list(base.get("providers") or [])
     if not providers and provider_name:
         providers = [{"name": provider_name, "roles": ["producer", "licensor"], **({"url": provider_url} if provider_url else {})}]
+    for y in years:
+        if ds.converter(y.year) != ds.id:
+            from catalogize_parts import part_providers
+
+            for provider in part_providers(y.stac, (backfill or {})[ds.converter(y.year)]):
+                if provider.get("name") not in {known.get("name") for known in providers}:
+                    providers.append(provider)
     host = dict(manifest.host)
     providers.append(host)
 
@@ -482,7 +538,7 @@ def build_collection(
         ],
         "id": ds.id,
         "title": meta["title"],
-        "description": meta["description"] + access + provenance,
+        "description": meta["description"] + access + (f"\n\n{text}" if (text := backfill_text(ds, backfill)) else "") + provenance,
         "boundaries": ds.boundaries,
         "keywords": sorted(set(["field boundaries", "agriculture", "fiboa", *ds.keywords])),
         "license": lic,
@@ -689,8 +745,10 @@ def collection_docs(
     human_base: str,
     survey_url: str | None,
     style_facts: dict,
+    backfill: dict[str, dict] | None = None,
 ) -> None:
     latest = years[-1]
+    filled = backfill_text(ds, backfill)
     cdir = CATALOG_DIR / ds.id
     config = publish_config()
     provider_name, provider_url = parse_link_str(meta.get("provider"))
@@ -733,6 +791,8 @@ def collection_docs(
     lines += ["", f"The latest edition is also available at a stable path: [{ds.id}/latest/{ds.id}.parquet]({latest_url}). All editions together through the S3 glob `{glob}` (see the [AGENTS.md]({human_base}/{ds.id}/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).", ""]
     if ds.notes:
         lines += [ds.notes, ""]
+    if filled:
+        lines += [filled, ""]
     lines += ["## Columns", "", "| Column | Type | Description |", "|---|---|---|"]
     in_latest = {c["name"] for c in latest.data_asset.get("table:columns", [])}
     for c in columns:
@@ -749,9 +809,10 @@ def collection_docs(
     lines.append(f"This catalog is a mirror: the data is produced and licensed by {prov_md} and republished here as cloud-native GeoParquet and PMTiles by {manifest.host['name']}. Each edition was downloaded from the source and converted with {software_md}:")
     lines.append("")
     for y in years:
-        urls = meta.get("sources", {}).get(y.year) or meta.get("sources", {}).get("") or []
+        year_meta = meta if ds.converter(y.year) == ds.id else (backfill or {})[ds.converter(y.year)]
+        urls = year_meta.get("sources", {}).get(y.year) or year_meta.get("sources", {}).get("") or []
         lines.append(f"- {y.year}: converted {iso_mtime(y.parquet)[:10]} from " + (", ".join(f"<{u}>" for u in urls) if urls else "a manually obtained file"))
-    lines += ["", "The conversion is deterministic and lives in [fiboa-cli]({0}); changes to how a column is mapped are made there, not in this catalog.".format(FIBOA_CLI_REPO), "", "## License", "", f"{lic_md}. " + (f"Attribution: {meta['attribution']}" if meta.get("attribution") else f"Attribute the data to {provider_name or 'the source data provider'}.")]
+    lines += ["", "The conversion is deterministic and lives in [fiboa-cli]({0}); changes to how a column is mapped are made there, not in this catalog.".format(FIBOA_CLI_REPO), "", "## License", "", f"{lic_md}. " + (f"Attribution: {meta['attribution']}" if meta.get("attribution") else f"Attribute the data to {provider_name or 'the source data provider'}.") + (f" {filled}" if filled else "")]
     write_text(cdir / "README.md", "\n".join(lines))
 
     # -- AGENTS.md
@@ -789,6 +850,8 @@ def collection_docs(
         a.append("- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: " + ", ".join(f"`{k}` = `{v}`" for k, v in latest.collection_props.items()) + f" ({latest.year} edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.")
     if ds.notes:
         a.append(f"- {ds.notes}")
+    if filled:
+        a.append(f"- **Not every edition comes from the same source.** {filled}")
     a += ["", "## Tested queries", ""]
     a.append("Fields and hectares per edition, through the partition glob:")
     a.append("")
@@ -1047,6 +1110,7 @@ def catalogize(dataset_id: str, manifest: Manifest) -> None:
     public_base = config["public_base"].rstrip("/")
     human_base = manifest.catalog["human_base"].rstrip("/")
     meta = load_converter_meta(ds.id)
+    backfill = {part_id: load_converter_meta(ds.id, part_id) for part_id in ds.backfill}
     years = [YearInput(ds.id, y) for y in ds.years]
     latest = years[-1]
 
@@ -1061,14 +1125,14 @@ def catalogize(dataset_id: str, manifest: Manifest) -> None:
 
     survey_url, survey_props = data_survey(ds.id)
     style_assets, style_facts = build_styles(ds, meta, latest)
-    items = build_items(ds, meta, years, public_base, survey_props)
+    items = build_items(ds, meta, years, public_base, survey_props, backfill)
     table_columns = union_columns(items)
-    collection = build_collection(ds, meta, years, items, manifest, public_base, human_base, table_columns, style_assets, survey_url)
+    collection = build_collection(ds, meta, years, items, manifest, public_base, human_base, table_columns, style_assets, survey_url, backfill)
 
     for y, item in zip(years, items):
         write_json(catalog_year_dir(ds.id, y.year) / f"{item['id']}.json", item)
     write_json(CATALOG_DIR / ds.id / "collection.json", collection)
-    collection_docs(ds, meta, years, collection, manifest, public_base, human_base, survey_url, style_facts)
+    collection_docs(ds, meta, years, collection, manifest, public_base, human_base, survey_url, style_facts, backfill)
     print(f"catalogized {ds.id}: {len(years)} edition(s), {len(style_assets)} style(s), {len(table_columns)} columns")
 
 

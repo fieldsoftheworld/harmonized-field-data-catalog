@@ -80,6 +80,28 @@ if not (ch.is_parts and ch.years == [] and list(ch.parts) == ["ch_ag", "ch_zh"])
     err(f"parts are not kept in manifest order: {list(ch.parts)}")
 if ch.parts["ch_ag"].years or ch.parts["ch_zh"].years != ["2024", "2025"] or ch.parts["ch_zh"].notes != "n":
     err(f"part years/notes not loaded: {ch.parts}")
+BACKFILL = """\
+  fr:
+    years: ['2017', '2019']
+    boundaries: declared
+    backfill:
+      ec_fr: {years: ['2015', '2018'], notes: n}
+"""
+if rejects(BACKFILL) is not None:
+    err(f"a backfilled dataset is rejected: {rejects(BACKFILL)}")
+if rejects(BACKFILL.replace("['2015', '2018']", "['2015', '2017']")) is None:
+    err("a backfill that repeats one of the dataset's own years loads")
+if rejects(BACKFILL.replace("{years: ['2015', '2018'], notes: n}", "{notes: n}")) is None:
+    err("a backfill without years loads")
+if rejects(BACKFILL.replace("years: ['2017', '2019']", "year: 2019")) is None:
+    err("a backfill on a dataset without variants loads")
+if rejects(BACKFILL + "      ec2_fr: {years: ['2015']}\n") is None:
+    err("a year backfilled twice loads")
+with tempfile.TemporaryDirectory() as tmp:
+    (Path(tmp) / "datasets.yaml").write_text(HEADER + BACKFILL)
+    fr = Manifest.load(Path(tmp) / "datasets.yaml").datasets["fr"]
+if fr.years != ["2015", "2017", "2018", "2019"] or fr.latest != "2019" or fr.converter("2018") != "ec_fr" or fr.converter("2017") != "fr":
+    err(f"backfilled years are not merged into the series: {fr.years}")
 Manifest.load()  # the real manifest passes the same rules
 
 
@@ -103,6 +125,7 @@ def expected_items(dataset_id: str, spec: dict) -> set[str]:
     """
     if "parts" not in spec:
         years = [str(y) for y in (spec.get("years") or [spec.get("year")])]
+        years += [str(y) for part in (spec.get("backfill") or {}).values() for y in (part or {}).get("years") or []]
         return {f"year={y}/{dataset_id}-{y}.json" for y in years}
     out = set()
     for part_id, part in spec["parts"].items():
