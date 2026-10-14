@@ -12,12 +12,16 @@
   ],
   "id": "jp",
   "title": "Japan Fude Parcels",
-  "description": "Japanese Farmland Parcel Polygons (Fude Polygons in Japanese) represent parcel information of farmland.\nThe polygons are manually digitized data derived from aerial imagery, such as satellite images. Since no\non-site verification or similar procedures have been conducted, the data may not necessarily match the actual\ncurrent conditions. Fude Polygons are created for the purpose of roughly indicating the locations of farmland.\n\nThis collection holds 4 editions (2021, 2022, 2023, 2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/jp/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/jp/AGENTS.md).\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no farmer's declaration behind them.",
+  "description": "Japanese Farmland Parcel Polygons (Fude Polygons in Japanese) represent parcel information of farmland.\nThe polygons are manually digitized data derived from aerial imagery, such as satellite images. Since no\non-site verification or similar procedures have been conducted, the data may not necessarily match the actual\ncurrent conditions. Fude Polygons are created for the purpose of roughly indicating the locations of farmland.\n\nThis collection holds 6 editions (2021, 2022, 2023, 2024, 2025, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/jp/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:6668). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/jp/AGENTS.md).\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no farmer's declaration behind them.",
   "boundaries": "mapped",
   "keywords": [
+    "Fude Polygons",
+    "Japan",
+    "MAFF",
     "agriculture",
     "fiboa",
-    "field boundaries"
+    "field boundaries",
+    "rice fields"
   ],
   "license": "CC-BY-4.0",
   "providers": [
@@ -27,7 +31,7 @@
         "producer",
         "licensor"
       ],
-      "url": "https://www.maff.go.jp/"
+      "url": "https://download.fude.maff.go.jp/"
     },
     {
       "name": "Fields of the World",
@@ -53,40 +57,40 @@
       "interval": [
         [
           "2021-01-01T00:00:00Z",
-          "2024-01-01T00:00:00Z"
+          "2026-01-01T00:00:00Z"
         ]
       ]
     }
   },
   "summaries": {
     "proj:code": [
-      "EPSG:4326"
+      "EPSG:6668"
     ]
   },
   "table:columns": [
     {
       "name": "geometry",
-      "type": "large_binary",
+      "type": "binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "id",
-      "type": "large_string",
+      "type": "string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "land_type_en",
-      "type": "large_string",
-      "description": "land_typeコードの英語表記（rice_field または field） (per the fiboa data survey)"
+      "type": "string",
+      "description": "衛星画像の目視判読による田、畑の地目コード (source column `land_type`, per the fiboa data survey)"
     },
     {
       "name": "admin_local_code",
-      "type": "large_string",
+      "type": "string",
       "description": "ポリゴンの重心点と重なる市区町村の総務省地方公共団体コード (source column `local_government_cd`, per the fiboa data survey)"
     },
     {
       "name": "determination:datetime",
-      "type": "timestamp[us, tz=UTC]",
+      "type": "timestamp[ms, tz=UTC]",
       "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -96,7 +100,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 29418076,
+  "table:row_count": 28103804,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -106,20 +110,20 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 4,
+  "partition:file_count": 6,
   "partition:glob": "s3://ftw/harmonized-field-data/jp/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/jp.parquet",
       "type": "application/vnd.apache.parquet",
-      "title": "Japan — latest edition (2024) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2024/jp-2024.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "title": "Japan — latest edition (2026) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2026/jp-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 5680851054,
-      "file:checksum": "12207e43776c6bd22198d72d2bb197580db844ae47ccb1cb09f4df01b90de17ed8d8",
-      "proj:code": "EPSG:4326"
+      "file:size": 5448348951,
+      "file:checksum": "1220d06b039881e2c1346826b005800fc2c02edddf0c95d64a0d81771aa0ffcdd097",
+      "proj:code": "EPSG:6668"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -131,17 +135,17 @@
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
       "file:size": 725,
-      "file:checksum": "1220352eaca30302c9f31f53822ce07b39621e69ca7c3d91558814912ef6846fe91a"
+      "file:checksum": "12203367e30177ce89dacb8a424001b0d959a7721a3f994c5db2a42b18c6d92a62eb"
     },
     "visual": {
-      "href": "./year=2024/jp-2024.pmtiles",
+      "href": "./year=2026/jp-2026.pmtiles",
       "type": "application/vnd.pmtiles",
-      "title": "Japan — latest edition (2024) (PMTiles)",
+      "title": "Japan — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 3413829598,
-      "file:checksum": "12207b5b7ca7c0e411ae1209ae7895763f1c966419caa4396a6de899237915ec4246"
+      "file:size": 3296266142,
+      "file:checksum": "122015e2ec5a8853ddf9577627dd98caff0e4edc65b8620a1efddf5a91e9bcfd2908"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -150,8 +154,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 257502,
-      "file:checksum": "12207c223d969712124add06221645b51f6985a6a70978324c33fc52552b2dfdaef5"
+      "file:size": 150844,
+      "file:checksum": "1220606d31a0d6c072d82f87e6d1114345bcb47bcf9b68681906a2f3db2d395d859d"
     }
   },
   "links": [
@@ -185,7 +189,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2024/jp-2024.pmtiles",
+      "href": "./year=2026/jp-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -194,7 +198,7 @@
     },
     {
       "rel": "via",
-      "href": "https://www.maff.go.jp/",
+      "href": "https://download.fude.maff.go.jp/",
       "type": "text/html",
       "title": "Original source (publisher page)"
     },
@@ -233,16 +237,28 @@
       "href": "./year=2024/jp-2024.json",
       "type": "application/geo+json",
       "title": "Japan — 2024"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2025/jp-2025.json",
+      "type": "application/geo+json",
+      "title": "Japan — 2025"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2026/jp-2026.json",
+      "type": "application/geo+json",
+      "title": "Japan — 2026"
     }
   ],
-  "updated": "2026-08-29T09:26:22Z",
+  "updated": "2026-10-14T17:02:29Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "jp": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "Fude Polygon Data (2021-2024). Japanese Ministry of Agriculture, Forestry and Fisheries. Processed by Pacific Spatial Solutions, Inc"
+  "attribution": "出典：「筆ポリゴンデータ」（農林水産省）を加工して作成"
 }

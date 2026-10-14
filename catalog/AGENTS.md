@@ -25,7 +25,7 @@ GROUP BY 1 ORDER BY 1;
 -- de_bb | 232338
 -- de_bw | 4363087
 -- de_mv | 20000
--- ... 13 more rows
+-- ... 14 more rows
 ```
 
 Every edition of every collection:
@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2020 | at | 2614636
 -- 2021 | at | 2610511
 -- 2022 | at | 2600002
--- ... 140 more rows
+-- ... 146 more rows
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.

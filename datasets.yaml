@@ -383,7 +383,7 @@ datasets:
     keywords: [Brazil, Conab, mapeamento agrícola, coffee, irrigated rice, cotton, sugarcane]
     notes: "Licensed CC-BY-NC-4.0: Conab authorises reproduction without profit motive, citing the source. The 29 files are the mappings that, on inspection, hold hand-drawn field boundaries; Conab publishes more (259 downloads in 2026). Minas Gerais coffee (2017) holds most of the fields. Polygons under 100 m² are left out as digitising slivers: some 74,800, nearly all in Minas Gerais, where they are a fifth of the polygons. There is no crop column: the crop is the mapping's subject, named in `id`."
   jp:
-    years: ['2021', '2022', '2023', '2024']
+    years: ['2021', '2022', '2023', '2024', '2025', '2026']
     boundaries: mapped
     keywords: [Japan, Fude Polygons, MAFF, rice fields]
   nz:
