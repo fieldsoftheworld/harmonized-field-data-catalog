@@ -54,7 +54,7 @@ Government-published field boundaries harmonized to fiboa, 67 collections, GeoPa
 - ie_lpis: LPIS parcels for Ireland — crop fields — https://data.source.coop/ftw/harmonized-field-data/ie_lpis/latest/ie_lpis.parquet (license CC-BY-4.0, CRS EPSG:2157)
 - it_1: Italy Tuscany (ITI1) Crop Fields — EuroCropsV2 — crop fields — https://data.source.coop/ftw/harmonized-field-data/it_1/latest/it_1.parquet (license CC-BY-4.0, CRS EPSG:3035)
 - it_bz: Field boundaries for South Tyrol, Italy — crop fields — https://data.source.coop/ftw/harmonized-field-data/it_bz/latest/it_bz.parquet (license CC0-1.0, CRS EPSG:25832)
-- jp: Japan Fude Parcels — crop fields — https://data.source.coop/ftw/harmonized-field-data/jp/latest/jp.parquet (license CC-BY-4.0, CRS EPSG:4326)
+- jp: Japan Fude Parcels — crop fields — https://data.source.coop/ftw/harmonized-field-data/jp/latest/jp.parquet (license CC-BY-4.0, CRS EPSG:6668)
 - lt: Lithuania crop fields — crop fields — https://data.source.coop/ftw/harmonized-field-data/lt/latest/lt.parquet (license CC-BY-4.0, CRS EPSG:3035)
 - lu: Field blocks for Luxembourg — field blocks — https://data.source.coop/ftw/harmonized-field-data/lu/latest/lu.parquet (license CC-BY-4.0, CRS EPSG:2169)
 - lv: Latvia Lauki Parcels — crop fields — https://data.source.coop/ftw/harmonized-field-data/lv/latest/lv.parquet (license CC-BY-SA-4.0, CRS EPSG:3059)

@@ -48,31 +48,31 @@
     "start_datetime": "2022-01-01T00:00:00Z",
     "end_datetime": "2022-01-01T00:00:00Z",
     "year": 2022,
-    "proj:code": "EPSG:4326",
+    "proj:code": "EPSG:6668",
     "table:columns": [
       {
         "name": "geometry",
-        "type": "large_binary",
+        "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
-        "type": "large_string",
+        "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "land_type_en",
-        "type": "large_string",
-        "description": "land_typeコードの英語表記（rice_field または field） (per the fiboa data survey)"
+        "type": "string",
+        "description": "衛星画像の目視判読による田、畑の地目コード (source column `land_type`, per the fiboa data survey)"
       },
       {
         "name": "admin_local_code",
-        "type": "large_string",
+        "type": "string",
         "description": "ポリゴンの重心点と重なる市区町村の総務省地方公共団体コード (source column `local_government_cd`, per the fiboa data survey)"
       },
       {
         "name": "determination:datetime",
-        "type": "timestamp[us, tz=UTC]",
+        "type": "timestamp[ms, tz=UTC]",
         "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -85,7 +85,7 @@
     "table:row_count": 29778783,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.4.0"
     }
   },
   "collection": "jp",
@@ -97,9 +97,9 @@
       "roles": [
         "data"
       ],
-      "file:size": 5746583715,
-      "file:checksum": "12207f978bbe5c4a08e1bdf98cdec14031732ea4b8b7df71d3c058137e4dfc422395",
-      "proj:code": "EPSG:4326"
+      "file:size": 5766660591,
+      "file:checksum": "1220c6266d71c584fa6b387ab9045b5b85efdd2c66b5074f8db14c3873bce0d2e476",
+      "proj:code": "EPSG:6668"
     }
   },
   "links": [

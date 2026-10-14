@@ -48,31 +48,31 @@
     "start_datetime": "2024-01-01T00:00:00Z",
     "end_datetime": "2024-01-01T00:00:00Z",
     "year": 2024,
-    "proj:code": "EPSG:4326",
+    "proj:code": "EPSG:6668",
     "table:columns": [
       {
         "name": "geometry",
-        "type": "large_binary",
+        "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
-        "type": "large_string",
+        "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "land_type_en",
-        "type": "large_string",
-        "description": "land_typeコードの英語表記（rice_field または field） (per the fiboa data survey)"
+        "type": "string",
+        "description": "衛星画像の目視判読による田、畑の地目コード (source column `land_type`, per the fiboa data survey)"
       },
       {
         "name": "admin_local_code",
-        "type": "large_string",
+        "type": "string",
         "description": "ポリゴンの重心点と重なる市区町村の総務省地方公共団体コード (source column `local_government_cd`, per the fiboa data survey)"
       },
       {
         "name": "determination:datetime",
-        "type": "timestamp[us, tz=UTC]",
+        "type": "timestamp[ms, tz=UTC]",
         "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
@@ -85,7 +85,7 @@
     "table:row_count": 29418076,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.4.0"
     }
   },
   "collection": "jp",
@@ -97,19 +97,9 @@
       "roles": [
         "data"
       ],
-      "file:size": 5680851054,
-      "file:checksum": "12207e43776c6bd22198d72d2bb197580db844ae47ccb1cb09f4df01b90de17ed8d8",
-      "proj:code": "EPSG:4326"
-    },
-    "visual": {
-      "href": "./jp-2024.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Japan 2024 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 3413829598,
-      "file:checksum": "12207b5b7ca7c0e411ae1209ae7895763f1c966419caa4396a6de899237915ec4246"
+      "file:size": 5700814275,
+      "file:checksum": "1220762187376d7ca5e56211c372f273f52745899a840f0b22d788017f4232c8d7ea",
+      "proj:code": "EPSG:6668"
     }
   },
   "links": [
