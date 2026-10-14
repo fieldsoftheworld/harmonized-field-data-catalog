@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-69 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`. `ch` is fed by several sources, each with its own converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one `<collection>/latest/<converter>.parquet` per source, and each item carries its source's license.
+67 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`. `ch` is fed by several sources, each with its own converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one `<collection>/latest/<converter>.parquet` per source, and each item carries its source's license.
 
 ## How to read it
 
@@ -17,15 +17,15 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
+-- at | 2944397
+-- be_vlg | 597088
+-- be_wal | 342315
 -- br_conab | 390805
 -- ch | 1520805
+-- de_bb | 232338
 -- de_bw | 4363087
 -- de_mv | 20000
--- de_sax | 95305
--- de_st | 78714
--- es | 17844643
--- ie_lpis | 1454480
--- ... 5 more rows
+-- ... 13 more rows
 ```
 
 Every edition of every collection:
@@ -37,15 +37,15 @@ SELECT year, regexp_extract(filename, '/([^/]+)/year=', 1) AS collection, count(
 FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
--- 2026 | br_conab | 390805
--- 2017 | ch | 21296
--- 2018 | ch | 73682
--- 2019 | ch | 111309
--- 2020 | ch | 115884
--- 2021 | ch | 137395
--- 2022 | ch | 181046
--- 2023 | ch | 184918
--- ... 39 more rows
+-- 2015 | at | 2499283
+-- 2016 | at | 2492555
+-- 2017 | at | 2505150
+-- 2018 | at | 2523190
+-- 2019 | at | 2529896
+-- 2020 | at | 2614636
+-- 2021 | at | 2610511
+-- 2022 | at | 2600002
+-- ... 140 more rows
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.

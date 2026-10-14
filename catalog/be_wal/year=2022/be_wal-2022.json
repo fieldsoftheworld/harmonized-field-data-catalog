@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          2.832560248361601,
-          49.373050066309474
+          2.84220840341055,
+          49.496968463303936
         ],
         [
-          6.4677143415140534,
-          49.373050066309474
+          6.408060865519219,
+          49.496968463303936
         ],
         [
-          6.4677143415140534,
-          50.96552936628556
+          6.408060865519219,
+          50.81074714859895
         ],
         [
-          2.832560248361601,
-          50.96552936628556
+          2.84220840341055,
+          50.81074714859895
         ],
         [
-          2.832560248361601,
-          49.373050066309474
+          2.84220840341055,
+          49.496968463303936
         ]
       ]
     ]
   },
   "bbox": [
-    2.832560248361601,
-    49.373050066309474,
-    6.4677143415140534,
-    50.96552936628556
+    2.84220840341055,
+    49.496968463303936,
+    6.408060865519219,
+    50.81074714859895
   ],
   "properties": {
     "title": "Belgium, Wallonia — 2022",
-    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`be_wal.parquet`, 341,968 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
+    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`be_wal-2022.parquet`, 341,968 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2022-01-01T00:00:00Z",
     "end_datetime": "2022-01-01T00:00:00Z",
@@ -51,34 +51,19 @@
     "proj:code": "EPSG:3035",
     "table:columns": [
       {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
         "name": "id",
         "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "crop:name",
@@ -91,6 +76,21 @@
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
         "name": "bbox",
         "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
         "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -100,31 +100,21 @@
     "table:row_count": 341968,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "vecorel-cli": "0.4.0"
     }
   },
   "collection": "be_wal",
   "assets": {
     "data": {
-      "href": "./be_wal.parquet",
+      "href": "./be_wal-2022.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Belgium, Wallonia 2022 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 107607362,
-      "file:checksum": "122064e297c6e2587111d5d0984eee69711677d48971e569499b24567a61f9926ecd",
+      "file:size": 109545236,
+      "file:checksum": "12205caf83d5cbce8e6522a7421aec87559e2ea3db3a40f4ecec05e7d6adb5b18d0f",
       "proj:code": "EPSG:3035"
-    },
-    "visual": {
-      "href": "./be_wal.pmtiles",
-      "type": "application/vnd.pmtiles",
-      "title": "Belgium, Wallonia 2022 (PMTiles)",
-      "roles": [
-        "visual"
-      ],
-      "file:size": 25425863,
-      "file:checksum": "1220fd95d9be7e0cadd0377ce8ce4a0b384e3d84a062c60b3f3a625edfc707700783"
     }
   },
   "links": [

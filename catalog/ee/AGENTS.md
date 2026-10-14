@@ -1,6 +1,6 @@
 # Agent guidance — Field boundaries for Estonia
 
-Estonia field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 9 editions (2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Estonia field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 10 editions (2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -12,12 +12,13 @@ Estonia field boundaries in the [fiboa](https://github.com/fiboa/specification) 
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:3301, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres**, taken from the source column `pindala_ha` (hectares × 10 000). Divide by 10 000 for hectares.
+- **`metrics:area` is in square metres** (source column `pindala_ha`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/ee/ee.csv`) have `NULL`. All 166,508 rows of the 2024 edition carry one.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 166,500 rows of the 2024 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2024-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/ee/ee.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 - **There is no `crop:code`, because PRIA publishes none.** The WFS carries the crop as free text (`taotletud_kultuur`) and no code column in any edition, so `hcat:code` is derived from that name. The source's own classification is `land_use` (arable, permanent grassland, restored grassland, permanent crops, black fallow).
+- **Not every edition comes from the same source.** The 2015 edition, which the source above does not offer, comes from Field boundaries for Estonia — EuroCrops V2 (Joint Research Centre, European Commission, converter `ec_ee`), under CC-BY-4.0; attribution: European Commission, Joint Research Centre — EuroCropsV2; its item carries those terms.
 
 ## Tested queries
 
@@ -30,15 +31,15 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/ee/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2016 | 165421 | 958188.0
--- 2017 | 170560 | 964961.0
--- 2018 | 172499 | 967565.0
+-- 2015 | 156966 | 930358.0
+-- 2016 | 165241 | 956570.0
+-- 2017 | 170430 | 963722.0
+-- 2018 | 172387 | 966897.0
 -- 2019 | 174284 | 970149.0
 -- 2020 | 175963 | 972681.0
 -- 2021 | 176117 | 973982.0
--- 2022 | 175988 | 973659.0
--- 2023 | 169930 | 943025.0
--- ... 1 more rows
+-- 2022 | 175976 | 973637.0
+-- ... 2 more rows
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
@@ -50,11 +51,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ee/latest/
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330101 | winter_common_soft_wheat | 40799 | 379424.0
--- 330200 | pasture_meadow_grassland_grass | 74809 | 253540.0
--- 330109 | legumes_harvested_green | 24768 | 146888.0
+-- 330101 | winter_common_soft_wheat | 40797 | 379407.0
+-- 330200 | pasture_meadow_grassland_grass | 74806 | 253535.0
+-- 330109 | legumes_harvested_green | 24767 | 146888.0
 -- 330106 | winter_rapeseed_rape | 7093 | 69810.0
--- 330102 | peas | 7810 | 66200.0
+-- 330102 | peas | 7807 | 66199.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -63,7 +64,7 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ee/latest/ee.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(58.5525, 24.9687), 'EPSG:4326', 'EPSG:3301'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(58.5719, 25.0003), 'EPSG:4326', 'EPSG:3301'), 500))
 LIMIT 5;
 -- id | m2
 ```

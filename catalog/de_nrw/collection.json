@@ -12,7 +12,7 @@
   ],
   "id": "de_nrw",
   "title": "Field blocks for North Rhine-Westphalia (NRW), Germany",
-  "description": "A field block (German: \"Feldblock\") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.\n\nThis collection holds 1 edition (2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_nrw/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25832). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_nrw/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
+  "description": "A field block (German: \"Feldblock\") is a contiguous agricultural area surrounded by permanent boundaries, which is cultivated by one or more farmers with one or more crops, is fully or partially set aside or is fully or partially taken out of production.\n\nThis collection holds 6 editions (2019, 2020, 2021, 2022, 2023, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/de_nrw/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:25832). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_nrw/AGENTS.md).\n\nThe 2019, 2020, 2021, 2022 and 2023 editions, which the source above does not offer, come from Field blocks for North Rhine-Westphalia (NRW), Germany — EuroCrops V2 (Joint Research Centre, European Commission, converter `ec_de_nrw`), under CC-BY-4.0; attribution: European Commission, Joint Research Centre — EuroCropsV2; their items carry those terms.\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
   "boundaries": "declared",
   "keywords": [
     "Germany",
@@ -34,6 +34,14 @@
       "url": "https://www.opengeodata.nrw.de/produkte/umwelt_klima/bodennutzung/landwirtschaft/"
     },
     {
+      "name": "Joint Research Centre, European Commission",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://data.jrc.ec.europa.eu/dataset/b9fb9e67-78a9-4327-9d59-39a928d812d3"
+    },
+    {
       "name": "Fields of the World",
       "url": "https://fieldsofthe.world",
       "roles": [
@@ -46,72 +54,63 @@
     "spatial": {
       "bbox": [
         [
-          5.7654323420091425,
-          50.310489883899926,
-          9.468054798137555,
-          52.53090783983452
+          5.8665633064850935,
+          50.322904339065644,
+          9.461047278175604,
+          52.53133134171786
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2026-03-12T00:00:00Z",
-          "2026-08-20T00:00:00Z"
+          "2019-01-01T00:00:00Z",
+          "2026-10-09T00:00:00Z"
         ]
       ]
     }
   },
   "summaries": {
     "proj:code": [
-      "EPSG:25832"
+      "EPSG:25832",
+      "EPSG:3035"
     ]
   },
   "table:columns": [
     {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
       "name": "hcat:name",
-      "type": "large_string",
+      "type": "string",
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "flik",
-      "type": "large_string",
-      "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "crop:name",
-      "type": "large_string",
+      "type": "string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "determination:datetime",
-      "type": "timestamp[ms, tz=UTC]",
-      "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "hcat:name_en",
-      "type": "large_string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "name": "inspire:id",
+      "type": "string",
+      "description": "INSPIRE-compliant ID, an absolute and fully resolvable URI. ([spec](https://github.com/fiboa/inspire-extension/blob/main/README.md))"
+    },
+    {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "metrics:area",
@@ -124,13 +123,23 @@
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
+      "name": "determination:datetime",
+      "type": "timestamp[ms, tz=UTC]",
+      "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "flik",
+      "type": "string",
+      "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+    },
+    {
       "name": "bbox",
       "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
       "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 742010,
+  "table:row_count": 743072,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -140,19 +149,19 @@
       "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 1,
+  "partition:file_count": 6,
   "partition:glob": "s3://ftw/harmonized-field-data/de_nrw/year=*/*.parquet",
   "assets": {
     "data": {
       "href": "./latest/de_nrw.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, North Rhine-Westphalia — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_nrw.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_nrw-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 337422021,
-      "file:checksum": "122098191f87032562b8384359111705c87ed05b6944dcac7ba9e926af55bf774839",
+      "file:size": 300693853,
+      "file:checksum": "12205077a96c858b4d7043d630539ef128174ea87f7049d5bd763e3685d69b2bf24d",
       "proj:code": "EPSG:25832"
     },
     "style-hcat-crops": {
@@ -164,8 +173,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2340,
-      "file:checksum": "1220dec95fb75e91e9a65d9ad5e5266e72c2fee77ff6ec993927fea8301e95e9f4f8"
+      "file:size": 2373,
+      "file:checksum": "122013a9695b6b734953964e96bf15b6ba54a4ca1f960fa637b1fae9a4b369db31c8"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -175,8 +184,8 @@
         "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.25, 1, 2 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1204,
-      "file:checksum": "122010d1281e8b9a5d59d89b8ee4402543f4a2f6ecc6ae98517a8958a134764c1e02"
+      "file:size": 1209,
+      "file:checksum": "122087e93133bc0281339c60cd0497ae1a591d8e594e010c98a19a592c7c58896af4"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -186,18 +195,18 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 758,
-      "file:checksum": "122004d5612611574ca64aa5a399d1cdf145593659feaebe8a211172af0d4cc9faec"
+      "file:size": 763,
+      "file:checksum": "122076e9631dcf9d54424c0a4e2378af3f1e54cfdca8bdc977ac487ca4fd8d5d439e"
     },
     "visual": {
-      "href": "./year=2026/de_nrw.pmtiles",
+      "href": "./year=2026/de_nrw-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, North Rhine-Westphalia — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 104597929,
-      "file:checksum": "1220394f9d98a6abd475cad718dc07e0549d9d32ac7a0c14f16a5d427471f2ef7155"
+      "file:size": 116921163,
+      "file:checksum": "1220b5f52b190cf8331cba7f88e23bca794454b4824f519c7eaee535e62104165c9c"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -206,8 +215,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 377241,
-      "file:checksum": "1220ddf184fcce19b93bdf3d17fcd1f0adc9636bda60dbb24171677503dc002c8bd2"
+      "file:size": 299853,
+      "file:checksum": "12203943a06a66ed9c1778162abc1c51001154265956a805227b163d72bfd709fb8d"
     }
   },
   "links": [
@@ -241,7 +250,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_nrw.pmtiles",
+      "href": "./year=2026/de_nrw-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -268,23 +277,53 @@
     },
     {
       "rel": "item",
+      "href": "./year=2019/de_nrw-2019.json",
+      "type": "application/geo+json",
+      "title": "Germany, North Rhine-Westphalia — 2019"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/de_nrw-2020.json",
+      "type": "application/geo+json",
+      "title": "Germany, North Rhine-Westphalia — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/de_nrw-2021.json",
+      "type": "application/geo+json",
+      "title": "Germany, North Rhine-Westphalia — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/de_nrw-2022.json",
+      "type": "application/geo+json",
+      "title": "Germany, North Rhine-Westphalia — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/de_nrw-2023.json",
+      "type": "application/geo+json",
+      "title": "Germany, North Rhine-Westphalia — 2023"
+    },
+    {
+      "rel": "item",
       "href": "./year=2026/de_nrw-2026.json",
       "type": "application/geo+json",
       "title": "Germany, North Rhine-Westphalia — 2026"
     }
   ],
-  "updated": "2026-08-28T18:44:48Z",
+  "updated": "2026-10-13T12:10:43Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_nrw": [
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://fiboa.org/inspire-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
+      "https://fiboa.org/inspire-extension/v0.3.0/schema.yaml"
     ]
   }
 }

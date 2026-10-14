@@ -7,7 +7,7 @@
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2026/de_bb.pmtiles"
+      "url": "pmtiles://../year=2026/de_bb-2026.pmtiles"
     }
   },
   "layers": [

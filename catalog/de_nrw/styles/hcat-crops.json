@@ -7,7 +7,7 @@
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2026/de_nrw.pmtiles"
+      "url": "pmtiles://../year=2026/de_nrw-2026.pmtiles"
     }
   },
   "layers": [
@@ -45,10 +45,10 @@
             "Potatoes",
             3301010301,
             "Winter rye",
+            3301110000,
+            "Fallow land not crop",
             3301020100,
             "Beans",
-            3301090303,
-            "Clover",
             "Other"
           ],
           "Pasture meadow grassland grass",
@@ -71,9 +71,9 @@
           "#fdbf6f",
           "Winter rye",
           "#ff7f00",
-          "Beans",
+          "Fallow land not crop",
           "#6a3d9a",
-          "Clover",
+          "Beans",
           "#ffff99",
           "#c8c8c8"
         ],

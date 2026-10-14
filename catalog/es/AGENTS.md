@@ -1,6 +1,6 @@
 # Agent guidance — Spain Declared Crops (Cultivos Declarados SIGPAC)
 
-Spain field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2025). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Spain field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 4 editions (2021, 2022, 2023, 2025). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -17,6 +17,7 @@ Spain field boundaries in the [fiboa](https://github.com/fiboa/specification) sc
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. 284 of the 17,844,643 rows of the 2025 edition (0.00%) have none, so a query that filters or groups on crop silently leaves them out.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `determination:datetime` = `2025-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/es/es.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **Not every edition comes from the same source.** The 2021, 2022 and 2023 editions, which the source above does not offer, come from Spain Declared Crops (Cultivos Declarados SIGPAC) — EuroCrops V2 (Joint Research Centre, European Commission, converter `ec_es`), under CC-BY-4.0; attribution: European Commission, Joint Research Centre — EuroCropsV2; their items carry those terms.
 
 ## Tested queries
 
@@ -29,6 +30,9 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/es/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
+-- 2021 | 16489065 | 23586255.0
+-- 2022 | 17479847 | 24367079.0
+-- 2023 | 17104009 | 23887521.0
 -- 2025 | 17844643 | 27660439.0
 ```
 
