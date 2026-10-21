@@ -66,11 +66,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_nrw/lat
 
 This catalog is a mirror: the data is produced and licensed by [Land Nordrhein-Westfalen / Open.NRW](https://www.opengeodata.nrw.de/produkte/umwelt_klima/bodennutzung/landwirtschaft/) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.0:
 
-- 2019: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2019.parquet>
-- 2020: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2020.parquet>
-- 2021: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2021.parquet>
-- 2022: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2022.parquet>
-- 2023: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2023.parquet>
+- 2019: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2019.parquet>
+- 2020: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2020.parquet>
+- 2021: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2021.parquet>
+- 2022: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2022.parquet>
+- 2023: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/dea_2023.parquet>
 - 2026: converted 2026-10-13 from <https://www.opengeodata.nrw.de/produkte/umwelt_klima/bodennutzung/landwirtschaft/LWK-TSCHLAG_EPSG25832_Shape.zip>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.

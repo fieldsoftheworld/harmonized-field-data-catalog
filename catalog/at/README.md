@@ -76,9 +76,9 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/at/latest/
 
 This catalog is a mirror: the data is produced and licensed by [Agrarmarkt Austria](https://geometadatensuche.inspire.gv.at/metadatensuche/inspire/api/records/9db8a0c3-e92a-4df4-9d55-8210e326a7ed) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.0:
 
-- 2015: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/at_2015.parquet>
-- 2016: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/at_2016.parquet>
-- 2017: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/at_2017.parquet>
+- 2015: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/at_2015.parquet>
+- 2016: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/at_2016.parquet>
+- 2017: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/at_2017.parquet>
 - 2018: converted 2026-09-03 from <https://inspire.lfrz.gv.at/009501/ds/inspire_schlaege_2018_polygon.gpkg.zip>
 - 2019: converted 2026-09-03 from <https://inspire.lfrz.gv.at/009501/ds/inspire_schlaege_2019_polygon.gpkg.zip>
 - 2020: converted 2026-09-03 from <https://inspire.lfrz.gv.at/009501/ds/inspire_schlaege_2020_polygon.gpkg.zip>
