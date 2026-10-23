@@ -74,20 +74,20 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_bb/late
 
 This catalog is a mirror: the data is produced and licensed by [Land Brandenburg](https://geobroker.geobasis-bb.de/gbss.php?MODE=GetProductInformation&PRODUCTID=9e95f21f-4ecf-4682-9a44-e5f7609f6fa0) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.0:
 
-- 2010: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2010.parquet>
-- 2011: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2011.parquet>
-- 2012: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2012.parquet>
-- 2013: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2013.parquet>
-- 2014: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2014.parquet>
-- 2015: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2015.parquet>
-- 2016: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2016.parquet>
-- 2017: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2017.parquet>
-- 2018: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2018.parquet>
-- 2019: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2019.parquet>
-- 2020: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2020.parquet>
-- 2021: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2021.parquet>
-- 2022: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2022.parquet>
-- 2023: converted 2026-10-12 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2023.parquet>
+- 2010: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2010.parquet>
+- 2011: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2011.parquet>
+- 2012: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2012.parquet>
+- 2013: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2013.parquet>
+- 2014: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2014.parquet>
+- 2015: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2015.parquet>
+- 2016: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2016.parquet>
+- 2017: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2017.parquet>
+- 2018: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2018.parquet>
+- 2019: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2019.parquet>
+- 2020: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2020.parquet>
+- 2021: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2021.parquet>
+- 2022: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2022.parquet>
+- 2023: converted 2026-10-15 from <https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/DRLL/EuroCropsV2/gpqtv202/de4_2023.parquet>
 - 2026: converted 2026-10-12 from <https://data.geobasis-bb.de/geofachdaten/Landwirtschaft/antrag.zip>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
