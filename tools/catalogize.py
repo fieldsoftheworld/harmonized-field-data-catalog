@@ -997,7 +997,7 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     )
     description = (
         f"Field boundary datasets published by government bodies — from their agricultural subsidy registers "
-        f"(IACS/LPIS), cadastres, statistics and mapping programmes — harmonized into the [fiboa]({FIBOA_SPEC}) schema "
+        f"(IACS/LPIS), cadastres, statistics and mapping programmes — and by research institutions, harmonized into the [fiboa]({FIBOA_SPEC}) schema "
         f"with [fiboa-cli]({FIBOA_CLI_REPO}) and republished as cloud-native GeoParquet and PMTiles. "
         f"{len(collections)} collections ({', '.join(countries)}). {provenance}{len(field_ids)} hold crop fields — one declared crop on one parcel — "
         f"{fmt_int(n_fields)} in their latest editions and {fmt_int(n_field_years)} across all {n_editions} editions together, "
@@ -1082,7 +1082,7 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     write_text(CATALOG_DIR / "AGENTS.md", "\n".join(a))
 
     # llms.txt
-    l = [f"# {cat['title']}", "", f"Government-published field boundaries harmonized to fiboa, {len(collections)} collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: {public_base}/catalog.json. Agent guide: {human_base}/AGENTS.md.", ""]
+    l = [f"# {cat['title']}", "", f"Field boundaries published by government bodies and research institutions, harmonized to fiboa, {len(collections)} collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: {public_base}/catalog.json. Agent guide: {human_base}/AGENTS.md.", ""]
     for c in collections:
         kind = "field blocks" if c["id"] in blocks else "crop fields"
         newest = f"{public_base}/{c['id']}/latest/<converter>.parquet, one per source" if is_parts_collection(c) else f"{public_base}/{c['id']}/latest/{c['id']}.parquet"

@@ -370,6 +370,11 @@ datasets:
     years: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
     boundaries: inferred
     keywords: [United States, USDA, Crop Sequence Boundaries]
+  ca_prairies:
+    year: 2024
+    boundaries: inferred
+    notes: The fields were segmented from Sentinel-2 composites of 2021-2024 and carry no date of their own; the edition is filed under 2024, the last imagery year.
+    keywords: [Canada, Alberta, Saskatchewan, Manitoba, Sentinel-2, Segment Anything Model, University of Saskatchewan]
   us_ca_scm:
     years: ['2014', '2016', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
     boundaries: mapped

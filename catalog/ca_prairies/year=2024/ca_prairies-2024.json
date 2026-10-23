@@ -1,0 +1,142 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "ca_prairies-2024",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -120.0000534055402,
+          48.97152526358008
+        ],
+        [
+          -95.4749698634684,
+          48.97152526358008
+        ],
+        [
+          -95.4749698634684,
+          58.59894752510826
+        ],
+        [
+          -120.0000534055402,
+          58.59894752510826
+        ],
+        [
+          -120.0000534055402,
+          48.97152526358008
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -120.0000534055402,
+    48.97152526358008,
+    -95.4749698634684,
+    58.59894752510826
+  ],
+  "properties": {
+    "title": "Canada, Prairies — 2024",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`ca_prairies.parquet`, 656,082 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2024-01-01T00:00:00Z",
+    "end_datetime": "2024-12-31T23:59:59Z",
+    "year": 2024,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "metrics:perimeter",
+        "type": "float",
+        "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "admin:subdivision_code",
+        "type": "string",
+        "description": "ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
+      },
+      {
+        "name": "admin_local_code",
+        "type": "string",
+        "description": "Carried over from the source column `RM_number`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "admin_local_name",
+        "type": "string",
+        "description": "Carried over from the source column `RM_name`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 656082,
+    "processing:software": {
+      "fiboa-cli": "0.21.0",
+      "vecorel-cli": "0.4.0"
+    }
+  },
+  "collection": "ca_prairies",
+  "assets": {
+    "data": {
+      "href": "./ca_prairies.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Canada, Prairies 2024 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 3780112002,
+      "file:checksum": "1220425f8f94a59ccfd805ec998817df7594667a69b1602566e745ee329962aca887",
+      "proj:code": "EPSG:4326"
+    },
+    "visual": {
+      "href": "./ca_prairies.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Canada, Prairies 2024 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 862382707,
+      "file:checksum": "12205ec28356f72acb77e8252c5b5e248894158fca415fd4bd893af87cfb96455076"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}
