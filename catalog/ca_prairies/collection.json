@@ -1,0 +1,253 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+  ],
+  "id": "ca_prairies",
+  "title": "Field boundaries for the Canadian Prairies, derived from Sentinel-2",
+  "description": "Field boundaries for Alberta, Saskatchewan and Manitoba, segmented from Sentinel-2 imagery of\n2021-2024 with the Segment Anything Model by the University of Saskatchewan. The boundaries are\nderived, not declared: no farmer or authority drew them. Seasonal RGB composites were segmented\nwithout training data, the polygons cleaned and smoothed, and only those of at least 2 ha that\nmostly lie on cropland (AAFC Annual Crop Inventory and ESA WorldCover) were kept. One file per\nrural municipality (RM).\n\nThis collection holds 1 edition (2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/ca_prairies/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ca_prairies/AGENTS.md).\n\nBoundaries are inferred: a model derived them from satellite imagery, so they are an estimate of where fields are, not a record of what anyone declared or surveyed.",
+  "boundaries": "inferred",
+  "keywords": [
+    "Alberta",
+    "Canada",
+    "Manitoba",
+    "Saskatchewan",
+    "Segment Anything Model",
+    "Sentinel-2",
+    "University of Saskatchewan",
+    "agriculture",
+    "fiboa",
+    "field boundaries"
+  ],
+  "license": "CC-BY-4.0",
+  "providers": [
+    {
+      "name": "University of Saskatchewan",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://doi.org/10.17632/2y568rt76w.2"
+    },
+    {
+      "name": "Fields of the World",
+      "url": "https://fieldsofthe.world",
+      "roles": [
+        "processor",
+        "host"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -120.0000534055402,
+          48.97152526358008,
+          -95.4749698634684,
+          58.59894752510826
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2024-01-01T00:00:00Z",
+          "2024-12-31T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "proj:code": [
+      "EPSG:4326"
+    ]
+  },
+  "table:columns": [
+    {
+      "name": "metrics:perimeter",
+      "type": "float",
+      "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "admin:subdivision_code",
+      "type": "string",
+      "description": "ISO 3166-2 code for the principal subdivision (e.g., province or state, aka admin1) of a country that contains the field. Only the second part of the ISO 3166-2 code is stored. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
+    },
+    {
+      "name": "admin_local_code",
+      "type": "string",
+      "description": "Carried over from the source column `RM_number`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "admin_local_name",
+      "type": "string",
+      "description": "Carried over from the source column `RM_name`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "bbox",
+      "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+      "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    }
+  ],
+  "table:primary_geometry": "geometry",
+  "table:row_count": 656082,
+  "partition:scheme": "hive",
+  "partition:strategy": "temporal",
+  "partition:keys": [
+    {
+      "name": "year",
+      "type": "int32",
+      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+    }
+  ],
+  "partition:file_count": 1,
+  "partition:glob": "s3://ftw/harmonized-field-data/ca_prairies/year=*/*.parquet",
+  "assets": {
+    "data": {
+      "href": "./latest/ca_prairies.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Canada, Prairies — latest edition (2024) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2024/ca_prairies.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 3780112002,
+      "file:checksum": "1220425f8f94a59ccfd805ec998817df7594667a69b1602566e745ee329962aca887",
+      "proj:code": "EPSG:4326"
+    },
+    "style-field-size": {
+      "href": "./styles/field-size.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field size (ha)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 10, 20, 50 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1204,
+      "file:checksum": "12209fc6106892b5b93705319d888cb5e63704091f789dfeb7a074730efa8e5fcac2"
+    },
+    "style-outline": {
+      "href": "./styles/outline.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field boundaries",
+      "roles": [
+        "style"
+      ],
+      "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
+      "file:size": 758,
+      "file:checksum": "122041a739fa7e2397e298fc09c21deac50d2a524bfde242e6e4fbc23d037eea488d"
+    },
+    "visual": {
+      "href": "./year=2024/ca_prairies.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Canada, Prairies — latest edition (2024) (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 862382707,
+      "file:checksum": "12205ec28356f72acb77e8252c5b5e248894158fca415fd4bd893af87cfb96455076"
+    },
+    "thumbnail": {
+      "href": "./thumbnail.jpg",
+      "type": "image/jpeg",
+      "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "roles": [
+        "thumbnail"
+      ],
+      "file:size": 74791,
+      "file:checksum": "122029f489e2c9779ab5ff2be1790a85c6d66d1935dab78a234fb7e32ca8aad4324f"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "agents",
+      "href": "./AGENTS.md",
+      "type": "text/markdown",
+      "title": "Guidance for AI agents"
+    },
+    {
+      "rel": "describedby",
+      "href": "./README.md",
+      "type": "text/markdown",
+      "title": "Human-readable documentation"
+    },
+    {
+      "rel": "llms",
+      "href": "./llms.txt",
+      "type": "text/markdown",
+      "title": "Agent/LLM usage guide"
+    },
+    {
+      "rel": "pmtiles",
+      "href": "./year=2024/ca_prairies.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Web map tiles",
+      "pmtiles:layers": [
+        "ca_prairies"
+      ]
+    },
+    {
+      "rel": "via",
+      "href": "https://doi.org/10.17632/2y568rt76w.2",
+      "type": "text/html",
+      "title": "Original source (publisher page)"
+    },
+    {
+      "rel": "related",
+      "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ca_prairies.py",
+      "type": "text/html",
+      "title": "Converter source code (fiboa-cli)"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/ca_prairies-2024.json",
+      "type": "application/geo+json",
+      "title": "Canada, Prairies — 2024"
+    }
+  ],
+  "updated": "2026-10-21T19:08:33Z",
+  "fiboa_version": "0.3.0",
+  "vecorel_version": "0.1.0",
+  "vecorel_extensions": {
+    "ca_prairies": [
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+    ]
+  },
+  "attribution": "Ha, T., Nketia, K., Neudorf, S., Shirtliffe, S. (2026): A field boundary dataset for the Canadian Prairies derived from Sentinel-2 imagery using the Segment Anything Model, Mendeley Data, V2, doi:10.17632/2y568rt76w.2"
+}
