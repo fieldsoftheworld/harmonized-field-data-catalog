@@ -1,0 +1,9 @@
+# Crop type map of Germany from Sentinel-1, Sentinel-2 and Landsat (Thünen Institute)
+
+Germany (Thünen) field boundaries (2017, 2018, 2019, 2020, 2021) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Johann Heinrich von Thünen-Institut. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/de_thuenen/latest/de_thuenen.parquet
+- All editions: s3://ftw/harmonized-field-data/de_thuenen/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:3035; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: geometry, crop:name, metrics:area, hcat:name, crop:code, id, hcat:code, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/de_thuenen/README.md, agent guide https://source.coop/ftw/harmonized-field-data/de_thuenen/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/de_thuenen/collection.json
