@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Field boundaries published by government bodies and research institutions, harmonized to fiboa, 68 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Field boundaries published by government bodies and research institutions, harmonized to fiboa, 69 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - at: Field boundaries for Austria — crop fields — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:3035, EPSG:31287)
 - at_block: Field blocks for Austria — field blocks — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
@@ -27,6 +27,7 @@ Field boundaries published by government bodies and research institutions, harmo
 - de_sl_block: Field blocks for Saarland, Germany — field blocks — https://data.source.coop/ftw/harmonized-field-data/de_sl_block/latest/de_sl_block.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - de_st: Field blocks for Saxony-Anhalt, Germany — field blocks — https://data.source.coop/ftw/harmonized-field-data/de_st/latest/de_st.parquet (license DL-DE-BY-2.0, CRS EPSG:4326)
 - de_th: Field blocks for Thuringia, Germany — field blocks — https://data.source.coop/ftw/harmonized-field-data/de_th/latest/de_th.parquet (license DL-DE-BY-2.0, CRS EPSG:25832)
+- de_thuenen: Crop type map of Germany from Sentinel-1, Sentinel-2 and Landsat (Thünen Institute) — crop fields — https://data.source.coop/ftw/harmonized-field-data/de_thuenen/latest/de_thuenen.parquet (license CC-BY-4.0, CRS EPSG:3035)
 - dk: Denmark Crop Fields (Marker) — crop fields — https://data.source.coop/ftw/harmonized-field-data/dk/latest/dk.parquet (license CC0-1.0, CRS EPSG:25832)
 - ec_lt: Field boundaries for Lithuania - Eurocrops 2021 — crop fields — https://data.source.coop/ftw/harmonized-field-data/ec_lt/latest/ec_lt.parquet (license CC-BY-SA-4.0, CRS EPSG:4326)
 - ec_lv: Field boundaries for Latvia - Eurocrops 2021 — crop fields — https://data.source.coop/ftw/harmonized-field-data/ec_lv/latest/ec_lv.parquet (license CC-BY-SA-4.0, CRS EPSG:3059)

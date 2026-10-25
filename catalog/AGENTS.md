@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-68 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`. `ch` is fed by several sources, each with its own converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one `<collection>/latest/<converter>.parquet` per source, and each item carries its source's license.
+69 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`. `ch` is fed by several sources, each with its own converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one `<collection>/latest/<converter>.parquet` per source, and each item carries its source's license.
 
 ## How to read it
 
@@ -21,10 +21,10 @@ GROUP BY 1 ORDER BY 1;
 -- be_vlg | 597088
 -- be_wal | 342315
 -- br_conab | 390805
--- ca_prairies | 656082
 -- ch | 1520805
 -- de_bb | 232338
 -- de_bw | 4363087
+-- de_mv | 20000
 -- ... 15 more rows
 ```
 
@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2020 | at | 2614636
 -- 2021 | at | 2610511
 -- 2022 | at | 2600002
--- ... 145 more rows
+-- ... 149 more rows
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.
@@ -60,7 +60,7 @@ There are none. `id` is unique within one edition of one collection only; collec
 - `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.
 - Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.
 - 16 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `bg`, `de_bb_block`, `de_by_block`, `de_he`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sax`, `de_sh`, `de_sl_block`, `de_st`, `de_th`, `lu`, `nl_block`, `pl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
-- Not every boundary was declared by anyone. `br_conab`, `es_cn`, `jp`, `nz`, `us_ca_scm` are mapped by an authority from imagery or survey. `ca_prairies`, `us_usda_cropland` are inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
+- Not every boundary was declared by anyone. `br_conab`, `es_cn`, `jp`, `nz`, `us_ca_scm` are mapped by an authority from imagery or survey. `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
 
 ## Structure
 

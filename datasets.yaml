@@ -375,6 +375,11 @@ datasets:
     boundaries: inferred
     notes: The fields were segmented from Sentinel-2 composites of 2021-2024 and carry no date of their own; the edition is filed under 2024, the last imagery year.
     keywords: [Canada, Alberta, Saskatchewan, Manitoba, Sentinel-2, Segment Anything Model, University of Saskatchewan]
+  de_thuenen:
+    years: ['2017', '2018', '2019', '2020', '2021']
+    boundaries: inferred
+    keywords: [Germany, Thünen Institute, crop type map, Sentinel-1, Sentinel-2, Landsat]
+    thumbnail: {zoom: 13, center: [11.30, 52.05]}  # Magdeburger Börde; at the archive's max zoom the fields are specks
   us_ca_scm:
     years: ['2014', '2016', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
     boundaries: mapped
