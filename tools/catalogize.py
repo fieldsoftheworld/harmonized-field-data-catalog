@@ -581,6 +581,8 @@ def build_collection(
                 "file:size": latest.data_asset["file:size"],
                 "file:checksum": latest.data_asset["file:checksum"],
                 "proj:code": latest.crs,
+                # the processing extension the collection declares needs a field of its own
+                "processing:software": latest.data_asset.get("processing:software", {}),
             },
             **style_assets,
         },
