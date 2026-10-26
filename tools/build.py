@@ -91,8 +91,8 @@ def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True, c
     converter_id = converter_id or dataset_id
     out = staging_year_dir(dataset_id, year)
     out.mkdir(parents=True, exist_ok=True)
-    # an edition that is only a label, not a converter variant, is published as <id>
-    stem = file_stem(dataset_id, year) if has_variants else dataset_id
+    # named after its STAC item, also when the year is only a label and not a converter variant
+    stem = file_stem(dataset_id, year)
     parquet, pmtiles = out / f"{stem}.parquet", out / f"{stem}.pmtiles"
 
     if not parquet.exists():
