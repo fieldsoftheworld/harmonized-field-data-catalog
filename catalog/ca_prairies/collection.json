@@ -130,13 +130,17 @@
       "href": "./latest/ca_prairies.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Canada, Prairies — latest edition (2024) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2024/ca_prairies.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2024/ca_prairies-2024.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 3780112002,
       "file:checksum": "1220425f8f94a59ccfd805ec998817df7594667a69b1602566e745ee329962aca887",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -147,8 +151,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 10, 20, 50 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1204,
-      "file:checksum": "12209fc6106892b5b93705319d888cb5e63704091f789dfeb7a074730efa8e5fcac2"
+      "file:size": 1209,
+      "file:checksum": "122059e79bc56d11c9080ce02573e7b8b8d52798255873fbb8ac9d3c138f24a58f54"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -158,11 +162,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 758,
-      "file:checksum": "122041a739fa7e2397e298fc09c21deac50d2a524bfde242e6e4fbc23d037eea488d"
+      "file:size": 763,
+      "file:checksum": "1220c3244eeb2fb23ddd16b73a2593f475305eecea516843434beaa340f28a1f4cc3"
     },
     "visual": {
-      "href": "./year=2024/ca_prairies.pmtiles",
+      "href": "./year=2024/ca_prairies-2024.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Canada, Prairies — latest edition (2024) (PMTiles)",
       "roles": [
@@ -213,7 +217,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2024/ca_prairies.pmtiles",
+      "href": "./year=2024/ca_prairies-2024.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -244,9 +248,9 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "ca_prairies": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "Ha, T., Nketia, K., Neudorf, S., Shirtliffe, S. (2026): A field boundary dataset for the Canadian Prairies derived from Sentinel-2 imagery using the Segment Anything Model, Mendeley Data, V2, doi:10.17632/2y568rt76w.2"

@@ -7,7 +7,7 @@
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2025/pl_block.pmtiles"
+      "url": "pmtiles://../year=2025/pl_block-2025.pmtiles"
     }
   },
   "layers": [

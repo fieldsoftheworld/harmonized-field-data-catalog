@@ -9,7 +9,7 @@ The download service is a set of personalized spatial data of agricultural land 
 - **Editions:** 2021 (one GeoParquet per year)
 - **Fields in the latest edition (2021):** 439,199
 - **Coordinate reference system:** EPSG:4326 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.16 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ec_lt.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ec_lt.py))
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/ec_lt/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ec_lt/AGENTS.md) for tested queries.
 
@@ -17,7 +17,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2021 | 439,199 | [200.8 MB](https://data.source.coop/ftw/harmonized-field-data/ec_lt/year=2021/ec_lt.parquet) | [91.2 MB](https://data.source.coop/ftw/harmonized-field-data/ec_lt/year=2021/ec_lt.pmtiles) | [ec_lt-2021.json](https://data.source.coop/ftw/harmonized-field-data/ec_lt/year=2021/ec_lt-2021.json) |
+| 2021 | 439,199 | [200.8 MB](https://data.source.coop/ftw/harmonized-field-data/ec_lt/year=2021/ec_lt-2021.parquet) | [91.2 MB](https://data.source.coop/ftw/harmonized-field-data/ec_lt/year=2021/ec_lt-2021.pmtiles) | [ec_lt-2021.json](https://data.source.coop/ftw/harmonized-field-data/ec_lt/year=2021/ec_lt-2021.json) |
 
 The latest edition is also available at a stable path: [ec_lt/latest/ec_lt.parquet](https://data.source.coop/ftw/harmonized-field-data/ec_lt/latest/ec_lt.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/ec_lt/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ec_lt/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -54,7 +54,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_lt/late
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Construction Sector Development Agency <https://www.geoportal.lt/geoportal/nacionaline-mokejimo-agentura-prie-zemes-ukio-ministerijos#savedSearchId={56542726-DC0B-461E-A32C-3E9A4A693E27}&collapsed=true>, EuroCrops](https://github.com/maja601/EuroCrops) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
+This catalog is a mirror: the data is produced and licensed by [Construction Sector Development Agency <https://www.geoportal.lt/geoportal/nacionaline-mokejimo-agentura-prie-zemes-ukio-ministerijos#savedSearchId={56542726-DC0B-461E-A32C-3E9A4A693E27}&collapsed=true>, EuroCrops](https://github.com/maja601/EuroCrops) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2021: converted 2026-09-12 from <https://zenodo.org/records/6868143/files/LT_2021.zip>
 

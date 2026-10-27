@@ -75,6 +75,26 @@
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "crop:name_en",
+      "type": "string",
+      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "admin_municipality_code",
+      "type": "string",
+      "description": "Carried over from the source column `municipio`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
       "name": "crop:name",
       "type": "string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
@@ -90,19 +110,14 @@
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "crop:name_en",
-      "type": "string",
-      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "admin_municipality_code",
-      "type": "string",
-      "description": "Carried over from the source column `municipio`; the publisher documents no meaning for it."
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -132,17 +147,32 @@
       "roles": [
         "data"
       ],
-      "file:size": 265692414,
-      "file:checksum": "122025bf2a9aed7d55ac2754c8f401654efcbebda3a385895e1fc6538937900e05ac",
-      "proj:code": "EPSG:4258"
+      "file:size": 266164333,
+      "file:checksum": "122078d6e37b8f4bbd297d1f854c0e361781cfbdb2067b858b6f4ab4e807659e7a1b",
+      "proj:code": "EPSG:4258",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.2.18"
+      }
+    },
+    "style-hcat-crops": {
+      "href": "./styles/hcat-crops.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Crops (HCAT)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 7 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
+      "file:size": 1874,
+      "file:checksum": "12206f3def1bd2886eb7ad7f09d113dd7b6244df64b9b73ae6d2aef7e74f928e1d2f"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
       "type": "application/vnd.mapbox.style+json",
       "title": "Field size (ha)",
       "roles": [
-        "style",
-        "default"
+        "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
       "file:size": 1192,
@@ -166,8 +196,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 89256008,
-      "file:checksum": "122022622b9467403f0f8d99f48362233a30d71f3a54433054d75e9ebe39db49bd85"
+      "file:size": 89858327,
+      "file:checksum": "12200ee9509b79742215d5acb139a2219467bf3dcdad14b6451afd67d0b880ed454c"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -249,15 +279,16 @@
       "title": "Spain Navarra — 2026"
     }
   ],
-  "updated": "2026-09-16T18:37:13Z",
+  "updated": "2026-09-18T17:13:52Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_nc": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "©FEGA / Ministerio de Agricultura, Pesca y Alimentación"

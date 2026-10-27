@@ -45,10 +45,10 @@
     "spatial": {
       "bbox": [
         [
-          20.839223885313622,
-          55.63221901731316,
-          28.42516595855106,
-          58.043857497031084
+          20.983634336211278,
+          55.67535577616556,
+          28.22052639257332,
+          58.07650131807088
         ]
       ]
     },
@@ -146,13 +146,17 @@
       "href": "./latest/ec_lv.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Latvia - Eurocrops 2021 — latest edition (2021) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2021/ec_lv.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2021/ec_lv-2021.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 454537070,
       "file:checksum": "12209a873260758a7bb92ee420a87ed049716624b00650465072b0811ae7adfc7fbc",
-      "proj:code": "EPSG:3059"
+      "proj:code": "EPSG:3059",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",
@@ -163,8 +167,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2329,
-      "file:checksum": "12209b52d59f653a9871eea9e688ab6b2cad410cb77c2a65e41a131c4505f47c4eec"
+      "file:size": 2334,
+      "file:checksum": "1220b5cce38818f10425f9102dc97b4a3b70617d15dd85641a8a5fcfbe0e9f9b89f5"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -174,8 +178,8 @@
         "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1228,
-      "file:checksum": "1220fd05212c0d6871aa88391492991990a5825114fd28e8b2a47b1731c2f26afba3"
+      "file:size": 1233,
+      "file:checksum": "1220415c51f9a121ac48cd2a75c42e0eefb8b8d3c48352974e581eb8d089c8ef95af"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -185,11 +189,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 747,
-      "file:checksum": "12203ac6b1fbbbb0575a25968dbd6b5290f020707221a5b4729e154874e24dd849bc"
+      "file:size": 752,
+      "file:checksum": "12209d77bf96137130bbf17220873d881e9a045e83bded673f7f1c9a86192385bd58"
     },
     "visual": {
-      "href": "./year=2021/ec_lv.pmtiles",
+      "href": "./year=2021/ec_lv-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Latvia - Eurocrops 2021 — latest edition (2021) (PMTiles)",
       "roles": [
@@ -240,7 +244,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2021/ec_lv.pmtiles",
+      "href": "./year=2021/ec_lv-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [

@@ -7,7 +7,7 @@ A field block (German: "Feldblock") is a contiguous agricultural area surrounded
 - **Editions:** 2026 (one GeoParquet per year)
 - **Fields in the latest edition (2026):** 1,296,105
 - **Coordinate reference system:** EPSG:25832 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.15 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/de_by.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/de_by.py))
 - **Data survey:** [DE-BY.md](https://github.com/fiboa/data-survey/blob/main/data/DE-BY.md)
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/de_by/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_by/AGENTS.md) for tested queries.
@@ -16,7 +16,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 1,296,105 | [373.7 MB](https://data.source.coop/ftw/harmonized-field-data/de_by/year=2026/de_by.parquet) | [164.3 MB](https://data.source.coop/ftw/harmonized-field-data/de_by/year=2026/de_by.pmtiles) | [de_by-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_by/year=2026/de_by-2026.json) |
+| 2026 | 1,296,105 | [373.7 MB](https://data.source.coop/ftw/harmonized-field-data/de_by/year=2026/de_by-2026.parquet) | [164.3 MB](https://data.source.coop/ftw/harmonized-field-data/de_by/year=2026/de_by-2026.pmtiles) | [de_by-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_by/year=2026/de_by-2026.json) |
 
 The latest edition is also available at a stable path: [de_by/latest/de_by.parquet](https://data.source.coop/ftw/harmonized-field-data/de_by/latest/de_by.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/de_by/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_by/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -53,7 +53,7 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Bayerische Vermessungsverwaltung](https://www.ldbv.bayern.de) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
+This catalog is a mirror: the data is produced and licensed by [Bayerische Vermessungsverwaltung](https://www.ldbv.bayern.de) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2026: converted 2026-08-28 from <https://geodaten.bayern.de/odd/m/3/daten/ln/landnutzung.gpkg>
 

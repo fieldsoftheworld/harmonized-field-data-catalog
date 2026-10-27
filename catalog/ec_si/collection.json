@@ -45,10 +45,10 @@
     "spatial": {
       "bbox": [
         [
-          13.391407223909523,
-          45.41166432305473,
-          16.60796186754382,
-          46.86979599355252
+          13.410659993139568,
+          45.42227046875209,
+          16.596303417885895,
+          46.87424125552634
         ]
       ]
     },
@@ -151,13 +151,17 @@
       "href": "./latest/ec_si.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Slovenia - Eurocrops 2021 — latest edition (2021) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2021/ec_si.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2021/ec_si-2021.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 174134035,
       "file:checksum": "1220ac5a34e7c2c5209a60704f095bbb3eb1d3183194c4a13b6c87b827a66df516fd",
-      "proj:code": "EPSG:3794"
+      "proj:code": "EPSG:3794",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",
@@ -168,8 +172,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2423,
-      "file:checksum": "1220ba1fb3db0ae01f9a3fa1043e209f6e7d6a5af1deb10a8666a79a5c8c434400f0"
+      "file:size": 2428,
+      "file:checksum": "1220b1872012b6b746ee26506037d3f1864d38a66a424aa551784dccb4c018a29c1a"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -179,8 +183,8 @@
         "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 0.5, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1240,
-      "file:checksum": "1220b77ca5d1f60c9cb37f3063a745d6daddd5e9334987bb0add2d2ba5e4a72e1b57"
+      "file:size": 1245,
+      "file:checksum": "122024a2221ad871cb0a6950d36cb652deabaf3aa5453df478aff332c73be9d8e692"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -190,11 +194,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 749,
-      "file:checksum": "122093a9b4e6b3a7cafa8204b191d88367625b57f72affb34f7b734fd7ae8a38623a"
+      "file:size": 754,
+      "file:checksum": "12207cf2c6b58ca8c190756e0bbe9091f9ea46f482f9aea4bb4aeec0cb065cc56173"
     },
     "visual": {
-      "href": "./year=2021/ec_si.pmtiles",
+      "href": "./year=2021/ec_si-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Slovenia - Eurocrops 2021 — latest edition (2021) (PMTiles)",
       "roles": [
@@ -245,7 +249,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2021/ec_si.pmtiles",
+      "href": "./year=2021/ec_si-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -276,10 +280,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "ec_si": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "Ministrstvo za kmetijstvo, gozdarstvo in prehrano"

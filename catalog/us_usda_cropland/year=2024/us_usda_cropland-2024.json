@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          -127.82213224381233,
-          23.252088767155968
+          -124.56188412531732,
+          25.210672170972632
         ],
         [
-          -65.39556742696848,
-          23.252088767155968
+          -66.96772581967855,
+          25.210672170972632
         ],
         [
-          -65.39556742696848,
-          48.18311215673329
+          -66.96772581967855,
+          49.35960759582523
         ],
         [
-          -127.82213224381233,
-          48.18311215673329
+          -124.56188412531732,
+          49.35960759582523
         ],
         [
-          -127.82213224381233,
-          23.252088767155968
+          -124.56188412531732,
+          25.210672170972632
         ]
       ]
     ]
   },
   "bbox": [
-    -127.82213224381233,
-    23.252088767155968,
-    -65.39556742696848,
-    48.18311215673329
+    -124.56188412531732,
+    25.210672170972632,
+    -66.96772581967855,
+    49.35960759582523
   ],
   "properties": {
     "title": "US (USDA CSB) — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`us_usda_cropland-2024.parquet`, 7,522,713 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`us_usda_cropland-2024.parquet`, 7,541,673 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2024-01-01T00:00:00Z",
     "end_datetime": "2024-01-01T00:00:00Z",
@@ -51,24 +51,9 @@
     "proj:code": null,
     "table:columns": [
       {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "collection",
+        "name": "crop:name",
         "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "id",
@@ -76,19 +61,44 @@
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "hcat:name",
+        "name": "hcat:name_en",
         "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "crop:name",
+        "name": "administrative_area_level_2_code",
         "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "description": "Carried over from the source column `CNTYFIPS`; the publisher documents no meaning for it."
       },
       {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "administrative_area_level_2",
+        "type": "string",
+        "description": "Carried over from the source column `CNTY`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -97,10 +107,10 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 7522713,
+    "table:row_count": 7541673,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "us_usda_cropland",
@@ -112,8 +122,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 3073863777,
-      "file:checksum": "1220c536ac7f9f0acd2bb8d51fca39dd5b17b97f9fe63400b41d14d1c58bc7300909",
+      "file:size": 3118135954,
+      "file:checksum": "122001c687d2e04f6d3e2b52d300fcc1571721b47b905a990d202b0ef4f4f32e0d23",
       "proj:code": null
     },
     "visual": {
@@ -123,8 +133,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 762812735,
-      "file:checksum": "1220b8608f3c5bf533ed24b997b66eaabe406de98421aaa53a89a38f93a279f9f1f1"
+      "file:size": 832597577,
+      "file:checksum": "1220bee157622c2c75b205e83518044f936fffc4386937ae406c4c0a2ce1d45fcd8a"
     }
   },
   "links": [

@@ -7,7 +7,7 @@ This dataset contains the field boundaries for all of Latvia in 2021. The data w
 - **Editions:** 2021 (one GeoParquet per year)
 - **Fields in the latest edition (2021):** 432,188
 - **Coordinate reference system:** EPSG:3059 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.16 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ec_lv.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ec_lv.py))
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/ec_lv/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ec_lv/AGENTS.md) for tested queries.
 
@@ -15,7 +15,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2021 | 432,188 | [433.5 MB](https://data.source.coop/ftw/harmonized-field-data/ec_lv/year=2021/ec_lv.parquet) | [177.8 MB](https://data.source.coop/ftw/harmonized-field-data/ec_lv/year=2021/ec_lv.pmtiles) | [ec_lv-2021.json](https://data.source.coop/ftw/harmonized-field-data/ec_lv/year=2021/ec_lv-2021.json) |
+| 2021 | 432,188 | [433.5 MB](https://data.source.coop/ftw/harmonized-field-data/ec_lv/year=2021/ec_lv-2021.parquet) | [177.8 MB](https://data.source.coop/ftw/harmonized-field-data/ec_lv/year=2021/ec_lv-2021.pmtiles) | [ec_lv-2021.json](https://data.source.coop/ftw/harmonized-field-data/ec_lv/year=2021/ec_lv-2021.json) |
 
 The latest edition is also available at a stable path: [ec_lv/latest/ec_lv.parquet](https://data.source.coop/ftw/harmonized-field-data/ec_lv/latest/ec_lv.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/ec_lv/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ec_lv/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -54,7 +54,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_lv/late
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Lauku atbalsta dienests <https://www.lad.gov.lv/lv/lauku-registra-dati>, EuroCrops](https://github.com/maja601/EuroCrops) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
+This catalog is a mirror: the data is produced and licensed by [Lauku atbalsta dienests <https://www.lad.gov.lv/lv/lauku-registra-dati>, EuroCrops](https://github.com/maja601/EuroCrops) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2021: converted 2026-09-03 from <https://zenodo.org/records/8229128/files/LV_2021.zip>
 

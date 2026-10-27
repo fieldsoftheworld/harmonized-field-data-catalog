@@ -119,13 +119,17 @@
       "href": "./latest/pl_block.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Poland (blocks) — latest edition (2025) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2025/pl_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2025/pl_block-2025.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 1588381370,
       "file:checksum": "1220451bcfbf55da677d2ba32fc86842536451bc963e9317ad0f2b61114952c846ab",
-      "proj:code": "EPSG:2180"
+      "proj:code": "EPSG:2180",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -136,8 +140,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 0.5, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1239,
-      "file:checksum": "1220f0f455a3ad2866964ea5557978b6b4e02ad836f8247fca614d526828539b1a7e"
+      "file:size": 1244,
+      "file:checksum": "1220f736a3dd577a4372ceb21a29a45240ca31d46c70f4078818a49e8332e6825ed4"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -147,11 +151,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 748,
-      "file:checksum": "1220f23a9a9fc5f37dd102114c512e499d3adeb4afcd352abf5252d92db5089ed228"
+      "file:size": 753,
+      "file:checksum": "1220f049a71dfa1b0c69143645ea7952bba39b9b9d52d41ceb61fa5738a2c2e06b8f"
     },
     "visual": {
-      "href": "./year=2025/pl_block.pmtiles",
+      "href": "./year=2025/pl_block-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Poland (blocks) — latest edition (2025) (PMTiles)",
       "roles": [
@@ -208,7 +212,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2025/pl_block.pmtiles",
+      "href": "./year=2025/pl_block-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [

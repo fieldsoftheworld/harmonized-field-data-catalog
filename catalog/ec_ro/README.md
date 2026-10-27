@@ -11,7 +11,7 @@ The dataset is in line with the conceptual framework described in the Land Cover
 - **Editions:** 2026 (one GeoParquet per year)
 - **Fields in the latest edition (2026):** 259,862
 - **Coordinate reference system:** EPSG:32635 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.15 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ec_ro.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ec_ro.py))
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/ec_ro/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ec_ro/AGENTS.md) for tested queries.
 
@@ -19,7 +19,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 259,862 | [125.4 MB](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro.parquet) | [41.3 MB](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro.pmtiles) | [ec_ro-2026.json](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro-2026.json) |
+| 2026 | 259,862 | [125.4 MB](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro-2026.parquet) | [41.3 MB](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro-2026.pmtiles) | [ec_ro-2026.json](https://data.source.coop/ftw/harmonized-field-data/ec_ro/year=2026/ec_ro-2026.json) |
 
 The latest edition is also available at a stable path: [ec_ro/latest/ec_ro.parquet](https://data.source.coop/ftw/harmonized-field-data/ec_ro/latest/ec_ro.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/ec_ro/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ec_ro/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -58,7 +58,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_ro/late
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Ministry of Regional Development and Public Administration <http://spatial.mdrap.ro>, EuroCrops](https://github.com/maja601/EuroCrops) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
+This catalog is a mirror: the data is produced and licensed by [Ministry of Regional Development and Public Administration <http://spatial.mdrap.ro>, EuroCrops](https://github.com/maja601/EuroCrops) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2026: converted 2026-08-28 from <https://zenodo.org/records/14094196/files/RO_ny.zip?download=1>
 

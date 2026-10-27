@@ -5,9 +5,9 @@ Slovenia - Eurocrops 2021 field boundaries in the [fiboa](https://github.com/fib
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/ec_si/latest/ec_si.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/ec_si/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/ec_si/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si-2021.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/ec_si/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si.pmtiles`, layer `ec_si`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si-2021.pmtiles`, layer `ec_si`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
@@ -53,14 +53,14 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_si/latest/ec_si.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(46.1407, 14.9997), 'EPSG:4326', 'EPSG:3794'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(46.1483, 15.0035), 'EPSG:4326', 'EPSG:3794'), 500))
 LIMIT 5;
 -- id | m2
--- 6578642 | 5030.0
--- 6578623 | 6842.0
--- 6382124 | 5833.0
--- 6382125 | 712.0
--- 6578617 | 35131.0
+-- 6506634 | 10562.0
+-- 6506625 | 34686.0
+-- 6968331 | 3474.0
+-- 6281597 | 10269.0
+-- 6281596 | 327.0
 ```
 
 ## Related collections

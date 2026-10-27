@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          9.870286176309087,
-          50.16579691789659
+          9.878068493521274,
+          50.20885315827379
         ],
         [
-          12.70812350749261,
-          50.16579691789659
+          12.653888655384284,
+          50.20885315827379
         ],
         [
-          12.70812350749261,
-          51.65252530677689
+          12.653888655384284,
+          51.643253049899144
         ],
         [
-          9.870286176309087,
-          51.65252530677689
+          9.878068493521274,
+          51.643253049899144
         ],
         [
-          9.870286176309087,
-          50.16579691789659
+          9.878068493521274,
+          50.20885315827379
         ]
       ]
     ]
   },
   "bbox": [
-    9.870286176309087,
-    50.16579691789659,
-    12.70812350749261,
-    51.65252530677689
+    9.878068493521274,
+    50.20885315827379,
+    12.653888655384284,
+    51.643253049899144
   ],
   "properties": {
     "title": "Germany, Thuringia — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_th.parquet`, 102,076 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_th-2026.parquet`, 102,076 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2007-02-16T00:00:00Z",
     "end_datetime": "2026-07-31T00:00:00Z",
@@ -120,13 +120,13 @@
     "table:row_count": 102076,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "de_th",
   "assets": {
     "data": {
-      "href": "./de_th.parquet",
+      "href": "./de_th-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Thuringia 2026 (GeoParquet)",
       "roles": [
@@ -137,7 +137,7 @@
       "proj:code": "EPSG:25832"
     },
     "visual": {
-      "href": "./de_th.pmtiles",
+      "href": "./de_th-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Thuringia 2026 (PMTiles)",
       "roles": [

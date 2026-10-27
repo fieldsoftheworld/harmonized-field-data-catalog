@@ -15,7 +15,8 @@ Spain Navarra field boundaries in the [fiboa](https://github.com/fiboa/specifica
 - **`metrics:area` is in square metres**, taken from the source column `dn_surface`. Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin_province_code` = `31`, `admin:country_code` = `ES`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv`, `admin:subdivision_code` = `NC`, `determination:datetime` = `2026-01-01T00:00:00Z` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/es/sigpac/land_use.csv`) have `NULL`. All 663,167 rows of the 2026 edition carry one.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin_province_code` = `31`, `admin:country_code` = `ES`, `admin:subdivision_code` = `NC`, `determination:datetime` = `2026-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 - Navarra's own portal (sigpac.navarra.es) has not answered since 2026-09-10, so these editions come from FEGA's national release of the same register, province 31.
 
 ## Tested queries
@@ -31,6 +32,22 @@ GROUP BY year ORDER BY year;
 -- year | fields | hectares
 -- 2025 | 670772 | 607623.0
 -- 2026 | 663167 | 603077.0
+```
+
+Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
+
+```sql
+SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, mode("hcat:name") AS most_common_name,
+       count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
+FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_nc/latest/es_nc.parquet')
+WHERE "hcat:code" IS NOT NULL
+GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
+-- hcat_group | most_common_name | fields | hectares
+-- 330100 | arable_crops | 263853 | 301852.0
+-- 330200 | pasture_meadow_grassland_grass | 321938 | 265016.0
+-- 330306 | vineyards_wine_vine_rebland_grapes | 18649 | 16359.0
+-- 330305 | olive_plantations | 26972 | 9652.0
+-- 330303 | nuts | 12432 | 5793.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

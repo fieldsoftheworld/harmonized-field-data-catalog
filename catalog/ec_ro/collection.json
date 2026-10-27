@@ -45,10 +45,10 @@
     "spatial": {
       "bbox": [
         [
-          21.98360372119957,
-          43.5323910715832,
-          28.92332404837222,
-          45.17666803124226
+          22.02543817627908,
+          43.625664309708,
+          28.906869959380735,
+          45.11024715527661
         ]
       ]
     },
@@ -141,13 +141,17 @@
       "href": "./latest/ec_ro.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Romania - Eurocrops — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/ec_ro.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/ec_ro-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 131540418,
       "file:checksum": "122099da8f59e27cf57ebeaec9b665290de9b9b6e23efaa53cda074a408281a64fca",
-      "proj:code": "EPSG:32635"
+      "proj:code": "EPSG:32635",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",
@@ -158,8 +162,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 5 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 1599,
-      "file:checksum": "122031802a349d17ea3a6d0534f77a19e30a4683766eb7ea11a1ee43054c2254dcad"
+      "file:size": 1604,
+      "file:checksum": "12207fda272b7cab936f7e8c47fbf754f8650827608b7d6ec1f5366f33c6616581a1"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -169,8 +173,8 @@
         "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 5, 10, 20 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1224,
-      "file:checksum": "1220318398452f442a68851c5e380231e3a480ff874f1cc982daa8f8eaba1e519380"
+      "file:size": 1229,
+      "file:checksum": "122099d4e9c6e6b77cd8aff7beceb752e8c22f1d58a9225debece352749f26ce47d9"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -180,11 +184,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 743,
-      "file:checksum": "1220fd09ef7920be65e937f7660840e389741b10c6944c8464db00c09bdebd8e5ac7"
+      "file:size": 748,
+      "file:checksum": "1220561dd49613136f302c6de9efbd1652f528d50894ac0518de86b702741b92f779"
     },
     "visual": {
-      "href": "./year=2026/ec_ro.pmtiles",
+      "href": "./year=2026/ec_ro-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Romania - Eurocrops — latest edition (2026) (PMTiles)",
       "roles": [
@@ -235,7 +239,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/ec_ro.pmtiles",
+      "href": "./year=2026/ec_ro-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -266,10 +270,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "ec_ro": [
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   }
 }

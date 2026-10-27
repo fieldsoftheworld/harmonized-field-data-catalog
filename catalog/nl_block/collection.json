@@ -46,10 +46,10 @@
     "spatial": {
       "bbox": [
         [
-          3.257902051714933,
-          50.73428107549366,
-          7.237753140074882,
-          53.487756902892635
+          3.359684466189287,
+          50.750432999641234,
+          7.224379881107408,
+          53.49893845401366
         ]
       ]
     },
@@ -112,13 +112,17 @@
       "href": "./latest/nl_block.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Netherlands (blocks) — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/nl_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/nl_block-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 506705050,
       "file:checksum": "1220e675632de0ca8aee91890360ea226c5a41d0c96583d0952e567c2761094bd8ac",
-      "proj:code": "EPSG:28992"
+      "proj:code": "EPSG:28992",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -129,8 +133,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.25, 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1236,
-      "file:checksum": "12200fc5f0c768773a9c584d999bc361a8c18c7f173e44716aa104dff500c0730767"
+      "file:size": 1241,
+      "file:checksum": "1220a54a3fc6ee2115e207e6168168376dad0ae68127c0e0a9319edd9db8920b598e"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -140,11 +144,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 753,
-      "file:checksum": "1220326af3e0778980d2ed681fc1969c346b6fe15cb6bb9c81fed7ec766b7e6dba97"
+      "file:size": 758,
+      "file:checksum": "1220a8280acfe13aed7e28c8657cdaaf57cbde429c765a420013d7d425cc64e5d146"
     },
     "visual": {
-      "href": "./year=2026/nl_block.pmtiles",
+      "href": "./year=2026/nl_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Netherlands (blocks) — latest edition (2026) (PMTiles)",
       "roles": [
@@ -195,7 +199,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/nl_block.pmtiles",
+      "href": "./year=2026/nl_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -226,9 +230,9 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "nl_block": [
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   }
 }

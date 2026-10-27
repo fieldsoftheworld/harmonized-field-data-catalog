@@ -46,10 +46,10 @@
     "spatial": {
       "bbox": [
         [
-          8.976888352898056,
-          47.17999939062103,
-          14.014200261063245,
-          50.56130126204544
+          8.977135126954165,
+          47.2703426867411,
+          13.837348014824999,
+          50.55516499112016
         ]
       ]
     },
@@ -132,13 +132,17 @@
       "href": "./latest/de_by.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Bavaria — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_by.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_by-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 391819314,
       "file:checksum": "12209e2990f9b27adf9ab377d3df06a1b4756921a7ea5665045bdf12f40f7d60210e",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",
@@ -149,8 +153,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 5 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 1642,
-      "file:checksum": "122049925cb0a0a94cc43699216f09dafbe42523c892fdf89e45d18cd43b82fabac3"
+      "file:size": 1647,
+      "file:checksum": "1220bf46c8d250e841c6503ec22971eaebc9d075c72fe32dc96ffd1c870a9bef5aac"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -160,11 +164,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 740,
-      "file:checksum": "1220a1f8ea958b5c026948be1c4f519fa530b04e61734fb595ee6ab80f25e22b0598"
+      "file:size": 745,
+      "file:checksum": "12207508221c89a4cc323c45d94251357f2a7bf81782ce61889b15ee32d3689fb3da"
     },
     "visual": {
-      "href": "./year=2026/de_by.pmtiles",
+      "href": "./year=2026/de_by-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Bavaria — latest edition (2026) (PMTiles)",
       "roles": [
@@ -215,7 +219,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_by.pmtiles",
+      "href": "./year=2026/de_by-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -253,10 +257,10 @@
   "vecorel_extensions": {
     "de_by": [
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   },
   "attribution": "Datenquelle: Bayerische Vermessungsverwaltung – www.geodaten.bayern.de"

@@ -117,13 +117,17 @@
       "href": "./latest/de_sl.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Saarland — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_sl.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_sl-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 19836722,
       "file:checksum": "122065b4feedbefe4a8f6c91ddf711df158e0e169de99bcaa13ad1f76f27672fcc63",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -134,8 +138,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.25, 0.5, 1, 2 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1228,
-      "file:checksum": "1220ec6ba9ee14acb1591498da82ed68917af5690d4950aef719119546760294f0af"
+      "file:size": 1233,
+      "file:checksum": "12209eb90d99b101fcc69e4291a2300cbbf3df6e18c0878d1e0284f05dfd76f09e21"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -145,11 +149,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 741,
-      "file:checksum": "122015642830d0771b41afd3dc7df9a65671fe7c815708abcdf0bc8543f09fd50718"
+      "file:size": 746,
+      "file:checksum": "12209af83e86b531d52f74eb599b72e717fb6d838aa14aa916814cd92493a9ab9f73"
     },
     "visual": {
-      "href": "./year=2026/de_sl.pmtiles",
+      "href": "./year=2026/de_sl-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Saarland — latest edition (2026) (PMTiles)",
       "roles": [
@@ -200,7 +204,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_sl.pmtiles",
+      "href": "./year=2026/de_sl-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -237,10 +241,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_sl": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "©GDI-SL 2024"

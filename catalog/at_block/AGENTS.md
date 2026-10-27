@@ -5,9 +5,9 @@ Austria (blocks) field boundaries in the [fiboa](https://github.com/fiboa/specif
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/at_block/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/at_block/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block-2021.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/at_block/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block.pmtiles`, layer `at_block`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block-2021.pmtiles`, layer `at_block`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
@@ -37,9 +37,10 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(47.6558, 13.3188), 'EPSG:4326', 'EPSG:31287'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(47.7097, 13.3459), 'EPSG:4326', 'EPSG:31287'), 500))
 LIMIT 5;
 -- id | m2
+-- 107738498.0 | 73331984.0
 ```
 
 ## Related collections

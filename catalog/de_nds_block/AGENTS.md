@@ -5,14 +5,14 @@ Germany, Lower Saxony/Bremen/Hamburg (blocks) field boundaries in the [fiboa](ht
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/de_nds_block/latest/de_nds_block.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block-2026.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/de_nds_block/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block.pmtiles`, layer `de_nds_block`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block-2026.pmtiles`, layer `de_nds_block`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:25832, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres**, taken from the source column `FLAECHE` (hectares × 10 000). Divide by 10 000 for hectares.
+- **`metrics:area` is in square metres** (source column `FLAECHE`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `FLIK`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `ant_jahr` = `2026`, `admin:country_code` = `DE`, `admin:subdivision_code` = `NI` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
@@ -37,14 +37,14 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_nds_block/latest/de_nds_block.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.5944, 9.1295), 'EPSG:4326', 'EPSG:25832'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.6179, 9.1335), 'EPSG:4326', 'EPSG:25832'), 500))
 LIMIT 5;
 -- id | m2
--- DENILI1635910043 | 183052.0
--- DENILI2535910006 | 15211.0
--- DENILI2135910044 | 10407.0
--- DENILI2435910029 | 21864.0
--- DENILI2435910031 | 14381.0
+-- DENILI2435940018 | 15914.0
+-- DENILI2135940029 | 6853.0
+-- DENILI2435940014 | 31085.0
+-- DENILI1635940040 | 3059.0
+-- DENILI2135940042 | 1752.0
 ```
 
 ## Related collections

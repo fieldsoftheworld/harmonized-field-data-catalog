@@ -46,10 +46,10 @@
     "spatial": {
       "bbox": [
         [
-          9.870286176309087,
-          50.16579691789659,
-          12.70812350749261,
-          51.65252530677689
+          9.878068493521274,
+          50.20885315827379,
+          12.653888655384284,
+          51.643253049899144
         ]
       ]
     },
@@ -152,13 +152,17 @@
       "href": "./latest/de_th.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Thuringia — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_th.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_th-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 132118027,
       "file:checksum": "122019e9b5e2e02528a4c846278b4858f002e25b4561616fcd389fd606f6e5a266fb",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -169,8 +173,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2, 10 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1225,
-      "file:checksum": "1220f17ddbbe743d95a522e8726386f5608e213ac1829b3895b58543b3e9871b3d19"
+      "file:size": 1230,
+      "file:checksum": "12208b8dffdc0310777ed37529939cab66f296010f336c5897f358273b14e7ff9d35"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -180,11 +184,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 742,
-      "file:checksum": "12204dd2c5da48588f26c5c22c88a73d943144a3c1caf8228c301a2048e59ae70341"
+      "file:size": 747,
+      "file:checksum": "12209dcd5bf9c039cbd070f7164fc0464e9a8b8f528430cc5dbc73c99ebdb50fe9e9"
     },
     "visual": {
-      "href": "./year=2026/de_th.pmtiles",
+      "href": "./year=2026/de_th-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Thuringia — latest edition (2026) (PMTiles)",
       "roles": [
@@ -235,7 +239,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_th.pmtiles",
+      "href": "./year=2026/de_th-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -272,10 +276,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_th": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "© GDI-Th"

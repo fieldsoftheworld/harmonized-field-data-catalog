@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          20.839223885313622,
-          55.63221901731316
+          20.983634336211278,
+          55.67535577616556
         ],
         [
-          28.42516595855106,
-          55.63221901731316
+          28.22052639257332,
+          55.67535577616556
         ],
         [
-          28.42516595855106,
-          58.043857497031084
+          28.22052639257332,
+          58.07650131807088
         ],
         [
-          20.839223885313622,
-          58.043857497031084
+          20.983634336211278,
+          58.07650131807088
         ],
         [
-          20.839223885313622,
-          55.63221901731316
+          20.983634336211278,
+          55.67535577616556
         ]
       ]
     ]
   },
   "bbox": [
-    20.839223885313622,
-    55.63221901731316,
-    28.42516595855106,
-    58.043857497031084
+    20.983634336211278,
+    55.67535577616556,
+    28.22052639257332,
+    58.07650131807088
   ],
   "properties": {
     "title": "Latvia - Eurocrops 2021 — 2021",
-    "description": "Field boundaries of the 2021 edition of this dataset, one GeoParquet file (`ec_lv.parquet`, 432,188 fields) and its PMTiles. Partition `year=2021` of the collection's hive layout.",
+    "description": "Field boundaries of the 2021 edition of this dataset, one GeoParquet file (`ec_lv-2021.parquet`, 432,188 fields) and its PMTiles. Partition `year=2021` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2021-04-08T03:18:28Z",
     "end_datetime": "2021-08-23T03:10:38Z",
@@ -115,13 +115,13 @@
     "table:row_count": 432188,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "ec_lv",
   "assets": {
     "data": {
-      "href": "./ec_lv.parquet",
+      "href": "./ec_lv-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Latvia - Eurocrops 2021 2021 (GeoParquet)",
       "roles": [
@@ -132,7 +132,7 @@
       "proj:code": "EPSG:3059"
     },
     "visual": {
-      "href": "./ec_lv.pmtiles",
+      "href": "./ec_lv-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Latvia - Eurocrops 2021 2021 (PMTiles)",
       "roles": [

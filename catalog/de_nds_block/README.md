@@ -7,7 +7,7 @@ A field block (German: "Feldblock") is a contiguous agricultural area surrounded
 - **Editions:** 2026 (one GeoParquet per year)
 - **Fields in the latest edition (2026):** 539,834
 - **Coordinate reference system:** EPSG:25832 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.16 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/de_nds_block.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/de_nds_block.py))
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/de_nds_block/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_nds_block/AGENTS.md) for tested queries.
 
@@ -15,7 +15,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 539,834 | [168.4 MB](https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block.parquet) | [64.8 MB](https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block.pmtiles) | [de_nds_block-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block-2026.json) |
+| 2026 | 539,834 | [168.4 MB](https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block-2026.parquet) | [64.8 MB](https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block-2026.pmtiles) | [de_nds_block-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_nds_block/year=2026/de_nds_block-2026.json) |
 
 The latest edition is also available at a stable path: [de_nds_block/latest/de_nds_block.parquet](https://data.source.coop/ftw/harmonized-field-data/de_nds_block/latest/de_nds_block.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/de_nds_block/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_nds_block/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -53,7 +53,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_nds_blo
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [ML/SLA Niedersachsen](https://sla.niedersachsen.de/landentwicklung/LEA/) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
+This catalog is a mirror: the data is produced and licensed by [ML/SLA Niedersachsen](https://sla.niedersachsen.de/landentwicklung/LEA/) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2026: converted 2026-09-03 from <https://sla.niedersachsen.de/mapbender_sla/download/FB_NDS.zip>
 

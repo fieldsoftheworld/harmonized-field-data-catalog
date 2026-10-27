@@ -9,7 +9,7 @@ Geographic Information System (SIGPAC) in the Valencian Community valid for the 
 - **Editions:** 2024 (one GeoParquet per year)
 - **Fields in the latest edition (2024):** 2,319,893
 - **Coordinate reference system:** EPSG:25830 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.15 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/es_vc.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.18 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/es_vc.py))
 - **Data survey:** [ES-VC.md](https://github.com/fiboa/data-survey/blob/main/data/ES-VC.md)
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/es_vc/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_vc/AGENTS.md) for tested queries.
@@ -18,7 +18,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2024 | 2,319,893 | [1.0 GB](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.parquet) | [368.1 MB](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.pmtiles) | [es_vc-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.json) |
+| 2024 | 2,319,893 | [983.7 MB](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.parquet) | [373.2 MB](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.pmtiles) | [es_vc-2024.json](https://data.source.coop/ftw/harmonized-field-data/es_vc/year=2024/es_vc-2024.json) |
 
 The latest edition is also available at a stable path: [es_vc/latest/es_vc.parquet](https://data.source.coop/ftw/harmonized-field-data/es_vc/latest/es_vc.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/es_vc/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_vc/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -26,23 +26,25 @@ The latest edition is also available at a stable path: [es_vc/latest/es_vc.parqu
 
 | Column | Type | Description |
 |---|---|---|
-| `admin_province_code` | string | Province ID (source column `PROVINCIA`, per the fiboa data survey) |
-| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
-| `collection` | string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `crop:name_en` | string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
 | `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `admin_municipality_code` | string | Municipality ID (source column `MUNICIPIO`, per the fiboa data survey) |
 | `crop:code` | string | The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
 | `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `crop:name_en` | string | Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
 | `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `admin_municipality_code` | string | Municipality ID (source column `MUNICIPIO`, per the fiboa data survey) |
+| `hcat:name` | string | The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `hcat:name_en` | string | The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
+| `crop:name` | string | Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md)) |
+| `admin_province_code` | string | Province ID (source column `PROVINCIA`, per the fiboa data survey) |
+| `hcat:code` | uint32 | The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md)) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
 
 - `admin:country_code`: `ES`
-- `crop:code_list`: `https://fiboa.org/code/es/sigpac/land_use.csv`
 - `admin:subdivision_code`: `VC`
 - `determination:datetime`: `2024-01-01T00:00:00Z`
+- `crop:code_list`: `https://fiboa.org/code/es/sigpac/land_use.csv`
 
 ## Access
 
@@ -58,9 +60,9 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_vc/late
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Spanish Agricultural Guarantee Fund (FEGA) of the Ministry of Agriculture, Fisheries and Food](https://www.fega.gob.es/es/PwfGcp/es/el_fega/index.jsp) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
+This catalog is a mirror: the data is produced and licensed by [Spanish Agricultural Guarantee Fund (FEGA) of the Ministry of Agriculture, Fisheries and Food](https://www.fega.gob.es/es/PwfGcp/es/el_fega/index.jsp) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.18:
 
-- 2024: converted 2026-08-28 from <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PALI_SIGPAC_RECINTOS_25830_SHP.7z>, <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PCAS_SIGPAC_RECINTOS_25830_SHP.7z>, <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PVAL_SIGPAC_RECINTOS_25830_SHP.7z>
+- 2024: converted 2026-09-18 from <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PALI_SIGPAC_RECINTOS_25830_SHP.7z>, <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PCAS_SIGPAC_RECINTOS_25830_SHP.7z>, <https://descargas.icv.gva.es/dcd/14_mediorural/03_pac/2024_SIGPAC_0050/1403_2024PVAL_SIGPAC_RECINTOS_25830_SHP.7z>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

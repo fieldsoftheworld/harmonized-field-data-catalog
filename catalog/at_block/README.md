@@ -11,7 +11,7 @@ Reference parcel: is the physical block that can be clearly delimited from the o
 - **Editions:** 2021 (one GeoParquet per year)
 - **Fields in the latest edition (2021):** 1,299,755
 - **Coordinate reference system:** EPSG:31287 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.15 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/at_block.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/at_block.py))
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/at_block/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/at_block/AGENTS.md) for tested queries.
 
@@ -19,7 +19,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2021 | 1,299,755 | [727.9 MB](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block.parquet) | [244.1 MB](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block.pmtiles) | [at_block-2021.json](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block-2021.json) |
+| 2021 | 1,299,755 | [727.9 MB](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block-2021.parquet) | [244.1 MB](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block-2021.pmtiles) | [at_block-2021.json](https://data.source.coop/ftw/harmonized-field-data/at_block/year=2021/at_block-2021.json) |
 
 The latest edition is also available at a stable path: [at_block/latest/at_block.parquet](https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/at_block/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/at_block/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -57,7 +57,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/at_block/l
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Agrarmarkt Austria](https://geometadatensuche.inspire.gv.at/metadatensuche/inspire/api/records/9db8a0c3-e92a-4df4-9d55-8210e326a7ed) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
+This catalog is a mirror: the data is produced and licensed by [Agrarmarkt Austria](https://geometadatensuche.inspire.gv.at/metadatensuche/inspire/api/records/9db8a0c3-e92a-4df4-9d55-8210e326a7ed) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2021: converted 2026-08-28 from <https://inspire.lfrz.gv.at/009501/ds/inspire_referenzen_2021_polygon.gpkg.zip>
 

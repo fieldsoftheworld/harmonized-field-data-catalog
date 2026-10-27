@@ -139,7 +139,11 @@
       ],
       "file:size": 78093026,
       "file:checksum": "122031c17662afcbbbb2217b55db3ef686ce3324e6049e67892690c620af24ffeb26",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.3.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",

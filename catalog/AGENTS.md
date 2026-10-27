@@ -18,14 +18,14 @@ FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- at | 2944397
+-- at_block | 1299755
 -- be_vlg | 597088
 -- be_wal | 342315
+-- bg | 226592
 -- br_conab | 390805
+-- ca_prairies | 656082
 -- ch | 1520805
--- de_bb | 232338
--- de_bw | 4363087
--- de_mv | 20000
--- ... 15 more rows
+-- ... 58 more rows
 ```
 
 Every edition of every collection:
@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2020 | at | 2614636
 -- 2021 | at | 2610511
 -- 2022 | at | 2600002
--- ... 149 more rows
+-- ... 319 more rows
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.

@@ -45,10 +45,10 @@
     "spatial": {
       "bbox": [
         [
-          5.736141650909274,
-          49.44872633968609,
-          6.533284021587814,
-          50.18226420224323
+          5.73867219764378,
+          49.449423079925126,
+          6.530440438113776,
+          50.182753569718855
         ]
       ]
     },
@@ -106,13 +106,17 @@
       "href": "./latest/lu.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Luxembourg — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/lu.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/lu-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 30249415,
       "file:checksum": "12206ffdd9c74e6fa5d6fa2e85ed7d46e0b52abd3f64cab1ad7feb2baa604b9867f6",
-      "proj:code": "EPSG:2169"
+      "proj:code": "EPSG:2169",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -123,11 +127,11 @@
         "default"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 725,
-      "file:checksum": "12206f202372fda5a31f71af240f0dd12d7dccf38b7afe7149f9bcf2ae7d463ab1e0"
+      "file:size": 730,
+      "file:checksum": "1220b1cdde1223b617b55a5666b557445d1b731f583a6952057e8752e4832cd184d0"
     },
     "visual": {
-      "href": "./year=2026/lu.pmtiles",
+      "href": "./year=2026/lu-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Luxembourg — latest edition (2026) (PMTiles)",
       "roles": [
@@ -178,7 +182,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/lu.pmtiles",
+      "href": "./year=2026/lu-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -215,9 +219,9 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "lu": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "Luxembourg ministry of Agriculture"

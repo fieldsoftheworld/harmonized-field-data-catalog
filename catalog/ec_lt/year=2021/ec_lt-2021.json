@@ -43,7 +43,7 @@
   ],
   "properties": {
     "title": "Lithuania - Eurocrops 2021 — 2021",
-    "description": "Field boundaries of the 2021 edition of this dataset, one GeoParquet file (`ec_lt.parquet`, 439,199 fields) and its PMTiles. Partition `year=2021` of the collection's hive layout.",
+    "description": "Field boundaries of the 2021 edition of this dataset, one GeoParquet file (`ec_lt-2021.parquet`, 439,199 fields) and its PMTiles. Partition `year=2021` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2021-01-01T00:00:00Z",
     "end_datetime": "2021-12-31T23:59:59Z",
@@ -105,13 +105,13 @@
     "table:row_count": 439199,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "ec_lt",
   "assets": {
     "data": {
-      "href": "./ec_lt.parquet",
+      "href": "./ec_lt-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Lithuania - Eurocrops 2021 2021 (GeoParquet)",
       "roles": [
@@ -122,7 +122,7 @@
       "proj:code": "EPSG:4326"
     },
     "visual": {
-      "href": "./ec_lt.pmtiles",
+      "href": "./ec_lt-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Lithuania - Eurocrops 2021 2021 (PMTiles)",
       "roles": [

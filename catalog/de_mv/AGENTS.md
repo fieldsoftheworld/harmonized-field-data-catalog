@@ -5,9 +5,9 @@ Germany, Mecklenburg-Western Pomerania field boundaries in the [fiboa](https://g
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/de_mv/latest/de_mv.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/de_mv/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/de_mv/year=2026/de_mv.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/de_mv/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/de_mv/year=2026/de_mv-2026.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/de_mv/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/de_mv/year=2026/de_mv.pmtiles`, layer `de_mv`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/de_mv/year=2026/de_mv-2026.pmtiles`, layer `de_mv`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
@@ -37,12 +37,13 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_mv/latest/de_mv.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(53.8876, 12.4291), 'EPSG:4326', 'EPSG:25833'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(53.8961, 12.4943), 'EPSG:4326', 'EPSG:25833'), 500))
 LIMIT 5;
 -- id | m2
--- DEMVLI073BD10012 | 33767.0
--- DEMVLI073BD10141 | 1075.0
--- DEMVLI073BD10029 | 1876812.0
+-- DEMVLI073BD20074 | 2321098.0
+-- DEMVLI073BD20086 | 1492249.0
+-- DEMVLI074AC10024 | 399643.0
+-- DEMVLI073BD20028 | 779298.0
 ```
 
 ## Related collections

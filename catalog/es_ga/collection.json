@@ -56,7 +56,7 @@
       "interval": [
         [
           "2014-01-01T00:00:00Z",
-          "2026-01-01T00:00:00Z"
+          "2026-12-31T23:59:59Z"
         ]
       ]
     }
@@ -68,39 +68,9 @@
   },
   "table:columns": [
     {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:name",
-      "type": "string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "admin_province_code",
-      "type": "string",
-      "description": "Province code (source column `PROVINCIA`, per the fiboa data survey)"
-    },
-    {
       "name": "geometry",
       "type": "binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:name_en",
-      "type": "string",
-      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "admin_municipality_code",
@@ -108,9 +78,49 @@
       "description": "Municipal code (source column `MUNICIPIO`, per the fiboa data survey)"
     },
     {
+      "name": "crop:name_en",
+      "type": "string",
+      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "admin_province_code",
+      "type": "string",
+      "description": "Province code (source column `PROVINCIA`, per the fiboa data survey)"
+    },
+    {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
       "name": "crop:code",
       "type": "string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -140,17 +150,32 @@
       "roles": [
         "data"
       ],
-      "file:size": 1251413239,
-      "file:checksum": "12209cbb7ef17cccfa38bfecfb83d1db3b13a513db4eaa03b29818d4e5bc2216bffc",
-      "proj:code": "EPSG:4326"
+      "file:size": 1253823341,
+      "file:checksum": "12206fac527aaff40c3add419457bb7bf45f3b9d1d748d9de5bf36ecd93fbfb4a666",
+      "proj:code": "EPSG:4326",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.2.18"
+      }
+    },
+    "style-hcat-crops": {
+      "href": "./styles/hcat-crops.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Crops (HCAT)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 8 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
+      "file:size": 1985,
+      "file:checksum": "1220392f37095bd614aab9971e614ef0fba693696cd5f68555e5ce18c647c7a1648e"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
       "type": "application/vnd.mapbox.style+json",
       "title": "Field size (ha)",
       "roles": [
-        "style",
-        "default"
+        "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
       "file:size": 1155,
@@ -174,8 +199,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 569599770,
-      "file:checksum": "1220571c31f36d499478f44a5bbb448d97e7621784ee77bb5aff845fcec1b965a24c"
+      "file:size": 571904589,
+      "file:checksum": "12205656838115375a20538fbc34be20f719f284a3d02b168de9a57573aef124a5ed"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -323,15 +348,16 @@
       "title": "Spain Galicia — 2026"
     }
   ],
-  "updated": "2026-09-01T17:42:08Z",
+  "updated": "2026-09-19T10:27:29Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_ga": [
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "Información procedente do FOGGA"

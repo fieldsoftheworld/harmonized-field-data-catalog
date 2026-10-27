@@ -47,10 +47,10 @@
     "spatial": {
       "bbox": [
         [
-          8.976904133281685,
-          47.17999898404064,
-          14.014176378937588,
-          50.56127850734788
+          8.977150686911196,
+          47.27034142530396,
+          13.837326992427872,
+          50.555142259387125
         ]
       ]
     },
@@ -133,13 +133,17 @@
       "href": "./latest/de_by_block.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Bavaria (blocks) — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_by_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_by_block-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 606503140,
       "file:checksum": "12201d3f7ad403b7b23ce9a296683d1629fcfc98422fe0f20c7f5fe95b7586602dc3",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -150,8 +154,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1211,
-      "file:checksum": "1220c19d9d88f844314f5f2180774d9ed7944dfe89ec5eaadbf1fb69423fb860bebf"
+      "file:size": 1216,
+      "file:checksum": "122061fd581180e8f4f369c27874847169d6b4b3111fdd11c3476d0fd78339624261"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -161,11 +165,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 767,
-      "file:checksum": "1220e78b064a8ca94cffce450ee197a75d68cd5edd2483221bf414ed288eb08051ca"
+      "file:size": 772,
+      "file:checksum": "122012c56ddf1609e74f66756b1a14f8201c2d39e4f10382efbe30826ff382a04ae5"
     },
     "visual": {
-      "href": "./year=2026/de_by_block.pmtiles",
+      "href": "./year=2026/de_by_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Bavaria (blocks) — latest edition (2026) (PMTiles)",
       "roles": [
@@ -216,7 +220,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_by_block.pmtiles",
+      "href": "./year=2026/de_by_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -247,11 +251,11 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_by_block": [
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "© Bayerisches Staatsministerium für Ernährung, Landwirtschaft, Forsten und Tourismus, CC BY 4.0"

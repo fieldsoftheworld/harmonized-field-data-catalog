@@ -5,9 +5,9 @@ Conab field boundaries in the [fiboa](https://github.com/fiboa/specification) sc
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/br_conab/latest/br_conab.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/br_conab/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/br_conab/year=2026/br_conab.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/br_conab/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/br_conab/year=2026/br_conab-2026.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/br_conab/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/br_conab/year=2026/br_conab.pmtiles`, layer `br_conab`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/br_conab/year=2026/br_conab-2026.pmtiles`, layer `br_conab`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 

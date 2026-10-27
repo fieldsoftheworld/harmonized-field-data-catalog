@@ -43,7 +43,7 @@
   ],
   "properties": {
     "title": "Conab — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`br_conab.parquet`, 390,805 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`br_conab-2026.parquet`, 390,805 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2026-01-01T00:00:00Z",
     "end_datetime": "2026-12-31T23:59:59Z",
@@ -85,13 +85,13 @@
     "table:row_count": 390805,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.4.0"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "br_conab",
   "assets": {
     "data": {
-      "href": "./br_conab.parquet",
+      "href": "./br_conab-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Conab 2026 (GeoParquet)",
       "roles": [
@@ -102,7 +102,7 @@
       "proj:code": "EPSG:4674"
     },
     "visual": {
-      "href": "./br_conab.pmtiles",
+      "href": "./br_conab-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Conab 2026 (PMTiles)",
       "roles": [

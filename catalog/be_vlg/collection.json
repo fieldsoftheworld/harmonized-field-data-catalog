@@ -158,7 +158,11 @@
       ],
       "file:size": 99447811,
       "file:checksum": "122034fe0b790de292a3e017560166a8af7d7f38afecefa9a25b586d14d63179ba51",
-      "proj:code": "EPSG:31370"
+      "proj:code": "EPSG:31370",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.2.18"
+      }
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",

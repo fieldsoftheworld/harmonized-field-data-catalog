@@ -43,7 +43,7 @@
   ],
   "properties": {
     "title": "Germany, Saarland — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_sl.parquet`, 54,460 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_sl-2026.parquet`, 54,460 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2026-01-01T00:00:00Z",
     "end_datetime": "2026-12-31T23:59:59Z",
@@ -85,13 +85,13 @@
     "table:row_count": 54460,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.18"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "de_sl",
   "assets": {
     "data": {
-      "href": "./de_sl.parquet",
+      "href": "./de_sl-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Saarland 2026 (GeoParquet)",
       "roles": [
@@ -102,7 +102,7 @@
       "proj:code": "EPSG:4258"
     },
     "visual": {
-      "href": "./de_sl.pmtiles",
+      "href": "./de_sl-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Saarland 2026 (PMTiles)",
       "roles": [

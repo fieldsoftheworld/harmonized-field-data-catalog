@@ -15,7 +15,8 @@ Spain Extremadura field boundaries in the [fiboa](https://github.com/fiboa/speci
 - **`metrics:area` is in square metres**, taken from the source column `dn_surface`. Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv`, `admin:subdivision_code` = `EX`, `determination:datetime` = `2026-01-01T00:00:00Z` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/es/sigpac/land_use.csv`) have `NULL`. All 1,549,765 rows of the 2026 edition carry one.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `admin:subdivision_code` = `EX`, `determination:datetime` = `2026-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 - Extremadura's own portal (sitex.gobex.es) has not answered since 2026-09-10, so these editions come from FEGA's national release of the same register, provinces 06 (Badajoz) and 10 (Cáceres).
 
 ## Tested queries
@@ -31,6 +32,22 @@ GROUP BY year ORDER BY year;
 -- year | fields | hectares
 -- 2025 | 1550714 | 3232284.0
 -- 2026 | 1549765 | 3230661.0
+```
+
+Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
+
+```sql
+SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, mode("hcat:name") AS most_common_name,
+       count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
+FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_ex/latest/es_ex.parquet')
+WHERE "hcat:code" IS NOT NULL
+GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
+-- hcat_group | most_common_name | fields | hectares
+-- 330200 | pasture_meadow_grassland_grass | 432749 | 2042883.0
+-- 330100 | arable_crops | 390069 | 741964.0
+-- 330305 | olive_plantations | 492524 | 291889.0
+-- 330306 | vineyards_wine_vine_rebland_grapes | 70481 | 72225.0
+-- 330301 | orchards_fruits | 150375 | 52447.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

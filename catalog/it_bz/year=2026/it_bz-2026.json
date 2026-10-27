@@ -43,7 +43,7 @@
   ],
   "properties": {
     "title": "Italy, South Tyrol — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`it_bz.parquet`, 152,990 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`it_bz-2026.parquet`, 152,990 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2026-09-24T00:00:00Z",
     "end_datetime": "2026-09-24T00:00:00Z",
@@ -85,13 +85,13 @@
     "table:row_count": 152990,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.3.1"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "it_bz",
   "assets": {
     "data": {
-      "href": "./it_bz.parquet",
+      "href": "./it_bz-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Italy, South Tyrol 2026 (GeoParquet)",
       "roles": [
@@ -102,7 +102,7 @@
       "proj:code": "EPSG:25832"
     },
     "visual": {
-      "href": "./it_bz.pmtiles",
+      "href": "./it_bz-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Italy, South Tyrol 2026 (PMTiles)",
       "roles": [

@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          8.976888352898056,
-          47.17999939062103
+          8.977135126954165,
+          47.2703426867411
         ],
         [
-          14.014200261063245,
-          47.17999939062103
+          13.837348014824999,
+          47.2703426867411
         ],
         [
-          14.014200261063245,
-          50.56130126204544
+          13.837348014824999,
+          50.55516499112016
         ],
         [
-          8.976888352898056,
-          50.56130126204544
+          8.977135126954165,
+          50.55516499112016
         ],
         [
-          8.976888352898056,
-          47.17999939062103
+          8.977135126954165,
+          47.2703426867411
         ]
       ]
     ]
   },
   "bbox": [
-    8.976888352898056,
-    47.17999939062103,
-    14.014200261063245,
-    50.56130126204544
+    8.977135126954165,
+    47.2703426867411,
+    13.837348014824999,
+    50.55516499112016
   ],
   "properties": {
     "title": "Germany, Bavaria — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_by.parquet`, 1,296,105 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_by-2026.parquet`, 1,296,105 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2007-06-22T08:28:07Z",
     "end_datetime": "2025-12-30T15:55:41Z",
@@ -100,13 +100,13 @@
     "table:row_count": 1296105,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "de_by",
   "assets": {
     "data": {
-      "href": "./de_by.parquet",
+      "href": "./de_by-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Bavaria 2026 (GeoParquet)",
       "roles": [
@@ -117,7 +117,7 @@
       "proj:code": "EPSG:25832"
     },
     "visual": {
-      "href": "./de_by.pmtiles",
+      "href": "./de_by-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Bavaria 2026 (PMTiles)",
       "roles": [

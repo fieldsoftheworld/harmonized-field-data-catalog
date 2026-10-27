@@ -7,7 +7,7 @@
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2024/ca_prairies.pmtiles"
+      "url": "pmtiles://../year=2024/ca_prairies-2024.pmtiles"
     }
   },
   "layers": [

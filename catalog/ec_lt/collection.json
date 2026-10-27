@@ -136,13 +136,17 @@
       "href": "./latest/ec_lt.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Lithuania - Eurocrops 2021 — latest edition (2021) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2021/ec_lt.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2021/ec_lt-2021.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 210519587,
       "file:checksum": "1220638e5d5cdfd2e570af336a535df8b092e427ec11b4736c43052a5c8ec77d2bdc",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",
@@ -153,8 +157,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 9 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2082,
-      "file:checksum": "1220c48afe7b04ebe91faad2a8e1665dc8c1d81135d4e7bf148ee97e26b8fe0a3a71"
+      "file:size": 2087,
+      "file:checksum": "122056a36349f03113111a7adb42c3510248fb389f0ed445db1e3d12c355b0153038"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -164,8 +168,8 @@
         "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1231,
-      "file:checksum": "122061974e2f7c31654e064c002f8a48fcd0373211427be9f87cb69a9d81eacb3a7e"
+      "file:size": 1236,
+      "file:checksum": "1220ab41870e5a5963308a205cae4b91d470c4a56d6871a2d75075c5a17b3a4170da"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -175,11 +179,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 750,
-      "file:checksum": "1220424fd2d62ab534a436c1e6e4e94c8ca1d9b0ef9a5fe8e819fdf766534f5d2db2"
+      "file:size": 755,
+      "file:checksum": "1220695c1d39795529adbfbc5f99ac9f9e6df8bd49d974748ff930e87a1ecbc697cc"
     },
     "visual": {
-      "href": "./year=2021/ec_lt.pmtiles",
+      "href": "./year=2021/ec_lt-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Lithuania - Eurocrops 2021 — latest edition (2021) (PMTiles)",
       "roles": [
@@ -230,7 +234,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2021/ec_lt.pmtiles",
+      "href": "./year=2021/ec_lt-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -262,8 +266,8 @@
   "vecorel_extensions": {
     "ec_lt": [
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   }

@@ -128,13 +128,17 @@
       "href": "./latest/de_sl_block.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Saarland (LPIS) — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_sl_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_sl_block-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 19502080,
       "file:checksum": "1220d4d13a17494418f085f6a1bc320d8e42e4083ed8b69f3ad90ff65cc8bbfd32be",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -145,8 +149,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.25, 0.5, 1, 2 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1253,
-      "file:checksum": "1220b08c5220628ef82fc9962ab762451a78d8a82c3587eb21745aad3216d5585856"
+      "file:size": 1258,
+      "file:checksum": "122066f55daf82ceccc3307e114dfa3ec4c4608abea1d6a8de6f2be0f34542ee2a01"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -156,11 +160,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 766,
-      "file:checksum": "122021957467464cbb6968aa4684e40cd88be78230b220ef824b189fda9d96840488"
+      "file:size": 771,
+      "file:checksum": "12204fa1e2b24c7e9577cc9540be4045c0029e91ed628136aba295957bf8859e552a"
     },
     "visual": {
-      "href": "./year=2026/de_sl_block.pmtiles",
+      "href": "./year=2026/de_sl_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Saarland (LPIS) — latest edition (2026) (PMTiles)",
       "roles": [
@@ -211,7 +215,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_sl_block.pmtiles",
+      "href": "./year=2026/de_sl_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -242,10 +246,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_sl_block": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },

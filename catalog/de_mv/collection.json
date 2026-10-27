@@ -46,10 +46,10 @@
     "spatial": {
       "bbox": [
         [
-          10.460957127993252,
-          53.08446448481229,
-          14.39716051830725,
-          54.69063591957422
+          10.594215601074769,
+          53.110319795519096,
+          14.394313888949151,
+          54.681942642464925
         ]
       ]
     },
@@ -157,13 +157,17 @@
       "href": "./latest/de_mv.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Mecklenburg-Western Pomerania — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_mv.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_mv-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 48385432,
       "file:checksum": "12201c15b8a41069ccec5cd51975f4d96f4225efd992b696bb66c753a6bbc6c9233f",
-      "proj:code": "EPSG:25833"
+      "proj:code": "EPSG:25833",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -174,8 +178,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 2, 10, 50 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1243,
-      "file:checksum": "12204e8421d201de7f86da35025e2d45d131670c245b669d869624bd1723eafad52e"
+      "file:size": 1248,
+      "file:checksum": "1220e4d0ac448b1c24d4a9073201d3bce608c5f85e3625180e5d742989e440acb86b"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -185,11 +189,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 762,
-      "file:checksum": "122038b3f3288cfe53427f8c50fa38162033a9c3a27e8e29ce876cee0a1aa3d45868"
+      "file:size": 767,
+      "file:checksum": "1220fa2c9cab776221ac3c80cabc4c89101f56c46f3f4c65d8e522f7ebdec4ba1d65"
     },
     "visual": {
-      "href": "./year=2026/de_mv.pmtiles",
+      "href": "./year=2026/de_mv-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Mecklenburg-Western Pomerania — latest edition (2026) (PMTiles)",
       "roles": [
@@ -246,7 +250,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_mv.pmtiles",
+      "href": "./year=2026/de_mv-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -283,10 +287,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_mv": [
-      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   }

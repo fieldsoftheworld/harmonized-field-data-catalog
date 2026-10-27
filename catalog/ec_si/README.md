@@ -7,7 +7,7 @@ This dataset contains the field boundaries for all of Slovenia in 2021. The data
 - **Editions:** 2021 (one GeoParquet per year)
 - **Fields in the latest edition (2021):** 828,263
 - **Coordinate reference system:** EPSG:3794 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.16 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ec_si.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ec_si.py))
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/ec_si/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ec_si/AGENTS.md) for tested queries.
 
@@ -15,7 +15,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2021 | 828,263 | [166.1 MB](https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si.parquet) | [141.6 MB](https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si.pmtiles) | [ec_si-2021.json](https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si-2021.json) |
+| 2021 | 828,263 | [166.1 MB](https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si-2021.parquet) | [141.6 MB](https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si-2021.pmtiles) | [ec_si-2021.json](https://data.source.coop/ftw/harmonized-field-data/ec_si/year=2021/ec_si-2021.json) |
 
 The latest edition is also available at a stable path: [ec_si/latest/ec_si.parquet](https://data.source.coop/ftw/harmonized-field-data/ec_si/latest/ec_si.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/ec_si/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ec_si/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -51,7 +51,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_si/late
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Ministrstvo za kmetijstvo, gozdarstvo in prehrano <https://rkg.gov.si/vstop/>, EuroCrops](https://github.com/maja601/EuroCrops) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.16:
+This catalog is a mirror: the data is produced and licensed by [Ministrstvo za kmetijstvo, gozdarstvo in prehrano <https://rkg.gov.si/vstop/>, EuroCrops](https://github.com/maja601/EuroCrops) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2021: converted 2026-09-03 from <https://zenodo.org/records/10118572/files/SI_2021.zip?download=1>
 

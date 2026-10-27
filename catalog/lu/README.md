@@ -9,7 +9,7 @@ To ensure that payments are regular, the CAP relies on the Integrated Administra
 - **Editions:** 2026 (one GeoParquet per year)
 - **Fields in the latest edition (2026):** 87,997
 - **Coordinate reference system:** EPSG:2169 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.15 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/lu.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/lu.py))
 - **Data survey:** [LU.md](https://github.com/fiboa/data-survey/blob/main/data/LU.md)
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/lu/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lu/AGENTS.md) for tested queries.
@@ -18,7 +18,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 87,997 | [28.8 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.parquet) | [9.8 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu.pmtiles) | [lu-2026.json](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu-2026.json) |
+| 2026 | 87,997 | [28.8 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu-2026.parquet) | [9.8 MB](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu-2026.pmtiles) | [lu-2026.json](https://data.source.coop/ftw/harmonized-field-data/lu/year=2026/lu-2026.json) |
 
 The latest edition is also available at a stable path: [lu/latest/lu.parquet](https://data.source.coop/ftw/harmonized-field-data/lu/latest/lu.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/lu/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lu/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -48,7 +48,7 @@ SELECT count(*) AS fields FROM read_parquet('https://data.source.coop/ftw/harmon
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Administration des services techniques de l'agriculture](https://asta.etat.lu/en) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
+This catalog is a mirror: the data is produced and licensed by [Administration des services techniques de l'agriculture](https://asta.etat.lu/en) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2026: converted 2026-08-28 from <https://data.public.lu/fr/datasets/r/b4ae6690-7e4c-4454-8b60-9fa33ba6a61b>
 

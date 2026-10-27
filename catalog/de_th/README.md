@@ -20,7 +20,7 @@ To produce the DGK-Lw, (official) orthophotos from the Thuringian Land Registry 
 - **Editions:** 2026 (one GeoParquet per year)
 - **Fields in the latest edition (2026):** 102,076
 - **Coordinate reference system:** EPSG:25832 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.2.15 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/de_th.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/de_th.py))
 - **Data survey:** [DE-TH.md](https://github.com/fiboa/data-survey/blob/main/data/DE-TH.md)
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/de_th/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_th/AGENTS.md) for tested queries.
@@ -29,7 +29,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 102,076 | [126.0 MB](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th.parquet) | [36.5 MB](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th.pmtiles) | [de_th-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.json) |
+| 2026 | 102,076 | [126.0 MB](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.parquet) | [36.5 MB](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.pmtiles) | [de_th-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.json) |
 
 The latest edition is also available at a stable path: [de_th/latest/de_th.parquet](https://data.source.coop/ftw/harmonized-field-data/de_th/latest/de_th.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/de_th/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_th/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -72,7 +72,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_th/late
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Thüringer Landesamt für Landwirtschaft und Ländlichen Raum](https://geomis.geoportal-th.de/geonetwork/srv/ger/catalog.search#/metadata/D872F2D6-60BC-11D6-B67D-00E0290F5BA0) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.2.15:
+This catalog is a mirror: the data is produced and licensed by [Thüringer Landesamt für Landwirtschaft und Ländlichen Raum](https://geomis.geoportal-th.de/geonetwork/srv/ger/catalog.search#/metadata/D872F2D6-60BC-11D6-B67D-00E0290F5BA0) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2026: converted 2026-08-28 from <https://www.geoproxy.geoportal-th.de/download-service/opendata/agrar/DGK_Thue.zip>
 

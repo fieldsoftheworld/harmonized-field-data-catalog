@@ -47,10 +47,10 @@
     "spatial": {
       "bbox": [
         [
-          11.235119972136074,
-          51.31069259294588,
-          14.765480886097825,
-          53.56446415731656
+          11.269227339248756,
+          51.35897444894012,
+          14.764205453359025,
+          53.55861242367207
         ]
       ]
     },
@@ -138,13 +138,17 @@
       "href": "./latest/de_bb_block.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Berlin/Brandenburg (blocks) — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_bb_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_bb_block-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 88619653,
       "file:checksum": "1220752062e14842ad68417bf5a51e45a78802786517033bebe594d79104860cb9a1",
-      "proj:code": "EPSG:25833"
+      "proj:code": "EPSG:25833",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -155,8 +159,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 2, 5, 20 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1257,
-      "file:checksum": "12204edb74bf77bb798c8f4172f04c9430162272717127024ab0c3854ef3df94edab"
+      "file:size": 1262,
+      "file:checksum": "12205a9296ed27c86d414300bf653c9572f8215008bb374aee415e987425fb3035d8"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -166,11 +170,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 778,
-      "file:checksum": "1220dd4147c0678260a074bc737b760eaba0b0c7b211256e39c53e8f848857b10762"
+      "file:size": 783,
+      "file:checksum": "12200e2a4df496951dd951ddc52a22952bd667e5668eb94915baace7563814f95f48"
     },
     "visual": {
-      "href": "./year=2026/de_bb_block.pmtiles",
+      "href": "./year=2026/de_bb_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Berlin/Brandenburg (blocks) — latest edition (2026) (PMTiles)",
       "roles": [
@@ -221,7 +225,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_bb_block.pmtiles",
+      "href": "./year=2026/de_bb_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -252,10 +256,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_bb_block": [
-      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml"
     ]
   }
 }

@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Field boundary datasets published by government bodies — from their agricultural subsidy registers (IACS/LPIS), cadastres, statistics and mapping programmes — and by research institutions, harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 69 collections (AT, BE, BG, BR, CA, CH, CZ, DE, DK, EC, EE, ES, FI, FR, HR, IE, IT, JP, LT, LU, LV, NL, NZ, PL, PT, SE, SI, SK, US). In 61 collections the boundaries are declared — they come from farmers' subsidy applications, or from the parcel register built on those declarations. `br_conab`, `es_cn`, `jp`, `nz`, `us_ca_scm` are mapped by an authority from imagery or survey; `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Each collection's `boundaries` field says which. 53 hold crop fields — one declared crop on one parcel — 145,713,124 in their latest editions and 773,229,641 across all 339 editions together, counting a field once per edition it appears in. The other 16 hold field blocks (reference parcels, which several fields can share): 19,341,868 and 25,762,283 over 32 editions. The two are not added together. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.
+Field boundary datasets published by government bodies — from their agricultural subsidy registers (IACS/LPIS), cadastres, statistics and mapping programmes — and by research institutions, harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 69 collections (AT, BE, BG, BR, CA, CH, CZ, DE, DK, EC, EE, ES, FI, FR, HR, IE, IT, JP, LT, LU, LV, NL, NZ, PL, PT, SE, SI, SK, US). In 61 collections the boundaries are declared — they come from farmers' subsidy applications, or from the parcel register built on those declarations. `br_conab`, `es_cn`, `jp`, `nz`, `us_ca_scm` are mapped by an authority from imagery or survey; `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Each collection's `boundaries` field says which. 53 hold crop fields — one declared crop on one parcel — 145,732,084 in their latest editions and 773,381,390 across all 339 editions together, counting a field once per edition it appears in. The other 16 hold field blocks (reference parcels, which several fields can share): 19,341,868 and 25,762,283 over 32 editions. The two are not added together. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.
 
 ## Collections
 
@@ -74,7 +74,7 @@ Field boundary datasets published by government bodies — from their agricultur
 | [Slovenia Crop Fields](https://source.coop/ftw/harmonized-field-data/si) | crop fields | [Ministry of Agriculture, Forestry and Food (Ministrstvo za kmetijstvo, gozdarstvo in prehrano)](https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-kmetijstvo-gozdarstvo-in-prehrano/) | 2019, 2020, 2021, 2022, 2023, 2024 | 809,044 | other | [README](https://source.coop/ftw/harmonized-field-data/si/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/si/AGENTS.md) |
 | [Slovakia Agricultural Land Identification System](https://source.coop/ftw/harmonized-field-data/sk) | crop fields | [Pôdohospodárska platobná agentúra](https://www.apa.sk) | 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 | 271,807 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/sk/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/sk/AGENTS.md) |
 | [California (US) Statewide Crop Mapping](https://source.coop/ftw/harmonized-field-data/us_ca_scm) | crop fields | [California Department of Water Resources](https://data.cnra.ca.gov/dataset/statewide-crop-mapping) | 2014, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024 | 447,944 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/us_ca_scm/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/us_ca_scm/AGENTS.md) |
-| [U.S. Department of Agriculture Crop Sequence Boundaries](https://source.coop/ftw/harmonized-field-data/us_usda_cropland) | crop fields | [United States Department of Agriculture](https://www.nass.usda.gov) | 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 | 7,522,713 | other | [README](https://source.coop/ftw/harmonized-field-data/us_usda_cropland/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/us_usda_cropland/AGENTS.md) |
+| [U.S. Department of Agriculture Crop Sequence Boundaries](https://source.coop/ftw/harmonized-field-data/us_usda_cropland) | crop fields | [United States Department of Agriculture](https://www.nass.usda.gov) | 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 | 7,541,673 | other | [README](https://source.coop/ftw/harmonized-field-data/us_usda_cropland/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/us_usda_cropland/AGENTS.md) |
 
 ## Access
 
@@ -88,14 +88,14 @@ FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- at | 2944397
+-- at_block | 1299755
 -- be_vlg | 597088
 -- be_wal | 342315
+-- bg | 226592
 -- br_conab | 390805
+-- ca_prairies | 656082
 -- ch | 1520805
--- de_bb | 232338
--- de_bw | 4363087
--- de_mv | 20000
--- ... 15 more rows
+-- ... 58 more rows
 ```
 
 ## Map tiles of every collection

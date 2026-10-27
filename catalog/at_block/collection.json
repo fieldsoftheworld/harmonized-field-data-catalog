@@ -46,10 +46,10 @@
     "spatial": {
       "bbox": [
         [
-          9.405290337503184,
-          46.34587798618984,
-          17.232237903076722,
-          48.96562892993612
+          9.531354722129752,
+          46.40140149518497,
+          17.16051790549572,
+          49.01793111058077
         ]
       ]
     },
@@ -137,13 +137,17 @@
       "href": "./latest/at_block.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Austria (blocks) — latest edition (2021) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2021/at_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2021/at_block-2021.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 763243424,
       "file:checksum": "12207b24012a4af2cc3fee98d3748d361adc5a75dcec2b2190ce1747069dd1dfaee9",
-      "proj:code": "EPSG:31287"
+      "proj:code": "EPSG:31287",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -154,8 +158,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.5, 2 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1197,
-      "file:checksum": "1220722367719314bca2db87df3013e73cc1be228794832155ded90fe354106eed1d"
+      "file:size": 1202,
+      "file:checksum": "122090dac5a575f98a396d2669e302aeb7f511205a6f0d7a2532b80ab3dad16f38eb"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -165,11 +169,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 749,
-      "file:checksum": "1220bf0dbe3dcb53d18ad80091e6ee05393a2ba588cddda2b9aeaef6457e732fa451"
+      "file:size": 754,
+      "file:checksum": "12207239357eeb8043ed0d5723fb86459073a01981801464df35ac726adad8d9ddbc"
     },
     "visual": {
-      "href": "./year=2021/at_block.pmtiles",
+      "href": "./year=2021/at_block-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Austria (blocks) — latest edition (2021) (PMTiles)",
       "roles": [
@@ -220,7 +224,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2021/at_block.pmtiles",
+      "href": "./year=2021/at_block-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -251,10 +255,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "at_block": [
-      "https://fiboa.org/inspire-extension/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/inspire-extension/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   }
 }
