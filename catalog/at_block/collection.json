@@ -46,10 +46,10 @@
     "spatial": {
       "bbox": [
         [
-          9.405290337503184,
-          46.34587798618984,
-          17.232237903076722,
-          48.96562892993612
+          9.531354722129752,
+          46.40140149518497,
+          17.16051790549572,
+          49.01793111058077
         ]
       ]
     },
@@ -69,28 +69,33 @@
   },
   "table:columns": [
     {
+      "name": "inspire:id",
+      "type": "string",
+      "description": "INSPIRE-compliant ID, an absolute and fully resolvable URI. ([spec](https://github.com/fiboa/inspire-extension/blob/main/README.md))"
+    },
+    {
+      "name": "ref_art_bezeichnung",
+      "type": "string",
+      "description": "Carried over from the source column `REF_ART_BEZEICHNUNG`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "determination:datetime",
+      "type": "timestamp[ms, tz=UTC]",
+      "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "referenz_kennung",
       "type": "uint64",
       "description": "Carried over from the source column `REFERENZ_KENNUNG`; the publisher documents no meaning for it."
     },
     {
-      "name": "ref_art_bezeichnung",
-      "type": "large_string",
-      "description": "Carried over from the source column `REF_ART_BEZEICHNUNG`; the publisher documents no meaning for it."
-    },
-    {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "inspire:id",
-      "type": "large_string",
-      "description": "INSPIRE-compliant ID, an absolute and fully resolvable URI. ([spec](https://github.com/fiboa/inspire-extension/blob/main/README.md))"
+      "name": "ref_art",
+      "type": "string",
+      "description": "Carried over from the source column `REF_ART`; the publisher documents no meaning for it."
     },
     {
       "name": "id",
-      "type": "large_string",
+      "type": "string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
@@ -99,19 +104,9 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "ref_art",
-      "type": "large_string",
-      "description": "Carried over from the source column `REF_ART`; the publisher documents no meaning for it."
-    },
-    {
-      "name": "determination:datetime",
-      "type": "timestamp[ms, tz=UTC]",
-      "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -120,7 +115,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 1299755,
+  "table:row_count": 1299745,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -137,13 +132,17 @@
       "href": "./latest/at_block.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Austria (blocks) — latest edition (2021) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2021/at_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2021/at_block-2021.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 763243424,
-      "file:checksum": "12207b24012a4af2cc3fee98d3748d361adc5a75dcec2b2190ce1747069dd1dfaee9",
-      "proj:code": "EPSG:31287"
+      "file:size": 490127014,
+      "file:checksum": "1220a0f580260cb1f5b6ac454a815fb67fff45b60f09ecd2f32e5e03b0c6650903ab",
+      "proj:code": "EPSG:31287",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -154,8 +153,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.5, 2 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1197,
-      "file:checksum": "1220722367719314bca2db87df3013e73cc1be228794832155ded90fe354106eed1d"
+      "file:size": 1202,
+      "file:checksum": "122090dac5a575f98a396d2669e302aeb7f511205a6f0d7a2532b80ab3dad16f38eb"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -165,18 +164,18 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 749,
-      "file:checksum": "1220bf0dbe3dcb53d18ad80091e6ee05393a2ba588cddda2b9aeaef6457e732fa451"
+      "file:size": 754,
+      "file:checksum": "12207239357eeb8043ed0d5723fb86459073a01981801464df35ac726adad8d9ddbc"
     },
     "visual": {
-      "href": "./year=2021/at_block.pmtiles",
+      "href": "./year=2021/at_block-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Austria (blocks) — latest edition (2021) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 255967365,
-      "file:checksum": "1220ae499e6cbb60ef98c85aebb9b713821e36c2961cece1170624ca115be428c2bf"
+      "file:size": 255132323,
+      "file:checksum": "1220893538d8314654950a8881a3ab63e0a540124a687d08e84d8e56033b17dcb22b"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -220,7 +219,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2021/at_block.pmtiles",
+      "href": "./year=2021/at_block-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -246,14 +245,14 @@
       "title": "Austria (blocks) — 2021"
     }
   ],
-  "updated": "2026-08-28T18:51:12Z",
+  "updated": "2026-10-27T18:07:12Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "at_block": [
-      "https://fiboa.org/inspire-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/inspire-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   }

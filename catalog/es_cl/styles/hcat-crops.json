@@ -1,0 +1,83 @@
+{
+  "version": 8,
+  "name": "Spain Castilla y León — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 9 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2025/es_cl-2025.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "es_cl",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3302000000,
+            "Pasture meadow grassland grass",
+            3301000000,
+            "Arable crops",
+            3303060000,
+            "Vineyards wine vine rebland grapes",
+            3399000000,
+            "Not known and other",
+            3303010000,
+            "Orchards fruits",
+            3303050000,
+            "Olive plantations",
+            3303030000,
+            "Nuts",
+            3303990000,
+            "Other permanent crops plantations",
+            3303040000,
+            "Citrus plantations",
+            "Other"
+          ],
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Arable crops",
+          "#a6cee3",
+          "Vineyards wine vine rebland grapes",
+          "#1f78b4",
+          "Not known and other",
+          "#b2df8a",
+          "Orchards fruits",
+          "#fb9a99",
+          "Olive plantations",
+          "#e31a1c",
+          "Nuts",
+          "#cc9932",
+          "Other permanent crops plantations",
+          "#fdbf6f",
+          "Citrus plantations",
+          "#ff7f00",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "es_cl",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

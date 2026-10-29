@@ -123,7 +123,11 @@
       ],
       "file:size": 5448348951,
       "file:checksum": "1220d06b039881e2c1346826b005800fc2c02edddf0c95d64a0d81771aa0ffcdd097",
-      "proj:code": "EPSG:6668"
+      "proj:code": "EPSG:6668",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.0"
+      }
     },
     "style-outline": {
       "href": "./styles/outline.json",

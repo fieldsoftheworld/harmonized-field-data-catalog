@@ -120,13 +120,17 @@
       "href": "./latest/br_conab.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Conab — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/br_conab.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/br_conab-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 212324727,
       "file:checksum": "12203a372cf13a2eba7a27d09408f752090c5d4611a3f832d26d8f8d17104a5dafc3",
-      "proj:code": "EPSG:4674"
+      "proj:code": "EPSG:4674",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -137,8 +141,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1219,
-      "file:checksum": "122020fabb8b8ed9e228fb47e9d150cff4714fd876b63391489b5ae5766f5d5a552b"
+      "file:size": 1224,
+      "file:checksum": "122095c4ad6be3a6cdcb40afec44fd7539ea634c8a3d91aba6595cf5cfa0f37879a0"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -148,11 +152,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 738,
-      "file:checksum": "12207ce19dc889eecfff413f99f7759006fcb15f98dc770428986708654bf829069c"
+      "file:size": 743,
+      "file:checksum": "12203b0829e7fc26e63c009546769af5bfd27209ec7225a6c69de56eeae0ad7b110b"
     },
     "visual": {
-      "href": "./year=2026/br_conab.pmtiles",
+      "href": "./year=2026/br_conab-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Conab — latest edition (2026) (PMTiles)",
       "roles": [
@@ -203,7 +207,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/br_conab.pmtiles",
+      "href": "./year=2026/br_conab-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -240,9 +244,9 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "br_conab": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "CONAB - conab.gov.br"

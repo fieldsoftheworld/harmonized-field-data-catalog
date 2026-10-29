@@ -118,13 +118,17 @@
       "href": "./latest/it_bz.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Italy, South Tyrol — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/it_bz.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/it_bz-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 67364368,
       "file:checksum": "1220d0bf76c6183d8252136c395892aec031237d4a7c7e451122e9d8b992522d7365",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -135,8 +139,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.5, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1190,
-      "file:checksum": "1220c591d7083748fb96abce45d98bc90901b6bb215d0f204beecbf4263389744ca6"
+      "file:size": 1195,
+      "file:checksum": "12201ba62062b57b691ad36fb63e458ea7594f6ae6cb439a200cb75daaaed98c1728"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -146,11 +150,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 742,
-      "file:checksum": "1220a070476f0c8f9bd174ca3ea5f7b9bed26503a0ad6a4cd80e27b091e2c0e41ad7"
+      "file:size": 747,
+      "file:checksum": "1220738614bdb71ff698fe86a89488a64fc421fa79c4e2947492449fdee5cc0e2e26"
     },
     "visual": {
-      "href": "./year=2026/it_bz.pmtiles",
+      "href": "./year=2026/it_bz-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Italy, South Tyrol — latest edition (2026) (PMTiles)",
       "roles": [
@@ -201,7 +205,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/it_bz.pmtiles",
+      "href": "./year=2026/it_bz-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -238,10 +242,10 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "it_bz": [
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "© Autonome Provinz Bozen - Südtirol"

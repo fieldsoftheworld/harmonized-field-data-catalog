@@ -5,16 +5,16 @@ Netherlands (blocks) field boundaries in the [fiboa](https://github.com/fiboa/sp
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/nl_block/latest/nl_block.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/nl_block/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/nl_block/year=2026/nl_block.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/nl_block/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/nl_block/year=2026/nl_block-2026.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/nl_block/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/nl_block/year=2026/nl_block.pmtiles`, layer `nl_block`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/nl_block/year=2026/nl_block-2026.pmtiles`, layer `nl_block`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:28992, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres** (source column `area`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
+- **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `source` = `luchtfoto`, `determination:datetime` = `2023-06-15T00:00:00Z`, `admin:country_code` = `NL` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
@@ -37,12 +37,10 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/nl_block/latest/nl_block.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.1110, 5.2478), 'EPSG:4326', 'EPSG:28992'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.1247, 5.2920), 'EPSG:4326', 'EPSG:28992'), 500))
 LIMIT 5;
 -- id | m2
--- 2324328 | 16068.0
--- 1316272 | 24988.0
--- 1687051 | 4667.0
+-- 232825 | 6348.0
 ```
 
 ## Related collections

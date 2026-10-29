@@ -51,29 +51,9 @@
     "proj:code": "EPSG:4258",
     "table:columns": [
       {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "id",
         "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "admin_municipality_code",
-        "type": "string",
-        "description": "Adminstrative subdivision municipality ID (source column `municipio`, per the fiboa data survey)"
       },
       {
         "name": "crop:name",
@@ -81,14 +61,49 @@
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "admin_province_code",
         "type": "string",
         "description": "Adminstrative subdivision Province ID (source column `provincia`, per the fiboa data survey)"
       },
       {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
         "name": "crop:name_en",
         "type": "string",
         "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "admin_municipality_code",
+        "type": "string",
+        "description": "Adminstrative subdivision municipality ID (source column `municipio`, per the fiboa data survey)"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -112,8 +127,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 880612422,
-      "file:checksum": "12206fad48f0cd7770bc3b3629c44bdf3233dab0878bf55742fac47630068041ec0c",
+      "file:size": 881810706,
+      "file:checksum": "12206b9fdcce6d5bb1a5e6513fb894227e5045a571b6999a8acad63a7f895e0e55d9",
       "proj:code": "EPSG:4258"
     },
     "visual": {
@@ -123,8 +138,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 355726228,
-      "file:checksum": "1220a681ed6036ad70ecbbcffd097aa59903ccb31a9bb4b7e40da97b0f5d554d3f65"
+      "file:size": 364685631,
+      "file:checksum": "122013c74f9b35a9b59a81425515db2f65543bd7e4523fa400c02e1a9664822b0fb4"
     }
   },
   "links": [

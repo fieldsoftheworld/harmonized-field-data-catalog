@@ -56,7 +56,7 @@
       "interval": [
         [
           "2010-01-01T00:00:00Z",
-          "2025-01-01T00:00:00Z"
+          "2025-12-31T23:59:59Z"
         ]
       ]
     }
@@ -68,9 +68,9 @@
   },
   "table:columns": [
     {
-      "name": "id",
+      "name": "crop:name",
       "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "admin_municipality_code",
@@ -78,19 +78,14 @@
       "description": "Municipality ID (source column `MUNICIPIO`, per the fiboa data survey)"
     },
     {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "crop:name_en",
       "type": "string",
       "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "crop:code",
-      "type": "string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "geometry",
@@ -98,9 +93,24 @@
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "crop:name",
+      "name": "hcat:name_en",
       "type": "string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -135,17 +145,32 @@
       "roles": [
         "data"
       ],
-      "file:size": 250025296,
-      "file:checksum": "122080ca9db79161d8b63f1fd0a9eb07241d3ea5d582aec8609d3933d8e9270d30bf",
-      "proj:code": "EPSG:4326"
+      "file:size": 250252981,
+      "file:checksum": "1220e62e759e605edd357bfd6413a2e147783858a737de88fc62ba796d29c0095dd4",
+      "proj:code": "EPSG:4326",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.2.18"
+      }
+    },
+    "style-hcat-crops": {
+      "href": "./styles/hcat-crops.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Crops (HCAT)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 6 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
+      "file:size": 1737,
+      "file:checksum": "1220dfb2f4666912715510e0ed96b6a0eff35bfdb9542c9229d6eae9f91adbb3fdc1"
     },
     "style-outline": {
       "href": "./styles/outline.json",
       "type": "application/vnd.mapbox.style+json",
       "title": "Field boundaries",
       "roles": [
-        "style",
-        "default"
+        "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
       "file:size": 744,
@@ -158,8 +183,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 92434403,
-      "file:checksum": "1220d786e87fcbf1da364810b781a82f1fbd2a273502daab28303213253cc166212a"
+      "file:size": 93371935,
+      "file:checksum": "122004229b2f8484abda33e4fc69d1d1deac8cb99bfddd28506e230b75d485d60b1f"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -331,15 +356,16 @@
       "title": "Spain Cantabria — 2025"
     }
   ],
-  "updated": "2026-09-06T22:47:14Z",
+  "updated": "2026-09-18T23:36:21Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_cb": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   },
   "attribution": "© Gobierno de Cantabria. Información gratuita disponible en https://mapas.cantabria.es"

@@ -5,17 +5,18 @@ Spain Comunidad de Madrid field boundaries in the [fiboa](https://github.com/fib
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/es_md/latest/es_md.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/es_md/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/es_md/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md-2026.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/es_md/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md.pmtiles`, layer `es_md`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/es_md/year=2026/es_md-2026.pmtiles`, layer `es_md`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:4258, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres**, taken from the source column `DN_SURFACE`. Divide by 10 000 for hectares.
+- **`metrics:area` is in square metres** (source column `DN_SURFACE`; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `DN_OID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv`, `determination:datetime` = `2024-01-01T00:00:00Z`, `admin:subdivision_code` = `MD` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 636,756 rows of the 2026 edition carry one.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `determination:datetime` = `2024-01-01T00:00:00Z`, `admin:subdivision_code` = `MD`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -29,6 +30,22 @@ FROM read_parquet('s3://ftw/harmonized-field-data/es_md/year=*/*.parquet', hive_
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
 -- 2026 | 636756 | 0
+```
+
+Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
+
+```sql
+SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, mode("hcat:name") AS most_common_name,
+       count(*) AS fields
+FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_md/latest/es_md.parquet')
+WHERE "hcat:code" IS NOT NULL
+GROUP BY 1 ORDER BY fields DESC LIMIT 5;
+-- hcat_group | most_common_name | fields
+-- 330200 | pasture_meadow_grassland_grass | 353735
+-- 330100 | arable_crops | 179686
+-- 330305 | olive_plantations | 74156
+-- 330306 | vineyards_wine_vine_rebland_grapes | 15740
+-- 330301 | orchards_fruits | 11554
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

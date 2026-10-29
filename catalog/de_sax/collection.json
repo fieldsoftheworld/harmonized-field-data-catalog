@@ -198,13 +198,17 @@
       "href": "./latest/de_sax.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Saxony — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_sax.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_sax-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 72479144,
       "file:checksum": "122019e4830f1879ca319a94d3a01745e5ff8e48a1fc3f29a9f511e6867a6a74b2f7",
-      "proj:code": "EPSG:25833"
+      "proj:code": "EPSG:25833",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -215,8 +219,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 2, 5, 10 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1225,
-      "file:checksum": "12204d00782d963bec8a912b3ba1380b0dde650d8828482f563c49d82ec80622093d"
+      "file:size": 1230,
+      "file:checksum": "122095bd893f08c04df49369b1a387d7d6c9c5eada4abd549ebbb6ac58eb27f50005"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -226,11 +230,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 742,
-      "file:checksum": "1220a5ae2e901d8f68040a962682da653b2c0f4dcded92e21e0575b948d52bffdc82"
+      "file:size": 747,
+      "file:checksum": "12205b2a3501cfbe6dbe50048b09d96cb89cc3719a15df6a9604b1245e1a77cbc2be"
     },
     "visual": {
-      "href": "./year=2026/de_sax.pmtiles",
+      "href": "./year=2026/de_sax-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Saxony — latest edition (2026) (PMTiles)",
       "roles": [
@@ -281,7 +285,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_sax.pmtiles",
+      "href": "./year=2026/de_sax-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -318,9 +322,9 @@
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_sax": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },

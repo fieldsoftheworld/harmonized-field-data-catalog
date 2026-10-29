@@ -48,10 +48,10 @@
     "spatial": {
       "bbox": [
         [
-          6.6071263849957536,
-          51.279793575394315,
-          11.651879546500899,
-          53.90893481983809
+          6.6687925715381295,
+          51.304078295997726,
+          11.598228890692432,
+          53.93172917631737
         ]
       ]
     },
@@ -134,13 +134,17 @@
       "href": "./latest/de_nds_block.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Lower Saxony/Bremen/Hamburg (blocks) — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_nds_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_nds_block-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
       "file:size": 176550313,
       "file:checksum": "1220c09b1c752c70a40c75e4ec6f30c255f70223275ffcf52a1c0cc027dde63b2c55",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -151,8 +155,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1230,
-      "file:checksum": "12207df91f9b5d02b53f68121ddbda2ab12fd6d04a7caa237b18dacbb5656c819df9"
+      "file:size": 1235,
+      "file:checksum": "122034aeac59c76e589a43b22c51d54a7094f33e8cf3b5d363f8e1c97620859959e0"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -162,11 +166,11 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 790,
-      "file:checksum": "1220dc18edbd7fc5cde6a1aa33dabe8ec85d91cce4ac647eec6522450acddf45a0b7"
+      "file:size": 795,
+      "file:checksum": "122026ee1bad5589fb9f175cd6f9cc80f32abfd30f32d54055f7909db4715bb71dbe"
     },
     "visual": {
-      "href": "./year=2026/de_nds_block.pmtiles",
+      "href": "./year=2026/de_nds_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Lower Saxony/Bremen/Hamburg (blocks) — latest edition (2026) (PMTiles)",
       "roles": [
@@ -217,7 +221,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_nds_block.pmtiles",
+      "href": "./year=2026/de_nds_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -249,9 +253,9 @@
   "vecorel_extensions": {
     "de_nds_block": [
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/flik-extension/v0.2.0/schema.yaml"
     ]
   },
   "attribution": "© ML/SLA Niedersachsen (2024), DL-DE-BY-2.0 (www.govdata.de/DL-DE-BY-2.0), Daten bearbeitet"

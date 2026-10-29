@@ -45,10 +45,10 @@
     "spatial": {
       "bbox": [
         [
-          21.98360372119957,
-          43.5323910715832,
-          28.92332404837222,
-          45.17666803124226
+          22.02543817627908,
+          43.625664309708,
+          28.906869959380735,
+          45.11024715527661
         ]
       ]
     },
@@ -68,44 +68,29 @@
   },
   "table:columns": [
     {
-      "name": "crop:name",
-      "type": "large_string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "source",
-      "type": "large_string",
-      "description": "Carried over from the source column `SOURCE`; the publisher documents no meaning for it."
-    },
-    {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
       "name": "hcat:name",
-      "type": "large_string",
+      "type": "string",
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
       "name": "hcat:name_en",
-      "type": "large_string",
+      "type": "string",
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "metrics:area",
@@ -113,9 +98,19 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "source",
+      "type": "string",
+      "description": "Carried over from the source column `SOURCE`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -124,7 +119,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 259862,
+  "table:row_count": 259852,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -141,13 +136,17 @@
       "href": "./latest/ec_ro.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Romania - Eurocrops — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/ec_ro.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/ec_ro-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 131540418,
-      "file:checksum": "122099da8f59e27cf57ebeaec9b665290de9b9b6e23efaa53cda074a408281a64fca",
-      "proj:code": "EPSG:32635"
+      "file:size": 95725054,
+      "file:checksum": "1220d7e7a2811ca22fc885cd02094e85f4a59e1dc531243502bd4ae29b31d51c30d3",
+      "proj:code": "EPSG:32635",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",
@@ -158,8 +157,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 5 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 1599,
-      "file:checksum": "122031802a349d17ea3a6d0534f77a19e30a4683766eb7ea11a1ee43054c2254dcad"
+      "file:size": 1604,
+      "file:checksum": "12207fda272b7cab936f7e8c47fbf754f8650827608b7d6ec1f5366f33c6616581a1"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -169,8 +168,8 @@
         "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 5, 10, 20 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1224,
-      "file:checksum": "1220318398452f442a68851c5e380231e3a480ff874f1cc982daa8f8eaba1e519380"
+      "file:size": 1229,
+      "file:checksum": "122099d4e9c6e6b77cd8aff7beceb752e8c22f1d58a9225debece352749f26ce47d9"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -180,18 +179,18 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 743,
-      "file:checksum": "1220fd09ef7920be65e937f7660840e389741b10c6944c8464db00c09bdebd8e5ac7"
+      "file:size": 748,
+      "file:checksum": "1220561dd49613136f302c6de9efbd1652f528d50894ac0518de86b702741b92f779"
     },
     "visual": {
-      "href": "./year=2026/ec_ro.pmtiles",
+      "href": "./year=2026/ec_ro-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Romania - Eurocrops — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 43308594,
-      "file:checksum": "1220b35c6507362c2f80646e52723056d1ec5d5c6fe3355ce906e63429a4bf5cc6c8"
+      "file:size": 43108481,
+      "file:checksum": "12209d62750cb3235533e8f92d191ddacc7eafb76f5ae867e9323009c1510c410ca7"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -235,7 +234,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/ec_ro.pmtiles",
+      "href": "./year=2026/ec_ro-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -261,15 +260,15 @@
       "title": "Romania - Eurocrops — 2026"
     }
   ],
-  "updated": "2026-08-28T18:53:22Z",
+  "updated": "2026-10-27T18:42:20Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "ec_ro": [
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   }
 }

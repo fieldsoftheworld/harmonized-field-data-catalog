@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          10.460957127993252,
-          53.08446448481229
+          10.593638738614555,
+          53.110319795519096
         ],
         [
-          14.39716051830725,
-          53.08446448481229
+          14.411983561714688,
+          53.110319795519096
         ],
         [
-          14.39716051830725,
-          54.69063591957422
+          14.411983561714688,
+          54.68386045782266
         ],
         [
-          10.460957127993252,
-          54.69063591957422
+          10.593638738614555,
+          54.68386045782266
         ],
         [
-          10.460957127993252,
-          53.08446448481229
+          10.593638738614555,
+          53.110319795519096
         ]
       ]
     ]
   },
   "bbox": [
-    10.460957127993252,
-    53.08446448481229,
-    14.39716051830725,
-    54.69063591957422
+    10.593638738614555,
+    53.110319795519096,
+    14.411983561714688,
+    54.68386045782266
   ],
   "properties": {
     "title": "Germany, Mecklenburg-Western Pomerania — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_mv.parquet`, 20,000 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_mv-2026.parquet`, 71,537 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2026-01-01T00:00:00Z",
     "end_datetime": "2026-12-31T23:59:59Z",
@@ -52,28 +52,23 @@
     "table:columns": [
       {
         "name": "crop:code",
-        "type": "large_string",
+        "type": "string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "bez_kreis",
-        "type": "large_string",
-        "description": "District name (Kreisbezeichnung) (per the fiboa data survey)"
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
       },
       {
-        "name": "id",
-        "type": "large_string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "erwater_l",
+        "type": "string",
+        "description": "Water-erosion class per DIN 19708 (per the fiboa data survey)"
       },
       {
-        "name": "erwater",
-        "type": "large_string",
-        "description": "Water-erosion class per Direktzahlungen-Verordnung (per the fiboa data survey)"
-      },
-      {
-        "name": "dgl_jahr",
-        "type": "int16",
-        "description": "Permanent-grassland year (DGL Jahr) (per the fiboa data survey)"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "metrics:area",
@@ -82,18 +77,23 @@
       },
       {
         "name": "erwind",
-        "type": "large_string",
+        "type": "string",
         "description": "Wind-erosion class per Direktzahlungen-Verordnung (per the fiboa data survey)"
       },
       {
-        "name": "erwater_l",
-        "type": "large_string",
-        "description": "Water-erosion class per DIN 19708 (per the fiboa data survey)"
+        "name": "bez_kreis",
+        "type": "string",
+        "description": "District name (Kreisbezeichnung) (per the fiboa data survey)"
       },
       {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "erwind_l",
+        "type": "string",
+        "description": "Wind-erosion class per DIN 19708 (per the fiboa data survey)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "metrics:perimeter",
@@ -101,19 +101,14 @@
         "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "erwind_l",
-        "type": "large_string",
-        "description": "Wind-erosion class per DIN 19708 (per the fiboa data survey)"
+        "name": "erwater",
+        "type": "string",
+        "description": "Water-erosion class per Direktzahlungen-Verordnung (per the fiboa data survey)"
       },
       {
-        "name": "geometry",
-        "type": "large_binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "flik",
-        "type": "large_string",
-        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+        "name": "dgl_jahr",
+        "type": "int16",
+        "description": "Permanent-grassland year (DGL Jahr) (per the fiboa data survey)"
       },
       {
         "name": "bbox",
@@ -122,34 +117,34 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 20000,
+    "table:row_count": 71537,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "de_mv",
   "assets": {
     "data": {
-      "href": "./de_mv.parquet",
+      "href": "./de_mv-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Mecklenburg-Western Pomerania 2026 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 48385432,
-      "file:checksum": "12201c15b8a41069ccec5cd51975f4d96f4225efd992b696bb66c753a6bbc6c9233f",
+      "file:size": 123603077,
+      "file:checksum": "12205eb1a0c2bfb5a0741c9ea1d5dc2f59e22b5fd6077c6c8c8e2c74073954c38d9f",
       "proj:code": "EPSG:25833"
     },
     "visual": {
-      "href": "./de_mv.pmtiles",
+      "href": "./de_mv-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Mecklenburg-Western Pomerania 2026 (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 14700859,
-      "file:checksum": "1220a9994b3a05f40802715b0cdce80684a2adc8ce536287684b7a2c925b4d905015"
+      "file:size": 35846143,
+      "file:checksum": "12206e03c0ffc7a524cc844d0813039c188c4dfeff315949e45c4481f1ae30949036"
     }
   },
   "links": [

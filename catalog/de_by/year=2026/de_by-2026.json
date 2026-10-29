@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          8.976888352898056,
-          47.17999939062103
+          8.977135126954165,
+          47.2703426867411
         ],
         [
-          14.014200261063245,
-          47.17999939062103
+          13.837348014824999,
+          47.2703426867411
         ],
         [
-          14.014200261063245,
-          50.56130126204544
+          13.837348014824999,
+          50.55516499112016
         ],
         [
-          8.976888352898056,
-          50.56130126204544
+          8.977135126954165,
+          50.55516499112016
         ],
         [
-          8.976888352898056,
-          47.17999939062103
+          8.977135126954165,
+          47.2703426867411
         ]
       ]
     ]
   },
   "bbox": [
-    8.976888352898056,
-    47.17999939062103,
-    14.014200261063245,
-    50.56130126204544
+    8.977135126954165,
+    47.2703426867411,
+    13.837348014824999,
+    50.55516499112016
   ],
   "properties": {
     "title": "Germany, Bavaria — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_by.parquet`, 1,296,105 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_by-2026.parquet`, 1,296,105 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2007-06-22T08:28:07Z",
     "end_datetime": "2025-12-30T15:55:41Z",
@@ -51,14 +51,9 @@
     "proj:code": "EPSG:25832",
     "table:columns": [
       {
-        "name": "crop:name",
-        "type": "large_string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "large_binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hcat:code",
@@ -66,29 +61,34 @@
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "id",
-        "type": "large_string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hcat:name",
-        "type": "large_string",
+        "type": "string",
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "determination:datetime",
         "type": "timestamp[ms, tz=UTC]",
         "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "large_string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -100,31 +100,31 @@
     "table:row_count": 1296105,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "de_by",
   "assets": {
     "data": {
-      "href": "./de_by.parquet",
+      "href": "./de_by-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Bavaria 2026 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 391819314,
-      "file:checksum": "12209e2990f9b27adf9ab377d3df06a1b4756921a7ea5665045bdf12f40f7d60210e",
+      "file:size": 310860817,
+      "file:checksum": "1220f3e1daa6c442ca0eb753197602360ff32de6b986514112868d4d0414ab147575",
       "proj:code": "EPSG:25832"
     },
     "visual": {
-      "href": "./de_by.pmtiles",
+      "href": "./de_by-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Bavaria 2026 (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 172299464,
-      "file:checksum": "12204a4b22f13bfb3e6a70572d2f70cc1967769aadf522fa24d09bf9afc748d0cd17"
+      "file:size": 198170688,
+      "file:checksum": "1220c01df8e07570f84cde23de71cd618df1bab27807fb6605edc0211e8d575acb17"
     }
   },
   "links": [

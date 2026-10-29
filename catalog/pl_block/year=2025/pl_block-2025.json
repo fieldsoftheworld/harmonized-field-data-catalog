@@ -43,7 +43,7 @@
   ],
   "properties": {
     "title": "Poland (blocks) — 2025",
-    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`pl_block.parquet`, 12,955,563 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
+    "description": "Field boundaries of the 2025 edition of this dataset, one GeoParquet file (`pl_block-2025.parquet`, 12,955,563 fields) and its PMTiles. Partition `year=2025` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2025-11-25T00:00:00Z",
     "end_datetime": "2025-11-25T00:00:00Z",
@@ -85,13 +85,13 @@
     "table:row_count": 12955563,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.3.1"
+      "vecorel-cli": "0.4.1"
     }
   },
   "collection": "pl_block",
   "assets": {
     "data": {
-      "href": "./pl_block.parquet",
+      "href": "./pl_block-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Poland (blocks) 2025 (GeoParquet)",
       "roles": [
@@ -102,7 +102,7 @@
       "proj:code": "EPSG:2180"
     },
     "visual": {
-      "href": "./pl_block.pmtiles",
+      "href": "./pl_block-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Poland (blocks) 2025 (PMTiles)",
       "roles": [

@@ -68,34 +68,44 @@
   },
   "table:columns": [
     {
-      "name": "crop:name",
-      "type": "large_string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "crop:name_en",
+      "type": "string",
+      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "id",
-      "type": "large_string",
+      "type": "string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "crop:code",
-      "type": "large_string",
+      "type": "string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:name_en",
-      "type": "large_string",
-      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
       "name": "geometry",
-      "type": "large_binary",
+      "type": "binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -121,35 +131,50 @@
       "href": "./latest/es_md.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Comunidad de Madrid — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/es_md.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/es_md-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 298111365,
-      "file:checksum": "1220f455f0e9b7b8ac867861636c32baa548ebdb64ecc70fa14380e0cb831246d026",
-      "proj:code": "EPSG:4258"
+      "file:size": 278733722,
+      "file:checksum": "1220e0a859b56a9e18dab89c68778ed6daf63a49a92c6c09fef05052423a8eb5444c",
+      "proj:code": "EPSG:4258",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
+    },
+    "style-hcat-crops": {
+      "href": "./styles/hcat-crops.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Crops (HCAT)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 8 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
+      "file:size": 1997,
+      "file:checksum": "12206d084300b3ede8d438e59462bf8f77d9575e1462d3e0002ea45e026d4be396c2"
     },
     "style-outline": {
       "href": "./styles/outline.json",
       "type": "application/vnd.mapbox.style+json",
       "title": "Field boundaries",
       "roles": [
-        "style",
-        "default"
+        "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 749,
-      "file:checksum": "12203395af3eb80b6902c49dfb10166d189d56b0bada84aa985f439ead0b0f2c33f7"
+      "file:size": 754,
+      "file:checksum": "122032fb054304e830f496cbae23cf9d0ab3b875d7577ecf56bff1cc2d0aa160baa6"
     },
     "visual": {
-      "href": "./year=2026/es_md.pmtiles",
+      "href": "./year=2026/es_md-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Spain Comunidad de Madrid — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 101256398,
-      "file:checksum": "1220b3048e8f1ce9b4f8a5a043249c0257db5ff57357edc1cd3a2e62f2331c1f4da1"
+      "file:size": 102301423,
+      "file:checksum": "12207d20a686e7e7f131d9c809388c25dabad7546d138b93e33aae6857a8ad64e97f"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -193,7 +218,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/es_md.pmtiles",
+      "href": "./year=2026/es_md-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -225,15 +250,16 @@
       "title": "Spain Comunidad de Madrid — 2026"
     }
   ],
-  "updated": "2026-08-28T19:05:13Z",
+  "updated": "2026-09-18T16:53:38Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_md": [
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   }
 }

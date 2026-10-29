@@ -68,9 +68,9 @@
   },
   "table:columns": [
     {
-      "name": "admin_province_code",
+      "name": "admin_municipality_code",
       "type": "string",
-      "description": "Province code (source column `PROVINCIA`, per the fiboa data survey)"
+      "description": "Municipality code (source column `MUNICIPIO`, per the fiboa data survey)"
     },
     {
       "name": "crop:code",
@@ -78,14 +78,9 @@
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "crop:name_en",
+      "name": "admin_province_code",
       "type": "string",
-      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "description": "Province code (source column `PROVINCIA`, per the fiboa data survey)"
     },
     {
       "name": "metrics:area",
@@ -93,14 +88,29 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
       "name": "crop:name",
       "type": "string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "crop:name_en",
+      "type": "string",
+      "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "id",
@@ -108,9 +118,9 @@
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "admin_municipality_code",
-      "type": "string",
-      "description": "Municipality code (source column `MUNICIPIO`, per the fiboa data survey)"
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -136,25 +146,40 @@
       "href": "./latest/es_ar.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Aragon — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/es_ar.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/es_ar-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 1437304267,
-      "file:checksum": "1220e4a6c0120f65a930a70748edaef0b3d51ff32550698f0f5f3c366e65f2b4e3c6",
-      "proj:code": "EPSG:4258"
+      "file:size": 1439067242,
+      "file:checksum": "12200708c4d439858e2a64d9a7fd272fd633b1ef41c1c0bf10f250755e3824de5a92",
+      "proj:code": "EPSG:4258",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
+    },
+    "style-hcat-crops": {
+      "href": "./styles/hcat-crops.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Crops (HCAT)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 8 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
+      "file:size": 1984,
+      "file:checksum": "1220ee601ebfc1863fac6cf976a35d12537a269005cec93f8e1e7dda75f3e0881c57"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
       "type": "application/vnd.mapbox.style+json",
       "title": "Field size (ha)",
       "roles": [
-        "style",
-        "default"
+        "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1186,
-      "file:checksum": "1220c9d9bb0521606297e715d149e9640e3361cb60aea4ed82b32c186b9d798023a2"
+      "file:size": 1191,
+      "file:checksum": "1220db3dd4aaa1f421123a84f63b3643133f91244b82aadfe6d2a8e9b14bfbcd49e1"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -164,18 +189,18 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 736,
-      "file:checksum": "12209904fdb5bf802194956697e5872f69a2130bf1b6adb7b2b5616458846c2628b7"
+      "file:size": 741,
+      "file:checksum": "1220ac2a380e319759db034c12a12bc05da8f81763161ad7cb489c2b001b700ab87f"
     },
     "visual": {
-      "href": "./year=2026/es_ar.pmtiles",
+      "href": "./year=2026/es_ar-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Spain Aragon — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 562175910,
-      "file:checksum": "1220ce94f6bc45bc152bc5818057df93321e2db768e1f51485496674b9fb854f8c18"
+      "file:size": 564849927,
+      "file:checksum": "1220ec6dc12ef998c84491479b5ef69d4a893247b0d164e739f1d4c72763da29f867"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -219,7 +244,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/es_ar.pmtiles",
+      "href": "./year=2026/es_ar-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -251,14 +276,15 @@
       "title": "Spain Aragon — 2026"
     }
   ],
-  "updated": "2026-08-23T12:37:10Z",
+  "updated": "2026-09-18T18:47:20Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_ar": [
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   },

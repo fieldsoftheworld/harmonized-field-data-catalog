@@ -12,9 +12,10 @@ US (USDA CSB) field boundaries in the [fiboa](https://github.com/fiboa/specifica
 ## Quirks that produce silently wrong answers
 
 - **CRS is None, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
+- **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/us/usda/cropland.csv`) have `NULL`. 363,781 of the 7,522,713 rows of the 2024 edition (4.84%) have none, so a query that filters or groups on crop silently leaves them out.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 7,541,673 rows of the 2024 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `US`, `determination:datetime` = `2024-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/us/usda/cropland.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
@@ -24,34 +25,34 @@ Fields and hectares per edition, through the partition glob:
 ```sql
 INSTALL httpfs; LOAD httpfs;
 CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');
-SELECT year, count(*) AS fields, 0 AS hectares
+SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/us_usda_cropland/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2017 | 7660547 | 0
--- 2018 | 7517019 | 0
--- 2019 | 7677349 | 0
--- 2020 | 7595821 | 0
--- 2021 | 7590146 | 0
--- 2022 | 7659738 | 0
--- 2023 | 7637878 | 0
--- 2024 | 7522713 | 0
+-- 2017 | 7679704 | 142650138.0
+-- 2018 | 7536193 | 142650138.0
+-- 2019 | 7696118 | 142650138.0
+-- 2020 | 7614833 | 142650138.0
+-- 2021 | 7608971 | 142650138.0
+-- 2022 | 7678702 | 142650138.0
+-- 2023 | 7656766 | 142650138.0
+-- 2024 | 7541673 | 142650138.0
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
 
 ```sql
 SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, mode("hcat:name") AS most_common_name,
-       count(*) AS fields
+       count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/latest/us_usda_cropland.parquet')
 WHERE "hcat:code" IS NOT NULL
-GROUP BY 1 ORDER BY fields DESC LIMIT 5;
--- hcat_group | most_common_name | fields
--- 330200 | pasture_meadow_grassland_grass | 2660792
--- 330101 | grain_maize_corn_popcorn | 1818101
--- 330116 | soy_soybeans | 1194224
--- 330109 | alfalfa_lucerne | 441467
--- 330800 | unmaintained | 251832
+GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
+-- hcat_group | most_common_name | fields | hectares
+-- 330101 | grain_maize_corn_popcorn | 1824184 | 59033751.0
+-- 330116 | soy_soybeans | 1199287 | 36565533.0
+-- 330200 | pasture_meadow_grassland_grass | 2665185 | 19053243.0
+-- 330106 | cotton | 209036 | 6787947.0
+-- 330109 | alfalfa_lucerne | 441864 | 5629165.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

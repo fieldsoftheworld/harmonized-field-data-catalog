@@ -12,7 +12,7 @@
   ],
   "id": "es_cl",
   "title": "Spain Castile and León Crop fields",
-  "description": "Official SIGPAC land plan for the year 2024. (reference date 02-01-2024)\n\nSource: SIGPAC (FEGA) database. The Land Consolidation Replacement Farms are included,\nnot updated in the SIGPAC published in the Viewer.\nData manager: Ministry of Agriculture, Fisheries and Food.\nData provided by: Department of Agriculture, Livestock and Rural Development. Regional Government of Castile and Leon.\nFree use of the data is permitted, but commercial exploitation is prohibited.\n\nThis collection holds 1 edition (2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/es_cl/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:4258). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_cl/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
+  "description": "Official SIGPAC land plans for the years 2019 to 2025.\n\nSource: SIGPAC (FEGA) database. The Land Consolidation Replacement Farms are included,\nnot updated in the SIGPAC published in the Viewer.\nData manager: Ministry of Agriculture, Fisheries and Food.\nData provided by: Department of Agriculture, Livestock and Rural Development. Regional Government of Castile and Leon.\nFree use of the data is permitted, but commercial exploitation is prohibited.\n\nThis collection holds 1 edition (2025), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/es_cl/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2025). Geometries are kept in the source CRS (EPSG:4258). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/es_cl/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
   "boundaries": "declared",
   "keywords": [
     "Castilla y León",
@@ -57,7 +57,7 @@
       "interval": [
         [
           "2025-01-01T00:00:00Z",
-          "2025-01-01T00:00:00Z"
+          "2025-12-31T23:59:59Z"
         ]
       ]
     }
@@ -69,19 +69,9 @@
   },
   "table:columns": [
     {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
       "name": "crop:name_en",
       "type": "string",
       "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "crop:code",
-      "type": "string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "geometry",
@@ -89,14 +79,34 @@
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
       "name": "crop:name",
       "type": "string",
       "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "collection",
+      "name": "hcat:name",
       "type": "string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -122,35 +132,50 @@
       "href": "./latest/es_cl.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Castilla y León — latest edition (2025) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2025/es_cl.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2025/es_cl-2025.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 2650751288,
-      "file:checksum": "1220b3c2c1d027b7aa5cb1b7d87b3752542f33ddb4d54539c20887aefea769b577ea",
-      "proj:code": "EPSG:4258"
+      "file:size": 2655465180,
+      "file:checksum": "122002a455761455faf72ee06111cf1b25aea9a14d69938d87c5d2b3f61a5e35fbff",
+      "proj:code": "EPSG:4258",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
+    },
+    "style-hcat-crops": {
+      "href": "./styles/hcat-crops.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Crops (HCAT)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 9 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
+      "file:size": 2107,
+      "file:checksum": "12203b90f1ee53f3078ec6449b8ddd3a96edc98726b6ca683c575ec3de3eb184b90b"
     },
     "style-outline": {
       "href": "./styles/outline.json",
       "type": "application/vnd.mapbox.style+json",
       "title": "Field boundaries",
       "roles": [
-        "style",
-        "default"
+        "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 746,
-      "file:checksum": "1220f1a45f9ecd34c4e53af1e5c4a11d4a23a96d51b542632114591487be04d6619d"
+      "file:size": 751,
+      "file:checksum": "122049009055f940b9398e30ca552dab58d6e43d3aca7fbb1acb9130d98b59f201aa"
     },
     "visual": {
-      "href": "./year=2025/es_cl.pmtiles",
+      "href": "./year=2025/es_cl-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Spain Castilla y León — latest edition (2025) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 1114283108,
-      "file:checksum": "1220aba03071822177a011d18dba5d6c089d771d2c2c071c036bfc1e6fe1b58c7b98"
+      "file:size": 1135303322,
+      "file:checksum": "1220d5782182342b5d6f56995be2d78febfddcb39b22ac4b350ae2872066ce5e5430"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -200,7 +225,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2025/es_cl.pmtiles",
+      "href": "./year=2025/es_cl-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -232,14 +257,15 @@
       "title": "Spain Castilla y León — 2025"
     }
   ],
-  "updated": "2026-09-08T14:44:45Z",
+  "updated": "2026-09-19T16:47:21Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es_cl": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   }

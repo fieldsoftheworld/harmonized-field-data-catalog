@@ -134,7 +134,11 @@
       ],
       "file:size": 125280359,
       "file:checksum": "12201fc45544329e1c2bf54b0890fccd3154815ef5b202232f2f7dd75e135315de53",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.2.18"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",

@@ -10,7 +10,7 @@ type rather than one farmer's application parcel. The source carries no farm or 
 - **Editions:** 2026 (one GeoParquet per year)
 - **Fields in the latest edition (2026):** 152,990
 - **Coordinate reference system:** EPSG:25832 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.3.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/it_bz.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/it_bz.py))
 - **Data survey:** [IT-BZ.md](https://github.com/fiboa/data-survey/blob/main/data/IT-BZ.md)
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/it_bz/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/it_bz/AGENTS.md) for tested queries.
@@ -19,7 +19,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 152,990 | [64.2 MB](https://data.source.coop/ftw/harmonized-field-data/it_bz/year=2026/it_bz.parquet) | [35.0 MB](https://data.source.coop/ftw/harmonized-field-data/it_bz/year=2026/it_bz.pmtiles) | [it_bz-2026.json](https://data.source.coop/ftw/harmonized-field-data/it_bz/year=2026/it_bz-2026.json) |
+| 2026 | 152,990 | [64.2 MB](https://data.source.coop/ftw/harmonized-field-data/it_bz/year=2026/it_bz-2026.parquet) | [35.0 MB](https://data.source.coop/ftw/harmonized-field-data/it_bz/year=2026/it_bz-2026.pmtiles) | [it_bz-2026.json](https://data.source.coop/ftw/harmonized-field-data/it_bz/year=2026/it_bz-2026.json) |
 
 The latest edition is also available at a stable path: [it_bz/latest/it_bz.parquet](https://data.source.coop/ftw/harmonized-field-data/it_bz/latest/it_bz.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/it_bz/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/it_bz/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -55,7 +55,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/it_bz/late
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Autonome Provinz Bozen - Südtirol](https://agricoltura.provincia.bz.it/it/home) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.3.1:
+This catalog is a mirror: the data is produced and licensed by [Autonome Provinz Bozen - Südtirol](https://agricoltura.provincia.bz.it/it/home) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2026: converted 2026-09-27 from <https://geoservices6.civis.bz.it/geoserver/p_bz-Agriculture/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=p_bz-Agriculture%3AFields-Used&outputFormat=application%2Fjson&count=50000&startIndex=0>, <https://geoservices6.civis.bz.it/geoserver/p_bz-Agriculture/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=p_bz-Agriculture%3AFields-Used&outputFormat=application%2Fjson&count=50000&startIndex=50000>, <https://geoservices6.civis.bz.it/geoserver/p_bz-Agriculture/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=p_bz-Agriculture%3AFields-Used&outputFormat=application%2Fjson&count=50000&startIndex=100000>, <https://geoservices6.civis.bz.it/geoserver/p_bz-Agriculture/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=p_bz-Agriculture%3AFields-Used&outputFormat=application%2Fjson&count=50000&startIndex=150000>
 

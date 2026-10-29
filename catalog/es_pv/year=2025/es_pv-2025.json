@@ -51,29 +51,39 @@
     "proj:code": "EPSG:25830",
     "table:columns": [
       {
-        "name": "id",
-        "type": "large_string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "large_string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "crop:name",
-        "type": "large_string",
+        "type": "string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "large_binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -85,7 +95,7 @@
     "table:row_count": 562040,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.15"
+      "vecorel-cli": "0.2.18"
     }
   },
   "collection": "es_pv",
@@ -97,8 +107,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 176803389,
-      "file:checksum": "1220c7d97fdda54d4e664342390edefc90f72d202d870e3976efeb6749c12cc21e27",
+      "file:size": 138039798,
+      "file:checksum": "12203ba73282950a7d5806409fdf3bee927c019f2c5a2db795af6f7ff31ae165cc71",
       "proj:code": "EPSG:25830"
     },
     "visual": {
@@ -108,8 +118,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 59991581,
-      "file:checksum": "1220b6ec0e280a95791c9264372d27f1b6269fc55f1394d0cee9319a41608044451d"
+      "file:size": 60792792,
+      "file:checksum": "1220c67cdb84e8244dbf6b4324fc2d582d2c76bcadba3ed3dbdad205729d353b4c18"
     }
   },
   "links": [

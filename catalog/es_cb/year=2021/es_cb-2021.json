@@ -46,24 +46,24 @@
     "description": "Field boundaries of the 2021 edition of this dataset, one GeoParquet file (`es_cb-2021.parquet`, 605,256 fields) and its PMTiles. Partition `year=2021` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2021-01-01T00:00:00Z",
-    "end_datetime": "2021-01-01T00:00:00Z",
+    "end_datetime": "2021-12-31T23:59:59Z",
     "year": 2021,
     "proj:code": "EPSG:4326",
     "table:columns": [
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
       {
         "name": "crop:code",
         "type": "string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "crop:name",
+        "name": "admin_municipality_code",
         "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "Municipality ID (source column `MUNICIPIO`, per the fiboa data survey)"
       },
       {
         "name": "id",
@@ -71,14 +71,24 @@
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "admin_municipality_code",
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
         "type": "string",
-        "description": "Municipality ID (source column `MUNICIPIO`, per the fiboa data survey)"
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "crop:name_en",
@@ -95,7 +105,7 @@
     "table:row_count": 605256,
     "processing:software": {
       "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "vecorel-cli": "0.2.18"
     }
   },
   "collection": "es_cb",
@@ -107,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 240929996,
-      "file:checksum": "12201957cb20de9fc57a8f81376c812708f09c9410dffc5c83d01dd576a4125468ce",
+      "file:size": 241160966,
+      "file:checksum": "1220f71e8e3ce63624bd388f65470f6cd0c486bf794d4def9d0256dc9b9d50d062db",
       "proj:code": "EPSG:4326"
     }
   },

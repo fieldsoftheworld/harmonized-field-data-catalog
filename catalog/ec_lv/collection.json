@@ -45,10 +45,10 @@
     "spatial": {
       "bbox": [
         [
-          20.839223885313622,
-          55.63221901731316,
-          28.42516595855106,
-          58.043857497031084
+          20.983634336211278,
+          55.67535577616556,
+          28.22052639257332,
+          58.07650131807088
         ]
       ]
     },
@@ -68,14 +68,39 @@
   },
   "table:columns": [
     {
+      "name": "EC_NUTS3",
+      "type": "string",
+      "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "parcel_id",
+      "type": "uint64",
+      "description": "Carried over from the source column `PARCEL_ID`; the publisher documents no meaning for it."
+    },
+    {
       "name": "crop:code",
       "type": "string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "id",
       "type": "string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "subsidy_type",
@@ -93,34 +118,9 @@
       "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:name_en",
-      "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "parcel_id",
-      "type": "uint64",
-      "description": "Carried over from the source column `PARCEL_ID`; the publisher documents no meaning for it."
-    },
-    {
       "name": "hcat:code",
       "type": "uint32",
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "EC_NUTS3",
-      "type": "string",
-      "description": "Source-specific column; the publisher documents no meaning for it."
     },
     {
       "name": "bbox",
@@ -146,13 +146,17 @@
       "href": "./latest/ec_lv.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Latvia - Eurocrops 2021 — latest edition (2021) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2021/ec_lv.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2021/ec_lv-2021.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 454537070,
-      "file:checksum": "12209a873260758a7bb92ee420a87ed049716624b00650465072b0811ae7adfc7fbc",
-      "proj:code": "EPSG:3059"
+      "file:size": 454535533,
+      "file:checksum": "1220100d6ca2cc80079066686c291867d0829d63fb6ea72c2d133491eb12a51a8af0",
+      "proj:code": "EPSG:3059",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-hcat-crops": {
       "href": "./styles/hcat-crops.json",
@@ -163,8 +167,8 @@
         "default"
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 12 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
-      "file:size": 2329,
-      "file:checksum": "12209b52d59f653a9871eea9e688ab6b2cad410cb77c2a65e41a131c4505f47c4eec"
+      "file:size": 2334,
+      "file:checksum": "1220b5cce38818f10425f9102dc97b4a3b70617d15dd85641a8a5fcfbe0e9f9b89f5"
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -174,8 +178,8 @@
         "style"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1228,
-      "file:checksum": "1220fd05212c0d6871aa88391492991990a5825114fd28e8b2a47b1731c2f26afba3"
+      "file:size": 1233,
+      "file:checksum": "1220415c51f9a121ac48cd2a75c42e0eefb8b8d3c48352974e581eb8d089c8ef95af"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -185,18 +189,18 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 747,
-      "file:checksum": "12203ac6b1fbbbb0575a25968dbd6b5290f020707221a5b4729e154874e24dd849bc"
+      "file:size": 752,
+      "file:checksum": "12209d77bf96137130bbf17220873d881e9a045e83bded673f7f1c9a86192385bd58"
     },
     "visual": {
-      "href": "./year=2021/ec_lv.pmtiles",
+      "href": "./year=2021/ec_lv-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Latvia - Eurocrops 2021 — latest edition (2021) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 186471136,
-      "file:checksum": "122061e81c452b1ef326dad034a8443b2d8954f886d84f9b1108c46a53e6e3163f19"
+      "file:size": 185935458,
+      "file:checksum": "122029a467079348b0608092647d9594c2e1a3c968a698d5ebfe8ef08bb85e4b4a15"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -240,7 +244,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2021/ec_lv.pmtiles",
+      "href": "./year=2021/ec_lv-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -266,14 +270,14 @@
       "title": "Latvia - Eurocrops 2021 — 2021"
     }
   ],
-  "updated": "2026-09-03T23:10:29Z",
+  "updated": "2026-10-27T22:20:07Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "ec_lv": [
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   },

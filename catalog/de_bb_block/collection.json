@@ -47,10 +47,10 @@
     "spatial": {
       "bbox": [
         [
-          11.235119972136074,
-          51.31069259294588,
-          14.765480886097825,
-          53.56446415731656
+          11.269227339248756,
+          51.35897444894012,
+          14.764205453359025,
+          53.55861242367207
         ]
       ]
     },
@@ -71,22 +71,17 @@
   "table:columns": [
     {
       "name": "tk10",
-      "type": "large_string",
+      "type": "string",
       "description": "Carried over from the source column `TK10_BLATT`; the publisher documents no meaning for it."
     },
     {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "hbn",
-      "type": "large_string",
+      "type": "string",
       "description": "Carried over from the source column `HBN_KAT`; the publisher documents no meaning for it."
     },
     {
@@ -95,14 +90,9 @@
       "description": "Carried over from the source column `FL_NETTO`; the publisher documents no meaning for it."
     },
     {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "flik",
-      "type": "large_string",
-      "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "kreis_nr",
@@ -110,9 +100,14 @@
       "description": "Carried over from the source column `KREIS_NR`; the publisher documents no meaning for it."
     },
     {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "flik",
+      "type": "string",
+      "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -121,7 +116,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 90764,
+  "table:row_count": 90849,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -138,13 +133,17 @@
       "href": "./latest/de_bb_block.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Berlin/Brandenburg (blocks) — latest edition (2026) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2026/de_bb_block.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2026/de_bb_block-2026.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 88619653,
-      "file:checksum": "1220752062e14842ad68417bf5a51e45a78802786517033bebe594d79104860cb9a1",
-      "proj:code": "EPSG:25833"
+      "file:size": 74177914,
+      "file:checksum": "12203cad5bd985a7c443612d3f5ae7e12a67b5aa044b06aa599882b252d444403aea",
+      "proj:code": "EPSG:25833",
+      "processing:software": {
+        "fiboa-cli": "0.21.0",
+        "vecorel-cli": "0.4.1"
+      }
     },
     "style-field-size": {
       "href": "./styles/field-size.json",
@@ -155,8 +154,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 2, 5, 20 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1257,
-      "file:checksum": "12204edb74bf77bb798c8f4172f04c9430162272717127024ab0c3854ef3df94edab"
+      "file:size": 1262,
+      "file:checksum": "12205a9296ed27c86d414300bf653c9572f8215008bb374aee415e987425fb3035d8"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -166,18 +165,18 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 778,
-      "file:checksum": "1220dd4147c0678260a074bc737b760eaba0b0c7b211256e39c53e8f848857b10762"
+      "file:size": 783,
+      "file:checksum": "12200e2a4df496951dd951ddc52a22952bd667e5668eb94915baace7563814f95f48"
     },
     "visual": {
-      "href": "./year=2026/de_bb_block.pmtiles",
+      "href": "./year=2026/de_bb_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Berlin/Brandenburg (blocks) — latest edition (2026) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 36585210,
-      "file:checksum": "122080b59ef0164a6a77149b0db9918387a055caee9ca6bbe20170206b184b8b3991"
+      "file:size": 36093626,
+      "file:checksum": "1220047c6e99de330639e73bf0cb3751477af1ecddbd4e408c6458e0975b2b367161"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -221,7 +220,7 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2026/de_bb_block.pmtiles",
+      "href": "./year=2026/de_bb_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
@@ -247,14 +246,14 @@
       "title": "Germany, Berlin/Brandenburg (blocks) — 2026"
     }
   ],
-  "updated": "2026-08-28T18:52:38Z",
+  "updated": "2026-10-27T18:25:43Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_bb_block": [
       "https://fiboa.org/flik-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   }

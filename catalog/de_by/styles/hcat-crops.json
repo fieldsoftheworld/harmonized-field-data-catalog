@@ -7,7 +7,7 @@
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2026/de_by.pmtiles"
+      "url": "pmtiles://../year=2026/de_by-2026.pmtiles"
     }
   },
   "layers": [
@@ -25,27 +25,27 @@
               "get",
               "hcat:code"
             ],
-            3302000000,
-            "Pasture meadow grassland grass",
             3301000000,
             "Arable crops",
-            3303000000,
-            "Permanent crops perennial",
-            3303060000,
-            "Vineyards wine vine rebland grapes",
+            3302000000,
+            "Pasture meadow grassland grass",
             3301060200,
             "Hops",
+            3303060000,
+            "Vineyards wine vine rebland grapes",
+            3303000000,
+            "Permanent crops perennial",
             "Other"
           ],
-          "Pasture meadow grassland grass",
-          "#32cc32",
           "Arable crops",
           "#a6cee3",
-          "Permanent crops perennial",
+          "Pasture meadow grassland grass",
+          "#32cc32",
+          "Hops",
           "#1f78b4",
           "Vineyards wine vine rebland grapes",
           "#b2df8a",
-          "Hops",
+          "Permanent crops perennial",
           "#fb9a99",
           "#c8c8c8"
         ],

@@ -7,7 +7,7 @@ Feldblöcke und förderfähige Elemente in Sachsen 2026
 - **Editions:** 2026 (one GeoParquet per year)
 - **Fields in the latest edition (2026):** 95,305
 - **Coordinate reference system:** EPSG:25833 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.3.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/de_sax.py))
+- **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/de_sax.py))
 - **Data survey:** [DE-SAX.md](https://github.com/fiboa/data-survey/blob/main/data/DE-SAX.md)
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/de_sax/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_sax/AGENTS.md) for tested queries.
@@ -16,7 +16,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 95,305 | [69.1 MB](https://data.source.coop/ftw/harmonized-field-data/de_sax/year=2026/de_sax.parquet) | [31.1 MB](https://data.source.coop/ftw/harmonized-field-data/de_sax/year=2026/de_sax.pmtiles) | [de_sax-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_sax/year=2026/de_sax-2026.json) |
+| 2026 | 95,305 | [69.1 MB](https://data.source.coop/ftw/harmonized-field-data/de_sax/year=2026/de_sax-2026.parquet) | [31.1 MB](https://data.source.coop/ftw/harmonized-field-data/de_sax/year=2026/de_sax-2026.pmtiles) | [de_sax-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_sax/year=2026/de_sax-2026.json) |
 
 The latest edition is also available at a stable path: [de_sax/latest/de_sax.parquet](https://data.source.coop/ftw/harmonized-field-data/de_sax/latest/de_sax.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/de_sax/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_sax/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -67,7 +67,7 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_sax/lat
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Sächsisches Landesamt für Umwelt, Landwirtschaft und Geologie](https://geoportal.sachsen.de) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.3.1:
+This catalog is a mirror: the data is produced and licensed by [Sächsisches Landesamt für Umwelt, Landwirtschaft und Geologie](https://geoportal.sachsen.de) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
 - 2026: converted 2026-09-27 from <https://www.smul.sachsen.de/gis-online/download/FBZ_ISS_Bereiche/gesamt_2026_RE.zip>
 
