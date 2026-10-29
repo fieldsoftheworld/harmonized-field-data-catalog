@@ -12,9 +12,10 @@ Germany, Bavaria field boundaries in the [fiboa](https://github.com/fiboa/specif
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:25832, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
+- **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `uuid`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/de/de_by.csv`) have `NULL`. All 1,296,105 rows of the 2026 edition carry one.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 1,296,105 rows of the 2026 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `DE`, `admin:subdivision_code` = `BY`, `crop:code_list` = `https://fiboa.org/code/de/de_by.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
@@ -24,43 +25,43 @@ Fields and hectares per edition, through the partition glob:
 ```sql
 INSTALL httpfs; LOAD httpfs;
 CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');
-SELECT year, count(*) AS fields, 0 AS hectares
+SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/de_by/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2026 | 1296105 | 0
+-- 2026 | 1296105 | 3234424.0
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
 
 ```sql
 SELECT substr(CAST("hcat:code" AS VARCHAR), 1, 6) AS hcat_group, mode("hcat:name") AS most_common_name,
-       count(*) AS fields
+       count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_by/latest/de_by.parquet')
 WHERE "hcat:code" IS NOT NULL
-GROUP BY 1 ORDER BY fields DESC LIMIT 5;
--- hcat_group | most_common_name | fields
--- 330200 | pasture_meadow_grassland_grass | 721780
--- 330100 | arable_crops | 556772
--- 330300 | permanent_crops_perennial | 6226
--- 330306 | vineyards_wine_vine_rebland_grapes | 6151
--- 330106 | hops | 5176
+GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
+-- hcat_group | most_common_name | fields | hectares
+-- 330100 | arable_crops | 556772 | 2019859.0
+-- 330200 | pasture_meadow_grassland_grass | 721780 | 1185608.0
+-- 330106 | hops | 5176 | 17242.0
+-- 330306 | vineyards_wine_vine_rebland_grapes | 6151 | 6429.0
+-- 330300 | permanent_crops_perennial | 6226 | 5287.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
-SELECT id
+SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_by/latest/de_by.parquet')
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(48.9128, 11.4072), 'EPSG:4326', 'EPSG:25832'), 500))
 LIMIT 5;
--- id
--- DEBYN0AAAAAGlsnR
--- DEBYN0AAAAAGlsUs
--- DEBYN0AAAAAGlskx
--- DEBYN0AAAAAGlskl
--- DEBYN0AAAAAGlr8M
+-- id | m2
+-- DEBYN0AAAAAGlsnR | 2640.0
+-- DEBYN0AAAAAGlsUs | 7949.0
+-- DEBYN0AAAAAGlskx | 101.0
+-- DEBYN0AAAAAGlskl | 22069.0
+-- DEBYN0AAAAAGlr8M | 3050.0
 ```
 
 ## Related collections

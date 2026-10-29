@@ -51,24 +51,19 @@
     "proj:code": "EPSG:28992",
     "table:columns": [
       {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "metrics:area",
         "type": "float",
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
-        "type": "large_string",
+        "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "large_binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -92,8 +87,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 506705050,
-      "file:checksum": "1220e675632de0ca8aee91890360ea226c5a41d0c96583d0952e567c2761094bd8ac",
+      "file:size": 359524410,
+      "file:checksum": "12206b10c0558cb5e55ff0f3fc4441936b009fd5c626b7ee9b78a3e6cc795fe8a72e",
       "proj:code": "EPSG:28992"
     },
     "visual": {
@@ -103,8 +98,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 126706010,
-      "file:checksum": "12206764c92fe5e8a7c6e77916b4bcd9cf62036c3544dc5a5c58cc2745a24139cff0"
+      "file:size": 125115380,
+      "file:checksum": "122004d451024bdd5c3ad5d6d1405965056298612a052dd25c387dbf00c143234ced"
     }
   },
   "links": [

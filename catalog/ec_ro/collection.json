@@ -68,44 +68,29 @@
   },
   "table:columns": [
     {
-      "name": "crop:name",
-      "type": "large_string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "source",
-      "type": "large_string",
-      "description": "Carried over from the source column `SOURCE`; the publisher documents no meaning for it."
-    },
-    {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
       "name": "hcat:name",
-      "type": "large_string",
+      "type": "string",
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "hcat:code",
+      "type": "uint32",
+      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
       "name": "hcat:name_en",
-      "type": "large_string",
+      "type": "string",
       "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "metrics:area",
@@ -113,9 +98,19 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "hcat:code",
-      "type": "uint32",
-      "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "source",
+      "type": "string",
+      "description": "Carried over from the source column `SOURCE`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "bbox",
@@ -124,7 +119,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 259862,
+  "table:row_count": 259852,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -145,8 +140,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 131540418,
-      "file:checksum": "122099da8f59e27cf57ebeaec9b665290de9b9b6e23efaa53cda074a408281a64fca",
+      "file:size": 95725054,
+      "file:checksum": "1220d7e7a2811ca22fc885cd02094e85f4a59e1dc531243502bd4ae29b31d51c30d3",
       "proj:code": "EPSG:32635",
       "processing:software": {
         "fiboa-cli": "0.21.0",
@@ -194,8 +189,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 43308594,
-      "file:checksum": "1220b35c6507362c2f80646e52723056d1ec5d5c6fe3355ce906e63429a4bf5cc6c8"
+      "file:size": 43108481,
+      "file:checksum": "12209d62750cb3235533e8f92d191ddacc7eafb76f5ae867e9323009c1510c410ca7"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -265,15 +260,15 @@
       "title": "Romania - Eurocrops — 2026"
     }
   ],
-  "updated": "2026-08-28T18:53:22Z",
+  "updated": "2026-10-27T18:42:20Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "ec_ro": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   }
 }

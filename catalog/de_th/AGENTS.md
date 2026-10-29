@@ -12,7 +12,7 @@ Germany, Thuringia field boundaries in the [fiboa](https://github.com/fiboa/spec
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:25832, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres**, taken from the source column `FB_FLAECHE` (hectares × 10 000). Divide by 10 000 for hectares.
+- **`metrics:area` is in square metres** (source column `FB_FLAECHE`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `FBI_KURZ`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `valid_year` = `2026`, `kond_le` = `False`, `admin:country_code` = `DE`, `admin:subdivision_code` = `TH` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
@@ -28,7 +28,7 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/de_th/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2026 | 102076 | 801996.0
+-- 2026 | 102174 | 802094.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

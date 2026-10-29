@@ -18,7 +18,7 @@ To produce the DGK-Lw, (official) orthophotos from the Thuringian Land Registry 
 - **Source data provider:** [Thüringer Landesamt für Landwirtschaft und Ländlichen Raum](https://geomis.geoportal-th.de/geonetwork/srv/ger/catalog.search#/metadata/D872F2D6-60BC-11D6-B67D-00E0290F5BA0)
 - **License:** DL-DE-BY-2.0
 - **Editions:** 2026 (one GeoParquet per year)
-- **Fields in the latest edition (2026):** 102,076
+- **Fields in the latest edition (2026):** 102,174
 - **Coordinate reference system:** EPSG:25832 (as published by the source; not reprojected)
 - **Converted with:** fiboa-cli 0.21.0, vecorel-cli 0.4.1 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/de_th.py))
 - **Data survey:** [DE-TH.md](https://github.com/fiboa/data-survey/blob/main/data/DE-TH.md)
@@ -29,7 +29,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2026 | 102,076 | [126.0 MB](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.parquet) | [36.5 MB](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.pmtiles) | [de_th-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.json) |
+| 2026 | 102,174 | [81.5 MB](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.parquet) | [36.6 MB](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.pmtiles) | [de_th-2026.json](https://data.source.coop/ftw/harmonized-field-data/de_th/year=2026/de_th-2026.json) |
 
 The latest edition is also available at a stable path: [de_th/latest/de_th.parquet](https://data.source.coop/ftw/harmonized-field-data/de_th/latest/de_th.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/de_th/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/de_th/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
@@ -37,18 +37,17 @@ The latest edition is also available at a stable path: [de_th/latest/de_th.parqu
 
 | Column | Type | Description |
 |---|---|---|
-| `collection` | large_string | The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `tk10` | large_string | Sheet of the 1:10,000 topographic map covering the centroid of the field block. Example: `51334` (source column `TK10`, per the fiboa data survey) |
-| `determination:datetime` | timestamp[ms, tz=UTC] | The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `change` | bool | Whether the field block changed since the previous update: `Geaendert` → true, `Unveraendert` → false, `Neu` → null (source column `AENDERUNG`, per the fiboa data survey) |
-| `flik` | large_string | The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md)) |
-| `geometry` | large_binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `flik_last_year` | list<element: string> | FLIK identifier(s) of the previous year, split on `,` (source column `FBI_VJ`, per the fiboa data survey) |
-| `id` | large_string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `area_last_year` | float | Area in the previous year, in ha (source column `FB_FL_VJ`, per the fiboa data survey) |
-| `bnk` | large_string | Category of main land use, short code (source column `BNK`, per the fiboa data survey) |
+| `determination:datetime` | timestamp[ms, tz=UTC] | The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `tk10` | string | Sheet of the 1:10,000 topographic map covering the centroid of the field block. Example: `51334` (source column `TK10`, per the fiboa data survey) |
+| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `flik` | string | The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md)) |
+| `bnk` | string | Category of main land use, short code (source column `BNK`, per the fiboa data survey) |
+| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `change` | bool | Whether the field block changed since the previous update: `Geaendert` → true, `Unveraendert` → false, `Neu` → null (source column `AENDERUNG`, per the fiboa data survey) |
+| `flik_last_year` | list<element: string> | FLIK identifier(s) of the previous year, split on `,` (source column `FBI_VJ`, per the fiboa data survey) |
 | `afo` | bool | Whether the field block is an agroforestry system (`J` → true, otherwise false) (source column `AFO`, per the fiboa data survey) |
+| `area_last_year` | float | Area in the previous year, in ha (source column `FB_FL_VJ`, per the fiboa data survey) |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 Properties that are the same for every field are stored once, in the GeoParquet file's `collection` metadata rather than as columns (latest edition shown; a client reading only the table will not see them):
@@ -67,14 +66,14 @@ INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_th/latest/de_th.parquet');
 -- fields | hectares
--- 102076 | 801996.0
+-- 102174 | 802094.0
 ```
 
 ## Provenance
 
 This catalog is a mirror: the data is produced and licensed by [Thüringer Landesamt für Landwirtschaft und Ländlichen Raum](https://geomis.geoportal-th.de/geonetwork/srv/ger/catalog.search#/metadata/D872F2D6-60BC-11D6-B67D-00E0290F5BA0) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.21.0, vecorel-cli 0.4.1:
 
-- 2026: converted 2026-08-28 from <https://www.geoproxy.geoportal-th.de/download-service/opendata/agrar/DGK_Thue.zip>
+- 2026: converted 2026-10-27 from <https://www.geoproxy.geoportal-th.de/download-service/opendata/agrar/DGK_Thue.zip>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

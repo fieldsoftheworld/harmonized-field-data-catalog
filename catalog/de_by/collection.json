@@ -69,14 +69,9 @@
   },
   "table:columns": [
     {
-      "name": "crop:name",
-      "type": "large_string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "geometry",
-      "type": "large_binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "hcat:code",
@@ -84,29 +79,34 @@
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "id",
-      "type": "large_string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "hcat:name",
-      "type": "large_string",
+      "type": "string",
       "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "crop:code",
+      "type": "string",
+      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
       "name": "determination:datetime",
       "type": "timestamp[ms, tz=UTC]",
       "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "crop:code",
-      "type": "large_string",
-      "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "collection",
-      "type": "large_string",
-      "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -136,8 +136,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 391819314,
-      "file:checksum": "12209e2990f9b27adf9ab377d3df06a1b4756921a7ea5665045bdf12f40f7d60210e",
+      "file:size": 310860817,
+      "file:checksum": "1220f3e1daa6c442ca0eb753197602360ff32de6b986514112868d4d0414ab147575",
       "proj:code": "EPSG:25832",
       "processing:software": {
         "fiboa-cli": "0.21.0",
@@ -154,7 +154,18 @@
       ],
       "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 5 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette.",
       "file:size": 1647,
-      "file:checksum": "1220bf46c8d250e841c6503ec22971eaebc9d075c72fe32dc96ffd1c870a9bef5aac"
+      "file:checksum": "122080b67aa83fa766871e39dc96d8d11594566e574a2ebe1ca24d1910404a1e10fd"
+    },
+    "style-field-size": {
+      "href": "./styles/field-size.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field size (ha)",
+      "roles": [
+        "style"
+      ],
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.25, 1, 2, 5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1228,
+      "file:checksum": "12206da82ab67518a08335e785a3ac9956616b4ffb65ec47b2772f040e215a0a8d1e"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -174,8 +185,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 172299464,
-      "file:checksum": "12204a4b22f13bfb3e6a70572d2f70cc1967769aadf522fa24d09bf9afc748d0cd17"
+      "file:size": 198170688,
+      "file:checksum": "1220c01df8e07570f84cde23de71cd618df1bab27807fb6605edc0211e8d575acb17"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -251,16 +262,16 @@
       "title": "Germany, Bavaria — 2026"
     }
   ],
-  "updated": "2026-08-28T18:44:08Z",
+  "updated": "2026-10-27T22:43:47Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "de_by": [
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "Datenquelle: Bayerische Vermessungsverwaltung – www.geodaten.bayern.de"

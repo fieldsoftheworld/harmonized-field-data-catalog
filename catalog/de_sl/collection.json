@@ -69,9 +69,9 @@
   },
   "table:columns": [
     {
-      "name": "id",
+      "name": "name",
       "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "description": "Source-specific column; the publisher documents no meaning for it."
     },
     {
       "name": "flik",
@@ -89,9 +89,9 @@
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "name",
+      "name": "id",
       "type": "string",
-      "description": "Source-specific column; the publisher documents no meaning for it."
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -100,7 +100,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 54460,
+  "table:row_count": 54038,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
@@ -121,8 +121,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 19836722,
-      "file:checksum": "122065b4feedbefe4a8f6c91ddf711df158e0e169de99bcaa13ad1f76f27672fcc63",
+      "file:size": 20005217,
+      "file:checksum": "12204c6d8aab38f07888e573609259f5b0a96923c3f69797ac1577461d869f07ba16",
       "proj:code": "EPSG:4258",
       "processing:software": {
         "fiboa-cli": "0.21.0",
@@ -159,8 +159,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 23689353,
-      "file:checksum": "1220865297ce552c3f73f0e73f36ae09320b2daa573a52173869d714874734ae9eaf"
+      "file:size": 23699251,
+      "file:checksum": "1220d6381f222239cd34754500b648af8b4605c6269c5e03f3e4a0382883929b9d7d"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -236,7 +236,7 @@
       "title": "Germany, Saarland — 2026"
     }
   ],
-  "updated": "2026-09-16T16:09:05Z",
+  "updated": "2026-10-27T18:34:03Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {

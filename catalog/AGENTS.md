@@ -18,7 +18,7 @@ FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- at | 2944397
--- at_block | 1299755
+-- at_block | 1299745
 -- be_vlg | 597088
 -- be_wal | 342315
 -- bg | 226592

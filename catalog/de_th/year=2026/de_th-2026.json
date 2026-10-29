@@ -43,22 +43,17 @@
   ],
   "properties": {
     "title": "Germany, Thuringia — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_th-2026.parquet`, 102,076 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`de_th-2026.parquet`, 102,174 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2007-02-16T00:00:00Z",
-    "end_datetime": "2026-07-31T00:00:00Z",
+    "end_datetime": "2026-09-29T00:00:00Z",
     "year": 2026,
     "proj:code": "EPSG:25832",
     "table:columns": [
       {
-        "name": "collection",
-        "type": "large_string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "tk10",
-        "type": "large_string",
-        "description": "Sheet of the 1:10,000 topographic map covering the centroid of the field block. Example: `51334` (source column `TK10`, per the fiboa data survey)"
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "determination:datetime",
@@ -66,19 +61,34 @@
         "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "change",
-        "type": "bool",
-        "description": "Whether the field block changed since the previous update: `Geaendert` → true, `Unveraendert` → false, `Neu` → null (source column `AENDERUNG`, per the fiboa data survey)"
-      },
-      {
-        "name": "flik",
-        "type": "large_string",
-        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+        "name": "tk10",
+        "type": "string",
+        "description": "Sheet of the 1:10,000 topographic map covering the centroid of the field block. Example: `51334` (source column `TK10`, per the fiboa data survey)"
       },
       {
         "name": "geometry",
-        "type": "large_binary",
+        "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "flik",
+        "type": "string",
+        "description": "The area identifier (FLIK code) is a 16-character string. ([spec](https://github.com/fiboa/flik-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bnk",
+        "type": "string",
+        "description": "Category of main land use, short code (source column `BNK`, per the fiboa data survey)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "change",
+        "type": "bool",
+        "description": "Whether the field block changed since the previous update: `Geaendert` → true, `Unveraendert` → false, `Neu` → null (source column `AENDERUNG`, per the fiboa data survey)"
       },
       {
         "name": "flik_last_year",
@@ -86,29 +96,14 @@
         "description": "FLIK identifier(s) of the previous year, split on `,` (source column `FBI_VJ`, per the fiboa data survey)"
       },
       {
-        "name": "id",
-        "type": "large_string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "afo",
+        "type": "bool",
+        "description": "Whether the field block is an agroforestry system (`J` → true, otherwise false) (source column `AFO`, per the fiboa data survey)"
       },
       {
         "name": "area_last_year",
         "type": "float",
         "description": "Area in the previous year, in ha (source column `FB_FL_VJ`, per the fiboa data survey)"
-      },
-      {
-        "name": "bnk",
-        "type": "large_string",
-        "description": "Category of main land use, short code (source column `BNK`, per the fiboa data survey)"
-      },
-      {
-        "name": "afo",
-        "type": "bool",
-        "description": "Whether the field block is an agroforestry system (`J` → true, otherwise false) (source column `AFO`, per the fiboa data survey)"
       },
       {
         "name": "bbox",
@@ -117,7 +112,7 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 102076,
+    "table:row_count": 102174,
     "processing:software": {
       "fiboa-cli": "0.21.0",
       "vecorel-cli": "0.4.1"
@@ -132,8 +127,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 132118027,
-      "file:checksum": "122019e9b5e2e02528a4c846278b4858f002e25b4561616fcd389fd606f6e5a266fb",
+      "file:size": 85482756,
+      "file:checksum": "1220857d8b510beb6715a79762dfd7a312042f24ac16d243910fc7b5afa61ef1a6b2",
       "proj:code": "EPSG:25832"
     },
     "visual": {
@@ -143,8 +138,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 38263350,
-      "file:checksum": "1220400478bc29fe0dca8e4d26ad20310381368c2bd9306d9fd0a6e38e8b36b3e6ba"
+      "file:size": 38403499,
+      "file:checksum": "1220e963c52a9e1814bc00a2f636596d141235c0a2d4f35327295137384c578c1c6f"
     }
   },
   "links": [

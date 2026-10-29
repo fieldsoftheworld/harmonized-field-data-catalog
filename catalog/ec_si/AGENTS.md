@@ -12,10 +12,11 @@ Slovenia - Eurocrops 2021 field boundaries in the [fiboa](https://github.com/fib
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:3794, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres**, taken from the source column `AREA`. Divide by 10 000 for hectares.
+- **`metrics:area` is in square metres** (source column `AREA`; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`si_2021.csv`) have `NULL`. 4 of the 828,263 rows of the 2021 edition (0.00%) have none, so a query that filters or groups on crop silently leaves them out.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 828,157 rows of the 2021 edition carry one.
+- **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/si_2021.csv` (2021 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
 
@@ -28,7 +29,7 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/ec_si/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2021 | 828263 | 475789.0
+-- 2021 | 828157 | 475683.0
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
@@ -40,10 +41,10 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_si/late
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330200 | pasture_meadow_grassland_grass | 422773 | 274395.0
--- 330101 | grain_maize_corn_popcorn | 156397 | 125697.0
--- 330109 | temporary_grass | 85026 | 27669.0
--- 330306 | vineyards_wine_vine_rebland_grapes | 31788 | 12738.0
+-- 330200 | pasture_meadow_grassland_grass | 422731 | 274305.0
+-- 330101 | grain_maize_corn_popcorn | 156375 | 125690.0
+-- 330109 | temporary_grass | 85005 | 27663.0
+-- 330306 | vineyards_wine_vine_rebland_grapes | 31782 | 12738.0
 -- 330301 | orchards_fruits | 34529 | 10343.0
 ```
 

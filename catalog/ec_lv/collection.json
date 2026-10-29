@@ -68,14 +68,39 @@
   },
   "table:columns": [
     {
+      "name": "EC_NUTS3",
+      "type": "string",
+      "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "parcel_id",
+      "type": "uint64",
+      "description": "Carried over from the source column `PARCEL_ID`; the publisher documents no meaning for it."
+    },
+    {
       "name": "crop:code",
       "type": "string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
       "name": "id",
       "type": "string",
       "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "subsidy_type",
@@ -93,34 +118,9 @@
       "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:name_en",
-      "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "parcel_id",
-      "type": "uint64",
-      "description": "Carried over from the source column `PARCEL_ID`; the publisher documents no meaning for it."
-    },
-    {
       "name": "hcat:code",
       "type": "uint32",
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "EC_NUTS3",
-      "type": "string",
-      "description": "Source-specific column; the publisher documents no meaning for it."
     },
     {
       "name": "bbox",
@@ -150,8 +150,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 454537070,
-      "file:checksum": "12209a873260758a7bb92ee420a87ed049716624b00650465072b0811ae7adfc7fbc",
+      "file:size": 454535533,
+      "file:checksum": "1220100d6ca2cc80079066686c291867d0829d63fb6ea72c2d133491eb12a51a8af0",
       "proj:code": "EPSG:3059",
       "processing:software": {
         "fiboa-cli": "0.21.0",
@@ -199,8 +199,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 186471136,
-      "file:checksum": "122061e81c452b1ef326dad034a8443b2d8954f886d84f9b1108c46a53e6e3163f19"
+      "file:size": 185935458,
+      "file:checksum": "122029a467079348b0608092647d9594c2e1a3c968a698d5ebfe8ef08bb85e4b4a15"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -270,14 +270,14 @@
       "title": "Latvia - Eurocrops 2021 — 2021"
     }
   ],
-  "updated": "2026-09-03T23:10:29Z",
+  "updated": "2026-10-27T22:20:07Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "ec_lv": [
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   },
