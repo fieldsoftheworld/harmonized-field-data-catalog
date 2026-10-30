@@ -15,7 +15,7 @@ Germany, Berlin/Brandenburg field boundaries in the [fiboa](https://github.com/f
 - **`metrics:area` is in square metres** (source column `groesse`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. 84,461 of the 232,338 rows of the 2026 edition (36.35%) have none, so a query that filters or groups on crop silently leaves them out.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 181,768 rows of the 2026 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `DE`, `admin:subdivision_code` = `BB`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/de.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 - **Not every edition comes from the same source.** The 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022 and 2023 editions, which the source above does not offer, come from Field boundaries for Berlin / Brandenburg, Germany — EuroCrops V2 (Joint Research Centre, European Commission, converter `ec_de_bb`), under CC-BY-4.0; attribution: European Commission, Joint Research Centre — EuroCropsV2; their items carry those terms.
 
@@ -50,11 +50,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_bb/late
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330101 | winter_rye | 35104 | 499866.0
--- 330200 | pasture_meadow_grassland_grass | 76558 | 335925.0
+-- 330101 | winter_rye | 35105 | 499869.0
+-- 330200 | pasture_meadow_grassland_grass | 79682 | 340180.0
 -- 330109 | green_silo_maize | 17360 | 206411.0
--- 330106 | winter_rapeseed_rape | 7041 | 127546.0
--- 330102 | peas | 2594 | 31966.0
+-- 330106 | winter_rapeseed_rape | 7052 | 127556.0
+-- 330111 | fallow_land_not_crop | 27597 | 59227.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -66,11 +66,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_bb/late
 WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.4588, 13.0172), 'EPSG:4326', 'EPSG:25833'), 500))
 LIMIT 5;
 -- id | m2
--- 146892 | 63332.0
--- 146893 | 21874.0
--- 146872 | 6888.0
--- 146871 | 65257.0
--- 146870 | 503.0
+-- 120682 | 63332.0
+-- 120683 | 21874.0
+-- 120662 | 6888.0
+-- 120661 | 65257.0
+-- 120660 | 503.0
 ```
 
 ## Related collections
