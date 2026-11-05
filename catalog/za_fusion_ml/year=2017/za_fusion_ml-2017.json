@@ -1,0 +1,152 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "za_fusion_ml-2017",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          20.521492384730347,
+          -34.39922362572791
+        ],
+        [
+          21.04341451023305,
+          -34.39922362572791
+        ],
+        [
+          21.04341451023305,
+          -33.980506187460875
+        ],
+        [
+          20.521492384730347,
+          -33.980506187460875
+        ],
+        [
+          20.521492384730347,
+          -34.39922362572791
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    20.521492384730347,
+    -34.39922362572791,
+    21.04341451023305,
+    -33.980506187460875
+  ],
+  "properties": {
+    "title": "South Africa (Fusion) with splits — 2017",
+    "description": "Field boundaries of the 2017 edition of this dataset, one GeoParquet file (`za_fusion_ml-2017.parquet`, 6,568 fields) and its PMTiles. Partition `year=2017` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2017-01-01T00:00:00Z",
+    "end_datetime": "2017-01-01T00:00:00Z",
+    "year": 2017,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "split",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 6568,
+    "processing:software": {
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.2"
+    }
+  },
+  "collection": "za_fusion_ml",
+  "assets": {
+    "data": {
+      "href": "./za_fusion_ml-2017.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "South Africa (Fusion) with splits 2017 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 2140348,
+      "file:checksum": "122063987a6272bd7f50068155941f9b77d0be34137200916e37b3ed7b9271722c0e",
+      "proj:code": "EPSG:4326"
+    },
+    "visual": {
+      "href": "./za_fusion_ml-2017.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "South Africa (Fusion) with splits 2017 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 1194721,
+      "file:checksum": "12203c2cd6782b6532a347490b83094c49f17d2bd61a442d4cb7d7cb995408668993"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

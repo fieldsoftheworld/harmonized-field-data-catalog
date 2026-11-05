@@ -1,0 +1,240 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+  ],
+  "id": "rw_rwanda_ml",
+  "title": "Rwanda Crop Field Boundaries with splits",
+  "description": "Field boundaries for smallholder farms in eastern Rwanda from the NASA Harvest\nRwanda Field Boundary Competition dataset. Annotated from Planet imagery for\nthe 2021 growing season. The competition publishes the labels as rasters; these are the\npolygons Kerner Lab (Arizona State University) converted from them for Fields of the World.\n\nThis collection holds 1 edition (2021), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/rw_rwanda_ml/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2021). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/rw_rwanda_ml/AGENTS.md).\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no farmer's declaration behind them.",
+  "boundaries": "mapped",
+  "keywords": [
+    "NASA Harvest",
+    "PlanetScope",
+    "Rwanda",
+    "agriculture",
+    "fiboa",
+    "field boundaries",
+    "hand-digitised",
+    "smallholder",
+    "train/val/test splits"
+  ],
+  "license": "CC-BY-4.0",
+  "providers": [
+    {
+      "name": "NASA Harvest",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://source.coop/nasa/rwanda-field-boundary-competition"
+    },
+    {
+      "name": "Fields of the World",
+      "url": "https://fieldsofthe.world",
+      "roles": [
+        "processor",
+        "host"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          30.291994000000003,
+          -1.5900790000000018,
+          30.423433000000003,
+          -1.3917700000000055
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2021-08-31T00:00:00Z",
+          "2021-08-31T00:00:00Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "proj:code": [
+      "EPSG:4326"
+    ]
+  },
+  "table:columns": [
+    {
+      "name": "split",
+      "type": "string",
+      "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "bbox",
+      "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+      "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    }
+  ],
+  "table:primary_geometry": "geometry",
+  "table:row_count": 1532,
+  "partition:scheme": "hive",
+  "partition:strategy": "temporal",
+  "partition:keys": [
+    {
+      "name": "year",
+      "type": "int32",
+      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+    }
+  ],
+  "partition:file_count": 1,
+  "partition:glob": "s3://ftw/harmonized-field-data/rw_rwanda_ml/year=*/*.parquet",
+  "assets": {
+    "data": {
+      "href": "./latest/rw_rwanda_ml.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Rwanda with splits — latest edition (2021) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2021/rw_rwanda_ml-2021.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 169252,
+      "file:checksum": "122041e846579622ea4bf8119a54ad189abec70cc2e8e848888d96e5e1b27ea61ae4",
+      "proj:code": "EPSG:4326",
+      "processing:software": {
+        "fiboa-cli": "0.30.0",
+        "vecorel-cli": "0.4.2"
+      }
+    },
+    "style-field-size": {
+      "href": "./styles/field-size.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field size (ha)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.5, 1, 2 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1212,
+      "file:checksum": "12207e93be84674b1cccb001bfbf9d7d2380342190b6c3c5e1a4ac433fb8a7105a11"
+    },
+    "style-outline": {
+      "href": "./styles/outline.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field boundaries",
+      "roles": [
+        "style"
+      ],
+      "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
+      "file:size": 768,
+      "file:checksum": "1220a46803062ffba4fb3c2be143ad5ec81ac3b9244e05a982bcf99d193bccc50ee1"
+    },
+    "visual": {
+      "href": "./year=2021/rw_rwanda_ml-2021.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Rwanda with splits — latest edition (2021) (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 150211,
+      "file:checksum": "122046d684052845cc37350c6dde3c3e5c75fcec6126282cdca8b0936339a1b13fdf"
+    },
+    "thumbnail": {
+      "href": "./thumbnail.jpg",
+      "type": "image/jpeg",
+      "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "roles": [
+        "thumbnail"
+      ],
+      "file:size": 47959,
+      "file:checksum": "12206a2d270a121d06e20fa933490cc0b274179b22ac59f5859ed3e07b33c5ca54a3"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "agents",
+      "href": "./AGENTS.md",
+      "type": "text/markdown",
+      "title": "Guidance for AI agents"
+    },
+    {
+      "rel": "describedby",
+      "href": "./README.md",
+      "type": "text/markdown",
+      "title": "Human-readable documentation"
+    },
+    {
+      "rel": "llms",
+      "href": "./llms.txt",
+      "type": "text/markdown",
+      "title": "Agent/LLM usage guide"
+    },
+    {
+      "rel": "pmtiles",
+      "href": "./year=2021/rw_rwanda_ml-2021.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Web map tiles",
+      "pmtiles:layers": [
+        "rw_rwanda_ml"
+      ]
+    },
+    {
+      "rel": "via",
+      "href": "https://source.coop/nasa/rwanda-field-boundary-competition",
+      "type": "text/html",
+      "title": "Original source (publisher page)"
+    },
+    {
+      "rel": "related",
+      "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/rw_rwanda_ml.py",
+      "type": "text/html",
+      "title": "Converter source code (fiboa-cli)"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/rw_rwanda_ml-2021.json",
+      "type": "application/geo+json",
+      "title": "Rwanda with splits — 2021"
+    }
+  ],
+  "updated": "2026-11-05T22:35:19Z",
+  "fiboa_version": "0.3.0",
+  "vecorel_version": "0.1.0",
+  "vecorel_extensions": {
+    "rw_rwanda_ml": [
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+    ]
+  },
+  "attribution": "https://doi.org/10.34911/rdnt.g580ww"
+}

@@ -1,12 +1,14 @@
 # Harmonized Field Boundary Data
 
-Field boundaries published by government bodies and research institutions, harmonized to fiboa, 69 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Field boundaries published by government bodies and research institutions, harmonized to fiboa, 77 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
+- ai4sf_ml: Field boundaries for Cambodia and Vietnam (AI4SmallFarms) with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/ai4sf_ml/latest/ai4sf_ml.parquet (license CC-BY-4.0, CRS EPSG:32648)
 - at: Field boundaries for Austria — crop fields — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:3035, EPSG:31287)
 - at_block: Field blocks for Austria — field blocks — https://data.source.coop/ftw/harmonized-field-data/at_block/latest/at_block.parquet (license CC-BY-4.0, CRS EPSG:31287)
 - be_vlg: Field boundaries for Flanders, Belgium — crop fields — https://data.source.coop/ftw/harmonized-field-data/be_vlg/latest/be_vlg.parquet (license other, CRS EPSG:3035, EPSG:31370)
 - be_wal: Belgium Wallonia: Parcellaire Agricole Anonyme — crop fields — https://data.source.coop/ftw/harmonized-field-data/be_wal/latest/be_wal.parquet (license CC-BY-4.0, CRS EPSG:3035)
 - bg: Field blocks for Bulgaria — field blocks — https://data.source.coop/ftw/harmonized-field-data/bg/latest/bg.parquet (license CC-BY-4.0, CRS EPSG:32635)
+- br_ba_lem: Field boundaries for the west of Bahia state, Brazil — crop fields — https://data.source.coop/ftw/harmonized-field-data/br_ba_lem/latest/br_ba_lem.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - br_conab: Brazil Crop Fields (CONAB) — crop fields — https://data.source.coop/ftw/harmonized-field-data/br_conab/latest/br_conab.parquet (license CC-BY-NC-4.0, CRS EPSG:4674)
 - ca_prairies: Field boundaries for the Canadian Prairies, derived from Sentinel-2 — crop fields — https://data.source.coop/ftw/harmonized-field-data/ca_prairies/latest/ca_prairies.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - ch: Field boundaries for Switzerland — crop fields — https://data.source.coop/ftw/harmonized-field-data/ch/latest/<converter>.parquet, one per source (license other, CRS EPSG:2056)
@@ -51,12 +53,15 @@ Field boundaries published by government bodies and research institutions, harmo
 - es_vc: Spain Valencia Crop Fields — crop fields — https://data.source.coop/ftw/harmonized-field-data/es_vc/latest/es_vc.parquet (license CC-BY-4.0, CRS EPSG:25830)
 - fi: Finnish Crop Fields (Maatalousmaa) — crop fields — https://data.source.coop/ftw/harmonized-field-data/fi/latest/fi.parquet (license CC-BY-4.0, CRS EPSG:3067)
 - fr: Registre Parcellaire Graphique; Crop Fields France — crop fields — https://data.source.coop/ftw/harmonized-field-data/fr/latest/fr.parquet (license other, CRS EPSG:2154, EPSG:3035, IGNF:LAMB93)
+- glocab: GloCAB cropland field boundaries (Brazil, Canada, Russia, Ukraine, USA) — crop fields — https://data.source.coop/ftw/harmonized-field-data/glocab/latest/glocab.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - hr: Croatian Field Boundaries — crop fields — https://data.source.coop/ftw/harmonized-field-data/hr/latest/hr.parquet (license other, CRS EPSG:3765)
 - ie: Ireland INSPIRE Geospatial aid application (GSAA) dataset — crop fields — https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - ie_lpis: LPIS parcels for Ireland — crop fields — https://data.source.coop/ftw/harmonized-field-data/ie_lpis/latest/ie_lpis.parquet (license CC-BY-4.0, CRS EPSG:2157)
+- india_10k_ml: 10,000 Crop Field Boundaries across India with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/india_10k_ml/latest/india_10k_ml.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - it_1: Italy Tuscany (ITI1) Crop Fields — EuroCropsV2 — crop fields — https://data.source.coop/ftw/harmonized-field-data/it_1/latest/it_1.parquet (license CC-BY-4.0, CRS EPSG:3035)
 - it_bz: Field boundaries for South Tyrol, Italy — crop fields — https://data.source.coop/ftw/harmonized-field-data/it_bz/latest/it_bz.parquet (license CC0-1.0, CRS EPSG:25832)
 - jp: Japan Fude Parcels — crop fields — https://data.source.coop/ftw/harmonized-field-data/jp/latest/jp.parquet (license CC-BY-4.0, CRS EPSG:6668)
+- ke_ecaas: Crop-cut farm polygons with crop type and yield for Kenya (ECAAS Bird's-Eye) — crop fields — https://data.source.coop/ftw/harmonized-field-data/ke_ecaas/latest/ke_ecaas.parquet (license GPL-2.0-or-later, CRS EPSG:4326)
 - lt: Lithuania crop fields — crop fields — https://data.source.coop/ftw/harmonized-field-data/lt/latest/lt.parquet (license CC-BY-4.0, CRS EPSG:3035)
 - lu: Field blocks for Luxembourg — field blocks — https://data.source.coop/ftw/harmonized-field-data/lu/latest/lu.parquet (license CC-BY-4.0, CRS EPSG:2169)
 - lv: Latvia Lauki Parcels — crop fields — https://data.source.coop/ftw/harmonized-field-data/lv/latest/lv.parquet (license CC-BY-SA-4.0, CRS EPSG:3059)
@@ -66,11 +71,14 @@ Field boundaries published by government bodies and research institutions, harmo
 - pl: Field boundaries for Poland — crop fields — https://data.source.coop/ftw/harmonized-field-data/pl/latest/pl.parquet (license other, CRS EPSG:2180)
 - pl_block: Field blocks for Poland — field blocks — https://data.source.coop/ftw/harmonized-field-data/pl_block/latest/pl_block.parquet (license other, CRS EPSG:2180)
 - pt: Field boundaries for Portugal — crop fields — https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet (license other, CRS EPSG:3763, EPSG:4326)
+- rw_rwanda_ml: Rwanda Crop Field Boundaries with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/rw_rwanda_ml/latest/rw_rwanda_ml.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - se: Swedish Crop Fields (Jordbruksskiften) — crop fields — https://data.source.coop/ftw/harmonized-field-data/se/latest/se.parquet (license CC0-1.0, CRS EPSG:3006)
 - si: Slovenia Crop Fields — crop fields — https://data.source.coop/ftw/harmonized-field-data/si/latest/si.parquet (license other, CRS EPSG:3794)
 - sk: Slovakia Agricultural Land Identification System — crop fields — https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet (license CC0-1.0, CRS EPSG:5514)
 - us_ca_scm: California (US) Statewide Crop Mapping — crop fields — https://data.source.coop/ftw/harmonized-field-data/us_ca_scm/latest/us_ca_scm.parquet (license CC0-1.0, CRS EPSG:3857, EPSG:4269)
 - us_usda_cropland: U.S. Department of Agriculture Crop Sequence Boundaries — crop fields — https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/latest/us_usda_cropland.parquet (license other, CRS )
+- za_fusion_ml: South Africa Crop Field Boundaries (Fusion Competition) with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/za_fusion_ml/latest/za_fusion_ml.parquet (license CC-BY-4.0, CRS EPSG:4326)
+- zm_ecaas: Crop-cut farm polygons with crop type and yield for Zambia (ECAAS Bird's-Eye) — crop fields — https://data.source.coop/ftw/harmonized-field-data/zm_ecaas/latest/zm_ecaas.parquet (license GPL-2.0-or-later, CRS EPSG:4326)
 
 Map tiles of the collections' newest editions (README says which), one layer `fields`, shared columns only: https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles
 

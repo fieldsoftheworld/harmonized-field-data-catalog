@@ -1,0 +1,35 @@
+{
+  "version": 8,
+  "name": "India 10k with splits — field boundaries",
+  "metadata": {
+    "description": "Every field in one colour with a thin outline; for reading the boundaries themselves."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2020/india_10k_ml-2020.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-fill",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "india_10k_ml",
+      "paint": {
+        "fill-color": "#2166ac",
+        "fill-opacity": 0.25
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "india_10k_ml",
+      "paint": {
+        "line-color": "#2166ac",
+        "line-width": 0.8
+      }
+    }
+  ]
+}

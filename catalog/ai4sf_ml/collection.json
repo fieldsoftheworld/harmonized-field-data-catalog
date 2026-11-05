@@ -1,0 +1,251 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+  ],
+  "id": "ai4sf_ml",
+  "title": "Field boundaries for Cambodia and Vietnam (AI4SmallFarms) with splits",
+  "description": "Agricultural field polygons within smallholder farming systems are essential to facilitate the collection of geo-spatial data useful for farmers, managers, and policymakers.\nHowever, the limited availability of training labels poses a challenge in developing supervised methods to accurately delineate field boundaries using Earth Observation (EO) data.\nThis data set allows researchers to test and benchmark machine learning methods to delineate agricultural field boundaries in polygon format.\nThe large-scale data set consists of 439,001 field polygons divided into 62 tiles of approximately 5×5 km distributed across Vietnam and Cambodia, covering a range of fields and diverse landscape types.\nThe field polygons have been meticulously digitized from satellite images, following a rigorous multi-step quality control process and topological consistency checks.\nMulti-temporal composites of Sentinel-2 (S2) images are provided to ensure cloud-free data.\n\nThis collection holds 1 edition (2021), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/ai4sf_ml/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2021). Geometries are kept in the source CRS (EPSG:32648). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/ai4sf_ml/AGENTS.md).\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no farmer's declaration behind them.",
+  "boundaries": "mapped",
+  "keywords": [
+    "AI4SmallFarms",
+    "Cambodia",
+    "Vietnam",
+    "agriculture",
+    "fiboa",
+    "field boundaries",
+    "hand-digitised",
+    "smallholder",
+    "train/val/test splits"
+  ],
+  "license": "CC-BY-4.0",
+  "providers": [
+    {
+      "name": "DATA Archiving and Networked Services (DANS)",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://research.tudelft.nl/en/publications/ai4smallfarms-a-dataset-for-crop-field-delineation-in-southeast-a"
+    },
+    {
+      "name": "Fields of the World",
+      "url": "https://fieldsofthe.world",
+      "roles": [
+        "processor",
+        "host"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          102.90251334054025,
+          9.642191415608739,
+          109.04341542937054,
+          21.34414085763546
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2021-08-01T00:00:00Z",
+          "2021-08-01T00:00:00Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "proj:code": [
+      "EPSG:32648"
+    ]
+  },
+  "table:columns": [
+    {
+      "name": "group",
+      "type": "uint8",
+      "description": "Carried over from the source column `id`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "admin:country_code",
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code (aka admin0). Two-letter country code for the country that contains the field. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
+    },
+    {
+      "name": "split",
+      "type": "string",
+      "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "bbox",
+      "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+      "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    }
+  ],
+  "table:primary_geometry": "geometry",
+  "table:row_count": 439001,
+  "partition:scheme": "hive",
+  "partition:strategy": "temporal",
+  "partition:keys": [
+    {
+      "name": "year",
+      "type": "int32",
+      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+    }
+  ],
+  "partition:file_count": 1,
+  "partition:glob": "s3://ftw/harmonized-field-data/ai4sf_ml/year=*/*.parquet",
+  "assets": {
+    "data": {
+      "href": "./latest/ai4sf_ml.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Cambodia/Vietnam (AI4SF) with splits — latest edition (2021) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2021/ai4sf_ml-2021.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 38281355,
+      "file:checksum": "12203cad8c05d83280abd21ce3f682c557a01f1ccb023706f37ebfde93e4f6fc7e8c",
+      "proj:code": "EPSG:32648",
+      "processing:software": {
+        "fiboa-cli": "0.30.0",
+        "vecorel-cli": "0.4.2"
+      }
+    },
+    "style-field-size": {
+      "href": "./styles/field-size.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field size (ha)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 0.5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1228,
+      "file:checksum": "1220cdbec0995fd5284a836a428b037550de9204a30ce402218ede3e20bd93ae4115"
+    },
+    "style-outline": {
+      "href": "./styles/outline.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field boundaries",
+      "roles": [
+        "style"
+      ],
+      "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
+      "file:size": 774,
+      "file:checksum": "1220d54d261f8c3efdca0cd046c327fa9e506a9aaaaa965e7469e4329b5ec70bda98"
+    },
+    "visual": {
+      "href": "./year=2021/ai4sf_ml-2021.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Cambodia/Vietnam (AI4SF) with splits — latest edition (2021) (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 34997984,
+      "file:checksum": "1220378901063ab12cadb8c560e8c5f7ccbb764e1dd910ea95ac4b8edd9f97ba9687"
+    },
+    "thumbnail": {
+      "href": "./thumbnail.jpg",
+      "type": "image/jpeg",
+      "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "roles": [
+        "thumbnail"
+      ],
+      "file:size": 268358,
+      "file:checksum": "1220217830e9bff13e252b4138239898f9f912c88bd661e554b0e72e44707c6f7a32"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "agents",
+      "href": "./AGENTS.md",
+      "type": "text/markdown",
+      "title": "Guidance for AI agents"
+    },
+    {
+      "rel": "describedby",
+      "href": "./README.md",
+      "type": "text/markdown",
+      "title": "Human-readable documentation"
+    },
+    {
+      "rel": "llms",
+      "href": "./llms.txt",
+      "type": "text/markdown",
+      "title": "Agent/LLM usage guide"
+    },
+    {
+      "rel": "pmtiles",
+      "href": "./year=2021/ai4sf_ml-2021.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Web map tiles",
+      "pmtiles:layers": [
+        "ai4sf_ml"
+      ]
+    },
+    {
+      "rel": "via",
+      "href": "https://research.tudelft.nl/en/publications/ai4smallfarms-a-dataset-for-crop-field-delineation-in-southeast-a",
+      "type": "text/html",
+      "title": "Original source (publisher page)"
+    },
+    {
+      "rel": "related",
+      "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/ai4sf_ml.py",
+      "type": "text/html",
+      "title": "Converter source code (fiboa-cli)"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/ai4sf_ml-2021.json",
+      "type": "application/geo+json",
+      "title": "Cambodia/Vietnam (AI4SF) with splits — 2021"
+    }
+  ],
+  "updated": "2026-11-05T22:33:57Z",
+  "fiboa_version": "0.3.0",
+  "vecorel_version": "0.1.0",
+  "vecorel_extensions": {
+    "ai4sf_ml": [
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+    ]
+  },
+  "attribution": "Persello, C., Grift, J., Fan, X., Paris, C., Hansch, R., Koeva, M., & Nelson, A. (2023). AI4SmallFarms: A Dataset for Crop Field Delineation in Southeast Asian Smallholder Farms. IEEE Geoscience and Remote Sensing Letters, 20, 1-5. Article 2505705. https://doi.org/10.1109/LGRS.2023.3323095"
+}

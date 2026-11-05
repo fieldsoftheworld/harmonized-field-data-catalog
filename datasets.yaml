@@ -35,8 +35,9 @@
 #             asset title in the collection follows this.
 #
 # Scope: field boundary datasets published by government bodies, typically from
-# IACS/LPIS registers, cadastres and agricultural statistics. Some are mapped or
-# modelled from imagery rather than declared; `boundaries` says which is which.
+# IACS/LPIS registers, cadastres and agricultural statistics, and open research
+# datasets of field boundaries (#32). Some are mapped or modelled from imagery
+# rather than declared; `boundaries` says which is which.
 
 catalog:
   id: harmonized-field-data
@@ -490,3 +491,49 @@ datasets:
     boundaries: declared
     year_source: BEGIN_DATE, the same for every feature (2026-09-24), the date of the snapshot.
     keywords: [Italy, South Tyrol, Alto Adige, LAFIS, crop fields]
+  # Research label sets (#32): digitised or surveyed by research projects, not declared
+  glocab:
+    years: ['2016', '2017', '2018', '2019', '2020']
+    boundaries: mapped
+    notes: "Each region was digitised over Sentinel-2 imagery of one month (Table A of the readme); an edition holds the regions digitised in its year. `predominant_crop` is the region's predominant crop, the same for every field of a region. Polygons with `no_area` enclose several fields too small to identify and are not true field boundaries."
+    keywords: [Brazil, Canada, Russia, Ukraine, United States, GloCAB, University of Maryland, Sentinel-2, hand-digitised]
+    row_count_tolerance: 8  # an edition is the regions mapped that year: 5,212 (2016) to 124,417 (2020)
+  ai4sf_ml:
+    year: 2021
+    boundaries: mapped
+    year_source: The converter's determination date (2021-08-01), the season of the Sentinel-2 composites the fields were digitised over.
+    keywords: [Cambodia, Vietnam, AI4SmallFarms, smallholder, hand-digitised, train/val/test splits]
+  india_10k_ml:
+    year: 2020
+    boundaries: mapped
+    year_source: "The imagery the fields were drawn on: Airbus SPOT images of India taken in October 2020 (Wang, Waldner & Lobell 2022, https://doi.org/10.3390/rs14225738)."
+    thumbnail: {zoom: 17}  # the fields come in samples of about ten, spread across India
+    keywords: [India, smallholder, Airbus SPOT, hand-digitised, train/val/test splits]
+  br_ba_lem:
+    year: 2020
+    boundaries: mapped
+    year_source: The monthly land-use columns run from October 2019 to September 2020; the edition is filed under 2020, the year the season ends.
+    keywords: [Brazil, Bahia, Luís Eduardo Magalhães, monthly land use, crop calendar]
+  rw_rwanda_ml:
+    year: 2021
+    boundaries: mapped
+    year_source: The source's determination date, the 2021 growing season the Planet imagery was annotated for.
+    thumbnail: {zoom: 15}  # the archive's max zoom shows the plots as specks
+    keywords: [Rwanda, NASA Harvest, smallholder, PlanetScope, hand-digitised, train/val/test splits]
+  za_fusion_ml:
+    year: 2017
+    boundaries: mapped
+    year_source: The source files are the competition's 2017 crop labels (sa-*-crop-labels-train-2017.geojson, sa-20E-259N-crop-labels-test-2017.geojson).
+    keywords: [South Africa, Western Cape, ESA Fusion Competition, crop type, train/test splits]
+  ke_ecaas:
+    year: 2021
+    boundaries: mapped
+    year_source: "Every plot was planted in 2021: the Long Rains 2021 season and the Short Rains season of 2021/22 (harvested until April 2022)."
+    thumbnail: {zoom: 16}  # crop-cut plots of a few thousand m², scattered over farms
+    keywords: [Kenya, Pula, ECAAS, Bird's-Eye, crop cuts, yield, smallholder]
+  zm_ecaas:
+    year: 2022
+    boundaries: mapped
+    year_source: The 2021/22 main season; the plots were planted from October 2021 and harvested from March to August 2022.
+    thumbnail: {zoom: 16}  # crop-cut plots of a few thousand m², scattered over farms
+    keywords: [Zambia, Pula, ECAAS, Bird's-Eye, crop cuts, yield, smallholder]

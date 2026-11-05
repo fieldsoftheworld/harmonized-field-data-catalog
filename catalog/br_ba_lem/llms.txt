@@ -1,0 +1,9 @@
+# Field boundaries for the west of Bahia state, Brazil
+
+West Bahia, Brazil field boundaries (2020) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Mendeley Data. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/br_ba_lem/latest/br_ba_lem.parquet
+- All editions: s3://ftw/harmonized-field-data/br_ba_lem/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: 2020-04, 2020-03, id, metrics:area, 2020-06, 2019-10, 2020-01, 2020-02, 2019-12, 2020-05, geometry, 2020-09, 2020-08, 2019-11, 2020-07, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/br_ba_lem/README.md, agent guide https://source.coop/ftw/harmonized-field-data/br_ba_lem/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/br_ba_lem/collection.json

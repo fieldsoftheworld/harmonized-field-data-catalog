@@ -1,0 +1,192 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "zm_ecaas-2022",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          22.0989383203163,
+          -17.8677411042331
+        ],
+        [
+          33.5073733719451,
+          -17.8677411042331
+        ],
+        [
+          33.5073733719451,
+          -8.40494381665715
+        ],
+        [
+          22.0989383203163,
+          -8.40494381665715
+        ],
+        [
+          22.0989383203163,
+          -17.8677411042331
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    22.0989383203163,
+    -17.8677411042331,
+    33.5073733719451,
+    -8.40494381665715
+  ],
+  "properties": {
+    "title": "Zambia (ECAAS crop cuts) — 2022",
+    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`zm_ecaas-2022.parquet`, 2,711 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2022-01-01T00:00:00Z",
+    "end_datetime": "2022-12-31T23:59:59Z",
+    "year": 2022,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "yield",
+        "type": "double",
+        "description": "Carried over from the source column `Yield(Mt/ha)`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "admin_level_1",
+        "type": "string",
+        "description": "Carried over from the source column `ADM1`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "crop_condition",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "intercrop",
+        "type": "string",
+        "description": "Carried over from the source column `inter_with_which_crop`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "harvest_weight",
+        "type": "double",
+        "description": "Carried over from the source column `Final_Weight`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "harvest_date",
+        "type": "date32[day]",
+        "description": "Carried over from the source column `Harvesting_date`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "intercropped",
+        "type": "bool",
+        "description": "Carried over from the source column `Intercropping`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "planting_date",
+        "type": "date32[day]",
+        "description": "Carried over from the source column `Planting_Date`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "admin_level_2",
+        "type": "string",
+        "description": "Carried over from the source column `ADM2`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 2711,
+    "processing:software": {
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.2"
+    }
+  },
+  "collection": "zm_ecaas",
+  "assets": {
+    "data": {
+      "href": "./zm_ecaas-2022.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Zambia (ECAAS crop cuts) 2022 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 656772,
+      "file:checksum": "12207f1267977342668e0f680bace42cdc7ed03abbf6ec226d4d1b4842cb0360d94a",
+      "proj:code": "EPSG:4326"
+    },
+    "visual": {
+      "href": "./zm_ecaas-2022.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Zambia (ECAAS crop cuts) 2022 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 3402490,
+      "file:checksum": "1220d0b67d3166af87daca7064a135d5f56534ea5cf9d33a7745ea410ffe364e4744"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

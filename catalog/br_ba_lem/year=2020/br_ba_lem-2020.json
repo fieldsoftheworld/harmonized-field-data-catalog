@@ -1,0 +1,182 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "br_ba_lem-2020",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -46.39799626566333,
+          -14.009289977268933
+        ],
+        [
+          -45.494108883961054,
+          -14.009289977268933
+        ],
+        [
+          -45.494108883961054,
+          -11.764555677542083
+        ],
+        [
+          -46.39799626566333,
+          -11.764555677542083
+        ],
+        [
+          -46.39799626566333,
+          -14.009289977268933
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -46.39799626566333,
+    -14.009289977268933,
+    -45.494108883961054,
+    -11.764555677542083
+  ],
+  "properties": {
+    "title": "West Bahia, Brazil — 2020",
+    "description": "Field boundaries of the 2020 edition of this dataset, one GeoParquet file (`br_ba_lem-2020.parquet`, 1,854 fields) and its PMTiles. Partition `year=2020` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2020-01-01T00:00:00Z",
+    "end_datetime": "2020-12-31T23:59:59Z",
+    "year": 2020,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "2020-04",
+        "type": "string",
+        "description": "Carried over from the source column `Apr_2020`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "2020-03",
+        "type": "string",
+        "description": "Carried over from the source column `Mar_2020`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "2020-06",
+        "type": "string",
+        "description": "Carried over from the source column `Jun_2020`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "2019-10",
+        "type": "string",
+        "description": "Carried over from the source column `Oct_2019`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "2020-01",
+        "type": "string",
+        "description": "Carried over from the source column `Jan_2020`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "2020-02",
+        "type": "string",
+        "description": "Carried over from the source column `Feb_2020`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "2019-12",
+        "type": "string",
+        "description": "Carried over from the source column `Dec_2019`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "2020-05",
+        "type": "string",
+        "description": "Carried over from the source column `May_2020`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "2020-09",
+        "type": "string",
+        "description": "Carried over from the source column `Sep_2020`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "2020-08",
+        "type": "string",
+        "description": "Carried over from the source column `Aug_2020`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "2019-11",
+        "type": "string",
+        "description": "Carried over from the source column `Nov_2019`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "2020-07",
+        "type": "string",
+        "description": "Carried over from the source column `Jul_2020`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 1854,
+    "processing:software": {
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.2"
+    }
+  },
+  "collection": "br_ba_lem",
+  "assets": {
+    "data": {
+      "href": "./br_ba_lem-2020.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "West Bahia, Brazil 2020 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 1436369,
+      "file:checksum": "1220fc9f8e179246144d850a6d48aff813d5a1ab4a94b3cf8dc25caaaaf8ba767f93",
+      "proj:code": "EPSG:4326"
+    },
+    "visual": {
+      "href": "./br_ba_lem-2020.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "West Bahia, Brazil 2020 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 729948,
+      "file:checksum": "1220296d5c8773173f6a173130a93f906ec3bc2f8b4e2910c4ba47dc3d3923532c53"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}
