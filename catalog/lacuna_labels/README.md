@@ -28,8 +28,8 @@ with [Planet's participant license agreement for the NICFI contract](https://go.
 
 - **Source data provider:** [Agricultural Impacts Research Group, Clark University](https://github.com/agroimpacts/lacunalabels)
 - **License:** other — [Planet NICFI participant license agreement](https://go.planet.com/nicfi-pla-2024) (converter: `Planet NICFI participant license agreement <https://go.planet.com/nicfi-pla-2024>`)
-- **Editions:** 2024 (one GeoParquet per year)
-- **Fields in the latest edition (2024):** 663,726
+- **Editions:** 2017, 2018, 2019, 2020, 2021, 2022, 2023 (one GeoParquet per year)
+- **Fields in the latest edition (2023):** 88,573
 - **Coordinate reference system:** EPSG:4326 (as published by the source; not reprojected)
 - **Converted with:** fiboa-cli 0.30.0, vecorel-cli 0.4.2 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/lacuna_labels.py))
 
@@ -39,28 +39,34 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2024 | 663,726 | [60.9 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2024/lacuna_labels-2024.parquet) | [88.8 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2024/lacuna_labels-2024.pmtiles) | [lacuna_labels-2024.json](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2024/lacuna_labels-2024.json) |
+| 2017 | 92,944 | [10.2 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2017/lacuna_labels-2017.parquet) | — | [lacuna_labels-2017.json](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2017/lacuna_labels-2017.json) |
+| 2018 | 95,633 | [10.5 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2018/lacuna_labels-2018.parquet) | — | [lacuna_labels-2018.json](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2018/lacuna_labels-2018.json) |
+| 2019 | 97,630 | [10.7 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2019/lacuna_labels-2019.parquet) | — | [lacuna_labels-2019.json](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2019/lacuna_labels-2019.json) |
+| 2020 | 100,383 | [11.2 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2020/lacuna_labels-2020.parquet) | — | [lacuna_labels-2020.json](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2020/lacuna_labels-2020.json) |
+| 2021 | 94,053 | [10.4 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2021/lacuna_labels-2021.parquet) | — | [lacuna_labels-2021.json](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2021/lacuna_labels-2021.json) |
+| 2022 | 94,510 | [10.5 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2022/lacuna_labels-2022.parquet) | — | [lacuna_labels-2022.json](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2022/lacuna_labels-2022.json) |
+| 2023 | 88,573 | [9.0 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2023/lacuna_labels-2023.parquet) | [13.8 MB](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2023/lacuna_labels-2023.pmtiles) | [lacuna_labels-2023.json](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2023/lacuna_labels-2023.json) |
 
 The latest edition is also available at a stable path: [lacuna_labels/latest/lacuna_labels.parquet](https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/latest/lacuna_labels.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/lacuna_labels/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lacuna_labels/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
-Presence-only: labellers did not always digitise every field in a site, so land outside the polygons is unknown, not non-field. One labelling per site, the one in the project's filtered label catalog; sites labelled with no fields are left out. `qscore` and `rscore` score the labeller against expert labels, not the individual field. The labels are licensed under Planet's NICFI participant license agreement, not an open license.
+Each field is dated by the month of the Planet NICFI basemap it was digitised on; an edition holds the fields digitised on that year's basemaps. Presence-only: labellers did not always digitise every field in a site, so land outside the polygons is unknown, not non-field. One labelling per site, the one in the project's filtered label catalog; sites labelled with no fields are left out. `qscore` and `rscore` score the labeller against expert labels, not the individual field. The labels are licensed under Planet's NICFI participant license agreement, not an open license.
 
 ## Columns
 
 | Column | Type | Description |
 |---|---|---|
-| `rscore` | float | Source-specific column; the publisher documents no meaning for it. |
-| `admin:country_code` | string | ISO 3166-1 alpha-2 country code (aka admin0). Two-letter country code for the country that contains the field. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md)) |
-| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `label_category` | string | Carried over from the source column `category`; the publisher documents no meaning for it. |
-| `assignment_id` | int64 | Source-specific column; the publisher documents no meaning for it. |
-| `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
-| `site` | string | Carried over from the source column `name`; the publisher documents no meaning for it. |
-| `label_class` | string | Source-specific column; the publisher documents no meaning for it. |
-| `determination:datetime` | timestamp[ms, tz=UTC] | The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `qscore` | float | Source-specific column; the publisher documents no meaning for it. |
+| `assignment_id` | int64 | Source-specific column; the publisher documents no meaning for it. |
+| `site` | string | Carried over from the source column `name`; the publisher documents no meaning for it. |
+| `label_category` | string | Carried over from the source column `category`; the publisher documents no meaning for it. |
+| `geometry` | binary | A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 | `labeller` | string | Source-specific column; the publisher documents no meaning for it. |
+| `label_class` | string | Source-specific column; the publisher documents no meaning for it. |
+| `id` | string | An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `metrics:area` | float | Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `determination:datetime` | timestamp[ms, tz=UTC] | The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
+| `admin:country_code` | string | ISO 3166-1 alpha-2 country code (aka admin0). Two-letter country code for the country that contains the field. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md)) |
+| `rscore` | float | Source-specific column; the publisher documents no meaning for it. |
 | `bbox` | struct<xmin: double, ymin: double, xmax: double, ymax: double> | The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md)) |
 
 ## Access
@@ -72,14 +78,20 @@ INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/latest/lacuna_labels.parquet');
 -- fields | hectares
--- 663726 | 628850.0
+-- 88573 | 89457.0
 ```
 
 ## Provenance
 
 This catalog is a mirror: the data is produced and licensed by [Agricultural Impacts Research Group, Clark University](https://github.com/agroimpacts/lacunalabels) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.30.0, vecorel-cli 0.4.2:
 
-- 2024: converted 2026-11-06 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2017: converted 2026-11-06 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2018: converted 2026-11-06 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2019: converted 2026-11-06 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2020: converted 2026-11-06 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2021: converted 2026-11-06 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2022: converted 2026-11-06 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2023: converted 2026-11-06 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

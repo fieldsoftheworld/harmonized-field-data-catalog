@@ -1,21 +1,21 @@
 # Agent guidance — Mapping Africa: crop field boundary labels for Africa, 2017-2023
 
-Mapping Africa field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2024). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Mapping Africa field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 7 editions (2017, 2018, 2019, 2020, 2021, 2022, 2023). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
 - Latest edition, stable path: `https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/latest/lacuna_labels.parquet`
-- One edition: `https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2024/lacuna_labels-2024.parquet`
+- One edition: `https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=<year>/<file>.parquet`, e.g. `https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2023/lacuna_labels-2023.parquet`
 - All editions (hive partitioned): `s3://ftw/harmonized-field-data/lacuna_labels/year=*/*.parquet` — the S3 form of the same prefix through the Source Cooperative proxy, because `*` needs a listing that plain https does not provide. In DuckDB: `CREATE SECRET sc (TYPE s3, PROVIDER config, ENDPOINT 'data.source.coop', URL_STYLE 'path', REGION 'us-west-2');` then `read_parquet(glob, hive_partitioning = true)` adds the `year` column. No credentials are needed.
-- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2024/lacuna_labels-2024.pmtiles`, layer `lacuna_labels`; MapLibre styles in `styles/`.
+- PMTiles for maps: `https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/year=2023/lacuna_labels-2023.pmtiles`, layer `lacuna_labels`; MapLibre styles in `styles/`.
 
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:4326, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- Presence-only: labellers did not always digitise every field in a site, so land outside the polygons is unknown, not non-field. One labelling per site, the one in the project's filtered label catalog; sites labelled with no fields are left out. `qscore` and `rscore` score the labeller against expert labels, not the individual field. The labels are licensed under Planet's NICFI participant license agreement, not an open license.
+- Each field is dated by the month of the Planet NICFI basemap it was digitised on; an edition holds the fields digitised on that year's basemaps. Presence-only: labellers did not always digitise every field in a site, so land outside the polygons is unknown, not non-field. One labelling per site, the one in the project's filtered label catalog; sites labelled with no fields are left out. `qscore` and `rscore` score the labeller against expert labels, not the individual field. The labels are licensed under Planet's NICFI participant license agreement, not an open license.
 
 ## Tested queries
 
@@ -28,7 +28,13 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/lacuna_labels/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2024 | 663726 | 628850.0
+-- 2017 | 92944 | 86020.0
+-- 2018 | 95633 | 87829.0
+-- 2019 | 97630 | 90308.0
+-- 2020 | 100383 | 96293.0
+-- 2021 | 94053 | 88750.0
+-- 2022 | 94510 | 90192.0
+-- 2023 | 88573 | 89457.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -37,14 +43,14 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/latest/lacuna_labels.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(-5.8549, 15.0540), 'EPSG:4326', 'EPSG:4326'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(-5.8625, 14.5692), 'EPSG:4326', 'EPSG:4326'), 500))
 LIMIT 5;
 -- id | m2
--- 67817 | 2975.0
--- 67811 | 10479.0
--- 67812 | 17049.0
--- 67813 | 13190.0
--- 67814 | 8179.0
+-- 520507 | 2634.0
+-- 520500 | 5300.0
+-- 520501 | 3583.0
+-- 520502 | 9237.0
+-- 520505 | 6879.0
 ```
 
 ## Related collections

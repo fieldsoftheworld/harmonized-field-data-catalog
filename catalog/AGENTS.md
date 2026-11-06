@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-77 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`. `ch` is fed by several sources, each with its own converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one `<collection>/latest/<converter>.parquet` per source, and each item carries its source's license.
+78 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`. `ch` is fed by several sources, each with its own converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one `<collection>/latest/<converter>.parquet` per source, and each item carries its source's license.
 
 ## How to read it
 
@@ -60,7 +60,7 @@ There are none. `id` is unique within one edition of one collection only; collec
 - `metrics:area` is square metres; `year` is the year the boundaries represent (season, declaration or snapshot year), not the year the source was published.
 - Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.
 - 16 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `bg`, `de_bb_block`, `de_by_block`, `de_he`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sax`, `de_sh`, `de_sl_block`, `de_st`, `de_th`, `lu`, `nl_block`, `pl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
-- Not every boundary was declared by anyone. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `india_10k_ml`, `jp`, `ke_ecaas`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey. `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
+- Not every boundary was declared by anyone. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `india_10k_ml`, `jp`, `ke_ecaas`, `lacuna_labels`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey. `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
 
 ## Structure
 
