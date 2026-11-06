@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Field boundaries published by government bodies and research institutions, harmonized to fiboa, 77 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Field boundaries published by government bodies and research institutions, harmonized to fiboa, 78 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - ai4sf_ml: Field boundaries for Cambodia and Vietnam (AI4SmallFarms) with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/ai4sf_ml/latest/ai4sf_ml.parquet (license CC-BY-4.0, CRS EPSG:32648)
 - at: Field boundaries for Austria — crop fields — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:3035, EPSG:31287)
@@ -62,6 +62,7 @@ Field boundaries published by government bodies and research institutions, harmo
 - it_bz: Field boundaries for South Tyrol, Italy — crop fields — https://data.source.coop/ftw/harmonized-field-data/it_bz/latest/it_bz.parquet (license CC0-1.0, CRS EPSG:25832)
 - jp: Japan Fude Parcels — crop fields — https://data.source.coop/ftw/harmonized-field-data/jp/latest/jp.parquet (license CC-BY-4.0, CRS EPSG:6668)
 - ke_ecaas: Crop-cut farm polygons with crop type and yield for Kenya (ECAAS Bird's-Eye) — crop fields — https://data.source.coop/ftw/harmonized-field-data/ke_ecaas/latest/ke_ecaas.parquet (license GPL-2.0-or-later, CRS EPSG:4326)
+- lacuna_labels: Mapping Africa: crop field boundary labels for Africa, 2017-2023 — crop fields — https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/latest/lacuna_labels.parquet (license other, CRS EPSG:4326)
 - lt: Lithuania crop fields — crop fields — https://data.source.coop/ftw/harmonized-field-data/lt/latest/lt.parquet (license CC-BY-4.0, CRS EPSG:3035)
 - lu: Field blocks for Luxembourg — field blocks — https://data.source.coop/ftw/harmonized-field-data/lu/latest/lu.parquet (license CC-BY-4.0, CRS EPSG:2169)
 - lv: Latvia Lauki Parcels — crop fields — https://data.source.coop/ftw/harmonized-field-data/lv/latest/lv.parquet (license CC-BY-SA-4.0, CRS EPSG:3059)
