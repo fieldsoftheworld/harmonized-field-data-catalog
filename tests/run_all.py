@@ -23,6 +23,7 @@ TESTS = [
     "test_backfill.py",
     "test_root_tiles.py",
     "test_pmtiles_read.py",
+    "test_split_years.py",
 ]
 
 failed = []

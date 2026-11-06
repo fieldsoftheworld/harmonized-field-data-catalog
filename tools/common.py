@@ -93,6 +93,9 @@ class Dataset:
     row_count_tolerance: float | None = None
     # the years are converter variants (`years:`), not a label (`year:`)
     has_variants: bool = False
+    # `split_by_year: true`: the converter has no variants; it is converted once and
+    # each year in `years` is the rows whose determination:datetime falls in it
+    split_by_year: bool = False
     # converter id -> Part, in manifest order; set instead of years
     parts: dict[str, Part] = field(default_factory=dict)
     # a parts collection's title, as no single converter speaks for it
@@ -172,6 +175,9 @@ class Manifest:
                 if len(filled) != len(set(filled)):
                     sys.exit(f"datasets.yaml: {dataset_id} backfills a year twice")
                 years = sorted(years + filled)
+            split = bool(spec.get("split_by_year"))
+            if split and ("years" not in spec or backfill or parts):
+                sys.exit(f"datasets.yaml: {dataset_id} split_by_year needs 'years' and no 'backfill' or 'parts'")
             if parts and not spec.get("title"):
                 sys.exit(f"datasets.yaml: {dataset_id} has parts and needs a 'title'")
             if spec.get("title") and not parts:
@@ -192,7 +198,8 @@ class Manifest:
                 notes=spec.get("notes"),
                 thumbnail=dict(spec.get("thumbnail") or {}),
                 row_count_tolerance=spec.get("row_count_tolerance"),
-                has_variants="years" in spec,
+                has_variants="years" in spec and not split,
+                split_by_year=split,
                 parts=parts,
                 title=spec.get("title"),
                 backfill=backfill,

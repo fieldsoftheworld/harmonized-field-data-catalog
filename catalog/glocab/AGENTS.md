@@ -1,6 +1,6 @@
 # Agent guidance — GloCAB cropland field boundaries (Brazil, Canada, Russia, Ukraine, USA)
 
-GloCAB field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 1 edition (2020). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+GloCAB field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 5 editions (2016, 2017, 2018, 2019, 2020). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -13,9 +13,9 @@ GloCAB field boundaries in the [fiboa](https://github.com/fiboa/specification) s
 
 - **CRS is EPSG:4326, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- Each region was digitised over Sentinel-2 imagery of one month (Table A of the readme), recorded as the determination:datetime of its fields. `predominant_crop` is the region's predominant crop, the same for every field of a region. Polygons with `no_area` enclose several fields too small to identify and are not true field boundaries.
+- Each region was digitised over Sentinel-2 imagery of one month (Table A of the readme), recorded as the determination:datetime of its fields; an edition holds the regions digitised in its year. `predominant_crop` is the region's predominant crop, the same for every field of a region. Polygons with `no_area` enclose several fields too small to identify and are not true field boundaries.
 
 ## Tested queries
 
@@ -28,7 +28,11 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/glocab/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2020 | 190832 | 7216961.0
+-- 2016 | 5212 | 251819.0
+-- 2017 | 40948 | 1633407.0
+-- 2018 | 5615 | 159981.0
+-- 2019 | 14640 | 1305660.0
+-- 2020 | 124417 | 3866093.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -37,14 +41,14 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/glocab/latest/glocab.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(16.7347, -13.6447), 'EPSG:4326', 'EPSG:4326'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(41.9578, -26.6302), 'EPSG:4326', 'EPSG:4326'), 500))
 LIMIT 5;
 -- id | m2
--- Brazil_B-174452 | 798272.0
--- Brazil_B-174453 | 815098.0
--- Brazil_B-174456 | 2362836.0
--- Brazil_B-174454 | 869745.0
--- Brazil_B-174527 | 1446562.0
+-- USA_D-163229 | 839240.0
+-- USA_D-163228 | 340834.0
+-- USA_D-163221 | 302100.0
+-- USA_D-163234 | 337802.0
+-- USA_D-163233 | 331724.0
 ```
 
 ## Related collections

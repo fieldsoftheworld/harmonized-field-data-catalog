@@ -11,7 +11,7 @@ Git-backed [Portolan](https://www.portolan-sdi.org/) catalog of **harmonized fie
 
 ## How the catalog is organised
 
-One collection per source dataset (one fiboa-cli converter), partitioned by edition year in a hive layout so every edition can be queried at once, and with the newest edition at a stable path so all datasets can be queried at once:
+One collection per source dataset (one fiboa-cli converter), partitioned by the year the boundaries represent (an edition) in a hive layout so every edition can be queried at once, and with the newest edition at a stable path so all datasets can be queried at once:
 
 ```
 catalog/

@@ -86,8 +86,50 @@ def convert(converter_id: str, parquet: Path, variant: str | None = None) -> Non
     run(cmd)
 
 
-def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True, converter_id: str | None = None) -> None:
-    """One edition, filed as <id>-<year> also when another converter backfills it."""
+def split_source(dataset_id: str) -> Path:
+    """The whole conversion of a ``split_by_year`` dataset, converted once and reused."""
+    full = STAGING_DIR / dataset_id / "tmp" / f"{dataset_id}.parquet"
+    if not full.exists():
+        convert(dataset_id, full)
+    return full
+
+
+def write_year_split(full: Path, year: str, years: list[str], target: Path) -> None:
+    """Write the rows of ``full`` whose determination:datetime falls in ``year`` to ``target``.
+
+    The years in the data must be exactly ``years`` (the manifest's list), so no row
+    is left out unnoticed. pyarrow keeps the file's schema metadata (geo, fiboa
+    collection), which fiboa validate needs.
+    """
+    import pyarrow.compute as pc
+    import pyarrow.parquet as pq
+
+    table = pq.read_table(full)
+    if "determination:datetime" not in table.column_names:
+        raise SystemExit(f"{full}: split_by_year needs a determination:datetime column")
+    row_years = pc.year(table["determination:datetime"])
+    if row_years.null_count:
+        raise SystemExit(f"{full}: {row_years.null_count} rows have no determination:datetime")
+    found = sorted(str(y) for y in pc.unique(row_years).to_pylist())
+    if found != sorted(years):
+        raise SystemExit(f"{full}: the data holds years {found}; datasets.yaml lists {sorted(years)}")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    pq.write_table(table.filter(pc.equal(row_years, int(year))), target)
+
+
+def stage(
+    dataset_id: str,
+    year: str,
+    has_variants: bool,
+    latest: bool = True,
+    converter_id: str | None = None,
+    split_years: list[str] | None = None,
+) -> None:
+    """One edition, filed as <id>-<year> also when another converter backfills it.
+
+    With ``split_years`` (a ``split_by_year`` dataset) the edition is that year's rows
+    of the single conversion.
+    """
     converter_id = converter_id or dataset_id
     out = staging_year_dir(dataset_id, year)
     out.mkdir(parents=True, exist_ok=True)
@@ -96,7 +138,10 @@ def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True, c
     parquet, pmtiles = out / f"{stem}.parquet", out / f"{stem}.pmtiles"
 
     if not parquet.exists():
-        convert(converter_id, parquet, year if has_variants else None)
+        if split_years:
+            write_year_split(split_source(dataset_id), year, split_years, parquet)
+        else:
+            convert(converter_id, parquet, year if has_variants else None)
     run([*FIBOA_CMD, "validate", "-n", "-1", str(parquet)])
 
     # only the newest edition is rendered in the browser; tiles for older
@@ -300,7 +345,14 @@ def prepare(ds: Dataset, only_year: str | None, skip_convert: bool) -> list[str]
         ]
     if not skip_convert:
         for year in [only_year] if only_year else ds.years:
-            stage(ds.id, year, ds.has_variants, latest=(year == ds.years[-1]), converter_id=ds.converter(year))
+            stage(
+                ds.id,
+                year,
+                ds.has_variants,
+                latest=(year == ds.years[-1]),
+                converter_id=ds.converter(year),
+                split_years=ds.years if ds.split_by_year else None,
+            )
     # compare against the whole series, not just the years built now: a
     # single rebuilt edition is only suspicious next to its neighbours
     jumps = check_row_counts(ds.id, ds.years, row_count_tolerance(ds))
