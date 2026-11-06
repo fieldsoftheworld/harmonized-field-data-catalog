@@ -100,7 +100,7 @@ GROUP BY 1 ORDER BY 1;
 -- glocab | 124417
 -- india_10k_ml | 10013
 -- ke_ecaas | 1349
--- lacuna_labels | 663726
+-- lacuna_labels | 88573
 -- rw_rwanda_ml | 1532
 -- za_fusion_ml | 6568
 -- ... 1 more rows

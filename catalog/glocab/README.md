@@ -22,11 +22,11 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 | Year | Fields | GeoParquet | PMTiles | STAC item |
 |---|---:|---|---|---|
-| 2016 | 5,212 | [765.1 KB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2016/glocab-2016.parquet) | — | [glocab-2016.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2016/glocab-2016.json) |
-| 2017 | 40,948 | [5.4 MB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2017/glocab-2017.parquet) | — | [glocab-2017.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2017/glocab-2017.json) |
-| 2018 | 5,615 | [626.9 KB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2018/glocab-2018.parquet) | — | [glocab-2018.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2018/glocab-2018.json) |
-| 2019 | 14,640 | [2.0 MB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2019/glocab-2019.parquet) | — | [glocab-2019.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2019/glocab-2019.json) |
-| 2020 | 124,417 | [13.8 MB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2020/glocab-2020.parquet) | [7.7 MB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2020/glocab-2020.pmtiles) | [glocab-2020.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2020/glocab-2020.json) |
+| 2016 | 5,212 | [652.0 KB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2016/glocab-2016.parquet) | — | [glocab-2016.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2016/glocab-2016.json) |
+| 2017 | 40,948 | [4.5 MB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2017/glocab-2017.parquet) | — | [glocab-2017.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2017/glocab-2017.json) |
+| 2018 | 5,615 | [541.0 KB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2018/glocab-2018.parquet) | — | [glocab-2018.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2018/glocab-2018.json) |
+| 2019 | 14,640 | [1.8 MB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2019/glocab-2019.parquet) | — | [glocab-2019.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2019/glocab-2019.json) |
+| 2020 | 124,417 | [11.7 MB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2020/glocab-2020.parquet) | [7.7 MB](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2020/glocab-2020.pmtiles) | [glocab-2020.json](https://data.source.coop/ftw/harmonized-field-data/glocab/year=2020/glocab-2020.json) |
 
 The latest edition is also available at a stable path: [glocab/latest/glocab.parquet](https://data.source.coop/ftw/harmonized-field-data/glocab/latest/glocab.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/glocab/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/glocab/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 

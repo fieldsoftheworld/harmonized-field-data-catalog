@@ -22,7 +22,7 @@ GROUP BY 1 ORDER BY 1;
 -- glocab | 124417
 -- india_10k_ml | 10013
 -- ke_ecaas | 1349
--- lacuna_labels | 663726
+-- lacuna_labels | 88573
 -- rw_rwanda_ml | 1532
 -- za_fusion_ml | 6568
 -- ... 1 more rows
@@ -45,7 +45,7 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2019 | glocab | 14640
 -- 2020 | glocab | 124417
 -- 2020 | india_10k_ml | 10013
--- ... 5 more rows
+-- ... 11 more rows
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.

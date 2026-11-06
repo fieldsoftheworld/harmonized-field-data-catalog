@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 641958,
-      "file:checksum": "1220d96641b466e33f1a4eeaeb10599d29b704cb6d3742a454b683b40c26a5b6b7b8",
+      "file:size": 553990,
+      "file:checksum": "12202240a1eca4f6f03a0b9377d28bf162e28c5efcd2dbe570b14c1b7e8e17542b3d",
       "proj:code": "EPSG:4326"
     }
   },

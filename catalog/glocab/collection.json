@@ -127,7 +127,7 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 5,
@@ -141,8 +141,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 14434405,
-      "file:checksum": "1220264cf41048e17e6a0a1d67b02d1a23392fa16aa4e7b9c8f3b1f557de1d874d0e",
+      "file:size": 12226183,
+      "file:checksum": "12205a9e59879af5ca90ee76102fb694cc7fc22529f1d06d7f290c10b086b27183f6",
       "proj:code": "EPSG:4326",
       "processing:software": {
         "fiboa-cli": "0.30.0",
@@ -189,8 +189,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 362491,
-      "file:checksum": "1220914bfbc300637b0387c62cc3852cc779f6fa27ce9d43e4805a692ed4823193d9"
+      "file:size": 362716,
+      "file:checksum": "12206413397f08ffadb634e259bd2730f7f0dcacc8cc14b213767f9f762e4b8e1f32"
     }
   },
   "links": [
@@ -274,14 +274,14 @@
       "title": "GloCAB — 2020"
     }
   ],
-  "updated": "2026-11-06T22:36:00Z",
+  "updated": "2026-11-06T22:41:08Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "glocab": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "Hall, J. V., Argueta, F., Giglio, L.: GloCAB Cropland Field Boundary Dataset, Zenodo, doi:10.5281/zenodo.10479122"

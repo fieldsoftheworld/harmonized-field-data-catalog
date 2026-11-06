@@ -39,6 +39,7 @@ delete them to reconvert.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import shlex
 import subprocess
@@ -86,11 +87,23 @@ def convert(converter_id: str, parquet: Path, variant: str | None = None) -> Non
     run(cmd)
 
 
+def split_source_path(dataset_id: str) -> Path:
+    return STAGING_DIR / dataset_id / "tmp" / f"{dataset_id}.parquet"
+
+
 def split_source(dataset_id: str) -> Path:
-    """The whole conversion of a ``split_by_year`` dataset, converted once and reused."""
-    full = STAGING_DIR / dataset_id / "tmp" / f"{dataset_id}.parquet"
+    """The whole conversion of a ``split_by_year`` dataset, converted once per build.
+
+    Written under another name and moved into place, so a crashed conversion is
+    never reused. prepare() deletes it after a full build: a later rebuild of a
+    year then converts again instead of splitting an old conversion.
+    """
+    full = split_source_path(dataset_id)
     if not full.exists():
-        convert(dataset_id, full)
+        partial = full.with_suffix(".partial.parquet")
+        partial.unlink(missing_ok=True)
+        convert(dataset_id, partial)
+        os.replace(partial, full)
     return full
 
 
@@ -113,8 +126,21 @@ def write_year_split(full: Path, year: str, years: list[str], target: Path) -> N
     found = sorted(str(y) for y in pc.unique(row_years).to_pylist())
     if found != sorted(years):
         raise SystemExit(f"{full}: the data holds years {found}; datasets.yaml lists {sorted(years)}")
+    part = table.filter(pc.equal(row_years, int(year)))
+    # the file-level bbox in the geo metadata describes these rows, not the whole source
+    metadata = dict(table.schema.metadata or {})
+    if b"geo" in metadata and "bbox" in part.column_names:
+        geo = json.loads(metadata[b"geo"])
+        bbox = part["bbox"]
+        extent = [pc.min(pc.struct_field(bbox, k)).as_py() for k in ("xmin", "ymin")]
+        extent += [pc.max(pc.struct_field(bbox, k)).as_py() for k in ("xmax", "ymax")]
+        geo["columns"][geo["primary_column"]]["bbox"] = extent
+        metadata[b"geo"] = json.dumps(geo).encode()
+    source = pq.ParquetFile(full)
+    row_group = source.metadata.row_group(0).num_rows if source.metadata.num_row_groups else None
+    compression = source.metadata.row_group(0).column(0).compression.lower() if row_group else "zstd"
     target.parent.mkdir(parents=True, exist_ok=True)
-    pq.write_table(table.filter(pc.equal(row_years, int(year))), target)
+    pq.write_table(part.replace_schema_metadata(metadata), target, compression=compression, row_group_size=row_group)
 
 
 def stage(
@@ -353,6 +379,8 @@ def prepare(ds: Dataset, only_year: str | None, skip_convert: bool) -> list[str]
                 converter_id=ds.converter(year),
                 split_years=ds.years if ds.split_by_year else None,
             )
+        if ds.split_by_year and not only_year:
+            split_source_path(ds.id).unlink(missing_ok=True)
     # compare against the whole series, not just the years built now: a
     # single rebuilt edition is only suspicious next to its neighbours
     jumps = check_row_counts(ds.id, ds.years, row_count_tolerance(ds))

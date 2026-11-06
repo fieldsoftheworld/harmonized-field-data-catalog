@@ -566,7 +566,7 @@ def build_collection(
             {
                 "name": PARTITION_KEY,
                 "type": "int32",
-                "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing.",
+                "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing.",
             }
         ],
         "partition:file_count": len(years),
