@@ -172,6 +172,19 @@ def stage_parts_pmtiles(ds: Dataset) -> None:
     make_pmtiles(sources, pmtiles, ds.id, attribution="; ".join(attributions))
 
 
+def ogr_geojsonseq(parquet: Path) -> list[str]:
+    """ogr2ogr argv streaming ``parquet`` as GeoJSONSeq in lon/lat to stdout.
+
+    Read through the SQLite dialect: GDAL 3.13's Parquet reader garbles the strings
+    of a few features (empty id, invalid UTF-8) in some files, depending on column
+    order and values (GloCAB: a timestamp column first, ids spatially shuffled), and
+    fiboa-cli writes columns in set order, so any conversion can hit it. The SQLite
+    dialect reads the same values without the corruption.
+    """
+    sql = f'SELECT * FROM "{parquet.stem}"'
+    return ["ogr2ogr", "-t_srs", "EPSG:4326", "-f", "GeoJSONSeq", "/vsistdout/", str(parquet), "-dialect", "SQLite", "-sql", sql]
+
+
 def make_pmtiles(sources: Path | list[Path], pmtiles: Path, layer: str, attribution: str | None = None) -> None:
     """Tile one or more GeoParquet files into one layer (ogr2ogr, one after another, into tippecanoe)."""
     sources = [sources] if isinstance(sources, Path) else sources
@@ -184,7 +197,7 @@ def make_pmtiles(sources: Path | list[Path], pmtiles: Path, layer: str, attribut
     tiles = subprocess.Popen(tippecanoe, stdin=subprocess.PIPE)
     failed = 0
     for parquet in sources:
-        ogr = ["ogr2ogr", "-t_srs", "EPSG:4326", "-f", "GeoJSONSeq", "/vsistdout/", str(parquet)]
+        ogr = ogr_geojsonseq(parquet)
         print(f"  <- {shlex.join(ogr)}", flush=True)
         failed = failed or subprocess.run(ogr, stdout=tiles.stdin).returncode
     tiles.stdin.close()

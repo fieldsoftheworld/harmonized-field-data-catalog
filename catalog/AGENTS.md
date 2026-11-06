@@ -19,7 +19,7 @@ GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- ai4sf_ml | 439001
 -- br_ba_lem | 1854
--- glocab | 124417
+-- glocab | 190832
 -- india_10k_ml | 10013
 -- ke_ecaas | 1349
 -- rw_rwanda_ml | 1532
@@ -38,13 +38,12 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
 -- 2021 | ai4sf_ml | 439001
 -- 2020 | br_ba_lem | 1854
--- 2016 | glocab | 5212
--- 2017 | glocab | 40948
--- 2018 | glocab | 5615
--- 2019 | glocab | 14640
--- 2020 | glocab | 124417
+-- 2020 | glocab | 190832
 -- 2020 | india_10k_ml | 10013
--- ... 4 more rows
+-- 2021 | ke_ecaas | 1349
+-- 2021 | rw_rwanda_ml | 1532
+-- 2017 | za_fusion_ml | 6568
+-- 2022 | zm_ecaas | 2711
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.

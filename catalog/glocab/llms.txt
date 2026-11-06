@@ -1,9 +1,9 @@
 # GloCAB cropland field boundaries (Brazil, Canada, Russia, Ukraine, USA)
 
-GloCAB field boundaries (2016, 2017, 2018, 2019, 2020) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from University of Maryland. License: CC-BY-4.0.
+GloCAB field boundaries (2020) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from University of Maryland. License: CC-BY-4.0.
 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/glocab/latest/glocab.parquet
 - All editions: s3://ftw/harmonized-field-data/glocab/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
 - CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: geometry, determination:datetime, predominant_crop, region, metrics:area, no_area, admin:country_code, id, bbox
+- Columns: predominant_crop, determination:datetime, geometry, no_area, region, admin:country_code, metrics:area, id, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/glocab/README.md, agent guide https://source.coop/ftw/harmonized-field-data/glocab/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/glocab/collection.json
