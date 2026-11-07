@@ -1,0 +1,142 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "wri_trazo-2024",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -59.5953828307158,
+          -27.304423018226867
+        ],
+        [
+          -47.322336223067865,
+          -27.304423018226867
+        ],
+        [
+          -47.322336223067865,
+          -2.7267910305076306
+        ],
+        [
+          -59.5953828307158,
+          -2.7267910305076306
+        ],
+        [
+          -59.5953828307158,
+          -27.304423018226867
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -59.5953828307158,
+    -27.304423018226867,
+    -47.322336223067865,
+    -2.7267910305076306
+  ],
+  "properties": {
+    "title": "Trazo — 2024",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`wri_trazo-2024.parquet`, 6,092 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2024-01-01T00:00:00Z",
+    "end_datetime": "2024-01-01T00:00:00Z",
+    "year": 2024,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "determination:datetime",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "split",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "basemap",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 6092,
+    "processing:software": {
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.3"
+    }
+  },
+  "collection": "wri_trazo",
+  "assets": {
+    "data": {
+      "href": "./wri_trazo-2024.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Trazo 2024 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 2608436,
+      "file:checksum": "122042d1be70dcdefd47c4ee79042973dfa55ac976bd610f5725084fef30c8db1641",
+      "proj:code": "EPSG:4326"
+    },
+    "visual": {
+      "href": "./wri_trazo-2024.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Trazo 2024 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 1588318,
+      "file:checksum": "1220535e496423ad2572d6eafe2f44964e65f240b9397a8ecede7fae851e0aa3a0dc"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

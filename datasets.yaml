@@ -544,3 +544,11 @@ datasets:
     year_source: The 2021/22 main season; the plots were planted from October 2021 and harvested from March to August 2022.
     thumbnail: {zoom: 16}  # crop-cut plots of a few thousand m², scattered over farms
     keywords: [Zambia, Pula, ECAAS, Bird's-Eye, crop cuts, yield, smallholder]
+  wri_trazo:
+    years: ['2020', '2021', '2022', '2023', '2024']
+    split_by_year: true
+    boundaries: mapped
+    year_source: "Each sampling region was annotated for one year (its file name and annotation info), recorded as 1 January of that year in determination:datetime; an edition holds the regions annotated in its year."
+    notes: "`split` is test for the three randomly sampled test regions and train for the others (by region, not WRI's per-chip 90/10 train/val). The fields completely cover WRI's 256x256 Sentinel-2 chips; annotations reaching beyond a chip are kept, so land outside the chips is not completely labelled."
+    keywords: [South America, Trazo, World Resources Institute, Arizona State University, hand-digitised, PlanetScope, Sentinel-2, train/test splits]
+    row_count_tolerance: 1  # an edition is the regions annotated that year: 4,921 (2023) to 37,879 (2020)
