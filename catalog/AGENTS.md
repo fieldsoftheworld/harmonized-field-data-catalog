@@ -20,12 +20,11 @@ GROUP BY 1 ORDER BY 1;
 -- ai4sf_ml | 439001
 -- br_ba_lem | 1854
 -- glocab | 124417
--- india_10k_ml | 10013
+-- in_10k_ml | 10013
 -- ke_ecaas | 1349
--- lacuna_labels | 88573
 -- rw_rwanda_ml | 1532
 -- za_fusion_ml | 6568
--- ... 1 more rows
+-- zm_ecaas | 2711
 ```
 
 Every edition of every collection:
@@ -44,8 +43,8 @@ GROUP BY 1, 2 ORDER BY 2, 1;
 -- 2018 | glocab | 5615
 -- 2019 | glocab | 14640
 -- 2020 | glocab | 124417
--- 2020 | india_10k_ml | 10013
--- ... 11 more rows
+-- 2020 | in_10k_ml | 10013
+-- ... 4 more rows
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.
@@ -60,7 +59,7 @@ There are none. `id` is unique within one edition of one collection only; collec
 - `metrics:area` is square metres; `year` is the year the boundaries represent (season, declaration or snapshot year), not the year the source was published.
 - Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.
 - 16 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `bg`, `de_bb_block`, `de_by_block`, `de_he`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sax`, `de_sh`, `de_sl_block`, `de_st`, `de_th`, `lu`, `nl_block`, `pl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
-- Not every boundary was declared by anyone. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `india_10k_ml`, `jp`, `ke_ecaas`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey. `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
+- Not every boundary was declared by anyone. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `in_10k_ml`, `jp`, `ke_ecaas`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey. `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
 
 ## Structure
 

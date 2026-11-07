@@ -57,7 +57,7 @@ Field boundaries published by government bodies and research institutions, harmo
 - hr: Croatian Field Boundaries — crop fields — https://data.source.coop/ftw/harmonized-field-data/hr/latest/hr.parquet (license other, CRS EPSG:3765)
 - ie: Ireland INSPIRE Geospatial aid application (GSAA) dataset — crop fields — https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet (license CC-BY-4.0, CRS EPSG:4258)
 - ie_lpis: LPIS parcels for Ireland — crop fields — https://data.source.coop/ftw/harmonized-field-data/ie_lpis/latest/ie_lpis.parquet (license CC-BY-4.0, CRS EPSG:2157)
-- india_10k_ml: 10,000 Crop Field Boundaries across India with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/india_10k_ml/latest/india_10k_ml.parquet (license CC-BY-4.0, CRS EPSG:4326)
+- in_10k_ml: 10,000 Crop Field Boundaries across India with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/in_10k_ml/latest/in_10k_ml.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - it_1: Italy Tuscany (ITI1) Crop Fields — EuroCropsV2 — crop fields — https://data.source.coop/ftw/harmonized-field-data/it_1/latest/it_1.parquet (license CC-BY-4.0, CRS EPSG:3035)
 - it_bz: Field boundaries for South Tyrol, Italy — crop fields — https://data.source.coop/ftw/harmonized-field-data/it_bz/latest/it_bz.parquet (license CC0-1.0, CRS EPSG:25832)
 - jp: Japan Fude Parcels — crop fields — https://data.source.coop/ftw/harmonized-field-data/jp/latest/jp.parquet (license CC-BY-4.0, CRS EPSG:6668)

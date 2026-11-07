@@ -103,10 +103,18 @@ class Dataset:
     # converter id -> Part: editions another converter supplies (years the
     # dataset's own source no longer offers); their years are in `years` too
     backfill: dict[str, Part] = field(default_factory=dict)
+    # `converter:` the fiboa-cli command, when it is not the collection id (india_10k_ml
+    # writes the collection in_10k_ml); the collection is still checked against `id`
+    cli: str | None = None
 
     def converter(self, year: str) -> str:
         """The converter of an edition: the dataset's own, or the one that backfills that year."""
         return next((p.id for p in self.backfill.values() if year in p.years), self.id)
+
+    def command(self, year: str | None = None) -> str:
+        """The fiboa-cli command that converts an edition (or, without a year, the dataset)."""
+        converter = self.converter(year) if year else self.id
+        return (self.cli or self.id) if converter == self.id else converter
 
     @property
     def latest(self) -> str:
@@ -182,6 +190,9 @@ class Manifest:
                 sys.exit(f"datasets.yaml: {dataset_id} has parts and needs a 'title'")
             if spec.get("title") and not parts:
                 sys.exit(f"datasets.yaml: {dataset_id}: 'title' is for a parts collection; the converter titles the others")
+            cli = spec.get("converter")
+            if cli is not None and (not isinstance(cli, str) or parts):
+                sys.exit(f"datasets.yaml: {dataset_id} 'converter' must be a fiboa-cli command, and not with 'parts'")
             boundaries = spec.get("boundaries")
             if boundaries not in BOUNDARIES:
                 sys.exit(
@@ -203,6 +214,7 @@ class Manifest:
                 parts=parts,
                 title=spec.get("title"),
                 backfill=backfill,
+                cli=cli,
             )
         return cls(catalog=raw["catalog"], host=raw["host"], datasets=datasets)
 

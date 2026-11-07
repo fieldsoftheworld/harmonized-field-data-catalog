@@ -1,0 +1,9 @@
+# 10,000 Crop Field Boundaries across India with splits
+
+India 10k with splits field boundaries (2020) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Zenodo. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/in_10k_ml/latest/in_10k_ml.parquet
+- All editions: s3://ftw/harmonized-field-data/in_10k_ml/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: geometry, metrics:area, split, id, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/in_10k_ml/README.md, agent guide https://source.coop/ftw/harmonized-field-data/in_10k_ml/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/in_10k_ml/collection.json
