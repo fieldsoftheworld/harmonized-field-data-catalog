@@ -1,0 +1,9 @@
+# Crop-cut farm polygons with crop type and yield for Kenya (ECAAS Bird's-Eye)
+
+Kenya (ECAAS crop cuts) field boundaries (2021) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Pula Advisors. License: GPL-2.0-or-later.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/ke_ecaas/latest/ke_ecaas.parquet
+- All editions: s3://ftw/harmonized-field-data/ke_ecaas/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: planting_date, id, harvest_weight, hcat:name_en, admin_level_2, geometry, metrics:area, hcat:code, harvest_date, yield, hcat:name, crop_condition, intercrop, admin_level_1, intercropped, crop:name, crop:code, season, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/ke_ecaas/README.md, agent guide https://source.coop/ftw/harmonized-field-data/ke_ecaas/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/ke_ecaas/collection.json

@@ -39,6 +39,7 @@ delete them to reconvert.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import shlex
 import subprocess
@@ -86,9 +87,79 @@ def convert(converter_id: str, parquet: Path, variant: str | None = None) -> Non
     run(cmd)
 
 
-def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True, converter_id: str | None = None) -> None:
-    """One edition, filed as <id>-<year> also when another converter backfills it."""
+def split_source_path(dataset_id: str) -> Path:
+    return STAGING_DIR / dataset_id / "tmp" / f"{dataset_id}.parquet"
+
+
+def split_source(dataset_id: str, command: str | None = None) -> Path:
+    """The whole conversion of a ``split_by_year`` dataset, converted once per build.
+
+    Written under another name and moved into place, so a crashed conversion is
+    never reused. prepare() deletes it after a full build: a later rebuild of a
+    year then converts again instead of splitting an old conversion.
+    """
+    full = split_source_path(dataset_id)
+    if not full.exists():
+        partial = full.with_suffix(".partial.parquet")
+        partial.unlink(missing_ok=True)
+        convert(command or dataset_id, partial)
+        os.replace(partial, full)
+    return full
+
+
+def write_year_split(full: Path, year: str, years: list[str], target: Path) -> None:
+    """Write the rows of ``full`` whose determination:datetime falls in ``year`` to ``target``.
+
+    The years in the data must be exactly ``years`` (the manifest's list), so no row
+    is left out unnoticed. pyarrow keeps the file's schema metadata (geo, fiboa
+    collection), which fiboa validate needs.
+    """
+    import pyarrow.compute as pc
+    import pyarrow.parquet as pq
+
+    table = pq.read_table(full)
+    if "determination:datetime" not in table.column_names:
+        raise SystemExit(f"{full}: split_by_year needs a determination:datetime column")
+    row_years = pc.year(table["determination:datetime"])
+    if row_years.null_count:
+        raise SystemExit(f"{full}: {row_years.null_count} rows have no determination:datetime")
+    found = sorted(str(y) for y in pc.unique(row_years).to_pylist())
+    if found != sorted(years):
+        raise SystemExit(f"{full}: the data holds years {found}; datasets.yaml lists {sorted(years)}")
+    part = table.filter(pc.equal(row_years, int(year)))
+    # the file-level bbox in the geo metadata describes these rows, not the whole source
+    metadata = dict(table.schema.metadata or {})
+    if b"geo" in metadata and "bbox" in part.column_names:
+        geo = json.loads(metadata[b"geo"])
+        bbox = part["bbox"]
+        extent = [pc.min(pc.struct_field(bbox, k)).as_py() for k in ("xmin", "ymin")]
+        extent += [pc.max(pc.struct_field(bbox, k)).as_py() for k in ("xmax", "ymax")]
+        geo["columns"][geo["primary_column"]]["bbox"] = extent
+        metadata[b"geo"] = json.dumps(geo).encode()
+    source = pq.ParquetFile(full)
+    row_group = source.metadata.row_group(0).num_rows if source.metadata.num_row_groups else None
+    compression = source.metadata.row_group(0).column(0).compression.lower() if row_group else "zstd"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    pq.write_table(part.replace_schema_metadata(metadata), target, compression=compression, row_group_size=row_group)
+
+
+def stage(
+    dataset_id: str,
+    year: str,
+    has_variants: bool,
+    latest: bool = True,
+    converter_id: str | None = None,
+    split_years: list[str] | None = None,
+    command: str | None = None,
+) -> None:
+    """One edition, filed as <id>-<year> also when another converter backfills it.
+
+    With ``split_years`` (a ``split_by_year`` dataset) the edition is that year's rows
+    of the single conversion. ``command`` is the fiboa-cli command when it is not the
+    converter id (the manifest's ``converter:``).
+    """
     converter_id = converter_id or dataset_id
+    command = command or converter_id
     out = staging_year_dir(dataset_id, year)
     out.mkdir(parents=True, exist_ok=True)
     # named after its STAC item, also when the year is only a label and not a converter variant
@@ -96,7 +167,10 @@ def stage(dataset_id: str, year: str, has_variants: bool, latest: bool = True, c
     parquet, pmtiles = out / f"{stem}.parquet", out / f"{stem}.pmtiles"
 
     if not parquet.exists():
-        convert(converter_id, parquet, year if has_variants else None)
+        if split_years:
+            write_year_split(split_source(dataset_id, command), year, split_years, parquet)
+        else:
+            convert(command, parquet, year if has_variants else None)
     run([*FIBOA_CMD, "validate", "-n", "-1", str(parquet)])
 
     # only the newest edition is rendered in the browser; tiles for older
@@ -172,6 +246,19 @@ def stage_parts_pmtiles(ds: Dataset) -> None:
     make_pmtiles(sources, pmtiles, ds.id, attribution="; ".join(attributions))
 
 
+def ogr_geojsonseq(parquet: Path) -> list[str]:
+    """ogr2ogr argv streaming ``parquet`` as GeoJSONSeq in lon/lat to stdout.
+
+    Read through the SQLite dialect: GDAL 3.13's Parquet reader garbles the strings
+    of a few features (empty id, invalid UTF-8) in some files, depending on column
+    order and values (GloCAB: a timestamp column first, ids spatially shuffled), and
+    fiboa-cli writes columns in set order, so any conversion can hit it. The SQLite
+    dialect reads the same values without the corruption.
+    """
+    sql = f'SELECT * FROM "{parquet.stem}"'
+    return ["ogr2ogr", "-t_srs", "EPSG:4326", "-f", "GeoJSONSeq", "/vsistdout/", str(parquet), "-dialect", "SQLite", "-sql", sql]
+
+
 def make_pmtiles(sources: Path | list[Path], pmtiles: Path, layer: str, attribution: str | None = None) -> None:
     """Tile one or more GeoParquet files into one layer (ogr2ogr, one after another, into tippecanoe)."""
     sources = [sources] if isinstance(sources, Path) else sources
@@ -184,7 +271,7 @@ def make_pmtiles(sources: Path | list[Path], pmtiles: Path, layer: str, attribut
     tiles = subprocess.Popen(tippecanoe, stdin=subprocess.PIPE)
     failed = 0
     for parquet in sources:
-        ogr = ["ogr2ogr", "-t_srs", "EPSG:4326", "-f", "GeoJSONSeq", "/vsistdout/", str(parquet)]
+        ogr = ogr_geojsonseq(parquet)
         print(f"  <- {shlex.join(ogr)}", flush=True)
         failed = failed or subprocess.run(ogr, stdout=tiles.stdin).returncode
     tiles.stdin.close()
@@ -287,11 +374,21 @@ def prepare(ds: Dataset, only_year: str | None, skip_convert: bool) -> list[str]
         ]
     if not skip_convert:
         for year in [only_year] if only_year else ds.years:
-            stage(ds.id, year, ds.has_variants, latest=(year == ds.years[-1]), converter_id=ds.converter(year))
+            stage(
+                ds.id,
+                year,
+                ds.has_variants,
+                latest=(year == ds.years[-1]),
+                converter_id=ds.converter(year),
+                split_years=ds.years if ds.split_by_year else None,
+                command=ds.command(year),
+            )
+        if ds.split_by_year and not only_year:
+            split_source_path(ds.id).unlink(missing_ok=True)
     # compare against the whole series, not just the years built now: a
     # single rebuilt edition is only suspicious next to its neighbours
     jumps = check_row_counts(ds.id, ds.years, row_count_tolerance(ds))
-    converter_meta(ds.id, staging_converter_meta(ds.id))
+    converter_meta(ds.command(), staging_converter_meta(ds.id))
     for part_id in ds.backfill:
         converter_meta(part_id, staging_converter_meta(ds.id, part_id))
     return jumps

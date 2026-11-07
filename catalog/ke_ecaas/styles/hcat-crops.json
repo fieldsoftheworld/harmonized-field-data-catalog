@@ -1,0 +1,67 @@
+{
+  "version": 8,
+  "name": "Kenya (ECAAS crop cuts) — crops (HCAT)",
+  "metadata": {
+    "description": "Fields coloured by harmonized crop (EuroCrops HCAT code, `hcat:code`). The 5 crops covering the most area are named, everything else is grey. Colours follow the fiboa.org crop map palette."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../year=2021/ke_ecaas-2021.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "fields-by-crop",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "ke_ecaas",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "match",
+            [
+              "get",
+              "hcat:code"
+            ],
+            3301010600,
+            "Grain maize corn popcorn",
+            3301030000,
+            "Potatoes",
+            3301020100,
+            "Beans",
+            3301020000,
+            "Legumes dried pulses protein crops",
+            3301010900,
+            "Millet sorghum",
+            "Other"
+          ],
+          "Grain maize corn popcorn",
+          "#ccb732",
+          "Potatoes",
+          "#a6cee3",
+          "Beans",
+          "#4ccc32",
+          "Legumes dried pulses protein crops",
+          "#1f78b4",
+          "Millet sorghum",
+          "#b2df8a",
+          "#c8c8c8"
+        ],
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "fields-outline",
+      "type": "line",
+      "source": "data",
+      "source-layer": "ke_ecaas",
+      "minzoom": 11,
+      "paint": {
+        "line-color": "rgba(60,60,60,0.5)",
+        "line-width": 0.5
+      }
+    }
+  ]
+}

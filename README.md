@@ -11,7 +11,7 @@ Git-backed [Portolan](https://www.portolan-sdi.org/) catalog of **harmonized fie
 
 ## How the catalog is organised
 
-One collection per source dataset (one fiboa-cli converter), partitioned by edition year in a hive layout so every edition can be queried at once, and with the newest edition at a stable path so all datasets can be queried at once:
+One collection per source dataset (one fiboa-cli converter), partitioned by the year the boundaries represent (an edition) in a hive layout so every edition can be queried at once, and with the newest edition at a stable path so all datasets can be queried at once:
 
 ```
 catalog/
@@ -86,7 +86,7 @@ The bucket is addressed through the proxy as `s3://ftw/harmonized-field-data/`.
 
 ## Scope
 
-In: field boundaries published by the responsible public body (or an official mirror such as INSPIRE/EuroCrops of such data). Out: AI-generated boundaries (see [Fields of the World](https://fieldsofthe.world)), commercial products, and research label sets — fiboa-cli has converters for those too, but they are not listed in `datasets.yaml`.
+In: field boundaries published by the responsible public body (or an official mirror such as INSPIRE/EuroCrops of such data), and open research datasets of field boundaries: digitised by hand from imagery, surveyed on the ground, or derived from imagery by a model. Every collection says which in `boundaries` (`declared`, `mapped` or `inferred`), so a reader can keep to one kind. Out: commercial products, and datasets without an open licence.
 
 ## License
 

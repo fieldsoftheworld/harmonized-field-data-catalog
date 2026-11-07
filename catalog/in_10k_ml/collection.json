@@ -1,0 +1,240 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+  ],
+  "id": "in_10k_ml",
+  "title": "10,000 Crop Field Boundaries across India with splits",
+  "description": "Release of dataset and neural network weights accompanying the paper\n\"Unlocking large-scale crop field delineation in smallholder farming systems with transfer learning and weak supervision\"\n(forthcoming in Remote Sensing). Ten thousand crop fields in India were delineated manually through inspection\nof high-resolution satellite imagery (Airbus SPOT). We also provide the weights of the highest performing\nneural network (FracTAL ResUNet architecture) pre-trained in France and fine-tuned on Airbus SPOT images in India.\nThe model was trained in MXNet 1.6.0 and can be loaded with the \"model.load_parameters()\" function.\n\nThis collection holds 1 edition (2020), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/in_10k_ml/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2020). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/in_10k_ml/AGENTS.md).\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no farmer's declaration behind them.",
+  "boundaries": "mapped",
+  "keywords": [
+    "Airbus SPOT",
+    "India",
+    "agriculture",
+    "fiboa",
+    "field boundaries",
+    "hand-digitised",
+    "smallholder",
+    "train/val/test splits"
+  ],
+  "license": "CC-BY-4.0",
+  "providers": [
+    {
+      "name": "Zenodo",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://zenodo.org"
+    },
+    {
+      "name": "Fields of the World",
+      "url": "https://fieldsofthe.world",
+      "roles": [
+        "processor",
+        "host"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          68.79696863780806,
+          9.248616997240717,
+          96.23688077261794,
+          34.5325092898945
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-10-01T00:00:00Z",
+          "2020-10-01T00:00:00Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "proj:code": [
+      "EPSG:4326"
+    ]
+  },
+  "table:columns": [
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "split",
+      "type": "string",
+      "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "bbox",
+      "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+      "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    }
+  ],
+  "table:primary_geometry": "geometry",
+  "table:row_count": 10013,
+  "partition:scheme": "hive",
+  "partition:strategy": "temporal",
+  "partition:keys": [
+    {
+      "name": "year",
+      "type": "int32",
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+    }
+  ],
+  "partition:file_count": 1,
+  "partition:glob": "s3://ftw/harmonized-field-data/in_10k_ml/year=*/*.parquet",
+  "assets": {
+    "data": {
+      "href": "./latest/in_10k_ml.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "India 10k with splits — latest edition (2020) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2020/in_10k_ml-2020.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 7982865,
+      "file:checksum": "1220e65b0e680ede8fc56554477f54b8a5f2d8f6ef53e36c86989e831ce7a121ad9a",
+      "proj:code": "EPSG:4326",
+      "processing:software": {
+        "fiboa-cli": "0.30.0",
+        "vecorel-cli": "0.4.3"
+      }
+    },
+    "style-field-size": {
+      "href": "./styles/field-size.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field size (ha)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.1, 0.25, 0.5 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1216,
+      "file:checksum": "1220b7f7c0754e12b0492777e13d549ed303a330af545e85fc5faaa4f6c04e49e245"
+    },
+    "style-outline": {
+      "href": "./styles/outline.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field boundaries",
+      "roles": [
+        "style"
+      ],
+      "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
+      "file:size": 762,
+      "file:checksum": "1220a482774eb2526f264c0ab21ca65d8fc898e9f6b9f8e0d57b64e69d40156a7744"
+    },
+    "visual": {
+      "href": "./year=2020/in_10k_ml-2020.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "India 10k with splits — latest edition (2020) (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 5996979,
+      "file:checksum": "1220d286f5a61e321bc0c6bd8eb812cfae78317d704fa6a2b6ae3838f1805308cb48"
+    },
+    "thumbnail": {
+      "href": "./thumbnail.jpg",
+      "type": "image/jpeg",
+      "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "roles": [
+        "thumbnail"
+      ],
+      "file:size": 7479,
+      "file:checksum": "122089316f0f2b77947107f85d562cc00ae022ab800158fc13be658d25ab04473f68"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "agents",
+      "href": "./AGENTS.md",
+      "type": "text/markdown",
+      "title": "Guidance for AI agents"
+    },
+    {
+      "rel": "describedby",
+      "href": "./README.md",
+      "type": "text/markdown",
+      "title": "Human-readable documentation"
+    },
+    {
+      "rel": "llms",
+      "href": "./llms.txt",
+      "type": "text/markdown",
+      "title": "Agent/LLM usage guide"
+    },
+    {
+      "rel": "pmtiles",
+      "href": "./year=2020/in_10k_ml-2020.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Web map tiles",
+      "pmtiles:layers": [
+        "in_10k_ml"
+      ]
+    },
+    {
+      "rel": "via",
+      "href": "https://zenodo.org",
+      "type": "text/html",
+      "title": "Original source (publisher page)"
+    },
+    {
+      "rel": "related",
+      "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/india_10k_ml.py",
+      "type": "text/html",
+      "title": "Converter source code (fiboa-cli)"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/in_10k_ml-2020.json",
+      "type": "application/geo+json",
+      "title": "India 10k with splits — 2020"
+    }
+  ],
+  "updated": "2026-11-07T07:02:00Z",
+  "fiboa_version": "0.3.0",
+  "vecorel_version": "0.1.0",
+  "vecorel_extensions": {
+    "in_10k_ml": [
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+    ]
+  },
+  "attribution": "https://doi.org/10.5281/zenodo.7315090"
+}

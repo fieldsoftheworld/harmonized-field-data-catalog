@@ -566,7 +566,7 @@ def build_collection(
             {
                 "name": PARTITION_KEY,
                 "type": "int32",
-                "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing.",
+                "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing.",
             }
         ],
         "partition:file_count": len(years),
@@ -835,7 +835,7 @@ def collection_docs(
         a.append(f"- **`metrics:area` is in square metres**, taken from the source column `{area_src}`{' (hectares × 10 000)' if meta.get('area_is_in_ha') else ''}. Divide by 10 000 for hectares.")
     elif has_area:
         a.append("- **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.")
-    a.append(f"- **`{PARTITION_KEY}` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.")
+    a.append(f"- **`{PARTITION_KEY}` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.")
     id_src = reverse_columns(meta).get("id")
     a.append(f"- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is {'the source column `' + id_src + '`' if id_src else 'assigned by the converter'}). Whether an id persists across editions is not verified here; do not join editions on it without checking.")
     if hcat_cols:
@@ -1079,7 +1079,7 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     if tiles:
         a += [f"For a map rather than a query: `{public_base}/{ROOT_TILES}` tiles the newest editions into one layer `{ROOT_TILES_LAYER}`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.", ""]
     a += ["## Join keys", "", "There are none. `id` is unique within one edition of one collection only; collections do not share identifiers and editions are not tracked across years. Spatial joins are the only bridge, and each collection is in its own CRS (`proj:code` on the collection and the `data` asset), so transform before joining.", ""]
-    a += ["## Quirks that produce silently wrong answers", "", "- Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.", "- `metrics:area` is square metres; `year` is the edition (publication) year, not an observation date.", "- Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.", f"- {len(blocks)} collections hold field *blocks* (reference parcels), not crop fields: {', '.join(f'`{b}`' for b in sorted(blocks))}. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.", f"- Not every boundary was declared by anyone. {not_declared_agents} Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.", ""]
+    a += ["## Quirks that produce silently wrong answers", "", "- Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.", "- `metrics:area` is square metres; `year` is the year the boundaries represent (season, declaration or snapshot year), not the year the source was published.", "- Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.", f"- {len(blocks)} collections hold field *blocks* (reference parcels), not crop fields: {', '.join(f'`{b}`' for b in sorted(blocks))}. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.", f"- Not every boundary was declared by anyone. {not_declared_agents} Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.", ""]
     a += ["## Structure", "", f"Assets and structural links resolve relative to the object that carries them; catalogs carry no `self` link. Generated by [tools/catalogize.py]({repo}/blob/main/tools/catalogize.py); fix documentation there."]
     write_text(CATALOG_DIR / "AGENTS.md", "\n".join(a))
 

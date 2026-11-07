@@ -1,0 +1,9 @@
+# Rwanda Crop Field Boundaries with splits
+
+Rwanda with splits field boundaries (2021) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from NASA Harvest. License: CC-BY-4.0.
+
+- Latest: https://data.source.coop/ftw/harmonized-field-data/rw_rwanda_ml/latest/rw_rwanda_ml.parquet
+- All editions: s3://ftw/harmonized-field-data/rw_rwanda_ml/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
+- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
+- Columns: split, geometry, id, metrics:area, bbox
+- Docs: https://source.coop/ftw/harmonized-field-data/rw_rwanda_ml/README.md, agent guide https://source.coop/ftw/harmonized-field-data/rw_rwanda_ml/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/rw_rwanda_ml/collection.json

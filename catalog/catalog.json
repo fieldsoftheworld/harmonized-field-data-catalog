@@ -7,13 +7,19 @@
   ],
   "id": "harmonized-field-data",
   "title": "Harmonized Field Boundary Data",
-  "description": "Field boundary datasets published by government bodies — from their agricultural subsidy registers (IACS/LPIS), cadastres, statistics and mapping programmes — and by research institutions, harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 69 collections (AT, BE, BG, BR, CA, CH, CZ, DE, DK, EC, EE, ES, FI, FR, HR, IE, IT, JP, LT, LU, LV, NL, NZ, PL, PT, SE, SI, SK, US). In 61 collections the boundaries are declared — they come from farmers' subsidy applications, or from the parcel register built on those declarations. `br_conab`, `es_cn`, `jp`, `nz`, `us_ca_scm` are mapped by an authority from imagery or survey; `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Each collection's `boundaries` field says which. 53 hold crop fields — one declared crop on one parcel — 145,680,976 in their latest editions and 773,330,282 across all 339 editions together, counting a field once per edition it appears in. The other 16 hold field blocks (reference parcels, which several fields can share): 19,393,578 and 25,813,993 over 32 editions. The two are not added together. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.",
+  "description": "Field boundary datasets published by government bodies — from their agricultural subsidy registers (IACS/LPIS), cadastres, statistics and mapping programmes — and by research institutions, harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 77 collections (AI4SF, AT, BE, BG, BR, CA, CH, CZ, DE, DK, EC, EE, ES, FI, FR, GLOCAB, HR, IE, IN, IT, JP, KE, LT, LU, LV, NL, NZ, PL, PT, RW, SE, SI, SK, US, ZA, ZM). In 61 collections the boundaries are declared — they come from farmers' subsidy applications, or from the parcel register built on those declarations. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `in_10k_ml`, `jp`, `ke_ecaas`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey; `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Each collection's `boundaries` field says which. 61 hold crop fields — one declared crop on one parcel — 146,268,421 in their latest editions and 773,984,142 across all 351 editions together, counting a field once per edition it appears in. The other 16 hold field blocks (reference parcels, which several fields can share): 19,393,578 and 25,813,993 over 32 editions. The two are not added together. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.",
   "links": [
     {
       "rel": "root",
       "href": "./catalog.json",
       "type": "application/json",
       "title": "Harmonized Field Boundary Data"
+    },
+    {
+      "rel": "child",
+      "href": "./ai4sf_ml/collection.json",
+      "type": "application/json",
+      "title": "Field boundaries for Cambodia and Vietnam (AI4SmallFarms) with splits"
     },
     {
       "rel": "child",
@@ -44,6 +50,12 @@
       "href": "./bg/collection.json",
       "type": "application/json",
       "title": "Field blocks for Bulgaria"
+    },
+    {
+      "rel": "child",
+      "href": "./br_ba_lem/collection.json",
+      "type": "application/json",
+      "title": "Field boundaries for the west of Bahia state, Brazil"
     },
     {
       "rel": "child",
@@ -311,6 +323,12 @@
     },
     {
       "rel": "child",
+      "href": "./glocab/collection.json",
+      "type": "application/json",
+      "title": "GloCAB cropland field boundaries (Brazil, Canada, Russia, Ukraine, USA)"
+    },
+    {
+      "rel": "child",
       "href": "./hr/collection.json",
       "type": "application/json",
       "title": "Croatian Field Boundaries"
@@ -329,6 +347,12 @@
     },
     {
       "rel": "child",
+      "href": "./in_10k_ml/collection.json",
+      "type": "application/json",
+      "title": "10,000 Crop Field Boundaries across India with splits"
+    },
+    {
+      "rel": "child",
       "href": "./it_1/collection.json",
       "type": "application/json",
       "title": "Italy Tuscany (ITI1) Crop Fields — EuroCropsV2"
@@ -344,6 +368,12 @@
       "href": "./jp/collection.json",
       "type": "application/json",
       "title": "Japan Fude Parcels"
+    },
+    {
+      "rel": "child",
+      "href": "./ke_ecaas/collection.json",
+      "type": "application/json",
+      "title": "Crop-cut farm polygons with crop type and yield for Kenya (ECAAS Bird's-Eye)"
     },
     {
       "rel": "child",
@@ -401,6 +431,12 @@
     },
     {
       "rel": "child",
+      "href": "./rw_rwanda_ml/collection.json",
+      "type": "application/json",
+      "title": "Rwanda Crop Field Boundaries with splits"
+    },
+    {
+      "rel": "child",
       "href": "./se/collection.json",
       "type": "application/json",
       "title": "Swedish Crop Fields (Jordbruksskiften)"
@@ -428,6 +464,18 @@
       "href": "./us_usda_cropland/collection.json",
       "type": "application/json",
       "title": "U.S. Department of Agriculture Crop Sequence Boundaries"
+    },
+    {
+      "rel": "child",
+      "href": "./za_fusion_ml/collection.json",
+      "type": "application/json",
+      "title": "South Africa Crop Field Boundaries (Fusion Competition) with splits"
+    },
+    {
+      "rel": "child",
+      "href": "./zm_ecaas/collection.json",
+      "type": "application/json",
+      "title": "Crop-cut farm polygons with crop type and yield for Zambia (ECAAS Bird's-Eye)"
     },
     {
       "rel": "icon",
@@ -481,5 +529,5 @@
       ]
     }
   ],
-  "updated": "2026-10-29T19:53:05Z"
+  "updated": "2026-11-07T07:02:00Z"
 }

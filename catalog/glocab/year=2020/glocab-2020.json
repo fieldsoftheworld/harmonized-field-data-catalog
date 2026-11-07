@@ -1,0 +1,147 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "glocab-2020",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -90.95805804399998,
+          35.485290046000046
+        ],
+        [
+          37.69771878899098,
+          35.485290046000046
+        ],
+        [
+          37.69771878899098,
+          48.43022880721372
+        ],
+        [
+          -90.95805804399998,
+          48.43022880721372
+        ],
+        [
+          -90.95805804399998,
+          35.485290046000046
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -90.95805804399998,
+    35.485290046000046,
+    37.69771878899098,
+    48.43022880721372
+  ],
+  "properties": {
+    "title": "GloCAB — 2020",
+    "description": "Field boundaries of the 2020 edition of this dataset, one GeoParquet file (`glocab-2020.parquet`, 124,417 fields) and its PMTiles. Partition `year=2020` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2020-07-01T00:00:00Z",
+    "end_datetime": "2020-09-01T00:00:00Z",
+    "year": 2020,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "region",
+        "type": "string",
+        "description": "Carried over from the source column `Ctry_Reg`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "predominant_crop",
+        "type": "string",
+        "description": "Carried over from the source column `CropType`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "admin:country_code",
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code (aka admin0). Two-letter country code for the country that contains the field. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
+      },
+      {
+        "name": "determination:datetime",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "no_area",
+        "type": "bool",
+        "description": "Carried over from the source column `No_Area`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 124417,
+    "processing:software": {
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.2"
+    }
+  },
+  "collection": "glocab",
+  "assets": {
+    "data": {
+      "href": "./glocab-2020.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "GloCAB 2020 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 12226183,
+      "file:checksum": "12205a9e59879af5ca90ee76102fb694cc7fc22529f1d06d7f290c10b086b27183f6",
+      "proj:code": "EPSG:4326"
+    },
+    "visual": {
+      "href": "./glocab-2020.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "GloCAB 2020 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 8022203,
+      "file:checksum": "12208b3f5db822052ba224c89123bc356d98db5a4f185c2f1b13e82c085955616909"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+  ],
+  "id": "br_ba_lem",
+  "title": "Field boundaries for the west of Bahia state, Brazil",
+  "description": "This dataset is the supplementary data of a paper published in the Data in Brief Journal.\n\nThe dataset, in ESRI shapefile format (spatial reference system: WGS 84, EPSG: 4326), provides monthly land use\ninformation about 1854 fields from October 2019 to September 2020 from Luís Eduardo Magalhães (LEM) and other\nmunicipalities in the west of Bahia state, Brazil. The majority of the 16 land uses classes are related to crops.\n\nThis collection holds 1 edition (2020), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/br_ba_lem/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2020). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/br_ba_lem/AGENTS.md).\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no farmer's declaration behind them.",
+  "boundaries": "mapped",
+  "keywords": [
+    "Bahia",
+    "Brazil",
+    "Luís Eduardo Magalhães",
+    "agriculture",
+    "crop calendar",
+    "fiboa",
+    "field boundaries",
+    "monthly land use"
+  ],
+  "license": "CC-BY-4.0",
+  "providers": [
+    {
+      "name": "Mendeley Data",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://data.mendeley.com/datasets/vz6d7tw87f/1#file-5ac1542b-12ef-4dce-8258-113b5c5d87c9"
+    },
+    {
+      "name": "Fields of the World",
+      "url": "https://fieldsofthe.world",
+      "roles": [
+        "processor",
+        "host"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -46.39799626566333,
+          -14.009289977268933,
+          -45.494108883961054,
+          -11.764555677542083
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-01-01T00:00:00Z",
+          "2020-12-31T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "proj:code": [
+      "EPSG:4326"
+    ]
+  },
+  "table:columns": [
+    {
+      "name": "2020-04",
+      "type": "string",
+      "description": "Carried over from the source column `Apr_2020`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "2020-03",
+      "type": "string",
+      "description": "Carried over from the source column `Mar_2020`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "2020-06",
+      "type": "string",
+      "description": "Carried over from the source column `Jun_2020`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "2019-10",
+      "type": "string",
+      "description": "Carried over from the source column `Oct_2019`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "2020-01",
+      "type": "string",
+      "description": "Carried over from the source column `Jan_2020`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "2020-02",
+      "type": "string",
+      "description": "Carried over from the source column `Feb_2020`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "2019-12",
+      "type": "string",
+      "description": "Carried over from the source column `Dec_2019`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "2020-05",
+      "type": "string",
+      "description": "Carried over from the source column `May_2020`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "2020-09",
+      "type": "string",
+      "description": "Carried over from the source column `Sep_2020`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "2020-08",
+      "type": "string",
+      "description": "Carried over from the source column `Aug_2020`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "2019-11",
+      "type": "string",
+      "description": "Carried over from the source column `Nov_2019`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "2020-07",
+      "type": "string",
+      "description": "Carried over from the source column `Jul_2020`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "bbox",
+      "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+      "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    }
+  ],
+  "table:primary_geometry": "geometry",
+  "table:row_count": 1854,
+  "partition:scheme": "hive",
+  "partition:strategy": "temporal",
+  "partition:keys": [
+    {
+      "name": "year",
+      "type": "int32",
+      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+    }
+  ],
+  "partition:file_count": 1,
+  "partition:glob": "s3://ftw/harmonized-field-data/br_ba_lem/year=*/*.parquet",
+  "assets": {
+    "data": {
+      "href": "./latest/br_ba_lem.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "West Bahia, Brazil — latest edition (2020) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2020/br_ba_lem-2020.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 1436369,
+      "file:checksum": "1220fc9f8e179246144d850a6d48aff813d5a1ab4a94b3cf8dc25caaaaf8ba767f93",
+      "proj:code": "EPSG:4326",
+      "processing:software": {
+        "fiboa-cli": "0.30.0",
+        "vecorel-cli": "0.4.2"
+      }
+    },
+    "style-field-size": {
+      "href": "./styles/field-size.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field size (ha)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 50, 100, 200 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1209,
+      "file:checksum": "12203af584b1598b9f42c7149acb7397db8758d2a05536881993f4acacfa4ac69ccc"
+    },
+    "style-outline": {
+      "href": "./styles/outline.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field boundaries",
+      "roles": [
+        "style"
+      ],
+      "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
+      "file:size": 759,
+      "file:checksum": "12207918a0c163e31aab45f110762af67a105b1aa90b8ebf0d8f279c1f652788086d"
+    },
+    "visual": {
+      "href": "./year=2020/br_ba_lem-2020.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "West Bahia, Brazil — latest edition (2020) (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 729948,
+      "file:checksum": "1220296d5c8773173f6a173130a93f906ec3bc2f8b4e2910c4ba47dc3d3923532c53"
+    },
+    "thumbnail": {
+      "href": "./thumbnail.jpg",
+      "type": "image/jpeg",
+      "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "roles": [
+        "thumbnail"
+      ],
+      "file:size": 120260,
+      "file:checksum": "12206e8e6d304e2b84cdd845cfe2d89604b7019d79cbad94e806015af12489ae000b"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "agents",
+      "href": "./AGENTS.md",
+      "type": "text/markdown",
+      "title": "Guidance for AI agents"
+    },
+    {
+      "rel": "describedby",
+      "href": "./README.md",
+      "type": "text/markdown",
+      "title": "Human-readable documentation"
+    },
+    {
+      "rel": "llms",
+      "href": "./llms.txt",
+      "type": "text/markdown",
+      "title": "Agent/LLM usage guide"
+    },
+    {
+      "rel": "pmtiles",
+      "href": "./year=2020/br_ba_lem-2020.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Web map tiles",
+      "pmtiles:layers": [
+        "br_ba_lem"
+      ]
+    },
+    {
+      "rel": "via",
+      "href": "https://data.mendeley.com/datasets/vz6d7tw87f/1#file-5ac1542b-12ef-4dce-8258-113b5c5d87c9",
+      "type": "text/html",
+      "title": "Original source (publisher page)"
+    },
+    {
+      "rel": "related",
+      "href": "https://github.com/fiboa/data-survey/blob/main/data/BR-BA-LEM.md",
+      "type": "text/html",
+      "title": "fiboa data survey entry for this source"
+    },
+    {
+      "rel": "related",
+      "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/br_ba_lem.py",
+      "type": "text/html",
+      "title": "Converter source code (fiboa-cli)"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/br_ba_lem-2020.json",
+      "type": "application/geo+json",
+      "title": "West Bahia, Brazil — 2020"
+    }
+  ],
+  "updated": "2026-11-05T22:35:08Z",
+  "fiboa_version": "0.3.0",
+  "vecorel_version": "0.1.0",
+  "vecorel_extensions": {
+    "br_ba_lem": [
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+    ]
+  },
+  "attribution": "Copyright © 2024 Elsevier inc, its licensors, and contributors."
+}
