@@ -10,9 +10,9 @@
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
     "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
   ],
-  "id": "lacuna_labels",
+  "id": "lacuna",
   "title": "Mapping Africa: crop field boundary labels for Africa, 2017-2023",
-  "description": "Crop field boundaries digitised by trained labellers over Planet NICFI monthly basemaps at\nsites (0.005° cells, about 550 m) across 39 African countries, 2017-2023, from the\n[Lacuna Fund](https://lacunafund.org/) project led by [Farmerline](https://farmerline.co/)\nwith [Spatial Collective](https://spatialcollective.com/) and the Agricultural Impacts\nResearch Group at Clark University ([lacunalabels](https://github.com/agroimpacts/lacunalabels)).\n\nOnly the assignments in the project's filtered label catalog are kept, which is one labelling\nper site; sites labelled with no fields have no rows. Each field is dated by the month of the\nbasemap it was digitised on. `label_class` is the catalog's assignment class (1a, 1b, 1d:\nexpert-labelled quality-control sites; 2: one labeller; 4: one of three labellers), and\n`qscore` / `rscore` are the labeller's quality scores against the expert labels: one value\nper labeller, not per field.\n\nThe labels are not wall-to-wall: fields can be missing from a site, so unlabelled land is\nunknown, not non-field.\n\nEstes, L. D., Wussah, A., Asipunu, M., Gathigi, M., Kovačič, P., Muhando, J.,\nYeboah, B. V., Addai, F. K., Akakpo, E. S., Allotey, M. K., Amkoya, P., Amponsem, E.,\nDonkoh, K. D., Ha, N., Heltzel, E., Juma, C., Mdawida, R., Miroyo, A., Mucha, J.,\nMugami, J., Mwawaza, F., Nyarko, D. A., Oduor, P., Ohemeng, K. N., Segbefia, S. I. D.,\nTumbula, T., Wambua, F., Xeflide, G. H., Ye, S., Yeboah, F.(2024). A region-wide,\nmulti-year set of crop field boundary labels for Africa. arXiv:2412.18483.\n\nThe labels are published at https://zenodo.org/records/11060871 and can be used in accordance\nwith [Planet's participant license agreement for the NICFI contract](https://go.planet.com/nicfi-pla-2024).\n\nThis collection holds 7 editions (2017, 2018, 2019, 2020, 2021, 2022, 2023), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/lacuna_labels/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2023). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lacuna_labels/AGENTS.md).\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no farmer's declaration behind them.",
+  "description": "Crop field boundaries digitised by trained labellers over Planet NICFI monthly basemaps at\nsites (0.005° cells, about 550 m) across 39 African countries, 2017-2023, from the\n[Lacuna Fund](https://lacunafund.org/) project led by [Farmerline](https://farmerline.co/)\nwith [Spatial Collective](https://spatialcollective.com/) and the Agricultural Impacts\nResearch Group at Clark University ([lacunalabels](https://github.com/agroimpacts/lacunalabels)).\n\nOnly the assignments in the project's filtered label catalog are kept, which is one labelling\nper site; sites labelled with no fields have no rows. Each field is dated by the month of the\nbasemap it was digitised on. `label_class` is the catalog's assignment class (1a, 1b, 1d:\nexpert-labelled quality-control sites; 2: one labeller; 4: one of three labellers), and\n`qscore` / `rscore` are the labeller's quality scores against the expert labels: one value\nper labeller, not per field.\n\nThe labels are not wall-to-wall: fields can be missing from a site, so unlabelled land is\nunknown, not non-field.\n\nEstes, L. D., Wussah, A., Asipunu, M., Gathigi, M., Kovačič, P., Muhando, J.,\nYeboah, B. V., Addai, F. K., Akakpo, E. S., Allotey, M. K., Amkoya, P., Amponsem, E.,\nDonkoh, K. D., Ha, N., Heltzel, E., Juma, C., Mdawida, R., Miroyo, A., Mucha, J.,\nMugami, J., Mwawaza, F., Nyarko, D. A., Oduor, P., Ohemeng, K. N., Segbefia, S. I. D.,\nTumbula, T., Wambua, F., Xeflide, G. H., Ye, S., Yeboah, F.(2024). A region-wide,\nmulti-year set of crop field boundary labels for Africa. arXiv:2412.18483.\n\nThe labels are published at https://zenodo.org/records/11060871 and can be used in accordance\nwith [Planet's participant license agreement for the NICFI contract](https://go.planet.com/nicfi-pla-2024).\n\nThis collection holds 7 editions (2017, 2018, 2019, 2020, 2021, 2022, 2023), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/lacuna/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2023). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lacuna/AGENTS.md).\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no farmer's declaration behind them.",
   "boundaries": "mapped",
   "keywords": [
     "Africa",
@@ -73,49 +73,9 @@
   },
   "table:columns": [
     {
-      "name": "qscore",
-      "type": "float",
-      "description": "Source-specific column; the publisher documents no meaning for it."
-    },
-    {
-      "name": "assignment_id",
-      "type": "int64",
-      "description": "Source-specific column; the publisher documents no meaning for it."
-    },
-    {
-      "name": "site",
-      "type": "string",
-      "description": "Carried over from the source column `name`; the publisher documents no meaning for it."
-    },
-    {
-      "name": "label_category",
-      "type": "string",
-      "description": "Carried over from the source column `category`; the publisher documents no meaning for it."
-    },
-    {
       "name": "geometry",
       "type": "binary",
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "labeller",
-      "type": "string",
-      "description": "Source-specific column; the publisher documents no meaning for it."
-    },
-    {
-      "name": "label_class",
-      "type": "string",
-      "description": "Source-specific column; the publisher documents no meaning for it."
-    },
-    {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "metrics:area",
-      "type": "float",
-      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "determination:datetime",
@@ -128,9 +88,54 @@
       "description": "ISO 3166-1 alpha-2 country code (aka admin0). Two-letter country code for the country that contains the field. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
     },
     {
+      "name": "site",
+      "type": "string",
+      "description": "Carried over from the source column `name`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "assignment_id",
+      "type": "int64",
+      "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "label_class",
+      "type": "string",
+      "description": "Carried over from the source column `Class`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "labeller",
+      "type": "string",
+      "description": "Carried over from the source column `Labeller`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "qscore",
+      "type": "float",
+      "description": "Carried over from the source column `Qscore`; the publisher documents no meaning for it."
+    },
+    {
       "name": "rscore",
       "type": "float",
+      "description": "Carried over from the source column `Rscore`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "label_category",
+      "type": "string",
+      "description": "Carried over from the source column `category`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "completion_time",
+      "type": "timestamp[ms, tz=UTC]",
       "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -150,22 +155,22 @@
     }
   ],
   "partition:file_count": 7,
-  "partition:glob": "s3://ftw/harmonized-field-data/lacuna_labels/year=*/*.parquet",
+  "partition:glob": "s3://ftw/harmonized-field-data/lacuna/year=*/*.parquet",
   "assets": {
     "data": {
-      "href": "./latest/lacuna_labels.parquet",
+      "href": "./latest/lacuna.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Mapping Africa — latest edition (2023) (GeoParquet)",
-      "description": "Byte-identical copy of `year=2023/lacuna_labels-2023.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "description": "Byte-identical copy of `year=2023/lacuna-2023.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
       "roles": [
         "data"
       ],
-      "file:size": 9416912,
-      "file:checksum": "1220068205736b272a14cd5ca6681c06045888f91728956a781f64280f5be7a27bc5",
+      "file:size": 9702683,
+      "file:checksum": "1220d9efac4d838ac794c0bb73dc5dc9533b66aa522d70bc5f6be95d8aee3e3d460f",
       "proj:code": "EPSG:4326",
       "processing:software": {
         "fiboa-cli": "0.30.0",
-        "vecorel-cli": "0.4.2"
+        "vecorel-cli": "0.4.3"
       }
     },
     "style-field-size": {
@@ -177,8 +182,8 @@
         "default"
       ],
       "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 0.25, 0.5, 1 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
-      "file:size": 1217,
-      "file:checksum": "12202a0c0a2fcf4d6832e71ac2cd1c53af805f75f7d37c28d549786d52cdaa30a456"
+      "file:size": 1196,
+      "file:checksum": "1220c3ad5773eb88fbb4ff9fd4006625327bbdc7706beaa9fdadec1a475c09e44f1e"
     },
     "style-outline": {
       "href": "./styles/outline.json",
@@ -188,18 +193,18 @@
         "style"
       ],
       "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
-      "file:size": 767,
-      "file:checksum": "1220f81be771b24d18e970cc2216562afb393600733700a88a84fb97d80359304542"
+      "file:size": 746,
+      "file:checksum": "122004f55ab80e435f83c2db05df2d2d6040c80bfad80d166050eced02a484e8ad6e"
     },
     "visual": {
-      "href": "./year=2023/lacuna_labels-2023.pmtiles",
+      "href": "./year=2023/lacuna-2023.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Mapping Africa — latest edition (2023) (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 14489695,
-      "file:checksum": "122055740a682944f4876d3bbbc5b2796ae8f801d32acdb60a18c0fd8459a5ef15e6"
+      "file:size": 17075794,
+      "file:checksum": "122035543bfe0a9a205d31252274a6bec77543113457cf933a6edc9af0d519452db0"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -249,11 +254,11 @@
     },
     {
       "rel": "pmtiles",
-      "href": "./year=2023/lacuna_labels-2023.pmtiles",
+      "href": "./year=2023/lacuna-2023.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Web map tiles",
       "pmtiles:layers": [
-        "lacuna_labels"
+        "lacuna"
       ]
     },
     {
@@ -270,55 +275,55 @@
     },
     {
       "rel": "item",
-      "href": "./year=2017/lacuna_labels-2017.json",
+      "href": "./year=2017/lacuna-2017.json",
       "type": "application/geo+json",
       "title": "Mapping Africa — 2017"
     },
     {
       "rel": "item",
-      "href": "./year=2018/lacuna_labels-2018.json",
+      "href": "./year=2018/lacuna-2018.json",
       "type": "application/geo+json",
       "title": "Mapping Africa — 2018"
     },
     {
       "rel": "item",
-      "href": "./year=2019/lacuna_labels-2019.json",
+      "href": "./year=2019/lacuna-2019.json",
       "type": "application/geo+json",
       "title": "Mapping Africa — 2019"
     },
     {
       "rel": "item",
-      "href": "./year=2020/lacuna_labels-2020.json",
+      "href": "./year=2020/lacuna-2020.json",
       "type": "application/geo+json",
       "title": "Mapping Africa — 2020"
     },
     {
       "rel": "item",
-      "href": "./year=2021/lacuna_labels-2021.json",
+      "href": "./year=2021/lacuna-2021.json",
       "type": "application/geo+json",
       "title": "Mapping Africa — 2021"
     },
     {
       "rel": "item",
-      "href": "./year=2022/lacuna_labels-2022.json",
+      "href": "./year=2022/lacuna-2022.json",
       "type": "application/geo+json",
       "title": "Mapping Africa — 2022"
     },
     {
       "rel": "item",
-      "href": "./year=2023/lacuna_labels-2023.json",
+      "href": "./year=2023/lacuna-2023.json",
       "type": "application/geo+json",
       "title": "Mapping Africa — 2023"
     }
   ],
-  "updated": "2026-11-06T22:43:30Z",
+  "updated": "2026-11-07T17:40:18Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
-    "lacuna_labels": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+    "lacuna": [
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
   "attribution": "Estes et al. (2024), Lacuna Fund; labels digitised over Planet NICFI basemaps"

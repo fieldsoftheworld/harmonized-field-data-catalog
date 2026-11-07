@@ -1,9 +1,0 @@
-# Mapping Africa: crop field boundary labels for Africa, 2017-2023
-
-Mapping Africa field boundaries (2017, 2018, 2019, 2020, 2021, 2022, 2023) as fiboa GeoParquet + PMTiles, mirrored by Fields of the World from Agricultural Impacts Research Group, Clark University. License: other.
-
-- Latest: https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/latest/lacuna_labels.parquet
-- All editions: s3://ftw/harmonized-field-data/lacuna_labels/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
-- CRS EPSG:4326; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: qscore, assignment_id, site, label_category, geometry, labeller, label_class, id, metrics:area, determination:datetime, admin:country_code, rscore, bbox
-- Docs: https://source.coop/ftw/harmonized-field-data/lacuna_labels/README.md, agent guide https://source.coop/ftw/harmonized-field-data/lacuna_labels/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/lacuna_labels/collection.json

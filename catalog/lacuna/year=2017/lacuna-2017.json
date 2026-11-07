@@ -7,7 +7,7 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "lacuna_labels-2017",
+  "id": "lacuna-2017",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
@@ -43,7 +43,7 @@
   ],
   "properties": {
     "title": "Mapping Africa — 2017",
-    "description": "Field boundaries of the 2017 edition of this dataset, one GeoParquet file (`lacuna_labels-2017.parquet`, 92,944 fields) and its PMTiles. Partition `year=2017` of the collection's hive layout.",
+    "description": "Field boundaries of the 2017 edition of this dataset, one GeoParquet file (`lacuna-2017.parquet`, 92,944 fields) and its PMTiles. Partition `year=2017` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2017-02-01T00:00:00Z",
     "end_datetime": "2017-08-01T00:00:00Z",
@@ -51,49 +51,9 @@
     "proj:code": "EPSG:4326",
     "table:columns": [
       {
-        "name": "qscore",
-        "type": "float",
-        "description": "Source-specific column; the publisher documents no meaning for it."
-      },
-      {
-        "name": "assignment_id",
-        "type": "int64",
-        "description": "Source-specific column; the publisher documents no meaning for it."
-      },
-      {
-        "name": "site",
-        "type": "string",
-        "description": "Carried over from the source column `name`; the publisher documents no meaning for it."
-      },
-      {
-        "name": "label_category",
-        "type": "string",
-        "description": "Carried over from the source column `category`; the publisher documents no meaning for it."
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "labeller",
-        "type": "string",
-        "description": "Source-specific column; the publisher documents no meaning for it."
-      },
-      {
-        "name": "label_class",
-        "type": "string",
-        "description": "Source-specific column; the publisher documents no meaning for it."
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "determination:datetime",
@@ -106,9 +66,54 @@
         "description": "ISO 3166-1 alpha-2 country code (aka admin0). Two-letter country code for the country that contains the field. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
       },
       {
+        "name": "site",
+        "type": "string",
+        "description": "Carried over from the source column `name`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "assignment_id",
+        "type": "int64",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "label_class",
+        "type": "string",
+        "description": "Carried over from the source column `Class`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "labeller",
+        "type": "string",
+        "description": "Carried over from the source column `Labeller`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "qscore",
+        "type": "float",
+        "description": "Carried over from the source column `Qscore`; the publisher documents no meaning for it."
+      },
+      {
         "name": "rscore",
         "type": "float",
+        "description": "Carried over from the source column `Rscore`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "label_category",
+        "type": "string",
+        "description": "Carried over from the source column `category`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "completion_time",
+        "type": "timestamp[ms, tz=UTC]",
         "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -120,20 +125,20 @@
     "table:row_count": 92944,
     "processing:software": {
       "fiboa-cli": "0.30.0",
-      "vecorel-cli": "0.4.2"
+      "vecorel-cli": "0.4.3"
     }
   },
-  "collection": "lacuna_labels",
+  "collection": "lacuna",
   "assets": {
     "data": {
-      "href": "./lacuna_labels-2017.parquet",
+      "href": "./lacuna-2017.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Mapping Africa 2017 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 10643942,
-      "file:checksum": "1220a5e32ae13514fea5120a26a8716ce6d145a30af378ae941568e9f1dd3b154bbb",
+      "file:size": 10940404,
+      "file:checksum": "12205f6aaf1e24afa66eae0e4bb1f57a723fec3c2cadee9452d5d227df8a6c5c6dd9",
       "proj:code": "EPSG:4326"
     }
   },

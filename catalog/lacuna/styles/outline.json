@@ -7,7 +7,7 @@
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2023/lacuna_labels-2023.pmtiles"
+      "url": "pmtiles://../year=2023/lacuna-2023.pmtiles"
     }
   },
   "layers": [
@@ -15,9 +15,9 @@
       "id": "fields-fill",
       "type": "fill",
       "source": "data",
-      "source-layer": "lacuna_labels",
+      "source-layer": "lacuna",
       "paint": {
-        "fill-color": "#e08214",
+        "fill-color": "#2166ac",
         "fill-opacity": 0.25
       }
     },
@@ -25,9 +25,9 @@
       "id": "fields-outline",
       "type": "line",
       "source": "data",
-      "source-layer": "lacuna_labels",
+      "source-layer": "lacuna",
       "paint": {
-        "line-color": "#e08214",
+        "line-color": "#2166ac",
         "line-width": 0.8
       }
     }
