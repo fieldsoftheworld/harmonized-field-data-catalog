@@ -7,7 +7,7 @@
   "sources": {
     "data": {
       "type": "vector",
-      "url": "pmtiles://../year=2020/india_10k_ml-2020.pmtiles"
+      "url": "pmtiles://../year=2020/in_10k_ml-2020.pmtiles"
     }
   },
   "layers": [
@@ -15,7 +15,7 @@
       "id": "fields-by-size",
       "type": "fill",
       "source": "data",
-      "source-layer": "india_10k_ml",
+      "source-layer": "in_10k_ml",
       "paint": {
         "fill-color": [
           "step",
@@ -42,7 +42,7 @@
       "id": "fields-outline",
       "type": "line",
       "source": "data",
-      "source-layer": "india_10k_ml",
+      "source-layer": "in_10k_ml",
       "minzoom": 11,
       "paint": {
         "line-color": "rgba(60,60,60,0.4)",

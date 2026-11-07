@@ -516,7 +516,8 @@ datasets:
     boundaries: mapped
     year_source: The converter's determination date (2021-08-01), the season of the Sentinel-2 composites the fields were digitised over.
     keywords: [Cambodia, Vietnam, AI4SmallFarms, smallholder, hand-digitised, train/val/test splits]
-  india_10k_ml:
+  in_10k_ml:
+    converter: india_10k_ml  # fiboa-cli's command; the collection id is in_10k_ml
     year: 2020
     boundaries: mapped
     year_source: "The imagery the fields were drawn on: Airbus SPOT images of India taken in October 2020 (Wang, Waldner & Lobell 2022, https://doi.org/10.3390/rs14225738)."

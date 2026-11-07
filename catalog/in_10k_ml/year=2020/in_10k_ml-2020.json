@@ -7,7 +7,7 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "india_10k_ml-2020",
+  "id": "in_10k_ml-2020",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
@@ -43,7 +43,7 @@
   ],
   "properties": {
     "title": "India 10k with splits — 2020",
-    "description": "Field boundaries of the 2020 edition of this dataset, one GeoParquet file (`india_10k_ml-2020.parquet`, 10,013 fields) and its PMTiles. Partition `year=2020` of the collection's hive layout.",
+    "description": "Field boundaries of the 2020 edition of this dataset, one GeoParquet file (`in_10k_ml-2020.parquet`, 10,013 fields) and its PMTiles. Partition `year=2020` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2020-10-01T00:00:00Z",
     "end_datetime": "2020-10-01T00:00:00Z",
@@ -51,14 +51,14 @@
     "proj:code": "EPSG:4326",
     "table:columns": [
       {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "split",
@@ -80,31 +80,31 @@
     "table:row_count": 10013,
     "processing:software": {
       "fiboa-cli": "0.30.0",
-      "vecorel-cli": "0.4.2"
+      "vecorel-cli": "0.4.3"
     }
   },
-  "collection": "india_10k_ml",
+  "collection": "in_10k_ml",
   "assets": {
     "data": {
-      "href": "./india_10k_ml-2020.parquet",
+      "href": "./in_10k_ml-2020.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "India 10k with splits 2020 (GeoParquet)",
       "roles": [
         "data"
       ],
-      "file:size": 7982880,
-      "file:checksum": "122060f496126b97fcc26bd18b9c870db3d6d5ac771e8abcf83827e292efe2db0f0d",
+      "file:size": 7982865,
+      "file:checksum": "1220e65b0e680ede8fc56554477f54b8a5f2d8f6ef53e36c86989e831ce7a121ad9a",
       "proj:code": "EPSG:4326"
     },
     "visual": {
-      "href": "./india_10k_ml-2020.pmtiles",
+      "href": "./in_10k_ml-2020.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "India 10k with splits 2020 (PMTiles)",
       "roles": [
         "visual"
       ],
-      "file:size": 6039612,
-      "file:checksum": "12208a86f7413eee8273a50e867d9e825cfe0c27ef2bd724dbadfd32d1f231563e5e"
+      "file:size": 5996979,
+      "file:checksum": "1220d286f5a61e321bc0c6bd8eb812cfae78317d704fa6a2b6ae3838f1805308cb48"
     }
   },
   "links": [

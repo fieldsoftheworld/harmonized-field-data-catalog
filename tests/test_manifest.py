@@ -80,6 +80,21 @@ if not (ch.is_parts and ch.years == [] and list(ch.parts) == ["ch_ag", "ch_zh"])
     err(f"parts are not kept in manifest order: {list(ch.parts)}")
 if ch.parts["ch_ag"].years or ch.parts["ch_zh"].years != ["2024", "2025"] or ch.parts["ch_zh"].notes != "n":
     err(f"part years/notes not loaded: {ch.parts}")
+# `converter:` names the fiboa-cli command when it is not the collection id
+CLI = "  in_10k_ml:\n    year: 2020\n    boundaries: mapped\n    converter: india_10k_ml\n"
+if rejects(CLI) is not None:
+    err(f"a dataset with a converter command is rejected: {rejects(CLI)}")
+if rejects(PARTS.replace("    parts:", "    converter: x\n    parts:")) is None:
+    err("a converter command on a parts dataset loads")
+with tempfile.TemporaryDirectory() as tmp:
+    (Path(tmp) / "datasets.yaml").write_text(HEADER + CLI + "  nl:\n    years: ['2024']\n    boundaries: declared\n"
+                                             "    backfill:\n      ec_nl: {years: ['2023']}\n")
+    loaded = Manifest.load(Path(tmp) / "datasets.yaml").datasets
+if (loaded["in_10k_ml"].command("2020"), loaded["in_10k_ml"].command(), loaded["in_10k_ml"].converter("2020")) != (
+        "india_10k_ml", "india_10k_ml", "in_10k_ml"):
+    err("a converter command must convert, while the collection id stays the converter id")
+if (loaded["nl"].command("2024"), loaded["nl"].command("2023"), loaded["nl"].command()) != ("nl", "ec_nl", "nl"):
+    err("without converter:, a dataset converts with its own id and a backfilled year with its backfill")
 BACKFILL = """\
   fr:
     years: ['2017', '2019']
