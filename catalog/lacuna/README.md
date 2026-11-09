@@ -31,7 +31,7 @@ with [Planet's participant license agreement for the NICFI contract](https://go.
 - **Editions:** 2017, 2018, 2019, 2020, 2021, 2022, 2023 (one GeoParquet per year)
 - **Fields in the latest edition (2023):** 88,573
 - **Coordinate reference system:** EPSG:4326 (as published by the source; not reprojected)
-- **Converted with:** fiboa-cli 0.30.0, vecorel-cli 0.4.3 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/lacuna_labels.py))
+- **Converted with:** fiboa-cli 0.30.0, vecorel-cli 0.4.4 ([converter](https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/lacuna_labels.py))
 
 Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/external/data.source.coop/ftw/harmonized-field-data/lacuna/collection.json), or start from the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/lacuna/AGENTS.md) for tested queries.
 
@@ -84,15 +84,15 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/lacuna/lat
 
 ## Provenance
 
-This catalog is a mirror: the data is produced and licensed by [Agricultural Impacts Research Group, Clark University](https://github.com/agroimpacts/lacunalabels) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.30.0, vecorel-cli 0.4.3:
+This catalog is a mirror: the data is produced and licensed by [Agricultural Impacts Research Group, Clark University](https://github.com/agroimpacts/lacunalabels) and republished here as cloud-native GeoParquet and PMTiles by Fields of the World. Each edition was downloaded from the source and converted with fiboa-cli 0.30.0, vecorel-cli 0.4.4:
 
-- 2017: converted 2026-11-07 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
-- 2018: converted 2026-11-07 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
-- 2019: converted 2026-11-07 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
-- 2020: converted 2026-11-07 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
-- 2021: converted 2026-11-07 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
-- 2022: converted 2026-11-07 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
-- 2023: converted 2026-11-07 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2017: converted 2026-11-09 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2018: converted 2026-11-09 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2019: converted 2026-11-09 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2020: converted 2026-11-09 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2021: converted 2026-11-09 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2022: converted 2026-11-09 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
+- 2023: converted 2026-11-09 from <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/mapped_fields_final.parquet>, <https://africa-field-boundary-labels.s3.us-west-2.amazonaws.com/label-catalog-filtered.csv>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.
 

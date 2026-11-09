@@ -166,11 +166,11 @@
         "data"
       ],
       "file:size": 9702683,
-      "file:checksum": "1220d9efac4d838ac794c0bb73dc5dc9533b66aa522d70bc5f6be95d8aee3e3d460f",
+      "file:checksum": "1220de5e955e98c90adf9ebdfcaec29310fc85cc66206803bfe24db0e46f8d1e0099",
       "proj:code": "EPSG:4326",
       "processing:software": {
         "fiboa-cli": "0.30.0",
-        "vecorel-cli": "0.4.3"
+        "vecorel-cli": "0.4.4"
       }
     },
     "style-field-size": {
@@ -316,14 +316,14 @@
       "title": "Mapping Africa — 2023"
     }
   ],
-  "updated": "2026-11-07T17:40:18Z",
+  "updated": "2026-11-09T15:14:14Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "lacuna": [
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "Estes et al. (2024), Lacuna Fund; labels digitised over Planet NICFI basemaps"

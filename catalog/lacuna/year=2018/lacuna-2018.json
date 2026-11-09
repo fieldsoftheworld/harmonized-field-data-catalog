@@ -125,7 +125,7 @@
     "table:row_count": 95633,
     "processing:software": {
       "fiboa-cli": "0.30.0",
-      "vecorel-cli": "0.4.3"
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "lacuna",
@@ -138,7 +138,7 @@
         "data"
       ],
       "file:size": 11309052,
-      "file:checksum": "122014ea34e308506ab2c7e6a3ab4e57a51b5273ba194daeefe52344811c66817974",
+      "file:checksum": "1220ec5e985801004ce2fe85d1747cf33f9aaec6ad1dd934205331a5a0f7bc1d706b",
       "proj:code": "EPSG:4326"
     }
   },
