@@ -1,0 +1,172 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "lacuna-2023",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -17.046141028404236,
+          -29.94558819094478
+        ],
+        [
+          46.18464052729542,
+          -29.94558819094478
+        ],
+        [
+          46.18464052729542,
+          18.220622688531876
+        ],
+        [
+          -17.046141028404236,
+          18.220622688531876
+        ],
+        [
+          -17.046141028404236,
+          -29.94558819094478
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -17.046141028404236,
+    -29.94558819094478,
+    46.18464052729542,
+    18.220622688531876
+  ],
+  "properties": {
+    "title": "Mapping Africa — 2023",
+    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`lacuna-2023.parquet`, 88,573 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2023-01-01T00:00:00Z",
+    "end_datetime": "2023-12-01T00:00:00Z",
+    "year": 2023,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "determination:datetime",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "admin:country_code",
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code (aka admin0). Two-letter country code for the country that contains the field. ([spec](https://github.com/vecorel/administrative-division-extension/blob/main/README.md))"
+      },
+      {
+        "name": "site",
+        "type": "string",
+        "description": "Carried over from the source column `name`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "assignment_id",
+        "type": "int64",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "label_class",
+        "type": "string",
+        "description": "Carried over from the source column `Class`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "labeller",
+        "type": "string",
+        "description": "Carried over from the source column `Labeller`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "qscore",
+        "type": "float",
+        "description": "Carried over from the source column `Qscore`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "rscore",
+        "type": "float",
+        "description": "Carried over from the source column `Rscore`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "label_category",
+        "type": "string",
+        "description": "Carried over from the source column `category`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "completion_time",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 88573,
+    "processing:software": {
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
+    }
+  },
+  "collection": "lacuna",
+  "assets": {
+    "data": {
+      "href": "./lacuna-2023.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Mapping Africa 2023 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 9702683,
+      "file:checksum": "1220de5e955e98c90adf9ebdfcaec29310fc85cc66206803bfe24db0e46f8d1e0099",
+      "proj:code": "EPSG:4326"
+    },
+    "visual": {
+      "href": "./lacuna-2023.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Mapping Africa 2023 (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 17075794,
+      "file:checksum": "122035543bfe0a9a205d31252274a6bec77543113457cf933a6edc9af0d519452db0"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}

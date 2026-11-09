@@ -504,6 +504,14 @@ datasets:
     notes: "Each region was digitised over Sentinel-2 imagery of one month (Table A of the readme), recorded as the determination:datetime of its fields; an edition holds the regions digitised in its year. `predominant_crop` is the region's predominant crop, the same for every field of a region. Polygons with `no_area` enclose several fields too small to identify and are not true field boundaries."
     keywords: [Brazil, Canada, Russia, Ukraine, United States, GloCAB, University of Maryland, Sentinel-2, hand-digitised]
     row_count_tolerance: 8  # an edition is the regions mapped that year: 5,212 (2016) to 124,417 (2020)
+  lacuna:
+    converter: lacuna_labels  # fiboa-cli's command; the collection id is lacuna
+    years: ['2017', '2018', '2019', '2020', '2021', '2022', '2023']
+    split_by_year: true
+    boundaries: mapped
+    notes: "Each field is dated by the month of the Planet NICFI basemap it was digitised on; an edition holds the fields digitised on that year's basemaps. Presence-only: labellers did not always digitise every field in a site, so land outside the polygons is unknown, not non-field. One labelling per site, the one in the project's filtered label catalog; sites labelled with no fields are left out. `qscore` and `rscore` score the labeller against expert labels, not the individual field. The labels are licensed under Planet's NICFI participant license agreement, not an open license."
+    keywords: [Africa, Mapping Africa, Lacuna Fund, Clark University, Farmerline, Planet NICFI, hand-digitised, presence-only]
+    thumbnail: {zoom: 17, rank: 1}  # one ~550 m site fills the frame; sites are too sparse to show at lower zooms
   ai4sf_ml:
     year: 2021
     boundaries: mapped
