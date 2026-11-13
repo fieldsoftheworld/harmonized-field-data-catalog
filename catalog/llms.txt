@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Field boundaries published by government bodies and research institutions, harmonized to fiboa, 78 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
+Field boundaries published by government bodies and research institutions, harmonized to fiboa, 79 collections, GeoParquet + PMTiles on Source Cooperative. Each collection's `boundaries` field says whether they were declared, mapped or inferred. Root: https://data.source.coop/ftw/harmonized-field-data/catalog.json. Agent guide: https://source.coop/ftw/harmonized-field-data/AGENTS.md.
 
 - ai4sf_ml: Field boundaries for Cambodia and Vietnam (AI4SmallFarms) with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/ai4sf_ml/latest/ai4sf_ml.parquet (license CC-BY-4.0, CRS EPSG:32648)
 - at: Field boundaries for Austria — crop fields — https://data.source.coop/ftw/harmonized-field-data/at/latest/at.parquet (license CC-BY-4.0, CRS EPSG:3035, EPSG:31287)
@@ -78,6 +78,7 @@ Field boundaries published by government bodies and research institutions, harmo
 - sk: Slovakia Agricultural Land Identification System — crop fields — https://data.source.coop/ftw/harmonized-field-data/sk/latest/sk.parquet (license CC0-1.0, CRS EPSG:5514)
 - us_ca_scm: California (US) Statewide Crop Mapping — crop fields — https://data.source.coop/ftw/harmonized-field-data/us_ca_scm/latest/us_ca_scm.parquet (license CC0-1.0, CRS EPSG:3857, EPSG:4269)
 - us_usda_cropland: U.S. Department of Agriculture Crop Sequence Boundaries — crop fields — https://data.source.coop/ftw/harmonized-field-data/us_usda_cropland/latest/us_usda_cropland.parquet (license other, CRS )
+- wri_trazo_ml: Trazo field boundary annotations for South America with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/wri_trazo_ml/latest/wri_trazo_ml.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - za_fusion_ml: South Africa Crop Field Boundaries (Fusion Competition) with splits — crop fields — https://data.source.coop/ftw/harmonized-field-data/za_fusion_ml/latest/za_fusion_ml.parquet (license CC-BY-4.0, CRS EPSG:4326)
 - zm_ecaas: Crop-cut farm polygons with crop type and yield for Zambia (ECAAS Bird's-Eye) — crop fields — https://data.source.coop/ftw/harmonized-field-data/zm_ecaas/latest/zm_ecaas.parquet (license GPL-2.0-or-later, CRS EPSG:4326)
 
