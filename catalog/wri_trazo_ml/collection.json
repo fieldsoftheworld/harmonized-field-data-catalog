@@ -1,0 +1,281 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+  ],
+  "id": "wri_trazo_ml",
+  "title": "Trazo field boundary annotations for South America with splits",
+  "description": "Agricultural field boundaries drawn by hand by World Resources Institute (WRI) and Arizona State\nUniversity annotators (in Paraguay with Mundo Agropecuario) in 25 sampling regions across South\nAmerica, 2020-2024, to adapt the\nFields of The World (FTW) field boundary models to South American agriculture. The regions are\necoregions (Chaco, Chiquitania, Araucaria, Amazon, Cerrado, Caatinga, Pampas and others) where the\nbaseline model performed poorly, about 500 samples in Paraguay from Mundo Agropecuario's data,\nMato Grosso samples chosen by active learning, and three randomly sampled test regions.\n\nEach region was annotated for one year, which is each field's determination date (1 January of\nthat year). The three test regions (`testchiquitania`, `testmatogrosso`, `testsoy`) were sampled\nrandomly, the statistically rigorous choice for evaluation; the others were chosen for poor model\nperformance, a query strategy or partner data (WRI's own chip files split those about 90/10 into\ntrain and val). `wri_trazo_ml` adds a `split`: `test` for the three test regions, `train` for the\nothers. Some Mato Grosso regions\noverlap: a few `testmatogrosso` fields are also labelled in train regions, and many\n`matogrosso_brazil_lowconfidences` fields are also in `matogrosso_brazil_confidences`.\n`basemap` is the imagery the annotators drew on: monthly Planet basemaps or, in three regions,\nSentinel-2 alone. Polygons that a source file holds twice are kept once.\n\nEvery field inside the 256x256 Sentinel-2 chips of WRI's training data is annotated; annotations\nthat reach beyond a chip are kept, but land outside the chips is not completely labelled.\n\nGrupp et al. (2026): Field Boundaries of South America. World Resources Institute & Arizona State\nUniversity, https://www.wri.org/research/field-boundaries-south-america\n\nThis collection holds 5 editions (2020, 2021, 2022, 2023, 2024), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/wri_trazo_ml/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2024). Geometries are kept in the source CRS (EPSG:4326). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/wri_trazo_ml/AGENTS.md).\n\nBoundaries are mapped: an authority delineated them from imagery or survey, with no farmer's declaration behind them.",
+  "boundaries": "mapped",
+  "keywords": [
+    "Arizona State University",
+    "PlanetScope",
+    "Sentinel-2",
+    "South America",
+    "Trazo",
+    "World Resources Institute",
+    "agriculture",
+    "fiboa",
+    "field boundaries",
+    "hand-digitised",
+    "train/test splits"
+  ],
+  "license": "CC-BY-4.0",
+  "providers": [
+    {
+      "name": "World Resources Institute and Arizona State University",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://source.coop/wri-data-lab/trazoannotations"
+    },
+    {
+      "name": "Fields of the World",
+      "url": "https://fieldsofthe.world",
+      "roles": [
+        "processor",
+        "host"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -76.7601038,
+          -38.9176182,
+          -39.0051103230735,
+          1.7415096590154422
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-01-01T00:00:00Z",
+          "2024-01-01T00:00:00Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "proj:code": [
+      "EPSG:4326"
+    ]
+  },
+  "table:columns": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "determination:datetime",
+      "type": "timestamp[ms, tz=UTC]",
+      "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "region",
+      "type": "string",
+      "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "basemap",
+      "type": "string",
+      "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "split",
+      "type": "string",
+      "description": "Source-specific column; the publisher documents no meaning for it."
+    },
+    {
+      "name": "metrics:area",
+      "type": "float",
+      "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    },
+    {
+      "name": "bbox",
+      "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+      "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+    }
+  ],
+  "table:primary_geometry": "geometry",
+  "table:row_count": 6092,
+  "partition:scheme": "hive",
+  "partition:strategy": "temporal",
+  "partition:keys": [
+    {
+      "name": "year",
+      "type": "int32",
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+    }
+  ],
+  "partition:file_count": 5,
+  "partition:glob": "s3://ftw/harmonized-field-data/wri_trazo_ml/year=*/*.parquet",
+  "assets": {
+    "data": {
+      "href": "./latest/wri_trazo_ml.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Trazo with splits — latest edition (2024) (GeoParquet)",
+      "description": "Byte-identical copy of `year=2024/wri_trazo_ml-2024.parquet`, kept at a stable path so `*/latest/*.parquet` selects the newest edition of every collection.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 2608430,
+      "file:checksum": "12201c29ea3a29dc9d9b106601af1c7c60b35a40f34967936c219d4035e56af68fe2",
+      "proj:code": "EPSG:4326",
+      "processing:software": {
+        "fiboa-cli": "0.30.0",
+        "vecorel-cli": "0.4.4"
+      }
+    },
+    "style-field-size": {
+      "href": "./styles/field-size.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field size (ha)",
+      "roles": [
+        "style",
+        "default"
+      ],
+      "description": "Fields shaded light to dark by area in hectares (metrics:area / 10 000). Stops at 1, 5, 20, 100 ha, the nice values nearest this dataset's 20th/40th/60th/80th percentiles so each class holds a similar share of fields.",
+      "file:size": 1250,
+      "file:checksum": "1220449119ec470cadda14af3898bce7f808de180be4fbb9817dc8953cd16c34a967"
+    },
+    "style-outline": {
+      "href": "./styles/outline.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "Field boundaries",
+      "roles": [
+        "style"
+      ],
+      "description": "Every field in one colour with a thin outline; for reading the boundaries themselves.",
+      "file:size": 767,
+      "file:checksum": "122018f4136a94831fffafe9e10e32108fbd7190704f35119905626074e08800eec7"
+    },
+    "visual": {
+      "href": "./year=2024/wri_trazo_ml-2024.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Trazo with splits — latest edition (2024) (PMTiles)",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 1589371,
+      "file:checksum": "122016d074f2c2e7829f68d551fb56b0a71461dc2586fd5af8e52075517ec96617f0"
+    },
+    "thumbnail": {
+      "href": "./thumbnail.jpg",
+      "type": "image/jpeg",
+      "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "roles": [
+        "thumbnail"
+      ],
+      "file:size": 39420,
+      "file:checksum": "12202eb21d36779448bb11671659bbee2778744ca82ed8f4421b187b10330b66bd61"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "agents",
+      "href": "./AGENTS.md",
+      "type": "text/markdown",
+      "title": "Guidance for AI agents"
+    },
+    {
+      "rel": "describedby",
+      "href": "./README.md",
+      "type": "text/markdown",
+      "title": "Human-readable documentation"
+    },
+    {
+      "rel": "llms",
+      "href": "./llms.txt",
+      "type": "text/markdown",
+      "title": "Agent/LLM usage guide"
+    },
+    {
+      "rel": "pmtiles",
+      "href": "./year=2024/wri_trazo_ml-2024.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "Web map tiles",
+      "pmtiles:layers": [
+        "wri_trazo_ml"
+      ]
+    },
+    {
+      "rel": "via",
+      "href": "https://source.coop/wri-data-lab/trazoannotations",
+      "type": "text/html",
+      "title": "Original source (publisher page)"
+    },
+    {
+      "rel": "related",
+      "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/wri_trazo_ml.py",
+      "type": "text/html",
+      "title": "Converter source code (fiboa-cli)"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2020/wri_trazo_ml-2020.json",
+      "type": "application/geo+json",
+      "title": "Trazo with splits — 2020"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2021/wri_trazo_ml-2021.json",
+      "type": "application/geo+json",
+      "title": "Trazo with splits — 2021"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2022/wri_trazo_ml-2022.json",
+      "type": "application/geo+json",
+      "title": "Trazo with splits — 2022"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2023/wri_trazo_ml-2023.json",
+      "type": "application/geo+json",
+      "title": "Trazo with splits — 2023"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2024/wri_trazo_ml-2024.json",
+      "type": "application/geo+json",
+      "title": "Trazo with splits — 2024"
+    }
+  ],
+  "updated": "2026-11-13T03:28:58Z",
+  "fiboa_version": "0.3.0",
+  "vecorel_version": "0.1.0",
+  "vecorel_extensions": {
+    "wri_trazo_ml": [
+      "https://vecorel.org/specification/v0.1.0/schema.yaml",
+      "https://fiboa.org/specification/v0.3.0/schema.yaml"
+    ]
+  },
+  "attribution": "Grupp et al. (2026), Field Boundaries of South America, World Resources Institute & Arizona State University"
+}

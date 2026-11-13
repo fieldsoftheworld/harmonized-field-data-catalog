@@ -7,7 +7,7 @@
   ],
   "id": "harmonized-field-data",
   "title": "Harmonized Field Boundary Data",
-  "description": "Field boundary datasets published by government bodies — from their agricultural subsidy registers (IACS/LPIS), cadastres, statistics and mapping programmes — and by research institutions, harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 78 collections (AI4SF, AT, BE, BG, BR, CA, CH, CZ, DE, DK, EC, EE, ES, FI, FR, GLOCAB, HR, IE, IN, IT, JP, KE, LACUNA, LT, LU, LV, NL, NZ, PL, PT, RW, SE, SI, SK, US, ZA, ZM). In 61 collections the boundaries are declared — they come from farmers' subsidy applications, or from the parcel register built on those declarations. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `in_10k_ml`, `jp`, `ke_ecaas`, `lacuna`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey; `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Each collection's `boundaries` field says which. 62 hold crop fields — one declared crop on one parcel — 146,356,994 in their latest editions and 774,647,868 across all 358 editions together, counting a field once per edition it appears in. The other 16 hold field blocks (reference parcels, which several fields can share): 19,393,578 and 25,813,993 over 32 editions. The two are not added together. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.",
+  "description": "Field boundary datasets published by government bodies — from their agricultural subsidy registers (IACS/LPIS), cadastres, statistics and mapping programmes — and by research institutions, harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 79 collections (AI4SF, AT, BE, BG, BR, CA, CH, CZ, DE, DK, EC, EE, ES, FI, FR, GLOCAB, HR, IE, IN, IT, JP, KE, LACUNA, LT, LU, LV, NL, NZ, PL, PT, RW, SE, SI, SK, US, WRI, ZA, ZM). In 61 collections the boundaries are declared — they come from farmers' subsidy applications, or from the parcel register built on those declarations. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `in_10k_ml`, `jp`, `ke_ecaas`, `lacuna`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `wri_trazo_ml`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey; `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Each collection's `boundaries` field says which. 63 hold crop fields — one declared crop on one parcel — 146,363,086 in their latest editions and 774,706,988 across all 363 editions together, counting a field once per edition it appears in. The other 16 hold field blocks (reference parcels, which several fields can share): 19,393,578 and 25,813,993 over 32 editions. The two are not added together. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.",
   "links": [
     {
       "rel": "root",
@@ -473,6 +473,12 @@
     },
     {
       "rel": "child",
+      "href": "./wri_trazo_ml/collection.json",
+      "type": "application/json",
+      "title": "Trazo field boundary annotations for South America with splits"
+    },
+    {
+      "rel": "child",
       "href": "./za_fusion_ml/collection.json",
       "type": "application/json",
       "title": "South Africa Crop Field Boundaries (Fusion Competition) with splits"
@@ -535,5 +541,5 @@
       ]
     }
   ],
-  "updated": "2026-11-07T17:40:18Z"
+  "updated": "2026-11-13T03:28:58Z"
 }
