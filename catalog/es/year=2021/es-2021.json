@@ -14,14 +14,14 @@
       [
         [
           -15.42079159787916,
-          27.882118346780175
+          27.882118346780178
         ],
         [
-          4.308757944368304,
-          27.882118346780175
+          4.308757944368305,
+          27.882118346780178
         ],
         [
-          4.308757944368304,
+          4.308757944368305,
           43.78663431447429
         ],
         [
@@ -30,15 +30,15 @@
         ],
         [
           -15.42079159787916,
-          27.882118346780175
+          27.882118346780178
         ]
       ]
     ]
   },
   "bbox": [
     -15.42079159787916,
-    27.882118346780175,
-    4.308757944368304,
+    27.882118346780178,
+    4.308757944368305,
     43.78663431447429
   ],
   "properties": {
@@ -51,16 +51,6 @@
     "proj:code": "EPSG:3035",
     "table:columns": [
       {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -71,9 +61,14 @@
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "hcat:name",
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
         "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name_en",
@@ -81,9 +76,14 @@
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "crop:code",
+        "name": "hcat:name",
         "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -94,8 +94,8 @@
     "table:primary_geometry": "geometry",
     "table:row_count": 16489065,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.4.0"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     },
     "license": "CC-BY-4.0",
     "attribution": "European Commission, Joint Research Centre — EuroCropsV2",
@@ -119,8 +119,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 8816856691,
-      "file:checksum": "12202393b74a1b7cc5bcba8c53b94a296f8578dd1ab1ec1333f6a3dd3b318589402a",
+      "file:size": 8816856699,
+      "file:checksum": "1220875826eff4a2fc33c75d9ef030cee0fb75ad6361f53d203d05ba9c3eedcf0644",
       "proj:code": "EPSG:3035"
     }
   },
