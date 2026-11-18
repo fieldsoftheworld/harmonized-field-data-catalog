@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          -9.551854922295218,
-          36.991827533373424
+          -9.482846645839798,
+          37.00311127608485
         ],
         [
-          -6.173148404290481,
-          36.991827533373424
+          -6.189894361274252,
+          37.00311127608485
         ],
         [
-          -6.173148404290481,
-          42.134449847013244
+          -6.189894361274252,
+          42.14320459987834
         ],
         [
-          -9.551854922295218,
-          42.134449847013244
+          -9.482846645839798,
+          42.14320459987834
         ],
         [
-          -9.551854922295218,
-          36.991827533373424
+          -9.482846645839798,
+          37.00311127608485
         ]
       ]
     ]
   },
   "bbox": [
-    -9.551854922295218,
-    36.991827533373424,
-    -6.173148404290481,
-    42.134449847013244
+    -9.482846645839798,
+    37.00311127608485,
+    -6.189894361274252,
+    42.14320459987834
   ],
   "properties": {
     "title": "Portugal — 2023",
-    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`pt-2023.parquet`, 4,805,442 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
+    "description": "Field boundaries of the 2023 edition of this dataset, one GeoParquet file (`pt-2023.parquet`, 4,804,467 fields) and its PMTiles. Partition `year=2023` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2023-01-01T00:00:00Z",
     "end_datetime": "2023-01-01T00:00:00Z",
@@ -51,9 +51,19 @@
     "proj:code": "EPSG:3763",
     "table:columns": [
       {
-        "name": "hcat:name_en",
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "id",
         "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "block_id",
+        "type": "int64",
+        "description": "Crop field identifier (source column `OSA_ID`, per the fiboa data survey)"
       },
       {
         "name": "crop:code",
@@ -66,11 +76,6 @@
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
         "name": "metrics:area",
         "type": "float",
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -81,24 +86,14 @@
         "description": "Perimeter of the field, in meters (m). Must be > 0 and <= 125,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "id",
+        "name": "hcat:name_en",
         "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name",
         "type": "string",
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "block_id",
-        "type": "int64",
-        "description": "Crop field identifier (source column `OSA_ID`, per the fiboa data survey)"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hcat:code",
@@ -112,10 +107,10 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 4805442,
+    "table:row_count": 4804467,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "pt",
@@ -127,8 +122,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 1242593700,
-      "file:checksum": "1220e7669d9612a1a78e967e622259cf4994da4369fdc4f4a44f036b98b216cf6f41",
+      "file:size": 1244081682,
+      "file:checksum": "1220207401837b3cfc3d2670717e8e60c92dd8c8f54cd6462899f68b2ac7b2cd69fd",
       "proj:code": "EPSG:3763"
     }
   },

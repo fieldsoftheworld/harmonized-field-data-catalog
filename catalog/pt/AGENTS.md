@@ -12,10 +12,10 @@ Portugal field boundaries in the [fiboa](https://github.com/fiboa/specification)
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:4326, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres**, taken from the source column `Shape_Area`. Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`metrics:area` is in square metres** (source column `Shape_Area`; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `CUL_ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/pt/pt.csv`) have `NULL`. 37,700 of the 3,571,255 rows of the 2025 edition (1.06%) have none, so a query that filters or groups on crop silently leaves them out.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. 4,574 of the 3,568,823 rows of the 2025 edition (0.13%) have none, so a query that filters or groups on crop silently leaves them out.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `PT`, `determination:datetime` = `2025-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/pt/pt.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 - No crop code for a fifth to a third of the fields in every edition before 2025 (22.8% of 2017, 18.7% of 2018, 20.9% of 2019, 29.4-33.4% of 2020-2023): mostly IFAP recorded a land cover class and declared no crop. It is written as an empty string rather than null, because crop:code is required and the writer rejects nulls; in 2023 it is a single space, so test with strip(). 2020 is worse for the islands specifically (199,123 fields), its crop table covering the mainland only; 2021's does cover them and 2022 carries the code on the layer. 2017 publishes no identifier for Madeira or the Azores, so those 177,614 fields carry ids synthesised from 10^12 upward, a sort position rather than a provider key. 2018 ships the north twice; the 154,980 duplicated fields are dropped, leaving 3,798,241.
 
@@ -30,14 +30,14 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/pt/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2017 | 3732091 | 4036236.0
--- 2018 | 3798241 | 4049687.0
--- 2019 | 4038298 | 4098351.0
--- 2020 | 4766789 | 4208349.0
--- 2021 | 4882314 | 4230766.0
--- 2022 | 4953834 | 4254173.0
--- 2023 | 4805442 | 4090352.0
--- 2025 | 3571255 | 3622080.0
+-- 2017 | 3731888 | 4035154.0
+-- 2018 | 3798048 | 4048621.0
+-- 2019 | 4038102 | 4097510.0
+-- 2020 | 4766595 | 4207317.0
+-- 2021 | 4882078 | 4229406.0
+-- 2022 | 4953618 | 4252918.0
+-- 2023 | 4804467 | 4089206.0
+-- 2025 | 3568823 | 3619697.0
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
@@ -49,11 +49,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/pt/latest/
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330200 | pasture_meadow_grassland_grass | 1494818 | 1885687.0
--- 330606 | oak | 92091 | 368002.0
--- 330305 | olive_plantations | 418832 | 327958.0
--- 330101 | grain_maize_corn_popcorn | 229324 | 228891.0
--- 330306 | vineyards_wine_vine_rebland_grapes | 260037 | 127728.0
+-- 330200 | pasture_meadow_grassland_grass | 1494351 | 1884870.0
+-- 330606 | oak | 92081 | 367916.0
+-- 330305 | olive_plantations | 418821 | 327910.0
+-- 330101 | grain_maize_corn_popcorn | 228776 | 228428.0
+-- 330306 | vineyards_wine_vine_rebland_grapes | 260029 | 127716.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:

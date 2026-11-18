@@ -72,6 +72,7 @@ from common import (
     parse_link_str,
     partition_dir,
     publish_config,
+    quote,
     read_json,
     staging_converter_meta,
     staging_part_stac,
@@ -704,12 +705,15 @@ def write_styles(ds: Dataset, title: str, source: Path | str, pm_rel: str) -> tu
 # --- documentation ---------------------------------------------------------------------
 
 
-def run_query(sql: str) -> str:
-    """Run a DuckDB query and return a compact text rendering of the result."""
+def query(sql: str) -> tuple[list[str], list[tuple]]:
+    """Run a DuckDB query; its column names and rows."""
     con = duckdb_connect()
     rel = con.execute(sql)
-    rows = rel.fetchall()
-    cols = [d[0] for d in rel.description]
+    return [d[0] for d in rel.description], rel.fetchall()
+
+
+def render(cols: list[str], rows: list[tuple]) -> str:
+    """A compact text rendering of a query result."""
     lines = [" | ".join(cols)]
     for row in rows[:8]:
         lines.append(" | ".join(str(v) for v in row))
@@ -730,11 +734,78 @@ def localize(sql: str, public_base: str) -> str:
 REMOTE = False  # --remote: run embedded queries against the published bucket
 
 
-def md_query(sql: str, public_base: str) -> str:
-    """A fenced SQL block followed by the result it produced locally."""
-    result = run_query(sql if REMOTE else localize(sql, public_base))
-    commented = "\n".join(f"-- {line}" for line in result.splitlines())
+def md_query(sql: str, public_base: str, run: str | None = None, collections: list[str] | None = None) -> str:
+    """A fenced SQL block followed by the result it produced locally.
+
+    `run` is the SQL to execute when it differs from the one shown. A recipe whose result is
+    empty is not shipped: the reader would take a query that returns nothing for a broken one.
+    With `collections`, its `collection` column must list exactly those collections.
+    """
+    cols, rows = query(run or (sql if REMOTE else localize(sql, public_base)))
+    if not rows:
+        raise RuntimeError(f"query returned no rows:\n{sql}")
+    if collections is not None:
+        at = cols.index("collection")
+        found = {row[at] for row in rows}
+        missing, extra = sorted(set(collections) - found), sorted(found - set(collections))
+        if missing or extra:
+            raise RuntimeError(
+                f"query lists {len(found)} of {len(collections)} collections"
+                + (f"; missing: {', '.join(missing)}" if missing else "")
+                + (f"; not in the catalog: {', '.join(extra)}" if extra else "")
+            )
+    commented = "\n".join(f"-- {line}" for line in render(cols, rows).splitlines())
     return f"```sql\n{sql.strip()}\n{commented}\n```"
+
+
+def every_collection(ids: list[str], pattern: str, config: dict) -> str:
+    """A DuckDB list of one glob per collection: its data in catalog/ where it is linked there,
+    the bucket otherwise. A query over the catalog's glob then sees every collection, also in a
+    checkout that has the data of only some of them (with --remote, the bucket for all)."""
+    def source(cid: str) -> str:
+        local = CATALOG_DIR / cid
+        found = list(local.glob(pattern))
+        # a link left from an earlier layout points nowhere, and DuckDB does not see it
+        if not REMOTE and found and all(f.exists() for f in found):
+            return f"{local.as_posix()}/{pattern}"
+        return f"{glob_base(config)}/{cid}/{pattern}"
+    return "[" + ", ".join(quote(source(cid)) for cid in ids) + "]"
+
+
+def field_point(path: Path, crs: str, bbox: list[float]) -> tuple[float, float]:
+    """(lon, lat) of a point inside the field nearest the centre of `bbox` (lon/lat).
+
+    The centre of a bounding box can fall where there are no fields (a city, a lake, the
+    sea), so the point query starts from a real field instead."""
+    cx, cy = (bbox[0] + bbox[2]) / 2, (bbox[1] + bbox[3]) / 2
+    centre = f"ST_Transform(ST_Point({cx}, {cy}), 'EPSG:4326', '{crs}', always_xy := true)"
+    row = query(
+        f"SELECT ST_X(p), ST_Y(p) FROM (SELECT ST_Transform(ST_PointOnSurface(geometry), '{crs}', 'EPSG:4326', always_xy := true) AS p\n"
+        f"FROM read_parquet({quote(path)}) WHERE geometry IS NOT NULL\n"
+        f"ORDER BY ST_Distance(ST_Centroid(geometry), {centre}) LIMIT 1)"
+    )[1]
+    if not row:
+        raise RuntimeError(f"no field with a geometry in {path}")
+    return row[0][0], row[0][1]
+
+
+def point_recipe(path: Path, url: str, crs: str, bbox: list[float], has_area: bool) -> tuple[str, str]:
+    """The sentence and SQL of the "fields around a point" recipe for one file.
+
+    The point is given in lon/lat (`always_xy`, whatever the axis order of EPSG:4326) and
+    transformed into the data's CRS. The radius is 500 m, or 0.005° where that CRS is in
+    degrees: a buffer is in the units of the CRS."""
+    import pyproj
+
+    lon, lat = field_point(path, crs, bbox)
+    geographic = pyproj.CRS.from_user_input(crs).is_geographic
+    radius, within = ("0.005", "about 500 m (0.005°; the CRS is in degrees)") if geographic else ("500", "500 m")
+    sel = 'id, round("metrics:area") AS m2' if has_area else "id"
+    sql = (
+        f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT {sel}\nFROM read_parquet('{url}')\n"
+        f"WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point({lon:.4f}, {lat:.4f}), 'EPSG:4326', '{crs}', always_xy := true), {radius}))\nLIMIT 5;"
+    )
+    return f"Fields within {within} of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:", sql
 
 
 def collection_docs(
@@ -867,14 +938,9 @@ def collection_docs(
         order = "hectares" if has_area else "fields"
         q = f"SELECT substr(CAST(\"hcat:code\" AS VARCHAR), 1, 6) AS hcat_group, mode(\"hcat:name\") AS most_common_name,\n       count(*) AS fields{measure}\nFROM read_parquet('{latest_url}')\nWHERE \"hcat:code\" IS NOT NULL\nGROUP BY 1 ORDER BY {order} DESC LIMIT 5;"
         a += [md_query(q, public_base), ""]
-    a.append("Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:")
-    a.append("")
-    cx = (latest.bbox[0] + latest.bbox[2]) / 2
-    cy = (latest.bbox[1] + latest.bbox[3]) / 2
-    sel = 'id, round("metrics:area") AS m2' if has_area else "id"
-    q = f"INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;\nSELECT {sel}\nFROM read_parquet('{latest_url}')\nWHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point({cy:.4f}, {cx:.4f}), 'EPSG:4326', '{latest.crs}'), 500))\nLIMIT 5;"
     try:
-        a += [md_query(q, public_base), ""]
+        sentence, q = point_recipe(latest.parquet, latest_url, latest.crs, latest.bbox, has_area)
+        a += [sentence, "", md_query(q, public_base), ""]
     except Exception as exc:  # noqa: BLE001 — a failed recipe is not shipped
         print(f"note: spatial query skipped for {ds.id}: {exc}")
     a += ["## Related collections", "", f"Every collection in this catalog shares the fiboa core columns, so the same queries work across countries; `{glob_base(config)}/*/latest/*.parquet` with `union_by_name = true` reads the newest edition of all of them (see the catalog [AGENTS.md]({human_base}/AGENTS.md)).", "", "## Structure", "", "Assets and structural links resolve relative to the object that carries them; there is no `self` link. Source: this collection is generated by [tools/catalogize.py]({0}/blob/main/tools/catalogize.py) in the catalog repository — fix documentation there.".format(manifest.catalog["repository"])]
@@ -1050,8 +1116,11 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
         kind = "field blocks" if c["id"] in blocks else "crop fields"
         r.append(f"| [{c['title']}]({human_base}/{c['id']}) | {kind} | {prov} | {', '.join(years)} | {fmt_int(c.get('table:row_count'))} | {c['license']} | [README]({human_base}/{c['id']}/README.md) · [agents]({human_base}/{c['id']}/AGENTS.md) |")
     r += ["", "## Access", "", f"Everything is static files on object storage: query them in place with DuckDB, GeoPandas or any GeoParquet reader, and render the PMTiles with MapLibre. Single files are plain https URLs; globs use the S3 form of the same prefix through the Source Cooperative proxy (`{s3_base}`, endpoint `{config.get('endpoint_url')}`, anonymous), because `*` needs a listing that https does not provide. Newest edition of every collection:", ""]
-    q = f"{duckdb_s3_setup(config)}\nSELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/latest/*.parquet', union_by_name = true, filename = true)\nGROUP BY 1 ORDER BY 1;"
-    r += [md_query(q, public_base), ""]
+    ids = [c["id"] for c in collections]
+    latest_glob = f"'{s3_base}/*/latest/*.parquet'"
+    q = f"{duckdb_s3_setup(config)}\nSELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) AS fields\nFROM read_parquet({latest_glob}, union_by_name = true, filename = true)\nGROUP BY 1 ORDER BY 1;"
+    latest_run = q.replace(latest_glob, every_collection(ids, "latest/*.parquet", config))
+    r += [md_query(q, public_base, run=latest_run, collections=ids), ""]
     r += tiles
     r += ["## License", "", "Each collection carries the license of its source data provider (see the table and each `collection.json`). The catalog metadata, styles and tooling are Apache-2.0, in the [repository]({0}).".format(repo), "", "## Provenance", "", f"A mirror: every collection links its original source (`rel: via`) and the fiboa data survey entry describing it, and records the fiboa-cli version that converted it. Conversion logic lives in [fiboa-cli]({FIBOA_CLI_REPO}); this repository only orchestrates publication. Previously published at [source.coop/fiboa/data](https://source.coop/fiboa/data)."]
     write_text(CATALOG_DIR / "README.md", "\n".join(r))
@@ -1073,9 +1142,11 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
     )
     a = [f"# Agent guidance — {cat['title']}", "", "**One rule survives every edit to this file.** Every claim here is quoted from a source or measured from the data; every query below was run before it was written down and its output follows as comments.", ""]
     a += ["## What this catalog holds", "", f"{len(collections)} collections, one per source dataset, all in the [fiboa]({FIBOA_SPEC}) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `{public_base}/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`." + parts_note, ""]
-    a += ["## How to read it", "", f"Single files: plain https under `{public_base}/`. Globs: the S3 form of the same prefix, `{s3_base}/`, through the Source Cooperative proxy (endpoint `{config.get('endpoint_url')}`, path-style, no credentials) — `*` needs a listing and https has none. Newest edition of every collection in one query (schemas differ per source, hence `union_by_name`):", "", md_query(q, public_base), ""]
-    q2 = f"{duckdb_s3_setup(config)}\nSELECT {PARTITION_KEY}, regexp_extract(filename, '/([^/]+)/{PARTITION_KEY}=', 1) AS collection, count(*) AS fields\nFROM read_parquet('{s3_base}/*/{PARTITION_KEY}=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)\nGROUP BY 1, 2 ORDER BY 2, 1;"
-    a += ["Every edition of every collection:", "", md_query(q2, public_base), ""]
+    a += ["## How to read it", "", f"Single files: plain https under `{public_base}/`. Globs: the S3 form of the same prefix, `{s3_base}/`, through the Source Cooperative proxy (endpoint `{config.get('endpoint_url')}`, path-style, no credentials) — `*` needs a listing and https has none. Newest edition of every collection in one query (schemas differ per source, hence `union_by_name`):", "", md_query(q, public_base, run=latest_run, collections=ids), ""]
+    years_glob = f"'{s3_base}/*/{PARTITION_KEY}=*/*.parquet'"
+    q2 = f"{duckdb_s3_setup(config)}\nSELECT {PARTITION_KEY}, regexp_extract(filename, '/([^/]+)/{PARTITION_KEY}=', 1) AS collection, count(*) AS fields\nFROM read_parquet({years_glob}, hive_partitioning = true, union_by_name = true, filename = true)\nGROUP BY 1, 2 ORDER BY 2, 1;"
+    years_run = q2.replace(years_glob, every_collection(ids, f"{PARTITION_KEY}=*/*.parquet", config))
+    a += ["Every edition of every collection:", "", md_query(q2, public_base, run=years_run, collections=ids), ""]
     if tiles:
         a += [f"For a map rather than a query: `{public_base}/{ROOT_TILES}` tiles the newest editions into one layer `{ROOT_TILES_LAYER}`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.", ""]
     a += ["## Join keys", "", "There are none. `id` is unique within one edition of one collection only; collections do not share identifiers and editions are not tracked across years. Spatial joins are the only bridge, and each collection is in its own CRS (`proj:code` on the collection and the `data` asset), so transform before joining.", ""]

@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          3.257552867243302,
-          50.73428105429953
+          3.3596831894889845,
+          50.750432999641234
         ],
         [
-          7.238055591164383,
-          50.73428105429953
+          7.22380604052417,
+          50.750432999641234
         ],
         [
-          7.238055591164383,
-          53.49476233618906
+          7.22380604052417,
+          53.5052741771375
         ],
         [
-          3.257552867243302,
-          53.49476233618906
+          3.3596831894889845,
+          53.5052741771375
         ],
         [
-          3.257552867243302,
-          50.73428105429953
+          3.3596831894889845,
+          50.750432999641234
         ]
       ]
     ]
   },
   "bbox": [
-    3.257552867243302,
-    50.73428105429953,
-    7.238055591164383,
-    53.49476233618906
+    3.3596831894889845,
+    50.750432999641234,
+    7.22380604052417,
+    53.5052741771375
   ],
   "properties": {
     "title": "Netherlands (Crops) — 2026",
-    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`nl-2026.parquet`, 1,265,023 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
+    "description": "Field boundaries of the 2026 edition of this dataset, one GeoParquet file (`nl-2026.parquet`, 1,266,361 fields) and its PMTiles. Partition `year=2026` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2026-05-15T00:00:00Z",
     "end_datetime": "2026-05-15T00:00:00Z",
@@ -56,14 +56,29 @@
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
+        "name": "coverage",
+        "type": "string",
+        "description": "Land-cover category (Grass land, Arable field, Ditch, Landscape element) (source column `category`, per the fiboa data survey)"
+      },
+      {
         "name": "crop:code",
         "type": "string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "id",
+        "name": "crop:name",
         "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:code",
@@ -76,24 +91,9 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "hcat:name",
+        "name": "id",
         "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:name",
-        "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "coverage",
-        "type": "string",
-        "description": "Land-cover category (Grass land, Arable field, Ditch, Landscape element) (source column `category`, per the fiboa data survey)"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -102,10 +102,10 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 1265023,
+    "table:row_count": 1266361,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.18"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "nl",
@@ -117,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 741326309,
-      "file:checksum": "12208f4c599672f7f4efe177dcb52e0a8fbf0423c9a6dcdfc0b004a93cf924ad0914",
+      "file:size": 741302878,
+      "file:checksum": "122038df59eca8f4e4caefd626fe6a6e759078267fc59cd8b0c60154e7d382584355",
       "proj:code": "EPSG:28992"
     },
     "visual": {
@@ -128,8 +128,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 530472843,
-      "file:checksum": "122013f703f686a7c3ca146c9c329097abcf7ade5692e011e5e60c8b76f55fc10472"
+      "file:size": 519138531,
+      "file:checksum": "12206b7af1cdd0863256e82efcdea665862718f9f3198b17829617da393739f01705"
     }
   },
   "links": [

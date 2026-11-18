@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          9.336256952864261,
-          55.174271140641004
+          10.987537038060102,
+          55.33770066666211
         ],
         [
-          25.099764984278767,
-          55.174271140641004
+          24.130377457997678,
+          55.33770066666211
         ],
         [
-          25.099764984278767,
-          68.51293826316373
+          24.130377457997678,
+          68.44244254369706
         ],
         [
-          9.336256952864261,
-          68.51293826316373
+          10.987537038060102,
+          68.44244254369706
         ],
         [
-          9.336256952864261,
-          55.174271140641004
+          10.987537038060102,
+          55.33770066666211
         ]
       ]
     ]
   },
   "bbox": [
-    9.336256952864261,
-    55.174271140641004,
-    25.099764984278767,
-    68.51293826316373
+    10.987537038060102,
+    55.33770066666211,
+    24.130377457997678,
+    68.44244254369706
   ],
   "properties": {
     "title": "Sweden — 2024",
@@ -51,24 +51,9 @@
     "proj:code": "EPSG:3006",
     "table:columns": [
       {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "metrics:area",
@@ -76,9 +61,14 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name",
@@ -91,6 +81,16 @@
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
         "name": "bbox",
         "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
         "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -99,8 +99,8 @@
     "table:primary_geometry": "geometry",
     "table:row_count": 1146499,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "se",
@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 284210065,
-      "file:checksum": "12207beb0454457b4312deebf244a109d5529f9a6e66a38ee058c2a10104a0206250",
+      "file:size": 284936297,
+      "file:checksum": "12200f8bb92a65c3e9cd4c51be0613b3eb9b7c9f75ce35419162e3fb6c20b7ae6a50",
       "proj:code": "EPSG:3006"
     }
   },

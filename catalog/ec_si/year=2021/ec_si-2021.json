@@ -51,44 +51,14 @@
     "proj:code": "EPSG:3794",
     "table:columns": [
       {
-        "name": "color",
-        "type": "string",
-        "description": "Carried over from the source column `COLOR`; the publisher documents no meaning for it."
-      },
-      {
-        "name": "crop_lat_e",
-        "type": "string",
-        "description": "Carried over from the source column `CROP_LAT_E`; the publisher documents no meaning for it."
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "crop_type_class",
+        "name": "id",
         "type": "string",
-        "description": "Carried over from the source column `SIFRA_KMRS`; the publisher documents no meaning for it."
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "rastlina",
-        "type": "string",
-        "description": "Carried over from the source column `RASTLINA`; the publisher documents no meaning for it."
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "metrics:area",
@@ -96,14 +66,34 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
         "name": "gerk_pid",
         "type": "uint64",
         "description": "Carried over from the source column `GERK_PID`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "crop_type_class",
+        "type": "string",
+        "description": "Carried over from the source column `SIFRA_KMRS`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "rastlina",
+        "type": "string",
+        "description": "Carried over from the source column `RASTLINA`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "crop_lat_e",
+        "type": "string",
+        "description": "Carried over from the source column `CROP_LAT_E`; the publisher documents no meaning for it."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "description": "Carried over from the source column `COLOR`; the publisher documents no meaning for it."
       },
       {
         "name": "EC_NUTS3",
@@ -111,9 +101,24 @@
         "description": "Source-specific column; the publisher documents no meaning for it."
       },
       {
-        "name": "id",
+        "name": "hcat:name_en",
         "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -124,8 +129,8 @@
     "table:primary_geometry": "geometry",
     "table:row_count": 828157,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.4.1"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "ec_si",
@@ -137,8 +142,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 174497856,
-      "file:checksum": "12208071b4e9220b6324642df2209416a8c6edf8c3c3fbff248f6215a57858d5d891",
+      "file:size": 174929653,
+      "file:checksum": "122073868f915385ff7f528f8a57a1473ea70874de02feeea123b3a0e9c09948e143",
       "proj:code": "EPSG:3794"
     },
     "visual": {
@@ -148,8 +153,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 146625686,
-      "file:checksum": "122015589c38f5641cffb55ca21739a3ed0683b22b320e53846896d8da16788a43b0"
+      "file:size": 144677146,
+      "file:checksum": "1220955aab53619aa2391600d1ffd452d4fc0767077e126de0bd8a9a42846eaaca33"
     }
   },
   "links": [

@@ -18,14 +18,14 @@ FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
 -- ai4sf_ml | 439001
+-- at | 2944397
+-- at_block | 1299745
+-- be_vlg | 597088
+-- be_wal | 342315
+-- bg | 226592
 -- br_ba_lem | 1854
--- glocab | 124417
--- in_10k_ml | 10013
--- it_1 | 667107
--- ke_ecaas | 1349
--- lacuna | 88573
--- lacuna_labels | 88573
--- ... 5 more rows
+-- br_conab | 390805
+-- ... 71 more rows
 ```
 
 Every edition of every collection:
@@ -38,14 +38,14 @@ FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_part
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
 -- 2021 | ai4sf_ml | 439001
--- 2020 | br_ba_lem | 1854
--- 2016 | glocab | 5212
--- 2017 | glocab | 40948
--- 2018 | glocab | 5615
--- 2019 | glocab | 14640
--- 2020 | glocab | 124417
--- 2020 | in_10k_ml | 10013
--- ... 33 more rows
+-- 2015 | at | 2499283
+-- 2016 | at | 2492555
+-- 2017 | at | 2505150
+-- 2018 | at | 2523190
+-- 2019 | at | 2529896
+-- 2020 | at | 2614636
+-- 2021 | at | 2610511
+-- ... 361 more rows
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.

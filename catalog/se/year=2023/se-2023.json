@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          9.330066009624627,
-          55.17427113338902
+          10.987537072692351,
+          55.33770065789324
         ],
         [
-          25.110648011758574,
-          55.17427113338902
+          24.1205865000662,
+          55.33770065789324
         ],
         [
-          25.110648011758574,
-          68.53750490214182
+          24.1205865000662,
+          68.47847674816495
         ],
         [
-          9.330066009624627,
-          68.53750490214182
+          10.987537072692351,
+          68.47847674816495
         ],
         [
-          9.330066009624627,
-          55.17427113338902
+          10.987537072692351,
+          55.33770065789324
         ]
       ]
     ]
   },
   "bbox": [
-    9.330066009624627,
-    55.17427113338902,
-    25.110648011758574,
-    68.53750490214182
+    10.987537072692351,
+    55.33770065789324,
+    24.1205865000662,
+    68.47847674816495
   ],
   "properties": {
     "title": "Sweden — 2023",
@@ -51,29 +51,9 @@
     "proj:code": "EPSG:3006",
     "table:columns": [
       {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "collection",
-        "type": "string",
-        "description": "The identifier of the collection. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "metrics:area",
@@ -81,14 +61,34 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
         "name": "id",
         "type": "string",
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -99,8 +99,8 @@
     "table:primary_geometry": "geometry",
     "table:row_count": 1142785,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "se",
@@ -112,8 +112,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 358853623,
-      "file:checksum": "122007d8f3415365383d08e0e8127a7095af36ce2ebf336ba23da9af95af0c2a167d",
+      "file:size": 359582498,
+      "file:checksum": "12203ff7c81a609c1b332fed0364a34435bcba8336da99a43a5fc7fb45e01a0e8b99",
       "proj:code": "EPSG:3006"
     }
   },

@@ -12,7 +12,7 @@
   ],
   "id": "nl",
   "title": "BRP Crop Field Boundaries for The Netherlands (CAP-based)",
-  "description": "BasisRegistratie Percelen (BRP) combines the location of\nagricultural plots with the crop grown. The data set\nis published by RVO (Netherlands Enterprise Agency). The boundaries of the agricultural plots\nare based within the reference parcels (formerly known as AAN). A user an agricultural plot\nannually has to register his crop fields with crops (for the Common Agricultural Policy scheme).\nA dataset is generated for each year with reference date May 15.\nA view service and a download service are available for the most recent BRP crop plots.\n\n<https://service.pdok.nl/rvo/gewaspercelen/atom/index.xml>\n\nData is currently available for the years 2009 to 2025 (final) and 2026 (concept).\n\nThis collection holds 18 editions (2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/nl/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:28992). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
+  "description": "BasisRegistratie Percelen (BRP) combines the location of\nagricultural plots with the crop grown. The data set\nis published by RVO (Netherlands Enterprise Agency). The boundaries of the agricultural plots\nare based within the reference parcels (formerly known as AAN). A user an agricultural plot\nannually has to register his crop fields with crops (for the Common Agricultural Policy scheme).\nA dataset is generated for each year with reference date May 15.\nA view service and a download service are available for the most recent BRP crop plots.\n\n<https://service.pdok.nl/rvo/gewaspercelen/atom/index.xml>\n\nData is currently available for the years 2009 to 2025 (final) and 2026 (concept).\nThe editions 2005 to 2008 were published by RVO before and are no longer\ndownloadable; convert a copy with `--variant <year> -i \"<zip>|<shapefile>\"`.\n\nThis collection holds 22 editions (2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026), one GeoParquet file per year under `year=<year>/` (hive layout). Read them all at once with the partition glob `s3://ftw/harmonized-field-data/nl/year=*/*.parquet` (S3 through the Source Cooperative proxy, endpoint `https://data.source.coop`; plain https cannot expand `*`); the `data` asset is a copy of the latest edition (2026). Geometries are kept in the source CRS (EPSG:28992). Converted with [fiboa-cli](https://github.com/fiboa/cli) into the [fiboa](https://github.com/fiboa/specification) schema; tested queries are in the collection's [AGENTS.md](https://source.coop/ftw/harmonized-field-data/nl/AGENTS.md).\n\nBoundaries are declared: they come from farmers' subsidy applications, or from the parcel register built on those declarations.",
   "boundaries": "declared",
   "keywords": [
     "BRP",
@@ -48,17 +48,17 @@
     "spatial": {
       "bbox": [
         [
-          3.257552867243302,
-          50.734265583314304,
-          7.238055591164383,
-          53.49476233618906
+          3.3596569282870705,
+          50.75034151299357,
+          7.2245622974511186,
+          53.5052741771375
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2009-05-15T00:00:00Z",
+          "2005-05-15T00:00:00Z",
           "2026-05-15T00:00:00Z"
         ]
       ]
@@ -76,14 +76,29 @@
       "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
+      "name": "coverage",
+      "type": "string",
+      "description": "Land-cover category (Grass land, Arable field, Ditch, Landscape element) (source column `category`, per the fiboa data survey)"
+    },
+    {
       "name": "crop:code",
       "type": "string",
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "id",
+      "name": "crop:name",
       "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "hcat:code",
@@ -96,24 +111,9 @@
       "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "hcat:name",
+      "name": "id",
       "type": "string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "crop:name",
-      "type": "string",
-      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-    },
-    {
-      "name": "coverage",
-      "type": "string",
-      "description": "Land-cover category (Grass land, Arable field, Ditch, Landscape element) (source column `category`, per the fiboa data survey)"
-    },
-    {
-      "name": "hcat:name_en",
-      "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "bbox",
@@ -122,17 +122,17 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 1265023,
+  "table:row_count": 1266361,
   "partition:scheme": "hive",
   "partition:strategy": "temporal",
   "partition:keys": [
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
-  "partition:file_count": 18,
+  "partition:file_count": 22,
   "partition:glob": "s3://ftw/harmonized-field-data/nl/year=*/*.parquet",
   "assets": {
     "data": {
@@ -143,12 +143,12 @@
       "roles": [
         "data"
       ],
-      "file:size": 741326309,
-      "file:checksum": "12208f4c599672f7f4efe177dcb52e0a8fbf0423c9a6dcdfc0b004a93cf924ad0914",
+      "file:size": 741302878,
+      "file:checksum": "122038df59eca8f4e4caefd626fe6a6e759078267fc59cd8b0c60154e7d382584355",
       "proj:code": "EPSG:28992",
       "processing:software": {
-        "fiboa-cli": "0.21.0",
-        "vecorel-cli": "0.2.18"
+        "fiboa-cli": "0.30.0",
+        "vecorel-cli": "0.4.4"
       }
     },
     "style-hcat-crops": {
@@ -192,8 +192,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 530472843,
-      "file:checksum": "122013f703f686a7c3ca146c9c329097abcf7ade5692e011e5e60c8b76f55fc10472"
+      "file:size": 519138531,
+      "file:checksum": "12206b7af1cdd0863256e82efcdea665862718f9f3198b17829617da393739f01705"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -261,6 +261,30 @@
       "href": "https://github.com/fiboa/cli/blob/main/fiboa_cli/datasets/nl.py",
       "type": "text/html",
       "title": "Converter source code (fiboa-cli)"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2005/nl-2005.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2005"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2006/nl-2006.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2006"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2007/nl-2007.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2007"
+    },
+    {
+      "rel": "item",
+      "href": "./year=2008/nl-2008.json",
+      "type": "application/geo+json",
+      "title": "Netherlands (Crops) — 2008"
     },
     {
       "rel": "item",
@@ -371,16 +395,16 @@
       "title": "Netherlands (Crops) — 2026"
     }
   ],
-  "updated": "2026-09-18T00:29:43Z",
+  "updated": "2026-11-18T04:53:12Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "nl": [
+      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
+      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
-      "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   }
 }
