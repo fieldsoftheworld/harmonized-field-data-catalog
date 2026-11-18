@@ -57,7 +57,7 @@
         [
           -18.145464483191937,
           27.659948095899708,
-          4.308757944368304,
+          4.308757944368305,
           43.78663774518745
         ]
       ]
@@ -79,29 +79,14 @@
   },
   "table:columns": [
     {
-      "name": "irrigation_system",
-      "type": "string",
-      "description": "Carried over from the source column `parc_sistexp`; the publisher documents no meaning for it."
+      "name": "geometry",
+      "type": "binary",
+      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
-      "name": "hcat:name_en",
+      "name": "admin_municipality_code",
       "type": "string",
-      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-    },
-    {
-      "name": "cultivation_surface",
-      "type": "int32",
-      "description": "Carried over from the source column `parc_supcult`; the publisher documents no meaning for it."
-    },
-    {
-      "name": "id",
-      "type": "string",
-      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-    },
-    {
-      "name": "hcat:name",
-      "type": "string",
-      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      "description": "Carried over from the source column `municipio`; the publisher documents no meaning for it."
     },
     {
       "name": "metrics:area",
@@ -114,9 +99,24 @@
       "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
     },
     {
-      "name": "admin_municipality_code",
+      "name": "irrigation_system",
       "type": "string",
-      "description": "Carried over from the source column `municipio`; the publisher documents no meaning for it."
+      "description": "Carried over from the source column `parc_sistexp`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "cultivation_surface",
+      "type": "int32",
+      "description": "Carried over from the source column `parc_supcult`; the publisher documents no meaning for it."
+    },
+    {
+      "name": "hcat:name_en",
+      "type": "string",
+      "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+    },
+    {
+      "name": "hcat:name",
+      "type": "string",
+      "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
       "name": "hcat:code",
@@ -124,9 +124,14 @@
       "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
     },
     {
-      "name": "geometry",
-      "type": "binary",
-      "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      "name": "crop:name",
+      "type": "string",
+      "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
     },
     {
       "name": "admin_province_code",
@@ -147,7 +152,7 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 4,
@@ -161,12 +166,12 @@
       "roles": [
         "data"
       ],
-      "file:size": 10461993678,
-      "file:checksum": "1220213800871b7b72759765f0398361b91c0491b8e26232cbc4fea8de0ea15330f8",
+      "file:size": 10468973297,
+      "file:checksum": "12209cfd0c6427ce115a31ebd356df919d6f5bbde8898fddcf7c39acad7997205418",
       "proj:code": "EPSG:4258",
       "processing:software": {
-        "fiboa-cli": "0.21.0",
-        "vecorel-cli": "0.3.1"
+        "fiboa-cli": "0.30.0",
+        "vecorel-cli": "0.4.4"
       }
     },
     "style-hcat-crops": {
@@ -210,8 +215,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 4232930564,
-      "file:checksum": "1220d5ce0ec11b3a846eb1abe01390625b3d2f971cf1dc0e638bb28ea4cde0d75cc3"
+      "file:size": 4239735537,
+      "file:checksum": "1220338aacd45046c97402d6b290c0b9e31a969a677fca1a9175212e31833371acf2"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -220,8 +225,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 171464,
-      "file:checksum": "122035ec6d663a54136f9ef21be237e679a931fdf880201a5ef5b0bec65de6f4dcf9"
+      "file:size": 177629,
+      "file:checksum": "1220d7b49bef31e3872c57c80a0fa58a6c563b3dfc1712f8bc7ef0ecbe104c939ef3"
     }
   },
   "links": [
@@ -305,16 +310,16 @@
       "title": "Spain — 2025"
     }
   ],
-  "updated": "2026-09-26T22:05:18Z",
+  "updated": "2026-11-18T10:36:51Z",
   "fiboa_version": "0.3.0",
   "vecorel_version": "0.1.0",
   "vecorel_extensions": {
     "es": [
-      "https://fiboa.org/specification/v0.3.0/schema.yaml",
-      "https://vecorel.org/specification/v0.1.0/schema.yaml",
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml",
-      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
+      "https://fiboa.org/specification/v0.3.0/schema.yaml",
+      "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
+      "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
   "attribution": "©FEGA / Ministerio de Agricultura, Pesca y Alimentación"

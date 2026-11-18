@@ -22,11 +22,11 @@
         ],
         [
           9.55961872699482,
-          51.07510062402308
+          51.07510062402309
         ],
         [
           -4.91118627200579,
-          51.07510062402308
+          51.07510062402309
         ],
         [
           -4.91118627200579,
@@ -39,7 +39,7 @@
     -4.91118627200579,
     41.36604206605838,
     9.55961872699482,
-    51.07510062402308
+    51.07510062402309
   ],
   "properties": {
     "title": "France — 2017",
@@ -51,24 +51,9 @@
     "proj:code": "IGNF:LAMB93",
     "table:columns": [
       {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "parcel_id",
-        "type": "string",
-        "description": "Source-specific column; the publisher documents no meaning for it."
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "id",
@@ -76,9 +61,19 @@
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "parcel_id",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "group_code",
@@ -91,9 +86,19 @@
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -104,8 +109,8 @@
     "table:primary_geometry": "geometry",
     "table:row_count": 9389434,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.4.0"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "fr",
@@ -117,8 +122,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 2329538677,
-      "file:checksum": "1220bce1e7338654a20f508b03e25f04d426faedd81759a5a77db01f050a51cc705c",
+      "file:size": 2335747660,
+      "file:checksum": "12208a9cfb604652da32700e127af19fa6447130af65174b179d5139aba9e55c4986",
       "proj:code": "IGNF:LAMB93"
     }
   },

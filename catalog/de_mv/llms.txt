@@ -5,5 +5,5 @@ Germany, Mecklenburg-Western Pomerania field boundaries (2026) as fiboa GeoParqu
 - Latest: https://data.source.coop/ftw/harmonized-field-data/de_mv/latest/de_mv.parquet
 - All editions: s3://ftw/harmonized-field-data/de_mv/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
 - CRS EPSG:25833; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: crop:code, flik, erwater_l, geometry, metrics:area, erwind, bez_kreis, erwind_l, id, metrics:perimeter, erwater, dgl_jahr, bbox
+- Columns: geometry, id, flik, dgl_jahr, crop:code, bez_kreis, metrics:area, metrics:perimeter, erwind, erwater, erwind_l, erwater_l, crop:name, crop:name_en, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/de_mv/README.md, agent guide https://source.coop/ftw/harmonized-field-data/de_mv/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/de_mv/collection.json
