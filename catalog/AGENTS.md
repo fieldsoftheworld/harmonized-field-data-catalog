@@ -17,15 +17,15 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
--- ai4sf_ml | 439001
--- br_ba_lem | 1854
--- glocab | 124417
--- in_10k_ml | 10013
--- ke_ecaas | 1349
--- lacuna | 88573
--- rw_rwanda_ml | 1532
--- za_fusion_ml | 6568
--- ... 1 more rows
+-- at | 2944397
+-- at_block | 1299745
+-- be_vlg | 597088
+-- be_wal | 342315
+-- bg | 226592
+-- cz | 415300
+-- de_bb | 181768
+-- de_bb_block | 90849
+-- ... 51 more rows
 ```
 
 Every edition of every collection:
@@ -37,15 +37,15 @@ SELECT year, regexp_extract(filename, '/([^/]+)/year=', 1) AS collection, count(
 FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
--- 2021 | ai4sf_ml | 439001
--- 2020 | br_ba_lem | 1854
--- 2016 | glocab | 5212
--- 2017 | glocab | 40948
--- 2018 | glocab | 5615
--- 2019 | glocab | 14640
--- 2020 | glocab | 124417
--- 2020 | in_10k_ml | 10013
--- ... 11 more rows
+-- 2018 | at | 2523190
+-- 2019 | at | 2529896
+-- 2020 | at | 2614636
+-- 2021 | at | 2610511
+-- 2022 | at | 2600002
+-- 2023 | at | 2947754
+-- 2024 | at | 2956449
+-- 2025 | at | 2944397
+-- ... 205 more rows
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.
