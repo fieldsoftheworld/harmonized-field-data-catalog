@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          15.960133318035275,
-          59.65585491405865
+          19.329050458982344,
+          59.805266301969624
         ],
         [
-          32.87346857753195,
-          59.65585491405865
+          31.381951751771883,
+          59.805266301969624
         ],
         [
-          32.87346857753195,
-          69.98920150875063
+          31.381951751771883,
+          70.08379637807703
         ],
         [
-          15.960133318035275,
-          69.98920150875063
+          19.329050458982344,
+          70.08379637807703
         ],
         [
-          15.960133318035275,
-          59.65585491405865
+          19.329050458982344,
+          59.805266301969624
         ]
       ]
     ]
   },
   "bbox": [
-    15.960133318035275,
-    59.65585491405865,
-    32.87346857753195,
-    69.98920150875063
+    19.329050458982344,
+    59.805266301969624,
+    31.381951751771883,
+    70.08379637807703
   ],
   "properties": {
     "title": "Finland — 2024",
@@ -51,29 +51,14 @@
     "proj:code": "EPSG:3067",
     "table:columns": [
       {
-        "name": "crop:name",
-        "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "block_id",
-        "type": "string",
-        "description": "Official Identifier (source column `PERUSLOHKOTUNNUS`, per the fiboa data survey)"
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "id",
+        "name": "block_id",
         "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "description": "Official Identifier (source column `PERUSLOHKOTUNNUS`, per the fiboa data survey)"
       },
       {
         "name": "metrics:area",
@@ -86,14 +71,29 @@
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "hcat:name",
         "type": "string",
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -104,8 +104,8 @@
     "table:primary_geometry": "geometry",
     "table:row_count": 998336,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.18"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "fi",
@@ -117,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 287047389,
-      "file:checksum": "1220cca61b180c52eb9d436e3deefddc0593b6209dd02d47fc0cbbbbb153694e2f37",
+      "file:size": 287104786,
+      "file:checksum": "1220b15b4887e206d542cd39e52afe1e6ac0dd50b2290eb082e33911f9c3f3ae73da",
       "proj:code": "EPSG:3067"
     }
   },

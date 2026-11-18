@@ -12,10 +12,10 @@ Sweden field boundaries in the [fiboa](https://github.com/fiboa/specification) s
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:3006, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres**, taken from the source column `faststalld` (hectares × 10 000). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/se/se.csv`) have `NULL`. All 1,207,889 rows of the 2025 edition carry one.
+- **`metrics:area` is in square metres** (source column `faststalld`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 1,207,889 rows of the 2025 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2025-01-01T00:00:00Z`, `admin:country_code` = `SE`, `crop:code_list` = `https://fiboa.org/code/se/se.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
@@ -33,7 +33,7 @@ GROUP BY year ORDER BY year;
 -- 2016 | 1127793 | 2731541.0
 -- 2017 | 1125651 | 2721890.0
 -- 2018 | 1119587 | 2738345.0
--- 2019 | 1125696 | 2756498.0
+-- 2019 | 1125696 | 2756499.0
 -- 2020 | 1142901 | 2811454.0
 -- 2021 | 1147391 | 2806355.0
 -- 2022 | 1141367 | 2793917.0
@@ -49,11 +49,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/se/latest/
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330200 | pasture_meadow_grassland_grass | 822996 | 1418812.0
--- 330101 | winter_common_soft_wheat | 191826 | 1052481.0
--- 330106 | winter_rapeseed_rape | 13837 | 115459.0
--- 330111 | fallow_land_not_crop | 86179 | 103522.0
--- 330109 | plants_harvested_green | 17520 | 51880.0
+-- 330109 | temporary_grass | 610741 | 1091877.0
+-- 330101 | winter_common_soft_wheat | 191826 | 1052598.0
+-- 330200 | pasture_meadow_grassland_grass | 229775 | 403020.0
+-- 330106 | winter_rapeseed_rape | 13837 | 115533.0
+-- 330111 | fallow_land_not_crop | 86179 | 103827.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -62,7 +62,7 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/se/latest/se.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(61.8557, 17.2063), 'EPSG:4326', 'EPSG:3006'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(61.9084, 17.5439), 'EPSG:4326', 'EPSG:3006'), 500))
 LIMIT 5;
 -- id | m2
 ```

@@ -13,9 +13,9 @@ Finland field boundaries in the [fiboa](https://github.com/fiboa/specification) 
 
 - **CRS is EPSG:3067, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres** (source column `area`; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/fi/fi_2023.csv`) have `NULL`. 258 of the 985,486 rows of the 2025 edition (0.03%) have none, so a query that filters or groups on crop silently leaves them out.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. 258 of the 985,483 rows of the 2025 edition (0.03%) have none, so a query that filters or groups on crop silently leaves them out.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2025-01-01T00:00:00Z`, `admin:country_code` = `FI`, `crop:code_list` = `https://fiboa.org/code/fi/fi_2023.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
@@ -31,10 +31,10 @@ GROUP BY year ORDER BY year;
 -- year | fields | hectares
 -- 2020 | 1088750 | 2331882.0
 -- 2021 | 1086365 | 2330619.0
--- 2022 | 1086997 | 2329465.0
--- 2023 | 1006588 | 2312752.0
+-- 2022 | 1086995 | 2329463.0
+-- 2023 | 1006584 | 2312738.0
 -- 2024 | 998336 | 2301982.0
--- 2025 | 985486 | 2292382.0
+-- 2025 | 985483 | 2292367.0
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
@@ -47,10 +47,10 @@ WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
 -- 330101 | barley | 313477 | 998535.0
--- 330200 | pasture_meadow_grassland_grass | 486992 | 918438.0
+-- 330109 | temporary_grass | 456043 | 895408.0
 -- 339900 | not_known_and_other | 61620 | 100931.0
 -- 330106 | spring_rapeseed_rape | 27073 | 86198.0
--- 330102 | peas | 20562 | 64027.0
+-- 330111 | fallow_land_not_crop | 55370 | 79481.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -59,7 +59,7 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/fi/latest/fi.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(64.8225, 24.4168), 'EPSG:4326', 'EPSG:3067'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(64.9445, 25.3555), 'EPSG:4326', 'EPSG:3067'), 500))
 LIMIT 5;
 -- id | m2
 ```

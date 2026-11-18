@@ -1,6 +1,6 @@
 # Agent guidance — BRP Crop Field Boundaries for The Netherlands (CAP-based)
 
-Netherlands (Crops) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 18 editions (2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
+Netherlands (Crops) field boundaries in the [fiboa](https://github.com/fiboa/specification) schema, 22 editions (2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026). Every claim below is quoted from the source, the converter, or measured from the published files; each query was run before it was written down, and its output follows it as comments.
 
 ## Access
 
@@ -12,11 +12,12 @@ Netherlands (Crops) field boundaries in the [fiboa](https://github.com/fiboa/spe
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:28992, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres** (source column `area`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/nl/nl.csv`) have `NULL`. All 1,265,023 rows of the 2026 edition carry one.
+- **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 1,266,361 rows of the 2026 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2026-05-15T00:00:00Z`, `admin:country_code` = `NL`, `crop:code_list` = `https://fiboa.org/code/nl/nl.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
+- The editions 2005-2008 were published by RVO under the same license and are no longer downloadable from PDOK; they are converted from copies of the original shapefiles, which also keep fallow (`Braakland`) and crops without a category. RVO gave some crop codes a new crop over the years: an edition before the new meaning carries the code with an `o` suffix (`1934o`, starch potatoes, against `1934`, shallots, from 2019), which the code list maps to the old crop.
 
 ## Tested queries
 
@@ -29,15 +30,15 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/nl/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2009 | 781445 | 1802019.0
--- 2010 | 747450 | 1791128.0
--- 2011 | 743778 | 1787196.0
--- 2012 | 761067 | 1835176.0
--- 2013 | 751585 | 1817903.0
--- 2014 | 753749 | 1819421.0
--- 2015 | 781377 | 1832265.0
--- 2016 | 775949 | 1830776.0
--- ... 10 more rows
+-- 2005 | 731927 | 1838037.0
+-- 2006 | 771385 | 1897673.0
+-- 2007 | 759230 | 1908446.0
+-- 2008 | 755057 | 1922893.0
+-- 2009 | 809814 | 1887471.0
+-- 2010 | 776291 | 1881098.0
+-- 2011 | 773361 | 1871345.0
+-- 2012 | 763436 | 1836951.0
+-- ... 14 more rows
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
@@ -53,7 +54,7 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330109 | temporary_grass | 250514 | 422321.0
 -- 330101 | winter_common_soft_wheat | 58401 | 187476.0
 -- 330103 | potatoes | 32434 | 149306.0
--- 330129 | sugar_beet | 17719 | 81595.0
+-- 330129 | sugar_beet | 17692 | 81570.0
 ```
 
 Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
@@ -62,7 +63,7 @@ Fields around a point, transforming the point into the data's CRS instead of the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.1145, 5.2478), 'EPSG:4326', 'EPSG:28992'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.1279, 5.2917), 'EPSG:4326', 'EPSG:28992'), 500))
 LIMIT 5;
 -- id | m2
 ```

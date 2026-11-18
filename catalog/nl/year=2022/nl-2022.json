@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          3.2580253272838804,
-          50.73426581693989
+          3.359696566205759,
+          50.75041832978029
         ],
         [
-          7.2376572851450796,
-          50.73426581693989
+          7.224379881221812,
+          50.75041832978029
         ],
         [
-          7.2376572851450796,
-          53.48553614104339
+          7.224379881221812,
+          53.497030278897846
         ],
         [
-          3.2580253272838804,
-          53.48553614104339
+          3.359696566205759,
+          53.497030278897846
         ],
         [
-          3.2580253272838804,
-          50.73426581693989
+          3.359696566205759,
+          50.75041832978029
         ]
       ]
     ]
   },
   "bbox": [
-    3.2580253272838804,
-    50.73426581693989,
-    7.2376572851450796,
-    53.48553614104339
+    3.359696566205759,
+    50.75041832978029,
+    7.224379881221812,
+    53.497030278897846
   ],
   "properties": {
     "title": "Netherlands (Crops) — 2022",
-    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`nl-2022.parquet`, 744,949 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
+    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`nl-2022.parquet`, 746,083 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2022-05-15T00:00:00Z",
     "end_datetime": "2022-05-15T00:00:00Z",
@@ -61,6 +61,31 @@
         "description": "Land-cover category (Grass land, Arable field, Ditch, Landscape element) (source column `category`, per the fiboa data survey)"
       },
       {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name_en",
+        "type": "string",
+        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
         "name": "metrics:area",
         "type": "float",
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -71,41 +96,16 @@
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name_en",
-        "type": "string",
-        "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:name",
-        "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
         "name": "bbox",
         "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
         "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 744949,
+    "table:row_count": 746083,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.18"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "nl",
@@ -117,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 450673106,
-      "file:checksum": "12200d3f1e91b10a64be1c698a2d4d757f2697420fe0fb50452b7bdc70c3b655f58b",
+      "file:size": 451005366,
+      "file:checksum": "12203c1d1d4225e02def54b2a031149d098efc7627e7a81b52346c34523917a3ccac",
       "proj:code": "EPSG:28992"
     }
   },

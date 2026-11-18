@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          15.958337857015065,
-          59.655753413063884
+          19.3269818547768,
+          59.805046492891464
         ],
         [
-          32.87348259065467,
-          59.655753413063884
+          31.381964628481835,
+          59.805046492891464
         ],
         [
-          32.87348259065467,
-          69.98920104486811
+          31.381964628481835,
+          70.08379637807703
         ],
         [
-          15.958337857015065,
-          69.98920104486811
+          19.3269818547768,
+          70.08379637807703
         ],
         [
-          15.958337857015065,
-          59.655753413063884
+          19.3269818547768,
+          59.805046492891464
         ]
       ]
     ]
   },
   "bbox": [
-    15.958337857015065,
-    59.655753413063884,
-    32.87348259065467,
-    69.98920104486811
+    19.3269818547768,
+    59.805046492891464,
+    31.381964628481835,
+    70.08379637807703
   ],
   "properties": {
     "title": "Finland — 2021",
@@ -51,19 +51,14 @@
     "proj:code": "EPSG:3067",
     "table:columns": [
       {
-        "name": "crop:code",
-        "type": "string",
-        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "block_id",
+        "type": "string",
+        "description": "Official Identifier (source column `PERUSLOHKOTUNNUS`, per the fiboa data survey)"
       },
       {
         "name": "metrics:area",
@@ -71,14 +66,14 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
+        "name": "crop:code",
+        "type": "string",
+        "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
         "name": "crop:name",
         "type": "string",
         "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hcat:name_en",
@@ -91,9 +86,14 @@
         "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "block_id",
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
         "type": "string",
-        "description": "Official Identifier (source column `PERUSLOHKOTUNNUS`, per the fiboa data survey)"
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -104,8 +104,8 @@
     "table:primary_geometry": "geometry",
     "table:row_count": 1086365,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.18"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "fi",
@@ -117,8 +117,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 299997629,
-      "file:checksum": "1220a5e2d76fb96cb1d639f169b52e4686bcfc8c454c0f467803589869290cc393eb",
+      "file:size": 300052954,
+      "file:checksum": "122048b3617f1bba4c528ba6b657da54f10829582ba78d7e419e37bd112e406d622e",
       "proj:code": "EPSG:3067"
     }
   },
