@@ -1,6 +1,6 @@
 # Harmonized Field Boundary Data
 
-Field boundary datasets published by government bodies — from their agricultural subsidy registers (IACS/LPIS), cadastres, statistics and mapping programmes — and by research institutions, harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 78 collections (AI4SF, AT, BE, BG, BR, CA, CH, CZ, DE, DK, EC, EE, ES, FI, FR, GLOCAB, HR, IE, IN, IT, JP, KE, LACUNA, LT, LU, LV, NL, NZ, PL, PT, RW, SE, SI, SK, US, ZA, ZM). In 61 collections the boundaries are declared — they come from farmers' subsidy applications, or from the parcel register built on those declarations. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `in_10k_ml`, `jp`, `ke_ecaas`, `lacuna`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey; `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Each collection's `boundaries` field says which. 62 hold crop fields — one declared crop on one parcel — 146,355,683 in their latest editions and 777,768,959 across all 362 editions together, counting a field once per edition it appears in. The other 16 hold field blocks (reference parcels, which several fields can share): 19,393,592 and 25,814,007 over 32 editions. The two are not added together. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.
+Field boundary datasets published by government bodies — from their agricultural subsidy registers (IACS/LPIS), cadastres, statistics and mapping programmes — and by research institutions, harmonized into the [fiboa](https://github.com/fiboa/specification) schema with [fiboa-cli](https://github.com/fiboa/cli) and republished as cloud-native GeoParquet and PMTiles. 79 collections (AI4SF, AT, BE, BG, BR, CA, CH, CZ, DE, DK, EC, EE, ES, FI, FR, GLOCAB, HR, IE, IN, IT, JP, KE, LACUNA, LT, LU, LV, NL, NZ, PL, PT, RW, SE, SI, SK, US, WRI, ZA, ZM). In 61 collections the boundaries are declared — they come from farmers' subsidy applications, or from the parcel register built on those declarations. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `in_10k_ml`, `jp`, `ke_ecaas`, `lacuna`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `wri_trazo_ml`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey; `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Each collection's `boundaries` field says which. 63 hold crop fields — one declared crop on one parcel — 146,361,775 in their latest editions and 777,828,079 across all 367 editions together, counting a field once per edition it appears in. The other 16 hold field blocks (reference parcels, which several fields can share): 19,393,592 and 25,814,007 over 32 editions. The two are not added together. Each collection is one source dataset, partitioned by edition year; `s3://ftw/harmonized-field-data/*/latest/*.parquet` reads the newest edition of every collection (S3 through the Source Cooperative proxy, see the agent guide). Hosted by [Fields of the World](https://fieldsofthe.world) on [Source Cooperative](https://source.coop/ftw/harmonized-field-data); the metadata is maintained in the [harmonized-field-data-catalog repository](https://github.com/fieldsoftheworld/harmonized-field-data-catalog), where corrections are welcome as pull requests. Start at the catalog [AGENTS.md](https://source.coop/ftw/harmonized-field-data/AGENTS.md) for cross-dataset queries.
 
 ## Collections
 
@@ -82,6 +82,7 @@ Field boundary datasets published by government bodies — from their agricultur
 | [Slovakia Agricultural Land Identification System](https://source.coop/ftw/harmonized-field-data/sk) | crop fields | [Pôdohospodárska platobná agentúra](https://www.apa.sk) | 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 | 271,807 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/sk/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/sk/AGENTS.md) |
 | [California (US) Statewide Crop Mapping](https://source.coop/ftw/harmonized-field-data/us_ca_scm) | crop fields | [California Department of Water Resources](https://data.cnra.ca.gov/dataset/statewide-crop-mapping) | 2014, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024 | 447,944 | CC0-1.0 | [README](https://source.coop/ftw/harmonized-field-data/us_ca_scm/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/us_ca_scm/AGENTS.md) |
 | [U.S. Department of Agriculture Crop Sequence Boundaries](https://source.coop/ftw/harmonized-field-data/us_usda_cropland) | crop fields | [United States Department of Agriculture](https://www.nass.usda.gov) | 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 | 7,541,673 | other | [README](https://source.coop/ftw/harmonized-field-data/us_usda_cropland/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/us_usda_cropland/AGENTS.md) |
+| [Trazo field boundary annotations for South America with splits](https://source.coop/ftw/harmonized-field-data/wri_trazo_ml) | crop fields | [World Resources Institute and Arizona State University](https://source.coop/wri-data-lab/trazoannotations) | 2020, 2021, 2022, 2023, 2024 | 6,092 | CC-BY-4.0 | [README](https://source.coop/ftw/harmonized-field-data/wri_trazo_ml/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/wri_trazo_ml/AGENTS.md) |
 | [South Africa Crop Field Boundaries (Fusion Competition) with splits](https://source.coop/ftw/harmonized-field-data/za_fusion_ml) | crop fields | [ESA Fusion Competition via Source Cooperative](https://source.coop/esa/fusion-competition) | 2017 | 6,568 | CC-BY-4.0 | [README](https://source.coop/ftw/harmonized-field-data/za_fusion_ml/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/za_fusion_ml/AGENTS.md) |
 | [Crop-cut farm polygons with crop type and yield for Zambia (ECAAS Bird's-Eye)](https://source.coop/ftw/harmonized-field-data/zm_ecaas) | crop fields | [Pula Advisors](https://ecass-project-documentation.readthedocs.io/en/latest/modules/data_access.html) | 2022 | 2,711 | GPL-2.0-or-later | [README](https://source.coop/ftw/harmonized-field-data/zm_ecaas/README.md) · [agents](https://source.coop/ftw/harmonized-field-data/zm_ecaas/AGENTS.md) |
 
@@ -96,18 +97,20 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
--- de_mv | 71551
--- ec_lv | 432188
--- ec_si | 828157
--- es | 17844643
--- fr | 9671468
--- pt | 3568823
--- se | 1207889
+-- ai4sf_ml | 439001
+-- at | 2944397
+-- at_block | 1299745
+-- be_vlg | 597088
+-- be_wal | 342315
+-- bg | 226592
+-- br_ba_lem | 1854
+-- br_conab | 390805
+-- ... 71 more rows
 ```
 
 ## Map tiles of every collection
 
-[`harmonized-field-data.pmtiles`](https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles) (26.8 GB) tiles the newest edition of 67 of the 78 collections (86 files; not yet `ai4sf_ml`, `br_ba_lem`, `br_conab`, `ca_prairies`, `de_thuenen`, `glocab`, `in_10k_ml`, `ke_ecaas`, `lacuna`, `rw_rwanda_ml`, `us_ca_scm`, `za_fusion_ml`, `zm_ecaas`, added after it was built) into one layer, `fields`: 169,368,086 features, 3,383,288 tiles from zoom 3 to 14, built 2026-10-07. Each collection's own PMTiles keep all its columns; this archive reprojects every file to lon/lat and keeps only the columns they share, so they fit one schema:
+[`harmonized-field-data.pmtiles`](https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles) (26.8 GB) tiles the newest edition of 67 of the 79 collections (86 files; not yet `ai4sf_ml`, `br_ba_lem`, `br_conab`, `ca_prairies`, `de_thuenen`, `glocab`, `in_10k_ml`, `ke_ecaas`, `lacuna`, `rw_rwanda_ml`, `us_ca_scm`, `wri_trazo_ml`, `za_fusion_ml`, `zm_ecaas`, added after it was built) into one layer, `fields`: 169,368,086 features, 3,383,288 tiles from zoom 3 to 14, built 2026-10-07. Each collection's own PMTiles keep all its columns; this archive reprojects every file to lon/lat and keeps only the columns they share, so they fit one schema:
 
 `collection`, `id`, `metrics:area`, `crop:code`, `crop:name`, `hcat:code`, `hcat:name_en`.
 

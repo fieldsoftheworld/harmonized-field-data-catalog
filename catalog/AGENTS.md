@@ -4,7 +4,7 @@
 
 ## What this catalog holds
 
-78 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`. `ch` is fed by several sources, each with its own converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one `<collection>/latest/<converter>.parquet` per source, and each item carries its source's license.
+79 collections, one per source dataset, all in the [fiboa](https://github.com/fiboa/specification) schema (`id`, `geometry`, `bbox`, optional `metrics:area` in m², `determination:datetime`, crop columns where the source has them). Public root: `https://data.source.coop/ftw/harmonized-field-data/catalog.json`. Each collection is hive-partitioned by edition: `<collection>/year=<Y>/<collection>-<Y>.parquet`, with the newest edition copied to `<collection>/latest/<collection>.parquet`. `ch` is fed by several sources, each with its own converter and terms: there the files are `<collection>/year=<Y>/<converter>-<Y>.parquet`, one `<collection>/latest/<converter>.parquet` per source, and each item carries its source's license.
 
 ## How to read it
 
@@ -17,13 +17,15 @@ SELECT regexp_extract(filename, '/([^/]+)/latest/', 1) AS collection, count(*) A
 FROM read_parquet('s3://ftw/harmonized-field-data/*/latest/*.parquet', union_by_name = true, filename = true)
 GROUP BY 1 ORDER BY 1;
 -- collection | fields
--- de_mv | 71551
--- ec_lv | 432188
--- ec_si | 828157
--- es | 17844643
--- fr | 9671468
--- pt | 3568823
--- se | 1207889
+-- ai4sf_ml | 439001
+-- at | 2944397
+-- at_block | 1299745
+-- be_vlg | 597088
+-- be_wal | 342315
+-- bg | 226592
+-- br_ba_lem | 1854
+-- br_conab | 390805
+-- ... 71 more rows
 ```
 
 Every edition of every collection:
@@ -35,15 +37,15 @@ SELECT year, regexp_extract(filename, '/([^/]+)/year=', 1) AS collection, count(
 FROM read_parquet('s3://ftw/harmonized-field-data/*/year=*/*.parquet', hive_partitioning = true, union_by_name = true, filename = true)
 GROUP BY 1, 2 ORDER BY 2, 1;
 -- year | collection | fields
--- 2026 | de_mv | 71551
--- 2021 | ec_lv | 432188
--- 2021 | ec_si | 828157
--- 2021 | es | 16489065
--- 2022 | es | 17479847
--- 2023 | es | 17104009
--- 2025 | es | 17844643
--- 2015 | fr | 9434038
--- ... 28 more rows
+-- 2021 | ai4sf_ml | 439001
+-- 2015 | at | 2499283
+-- 2016 | at | 2492555
+-- 2017 | at | 2505150
+-- 2018 | at | 2523190
+-- 2019 | at | 2529896
+-- 2020 | at | 2614636
+-- 2021 | at | 2610511
+-- ... 361 more rows
 ```
 
 For a map rather than a query: `https://data.source.coop/ftw/harmonized-field-data/harmonized-field-data.pmtiles` tiles the newest editions into one layer `fields`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.
@@ -58,7 +60,7 @@ There are none. `id` is unique within one edition of one collection only; collec
 - `metrics:area` is square metres; `year` is the year the boundaries represent (season, declaration or snapshot year), not the year the source was published.
 - Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.
 - 16 collections hold field *blocks* (reference parcels), not crop fields: `at_block`, `bg`, `de_bb_block`, `de_by_block`, `de_he`, `de_mv`, `de_nds_block`, `de_nrw`, `de_sax`, `de_sh`, `de_sl_block`, `de_st`, `de_th`, `lu`, `nl_block`, `pl_block`. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.
-- Not every boundary was declared by anyone. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `in_10k_ml`, `jp`, `ke_ecaas`, `lacuna`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey. `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
+- Not every boundary was declared by anyone. `ai4sf_ml`, `br_ba_lem`, `br_conab`, `es_cn`, `glocab`, `in_10k_ml`, `jp`, `ke_ecaas`, `lacuna`, `nz`, `rw_rwanda_ml`, `us_ca_scm`, `wri_trazo_ml`, `za_fusion_ml`, `zm_ecaas` are mapped by an authority from imagery or survey. `ca_prairies`, `de_thuenen`, `us_usda_cropland` are inferred from imagery by a model. Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.
 
 ## Structure
 

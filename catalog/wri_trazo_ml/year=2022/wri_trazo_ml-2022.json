@@ -1,0 +1,132 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "wri_trazo_ml-2022",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -76.7601038,
+          -27.207176131203738
+        ],
+        [
+          -57.91314969516145,
+          -27.207176131203738
+        ],
+        [
+          -57.91314969516145,
+          -5.4681804000000005
+        ],
+        [
+          -76.7601038,
+          -5.4681804000000005
+        ],
+        [
+          -76.7601038,
+          -27.207176131203738
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -76.7601038,
+    -27.207176131203738,
+    -57.91314969516145,
+    -5.4681804000000005
+  ],
+  "properties": {
+    "title": "Trazo with splits — 2022",
+    "description": "Field boundaries of the 2022 edition of this dataset, one GeoParquet file (`wri_trazo_ml-2022.parquet`, 6,114 fields) and its PMTiles. Partition `year=2022` of the collection's hive layout.",
+    "datetime": null,
+    "start_datetime": "2022-01-01T00:00:00Z",
+    "end_datetime": "2022-01-01T00:00:00Z",
+    "year": 2022,
+    "proj:code": "EPSG:4326",
+    "table:columns": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "determination:datetime",
+        "type": "timestamp[ms, tz=UTC]",
+        "description": "The last timestamp at which the field did exist and was observed. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "basemap",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "split",
+        "type": "string",
+        "description": "Source-specific column; the publisher documents no meaning for it."
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      },
+      {
+        "name": "bbox",
+        "type": "struct<xmin: double, ymin: double, xmax: double, ymax: double>",
+        "description": "The bounding box of the field. Per-feature covering column (GeoParquet 1.1), in the source CRS. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+      }
+    ],
+    "table:primary_geometry": "geometry",
+    "table:row_count": 6114,
+    "processing:software": {
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
+    }
+  },
+  "collection": "wri_trazo_ml",
+  "assets": {
+    "data": {
+      "href": "./wri_trazo_ml-2022.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Trazo with splits 2022 (GeoParquet)",
+      "roles": [
+        "data"
+      ],
+      "file:size": 1526602,
+      "file:checksum": "1220a59ff626779b65e32306f8b88067e5a02e3629cd4c71a3b83732124d75627fc3",
+      "proj:code": "EPSG:4326"
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ]
+}
