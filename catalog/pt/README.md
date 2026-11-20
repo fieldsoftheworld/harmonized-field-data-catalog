@@ -27,7 +27,7 @@ Browse this collection in the [data browser](https://browser.portolan-sdi.org/#/
 
 The latest edition is also available at a stable path: [pt/latest/pt.parquet](https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet). All editions together through the S3 glob `s3://ftw/harmonized-field-data/pt/year=*/*.parquet` (see the [AGENTS.md](https://source.coop/ftw/harmonized-field-data/pt/AGENTS.md) for the DuckDB setup; plain https cannot expand `*`).
 
-No crop code for a fifth to a third of the fields in every edition before 2025 (22.8% of 2017, 18.7% of 2018, 20.9% of 2019, 29.4-33.4% of 2020-2023): mostly IFAP recorded a land cover class and declared no crop. It is written as an empty string rather than null, because crop:code is required and the writer rejects nulls; in 2023 it is a single space, so test with strip(). 2020 is worse for the islands specifically (199,123 fields), its crop table covering the mainland only; 2021's does cover them and 2022 carries the code on the layer. 2017 publishes no identifier for Madeira or the Azores, so those 177,614 fields carry ids synthesised from 10^12 upward, a sort position rather than a provider key. 2018 ships the north twice; the 154,980 duplicated fields are dropped, leaving 3,798,241.
+No crop code for a fifth to a third of the fields in every edition before 2025 (22.8% of 2017, 18.7% of 2018, 20.9% of 2019, 29.4-33.4% of 2020-2023): mostly IFAP recorded a land cover class and declared no crop. It is written as an empty string rather than null, because crop:code is required and the writer rejects nulls. 2020 is worse for the islands specifically (199,123 fields), its crop table covering the mainland only; 2021's does cover them and 2022 carries the code on the layer. 2017 publishes no identifier for Madeira or the Azores, so those 177,614 fields carry ids synthesised from 10^12 upward, a sort position rather than a provider key. 2018 ships the north twice; the 154,980 duplicated fields are dropped, leaving 3,798,241.
 
 ## Columns
 
@@ -71,9 +71,9 @@ This catalog is a mirror: the data is produced and licensed by [IPAP - Instituto
 - 2018: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2017-2020/2018.zip>
 - 2019: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2017-2020/2019.zip>
 - 2020: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2017-2020/2020.zip>
-- 2021: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2021/2021.zip>
+- 2021: converted 2026-11-20 from <https://www.ifap.pt/isip/ows/resources/2021/2021.zip>
 - 2022: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2022/2022.zip>
-- 2023: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2023/Continente.gpkg>
+- 2023: converted 2026-11-20 from <https://www.ifap.pt/isip/ows/resources/2023/Continente.gpkg>
 - 2025: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2025/culturas.gpkg>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.

@@ -119,13 +119,13 @@
       "href": "./pt-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Portugal 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Portugal, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
-      "file:size": 1720105958,
-      "file:checksum": "1220853b6bae269bbf088acd200632e6322bf1ab002cb44f1b70859498b4ed2f4a3e",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2021 edition of Portugal, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "file:size": 1720145451,
+      "file:checksum": "1220948f071bedeca6509683b0562d3dbca2b96549fea59ea1543cf36e5126464890",
+      "proj:code": "EPSG:4326"
     }
   },
   "links": [

@@ -17,7 +17,7 @@ Portugal field boundaries in the [fiboa](https://github.com/fiboa/specification)
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `CUL_ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. 4,574 of the 3,568,823 rows of the 2025 edition (0.13%) have none, so a query that filters or groups on crop silently leaves them out.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `PT`, `determination:datetime` = `2025-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/pt/pt.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
-- No crop code for a fifth to a third of the fields in every edition before 2025 (22.8% of 2017, 18.7% of 2018, 20.9% of 2019, 29.4-33.4% of 2020-2023): mostly IFAP recorded a land cover class and declared no crop. It is written as an empty string rather than null, because crop:code is required and the writer rejects nulls; in 2023 it is a single space, so test with strip(). 2020 is worse for the islands specifically (199,123 fields), its crop table covering the mainland only; 2021's does cover them and 2022 carries the code on the layer. 2017 publishes no identifier for Madeira or the Azores, so those 177,614 fields carry ids synthesised from 10^12 upward, a sort position rather than a provider key. 2018 ships the north twice; the 154,980 duplicated fields are dropped, leaving 3,798,241.
+- No crop code for a fifth to a third of the fields in every edition before 2025 (22.8% of 2017, 18.7% of 2018, 20.9% of 2019, 29.4-33.4% of 2020-2023): mostly IFAP recorded a land cover class and declared no crop. It is written as an empty string rather than null, because crop:code is required and the writer rejects nulls. 2020 is worse for the islands specifically (199,123 fields), its crop table covering the mainland only; 2021's does cover them and 2022 carries the code on the layer. 2017 publishes no identifier for Madeira or the Azores, so those 177,614 fields carry ids synthesised from 10^12 upward, a sort position rather than a provider key. 2018 ships the north twice; the 154,980 duplicated fields are dropped, leaving 3,798,241.
 
 ## Tested queries
 
@@ -56,20 +56,20 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330306 | vineyards_wine_vine_rebland_grapes | 260029 | 127716.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within about 500 m (0.005°; the CRS is in degrees) of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(37.3895, -18.7287), 'EPSG:4326', 'EPSG:4326'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(-17.1975, 32.8673), 'EPSG:4326', 'EPSG:4326', always_xy := true), 0.005))
 LIMIT 5;
 -- id | m2
--- 203575 | 6432.0
--- 8464487 | 2202.0
--- 1080533 | 2456.0
--- 1080532 | 2370.0
--- 203574 | 4033.0
+-- 2406289 | 557.0
+-- 6319569 | 596.0
+-- 2406285 | 409.0
+-- 8485025 | 727.0
+-- 2406298 | 246.0
 ```
 
 ## Related collections
