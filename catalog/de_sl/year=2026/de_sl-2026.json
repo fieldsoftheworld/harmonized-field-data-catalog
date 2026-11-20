@@ -94,24 +94,24 @@
       "href": "./de_sl-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Saarland 2026 (GeoParquet)",
+      "description": "GeoParquet file for the 2026 edition of Germany, Saarland, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 20005217,
       "file:checksum": "12204c6d8aab38f07888e573609259f5b0a96923c3f69797ac1577461d869f07ba16",
-      "proj:code": "EPSG:4258",
-      "description": "GeoParquet file for the 2026 edition of Germany, Saarland, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4258"
     },
     "visual": {
       "href": "./de_sl-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Saarland 2026 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition of Germany, Saarland, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 23699251,
-      "file:checksum": "1220d6381f222239cd34754500b648af8b4605c6269c5e03f3e4a0382883929b9d7d",
-      "description": "PMTiles vector tiles of the 2026 edition of Germany, Saarland, generated from this item's `data` asset."
+      "file:checksum": "1220d6381f222239cd34754500b648af8b4605c6269c5e03f3e4a0382883929b9d7d"
     }
   },
   "links": [

@@ -124,13 +124,13 @@
       "href": "./cz-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Czech 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Czech, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 368732774,
       "file:checksum": "1220b1c30fd09300fc4d9b47a1e7913acac3117293c794354544fb106bc8f5065c16",
-      "proj:code": "EPSG:4258",
-      "description": "GeoParquet file for the 2024 edition of Czech, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4258"
     }
   },
   "links": [

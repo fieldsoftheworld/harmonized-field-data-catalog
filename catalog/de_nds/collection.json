@@ -135,11 +135,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
   "partition:glob": "s3://ftw/harmonized-field-data/de_nds/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/de_nds.parquet",
@@ -195,23 +203,23 @@
       "href": "./year=2025/de_nds-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Lower Saxony/Bremen/Hamburg — latest edition (2025) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 84744106,
-      "file:checksum": "1220b09effdac87ef0186a10996aa6de05b72977358c52e139d31eaa21b3c4b9c9da",
-      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "1220b09effdac87ef0186a10996aa6de05b72977358c52e139d31eaa21b3c4b9c9da"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the collection's default style.",
+      "description": "Static JPEG image rendered from the collection's default style, with no basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 335194,
-      "file:checksum": "1220730e7ff35f57ccef88fdfe470de8005c9a688b8c880dcb8a8949a5a0ce53d09d",
-      "description": "Static JPEG image rendered from the collection's default style, with no basemap."
+      "file:checksum": "1220730e7ff35f57ccef88fdfe470de8005c9a688b8c880dcb8a8949a5a0ce53d09d"
     }
   },
   "links": [
@@ -290,13 +298,5 @@
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   },
-  "attribution": "© ML/SLA Niedersachsen (2024), DL-DE-BY-2.0 (www.govdata.de/DL-DE-BY-2.0), Daten bearbeitet",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "© ML/SLA Niedersachsen (2024), DL-DE-BY-2.0 (www.govdata.de/DL-DE-BY-2.0), Daten bearbeitet"
 }

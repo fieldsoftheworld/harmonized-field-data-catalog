@@ -121,13 +121,13 @@
       "href": "./be_vlg-2010.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Belgium, Flanders 2010 (GeoParquet)",
+      "description": "GeoParquet file for the 2010 edition of Belgium, Flanders, partition `year=2010` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 100786661,
       "file:checksum": "12208aeb09d75f5063bc74991aa2a0398c04dc2638eba6703940e4f7e66b92dab398",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2010 edition of Belgium, Flanders, partition `year=2010` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

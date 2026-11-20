@@ -121,13 +121,13 @@
       "href": "./be_vlg-2016.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Belgium, Flanders 2016 (GeoParquet)",
+      "description": "GeoParquet file for the 2016 edition of Belgium, Flanders, partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 179621759,
       "file:checksum": "12204c30830843a4320a9ff2a4c60b09c5dc8c3fa13b33e6b38c16e491c0122bb5b9",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2016 edition of Belgium, Flanders, partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

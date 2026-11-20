@@ -111,11 +111,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
   "partition:glob": "s3://ftw/harmonized-field-data/br_conab/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/br_conab.parquet",
@@ -160,23 +168,23 @@
       "href": "./year=2026/br_conab-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Conab — latest edition (2026) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 111992238,
-      "file:checksum": "12209ab4ac2dc1be9ee995dcd6cd214b5112bed09ee5707ba5aba5b9c89abc605dc8",
-      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "12209ab4ac2dc1be9ee995dcd6cd214b5112bed09ee5707ba5aba5b9c89abc605dc8"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 279848,
-      "file:checksum": "122036e92eb8705cb63d31e44d4d12a84d7b99a79819d563c5c10ef0dbda1df976aa",
-      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+      "file:checksum": "122036e92eb8705cb63d31e44d4d12a84d7b99a79819d563c5c10ef0dbda1df976aa"
     }
   },
   "links": [
@@ -252,13 +260,5 @@
       "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
-  "attribution": "CONAB - conab.gov.br",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "CONAB - conab.gov.br"
 }

@@ -120,11 +120,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 5,
   "partition:glob": "s3://ftw/harmonized-field-data/de_thuenen/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/de_thuenen.parquet",
@@ -180,23 +188,23 @@
       "href": "./year=2021/de_thuenen-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany (Thünen) — latest edition (2021) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2021 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 471617410,
-      "file:checksum": "12205b79abfee581a3cd36f749363a7273cf3c80bc8bd5c2d7e73869463bdf833193",
-      "description": "PMTiles vector tiles of the 2021 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "12205b79abfee581a3cd36f749363a7273cf3c80bc8bd5c2d7e73869463bdf833193"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 144080,
-      "file:checksum": "1220f640524c421c6b9bf6211a4f43417e60db4f5e46937a5391cf7eaa527cb4adee",
-      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+      "file:checksum": "1220f640524c421c6b9bf6211a4f43417e60db4f5e46937a5391cf7eaa527cb4adee"
     }
   },
   "links": [
@@ -292,13 +300,5 @@
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "Tetteh, G.O., Schwieder, M., Blickensdörfer, L., Gocht, A., Erasmi, S. (2024): Agricultural land use (vector): National-scale crop type maps for Germany, v201, Thünen-Institut, doi:10.5281/zenodo.10619783",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "Tetteh, G.O., Schwieder, M., Blickensdörfer, L., Gocht, A., Erasmi, S. (2024): Agricultural land use (vector): National-scale crop type maps for Germany, v201, Thünen-Institut, doi:10.5281/zenodo.10619783"
 }

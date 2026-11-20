@@ -124,24 +124,24 @@
       "href": "./es_cm-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Castilla-La Mancha 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Spain Castilla-La Mancha, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 2460913545,
       "file:checksum": "1220e9aa8f394004610cea62e807b3b7169cb87d15c929fd89ff0158f0c6ec0dfa47",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2024 edition of Spain Castilla-La Mancha, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     },
     "visual": {
       "href": "./es_cm-2024.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Spain Castilla-La Mancha 2024 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2024 edition of Spain Castilla-La Mancha, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 1117317122,
-      "file:checksum": "1220b6136ca1c1ebf560b9afe5b11e5e5a379322fea42ca2019052e5faf86e2145ab",
-      "description": "PMTiles vector tiles of the 2024 edition of Spain Castilla-La Mancha, generated from this item's `data` asset."
+      "file:checksum": "1220b6136ca1c1ebf560b9afe5b11e5e5a379322fea42ca2019052e5faf86e2145ab"
     }
   },
   "links": [

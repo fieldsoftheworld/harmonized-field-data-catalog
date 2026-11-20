@@ -124,13 +124,13 @@
       "href": "./lv-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Latvia 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Latvia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 444816104,
       "file:checksum": "12202f1929f14ebfee35b1d99e26bd3cda2258a31580134d6beb9df546e67087bfd5",
-      "proj:code": "EPSG:3059",
-      "description": "GeoParquet file for the 2024 edition of Latvia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3059"
     }
   },
   "links": [

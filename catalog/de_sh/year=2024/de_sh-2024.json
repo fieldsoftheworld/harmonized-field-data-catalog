@@ -99,13 +99,13 @@
       "href": "./de_sh-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Schleswig-Holstein 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Germany, Schleswig-Holstein, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 64957285,
       "file:checksum": "12209272d4a732e5060d747a4185ba50b84e0aab8d72e0d9a864a7ae29e7430cf9a2",
-      "proj:code": "EPSG:4647",
-      "description": "GeoParquet file for the 2024 edition of Germany, Schleswig-Holstein, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4647"
     }
   },
   "links": [

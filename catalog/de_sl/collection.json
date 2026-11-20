@@ -108,11 +108,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
   "partition:glob": "s3://ftw/harmonized-field-data/de_sl/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/de_sl.parquet",
@@ -157,23 +165,23 @@
       "href": "./year=2026/de_sl-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Saarland — latest edition (2026) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 23699251,
-      "file:checksum": "1220d6381f222239cd34754500b648af8b4605c6269c5e03f3e4a0382883929b9d7d",
-      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "1220d6381f222239cd34754500b648af8b4605c6269c5e03f3e4a0382883929b9d7d"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the collection's default style.",
+      "description": "Static JPEG image rendered from the collection's default style, with no basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 276360,
-      "file:checksum": "122009a30b8b53d6a4c2e438a2f5b11e4ecaeabd8bde0ccf6d8b806d9b007ca6f45e",
-      "description": "Static JPEG image rendered from the collection's default style, with no basemap."
+      "file:checksum": "122009a30b8b53d6a4c2e438a2f5b11e4ecaeabd8bde0ccf6d8b806d9b007ca6f45e"
     }
   },
   "links": [
@@ -250,13 +258,5 @@
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "©GDI-SL 2024",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "©GDI-SL 2024"
 }

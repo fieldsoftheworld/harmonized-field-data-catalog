@@ -124,11 +124,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
   "partition:glob": "s3://ftw/harmonized-field-data/de_by_block/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/de_by_block.parquet",
@@ -173,23 +181,23 @@
       "href": "./year=2026/de_by_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Bavaria (blocks) — latest edition (2026) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 214502957,
-      "file:checksum": "122094936c4424aa9c3d519f14320290914cee193482784d7da3a1c857e343e8b19d",
-      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "122094936c4424aa9c3d519f14320290914cee193482784d7da3a1c857e343e8b19d"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the collection's default style.",
+      "description": "Static JPEG image rendered from the collection's default style, with no basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 285864,
-      "file:checksum": "12207ce2ae57b213518a5f1834b4aa01024d09f40eeee1317f959fe793475493c466",
-      "description": "Static JPEG image rendered from the collection's default style, with no basemap."
+      "file:checksum": "12207ce2ae57b213518a5f1834b4aa01024d09f40eeee1317f959fe793475493c466"
     }
   },
   "links": [
@@ -261,13 +269,5 @@
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "© Bayerisches Staatsministerium für Ernährung, Landwirtschaft, Forsten und Tourismus, CC BY 4.0",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "© Bayerisches Staatsministerium für Ernährung, Landwirtschaft, Forsten und Tourismus, CC BY 4.0"
 }

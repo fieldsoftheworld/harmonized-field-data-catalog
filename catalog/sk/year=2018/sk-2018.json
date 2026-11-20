@@ -124,13 +124,13 @@
       "href": "./sk-2018.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Slovakia 2018 (GeoParquet)",
+      "description": "GeoParquet file for the 2018 edition of Slovakia, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 227755104,
       "file:checksum": "12208a36761db0fe382817f1cb2a21885a026313820dc69e97d0a8f4abadef64236c",
-      "proj:code": "EPSG:5514",
-      "description": "GeoParquet file for the 2018 edition of Slovakia, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:5514"
     }
   },
   "links": [

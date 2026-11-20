@@ -119,13 +119,13 @@
       "href": "./ie_lpis-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Ireland (LPIS) 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Ireland (LPIS), partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 685664518,
       "file:checksum": "1220e8aaef448ff52a253fd2bee13117ef5bce0b606cd1dabb80ad686f42a7f5e7cc",
-      "proj:code": "EPSG:2157",
-      "description": "GeoParquet file for the 2021 edition of Ireland (LPIS), partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2157"
     }
   },
   "links": [

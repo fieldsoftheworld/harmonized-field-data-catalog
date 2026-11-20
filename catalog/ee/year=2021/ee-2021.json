@@ -119,13 +119,13 @@
       "href": "./ee-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Estonia 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Estonia, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 309817334,
       "file:checksum": "1220a433ae24f76844431069907afdf0a92432f7cf79af647edb0c7f4468e2e580b9",
-      "proj:code": "EPSG:3301",
-      "description": "GeoParquet file for the 2021 edition of Estonia, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3301"
     }
   },
   "links": [

@@ -119,24 +119,24 @@
       "href": "./ie_lpis-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Ireland (LPIS) 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Ireland (LPIS), partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 965180671,
       "file:checksum": "12203aa7cc858e156e0a7f90c475e0540737da775010038a7840567ff8c3b976c0a4",
-      "proj:code": "EPSG:2157",
-      "description": "GeoParquet file for the 2025 edition of Ireland (LPIS), partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2157"
     },
     "visual": {
       "href": "./ie_lpis-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Ireland (LPIS) 2025 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition of Ireland (LPIS), generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 352472293,
-      "file:checksum": "1220256fda9dd99a543f15390ca10ebaf268a7cceb900c70944bc5bb60904e49f607",
-      "description": "PMTiles vector tiles of the 2025 edition of Ireland (LPIS), generated from this item's `data` asset."
+      "file:checksum": "1220256fda9dd99a543f15390ca10ebaf268a7cceb900c70944bc5bb60904e49f607"
     }
   },
   "links": [

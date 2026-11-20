@@ -13,7 +13,7 @@ Germany, Saarland field boundaries in the [fiboa](https://github.com/fiboa/speci
 
 - **CRS is EPSG:4258, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `identifier`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `DE`, `admin:subdivision_code` = `SL` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
@@ -31,20 +31,20 @@ GROUP BY year ORDER BY year;
 -- 2026 | 54038 | 78171.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within about 500 m (0.005°; the CRS is in degrees) of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_sl/latest/de_sl.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(49.3735, 6.8804), 'EPSG:4326', 'EPSG:4258'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(6.8802, 49.3735), 'EPSG:4326', 'EPSG:4258', always_xy := true), 0.005))
 LIMIT 5;
 -- id | m2
--- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_bbcfa324dff37b44353d58f4709946ecee626212afa827829f7680999464a84a_DESLLI06000033662224965 | 14851.0
--- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_1e75cc46fd530948b9f2bb2d7d50e3b7a06fc5c4557272e1fa80f0cef0f4b7e7_DESLLI02000032122254797 | 1764.0
--- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_792a520686ce10cf452e5cda259952aa1a1b11f7f89c25883dc14e8a6ae7f1c2_DESLLI05000022112224980 | 30927.0
--- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_8d838d49c525545c23544b66fe06d9db8b432623f0b598c54fdddcab73cdf189_DESLLI04000076562267048 | 12232.0
--- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_a6e31329c5ece03747542738bba4c106d31fa6030cee29f0fe8f5216b10307eb_DESLLI05001276602268127 | 7361.0
+-- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_913d315552e1c0ea5f98c3bf972179587383d97bb6f33555c4ff689cc1463887_DESLLI03000110092265241 | 14698.0
+-- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_28e47ad950aa7a7444c59dda25de3cd62579bc09dfb4917e266a3016f105014f_DESLLI03000109442270934 | 3413.0
+-- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_19886f99dac9954f3c0dd0cd2b150e4d6c3b7fb1186ffa61c3ab9da492345c3f_DESLLI01001350132236398 | 2610.0
+-- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_a612b25ef6a95ada61de2d93b21c52f63392e7becc45a4c204561c5cba6db066_DESLLI07000102322236407 | 4176.0
+-- https://registry.gdi-de.org/id/de.sl.inspire.elu.invekos/ExistingLandUseObject_6de7077802e25a6f228161a6e599017e5813eae072de8993bc9bb1142d1a8f46_DESLLI09000102322248954 | 5415.0
 ```
 
 ## Related collections

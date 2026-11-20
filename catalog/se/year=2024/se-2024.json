@@ -109,13 +109,13 @@
       "href": "./se-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Sweden 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Sweden, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 284936297,
       "file:checksum": "12200f8bb92a65c3e9cd4c51be0613b3eb9b7c9f75ce35419162e3fb6c20b7ae6a50",
-      "proj:code": "EPSG:3006",
-      "description": "GeoParquet file for the 2024 edition of Sweden, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3006"
     }
   },
   "links": [

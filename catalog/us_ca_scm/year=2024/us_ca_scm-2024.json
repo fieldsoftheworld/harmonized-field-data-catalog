@@ -114,24 +114,24 @@
       "href": "./us_ca_scm-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "US, California (SCM) 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of US, California (SCM), partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 148392250,
       "file:checksum": "12201a809d972351fd85c1e82b815421c821b0501089e05415c686a2f7ba00885be3",
-      "proj:code": "EPSG:4269",
-      "description": "GeoParquet file for the 2024 edition of US, California (SCM), partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4269"
     },
     "visual": {
       "href": "./us_ca_scm-2024.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "US, California (SCM) 2024 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2024 edition of US, California (SCM), generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 77739039,
-      "file:checksum": "12209a23e39d9ae74504788a28ec47455c77ed5188929bd6f720401014b93b29cfcc",
-      "description": "PMTiles vector tiles of the 2024 edition of US, California (SCM), generated from this item's `data` asset."
+      "file:checksum": "12209a23e39d9ae74504788a28ec47455c77ed5188929bd6f720401014b93b29cfcc"
     }
   },
   "links": [

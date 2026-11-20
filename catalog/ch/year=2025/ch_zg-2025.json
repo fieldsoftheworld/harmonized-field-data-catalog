@@ -121,13 +121,13 @@
       "href": "./ch_zg-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Zug 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Switzerland, Zug, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 7428469,
       "file:checksum": "1220ba522935b7357ae43e5cb044821d1e798ad7ebf6c8de1c373b2e0bf04f347d2f",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2025 edition of Switzerland, Zug, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

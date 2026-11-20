@@ -119,24 +119,24 @@
       "href": "./ec_lt-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Lithuania - Eurocrops 2021 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Lithuania - Eurocrops 2021, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 210621115,
       "file:checksum": "1220b93ea2a45e3dea081e58ac844878a3371ec700342c3743bc2848d2aeeedc6c4e",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2021 edition of Lithuania - Eurocrops 2021, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     },
     "visual": {
       "href": "./ec_lt-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Lithuania - Eurocrops 2021 2021 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2021 edition of Lithuania - Eurocrops 2021, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 97377405,
-      "file:checksum": "12205b575596f6e75daa530c28db9c13954f8fc13cb65996994ad6960668f7b3c57d",
-      "description": "PMTiles vector tiles of the 2021 edition of Lithuania - Eurocrops 2021, generated from this item's `data` asset."
+      "file:checksum": "12205b575596f6e75daa530c28db9c13954f8fc13cb65996994ad6960668f7b3c57d"
     }
   },
   "links": [

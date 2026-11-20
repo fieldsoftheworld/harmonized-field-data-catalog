@@ -137,11 +137,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
   "partition:glob": "s3://ftw/harmonized-field-data/es_cm/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/es_cm.parquet",
@@ -197,23 +205,23 @@
       "href": "./year=2024/es_cm-2024.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Spain Castilla-La Mancha — latest edition (2024) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2024 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 1117317122,
-      "file:checksum": "1220b6136ca1c1ebf560b9afe5b11e5e5a379322fea42ca2019052e5faf86e2145ab",
-      "description": "PMTiles vector tiles of the 2024 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "1220b6136ca1c1ebf560b9afe5b11e5e5a379322fea42ca2019052e5faf86e2145ab"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 148635,
-      "file:checksum": "1220577a8a276e518449da0e077c838866be4128b293670ea935c698c7671405d80c",
-      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+      "file:checksum": "1220577a8a276e518449da0e077c838866be4128b293670ea935c698c7671405d80c"
     }
   },
   "links": [
@@ -291,13 +299,5 @@
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "Unidad de Cartografía. Secretaría General. Consejería de Agricultura, Ganadería y Desarrollo Rural.",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "Unidad de Cartografía. Secretaría General. Consejería de Agricultura, Ganadería y Desarrollo Rural."
 }

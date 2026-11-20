@@ -109,24 +109,24 @@
       "href": "./at_block-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Austria (blocks) 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Austria (blocks), partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 490127014,
       "file:checksum": "1220a0f580260cb1f5b6ac454a815fb67fff45b60f09ecd2f32e5e03b0c6650903ab",
-      "proj:code": "EPSG:31287",
-      "description": "GeoParquet file for the 2021 edition of Austria (blocks), partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:31287"
     },
     "visual": {
       "href": "./at_block-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Austria (blocks) 2021 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2021 edition of Austria (blocks), generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 255132323,
-      "file:checksum": "1220893538d8314654950a8881a3ab63e0a540124a687d08e84d8e56033b17dcb22b",
-      "description": "PMTiles vector tiles of the 2021 edition of Austria (blocks), generated from this item's `data` asset."
+      "file:checksum": "1220893538d8314654950a8881a3ab63e0a540124a687d08e84d8e56033b17dcb22b"
     }
   },
   "links": [

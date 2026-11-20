@@ -114,13 +114,13 @@
       "href": "./nl-2014.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Netherlands (Crops) 2014 (GeoParquet)",
+      "description": "GeoParquet file for the 2014 edition of Netherlands (Crops), partition `year=2014` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 161179600,
       "file:checksum": "1220a52376f2602c6b2af7b5cd490747bfe0d811a4db6a179b1d12c87ba4189667e0",
-      "proj:code": "EPSG:28992",
-      "description": "GeoParquet file for the 2014 edition of Netherlands (Crops), partition `year=2014` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:28992"
     }
   },
   "links": [

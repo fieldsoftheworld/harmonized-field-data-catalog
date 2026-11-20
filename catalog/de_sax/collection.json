@@ -189,11 +189,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
   "partition:glob": "s3://ftw/harmonized-field-data/de_sax/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/de_sax.parquet",
@@ -238,23 +246,23 @@
       "href": "./year=2026/de_sax-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Saxony — latest edition (2026) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 32600075,
-      "file:checksum": "1220dcac2d3bf37ad6ac17a57a80e926b8871a63ee393226d246290043a0f221ecd7",
-      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "1220dcac2d3bf37ad6ac17a57a80e926b8871a63ee393226d246290043a0f221ecd7"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 263393,
-      "file:checksum": "122080dfe224f1e768d37bf4b1f1610706068a2a0836dc0a071ab3398aa218ce9167",
-      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+      "file:checksum": "122080dfe224f1e768d37bf4b1f1610706068a2a0836dc0a071ab3398aa218ce9167"
     }
   },
   "links": [
@@ -331,13 +339,5 @@
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "Sächsisches Landesamt für Umwelt, Landwirtschaft und Geologie",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "Sächsisches Landesamt für Umwelt, Landwirtschaft und Geologie"
 }

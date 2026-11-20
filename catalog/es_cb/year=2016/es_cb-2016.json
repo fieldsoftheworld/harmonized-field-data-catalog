@@ -119,13 +119,13 @@
       "href": "./es_cb-2016.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Cantabria 2016 (GeoParquet)",
+      "description": "GeoParquet file for the 2016 edition of Spain Cantabria, partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 233896393,
       "file:checksum": "122061e51b6f899432aa816ee28aece285bf8e3a8529feaec26d297faf1a10b188fb",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2016 edition of Spain Cantabria, partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     }
   },
   "links": [

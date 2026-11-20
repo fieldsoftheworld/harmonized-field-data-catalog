@@ -114,13 +114,13 @@
       "href": "./es_cb-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Cantabria 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Spain Cantabria, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 241160966,
       "file:checksum": "1220f71e8e3ce63624bd388f65470f6cd0c486bf794d4def9d0256dc9b9d50d062db",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2021 edition of Spain Cantabria, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     }
   },
   "links": [

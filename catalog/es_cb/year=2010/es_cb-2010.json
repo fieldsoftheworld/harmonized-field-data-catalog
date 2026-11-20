@@ -119,13 +119,13 @@
       "href": "./es_cb-2010.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Cantabria 2010 (GeoParquet)",
+      "description": "GeoParquet file for the 2010 edition of Spain Cantabria, partition `year=2010` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 188488416,
       "file:checksum": "1220e470f6c585afeb322079a808a7e3300362714e8586134987641dd19af080e2e9",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2010 edition of Spain Cantabria, partition `year=2010` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     }
   },
   "links": [

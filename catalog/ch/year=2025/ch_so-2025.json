@@ -121,13 +121,13 @@
       "href": "./ch_so-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Solothurn 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Switzerland, Solothurn, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 8453848,
       "file:checksum": "12207a6c854cc481b09b73f56c5fa9804f44aec04c918bd7ccc2571c6adb5b40ee23",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2025 edition of Switzerland, Solothurn, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

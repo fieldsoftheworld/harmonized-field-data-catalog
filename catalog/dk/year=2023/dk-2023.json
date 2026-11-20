@@ -109,13 +109,13 @@
       "href": "./dk-2023.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Denmark 2023 (GeoParquet)",
+      "description": "GeoParquet file for the 2023 edition of Denmark, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 341932876,
       "file:checksum": "1220e645a3fc2aa62826fdabda9e5894e0f42a6970e5464aa117ff741451b9949b25",
-      "proj:code": "EPSG:25832",
-      "description": "GeoParquet file for the 2023 edition of Denmark, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:25832"
     }
   },
   "links": [

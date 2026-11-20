@@ -117,11 +117,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
   "partition:glob": "s3://ftw/harmonized-field-data/es_pv/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/es_pv.parquet",
@@ -166,23 +174,23 @@
       "href": "./year=2025/es_pv-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Spain Basque Country — latest edition (2025) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 60792792,
-      "file:checksum": "1220c67cdb84e8244dbf6b4324fc2d582d2c76bcadba3ed3dbdad205729d353b4c18",
-      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "1220c67cdb84e8244dbf6b4324fc2d582d2c76bcadba3ed3dbdad205729d353b4c18"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 417576,
-      "file:checksum": "12201118ebfa3ae854189708cb2bc87b5f3f6d8260fc36cd1a2fd77a0605e6c41aeb",
-      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+      "file:checksum": "12201118ebfa3ae854189708cb2bc87b5f3f6d8260fc36cd1a2fd77a0605e6c41aeb"
     }
   },
   "links": [
@@ -260,13 +268,5 @@
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "Basque Government / Gobierno Vasco",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "Basque Government / Gobierno Vasco"
 }

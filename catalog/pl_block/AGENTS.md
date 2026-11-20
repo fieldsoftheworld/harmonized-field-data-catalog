@@ -13,7 +13,7 @@ Poland (blocks) field boundaries in the [fiboa](https://github.com/fiboa/specifi
 
 - **CRS is EPSG:2180, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres** (source column `powierzchn`; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2025-11-25T00:00:00Z`, `admin:country_code` = `PL` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
@@ -31,20 +31,20 @@ GROUP BY year ORDER BY year;
 -- 2025 | 12955563 | 14319566.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/pl_block/latest/pl_block.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(51.9241, 19.1354), 'EPSG:4326', 'EPSG:2180'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(19.1355, 51.9245), 'EPSG:4326', 'EPSG:2180', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
--- 301009_2.0018.5031/2 | 44155.0
--- 301009_2.0018.121 | 27679.0
--- 301009_2.0018.120 | 25734.0
--- 301009_2.0018.123 | 11196.0
--- 301009_2.0018.124/2 | 9859.0
+-- 101101_2.0003.93 | 6214.0
+-- 101101_2.0003.92 | 4291.0
+-- 101101_2.0003.406 | 6610.0
+-- 101101_2.0003.407 | 9102.0
+-- 101101_2.0003.86 | 14647.0
 ```
 
 ## Related collections

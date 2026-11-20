@@ -121,13 +121,13 @@
       "href": "./ch_tg-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Thurgau 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Switzerland, Thurgau, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 14775421,
       "file:checksum": "1220e96652c3949ed6f1b472684093206462d180db673c9783a181d04663f003c1bd",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2025 edition of Switzerland, Thurgau, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

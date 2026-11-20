@@ -124,13 +124,13 @@
       "href": "./es_ga-2023.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Galicia 2023 (GeoParquet)",
+      "description": "GeoParquet file for the 2023 edition of Spain Galicia, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 1251125627,
       "file:checksum": "12208e848a36aaf8fa8bf40e9d47897b13a60a38c95b3bde15a2394321b92e88f82d",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2023 edition of Spain Galicia, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     }
   },
   "links": [

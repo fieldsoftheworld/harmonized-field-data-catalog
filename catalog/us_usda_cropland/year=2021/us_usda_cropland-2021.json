@@ -119,13 +119,13 @@
       "href": "./us_usda_cropland-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "US (USDA CSB) 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of US (USDA CSB), partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 3085891467,
       "file:checksum": "1220b3f649e7cc2dba6c9055da4f07226501898b4029a3ce002743f9d6073a148c64",
-      "proj:code": null,
-      "description": "GeoParquet file for the 2021 edition of US (USDA CSB), partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": null
     }
   },
   "links": [

@@ -132,11 +132,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 16,
   "partition:glob": "s3://ftw/harmonized-field-data/es_cb/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/es_cb.parquet",
@@ -181,23 +189,23 @@
       "href": "./year=2025/es_cb-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Spain Cantabria — latest edition (2025) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 93371935,
-      "file:checksum": "122004229b2f8484abda33e4fc69d1d1deac8cb99bfddd28506e230b75d485d60b1f",
-      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "122004229b2f8484abda33e4fc69d1d1deac8cb99bfddd28506e230b75d485d60b1f"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the collection's default style.",
+      "description": "Static JPEG image rendered from the collection's default style, with no basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 305509,
-      "file:checksum": "122069a71bc650a1b3c17d4a46f2974e43ee8b6f6891b1dbb81fddb34fd937d8a080",
-      "description": "Static JPEG image rendered from the collection's default style, with no basemap."
+      "file:checksum": "122069a71bc650a1b3c17d4a46f2974e43ee8b6f6891b1dbb81fddb34fd937d8a080"
     }
   },
   "links": [
@@ -371,13 +379,5 @@
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   },
-  "attribution": "© Gobierno de Cantabria. Información gratuita disponible en https://mapas.cantabria.es",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "© Gobierno de Cantabria. Información gratuita disponible en https://mapas.cantabria.es"
 }

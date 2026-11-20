@@ -114,13 +114,13 @@
       "href": "./be_vlg-2022.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Belgium, Flanders 2022 (GeoParquet)",
+      "description": "GeoParquet file for the 2022 edition of Belgium, Flanders, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 95673457,
       "file:checksum": "122085c47d751d2a21e047aef82234375577219040d1aaa6536a97daadd5790d025c",
-      "proj:code": "EPSG:31370",
-      "description": "GeoParquet file for the 2022 edition of Belgium, Flanders, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:31370"
     }
   },
   "links": [

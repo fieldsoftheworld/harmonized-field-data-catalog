@@ -119,13 +119,13 @@
       "href": "./us_usda_cropland-2017.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "US (USDA CSB) 2017 (GeoParquet)",
+      "description": "GeoParquet file for the 2017 edition of US (USDA CSB), partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 3108724658,
       "file:checksum": "12206a7bc81c9ddffd7a7a92770666e8e40cf62877abb89e778418c59529920ec5dc",
-      "proj:code": null,
-      "description": "GeoParquet file for the 2017 edition of US (USDA CSB), partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": null
     }
   },
   "links": [

@@ -114,13 +114,13 @@
       "href": "./si-2019.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Slovenia 2019 (GeoParquet)",
+      "description": "GeoParquet file for the 2019 edition of Slovenia, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 193719747,
       "file:checksum": "12209b0df9f3b14fa441c5dc78424a41e8d3732af1581c5ab001896577b765e44c83",
-      "proj:code": "EPSG:3794",
-      "description": "GeoParquet file for the 2019 edition of Slovenia, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3794"
     }
   },
   "links": [

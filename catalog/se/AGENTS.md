@@ -56,15 +56,20 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330111 | fallow_land_not_crop | 86179 | 103827.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/se/latest/se.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(61.9084, 17.5439), 'EPSG:4326', 'EPSG:3006'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(17.3841, 61.9846), 'EPSG:4326', 'EPSG:3006', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
+-- 68755829730_77A | 10600.0
+-- 68755829652_19A | 3200.0
+-- 68765820354_1A | 2600.0
+-- 68755829958_20A | 4500.0
+-- 68765820457_2A | 3600.0
 ```
 
 ## Related collections

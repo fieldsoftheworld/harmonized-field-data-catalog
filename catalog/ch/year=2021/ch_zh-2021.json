@@ -121,13 +121,13 @@
       "href": "./ch_zh-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Zürich 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Switzerland, Zürich, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 33165751,
       "file:checksum": "12200814ec7093685e3be44d78c3f0429447cf5c3c93df8252363911dfabd5f7305a",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2021 edition of Switzerland, Zürich, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

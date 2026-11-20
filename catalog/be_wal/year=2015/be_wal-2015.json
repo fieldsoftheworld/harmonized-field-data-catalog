@@ -121,13 +121,13 @@
       "href": "./be_wal-2015.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Belgium, Wallonia 2015 (GeoParquet)",
+      "description": "GeoParquet file for the 2015 edition of Belgium, Wallonia, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 100575582,
       "file:checksum": "1220db62e5c1b6dd8002851070ff6f4c533ad9b02d11548c467fd4a35f018b941f36",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2015 edition of Belgium, Wallonia, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

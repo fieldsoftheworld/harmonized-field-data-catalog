@@ -121,13 +121,13 @@
       "href": "./ch_be-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Bern 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Switzerland, Bern, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 49626529,
       "file:checksum": "1220434d543d4c67bfe5c615e4226b3120d4e923095dbdba11c9c2ece590bf7e8e59",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2025 edition of Switzerland, Bern, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

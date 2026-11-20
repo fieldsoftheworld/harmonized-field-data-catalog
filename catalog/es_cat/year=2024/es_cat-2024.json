@@ -114,24 +114,24 @@
       "href": "./es_cat-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Catalonia 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Catalonia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 296758384,
       "file:checksum": "1220458d24a660b886772b17cd8a106c7719a118c24f1e0b7007bc53f56818e9b5c6",
-      "proj:code": "EPSG:25831",
-      "description": "GeoParquet file for the 2024 edition of Catalonia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:25831"
     },
     "visual": {
       "href": "./es_cat-2024.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Catalonia 2024 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2024 edition of Catalonia, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 122161304,
-      "file:checksum": "1220ed26db9948a210335c2e24e8fba04f8ae7c08a283df394ccedaf2124f3d11f30",
-      "description": "PMTiles vector tiles of the 2024 edition of Catalonia, generated from this item's `data` asset."
+      "file:checksum": "1220ed26db9948a210335c2e24e8fba04f8ae7c08a283df394ccedaf2124f3d11f30"
     }
   },
   "links": [

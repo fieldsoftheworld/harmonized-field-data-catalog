@@ -119,13 +119,13 @@
       "href": "./es_nc-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Navarra 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Spain Navarra, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 268407196,
       "file:checksum": "1220b5740943af7130d0b7f7d2683a254e71700e386f9520a4df72e3caa95f4f9d73",
-      "proj:code": "EPSG:4258",
-      "description": "GeoParquet file for the 2025 edition of Spain Navarra, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4258"
     }
   },
   "links": [

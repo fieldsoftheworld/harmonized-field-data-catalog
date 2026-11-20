@@ -114,13 +114,13 @@
       "href": "./nl-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Netherlands (Crops) 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Netherlands (Crops), partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 756312617,
       "file:checksum": "1220f0fc2f9cfe91dd40e4bb711d329a005e760abb24c2e43a80824fb2a0f64cd1c6",
-      "proj:code": "EPSG:28992",
-      "description": "GeoParquet file for the 2025 edition of Netherlands (Crops), partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:28992"
     }
   },
   "links": [

@@ -119,13 +119,13 @@
       "href": "./es_cb-2020.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Cantabria 2020 (GeoParquet)",
+      "description": "GeoParquet file for the 2020 edition of Spain Cantabria, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 246081773,
       "file:checksum": "1220502d527a345bcd6d041ff84992462b1c11aa376be2010b1ed29c27e3a2dafcb3",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2020 edition of Spain Cantabria, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     }
   },
   "links": [

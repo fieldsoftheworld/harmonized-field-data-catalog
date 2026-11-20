@@ -121,13 +121,13 @@
       "href": "./de_bb-2016.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Berlin/Brandenburg 2016 (GeoParquet)",
+      "description": "GeoParquet file for the 2016 edition of Germany, Berlin/Brandenburg, partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 116191290,
       "file:checksum": "12207602c4bd9aeafeb4c44b24a722741c805408b85e3caf67479111c8f092fc85b5",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2016 edition of Germany, Berlin/Brandenburg, partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

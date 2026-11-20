@@ -84,24 +84,24 @@
       "href": "./lu-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Luxembourg 2026 (GeoParquet)",
+      "description": "GeoParquet file for the 2026 edition of Luxembourg, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 30249415,
       "file:checksum": "12206ffdd9c74e6fa5d6fa2e85ed7d46e0b52abd3f64cab1ad7feb2baa604b9867f6",
-      "proj:code": "EPSG:2169",
-      "description": "GeoParquet file for the 2026 edition of Luxembourg, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2169"
     },
     "visual": {
       "href": "./lu-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Luxembourg 2026 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition of Luxembourg, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 10271242,
-      "file:checksum": "12205654ea7f6b07407e07497e2d7f99e3bf5940b0fcff3315dde80eb0620710d353",
-      "description": "PMTiles vector tiles of the 2026 edition of Luxembourg, generated from this item's `data` asset."
+      "file:checksum": "12205654ea7f6b07407e07497e2d7f99e3bf5940b0fcff3315dde80eb0620710d353"
     }
   },
   "links": [

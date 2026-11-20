@@ -119,13 +119,13 @@
       "href": "./at-2018.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Austria 2018 (GeoParquet)",
+      "description": "GeoParquet file for the 2018 edition of Austria, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 511710311,
       "file:checksum": "1220a1af432226b25469507ad79a730cda7c83e87adaaf5f0a1d75e0f04025e4ecf3",
-      "proj:code": null,
-      "description": "GeoParquet file for the 2018 edition of Austria, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": null
     }
   },
   "links": [

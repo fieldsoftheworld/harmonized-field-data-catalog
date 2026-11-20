@@ -114,13 +114,13 @@
       "href": "./ie-2023.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Ireland 2023 (GeoParquet)",
+      "description": "GeoParquet file for the 2023 edition of Ireland, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 840782944,
       "file:checksum": "1220bf4087a8e00840f9481767460580ca039ad1d0d321077b046667c60ab3f94d3b",
-      "proj:code": "EPSG:4258",
-      "description": "GeoParquet file for the 2023 edition of Ireland, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4258"
     }
   },
   "links": [

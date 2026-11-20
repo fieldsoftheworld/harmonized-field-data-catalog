@@ -121,13 +121,13 @@
       "href": "./de_bb-2020.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Berlin/Brandenburg 2020 (GeoParquet)",
+      "description": "GeoParquet file for the 2020 edition of Germany, Berlin/Brandenburg, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 133464609,
       "file:checksum": "122040a8c809dca435a725f2643be7ffed6756a4db0cc5265feb975f656a2195fe42",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2020 edition of Germany, Berlin/Brandenburg, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

@@ -12,7 +12,7 @@ Spain Castilla y León field boundaries in the [fiboa](https://github.com/fiboa/
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:4258, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `C_REFREC`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 9,109,125 rows of the 2025 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `admin:subdivision_code` = `CL`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
@@ -47,20 +47,20 @@ GROUP BY 1 ORDER BY fields DESC LIMIT 5;
 -- 330301 | orchards_fruits | 135163
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within about 500 m (0.005°; the CRS is in degrees) of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_cl/latest/es_cl.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(41.6580, -4.4259), 'EPSG:4326', 'EPSG:4258'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(-4.4247, 41.6582), 'EPSG:4326', 'EPSG:4258', always_xy := true), 0.005))
 LIMIT 5;
 -- id
--- 37006000005010501000010
--- 37006000005010501000017
--- 37006000005010501000003
--- 37006000005010501000009
--- 37006000005010501000002
+-- 47227000000110503900001
+-- 47227000000110503700001
+-- 47227000000110505000004
+-- 47227000000110504800005
+-- 47227000000110504800004
 ```
 
 ## Related collections

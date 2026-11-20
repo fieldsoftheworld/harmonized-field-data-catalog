@@ -13,7 +13,7 @@ Germany, Lower Saxony/Bremen/Hamburg field boundaries in the [fiboa](https://git
 
 - **CRS is EPSG:25832, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `AKTUELLEFL` (hectares × 10 000). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`de.csv`) have `NULL`. 15,147 of the 881,956 rows of the 2025 edition (1.72%) have none, so a query that filters or groups on crop silently leaves them out.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2025-01-01T00:00:00Z`, `admin:country_code` = `DE`, `admin:subdivision_code` = `NI`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/de.csv` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
@@ -48,20 +48,20 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330129 | sugar_beet | 17187 | 103084.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_nds/latest/de_nds.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.5944, 9.1295), 'EPSG:4326', 'EPSG:25832'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(9.1279, 52.5944), 'EPSG:4326', 'EPSG:25832', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
--- 256152 | 182816.0
--- 558518 | 14992.0
 -- 723168 | 10379.0
 -- 723855 | 16310.0
 -- 164502 | 14299.0
+-- 368192 | 77398.0
+-- 539398 | 35570.0
 ```
 
 ## Related collections

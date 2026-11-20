@@ -119,24 +119,24 @@
       "href": "./pl-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Poland 2026 (GeoParquet)",
+      "description": "GeoParquet file for the 2026 edition of Poland, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 2818740903,
       "file:checksum": "12207e5bf4002c4ce2f2e71931ff162fa104740ce979a8d490067b48f082098ba42f",
-      "proj:code": "EPSG:2180",
-      "description": "GeoParquet file for the 2026 edition of Poland, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2180"
     },
     "visual": {
       "href": "./pl-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Poland 2026 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition of Poland, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 1464957942,
-      "file:checksum": "12201e20bde3a6b6ea2fd9817d9b513cfef32cab2a43e1c1afe88c03aba0525e024f",
-      "description": "PMTiles vector tiles of the 2026 edition of Poland, generated from this item's `data` asset."
+      "file:checksum": "12201e20bde3a6b6ea2fd9817d9b513cfef32cab2a43e1c1afe88c03aba0525e024f"
     }
   },
   "links": [
