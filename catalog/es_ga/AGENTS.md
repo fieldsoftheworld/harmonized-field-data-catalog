@@ -13,7 +13,7 @@ Spain Galicia field boundaries in the [fiboa](https://github.com/fiboa/specifica
 
 - **CRS is EPSG:4326, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `DN_SURFACE`. Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `DN_OID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/es/sigpac/land_use.csv`) have `NULL`. All 4,978,799 rows of the 2026 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `ES`, `admin:subdivision_code` = `GA`, `crop:code_list` = `https://fiboa.org/code/es/sigpac/land_use.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
@@ -56,20 +56,20 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330303 | nuts | 2467 | 856.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within about 500 m (0.005°; the CRS is in degrees) of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_ga/latest/es_ga.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(42.7970, -8.0148), 'EPSG:4326', 'EPSG:4326'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(-8.0141, 42.7980), 'EPSG:4326', 'EPSG:4326', always_xy := true), 0.005))
 LIMIT 5;
 -- id | m2
--- 483508510 | 649.0
--- 483506885 | 260.0
--- 483506899 | 226.0
--- 483507537 | 2715.0
--- 483507561 | 2115.0
+-- 1157238918 | 455.0
+-- 1157239067 | 584.0
+-- 1157238862 | 1475.0
+-- 1157238865 | 2377.0
+-- 1157238869 | 4355.0
 ```
 
 ## Related collections

@@ -13,7 +13,7 @@ Germany, Schleswig-Holstein field boundaries in the [fiboa](https://github.com/f
 
 - **CRS is EPSG:4647, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, taken from the source column `Flaeche` (hectares × 10 000). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `FLIK`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2026-01-01T00:00:00Z`, `admin:country_code` = `DE`, `admin:subdivision_code` = `SH` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
@@ -34,20 +34,20 @@ GROUP BY year ORDER BY year;
 -- 2026 | 194503 | 984410.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_sh/latest/de_sh.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(54.1960, 9.5981), 'EPSG:4326', 'EPSG:4647'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(9.5981, 54.1944), 'EPSG:4326', 'EPSG:4647', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
 -- DESHLIH010400016 | 5546.0
 -- DESHLIH010410034 | 14469.0
 -- DESHLIH010400025 | 42967.0
+-- DESHLIH010410033 | 29952.0
 -- DESHLIH010400026 | 12667.0
--- DESHLIH010400027 | 17130.0
 ```
 
 ## Related collections

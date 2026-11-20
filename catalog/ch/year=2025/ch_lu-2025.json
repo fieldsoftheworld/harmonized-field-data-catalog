@@ -121,13 +121,13 @@
       "href": "./ch_lu-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Luzern 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Switzerland, Luzern, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 36593158,
       "file:checksum": "1220102de8b5b8636ba1e6b8e83bcfb31901d4dc658ee3181ec36ec6c52ca1f27399",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2025 edition of Switzerland, Luzern, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

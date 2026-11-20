@@ -121,13 +121,13 @@
       "href": "./ee-2015.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Estonia 2015 (GeoParquet)",
+      "description": "GeoParquet file for the 2015 edition of Estonia, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 251549378,
       "file:checksum": "12203558173b2ed6d9245c370f06d02f7a63abba121c934e741d8c73b99aa4e7a99f",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2015 edition of Estonia, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

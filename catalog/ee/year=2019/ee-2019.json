@@ -119,13 +119,13 @@
       "href": "./ee-2019.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Estonia 2019 (GeoParquet)",
+      "description": "GeoParquet file for the 2019 edition of Estonia, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 301930548,
       "file:checksum": "12200d0cb0575d76e6309fda50ef5ee3c6882235e3278621b00c3c11e201a63d1ebf",
-      "proj:code": "EPSG:3301",
-      "description": "GeoParquet file for the 2019 edition of Estonia, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3301"
     }
   },
   "links": [

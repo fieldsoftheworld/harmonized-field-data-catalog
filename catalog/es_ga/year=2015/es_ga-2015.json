@@ -124,13 +124,13 @@
       "href": "./es_ga-2015.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Galicia 2015 (GeoParquet)",
+      "description": "GeoParquet file for the 2015 edition of Spain Galicia, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 1241747476,
       "file:checksum": "1220e9d8bb93b778bfa409db2fa426acd644e58d58d0d22d0ff42735dff6c1e3c4bb",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2015 edition of Spain Galicia, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     }
   },
   "links": [

@@ -57,15 +57,16 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330129 | sugar_beet | 17692 | 81570.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/nl/latest/nl.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.1279, 5.2917), 'EPSG:4326', 'EPSG:28992'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(5.3027, 52.1488), 'EPSG:4326', 'EPSG:28992', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
+-- 1165738 | 8640.0
 ```
 
 ## Related collections

@@ -94,24 +94,24 @@
       "href": "./it_bz-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Italy, South Tyrol 2026 (GeoParquet)",
+      "description": "GeoParquet file for the 2026 edition of Italy, South Tyrol, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 67364368,
       "file:checksum": "1220d0bf76c6183d8252136c395892aec031237d4a7c7e451122e9d8b992522d7365",
-      "proj:code": "EPSG:25832",
-      "description": "GeoParquet file for the 2026 edition of Italy, South Tyrol, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:25832"
     },
     "visual": {
       "href": "./it_bz-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Italy, South Tyrol 2026 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition of Italy, South Tyrol, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 36693225,
-      "file:checksum": "1220988618e3632c5ae4a9a45ad9b40bf5bcf1da01bb5a8806a401b402d33b821ea8",
-      "description": "PMTiles vector tiles of the 2026 edition of Italy, South Tyrol, generated from this item's `data` asset."
+      "file:checksum": "1220988618e3632c5ae4a9a45ad9b40bf5bcf1da01bb5a8806a401b402d33b821ea8"
     }
   },
   "links": [

@@ -119,13 +119,13 @@
       "href": "./ie_lpis-2017.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Ireland (LPIS) 2017 (GeoParquet)",
+      "description": "GeoParquet file for the 2017 edition of Ireland (LPIS), partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 564770532,
       "file:checksum": "122040d92a426929eb21716590e870e6d344ec5d5e97c305676fce8b6035ef6c483c",
-      "proj:code": "EPSG:2157",
-      "description": "GeoParquet file for the 2017 edition of Ireland (LPIS), partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2157"
     }
   },
   "links": [

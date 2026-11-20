@@ -104,13 +104,13 @@
       "href": "./de_bw-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Baden-Württemberg 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Germany, Baden-Württemberg, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 627511961,
       "file:checksum": "1220551997a873f2712adff82b33b8c3c01993b3e3c893648a8eaf2578ce7fb8ee4f",
-      "proj:code": "EPSG:25832",
-      "description": "GeoParquet file for the 2021 edition of Germany, Baden-Württemberg, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:25832"
     }
   },
   "links": [

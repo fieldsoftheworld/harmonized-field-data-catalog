@@ -104,13 +104,13 @@
       "href": "./de_thuenen-2019.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany (Thünen) 2019 (GeoParquet)",
+      "description": "GeoParquet file for the 2019 edition of Germany (Thünen), partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 588118373,
       "file:checksum": "122031406a95c83c28f8bd615f7ae76424e6df04e003afe893dbc120bde30771d472",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2019 edition of Germany (Thünen), partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

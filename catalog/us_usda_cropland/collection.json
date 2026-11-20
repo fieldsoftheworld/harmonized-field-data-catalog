@@ -127,11 +127,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 8,
   "partition:glob": "s3://ftw/harmonized-field-data/us_usda_cropland/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/us_usda_cropland.parquet",
@@ -187,23 +195,23 @@
       "href": "./year=2024/us_usda_cropland-2024.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "US (USDA CSB) — latest edition (2024) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2024 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 832597577,
-      "file:checksum": "1220bee157622c2c75b205e83518044f936fffc4386937ae406c4c0a2ce1d45fcd8a",
-      "description": "PMTiles vector tiles of the 2024 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "1220bee157622c2c75b205e83518044f936fffc4386937ae406c4c0a2ce1d45fcd8a"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 334489,
-      "file:checksum": "122055fe684f830b1c180bac4f57e6b37911c7d25cf92ccfec3a6908fd4c0726f00d",
-      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+      "file:checksum": "122055fe684f830b1c180bac4f57e6b37911c7d25cf92ccfec3a6908fd4c0726f00d"
     }
   },
   "links": [
@@ -322,13 +330,5 @@
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
-  },
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
   }
 }

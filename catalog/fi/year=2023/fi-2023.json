@@ -114,13 +114,13 @@
       "href": "./fi-2023.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Finland 2023 (GeoParquet)",
+      "description": "GeoParquet file for the 2023 edition of Finland, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 287473183,
       "file:checksum": "1220f30ee168a1dfcbdea26f8e4e27610bb3abc8f324ff25abe51622a0e91340a02e",
-      "proj:code": "EPSG:3067",
-      "description": "GeoParquet file for the 2023 edition of Finland, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3067"
     }
   },
   "links": [

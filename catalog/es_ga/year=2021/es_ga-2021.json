@@ -124,13 +124,13 @@
       "href": "./es_ga-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Galicia 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Spain Galicia, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 1285861038,
       "file:checksum": "1220e341da73b4d1e97e7108bb44efcd2c811eadecdae90f54d2e4252e037531b48a",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2021 edition of Spain Galicia, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     }
   },
   "links": [

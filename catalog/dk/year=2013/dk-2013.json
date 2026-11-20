@@ -109,13 +109,13 @@
       "href": "./dk-2013.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Denmark 2013 (GeoParquet)",
+      "description": "GeoParquet file for the 2013 edition of Denmark, partition `year=2013` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 257789556,
       "file:checksum": "1220f5ef52f18239c6ab3385018864645c5eeb61fc70001e895b5d512a2c6b8b302d",
-      "proj:code": "EPSG:25832",
-      "description": "GeoParquet file for the 2013 edition of Denmark, partition `year=2013` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:25832"
     }
   },
   "links": [

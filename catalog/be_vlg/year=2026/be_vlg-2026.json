@@ -114,24 +114,24 @@
       "href": "./be_vlg-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Belgium, Flanders 2026 (GeoParquet)",
+      "description": "GeoParquet file for the 2026 edition of Belgium, Flanders, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 99447811,
       "file:checksum": "122034fe0b790de292a3e017560166a8af7d7f38afecefa9a25b586d14d63179ba51",
-      "proj:code": "EPSG:31370",
-      "description": "GeoParquet file for the 2026 edition of Belgium, Flanders, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:31370"
     },
     "visual": {
       "href": "./be_vlg-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Belgium, Flanders 2026 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition of Belgium, Flanders, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 70902489,
-      "file:checksum": "122021e371b8c15b5f7867344ef3aa296dc878ea636915a7ed89ce55232a73b60634",
-      "description": "PMTiles vector tiles of the 2026 edition of Belgium, Flanders, generated from this item's `data` asset."
+      "file:checksum": "122021e371b8c15b5f7867344ef3aa296dc878ea636915a7ed89ce55232a73b60634"
     }
   },
   "links": [

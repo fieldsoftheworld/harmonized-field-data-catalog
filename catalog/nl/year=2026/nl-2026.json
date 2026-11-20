@@ -114,24 +114,24 @@
       "href": "./nl-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Netherlands (Crops) 2026 (GeoParquet)",
+      "description": "GeoParquet file for the 2026 edition of Netherlands (Crops), partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 741302878,
       "file:checksum": "122038df59eca8f4e4caefd626fe6a6e759078267fc59cd8b0c60154e7d382584355",
-      "proj:code": "EPSG:28992",
-      "description": "GeoParquet file for the 2026 edition of Netherlands (Crops), partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:28992"
     },
     "visual": {
       "href": "./nl-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Netherlands (Crops) 2026 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition of Netherlands (Crops), generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 519138531,
-      "file:checksum": "12206b7af1cdd0863256e82efcdea665862718f9f3198b17829617da393739f01705",
-      "description": "PMTiles vector tiles of the 2026 edition of Netherlands (Crops), generated from this item's `data` asset."
+      "file:checksum": "12206b7af1cdd0863256e82efcdea665862718f9f3198b17829617da393739f01705"
     }
   },
   "links": [

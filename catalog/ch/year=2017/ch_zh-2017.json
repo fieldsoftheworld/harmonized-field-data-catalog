@@ -116,13 +116,13 @@
       "href": "./ch_zh-2017.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Zürich 2017 (GeoParquet)",
+      "description": "GeoParquet file for the 2017 edition of Switzerland, Zürich, partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 6017316,
       "file:checksum": "1220759bf9dbd6c4fb7e7c8ccefb71a5f99ce00400b8abac37a0436cd6e49e663452",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2017 edition of Switzerland, Zürich, partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

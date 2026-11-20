@@ -104,24 +104,24 @@
       "href": "./ca_prairies-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Canada, Prairies 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Canada, Prairies, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 3780112002,
       "file:checksum": "1220425f8f94a59ccfd805ec998817df7594667a69b1602566e745ee329962aca887",
-      "proj:code": "EPSG:4326",
-      "description": "GeoParquet file for the 2024 edition of Canada, Prairies, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4326"
     },
     "visual": {
       "href": "./ca_prairies-2024.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Canada, Prairies 2024 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2024 edition of Canada, Prairies, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 862382707,
-      "file:checksum": "12205ec28356f72acb77e8252c5b5e248894158fca415fd4bd893af87cfb96455076",
-      "description": "PMTiles vector tiles of the 2024 edition of Canada, Prairies, generated from this item's `data` asset."
+      "file:checksum": "12205ec28356f72acb77e8252c5b5e248894158fca415fd4bd893af87cfb96455076"
     }
   },
   "links": [

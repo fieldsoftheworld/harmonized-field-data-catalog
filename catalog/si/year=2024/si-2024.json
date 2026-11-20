@@ -124,24 +124,24 @@
       "href": "./si-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Slovenia 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Slovenia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 250283960,
       "file:checksum": "1220da4920840c145f113ba9ca441d49c46aed96f70349050fe16ce0b1bf48b83c61",
-      "proj:code": "EPSG:3794",
-      "description": "GeoParquet file for the 2024 edition of Slovenia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3794"
     },
     "visual": {
       "href": "./si-2024.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Slovenia 2024 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2024 edition of Slovenia, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 147036822,
-      "file:checksum": "1220d96b31ce1b4da70521805d2fb735dbad9ddfbcfcf8e9a725a1d189875214cbef",
-      "description": "PMTiles vector tiles of the 2024 edition of Slovenia, generated from this item's `data` asset."
+      "file:checksum": "1220d96b31ce1b4da70521805d2fb735dbad9ddfbcfcf8e9a725a1d189875214cbef"
     }
   },
   "links": [

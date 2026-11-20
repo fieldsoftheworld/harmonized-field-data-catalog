@@ -124,13 +124,13 @@
       "href": "./lv-2015.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Latvia 2015 (GeoParquet)",
+      "description": "GeoParquet file for the 2015 edition of Latvia, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 363843246,
       "file:checksum": "1220f8b209e7917695d1bb5ef9d2611ef8093f2c196c48361336511003b6a4f332d3",
-      "proj:code": "EPSG:3059",
-      "description": "GeoParquet file for the 2015 edition of Latvia, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3059"
     }
   },
   "links": [

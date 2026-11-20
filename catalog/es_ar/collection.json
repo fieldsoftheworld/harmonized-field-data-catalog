@@ -137,11 +137,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
   "partition:glob": "s3://ftw/harmonized-field-data/es_ar/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/es_ar.parquet",
@@ -197,23 +205,23 @@
       "href": "./year=2026/es_ar-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Spain Aragon — latest edition (2026) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 564849927,
-      "file:checksum": "1220ec6dc12ef998c84491479b5ef69d4a893247b0d164e739f1d4c72763da29f867",
-      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "1220ec6dc12ef998c84491479b5ef69d4a893247b0d164e739f1d4c72763da29f867"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 145694,
-      "file:checksum": "12200013bf0bec70b30e519f08bda305dfbfab8fac29215614fa5d920832c25b617b",
-      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+      "file:checksum": "12200013bf0bec70b30e519f08bda305dfbfab8fac29215614fa5d920832c25b617b"
     }
   },
   "links": [
@@ -291,13 +299,5 @@
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   },
-  "attribution": "(c) Gobierno de Aragon",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "(c) Gobierno de Aragon"
 }

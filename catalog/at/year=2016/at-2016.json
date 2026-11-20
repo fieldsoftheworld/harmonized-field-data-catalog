@@ -121,13 +121,13 @@
       "href": "./at-2016.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Austria 2016 (GeoParquet)",
+      "description": "GeoParquet file for the 2016 edition of Austria, partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 764648722,
       "file:checksum": "122041d410cec82b2138ab8f67717b2b4e57539679bef928b0f9514528a7d0de9e53",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2016 edition of Austria, partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

@@ -104,13 +104,13 @@
       "href": "./bg-2022.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Bulgaria 2022 (GeoParquet)",
+      "description": "GeoParquet file for the 2022 edition of Bulgaria, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 159304046,
       "file:checksum": "122035a296d4fff2093e6779ed54950be5c256e9e460e98d170745689f0fef15f7ac",
-      "proj:code": "EPSG:32635",
-      "description": "GeoParquet file for the 2022 edition of Bulgaria, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:32635"
     }
   },
   "links": [

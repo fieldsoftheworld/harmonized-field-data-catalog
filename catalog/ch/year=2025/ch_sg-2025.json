@@ -121,13 +121,13 @@
       "href": "./ch_sg-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, St. Gallen 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Switzerland, St. Gallen, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 55605545,
       "file:checksum": "1220f17b30ce64f2914533e799b7e08787fe245ade60f970895cf5618b7f6c514d89",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2025 edition of Switzerland, St. Gallen, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

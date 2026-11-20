@@ -12,7 +12,7 @@ Japan field boundaries in the [fiboa](https://github.com/fiboa/specification) sc
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:6668, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `polygon_uuid`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 
 ## Tested queries
@@ -34,20 +34,20 @@ GROUP BY year ORDER BY year;
 -- 2026 | 28103804 | 0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within about 500 m (0.005°; the CRS is in degrees) of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/jp/latest/jp.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(34.7834, 134.3746), 'EPSG:4326', 'EPSG:6668'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(134.3742, 34.7800), 'EPSG:4326', 'EPSG:6668', always_xy := true), 0.005))
 LIMIT 5;
 -- id
--- 7f937e37-eb9e-40c8-a800-bcf001e58117
--- 2dc45e15-ba96-45ef-9202-8a655ab09992
--- ebdb8173-999b-4dbd-9e51-a4b36360ea52
--- 5e5a0353-9a6a-402f-adbe-3caec62a332c
--- 49953127-5a4e-4344-a249-658c4b76ed28
+-- ed7ebc1d-4f52-42fe-be08-dd3e76d963d5
+-- 8a5b1d51-4f1c-4dbe-bcdd-eb494b93fa25
+-- 33baecf0-940a-46ca-8156-c0a89133d94f
+-- dc6372cb-34fb-4b95-b875-c406e21b432b
+-- 87e7a74b-5b40-4135-8b8a-a4edcc79af06
 ```
 
 ## Related collections

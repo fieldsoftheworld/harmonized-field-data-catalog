@@ -132,11 +132,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 1,
   "partition:glob": "s3://ftw/harmonized-field-data/ec_lt/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/ec_lt.parquet",
@@ -192,23 +200,23 @@
       "href": "./year=2021/ec_lt-2021.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Lithuania - Eurocrops 2021 — latest edition (2021) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2021 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 97377405,
-      "file:checksum": "12205b575596f6e75daa530c28db9c13954f8fc13cb65996994ad6960668f7b3c57d",
-      "description": "PMTiles vector tiles of the 2021 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "12205b575596f6e75daa530c28db9c13954f8fc13cb65996994ad6960668f7b3c57d"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the collection's default style.",
+      "description": "Static JPEG image rendered from the collection's default style, with no basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 291098,
-      "file:checksum": "1220c321f227ee37351fc975595b34dcc1a4497f4a3b0ae1b61098481a552a6a5762",
-      "description": "Static JPEG image rendered from the collection's default style, with no basemap."
+      "file:checksum": "1220c321f227ee37351fc975595b34dcc1a4497f4a3b0ae1b61098481a552a6a5762"
     }
   },
   "links": [
@@ -278,13 +286,5 @@
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
-  },
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
   }
 }

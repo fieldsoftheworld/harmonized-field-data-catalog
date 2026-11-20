@@ -114,13 +114,13 @@
       "href": "./fi-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Finland 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Finland, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 300052954,
       "file:checksum": "122048b3617f1bba4c528ba6b657da54f10829582ba78d7e419e37bd112e406d622e",
-      "proj:code": "EPSG:3067",
-      "description": "GeoParquet file for the 2021 edition of Finland, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3067"
     }
   },
   "links": [

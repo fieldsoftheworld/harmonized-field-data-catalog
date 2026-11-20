@@ -124,13 +124,13 @@
       "href": "./es_ex-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Extremadura 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Spain Extremadura, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 880693874,
       "file:checksum": "12202f052b14fb3d3531df4ec117c5769ca59b52eb5048f4db1813c5cc0f9259883d",
-      "proj:code": "EPSG:4258",
-      "description": "GeoParquet file for the 2025 edition of Spain Extremadura, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4258"
     }
   },
   "links": [

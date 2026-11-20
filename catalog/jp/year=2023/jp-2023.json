@@ -94,13 +94,13 @@
       "href": "./jp-2023.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Japan 2023 (GeoParquet)",
+      "description": "GeoParquet file for the 2023 edition of Japan, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 5747303288,
       "file:checksum": "1220a414e8b1e521c59afce08b9f298b3409c5998cb923ad41d1eacf536a9f175144",
-      "proj:code": "EPSG:6668",
-      "description": "GeoParquet file for the 2023 edition of Japan, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:6668"
     }
   },
   "links": [

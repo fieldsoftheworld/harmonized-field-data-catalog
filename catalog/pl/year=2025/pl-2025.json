@@ -119,13 +119,13 @@
       "href": "./pl-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Poland 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Poland, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 2636940336,
       "file:checksum": "12202daaa480881a0f6328ed1d7bfff0f58d621f7495127f5ae9b4242fbfad421031",
-      "proj:code": "EPSG:2180",
-      "description": "GeoParquet file for the 2025 edition of Poland, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2180"
     }
   },
   "links": [

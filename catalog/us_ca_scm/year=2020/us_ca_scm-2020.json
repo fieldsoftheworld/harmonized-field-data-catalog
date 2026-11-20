@@ -114,13 +114,13 @@
       "href": "./us_ca_scm-2020.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "US, California (SCM) 2020 (GeoParquet)",
+      "description": "GeoParquet file for the 2020 edition of US, California (SCM), partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 141099154,
       "file:checksum": "12204ba4413aafc62b1cb8c763567768533f63605346504446d12db03c9c02570c11",
-      "proj:code": "EPSG:4269",
-      "description": "GeoParquet file for the 2020 edition of US, California (SCM), partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:4269"
     }
   },
   "links": [

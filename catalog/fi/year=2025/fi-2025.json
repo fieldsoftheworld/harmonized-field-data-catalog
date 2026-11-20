@@ -114,24 +114,24 @@
       "href": "./fi-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Finland 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Finland, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 286864856,
       "file:checksum": "122066beeb43f95e61e602e5fd971acdcfd2da9f62d7f473a21dbd654a9be6351977",
-      "proj:code": "EPSG:3067",
-      "description": "GeoParquet file for the 2025 edition of Finland, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3067"
     },
     "visual": {
       "href": "./fi-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Finland 2025 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition of Finland, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 154696827,
-      "file:checksum": "12209782786fe05638e7579c8b43833dba433cca20cdd6be630e699428a848eec4d8",
-      "description": "PMTiles vector tiles of the 2025 edition of Finland, generated from this item's `data` asset."
+      "file:checksum": "12209782786fe05638e7579c8b43833dba433cca20cdd6be630e699428a848eec4d8"
     }
   },
   "links": [

@@ -109,13 +109,13 @@
       "href": "./bg-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Bulgaria 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Bulgaria, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 152818925,
       "file:checksum": "1220a5e7de7ae0403d829a0d25fb5dd10669898e5615e04e1a9af9a3ce670c2a8897",
-      "proj:code": "EPSG:32635",
-      "description": "GeoParquet file for the 2021 edition of Bulgaria, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:32635"
     }
   },
   "links": [

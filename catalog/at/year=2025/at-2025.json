@@ -114,24 +114,24 @@
       "href": "./at-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Austria 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Austria, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 851633489,
       "file:checksum": "1220c7e97c3d26e7e8dc3b5a9300d0cb07eaf079fdaec5047c07a4a04daea314990a",
-      "proj:code": "EPSG:31287",
-      "description": "GeoParquet file for the 2025 edition of Austria, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:31287"
     },
     "visual": {
       "href": "./at-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Austria 2025 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition of Austria, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 642899274,
-      "file:checksum": "12202f4e7bce488715e8b19184d535b77f36621a7313b83a0aeac0d9c551072b4459",
-      "description": "PMTiles vector tiles of the 2025 edition of Austria, generated from this item's `data` asset."
+      "file:checksum": "12202f4e7bce488715e8b19184d535b77f36621a7313b83a0aeac0d9c551072b4459"
     }
   },
   "links": [

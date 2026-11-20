@@ -128,6 +128,14 @@
   ],
   "partition:file_count": 11,
   "partition:glob": "s3://ftw/harmonized-field-data/se/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/se.parquet",
@@ -183,23 +191,23 @@
       "href": "./year=2025/se-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Sweden — latest edition (2025) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 159325350,
-      "file:checksum": "122065fcd9bb108e99409d2c8228e6526305ed2d28d2c34a6a8c94dabba1f6c35069",
-      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "122065fcd9bb108e99409d2c8228e6526305ed2d28d2c34a6a8c94dabba1f6c35069"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 253073,
-      "file:checksum": "12200d16a32b78b7033e4bafe9d2894f1cd82387c8dc98f6ab516e7de4fb600d238e",
-      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+      "file:checksum": "12200d16a32b78b7033e4bafe9d2894f1cd82387c8dc98f6ab516e7de4fb600d238e"
     }
   },
   "links": [
@@ -337,13 +345,5 @@
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "Jordbruksverket",
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
-  }
+  "attribution": "Jordbruksverket"
 }

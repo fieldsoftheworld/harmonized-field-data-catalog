@@ -13,7 +13,7 @@ Bulgaria field boundaries in the [fiboa](https://github.com/fiboa/specification)
 
 - **CRS is EPSG:32635, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres** (source column `AREA`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `admin:country_code` = `BG`, `determination:datetime` = `2025-01-01T00:00:00Z` (2025 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 - The agricultural part of the physical block register; the same service's Physical_Blocks layers carry forest, urban and transport land as well. The 2021 and 2022 layers are a different release: they carry the usage inside ELGIDENT and publish an area column the later ones do not.
@@ -36,15 +36,17 @@ GROUP BY year ORDER BY year;
 -- 2025 | 226592 | 3559220.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/bg/latest/bg.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(42.7347, 25.4259), 'EPSG:4326', 'EPSG:32635'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(25.4065, 42.7749), 'EPSG:4326', 'EPSG:32635', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
+-- 10311 | 40634.0
+-- 9972 | 12625.0
 ```
 
 ## Related collections

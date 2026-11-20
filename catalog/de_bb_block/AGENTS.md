@@ -13,7 +13,7 @@ Germany, Berlin/Brandenburg (blocks) field boundaries in the [fiboa](https://git
 
 - **CRS is EPSG:25833, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres** (source column `FL_BRUTTO`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `FB_ID`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `fgue_jahr` = `2026`, `determination:datetime` = `2026-01-01T00:00:00Z`, `expiry_datetime` = `2026-12-31T00:00:00Z`, `admin:country_code` = `DE`, `admin:subdivision_code` = `BB` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
@@ -31,19 +31,20 @@ GROUP BY year ORDER BY year;
 -- 2026 | 90849 | 1334594.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/de_bb_block/latest/de_bb_block.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.4588, 13.0167), 'EPSG:4326', 'EPSG:25833'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(13.0184, 52.4606), 'EPSG:4326', 'EPSG:25833', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
 -- DEBBLI0269080623 | 102721.0
+-- DEBBLI0669907863 | 7450.0
+-- DEBBLI0269080619 | 100609.0
 -- DEBBLI0269080620 | 142803.0
--- DEBBLI0269080622 | 116743.0
--- DEBBLI0269080683 | 61461.0
+-- DEBBLI0269080621 | 33204.0
 ```
 
 ## Related collections

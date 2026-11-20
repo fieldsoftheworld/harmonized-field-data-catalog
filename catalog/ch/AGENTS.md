@@ -60,17 +60,20 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330600 | tree_wood_forest | 15794 | 16351.0
 ```
 
-Fields around a point in the largest source (Switzerland, Valais), transforming the point into the data's CRS instead of the data into WGS84:
+Fields in the largest source (Switzerland, Valais) within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ch/latest/ch_vs.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(46.2663, 7.5782), 'EPSG:4326', 'EPSG:2056'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(7.5808, 46.2622), 'EPSG:4326', 'EPSG:2056', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
 -- VS-0050569D8BFE1EED8A881DCFA548D522 | 6081.0
 -- VS-0050569D8BFE1EDEB4F6155525000000 | 1241.0
+-- VS-0050569D8BFE1EDEB4F6A01820CA4000 | 986.0
+-- VS-0050569D8BFE1EDDADB801EA659980C7 | 319.0
+-- VS-0050569D8BFE1EDDADB9F9976CBAE0C7 | 800.0
 ```
 
 ## Related collections

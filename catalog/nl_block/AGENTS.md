@@ -13,7 +13,7 @@ Netherlands (blocks) field boundaries in the [fiboa](https://github.com/fiboa/sp
 
 - **CRS is EPSG:28992, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres**, computed by the converter from the geometry (EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `source` = `luchtfoto`, `determination:datetime` = `2023-06-15T00:00:00Z`, `admin:country_code` = `NL` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
@@ -31,13 +31,13 @@ GROUP BY year ORDER BY year;
 -- 2026 | 534786 | 1834697.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/nl_block/latest/nl_block.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(52.1247, 5.2920), 'EPSG:4326', 'EPSG:28992'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(5.2912, 52.1239), 'EPSG:4326', 'EPSG:28992', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
 -- 232825 | 6348.0

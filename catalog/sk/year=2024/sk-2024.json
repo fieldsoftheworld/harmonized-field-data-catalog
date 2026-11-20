@@ -124,13 +124,13 @@
       "href": "./sk-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Slovakia 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Slovakia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 343214602,
       "file:checksum": "1220c6f0881de4c148c7a801eb45a53f57dd99b3cb0d2a3f2721960028440971ad1c",
-      "proj:code": "EPSG:5514",
-      "description": "GeoParquet file for the 2024 edition of Slovakia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:5514"
     }
   },
   "links": [

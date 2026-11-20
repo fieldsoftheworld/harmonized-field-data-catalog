@@ -114,13 +114,13 @@
       "href": "./us_ca_scm-2016.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "US, California (SCM) 2016 (GeoParquet)",
+      "description": "GeoParquet file for the 2016 edition of US, California (SCM), partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 100757904,
       "file:checksum": "12208d933ff3b0ea7620138879dc6ba858cce0dde37a65df944928e807f4b821722a",
-      "proj:code": "EPSG:3857",
-      "description": "GeoParquet file for the 2016 edition of US, California (SCM), partition `year=2016` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3857"
     }
   },
   "links": [

@@ -124,13 +124,13 @@
       "href": "./sk-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Slovakia 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Slovakia, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 287389509,
       "file:checksum": "122069b5420bf2e8045769f3ab31484fdd5ca9aec8eea2a1fbcf22c0b1edaa9356ed",
-      "proj:code": "EPSG:5514",
-      "description": "GeoParquet file for the 2021 edition of Slovakia, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:5514"
     }
   },
   "links": [

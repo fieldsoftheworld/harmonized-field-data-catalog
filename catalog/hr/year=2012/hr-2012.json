@@ -169,13 +169,13 @@
       "href": "./hr-2012.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Croatia 2012 (GeoParquet)",
+      "description": "GeoParquet file for the 2012 edition of Croatia, partition `year=2012` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 207508937,
       "file:checksum": "1220716dccf8a5553c786f6b04aed766cca1c875ba5fa2886d7788bb1e6a6906c1f3",
-      "proj:code": "EPSG:3765",
-      "description": "GeoParquet file for the 2012 edition of Croatia, partition `year=2012` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3765"
     }
   },
   "links": [

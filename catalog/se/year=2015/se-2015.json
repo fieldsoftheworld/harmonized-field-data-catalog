@@ -109,13 +109,13 @@
       "href": "./se-2015.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Sweden 2015 (GeoParquet)",
+      "description": "GeoParquet file for the 2015 edition of Sweden, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 299674662,
       "file:checksum": "1220cd24a149e6acbe5468654555dcf0626908911b031f4d6f022c65226a13515839",
-      "proj:code": "EPSG:3006",
-      "description": "GeoParquet file for the 2015 edition of Sweden, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3006"
     }
   },
   "links": [

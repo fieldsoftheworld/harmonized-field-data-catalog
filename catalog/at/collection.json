@@ -142,11 +142,19 @@
     {
       "name": "year",
       "type": "int32",
-      "description": "Edition year of the source dataset (the converter variant). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
+      "description": "The year the boundaries represent (the season, declaration or snapshot year). Not a column in the files; DuckDB adds it with hive_partitioning=true. Expand the glob through S3 (endpoint data.source.coop, path style); plain https has no listing."
     }
   ],
   "partition:file_count": 11,
   "partition:glob": "s3://ftw/harmonized-field-data/at/year=*/*.parquet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  },
   "assets": {
     "data": {
       "href": "./latest/at.parquet",
@@ -202,23 +210,23 @@
       "href": "./year=2025/at-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Austria — latest edition (2025) (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`.",
       "roles": [
         "visual"
       ],
       "file:size": 642899274,
-      "file:checksum": "12202f4e7bce488715e8b19184d535b77f36621a7313b83a0aeac0d9c551072b4459",
-      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+      "file:checksum": "12202f4e7bce488715e8b19184d535b77f36621a7313b83a0aeac0d9c551072b4459"
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
       "type": "image/jpeg",
       "title": "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO.",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap.",
       "roles": [
         "thumbnail"
       ],
       "file:size": 269887,
-      "file:checksum": "1220740f981cf0266a65767568cd5a759febf2d1252fb9501dac304c1e0c85e6d1d7",
-      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+      "file:checksum": "1220740f981cf0266a65767568cd5a759febf2d1252fb9501dac304c1e0c85e6d1d7"
     }
   },
   "links": [
@@ -355,13 +363,5 @@
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
-  },
-  "storage:schemes": {
-    "source-coop": {
-      "type": "custom-s3",
-      "platform": "https://data.source.coop",
-      "region": "us-west-2",
-      "bucket": "ftw"
-    }
   }
 }

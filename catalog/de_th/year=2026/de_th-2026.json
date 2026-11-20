@@ -124,24 +124,24 @@
       "href": "./de_th-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Thuringia 2026 (GeoParquet)",
+      "description": "GeoParquet file for the 2026 edition of Germany, Thuringia, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 85482756,
       "file:checksum": "1220857d8b510beb6715a79762dfd7a312042f24ac16d243910fc7b5afa61ef1a6b2",
-      "proj:code": "EPSG:25832",
-      "description": "GeoParquet file for the 2026 edition of Germany, Thuringia, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:25832"
     },
     "visual": {
       "href": "./de_th-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Thuringia 2026 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition of Germany, Thuringia, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 38403499,
-      "file:checksum": "1220e963c52a9e1814bc00a2f636596d141235c0a2d4f35327295137384c578c1c6f",
-      "description": "PMTiles vector tiles of the 2026 edition of Germany, Thuringia, generated from this item's `data` asset."
+      "file:checksum": "1220e963c52a9e1814bc00a2f636596d141235c0a2d4f35327295137384c578c1c6f"
     }
   },
   "links": [

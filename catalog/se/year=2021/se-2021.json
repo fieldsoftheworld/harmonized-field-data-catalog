@@ -109,13 +109,13 @@
       "href": "./se-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Sweden 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Sweden, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 367514765,
       "file:checksum": "122006a861166e0d128ecd5a839b279f1f468ee4e885341ca1ade6aa049a9f508a09",
-      "proj:code": "EPSG:3006",
-      "description": "GeoParquet file for the 2021 edition of Sweden, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3006"
     }
   },
   "links": [

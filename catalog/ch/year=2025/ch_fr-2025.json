@@ -121,13 +121,13 @@
       "href": "./ch_fr-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Fribourg 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Switzerland, Fribourg, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 14482933,
       "file:checksum": "122042c349aad81965df486b8736465ce1aa78b5bb04e79a2c87ff54b9a1c1315750",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2025 edition of Switzerland, Fribourg, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

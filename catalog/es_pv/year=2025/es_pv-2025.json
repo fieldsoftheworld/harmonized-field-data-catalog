@@ -104,24 +104,24 @@
       "href": "./es_pv-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Spain Basque Country 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Spain Basque Country, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 138039798,
       "file:checksum": "12203ba73282950a7d5806409fdf3bee927c019f2c5a2db795af6f7ff31ae165cc71",
-      "proj:code": "EPSG:25830",
-      "description": "GeoParquet file for the 2025 edition of Spain Basque Country, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:25830"
     },
     "visual": {
       "href": "./es_pv-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Spain Basque Country 2025 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition of Spain Basque Country, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 60792792,
-      "file:checksum": "1220c67cdb84e8244dbf6b4324fc2d582d2c76bcadba3ed3dbdad205729d353b4c18",
-      "description": "PMTiles vector tiles of the 2025 edition of Spain Basque Country, generated from this item's `data` asset."
+      "file:checksum": "1220c67cdb84e8244dbf6b4324fc2d582d2c76bcadba3ed3dbdad205729d353b4c18"
     }
   },
   "links": [

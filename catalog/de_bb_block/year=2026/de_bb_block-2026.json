@@ -109,24 +109,24 @@
       "href": "./de_bb_block-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, Berlin/Brandenburg (blocks) 2026 (GeoParquet)",
+      "description": "GeoParquet file for the 2026 edition of Germany, Berlin/Brandenburg (blocks), partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 74177914,
       "file:checksum": "12203cad5bd985a7c443612d3f5ae7e12a67b5aa044b06aa599882b252d444403aea",
-      "proj:code": "EPSG:25833",
-      "description": "GeoParquet file for the 2026 edition of Germany, Berlin/Brandenburg (blocks), partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:25833"
     },
     "visual": {
       "href": "./de_bb_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Germany, Berlin/Brandenburg (blocks) 2026 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition of Germany, Berlin/Brandenburg (blocks), generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 36093626,
-      "file:checksum": "1220047c6e99de330639e73bf0cb3751477af1ecddbd4e408c6458e0975b2b367161",
-      "description": "PMTiles vector tiles of the 2026 edition of Germany, Berlin/Brandenburg (blocks), generated from this item's `data` asset."
+      "file:checksum": "1220047c6e99de330639e73bf0cb3751477af1ecddbd4e408c6458e0975b2b367161"
     }
   },
   "links": [

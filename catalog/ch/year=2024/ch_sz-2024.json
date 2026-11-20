@@ -121,13 +121,13 @@
       "href": "./ch_sz-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Schwyz 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Switzerland, Schwyz, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 11770962,
       "file:checksum": "122095b0d206b9720239dd46586a8d7298cbffd748964d2084db0cdec633dcfca256",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2024 edition of Switzerland, Schwyz, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

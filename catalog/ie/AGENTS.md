@@ -13,7 +13,7 @@ Ireland field boundaries in the [fiboa](https://github.com/fiboa/specification) 
 
 - **CRS is EPSG:4258, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres** (source column `metrics:area`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `gml_id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/ie/ie.csv`) have `NULL`. All 1,119,949 rows of the 2024 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2024-12-31T00:00:00Z`, `admin:country_code` = `IE`, `crop:code_list` = `https://fiboa.org/code/ie/ie.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
@@ -51,20 +51,20 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 339900 | not_known_and_other | 11017 | 26305.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within about 500 m (0.005°; the CRS is in degrees) of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ie/latest/ie.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(53.4024, -8.2935), 'EPSG:4326', 'EPSG:4258'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(-8.2922, 53.4028), 'EPSG:4326', 'EPSG:4258', always_xy := true), 0.005))
 LIMIT 5;
 -- id | m2
--- id4a934e64-b4dd-4a81-a8ee-c0deedc82511 | 68842.0
--- id7a6e0808-23d6-4785-83d8-c790e8d97808 | 9823.0
--- id221e0f4e-b42a-4889-ba28-b3c84cffe14f | 4506.0
--- id2b838caa-179b-4d56-947d-0cafd8f00930 | 46156.0
--- id03b31cfc-e1e4-48cf-895f-8e0844c96fd6 | 23802.0
+-- id6b2ae18e-efd3-4c89-9bba-dc79f39f94bd | 93079.0
+-- id70f14f2a-48eb-4ddd-ba49-6fa9b8b43616 | 252383.0
+-- ida8f5fba2-fa8f-476f-a6db-53b8c0089f50 | 93653.0
+-- idd34d4e94-3038-4136-907a-29eaac343f37 | 81349.0
+-- idc1c84d71-2349-4bd6-9329-559cfecf92ae | 89798.0
 ```
 
 ## Related collections

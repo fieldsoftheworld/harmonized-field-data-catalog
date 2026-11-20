@@ -124,13 +124,13 @@
       "href": "./lv-2019.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Latvia 2019 (GeoParquet)",
+      "description": "GeoParquet file for the 2019 edition of Latvia, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 461420107,
       "file:checksum": "12208dd98790c6ba703ef401c4b182044d228dda8899e6561f49a293b06038b9ad53",
-      "proj:code": "EPSG:3059",
-      "description": "GeoParquet file for the 2019 edition of Latvia, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3059"
     }
   },
   "links": [

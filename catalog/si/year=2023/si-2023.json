@@ -124,13 +124,13 @@
       "href": "./si-2023.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Slovenia 2023 (GeoParquet)",
+      "description": "GeoParquet file for the 2023 edition of Slovenia, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 184038840,
       "file:checksum": "1220330b3cd00cf7a551da8c49c63fda98a9fedbd255474d99e64f37f437e99b7112",
-      "proj:code": "EPSG:3794",
-      "description": "GeoParquet file for the 2023 edition of Slovenia, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3794"
     }
   },
   "links": [

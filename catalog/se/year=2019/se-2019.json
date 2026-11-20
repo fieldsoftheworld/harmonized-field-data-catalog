@@ -109,13 +109,13 @@
       "href": "./se-2019.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Sweden 2019 (GeoParquet)",
+      "description": "GeoParquet file for the 2019 edition of Sweden, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 310065641,
       "file:checksum": "12208c7dc941530e774485871b68826a07df18be24a69754b89863656c23b7ffbb0d",
-      "proj:code": "EPSG:3006",
-      "description": "GeoParquet file for the 2019 edition of Sweden, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3006"
     }
   },
   "links": [

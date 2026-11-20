@@ -13,7 +13,7 @@ Romania - Eurocrops field boundaries in the [fiboa](https://github.com/fiboa/spe
 
 - **CRS is EPSG:32635, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
 - **`metrics:area` is in square metres** (source column `AREA_HA`; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
-- **`year` is the edition, not the observation date.** It is the year of the source publication (the converter variant). `determination:datetime`, where present, is the source's own date for a field.
+- **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
 - **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
 - **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 259,852 rows of the 2026 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2017-01-01T00:00:00Z`, `crop:code_list` = `https://raw.githubusercontent.com/maja601/EuroCrops/refs/heads/main/csvs/country_mappings/ro_no_year.csv` (2026 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
@@ -48,20 +48,20 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330500 | greenhouse_foil_film | 607 | 2163.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/ec_ro/latest/ec_ro.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(44.3680, 25.4662), 'EPSG:4326', 'EPSG:32635'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(25.4625, 44.3685), 'EPSG:4326', 'EPSG:32635', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
+-- 98302 | 1783251.0
+-- 142521 | 1783251.0
 -- 98341 | 571158.0
 -- 142560 | 571158.0
 -- 202216 | 571158.0
--- 97114 | 11006.0
--- 141333 | 11006.0
 ```
 
 ## Related collections

@@ -84,24 +84,24 @@
       "href": "./nl_block-2026.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Netherlands (blocks) 2026 (GeoParquet)",
+      "description": "GeoParquet file for the 2026 edition of Netherlands (blocks), partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 359524410,
       "file:checksum": "12206b10c0558cb5e55ff0f3fc4441936b009fd5c626b7ee9b78a3e6cc795fe8a72e",
-      "proj:code": "EPSG:28992",
-      "description": "GeoParquet file for the 2026 edition of Netherlands (blocks), partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:28992"
     },
     "visual": {
       "href": "./nl_block-2026.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Netherlands (blocks) 2026 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2026 edition of Netherlands (blocks), generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
       "file:size": 125115380,
-      "file:checksum": "122004d451024bdd5c3ad5d6d1405965056298612a052dd25c387dbf00c143234ced",
-      "description": "PMTiles vector tiles of the 2026 edition of Netherlands (blocks), generated from this item's `data` asset."
+      "file:checksum": "122004d451024bdd5c3ad5d6d1405965056298612a052dd25c387dbf00c143234ced"
     }
   },
   "links": [

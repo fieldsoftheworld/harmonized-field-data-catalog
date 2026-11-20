@@ -121,13 +121,13 @@
       "href": "./de_nrw-2023.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Germany, North Rhine-Westphalia 2023 (GeoParquet)",
+      "description": "GeoParquet file for the 2023 edition of Germany, North Rhine-Westphalia, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 305212713,
       "file:checksum": "1220a970654ad104f9697ab750c5b48ada74ef352bff61baec28a101347c014f82af",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2023 edition of Germany, North Rhine-Westphalia, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

@@ -121,13 +121,13 @@
       "href": "./ch_ge-2018.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Switzerland, Geneva 2018 (GeoParquet)",
+      "description": "GeoParquet file for the 2018 edition of Switzerland, Geneva, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 2461743,
       "file:checksum": "1220a3480eb479d0535ea1d157a9f175f421aef0fe8971be1efbfd225c689a2fc831",
-      "proj:code": "EPSG:2056",
-      "description": "GeoParquet file for the 2018 edition of Switzerland, Geneva, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:2056"
     }
   },
   "links": [

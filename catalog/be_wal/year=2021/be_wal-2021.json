@@ -121,13 +121,13 @@
       "href": "./be_wal-2021.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Belgium, Wallonia 2021 (GeoParquet)",
+      "description": "GeoParquet file for the 2021 edition of Belgium, Wallonia, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
       "file:size": 107370771,
       "file:checksum": "1220e4d0b8394d889151991419212fa2c3737a8bc8c908f14349ac7fe0c670498054",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2021 edition of Belgium, Wallonia, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [
