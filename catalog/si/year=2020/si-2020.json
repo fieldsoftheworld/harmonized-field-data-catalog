@@ -129,7 +129,8 @@
       ],
       "file:size": 196439173,
       "file:checksum": "1220ec85bc02d6b8dba9f9fe00776e10c9106d3a22f9eba42b67db20aa9a60ff09cb",
-      "proj:code": "EPSG:3794"
+      "proj:code": "EPSG:3794",
+      "description": "GeoParquet file for the 2020 edition of Slovenia, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

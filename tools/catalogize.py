@@ -405,6 +405,7 @@ def build_item(collection_id: str, stem: str, meta: dict, y: YearInput, survey_p
                 "href": f"./{parquet_name}",
                 "type": PARQUET_TYPE,
                 "title": f"{meta['short_name']} {y.year} (GeoParquet)",
+                "description": item_data_description(meta, y),
                 "roles": ["data"],
                 "file:size": y.data_asset["file:size"],
                 "file:checksum": y.data_asset["file:checksum"],
@@ -422,11 +423,25 @@ def build_item(collection_id: str, stem: str, meta: dict, y: YearInput, survey_p
             "href": f"./{pmtiles_name}",
             "type": PMTILES_TYPE,
             "title": f"{meta['short_name']} {y.year} (PMTiles)",
+            "description": item_visual_description(meta, y),
             "roles": ["visual"],
             "file:size": y.visual_asset["file:size"],
             "file:checksum": y.visual_asset["file:checksum"],
         }
     return item
+
+
+def item_data_description(meta: dict, y: YearInput) -> str:
+    """Description for an item's ``data`` asset (PORTO-CORE-088)."""
+    return (
+        f"GeoParquet file for the {y.year} edition of {meta['short_name']}, partition "
+        f"`{PARTITION_KEY}={y.year}` of the collection. Converted with fiboa-cli into the fiboa schema."
+    )
+
+
+def item_visual_description(meta: dict, y: YearInput) -> str:
+    """Description for an item's ``visual`` (PMTiles) asset (PORTO-CORE-088, PORTO-FMT-062)."""
+    return f"PMTiles vector tiles of the {y.year} edition of {meta['short_name']}, generated from this item's `data` asset."
 
 
 def license_fields(base: dict) -> tuple[str, list[dict]]:
@@ -467,10 +482,16 @@ def thumbnail_asset(ds: Dataset) -> dict | None:
         if basemap in (None, "none")
         else "Preview of the default style over a light basemap. © OpenStreetMap contributors © CARTO."
     )
+    description = (
+        "Static JPEG image rendered from the collection's default style, with no basemap."
+        if basemap in (None, "none")
+        else "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
+    )
     return {
         "href": "./thumbnail.jpg",
         "type": "image/jpeg",
         "title": title,
+        "description": description,
         "roles": ["thumbnail"],
         "file:size": thumb.stat().st_size,
         "file:checksum": "1220" + digest,
@@ -609,6 +630,10 @@ def build_collection(
             "href": pm,
             "type": PMTILES_TYPE,
             "title": f"{meta['short_name']} — latest edition ({latest.year}) (PMTiles)",
+            "description": (
+                f"PMTiles vector tiles of the {latest.year} edition, for rendering this collection's styles "
+                f"(`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
+            ),
             "roles": ["visual"],
             "file:size": latest.visual_asset["file:size"],
             "file:checksum": latest.visual_asset["file:checksum"],
@@ -1151,7 +1176,7 @@ def build_root(manifest: Manifest, public_base: str, human_base: str) -> None:
         a += [f"For a map rather than a query: `{public_base}/{ROOT_TILES}` tiles the newest editions into one layer `{ROOT_TILES_LAYER}`, in lon/lat and with only the columns the collections share (`rel: pmtiles` on the root catalog; the README lists the columns and which collections it holds). Tiles are generalized for display; query the parquet files for analysis.", ""]
     a += ["## Join keys", "", "There are none. `id` is unique within one edition of one collection only; collections do not share identifiers and editions are not tracked across years. Spatial joins are the only bridge, and each collection is in its own CRS (`proj:code` on the collection and the `data` asset), so transform before joining.", ""]
     a += ["## Quirks that produce silently wrong answers", "", "- Geometries are in the source CRS, not WGS84. `summaries.proj:code` per collection.", "- `metrics:area` is square metres; `year` is the year the boundaries represent (season, declaration or snapshot year), not the year the source was published.", "- Crop columns differ per source: `crop:code`/`crop:name` are the source's own code list; `hcat:code`/`hcat:name` (where present) are the harmonized EuroCrops HCAT taxonomy, hierarchical by digit prefix.", f"- {len(blocks)} collections hold field *blocks* (reference parcels), not crop fields: {', '.join(f'`{b}`' for b in sorted(blocks))}. A block is bounded by permanent features and several farmers and crops can share one, so its rows are not comparable with a crop field's and the two must not be summed. `holds: blocks` in the catalog manifest marks them.", f"- Not every boundary was declared by anyone. {not_declared_agents} Filter on `boundaries` in a collection.json before treating a row as a record of what a farmer grew.", ""]
-    a += ["## Structure", "", f"Assets and structural links resolve relative to the object that carries them; catalogs carry no `self` link. Generated by [tools/catalogize.py]({repo}/blob/main/tools/catalogize.py); fix documentation there."]
+    a += ["## Structure", "", f"Assets and structural links resolve relative to the object that carries them. The tracked `catalog.json` carries no `self` link, so the same files validate in this repository, in a preview, and in production; `tools/publish.py` adds an absolute `self` link, built from `public_base`, to the root `catalog.json` it uploads. Generated by [tools/catalogize.py]({repo}/blob/main/tools/catalogize.py); fix documentation there."]
     write_text(CATALOG_DIR / "AGENTS.md", "\n".join(a))
 
     # llms.txt

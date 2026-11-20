@@ -129,7 +129,8 @@
       ],
       "file:size": 1031454550,
       "file:checksum": "122073bd4778ca6785d5a99701fd37eb60c5c9240daf7c7e24c1047e3f24c92812bf",
-      "proj:code": "EPSG:25830"
+      "proj:code": "EPSG:25830",
+      "description": "GeoParquet file for the 2024 edition of Spain Valencia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es_vc-2024.pmtiles",
@@ -139,7 +140,8 @@
         "visual"
       ],
       "file:size": 391282754,
-      "file:checksum": "1220c08ac1bc5063acff2be5e2e9aa7134a4855dd4729adbf43cbe1ae154c6cc7d2e"
+      "file:checksum": "1220c08ac1bc5063acff2be5e2e9aa7134a4855dd4729adbf43cbe1ae154c6cc7d2e",
+      "description": "PMTiles vector tiles of the 2024 edition of Spain Valencia, generated from this item's `data` asset."
     }
   },
   "links": [

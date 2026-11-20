@@ -294,6 +294,11 @@ def parts_collection(
                 "href": f"./latest/{pmtiles.name}",
                 "type": PMTILES_TYPE,
                 "title": f"{ds.title} — latest edition of every source (PMTiles)",
+                "description": (
+                    "PMTiles vector tiles of the newest edition of every source feeding this collection, "
+                    "for rendering this collection's styles (`styles/`) in a web map. The underlying "
+                    "GeoParquet is each item's `data` asset and this collection's `partition:glob`."
+                ),
                 "roles": ["visual"],
                 **file_facts(pmtiles),
             },

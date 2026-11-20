@@ -159,7 +159,8 @@
       ],
       "file:size": 656772,
       "file:checksum": "12207f1267977342668e0f680bace42cdc7ed03abbf6ec226d4d1b4842cb0360d94a",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2022 edition of Zambia (ECAAS crop cuts), partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./zm_ecaas-2022.pmtiles",
@@ -169,7 +170,8 @@
         "visual"
       ],
       "file:size": 3402490,
-      "file:checksum": "1220d0b67d3166af87daca7064a135d5f56534ea5cf9d33a7745ea410ffe364e4744"
+      "file:checksum": "1220d0b67d3166af87daca7064a135d5f56534ea5cf9d33a7745ea410ffe364e4744",
+      "description": "PMTiles vector tiles of the 2022 edition of Zambia (ECAAS crop cuts), generated from this item's `data` asset."
     }
   },
   "links": [

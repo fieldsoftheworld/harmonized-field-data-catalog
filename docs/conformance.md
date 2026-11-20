@@ -19,7 +19,28 @@ something.
 
 ## Accepted deviations
 
-None.
+None. (`ACCEPTED` in `tests/test_conformance.py` only gates error-severity
+findings; the warnings below are not blocking and need no waiver.)
+
+## Notes on the current rashid run
+
+- **Fan-out (`PTL-CAT-001`, warning, pre-existing since v0.1.2)**: the root
+  catalog (79 children) and the `ch` (40) and `nl` (22) collections exceed
+  the twenty-child guideline for subcatalog grouping (`PORTO-CORE-078`).
+  Restructuring a flat catalog of this size into thematic subcatalogs is a
+  user-visible change to every collection's URL and is explicitly a
+  checkpoint in the migration guidance, not a Portolan v0.3.0 delta item.
+  Left for a maintainer decision; tracked as a follow-up rather than fixed
+  in the v0.3.0 migration.
+- **Partition data checks are not run locally**: every collection's
+  `partition:glob` is an absolute `s3://` URL (already compliant with the
+  v0.3.0 `PORTO-FMT-064` requirement). `rashid check catalog --no-data`
+  cannot list or read those partitions from a local relative tree, so a
+  clean local run says nothing about `PTL-DAT-*` row-group, schema, or
+  spatial-order checks on the data itself. Those only run against the
+  published catalog with `rashid check <url> --live` (or
+  `--live-base-url`), which needs the data on Source Cooperative and is out
+  of scope for a metadata-only migration PR.
 
 <!--
 When you accept one, add a row and a section explaining it, like this:

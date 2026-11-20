@@ -129,7 +129,8 @@
       ],
       "file:size": 1249996903,
       "file:checksum": "122018fac25026f243102c36428925352301e1e0782292f96904ea376460ca035f72",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2024 edition of Spain Galicia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

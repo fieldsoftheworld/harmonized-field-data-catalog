@@ -119,7 +119,8 @@
       ],
       "file:size": 159033903,
       "file:checksum": "1220738a3a541355a2e51821fa24d720b613d2c52cdd59622a13185ce2f58f82dfa5",
-      "proj:code": "EPSG:28992"
+      "proj:code": "EPSG:28992",
+      "description": "GeoParquet file for the 2011 edition of Netherlands (Crops), partition `year=2011` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

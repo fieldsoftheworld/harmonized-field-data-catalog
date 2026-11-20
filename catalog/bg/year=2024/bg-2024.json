@@ -114,7 +114,8 @@
       ],
       "file:size": 150097589,
       "file:checksum": "12209c85ae55fb8535a72878c20bccd7328901d0cc9e05f2aa166ffe524f04c4bec8",
-      "proj:code": "EPSG:32635"
+      "proj:code": "EPSG:32635",
+      "description": "GeoParquet file for the 2024 edition of Bulgaria, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

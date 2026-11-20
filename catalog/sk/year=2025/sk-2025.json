@@ -129,7 +129,8 @@
       ],
       "file:size": 350868753,
       "file:checksum": "1220de2120c088859910a0eb2f4788b3877506c7a4ef93f685d5c85a8e02a10e0554",
-      "proj:code": "EPSG:5514"
+      "proj:code": "EPSG:5514",
+      "description": "GeoParquet file for the 2025 edition of Slovakia, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

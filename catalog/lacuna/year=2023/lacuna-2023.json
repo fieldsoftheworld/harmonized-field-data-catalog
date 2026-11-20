@@ -139,7 +139,8 @@
       ],
       "file:size": 9702683,
       "file:checksum": "1220de5e955e98c90adf9ebdfcaec29310fc85cc66206803bfe24db0e46f8d1e0099",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2023 edition of Mapping Africa, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./lacuna-2023.pmtiles",
@@ -149,7 +150,8 @@
         "visual"
       ],
       "file:size": 17075794,
-      "file:checksum": "122035543bfe0a9a205d31252274a6bec77543113457cf933a6edc9af0d519452db0"
+      "file:checksum": "122035543bfe0a9a205d31252274a6bec77543113457cf933a6edc9af0d519452db0",
+      "description": "PMTiles vector tiles of the 2023 edition of Mapping Africa, generated from this item's `data` asset."
     }
   },
   "links": [

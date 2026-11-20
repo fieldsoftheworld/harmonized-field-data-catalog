@@ -219,7 +219,8 @@
       ],
       "file:size": 220930036,
       "file:checksum": "12205882fd1dc069c4441c79eaa1d01b3314abfd88096e893225268717288a8ffcf0",
-      "proj:code": "EPSG:3765"
+      "proj:code": "EPSG:3765",
+      "description": "GeoParquet file for the 2015 edition of Croatia, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

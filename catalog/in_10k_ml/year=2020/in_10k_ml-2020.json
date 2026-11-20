@@ -94,7 +94,8 @@
       ],
       "file:size": 7982865,
       "file:checksum": "1220e65b0e680ede8fc56554477f54b8a5f2d8f6ef53e36c86989e831ce7a121ad9a",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2020 edition of India 10k with splits, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./in_10k_ml-2020.pmtiles",
@@ -104,7 +105,8 @@
         "visual"
       ],
       "file:size": 5996979,
-      "file:checksum": "1220d286f5a61e321bc0c6bd8eb812cfae78317d704fa6a2b6ae3838f1805308cb48"
+      "file:checksum": "1220d286f5a61e321bc0c6bd8eb812cfae78317d704fa6a2b6ae3838f1805308cb48",
+      "description": "PMTiles vector tiles of the 2020 edition of India 10k with splits, generated from this item's `data` asset."
     }
   },
   "links": [

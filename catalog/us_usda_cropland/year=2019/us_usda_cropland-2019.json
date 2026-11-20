@@ -124,7 +124,8 @@
       ],
       "file:size": 3108459707,
       "file:checksum": "1220221f05c053c12575c5070036722679176b8066e06c56dee124a9ea55acbf5c9e",
-      "proj:code": null
+      "proj:code": null,
+      "description": "GeoParquet file for the 2019 edition of US (USDA CSB), partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

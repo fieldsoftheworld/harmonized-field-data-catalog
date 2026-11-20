@@ -114,7 +114,8 @@
       ],
       "file:size": 77892710,
       "file:checksum": "122042094bc2d653a932b1af04f203c9f4dc3c7880c80b3b604b62b2bdc8acfc78b5",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2022 edition of Germany, Saxony-Anhalt, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -129,7 +129,8 @@
       ],
       "file:size": 1286366674,
       "file:checksum": "1220c8a340feee0a0bb5116ab1d312d4e611bb76da1a688ee0e0c21f8e135c86e9d4",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2022 edition of Spain Galicia, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

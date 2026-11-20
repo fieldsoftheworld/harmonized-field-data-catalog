@@ -109,7 +109,8 @@
       ],
       "file:size": 659344972,
       "file:checksum": "1220a1b70089ca78649799d47575f9ae7ec0d329621613b7ed49d6804e7f9b69077b",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "description": "GeoParquet file for the 2018 edition of Germany, Baden-Württemberg, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -126,7 +126,8 @@
       ],
       "file:size": 777108132,
       "file:checksum": "1220a6a128623f207a5dbcd9d680bf62e59cbc2917cff25fe2049b74899b899153db",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2015 edition of Austria, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

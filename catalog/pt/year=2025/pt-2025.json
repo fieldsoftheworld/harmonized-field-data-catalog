@@ -124,7 +124,8 @@
       ],
       "file:size": 1392574548,
       "file:checksum": "12204b13619901cb43e52709f61e3ef8d2e39546d65887c0b1809f70548239fb2a0e",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2025 edition of Portugal, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./pt-2025.pmtiles",
@@ -134,7 +135,8 @@
         "visual"
       ],
       "file:size": 567582305,
-      "file:checksum": "12203fb32825447f98fbdd2eec3d43dd618825d45fbcab824c3ad7caf4f2d6a0ac2c"
+      "file:checksum": "12203fb32825447f98fbdd2eec3d43dd618825d45fbcab824c3ad7caf4f2d6a0ac2c",
+      "description": "PMTiles vector tiles of the 2025 edition of Portugal, generated from this item's `data` asset."
     }
   },
   "links": [

@@ -144,7 +144,8 @@
       ],
       "file:size": 174929653,
       "file:checksum": "122073868f915385ff7f528f8a57a1473ea70874de02feeea123b3a0e9c09948e143",
-      "proj:code": "EPSG:3794"
+      "proj:code": "EPSG:3794",
+      "description": "GeoParquet file for the 2021 edition of Slovenia - Eurocrops 2021, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./ec_si-2021.pmtiles",
@@ -154,7 +155,8 @@
         "visual"
       ],
       "file:size": 144677146,
-      "file:checksum": "1220955aab53619aa2391600d1ffd452d4fc0767077e126de0bd8a9a42846eaaca33"
+      "file:checksum": "1220955aab53619aa2391600d1ffd452d4fc0767077e126de0bd8a9a42846eaaca33",
+      "description": "PMTiles vector tiles of the 2021 edition of Slovenia - Eurocrops 2021, generated from this item's `data` asset."
     }
   },
   "links": [

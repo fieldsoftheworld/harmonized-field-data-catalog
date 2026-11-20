@@ -229,7 +229,8 @@
       ],
       "file:size": 306693029,
       "file:checksum": "12209392f2fe89e5fa8416eeb8e2f093754278f828f8f04263a3af16357ca15847f4",
-      "proj:code": "EPSG:3765"
+      "proj:code": "EPSG:3765",
+      "description": "GeoParquet file for the 2024 edition of Croatia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./hr-2024.pmtiles",
@@ -239,7 +240,8 @@
         "visual"
       ],
       "file:size": 172915826,
-      "file:checksum": "122062ea56f01c4c6af5fac8ee000ca00915de735bcb8a694dd1ebfa2fd515f54d0f"
+      "file:checksum": "122062ea56f01c4c6af5fac8ee000ca00915de735bcb8a694dd1ebfa2fd515f54d0f",
+      "description": "PMTiles vector tiles of the 2024 edition of Croatia, generated from this item's `data` asset."
     }
   },
   "links": [

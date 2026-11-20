@@ -99,7 +99,8 @@
       ],
       "file:size": 5448348951,
       "file:checksum": "1220d06b039881e2c1346826b005800fc2c02edddf0c95d64a0d81771aa0ffcdd097",
-      "proj:code": "EPSG:6668"
+      "proj:code": "EPSG:6668",
+      "description": "GeoParquet file for the 2026 edition of Japan, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./jp-2026.pmtiles",
@@ -109,7 +110,8 @@
         "visual"
       ],
       "file:size": 3296266142,
-      "file:checksum": "122015e2ec5a8853ddf9577627dd98caff0e4edc65b8620a1efddf5a91e9bcfd2908"
+      "file:checksum": "122015e2ec5a8853ddf9577627dd98caff0e4edc65b8620a1efddf5a91e9bcfd2908",
+      "description": "PMTiles vector tiles of the 2026 edition of Japan, generated from this item's `data` asset."
     }
   },
   "links": [

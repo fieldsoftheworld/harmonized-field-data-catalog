@@ -124,7 +124,8 @@
       ],
       "file:size": 290541050,
       "file:checksum": "1220e092822f78df835df6efe8f9a70761371546d57dbe53abc4fcc2c8fa3546c7a7",
-      "proj:code": "EPSG:3301"
+      "proj:code": "EPSG:3301",
+      "description": "GeoParquet file for the 2018 edition of Estonia, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -2,7 +2,7 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
@@ -173,7 +173,8 @@
         "visual"
       ],
       "file:size": 862382707,
-      "file:checksum": "12205ec28356f72acb77e8252c5b5e248894158fca415fd4bd893af87cfb96455076"
+      "file:checksum": "12205ec28356f72acb77e8252c5b5e248894158fca415fd4bd893af87cfb96455076",
+      "description": "PMTiles vector tiles of the 2024 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -183,7 +184,8 @@
         "thumbnail"
       ],
       "file:size": 74791,
-      "file:checksum": "122029f489e2c9779ab5ff2be1790a85c6d66d1935dab78a234fb7e32ca8aad4324f"
+      "file:checksum": "122029f489e2c9779ab5ff2be1790a85c6d66d1935dab78a234fb7e32ca8aad4324f",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [

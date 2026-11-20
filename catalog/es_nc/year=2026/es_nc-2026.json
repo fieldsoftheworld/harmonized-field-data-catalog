@@ -124,7 +124,8 @@
       ],
       "file:size": 266164333,
       "file:checksum": "122078d6e37b8f4bbd297d1f854c0e361781cfbdb2067b858b6f4ab4e807659e7a1b",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "description": "GeoParquet file for the 2026 edition of Spain Navarra, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es_nc-2026.pmtiles",
@@ -134,7 +135,8 @@
         "visual"
       ],
       "file:size": 89858327,
-      "file:checksum": "12200ee9509b79742215d5acb139a2219467bf3dcdad14b6451afd67d0b880ed454c"
+      "file:checksum": "12200ee9509b79742215d5acb139a2219467bf3dcdad14b6451afd67d0b880ed454c",
+      "description": "PMTiles vector tiles of the 2026 edition of Spain Navarra, generated from this item's `data` asset."
     }
   },
   "links": [

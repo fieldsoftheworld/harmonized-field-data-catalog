@@ -114,7 +114,8 @@
       ],
       "file:size": 606503140,
       "file:checksum": "12201d3f7ad403b7b23ce9a296683d1629fcfc98422fe0f20c7f5fe95b7586602dc3",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "description": "GeoParquet file for the 2026 edition of Germany, Bavaria (blocks), partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./de_by_block-2026.pmtiles",
@@ -124,7 +125,8 @@
         "visual"
       ],
       "file:size": 214502957,
-      "file:checksum": "122094936c4424aa9c3d519f14320290914cee193482784d7da3a1c857e343e8b19d"
+      "file:checksum": "122094936c4424aa9c3d519f14320290914cee193482784d7da3a1c857e343e8b19d",
+      "description": "PMTiles vector tiles of the 2026 edition of Germany, Bavaria (blocks), generated from this item's `data` asset."
     }
   },
   "links": [

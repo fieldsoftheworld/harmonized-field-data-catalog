@@ -129,7 +129,8 @@
       ],
       "file:size": 1253823341,
       "file:checksum": "12206fac527aaff40c3add419457bb7bf45f3b9d1d748d9de5bf36ecd93fbfb4a666",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2026 edition of Spain Galicia, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es_ga-2026.pmtiles",
@@ -139,7 +140,8 @@
         "visual"
       ],
       "file:size": 571904589,
-      "file:checksum": "12205656838115375a20538fbc34be20f719f284a3d02b168de9a57573aef124a5ed"
+      "file:checksum": "12205656838115375a20538fbc34be20f719f284a3d02b168de9a57573aef124a5ed",
+      "description": "PMTiles vector tiles of the 2026 edition of Spain Galicia, generated from this item's `data` asset."
     }
   },
   "links": [

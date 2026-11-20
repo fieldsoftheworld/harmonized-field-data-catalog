@@ -114,7 +114,8 @@
       ],
       "file:size": 233998321,
       "file:checksum": "122001a41773850f7ac59012c146ff3efc0236859855509d897f43509dd5f79be125",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2022 edition of Italy, Tuscany, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./it_1-2022.pmtiles",
@@ -124,7 +125,8 @@
         "visual"
       ],
       "file:size": 113915375,
-      "file:checksum": "1220f62f6e49ea38f46be3afc464af643c986a3f75e56d2b2c746b86be217caa7148"
+      "file:checksum": "1220f62f6e49ea38f46be3afc464af643c986a3f75e56d2b2c746b86be217caa7148",
+      "description": "PMTiles vector tiles of the 2022 edition of Italy, Tuscany, generated from this item's `data` asset."
     }
   },
   "links": [

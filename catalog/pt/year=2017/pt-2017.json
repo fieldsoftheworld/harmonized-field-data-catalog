@@ -124,7 +124,8 @@
       ],
       "file:size": 1288939496,
       "file:checksum": "122049ba8862616dc09b23f48136c88335e9c04d65c1b11e3112786d870d55d358ca",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2017 edition of Portugal, partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -126,7 +126,8 @@
       ],
       "file:size": 93339445,
       "file:checksum": "1220e82d1b34dc02114f4179b44f20b6f179f871836d8317e363be151f17b8dd737c",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2009 edition of Belgium, Flanders, partition `year=2009` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

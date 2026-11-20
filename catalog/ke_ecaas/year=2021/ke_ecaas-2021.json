@@ -164,7 +164,8 @@
       ],
       "file:size": 210086,
       "file:checksum": "12209b7e3118ec3d26191e1161b5be90ed8e3e4f99cc505a794a8557685379c20794",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2021 edition of Kenya (ECAAS crop cuts), partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./ke_ecaas-2021.pmtiles",
@@ -174,7 +175,8 @@
         "visual"
       ],
       "file:size": 444004,
-      "file:checksum": "1220ca035c861c24194419047e2a6fab44d69c4c285ecc21f469bc53211f26392ccb"
+      "file:checksum": "1220ca035c861c24194419047e2a6fab44d69c4c285ecc21f469bc53211f26392ccb",
+      "description": "PMTiles vector tiles of the 2021 edition of Kenya (ECAAS crop cuts), generated from this item's `data` asset."
     }
   },
   "links": [

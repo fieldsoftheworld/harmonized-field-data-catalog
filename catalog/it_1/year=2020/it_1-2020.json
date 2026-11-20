@@ -114,7 +114,8 @@
       ],
       "file:size": 248521857,
       "file:checksum": "12205589ca3e1ce23f62c2293078c9a2bd7991365f4638b324c786292ffbfc4cf1a2",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2020 edition of Italy, Tuscany, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

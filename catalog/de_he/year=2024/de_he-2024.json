@@ -94,7 +94,8 @@
       ],
       "file:size": 122673258,
       "file:checksum": "12204089dd785df40f107662f40ab75bc9249b58b042b1b0bd7925d84e95c7214160",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "description": "GeoParquet file for the 2024 edition of Germany, Hesse, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

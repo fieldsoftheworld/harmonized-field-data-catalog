@@ -124,7 +124,8 @@
       ],
       "file:size": 2765516842,
       "file:checksum": "12203a7aca6102d6b00f057a4b40528a22ed1406e438eedab480e83ab3387736b606",
-      "proj:code": "EPSG:2154"
+      "proj:code": "EPSG:2154",
+      "description": "GeoParquet file for the 2024 edition of France, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./fr-2024.pmtiles",
@@ -134,7 +135,8 @@
         "visual"
       ],
       "file:size": 1220076356,
-      "file:checksum": "1220b2f273164ed8ce463fc5ec9029073189402511dda32eada0b25f5c30746575e7"
+      "file:checksum": "1220b2f273164ed8ce463fc5ec9029073189402511dda32eada0b25f5c30746575e7",
+      "description": "PMTiles vector tiles of the 2024 edition of France, generated from this item's `data` asset."
     }
   },
   "links": [

@@ -25,7 +25,7 @@ TOOLS_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(TOOLS_DIR))
 from publish import load_config  # noqa: E402
 
-PORTOLAN_EXTENSION = "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json"
+PORTOLAN_EXTENSION = "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json"
 FILE_EXTENSION = "https://stac-extensions.github.io/file/v2.1.0/schema.json"
 TABLE_EXTENSION = "https://stac-extensions.github.io/table/v1.2.0/schema.json"
 PROJECTION_EXTENSION = "https://stac-extensions.github.io/projection/v2.0.0/schema.json"

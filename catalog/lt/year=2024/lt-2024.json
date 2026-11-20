@@ -114,7 +114,8 @@
       ],
       "file:size": 635533354,
       "file:checksum": "122003b874af7a38e300fd693ad9ca90984c575ff1dc2c60be786701eaefa5005e6b",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2024 edition of Lithuania, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -109,7 +109,8 @@
       ],
       "file:size": 64691674,
       "file:checksum": "12208b561fdff96a0c26c5b97c6a8df52126a4f63470ffaf6881761cd53c56b30a25",
-      "proj:code": "EPSG:4647"
+      "proj:code": "EPSG:4647",
+      "description": "GeoParquet file for the 2025 edition of Germany, Schleswig-Holstein, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

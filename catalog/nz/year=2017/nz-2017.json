@@ -109,7 +109,8 @@
       ],
       "file:size": 9517800,
       "file:checksum": "1220314497c5ba0b69e2458bd8219566c717c316c7e2c675ee28ea0e52e627e67f96",
-      "proj:code": "EPSG:2193"
+      "proj:code": "EPSG:2193",
+      "description": "GeoParquet file for the 2017 edition of New Zealand, partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

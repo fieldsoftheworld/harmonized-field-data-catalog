@@ -99,7 +99,8 @@
       ],
       "file:size": 5766660591,
       "file:checksum": "1220c6266d71c584fa6b387ab9045b5b85efdd2c66b5074f8db14c3873bce0d2e476",
-      "proj:code": "EPSG:6668"
+      "proj:code": "EPSG:6668",
+      "description": "GeoParquet file for the 2022 edition of Japan, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -126,7 +126,8 @@
       ],
       "file:size": 2327659,
       "file:checksum": "12202123352ee8a06a833643c56bbba93cf8cc354deaeb651a924af1450346a7f721",
-      "proj:code": "EPSG:2056"
+      "proj:code": "EPSG:2056",
+      "description": "GeoParquet file for the 2022 edition of Switzerland, Geneva, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

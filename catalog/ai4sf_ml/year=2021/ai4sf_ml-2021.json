@@ -104,7 +104,8 @@
       ],
       "file:size": 38281355,
       "file:checksum": "12203cad8c05d83280abd21ce3f682c557a01f1ccb023706f37ebfde93e4f6fc7e8c",
-      "proj:code": "EPSG:32648"
+      "proj:code": "EPSG:32648",
+      "description": "GeoParquet file for the 2021 edition of Cambodia/Vietnam (AI4SF) with splits, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./ai4sf_ml-2021.pmtiles",
@@ -114,7 +115,8 @@
         "visual"
       ],
       "file:size": 34997984,
-      "file:checksum": "1220378901063ab12cadb8c560e8c5f7ccbb764e1dd910ea95ac4b8edd9f97ba9687"
+      "file:checksum": "1220378901063ab12cadb8c560e8c5f7ccbb764e1dd910ea95ac4b8edd9f97ba9687",
+      "description": "PMTiles vector tiles of the 2021 edition of Cambodia/Vietnam (AI4SF) with splits, generated from this item's `data` asset."
     }
   },
   "links": [

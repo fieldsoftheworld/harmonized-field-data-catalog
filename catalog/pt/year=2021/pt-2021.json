@@ -124,7 +124,8 @@
       ],
       "file:size": 1720105958,
       "file:checksum": "1220853b6bae269bbf088acd200632e6322bf1ab002cb44f1b70859498b4ed2f4a3e",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2021 edition of Portugal, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

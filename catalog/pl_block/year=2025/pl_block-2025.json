@@ -99,7 +99,8 @@
       ],
       "file:size": 1588381370,
       "file:checksum": "1220451bcfbf55da677d2ba32fc86842536451bc963e9317ad0f2b61114952c846ab",
-      "proj:code": "EPSG:2180"
+      "proj:code": "EPSG:2180",
+      "description": "GeoParquet file for the 2025 edition of Poland (blocks), partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./pl_block-2025.pmtiles",
@@ -109,7 +110,8 @@
         "visual"
       ],
       "file:size": 986529721,
-      "file:checksum": "12206e1549281ccfd2228e8b0907bcd78bfc72ee1d32d910980c5f4d5bd0773d34b4"
+      "file:checksum": "12206e1549281ccfd2228e8b0907bcd78bfc72ee1d32d910980c5f4d5bd0773d34b4",
+      "description": "PMTiles vector tiles of the 2025 edition of Poland (blocks), generated from this item's `data` asset."
     }
   },
   "links": [

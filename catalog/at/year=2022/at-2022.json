@@ -124,7 +124,8 @@
       ],
       "file:size": 585536003,
       "file:checksum": "122092c5e7c8f9e85df08738cb28ee068019800126fa9ffd90f80a08d2711d261be6",
-      "proj:code": "EPSG:31287"
+      "proj:code": "EPSG:31287",
+      "description": "GeoParquet file for the 2022 edition of Austria, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

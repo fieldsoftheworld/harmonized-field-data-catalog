@@ -109,7 +109,8 @@
       ],
       "file:size": 15365385,
       "file:checksum": "122059c563f40e583da42047eb4d4acabc3a5dfcd05b0d4d43f9e4b5a9e91010c5bb",
-      "proj:code": "EPSG:2193"
+      "proj:code": "EPSG:2193",
+      "description": "GeoParquet file for the 2020 edition of New Zealand, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./nz-2020.pmtiles",
@@ -119,7 +120,8 @@
         "visual"
       ],
       "file:size": 9738961,
-      "file:checksum": "12207bacad605ec42a995e5d56b4c2963a7764b292f6f88dee2ce3717a3c4fcd6d87"
+      "file:checksum": "12207bacad605ec42a995e5d56b4c2963a7764b292f6f88dee2ce3717a3c4fcd6d87",
+      "description": "PMTiles vector tiles of the 2020 edition of New Zealand, generated from this item's `data` asset."
     }
   },
   "links": [

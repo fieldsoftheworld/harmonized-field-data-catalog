@@ -94,7 +94,8 @@
       ],
       "file:size": 169252,
       "file:checksum": "122041e846579622ea4bf8119a54ad189abec70cc2e8e848888d96e5e1b27ea61ae4",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2021 edition of Rwanda with splits, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./rw_rwanda_ml-2021.pmtiles",
@@ -104,7 +105,8 @@
         "visual"
       ],
       "file:size": 150211,
-      "file:checksum": "122046d684052845cc37350c6dde3c3e5c75fcec6126282cdca8b0936339a1b13fdf"
+      "file:checksum": "122046d684052845cc37350c6dde3c3e5c75fcec6126282cdca8b0936339a1b13fdf",
+      "description": "PMTiles vector tiles of the 2021 edition of Rwanda with splits, generated from this item's `data` asset."
     }
   },
   "links": [

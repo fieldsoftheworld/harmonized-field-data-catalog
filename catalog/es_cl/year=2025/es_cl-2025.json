@@ -114,7 +114,8 @@
       ],
       "file:size": 2655465180,
       "file:checksum": "122002a455761455faf72ee06111cf1b25aea9a14d69938d87c5d2b3f61a5e35fbff",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "description": "GeoParquet file for the 2025 edition of Spain Castilla y León, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es_cl-2025.pmtiles",
@@ -124,7 +125,8 @@
         "visual"
       ],
       "file:size": 1135303322,
-      "file:checksum": "1220d5782182342b5d6f56995be2d78febfddcb39b22ac4b350ae2872066ce5e5430"
+      "file:checksum": "1220d5782182342b5d6f56995be2d78febfddcb39b22ac4b350ae2872066ce5e5430",
+      "description": "PMTiles vector tiles of the 2025 edition of Spain Castilla y León, generated from this item's `data` asset."
     }
   },
   "links": [

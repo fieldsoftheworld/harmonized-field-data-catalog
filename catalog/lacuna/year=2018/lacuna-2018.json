@@ -139,7 +139,8 @@
       ],
       "file:size": 11309052,
       "file:checksum": "1220ec5e985801004ce2fe85d1747cf33f9aaec6ad1dd934205331a5a0f7bc1d706b",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2018 edition of Mapping Africa, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

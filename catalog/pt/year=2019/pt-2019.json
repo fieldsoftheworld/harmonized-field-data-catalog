@@ -124,7 +124,8 @@
       ],
       "file:size": 1441511370,
       "file:checksum": "1220540ea0170421725ad6d2f335b3e9baa2e84f4f06b020c1da3b0efcc5c4b80541",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2019 edition of Portugal, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

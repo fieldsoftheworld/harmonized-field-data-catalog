@@ -114,7 +114,8 @@
       ],
       "file:size": 329318924,
       "file:checksum": "12204a62414cef53dcbc56197b02323683f254cc3649977828d9bed5b5dc1927e0d7",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "description": "GeoParquet file for the 2026 edition of Denmark, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./dk-2026.pmtiles",
@@ -124,7 +125,8 @@
         "visual"
       ],
       "file:size": 252883366,
-      "file:checksum": "1220c26af86ca7d7ea143ec3ed388b638c370bde479b147733937a8538dac8fc5aa9"
+      "file:checksum": "1220c26af86ca7d7ea143ec3ed388b638c370bde479b147733937a8538dac8fc5aa9",
+      "description": "PMTiles vector tiles of the 2026 edition of Denmark, generated from this item's `data` asset."
     }
   },
   "links": [

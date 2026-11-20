@@ -119,7 +119,8 @@
       ],
       "file:size": 95725054,
       "file:checksum": "1220d7e7a2811ca22fc885cd02094e85f4a59e1dc531243502bd4ae29b31d51c30d3",
-      "proj:code": "EPSG:32635"
+      "proj:code": "EPSG:32635",
+      "description": "GeoParquet file for the 2026 edition of Romania - Eurocrops, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./ec_ro-2026.pmtiles",
@@ -129,7 +130,8 @@
         "visual"
       ],
       "file:size": 43108481,
-      "file:checksum": "12209d62750cb3235533e8f92d191ddacc7eafb76f5ae867e9323009c1510c410ca7"
+      "file:checksum": "12209d62750cb3235533e8f92d191ddacc7eafb76f5ae867e9323009c1510c410ca7",
+      "description": "PMTiles vector tiles of the 2026 edition of Romania - Eurocrops, generated from this item's `data` asset."
     }
   },
   "links": [

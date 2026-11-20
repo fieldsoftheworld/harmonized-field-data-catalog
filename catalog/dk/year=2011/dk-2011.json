@@ -114,7 +114,8 @@
       ],
       "file:size": 269260428,
       "file:checksum": "1220d45ebca8e5fedc214ccba4c9d2573f8df2fe7e1b52ea58e8f71a132289f16920",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "description": "GeoParquet file for the 2011 edition of Denmark, partition `year=2011` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

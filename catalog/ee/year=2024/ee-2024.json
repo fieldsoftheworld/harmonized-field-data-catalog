@@ -124,7 +124,8 @@
       ],
       "file:size": 263589795,
       "file:checksum": "1220ccce0a3452d0a6082ae0c59b65c92e22d5bbac4cf3b6f8aae31d2291e7d49cec",
-      "proj:code": "EPSG:3301"
+      "proj:code": "EPSG:3301",
+      "description": "GeoParquet file for the 2024 edition of Estonia, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./ee-2024.pmtiles",
@@ -134,7 +135,8 @@
         "visual"
       ],
       "file:size": 77237843,
-      "file:checksum": "12204dc4689ae5fc60bbc1b7c8b8c76f389cf6fb143afa0f176c29c32015a2dc48d8"
+      "file:checksum": "12204dc4689ae5fc60bbc1b7c8b8c76f389cf6fb143afa0f176c29c32015a2dc48d8",
+      "description": "PMTiles vector tiles of the 2024 edition of Estonia, generated from this item's `data` asset."
     }
   },
   "links": [

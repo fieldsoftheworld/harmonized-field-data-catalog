@@ -126,7 +126,8 @@
       ],
       "file:size": 104356607,
       "file:checksum": "1220c1f36c12991201bb2d3fdc8c3e5e502ba88d530d75427cb61ca97c260235f713",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2018 edition of Belgium, Wallonia, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

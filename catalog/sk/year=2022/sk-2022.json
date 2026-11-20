@@ -129,7 +129,8 @@
       ],
       "file:size": 329540560,
       "file:checksum": "12200a59d2e18389391e37865b07e766ce63ccebf298dd32003eb89c1a11d964fa24",
-      "proj:code": "EPSG:5514"
+      "proj:code": "EPSG:5514",
+      "description": "GeoParquet file for the 2022 edition of Slovakia, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [
