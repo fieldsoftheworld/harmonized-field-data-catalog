@@ -13,33 +13,33 @@
     "coordinates": [
       [
         [
-          20.568966237245437,
-          53.60874759494158
+          21.067471778078886,
+          53.90254367532386
         ],
         [
-          27.217407988674342,
-          53.60874759494158
+          26.8352659347366,
+          53.90254367532386
         ],
         [
-          27.217407988674342,
-          56.81328926399492
+          26.8352659347366,
+          56.444528325621995
         ],
         [
-          20.568966237245437,
-          56.81328926399492
+          21.067471778078886,
+          56.444528325621995
         ],
         [
-          20.568966237245437,
-          53.60874759494158
+          21.067471778078886,
+          53.90254367532386
         ]
       ]
     ]
   },
   "bbox": [
-    20.568966237245437,
-    53.60874759494158,
-    27.217407988674342,
-    56.81328926399492
+    21.067471778078886,
+    53.90254367532386,
+    26.8352659347366,
+    56.444528325621995
   ],
   "properties": {
     "title": "Lithuania — 2025",
@@ -51,16 +51,6 @@
     "proj:code": "EPSG:3035",
     "table:columns": [
       {
-        "name": "crop:name",
-        "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
         "name": "geometry",
         "type": "binary",
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
@@ -71,14 +61,19 @@
         "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
         "name": "crop:code",
         "type": "string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "metrics:area",
+        "type": "float",
+        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "hcat:name_en",
@@ -86,9 +81,14 @@
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
-        "name": "metrics:area",
-        "type": "float",
-        "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
         "name": "bbox",
@@ -99,8 +99,8 @@
     "table:primary_geometry": "geometry",
     "table:row_count": 1156767,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "lt",
@@ -109,24 +109,24 @@
       "href": "./lt-2025.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Lithuania 2025 (GeoParquet)",
+      "description": "GeoParquet file for the 2025 edition of Lithuania, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
-      "file:size": 629190418,
-      "file:checksum": "1220ab32325603f148216ad8a0eeb5ef3495d8cf8c7bcc207801ccc505d654075206",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2025 edition of Lithuania, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "file:size": 629187216,
+      "file:checksum": "12206534a8585d81bbb81c83a2f1c62569e22885e9879a0f2a21cdeb0abf13ba86d0",
+      "proj:code": "EPSG:3035"
     },
     "visual": {
       "href": "./lt-2025.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "Lithuania 2025 (PMTiles)",
+      "description": "PMTiles vector tiles of the 2025 edition of Lithuania, generated from this item's `data` asset.",
       "roles": [
         "visual"
       ],
-      "file:size": 249831058,
-      "file:checksum": "12207b85e92c2c3a958c01fa0bc6e2f2b0d01c7c2690002d686d546c9f2f0b3e59e0",
-      "description": "PMTiles vector tiles of the 2025 edition of Lithuania, generated from this item's `data` asset."
+      "file:size": 249884448,
+      "file:checksum": "12203bebe779a197734f6b1001262b0191b750b05c67f9af25636f1ae71c9df36b8e"
     }
   },
   "links": [

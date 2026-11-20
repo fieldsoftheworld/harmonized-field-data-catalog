@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          20.568966237468857,
-          53.60874998014148
+          21.067471778078886,
+          53.90254367622248
         ],
         [
-          27.217389218389155,
-          53.60874998014148
+          26.835253696122603,
+          53.90254367622248
         ],
         [
-          27.217389218389155,
-          56.81328926486545
+          26.835253696122603,
+          56.44452832652018
         ],
         [
-          20.568966237468857,
-          56.81328926486545
+          21.067471778078886,
+          56.44452832652018
         ],
         [
-          20.568966237468857,
-          53.60874998014148
+          21.067471778078886,
+          53.90254367622248
         ]
       ]
     ]
   },
   "bbox": [
-    20.568966237468857,
-    53.60874998014148,
-    27.217389218389155,
-    56.81328926486545
+    21.067471778078886,
+    53.90254367622248,
+    26.835253696122603,
+    56.44452832652018
   ],
   "properties": {
     "title": "Lithuania — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`lt-2024.parquet`, 1,213,522 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`lt-2024.parquet`, 1,213,520 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2024-01-01T00:00:00Z",
     "end_datetime": "2024-01-01T00:00:00Z",
@@ -56,19 +56,19 @@
         "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "crop:name",
+        "name": "id",
         "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "crop:code",
         "type": "string",
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
+        "name": "crop:name",
+        "type": "string",
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "metrics:area",
@@ -81,14 +81,14 @@
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
       },
       {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
         "name": "hcat:code",
         "type": "uint32",
         "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -97,10 +97,10 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 1213522,
+    "table:row_count": 1213520,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.16"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "lt",
@@ -109,13 +109,13 @@
       "href": "./lt-2024.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Lithuania 2024 (GeoParquet)",
+      "description": "GeoParquet file for the 2024 edition of Lithuania, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
-      "file:size": 635533354,
-      "file:checksum": "122003b874af7a38e300fd693ad9ca90984c575ff1dc2c60be786701eaefa5005e6b",
-      "proj:code": "EPSG:3035",
-      "description": "GeoParquet file for the 2024 edition of Lithuania, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "file:size": 635544493,
+      "file:checksum": "12209f23f75bc45fe03a1e70c64c825e5a4382dca4c8aa448c1e545115307a21f4d3",
+      "proj:code": "EPSG:3035"
     }
   },
   "links": [

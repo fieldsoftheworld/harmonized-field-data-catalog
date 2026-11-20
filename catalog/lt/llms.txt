@@ -5,5 +5,5 @@ Lithuania field boundaries (2024, 2025) as fiboa GeoParquet + PMTiles, mirrored 
 - Latest: https://data.source.coop/ftw/harmonized-field-data/lt/latest/lt.parquet
 - All editions: s3://ftw/harmonized-field-data/lt/year=*/*.parquet (S3 via endpoint https://data.source.coop, path style, anonymous; hive_partitioning=true adds `year`)
 - CRS EPSG:3035; `metrics:area` in m²; `year` = edition, `id` unique per edition only.
-- Columns: crop:name, hcat:name, geometry, id, hcat:code, crop:code, hcat:name_en, metrics:area, bbox
+- Columns: geometry, id, crop:code, crop:name, metrics:area, hcat:name_en, hcat:name, hcat:code, bbox
 - Docs: https://source.coop/ftw/harmonized-field-data/lt/README.md, agent guide https://source.coop/ftw/harmonized-field-data/lt/AGENTS.md, STAC https://data.source.coop/ftw/harmonized-field-data/lt/collection.json
