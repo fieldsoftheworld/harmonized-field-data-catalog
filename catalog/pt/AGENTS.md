@@ -56,20 +56,20 @@ GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- 330306 | vineyards_wine_vine_rebland_grapes | 260029 | 127716.0
 ```
 
-Fields around a point, transforming the point into the data's CRS instead of the data into WGS84:
+Fields within about 500 m (0.005°; the CRS is in degrees) of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
 
 ```sql
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/pt/latest/pt.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(37.3895, -18.7287), 'EPSG:4326', 'EPSG:4326'), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(-17.1975, 32.8673), 'EPSG:4326', 'EPSG:4326', always_xy := true), 0.005))
 LIMIT 5;
 -- id | m2
--- 203575 | 6432.0
--- 8464487 | 2202.0
--- 1080533 | 2456.0
--- 1080532 | 2370.0
--- 203574 | 4033.0
+-- 2406289 | 557.0
+-- 6319569 | 596.0
+-- 2406285 | 409.0
+-- 8485025 | 727.0
+-- 2406298 | 246.0
 ```
 
 ## Related collections

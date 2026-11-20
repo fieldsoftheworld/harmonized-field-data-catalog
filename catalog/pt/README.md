@@ -71,9 +71,9 @@ This catalog is a mirror: the data is produced and licensed by [IPAP - Instituto
 - 2018: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2017-2020/2018.zip>
 - 2019: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2017-2020/2019.zip>
 - 2020: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2017-2020/2020.zip>
-- 2021: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2021/2021.zip>
+- 2021: converted 2026-11-20 from <https://www.ifap.pt/isip/ows/resources/2021/2021.zip>
 - 2022: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2022/2022.zip>
-- 2023: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2023/Continente.gpkg>
+- 2023: converted 2026-11-20 from <https://www.ifap.pt/isip/ows/resources/2023/Continente.gpkg>
 - 2025: converted 2026-11-18 from <https://www.ifap.pt/isip/ows/resources/2025/culturas.gpkg>
 
 The conversion is deterministic and lives in [fiboa-cli](https://github.com/fiboa/cli); changes to how a column is mapped are made there, not in this catalog.

@@ -119,13 +119,13 @@
       "href": "./pt-2023.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "Portugal 2023 (GeoParquet)",
+      "description": "GeoParquet file for the 2023 edition of Portugal, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema.",
       "roles": [
         "data"
       ],
-      "file:size": 1244081682,
-      "file:checksum": "1220207401837b3cfc3d2670717e8e60c92dd8c8f54cd6462899f68b2ac7b2cd69fd",
-      "proj:code": "EPSG:3763",
-      "description": "GeoParquet file for the 2023 edition of Portugal, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
+      "file:size": 1244080035,
+      "file:checksum": "122027a9ac306683aba475508a79847eaf36041c58cd530fb5ffaa2494f7aff2e122",
+      "proj:code": "EPSG:3763"
     }
   },
   "links": [
