@@ -8,7 +8,8 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "de_nrw",
   "title": "Field blocks for North Rhine-Westphalia (NRW), Germany",
@@ -331,5 +332,13 @@
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/inspire-extension/v0.3.0/schema.yaml"
     ]
+  },
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
   }
 }

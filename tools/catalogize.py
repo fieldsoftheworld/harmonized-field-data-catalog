@@ -51,6 +51,7 @@ from common import (
     ROOT_TILES_FACTS,
     ROOT_TILES_LAYER,
     STAGING_DIR,
+    STORAGE_EXTENSION,
     STYLE_TYPE,
     TABLE_EXTENSION,
     TOOLS_DIR,
@@ -58,6 +59,7 @@ from common import (
     Dataset,
     Manifest,
     catalog_year_dir,
+    storage_schemes,
     column_stats,
     duckdb_connect,
     duckdb_s3_setup,
@@ -557,6 +559,7 @@ def build_collection(
             PROCESSING_EXTENSION,
             WEB_MAP_LINKS_EXTENSION,
             PARTITION_EXTENSION,
+            STORAGE_EXTENSION,
         ],
         "id": ds.id,
         "title": meta["title"],
@@ -593,6 +596,7 @@ def build_collection(
         ],
         "partition:file_count": len(years),
         "partition:glob": glob,
+        "storage:schemes": storage_schemes(config),
         "assets": {
             "data": {
                 "href": f"./latest/{ds.id}.parquet",

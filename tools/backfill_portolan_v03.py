@@ -17,6 +17,14 @@ using only fields already present in the committed JSON (title, year,
 basemap choice inferred from the existing title text) — no parquet/PMTiles
 read, no network. Run once; a future real rebuild is idempotent with it.
 
+Also applies PORTO-FMT-066 (``storage:schemes``, added to this PR after a
+sibling migration's rashid run showed a local ``--no-data`` pass cannot
+prove a live partition listing actually works): every collection's
+``storage:schemes`` and ``stac_extensions`` are set to match
+``common.storage_schemes()`` / ``common.STORAGE_EXTENSION``, which read the
+real `catalog.publish.yaml` — this one touches config, unlike the
+text-only patches above.
+
     python3 tools/backfill_portolan_v03.py           # dry run, prints a diff summary
     python3 tools/backfill_portolan_v03.py --write   # writes catalog/**/*.json
 """
@@ -25,13 +33,24 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG_DIR = ROOT / "catalog"
+TOOLS_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(TOOLS_DIR))
+
+import common  # noqa: E402
 
 OLD_SCHEMA_RE = re.compile(r"https://schemas\.portolan-sdi\.org/portolan/v[\d.]+/schema\.json")
 NEW_SCHEMA = "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json"
+
+
+def ensure_extension(extensions: list[str], ext: str) -> tuple[list[str], bool]:
+    if ext in extensions:
+        return extensions, False
+    return [*extensions, ext], True
 
 
 def bump_schema_uri(extensions: list[str]) -> tuple[list[str], bool]:
@@ -90,7 +109,7 @@ def short_name_from_asset_title(title: str, year: str, suffix: str) -> str | Non
     return None
 
 
-def patch_collection(doc: dict) -> bool:
+def patch_collection(doc: dict, schemes: dict) -> bool:
     changed = False
     if "stac_extensions" in doc:
         doc["stac_extensions"], c = bump_schema_uri(doc["stac_extensions"])
@@ -105,6 +124,15 @@ def patch_collection(doc: dict) -> bool:
     visual = assets.get("visual")
     if visual and not visual.get("description"):
         visual["description"] = collection_visual_description(visual.get("title", ""))
+        changed = True
+
+    # PORTO-FMT-066: every collection with a partition:glob needs a
+    # storage:schemes entry naming the proxy as custom-s3, or a client (and
+    # rashid's --data pass) assumes AWS S3's hostname template and the glob
+    # listing is denied.
+    if "partition:glob" in doc and doc.get("storage:schemes") != schemes:
+        doc["storage:schemes"] = schemes
+        doc["stac_extensions"], c = ensure_extension(doc.get("stac_extensions", []), common.STORAGE_EXTENSION)
         changed = True
 
     return changed
@@ -144,8 +172,11 @@ def main() -> int:
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
+    schemes = common.storage_schemes(common.publish_config())
+
     touched: list[Path] = []
     unpatched_assets: list[str] = []
+    unpatched_schemes: list[str] = []
 
     for path in sorted(CATALOG_DIR.rglob("*.json")):
         rel = path.relative_to(CATALOG_DIR)
@@ -159,7 +190,7 @@ def main() -> int:
         if rel == Path("catalog.json"):
             changed = patch_catalog_root(doc)
         elif path.name == "collection.json":
-            changed = patch_collection(doc)
+            changed = patch_collection(doc, schemes)
         elif doc.get("type") == "Feature":
             changed = patch_item(doc)
         else:
@@ -177,17 +208,25 @@ def main() -> int:
         for name, asset in doc.get("assets", {}).items():
             if name in ("thumbnail", "visual", "data") and not asset.get("description"):
                 unpatched_assets.append(f"{rel}: asset '{name}'")
+        if path.name == "collection.json" and "partition:glob" in doc and doc.get("storage:schemes") != schemes:
+            unpatched_schemes.append(str(rel))
 
     mode = "would patch" if not args.write else "patched"
     print(f"{mode} {len(touched)} file(s)")
+    ok = True
     if unpatched_assets:
+        ok = False
         print(f"\n{len(unpatched_assets)} asset(s) still missing a description (title did not match the expected template):")
         for u in unpatched_assets[:50]:
             print(f"  {u}")
         if len(unpatched_assets) > 50:
             print(f"  ... and {len(unpatched_assets) - 50} more")
-        return 1
-    return 0
+    if unpatched_schemes:
+        ok = False
+        print(f"\n{len(unpatched_schemes)} collection(s) still missing the storage:schemes entry:")
+        for u in unpatched_schemes[:50]:
+            print(f"  {u}")
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":

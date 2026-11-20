@@ -8,7 +8,8 @@
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "de_thuenen",
   "title": "Crop type map of Germany from Sentinel-1, Sentinel-2 and Landsat (Thünen Institute)",
@@ -291,5 +292,13 @@
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "Tetteh, G.O., Schwieder, M., Blickensdörfer, L., Gocht, A., Erasmi, S. (2024): Agricultural land use (vector): National-scale crop type maps for Germany, v201, Thünen-Institut, doi:10.5281/zenodo.10619783"
+  "attribution": "Tetteh, G.O., Schwieder, M., Blickensdörfer, L., Gocht, A., Erasmi, S. (2024): Agricultural land use (vector): National-scale crop type maps for Germany, v201, Thünen-Institut, doi:10.5281/zenodo.10619783",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }
