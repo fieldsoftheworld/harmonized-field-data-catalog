@@ -104,7 +104,8 @@
       ],
       "file:size": 64512320,
       "file:checksum": "122051a382dd48f17c7ead6e460123e902be1446fc60f3a11423419d9910247b6535",
-      "proj:code": "EPSG:4647"
+      "proj:code": "EPSG:4647",
+      "description": "GeoParquet file for the 2026 edition of Germany, Schleswig-Holstein, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./de_sh-2026.pmtiles",
@@ -114,7 +115,8 @@
         "visual"
       ],
       "file:size": 26072031,
-      "file:checksum": "122072ad0e9c1163c8a0d27e57b6add632ba379a63377a26fcd836b99755ce63e133"
+      "file:checksum": "122072ad0e9c1163c8a0d27e57b6add632ba379a63377a26fcd836b99755ce63e133",
+      "description": "PMTiles vector tiles of the 2026 edition of Germany, Schleswig-Holstein, generated from this item's `data` asset."
     }
   },
   "links": [

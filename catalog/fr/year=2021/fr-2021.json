@@ -124,7 +124,8 @@
       ],
       "file:size": 2572340252,
       "file:checksum": "12201999998b8afae2d7b4426dbf39c7e412fcd093a7706833885c884bd105ae1626",
-      "proj:code": "EPSG:2154"
+      "proj:code": "EPSG:2154",
+      "description": "GeoParquet file for the 2021 edition of France, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -126,7 +126,8 @@
       ],
       "file:size": 104819101,
       "file:checksum": "12204cb4dd5337ba9cc3e814299156d85ed051516d95aa0701e424647e98189b20e7",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2012 edition of Germany, Berlin/Brandenburg, partition `year=2012` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -119,7 +119,8 @@
       ],
       "file:size": 299335116,
       "file:checksum": "122033f481368bce8437052a4cecd9c0faee17c79aceaae53294434b9e7235a58481",
-      "proj:code": "EPSG:3067"
+      "proj:code": "EPSG:3067",
+      "description": "GeoParquet file for the 2020 edition of Finland, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

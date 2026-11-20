@@ -119,7 +119,8 @@
       ],
       "file:size": 1908404500,
       "file:checksum": "122036e487b0bdfbf96b6d447043cc1358a65b9cc92d3ab6037d9be80e4351e62be2",
-      "proj:code": "EPSG:25830"
+      "proj:code": "EPSG:25830",
+      "description": "GeoParquet file for the 2025 edition of Spain Andalusia, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es_an-2025.pmtiles",
@@ -129,7 +130,8 @@
         "visual"
       ],
       "file:size": 540826771,
-      "file:checksum": "1220a5b027747daa3fbd3500d516567f98daea1fed593aef5b3f236ef0413ad8f4ef"
+      "file:checksum": "1220a5b027747daa3fbd3500d516567f98daea1fed593aef5b3f236ef0413ad8f4ef",
+      "description": "PMTiles vector tiles of the 2025 edition of Spain Andalusia, generated from this item's `data` asset."
     }
   },
   "links": [

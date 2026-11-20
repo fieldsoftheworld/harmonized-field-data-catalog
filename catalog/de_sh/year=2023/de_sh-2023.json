@@ -109,7 +109,8 @@
       ],
       "file:size": 65092890,
       "file:checksum": "1220ed52a4f8a03b7b015cf035858c3d8bd3f7abb52987647c70232fa8f7d510a270",
-      "proj:code": "EPSG:4647"
+      "proj:code": "EPSG:4647",
+      "description": "GeoParquet file for the 2023 edition of Germany, Schleswig-Holstein, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

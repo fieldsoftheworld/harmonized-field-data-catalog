@@ -134,7 +134,8 @@
       ],
       "file:size": 454818405,
       "file:checksum": "12205e7c27cdadbc0ec98e6ad5ff37a77a1be08672db3954c0bc8b210691fab5670e",
-      "proj:code": "EPSG:3059"
+      "proj:code": "EPSG:3059",
+      "description": "GeoParquet file for the 2021 edition of Latvia - Eurocrops 2021, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./ec_lv-2021.pmtiles",
@@ -144,7 +145,8 @@
         "visual"
       ],
       "file:size": 189537725,
-      "file:checksum": "1220fee8c0433e5c202b86e36f63fee2fb85c27de63a13ef08da39d40b01a411afbc"
+      "file:checksum": "1220fee8c0433e5c202b86e36f63fee2fb85c27de63a13ef08da39d40b01a411afbc",
+      "description": "PMTiles vector tiles of the 2021 edition of Latvia - Eurocrops 2021, generated from this item's `data` asset."
     }
   },
   "links": [

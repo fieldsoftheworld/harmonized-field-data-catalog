@@ -109,7 +109,8 @@
       ],
       "file:size": 581501797,
       "file:checksum": "12206a4eebcde185e70249670b7c0ca2987f888ff9f30724a529c8632bc1e226da5b",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2018 edition of Germany (Thünen), partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

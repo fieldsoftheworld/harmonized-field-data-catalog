@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "es_ex",
   "title": "Spain Extremadura Crop fields",
@@ -202,7 +203,8 @@
         "visual"
       ],
       "file:size": 364685631,
-      "file:checksum": "122013c74f9b35a9b59a81425515db2f65543bd7e4523fa400c02e1a9664822b0fb4"
+      "file:checksum": "122013c74f9b35a9b59a81425515db2f65543bd7e4523fa400c02e1a9664822b0fb4",
+      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -212,7 +214,8 @@
         "thumbnail"
       ],
       "file:size": 270644,
-      "file:checksum": "1220b9e02fb43aeb7c70d038400aa01553ae5d41f033120c98d596aa0930236b69c1"
+      "file:checksum": "1220b9e02fb43aeb7c70d038400aa01553ae5d41f033120c98d596aa0930236b69c1",
+      "description": "Static JPEG image rendered from the collection's default style, with no basemap."
     }
   },
   "links": [
@@ -296,5 +299,13 @@
       "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
-  "attribution": "©FEGA / Ministerio de Agricultura, Pesca y Alimentación"
+  "attribution": "©FEGA / Ministerio de Agricultura, Pesca y Alimentación",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

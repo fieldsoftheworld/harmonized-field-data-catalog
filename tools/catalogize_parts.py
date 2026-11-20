@@ -37,6 +37,7 @@ from common import (
     PMTILES_TYPE,
     PORTOLAN_EXTENSION,
     PROJECTION_EXTENSION,
+    STORAGE_EXTENSION,
     TABLE_EXTENSION,
     WEB_MAP_LINKS_EXTENSION,
     Dataset,
@@ -53,6 +54,7 @@ from common import (
     parse_link_str,
     partition_dir,
     publish_config,
+    storage_schemes,
     write_json,
     write_text,
 )
@@ -251,6 +253,7 @@ def parts_collection(
             PROJECTION_EXTENSION,
             WEB_MAP_LINKS_EXTENSION,
             PARTITION_EXTENSION,
+            STORAGE_EXTENSION,
         ],
         # no processing extension: the software is per source and lives on the items
         "id": ds.id,
@@ -287,6 +290,7 @@ def parts_collection(
         ],
         "partition:file_count": len(inputs),
         "partition:glob": glob,
+        "storage:schemes": storage_schemes(config),
         # No data asset: each source's files are its items' assets, and a collection-level
         # asset per source would be judged against the extent of the whole collection
         "assets": {
@@ -294,6 +298,11 @@ def parts_collection(
                 "href": f"./latest/{pmtiles.name}",
                 "type": PMTILES_TYPE,
                 "title": f"{ds.title} — latest edition of every source (PMTiles)",
+                "description": (
+                    "PMTiles vector tiles of the newest edition of every source feeding this collection, "
+                    "for rendering this collection's styles (`styles/`) in a web map. The underlying "
+                    "GeoParquet is each item's `data` asset and this collection's `partition:glob`."
+                ),
                 "roles": ["visual"],
                 **file_facts(pmtiles),
             },

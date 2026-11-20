@@ -129,7 +129,8 @@
       ],
       "file:size": 337484102,
       "file:checksum": "12206044c0cecda2b6f7f4a93820507f13bbb791b76ee0085fca8ab58e4cb7e88ab0",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "description": "GeoParquet file for the 2026 edition of Czech, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./cz-2026.pmtiles",
@@ -139,7 +140,8 @@
         "visual"
       ],
       "file:size": 150407686,
-      "file:checksum": "1220f2ce381c232bff48172c99fe7154bf9f0fc2199fa195f8c2e28f9c9670882944"
+      "file:checksum": "1220f2ce381c232bff48172c99fe7154bf9f0fc2199fa195f8c2e28f9c9670882944",
+      "description": "PMTiles vector tiles of the 2026 edition of Czech, generated from this item's `data` asset."
     }
   },
   "links": [

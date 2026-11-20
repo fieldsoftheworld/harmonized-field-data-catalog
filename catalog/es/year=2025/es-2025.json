@@ -134,7 +134,8 @@
       ],
       "file:size": 10468973297,
       "file:checksum": "12209cfd0c6427ce115a31ebd356df919d6f5bbde8898fddcf7c39acad7997205418",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "description": "GeoParquet file for the 2025 edition of Spain, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es-2025.pmtiles",
@@ -144,7 +145,8 @@
         "visual"
       ],
       "file:size": 4239735537,
-      "file:checksum": "1220338aacd45046c97402d6b290c0b9e31a969a677fca1a9175212e31833371acf2"
+      "file:checksum": "1220338aacd45046c97402d6b290c0b9e31a969a677fca1a9175212e31833371acf2",
+      "description": "PMTiles vector tiles of the 2025 edition of Spain, generated from this item's `data` asset."
     }
   },
   "links": [

@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "fr",
   "title": "Registre Parcellaire Graphique; Crop Fields France",
@@ -206,7 +207,8 @@
         "visual"
       ],
       "file:size": 1220076356,
-      "file:checksum": "1220b2f273164ed8ce463fc5ec9029073189402511dda32eada0b25f5c30746575e7"
+      "file:checksum": "1220b2f273164ed8ce463fc5ec9029073189402511dda32eada0b25f5c30746575e7",
+      "description": "PMTiles vector tiles of the 2024 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -216,7 +218,8 @@
         "thumbnail"
       ],
       "file:size": 286403,
-      "file:checksum": "1220736a399fe9b3945dbd3ee973e169938403df585ac682f8055ecf7ed709918473"
+      "file:checksum": "1220736a399fe9b3945dbd3ee973e169938403df585ac682f8055ecf7ed709918473",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -354,5 +357,13 @@
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "IGN - Original data from https://geoservices.ign.fr/rpg"
+  "attribution": "IGN - Original data from https://geoservices.ign.fr/rpg",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

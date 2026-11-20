@@ -126,7 +126,8 @@
       ],
       "file:size": 122612185,
       "file:checksum": "12209a7186b340c4a0babfa153478f48d10f89700b521a2290022cd8148667d43c1c",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2023 edition of Germany, Berlin/Brandenburg, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

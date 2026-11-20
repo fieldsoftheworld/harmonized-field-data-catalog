@@ -124,7 +124,8 @@
       ],
       "file:size": 3101476173,
       "file:checksum": "12200106a5ff5eaf23c285a016bd9e768aa7c470ad2d01117a3acf25b54fd75363ee",
-      "proj:code": null
+      "proj:code": null,
+      "description": "GeoParquet file for the 2022 edition of US (USDA CSB), partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

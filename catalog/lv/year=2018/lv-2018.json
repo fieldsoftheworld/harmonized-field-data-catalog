@@ -129,7 +129,8 @@
       ],
       "file:size": 448800174,
       "file:checksum": "122062ae335f8b2356843bc49ef8dd848d30cd324edc5ca2456e009f8e8ab2a0ff09",
-      "proj:code": "EPSG:3059"
+      "proj:code": "EPSG:3059",
+      "description": "GeoParquet file for the 2018 edition of Latvia, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

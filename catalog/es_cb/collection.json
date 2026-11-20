@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "es_cb",
   "title": "Spain Cantabria Crop fields",
@@ -184,7 +185,8 @@
         "visual"
       ],
       "file:size": 93371935,
-      "file:checksum": "122004229b2f8484abda33e4fc69d1d1deac8cb99bfddd28506e230b75d485d60b1f"
+      "file:checksum": "122004229b2f8484abda33e4fc69d1d1deac8cb99bfddd28506e230b75d485d60b1f",
+      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -194,7 +196,8 @@
         "thumbnail"
       ],
       "file:size": 305509,
-      "file:checksum": "122069a71bc650a1b3c17d4a46f2974e43ee8b6f6891b1dbb81fddb34fd937d8a080"
+      "file:checksum": "122069a71bc650a1b3c17d4a46f2974e43ee8b6f6891b1dbb81fddb34fd937d8a080",
+      "description": "Static JPEG image rendered from the collection's default style, with no basemap."
     }
   },
   "links": [
@@ -368,5 +371,13 @@
       "https://fiboa.org/crop-extension/v0.2.0/schema.yaml"
     ]
   },
-  "attribution": "© Gobierno de Cantabria. Información gratuita disponible en https://mapas.cantabria.es"
+  "attribution": "© Gobierno de Cantabria. Información gratuita disponible en https://mapas.cantabria.es",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

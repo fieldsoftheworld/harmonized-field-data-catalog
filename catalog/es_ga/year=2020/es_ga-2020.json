@@ -129,7 +129,8 @@
       ],
       "file:size": 1296262269,
       "file:checksum": "1220a69f32b18869aa40c4272333a655a0f81eb3f31d1fd05512c2ddf3feb39ea5c8",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2020 edition of Spain Galicia, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

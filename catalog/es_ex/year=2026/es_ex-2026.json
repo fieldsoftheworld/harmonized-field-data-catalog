@@ -129,7 +129,8 @@
       ],
       "file:size": 881810706,
       "file:checksum": "12206b9fdcce6d5bb1a5e6513fb894227e5045a571b6999a8acad63a7f895e0e55d9",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "description": "GeoParquet file for the 2026 edition of Spain Extremadura, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es_ex-2026.pmtiles",
@@ -139,7 +140,8 @@
         "visual"
       ],
       "file:size": 364685631,
-      "file:checksum": "122013c74f9b35a9b59a81425515db2f65543bd7e4523fa400c02e1a9664822b0fb4"
+      "file:checksum": "122013c74f9b35a9b59a81425515db2f65543bd7e4523fa400c02e1a9664822b0fb4",
+      "description": "PMTiles vector tiles of the 2026 edition of Spain Extremadura, generated from this item's `data` asset."
     }
   },
   "links": [

@@ -114,7 +114,8 @@
       ],
       "file:size": 183251006,
       "file:checksum": "1220a8eecf1750d0a3dcc594505cd071d603213b2d47d2d9737d3190aa2e96a12d3f",
-      "proj:code": "EPSG:32635"
+      "proj:code": "EPSG:32635",
+      "description": "GeoParquet file for the 2025 edition of Bulgaria, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./bg-2025.pmtiles",
@@ -124,7 +125,8 @@
         "visual"
       ],
       "file:size": 69357274,
-      "file:checksum": "122050f112a8ea4896dbdf346136bb476201eb87823a116d27277c3ea4a4a5a8f3d9"
+      "file:checksum": "122050f112a8ea4896dbdf346136bb476201eb87823a116d27277c3ea4a4a5a8f3d9",
+      "description": "PMTiles vector tiles of the 2025 edition of Bulgaria, generated from this item's `data` asset."
     }
   },
   "links": [

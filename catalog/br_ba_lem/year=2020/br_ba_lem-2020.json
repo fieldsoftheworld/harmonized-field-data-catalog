@@ -149,7 +149,8 @@
       ],
       "file:size": 1436369,
       "file:checksum": "1220fc9f8e179246144d850a6d48aff813d5a1ab4a94b3cf8dc25caaaaf8ba767f93",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2020 edition of West Bahia, Brazil, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./br_ba_lem-2020.pmtiles",
@@ -159,7 +160,8 @@
         "visual"
       ],
       "file:size": 729948,
-      "file:checksum": "1220296d5c8773173f6a173130a93f906ec3bc2f8b4e2910c4ba47dc3d3923532c53"
+      "file:checksum": "1220296d5c8773173f6a173130a93f906ec3bc2f8b4e2910c4ba47dc3d3923532c53",
+      "description": "PMTiles vector tiles of the 2020 edition of West Bahia, Brazil, generated from this item's `data` asset."
     }
   },
   "links": [

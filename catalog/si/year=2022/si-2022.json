@@ -129,7 +129,8 @@
       ],
       "file:size": 182610309,
       "file:checksum": "1220ed26b08bc8f56fca421db8942d2bf5f063054b86f9ced3f20d94dbe462ab2eff",
-      "proj:code": "EPSG:3794"
+      "proj:code": "EPSG:3794",
+      "description": "GeoParquet file for the 2022 edition of Slovenia, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

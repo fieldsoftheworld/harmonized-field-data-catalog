@@ -124,7 +124,8 @@
       ],
       "file:size": 218358465,
       "file:checksum": "1220ad7fd0aec9df9711e3f1a55635cc02ac7ce233fa80ae2abf547d03a26f21a22b",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "description": "GeoParquet file for the 2025 edition of Germany, Lower Saxony/Bremen/Hamburg, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./de_nds-2025.pmtiles",
@@ -134,7 +135,8 @@
         "visual"
       ],
       "file:size": 84744106,
-      "file:checksum": "1220b09effdac87ef0186a10996aa6de05b72977358c52e139d31eaa21b3c4b9c9da"
+      "file:checksum": "1220b09effdac87ef0186a10996aa6de05b72977358c52e139d31eaa21b3c4b9c9da",
+      "description": "PMTiles vector tiles of the 2025 edition of Germany, Lower Saxony/Bremen/Hamburg, generated from this item's `data` asset."
     }
   },
   "links": [

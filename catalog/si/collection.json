@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "si",
   "title": "Slovenia Crop Fields",
@@ -200,7 +201,8 @@
         "visual"
       ],
       "file:size": 147036822,
-      "file:checksum": "1220d96b31ce1b4da70521805d2fb735dbad9ddfbcfcf8e9a725a1d189875214cbef"
+      "file:checksum": "1220d96b31ce1b4da70521805d2fb735dbad9ddfbcfcf8e9a725a1d189875214cbef",
+      "description": "PMTiles vector tiles of the 2024 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -210,7 +212,8 @@
         "thumbnail"
       ],
       "file:size": 313377,
-      "file:checksum": "12207ac89657e65f41f3c33e64472cc49345197b4c792db267871dd60295d83ff31d"
+      "file:checksum": "12207ac89657e65f41f3c33e64472cc49345197b4c792db267871dd60295d83ff31d",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -323,5 +326,13 @@
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
+  },
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
   }
 }

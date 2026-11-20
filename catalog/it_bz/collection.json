@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "it_bz",
   "title": "Field boundaries for South Tyrol, Italy",
@@ -161,7 +162,8 @@
         "visual"
       ],
       "file:size": 36693225,
-      "file:checksum": "1220988618e3632c5ae4a9a45ad9b40bf5bcf1da01bb5a8806a401b402d33b821ea8"
+      "file:checksum": "1220988618e3632c5ae4a9a45ad9b40bf5bcf1da01bb5a8806a401b402d33b821ea8",
+      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -171,7 +173,8 @@
         "thumbnail"
       ],
       "file:size": 229821,
-      "file:checksum": "1220f9f13f0acc14b56a27117b935bb02756026581e3f8c7c09a9d99c1bbe9b9fffc"
+      "file:checksum": "1220f9f13f0acc14b56a27117b935bb02756026581e3f8c7c09a9d99c1bbe9b9fffc",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -248,5 +251,13 @@
       "https://vecorel.org/administrative-division-extension/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "© Autonome Provinz Bozen - Südtirol"
+  "attribution": "© Autonome Provinz Bozen - Südtirol",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

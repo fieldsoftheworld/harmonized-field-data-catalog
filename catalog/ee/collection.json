@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "ee",
   "title": "Field boundaries for Estonia",
@@ -205,7 +206,8 @@
         "visual"
       ],
       "file:size": 77237843,
-      "file:checksum": "12204dc4689ae5fc60bbc1b7c8b8c76f389cf6fb143afa0f176c29c32015a2dc48d8"
+      "file:checksum": "12204dc4689ae5fc60bbc1b7c8b8c76f389cf6fb143afa0f176c29c32015a2dc48d8",
+      "description": "PMTiles vector tiles of the 2024 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -215,7 +217,8 @@
         "thumbnail"
       ],
       "file:size": 185926,
-      "file:checksum": "1220e71c49856337c737f5ecf7e2185099d0d0d660e02d8c83b4d7b3c5437fc23795"
+      "file:checksum": "1220e71c49856337c737f5ecf7e2185099d0d0d660e02d8c83b4d7b3c5437fc23795",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -346,5 +349,13 @@
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   },
-  "attribution": "© Põllumajanduse Registrite ja Informatsiooni Amet"
+  "attribution": "© Põllumajanduse Registrite ja Informatsiooni Amet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

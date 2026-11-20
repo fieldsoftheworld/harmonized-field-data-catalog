@@ -109,7 +109,8 @@
       ],
       "file:size": 588728865,
       "file:checksum": "1220cb482f0fd5f626907c8cfa972842ffaf76f6ed5b51358bd2657bc290622ba8e0",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2020 edition of Germany (Thünen), partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

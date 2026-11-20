@@ -129,7 +129,8 @@
       ],
       "file:size": 1439067242,
       "file:checksum": "12200708c4d439858e2a64d9a7fd272fd633b1ef41c1c0bf10f250755e3824de5a92",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "description": "GeoParquet file for the 2026 edition of Spain Aragon, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es_ar-2026.pmtiles",
@@ -139,7 +140,8 @@
         "visual"
       ],
       "file:size": 564849927,
-      "file:checksum": "1220ec6dc12ef998c84491479b5ef69d4a893247b0d164e739f1d4c72763da29f867"
+      "file:checksum": "1220ec6dc12ef998c84491479b5ef69d4a893247b0d164e739f1d4c72763da29f867",
+      "description": "PMTiles vector tiles of the 2026 edition of Spain Aragon, generated from this item's `data` asset."
     }
   },
   "links": [

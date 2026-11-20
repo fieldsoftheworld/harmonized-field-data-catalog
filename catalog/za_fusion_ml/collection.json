@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "za_fusion_ml",
   "title": "South Africa Crop Field Boundaries (Fusion Competition) with splits",
@@ -192,7 +193,8 @@
         "visual"
       ],
       "file:size": 1194721,
-      "file:checksum": "12203c2cd6782b6532a347490b83094c49f17d2bd61a442d4cb7d7cb995408668993"
+      "file:checksum": "12203c2cd6782b6532a347490b83094c49f17d2bd61a442d4cb7d7cb995408668993",
+      "description": "PMTiles vector tiles of the 2017 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -202,7 +204,8 @@
         "thumbnail"
       ],
       "file:size": 62095,
-      "file:checksum": "12204c71401aad9e561fcf7077ad4efc44987d62a3cd3611c11fc1c586cae8fe7a8d"
+      "file:checksum": "12204c71401aad9e561fcf7077ad4efc44987d62a3cd3611c11fc1c586cae8fe7a8d",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -273,5 +276,13 @@
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   },
-  "attribution": "https://data.source.coop/esa/fusion-competition"
+  "attribution": "https://data.source.coop/esa/fusion-competition",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

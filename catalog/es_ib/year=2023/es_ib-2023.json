@@ -114,7 +114,8 @@
       ],
       "file:size": 174884609,
       "file:checksum": "122022065e067f93f09ddd512f3ac5d0d517f666213dd74af731680db665eb03f691",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2023 edition of Spain Balearic Islands, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

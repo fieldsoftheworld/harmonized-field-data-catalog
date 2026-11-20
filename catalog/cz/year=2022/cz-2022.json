@@ -124,7 +124,8 @@
       ],
       "file:size": 280465379,
       "file:checksum": "12201e8321fe91399225e78db8689a4f7bacbb54296c3fbed114787a38ee6be30950",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "description": "GeoParquet file for the 2022 edition of Czech, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

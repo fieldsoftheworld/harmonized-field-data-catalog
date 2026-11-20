@@ -99,7 +99,8 @@
       ],
       "file:size": 5848709427,
       "file:checksum": "1220f7d94cc397f2205382e139b8d94495577d6d4395501ba815986d10556f42c20a",
-      "proj:code": "EPSG:6668"
+      "proj:code": "EPSG:6668",
+      "description": "GeoParquet file for the 2021 edition of Japan, partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

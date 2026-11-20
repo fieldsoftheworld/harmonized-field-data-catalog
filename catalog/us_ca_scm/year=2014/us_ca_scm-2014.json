@@ -119,7 +119,8 @@
       ],
       "file:size": 90988709,
       "file:checksum": "12202e53272fa176bb22e29b2c9b4c4d4731de164a0d13919bd15576324f09eddf92",
-      "proj:code": "EPSG:3857"
+      "proj:code": "EPSG:3857",
+      "description": "GeoParquet file for the 2014 edition of US, California (SCM), partition `year=2014` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

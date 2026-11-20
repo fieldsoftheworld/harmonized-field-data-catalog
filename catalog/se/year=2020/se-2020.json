@@ -114,7 +114,8 @@
       ],
       "file:size": 317454866,
       "file:checksum": "12206bf2e7331567637ede0d90b3d40dde783e82eb2bbe745bd9e4371c30e9d44749",
-      "proj:code": "EPSG:3006"
+      "proj:code": "EPSG:3006",
+      "description": "GeoParquet file for the 2020 edition of Sweden, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

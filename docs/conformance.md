@@ -19,7 +19,50 @@ something.
 
 ## Accepted deviations
 
-None.
+None. (`ACCEPTED` in `tests/test_conformance.py` only gates error-severity
+findings; the warnings below are not blocking and need no waiver.)
+
+## Notes on the current rashid run
+
+- **Fan-out (`PTL-CAT-001`, warning, pre-existing since v0.1.2)**: the root
+  catalog (79 children) and the `ch` (40) and `nl` (22) collections exceed
+  the twenty-child guideline for subcatalog grouping (`PORTO-CORE-078`).
+  Restructuring a flat catalog of this size into thematic subcatalogs is a
+  user-visible change to every collection's URL and is explicitly a
+  checkpoint in the migration guidance, not a Portolan v0.3.0 delta item.
+  Left for a maintainer decision; tracked as a follow-up rather than fixed
+  in the v0.3.0 migration.
+- **Partition data checks are not run locally, by default**: every
+  collection's `partition:glob` is an absolute `s3://` URL (already
+  compliant with the v0.3.0 `PORTO-FMT-064` requirement). `rashid check
+  catalog --no-data` (what CI runs) cannot list or read those partitions
+  from a local relative tree, so a clean `--no-data` run says nothing
+  about `PTL-DAT-*` checks on the data itself. `tests/test_conformance.py`
+  stays on `--no-data` deliberately — reading every collection's live
+  bytes on every push would be slow and depend on a third-party host.
+  Every collection also carries a `storage:schemes` entry
+  (`PORTO-FMT-066`): Source Cooperative's proxy is S3-compatible but is
+  not AWS, so without it a client (rashid included) assumes the AWS S3
+  hostname template and the listing comes back `403`, rather than a
+  Portolan error — confirmed by temporarily removing the entry and
+  re-running `rashid check --data` against two live collections, which
+  then reported `PTL-DAT-000: listing the glob denied`. With the entry
+  restored, the same run lists and reads the live partitions cleanly (0
+  findings; traced with `rashid -vv --timings` to confirm the `http.list`
+  and `http.range` calls actually happened against
+  `data.source.coop`, not merely "no error because nothing ran"), and a
+  glob rewritten to match no file reports a distinct
+  `PTL-DAT-000: the glob matches none of the N object(s) listed under it`
+  rather than failing silently. rashid's spatial-order check
+  (`PTL-DAT-006`, incubating per 0.3.0) reports a finding only when a file
+  fails the check — per its own source, "a validator's silence reads as a
+  pass" — so a clean file produces no visible rule id, which is the
+  expected shape of a passing result, not evidence the check didn't run.
+  Full details, including the exact commands, are in the v0.3.0 migration
+  PR. Checking every collection's live data on every push is still out of
+  scope for CI; `rashid check <url> --live` (or `--live-base-url`) against
+  the published catalog remains the full-coverage check, for after
+  publication.
 
 <!--
 When you accept one, add a row and a section explaining it, like this:

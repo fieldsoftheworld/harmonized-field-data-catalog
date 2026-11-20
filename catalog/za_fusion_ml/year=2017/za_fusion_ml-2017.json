@@ -119,7 +119,8 @@
       ],
       "file:size": 2140348,
       "file:checksum": "122063987a6272bd7f50068155941f9b77d0be34137200916e37b3ed7b9271722c0e",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2017 edition of South Africa (Fusion) with splits, partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./za_fusion_ml-2017.pmtiles",
@@ -129,7 +130,8 @@
         "visual"
       ],
       "file:size": 1194721,
-      "file:checksum": "12203c2cd6782b6532a347490b83094c49f17d2bd61a442d4cb7d7cb995408668993"
+      "file:checksum": "12203c2cd6782b6532a347490b83094c49f17d2bd61a442d4cb7d7cb995408668993",
+      "description": "PMTiles vector tiles of the 2017 edition of South Africa (Fusion) with splits, generated from this item's `data` asset."
     }
   },
   "links": [

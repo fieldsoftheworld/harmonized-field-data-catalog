@@ -119,7 +119,8 @@
       ],
       "file:size": 233216276,
       "file:checksum": "12208e1794d61db94d23c36bafd993f56a4fad3a6b134c674944e781841651ff59bb",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2017 edition of Spain Cantabria, partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

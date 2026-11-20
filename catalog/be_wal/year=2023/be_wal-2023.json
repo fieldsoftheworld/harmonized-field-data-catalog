@@ -126,7 +126,8 @@
       ],
       "file:size": 111187547,
       "file:checksum": "122003cdc8dcb9de52fb105b766ef58a4036ea81e5801975b45fb3b58a7e46ab7400",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2023 edition of Belgium, Wallonia, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./be_wal-2023.pmtiles",
@@ -136,7 +137,8 @@
         "visual"
       ],
       "file:size": 28546288,
-      "file:checksum": "1220c2f5b1c67cac4794ecde63e0114010c280d2c386e4987ef69bb832d2fa3cc975"
+      "file:checksum": "1220c2f5b1c67cac4794ecde63e0114010c280d2c386e4987ef69bb832d2fa3cc975",
+      "description": "PMTiles vector tiles of the 2023 edition of Belgium, Wallonia, generated from this item's `data` asset."
     }
   },
   "links": [

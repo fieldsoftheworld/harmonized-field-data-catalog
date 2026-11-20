@@ -224,7 +224,8 @@
       ],
       "file:size": 237905805,
       "file:checksum": "122066428e531485cd46854aaa910b4fb1130f7ed191250f76bf960bcfc2e13c8001",
-      "proj:code": "EPSG:3765"
+      "proj:code": "EPSG:3765",
+      "description": "GeoParquet file for the 2018 edition of Croatia, partition `year=2018` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

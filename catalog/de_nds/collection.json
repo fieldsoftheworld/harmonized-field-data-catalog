@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "de_nds",
   "title": "Crop Fields for Lower Saxony / Bremen / Hamburg, Germany",
@@ -198,7 +199,8 @@
         "visual"
       ],
       "file:size": 84744106,
-      "file:checksum": "1220b09effdac87ef0186a10996aa6de05b72977358c52e139d31eaa21b3c4b9c9da"
+      "file:checksum": "1220b09effdac87ef0186a10996aa6de05b72977358c52e139d31eaa21b3c4b9c9da",
+      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -208,7 +210,8 @@
         "thumbnail"
       ],
       "file:size": 335194,
-      "file:checksum": "1220730e7ff35f57ccef88fdfe470de8005c9a688b8c880dcb8a8949a5a0ce53d09d"
+      "file:checksum": "1220730e7ff35f57ccef88fdfe470de8005c9a688b8c880dcb8a8949a5a0ce53d09d",
+      "description": "Static JPEG image rendered from the collection's default style, with no basemap."
     }
   },
   "links": [
@@ -287,5 +290,13 @@
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   },
-  "attribution": "© ML/SLA Niedersachsen (2024), DL-DE-BY-2.0 (www.govdata.de/DL-DE-BY-2.0), Daten bearbeitet"
+  "attribution": "© ML/SLA Niedersachsen (2024), DL-DE-BY-2.0 (www.govdata.de/DL-DE-BY-2.0), Daten bearbeitet",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

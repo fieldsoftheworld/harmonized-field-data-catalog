@@ -121,7 +121,8 @@
       ],
       "file:size": 9283518027,
       "file:checksum": "1220f6bb3872ebd448e2ebc6818defd232bd85f7600941c3c5614cd9a4fded797f5f",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2023 edition of Spain, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -126,7 +126,8 @@
       ],
       "file:size": 11374651,
       "file:checksum": "1220ab5b9f00474d66131207689fd1353457763a445c7bfc2c62de2c87fab07acaf1",
-      "proj:code": "EPSG:2056"
+      "proj:code": "EPSG:2056",
+      "description": "GeoParquet file for the 2025 edition of Switzerland, Schwyz, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

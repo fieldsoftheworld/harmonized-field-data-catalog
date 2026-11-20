@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "ec_lt",
   "title": "Field boundaries for Lithuania - Eurocrops 2021",
@@ -195,7 +196,8 @@
         "visual"
       ],
       "file:size": 97377405,
-      "file:checksum": "12205b575596f6e75daa530c28db9c13954f8fc13cb65996994ad6960668f7b3c57d"
+      "file:checksum": "12205b575596f6e75daa530c28db9c13954f8fc13cb65996994ad6960668f7b3c57d",
+      "description": "PMTiles vector tiles of the 2021 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -205,7 +207,8 @@
         "thumbnail"
       ],
       "file:size": 291098,
-      "file:checksum": "1220c321f227ee37351fc975595b34dcc1a4497f4a3b0ae1b61098481a552a6a5762"
+      "file:checksum": "1220c321f227ee37351fc975595b34dcc1a4497f4a3b0ae1b61098481a552a6a5762",
+      "description": "Static JPEG image rendered from the collection's default style, with no basemap."
     }
   },
   "links": [
@@ -275,5 +278,13 @@
       "https://fiboa.org/specification/v0.3.0/schema.yaml",
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
+  },
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
   }
 }

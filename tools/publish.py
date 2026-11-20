@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -70,11 +71,17 @@ STYLE_TYPE = "application/vnd.mapbox.style+json"
 
 @dataclass(frozen=True)
 class Upload:
-    """One local file and the object key it publishes to."""
+    """One local file and the object key it publishes to.
+
+    ``content``, when set, is what is actually uploaded instead of the bytes
+    on disk (see ``inject_self_link``): the tracked tree and the published
+    object differ by design for exactly one file.
+    """
 
     local: Path
     key: str
     content_type: str
+    content: bytes | None = None
 
 
 def load_config(path: Path = CONFIG) -> dict[str, str]:
@@ -134,6 +141,31 @@ def is_publishable(rel: Path) -> bool:
     return not any(part.startswith(".") for part in rel.parts)
 
 
+def inject_self_link(path: Path, public_base: str) -> bytes:
+    """The root ``catalog.json`` bytes with an absolute ``self`` link added.
+
+    PORTO-CORE-081: a catalog served from one fixed URL SHOULD carry an
+    absolute `self` link on its root catalog. The tracked tree keeps no
+    `self` link (see the git-backed-catalogs best practice and this
+    collection's own "Structure" section): the same files then validate in
+    the repository, in a preview, and in production. This publish step adds
+    the link only to the bytes it uploads, built from ``public_base``, which
+    the config already holds.
+    """
+    data = json.loads(path.read_text(encoding="utf-8"))
+    links = data.get("links", [])
+    if not any(link.get("rel") == "self" for link in links):
+        self_link = {
+            "rel": "self",
+            "href": f"{public_base.rstrip('/')}/catalog.json",
+            "type": "application/json",
+        }
+        root_idx = next((i for i, link in enumerate(links) if link.get("rel") == "root"), -1)
+        links.insert(root_idx + 1, self_link)
+        data["links"] = links
+    return (json.dumps(data, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+
+
 def collect_uploads(config: dict[str, str], root: Path = ROOT) -> list[Upload]:
     """Every file that would be uploaded, in sorted order.
 
@@ -155,7 +187,13 @@ def collect_uploads(config: dict[str, str], root: Path = ROOT) -> list[Upload]:
         if not is_publishable(rel):
             continue
         key = f"{prefix}/{rel.as_posix()}" if prefix else rel.as_posix()
-        uploads.append(Upload(path, key, content_type_for(path)))
+        content = None
+        if rel == Path("catalog.json"):
+            try:
+                content = inject_self_link(path, config["public_base"])
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                content = None  # not real catalog JSON (e.g. a test fixture); publish bytes as-is
+        uploads.append(Upload(path, key, content_type_for(path), content=content))
     return uploads
 
 
@@ -168,7 +206,7 @@ def md5(path: Path) -> str:
 
 
 def is_unchanged(upload: Upload, index: dict[str, tuple[int, str]]) -> bool:
-    """True when the object already matches the local bytes.
+    """True when the object already matches the bytes that would be uploaded.
 
     A compound (multipart) ETag is not an MD5, so those compare on size alone.
     """
@@ -176,12 +214,14 @@ def is_unchanged(upload: Upload, index: dict[str, tuple[int, str]]) -> bool:
     if entry is None:
         return False
     size, etag = entry
-    if size != upload.local.stat().st_size:
+    local_size = len(upload.content) if upload.content is not None else upload.local.stat().st_size
+    if size != local_size:
         return False
     etag = etag.strip('"')
     if "-" in etag:
         return True
-    return etag == md5(upload.local)
+    local_md5 = hashlib.md5(upload.content).hexdigest() if upload.content is not None else md5(upload.local)  # noqa: S324
+    return etag == local_md5
 
 
 def s3_client(config: dict[str, str]):
@@ -279,12 +319,20 @@ def main() -> int:
 
     client = s3_client(config)
     for upload in changed:
-        client.upload_file(
-            str(upload.local),
-            bucket,
-            upload.key,
-            ExtraArgs={"ContentType": upload.content_type},
-        )
+        if upload.content is not None:
+            client.put_object(
+                Bucket=bucket,
+                Key=upload.key,
+                Body=upload.content,
+                ContentType=upload.content_type,
+            )
+        else:
+            client.upload_file(
+                str(upload.local),
+                bucket,
+                upload.key,
+                ExtraArgs={"ContentType": upload.content_type},
+            )
         print(f"  uploaded  {upload.key}")
     print(f"\nuploaded {len(changed)} file(s)")
     return 0

@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "es_pv",
   "title": "Spain Basque Country Crop fields",
@@ -169,7 +170,8 @@
         "visual"
       ],
       "file:size": 60792792,
-      "file:checksum": "1220c67cdb84e8244dbf6b4324fc2d582d2c76bcadba3ed3dbdad205729d353b4c18"
+      "file:checksum": "1220c67cdb84e8244dbf6b4324fc2d582d2c76bcadba3ed3dbdad205729d353b4c18",
+      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -179,7 +181,8 @@
         "thumbnail"
       ],
       "file:size": 417576,
-      "file:checksum": "12201118ebfa3ae854189708cb2bc87b5f3f6d8260fc36cd1a2fd77a0605e6c41aeb"
+      "file:checksum": "12201118ebfa3ae854189708cb2bc87b5f3f6d8260fc36cd1a2fd77a0605e6c41aeb",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -257,5 +260,13 @@
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
   },
-  "attribution": "Basque Government / Gobierno Vasco"
+  "attribution": "Basque Government / Gobierno Vasco",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "fi",
   "title": "Finnish Crop Fields (Maatalousmaa)",
@@ -191,7 +192,8 @@
         "visual"
       ],
       "file:size": 154696827,
-      "file:checksum": "12209782786fe05638e7579c8b43833dba433cca20cdd6be630e699428a848eec4d8"
+      "file:checksum": "12209782786fe05638e7579c8b43833dba433cca20cdd6be630e699428a848eec4d8",
+      "description": "PMTiles vector tiles of the 2025 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -201,7 +203,8 @@
         "thumbnail"
       ],
       "file:size": 305558,
-      "file:checksum": "122015b3f2a1f7ab51e5ab36a822b30031428b2ce298f234172094e63fae1e0e281b"
+      "file:checksum": "122015b3f2a1f7ab51e5ab36a822b30031428b2ce298f234172094e63fae1e0e281b",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -309,5 +312,13 @@
       "https://fiboa.org/specification/v0.3.0/schema.yaml"
     ]
   },
-  "attribution": "Finnish Food Authority"
+  "attribution": "Finnish Food Authority",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

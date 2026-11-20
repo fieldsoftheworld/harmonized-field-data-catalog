@@ -119,7 +119,8 @@
       ],
       "file:size": 144500436,
       "file:checksum": "1220eaaa44773114b921d8e88bfb1ed704988855eff393d116925b3ad71f060df97b",
-      "proj:code": "EPSG:4269"
+      "proj:code": "EPSG:4269",
+      "description": "GeoParquet file for the 2022 edition of US, California (SCM), partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

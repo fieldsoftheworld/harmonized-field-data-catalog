@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "nl",
   "title": "BRP Crop Field Boundaries for The Netherlands (CAP-based)",
@@ -193,7 +194,8 @@
         "visual"
       ],
       "file:size": 519138531,
-      "file:checksum": "12206b7af1cdd0863256e82efcdea665862718f9f3198b17829617da393739f01705"
+      "file:checksum": "12206b7af1cdd0863256e82efcdea665862718f9f3198b17829617da393739f01705",
+      "description": "PMTiles vector tiles of the 2026 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -203,7 +205,8 @@
         "thumbnail"
       ],
       "file:size": 184149,
-      "file:checksum": "12203e76410ee0121e1169681cc43ea5f3eb1e91e5b43318808f78ff3ccadcb95627"
+      "file:checksum": "12203e76410ee0121e1169681cc43ea5f3eb1e91e5b43318808f78ff3ccadcb95627",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -406,5 +409,13 @@
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml",
       "https://vecorel.org/specification/v0.1.0/schema.yaml"
     ]
+  },
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
   }
 }

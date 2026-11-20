@@ -126,7 +126,8 @@
       ],
       "file:size": 286751183,
       "file:checksum": "1220492a4fae1a65b27d027fa9467301d3a4e2d88bd2d89a9f7f3f05a878d77d1a34",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2019 edition of Germany, North Rhine-Westphalia, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

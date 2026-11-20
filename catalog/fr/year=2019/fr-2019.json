@@ -124,7 +124,8 @@
       ],
       "file:size": 2461695842,
       "file:checksum": "1220748c6cc5358c7f5dddd54b971cf229c50f5b9e111b005499add27f39092c9811",
-      "proj:code": "EPSG:2154"
+      "proj:code": "EPSG:2154",
+      "description": "GeoParquet file for the 2019 edition of France, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

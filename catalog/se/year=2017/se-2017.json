@@ -114,7 +114,8 @@
       ],
       "file:size": 288378789,
       "file:checksum": "12204d96ecb31cb9243e22c3f8879b66282faaf9c8268768e34f00699e4f08cc40c4",
-      "proj:code": "EPSG:3006"
+      "proj:code": "EPSG:3006",
+      "description": "GeoParquet file for the 2017 edition of Sweden, partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

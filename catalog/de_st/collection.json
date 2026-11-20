@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "de_st",
   "title": "Field blocks for Saxony-Anhalt, Germany",
@@ -176,7 +177,8 @@
         "visual"
       ],
       "file:size": 26949739,
-      "file:checksum": "12207c614eab5e44e1be21c69637a3d5c89621870140a6221630a0610de152a18b79"
+      "file:checksum": "12207c614eab5e44e1be21c69637a3d5c89621870140a6221630a0610de152a18b79",
+      "description": "PMTiles vector tiles of the 2023 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -186,7 +188,8 @@
         "thumbnail"
       ],
       "file:size": 221221,
-      "file:checksum": "1220e86f96efcfb4a3ae5abfaba5bd0e597834f4e5271b7a8bf28b088e608292b074"
+      "file:checksum": "1220e86f96efcfb4a3ae5abfaba5bd0e597834f4e5271b7a8bf28b088e608292b074",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -276,5 +279,13 @@
       "https://fiboa.org/flik-extension/v0.2.0/schema.yaml"
     ]
   },
-  "attribution": "© Ministerium für Wirtschaft, Tourismus, Landwirtschaft und Forsten des Landes Sachsen-Anhalt, dl-de/by-2-0"
+  "attribution": "© Ministerium für Wirtschaft, Tourismus, Landwirtschaft und Forsten des Landes Sachsen-Anhalt, dl-de/by-2-0",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

@@ -119,7 +119,8 @@
       ],
       "file:size": 88780132,
       "file:checksum": "1220c890d069d6887ed92603aed5047136c64f2be04e61552448e7c94e3df323995d",
-      "proj:code": "EPSG:31370"
+      "proj:code": "EPSG:31370",
+      "description": "GeoParquet file for the 2019 edition of Belgium, Flanders, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

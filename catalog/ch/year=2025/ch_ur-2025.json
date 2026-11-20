@@ -126,7 +126,8 @@
       ],
       "file:size": 11489134,
       "file:checksum": "12208ed529b8f37f0fd62c4b0d791bb0f59d761a796905c126fb504b4ece05e93742",
-      "proj:code": "EPSG:2056"
+      "proj:code": "EPSG:2056",
+      "description": "GeoParquet file for the 2025 edition of Switzerland, Uri, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

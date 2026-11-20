@@ -124,7 +124,8 @@
       ],
       "file:size": 2335747660,
       "file:checksum": "12208a9cfb604652da32700e127af19fa6447130af65174b179d5139aba9e55c4986",
-      "proj:code": "IGNF:LAMB93"
+      "proj:code": "IGNF:LAMB93",
+      "description": "GeoParquet file for the 2017 edition of France, partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -129,7 +129,8 @@
       ],
       "file:size": 468925988,
       "file:checksum": "1220dee241efc5d04a5fff3ac334d9305b9b5eb1f178938c24693e94f93f0a072bba",
-      "proj:code": "EPSG:3059"
+      "proj:code": "EPSG:3059",
+      "description": "GeoParquet file for the 2020 edition of Latvia, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

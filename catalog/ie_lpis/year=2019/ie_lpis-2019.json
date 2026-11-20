@@ -124,7 +124,8 @@
       ],
       "file:size": 578383732,
       "file:checksum": "12208441d6a54d65fc9c93d7fed06cd7e7e30a2c1a06770fee6a9546a93134fb2951",
-      "proj:code": "EPSG:2157"
+      "proj:code": "EPSG:2157",
+      "description": "GeoParquet file for the 2019 edition of Ireland (LPIS), partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

@@ -124,7 +124,8 @@
       ],
       "file:size": 116952233,
       "file:checksum": "1220e51799736c5e9d3c2d13812804712bfda6577be254dc99b98955684c4af7862a",
-      "proj:code": "EPSG:32628"
+      "proj:code": "EPSG:32628",
+      "description": "GeoParquet file for the 2026 edition of Spain Canary Islands, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es_cn-2026.pmtiles",
@@ -134,7 +135,8 @@
         "visual"
       ],
       "file:size": 48222202,
-      "file:checksum": "1220e5c947d5d5de153deb494bbc15c5792da09f37b481d4570f19e2132dc1bef7eb"
+      "file:checksum": "1220e5c947d5d5de153deb494bbc15c5792da09f37b481d4570f19e2132dc1bef7eb",
+      "description": "PMTiles vector tiles of the 2026 edition of Spain Canary Islands, generated from this item's `data` asset."
     }
   },
   "links": [

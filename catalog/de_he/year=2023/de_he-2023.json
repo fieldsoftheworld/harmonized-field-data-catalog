@@ -94,7 +94,8 @@
       ],
       "file:size": 123314379,
       "file:checksum": "12206050b7ddf53697b3175aba1eb7190ebb1ce91143c03c288db615ccab2727dbd7",
-      "proj:code": "EPSG:25832"
+      "proj:code": "EPSG:25832",
+      "description": "GeoParquet file for the 2023 edition of Germany, Hesse, partition `year=2023` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

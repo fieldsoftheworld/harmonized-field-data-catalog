@@ -2,13 +2,14 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
-    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+    "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
   ],
   "id": "ke_ecaas",
   "title": "Crop-cut farm polygons with crop type and yield for Kenya (ECAAS Bird's-Eye)",
@@ -239,7 +240,8 @@
         "visual"
       ],
       "file:size": 444004,
-      "file:checksum": "1220ca035c861c24194419047e2a6fab44d69c4c285ecc21f469bc53211f26392ccb"
+      "file:checksum": "1220ca035c861c24194419047e2a6fab44d69c4c285ecc21f469bc53211f26392ccb",
+      "description": "PMTiles vector tiles of the 2021 edition, for rendering this collection's styles (`styles/`) in a web map. The underlying GeoParquet is the `data` asset and `partition:glob`."
     },
     "thumbnail": {
       "href": "./thumbnail.jpg",
@@ -249,7 +251,8 @@
         "thumbnail"
       ],
       "file:size": 10109,
-      "file:checksum": "122033d5f6b6c2d67835288f75ca0dc60731739dcd3109f8cc19b1277638468870e5"
+      "file:checksum": "122033d5f6b6c2d67835288f75ca0dc60731739dcd3109f8cc19b1277638468870e5",
+      "description": "Static JPEG image rendered from the collection's default style over a light OpenStreetMap/CARTO basemap."
     }
   },
   "links": [
@@ -321,5 +324,13 @@
       "https://fiboa.org/hcat-extension/v0.3.0/schema.yaml"
     ]
   },
-  "attribution": "Pula Advisors and Tetra Tech, Bird's-Eye project, Enabling Crop Analytics at Scale (ECAAS)"
+  "attribution": "Pula Advisors and Tetra Tech, Bird's-Eye project, Enabling Crop Analytics at Scale (ECAAS)",
+  "storage:schemes": {
+    "source-coop": {
+      "type": "custom-s3",
+      "platform": "https://data.source.coop",
+      "region": "us-west-2",
+      "bucket": "ftw"
+    }
+  }
 }

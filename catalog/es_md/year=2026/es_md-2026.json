@@ -114,7 +114,8 @@
       ],
       "file:size": 278733722,
       "file:checksum": "1220e0a859b56a9e18dab89c68778ed6daf63a49a92c6c09fef05052423a8eb5444c",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "description": "GeoParquet file for the 2026 edition of Spain Comunidad de Madrid, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./es_md-2026.pmtiles",
@@ -124,7 +125,8 @@
         "visual"
       ],
       "file:size": 102301423,
-      "file:checksum": "12207d20a686e7e7f131d9c809388c25dabad7546d138b93e33aae6857a8ad64e97f"
+      "file:checksum": "12207d20a686e7e7f131d9c809388c25dabad7546d138b93e33aae6857a8ad64e97f",
+      "description": "PMTiles vector tiles of the 2026 edition of Spain Comunidad de Madrid, generated from this item's `data` asset."
     }
   },
   "links": [

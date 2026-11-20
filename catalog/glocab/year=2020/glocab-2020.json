@@ -114,7 +114,8 @@
       ],
       "file:size": 12226183,
       "file:checksum": "12205a9e59879af5ca90ee76102fb694cc7fc22529f1d06d7f290c10b086b27183f6",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2020 edition of GloCAB, partition `year=2020` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./glocab-2020.pmtiles",
@@ -124,7 +125,8 @@
         "visual"
       ],
       "file:size": 8022203,
-      "file:checksum": "12208b3f5db822052ba224c89123bc356d98db5a4f185c2f1b13e82c085955616909"
+      "file:checksum": "12208b3f5db822052ba224c89123bc356d98db5a4f185c2f1b13e82c085955616909",
+      "description": "PMTiles vector tiles of the 2020 edition of GloCAB, generated from this item's `data` asset."
     }
   },
   "links": [

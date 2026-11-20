@@ -179,7 +179,8 @@
       ],
       "file:size": 72479144,
       "file:checksum": "122019e4830f1879ca319a94d3a01745e5ff8e48a1fc3f29a9f511e6867a6a74b2f7",
-      "proj:code": "EPSG:25833"
+      "proj:code": "EPSG:25833",
+      "description": "GeoParquet file for the 2026 edition of Germany, Saxony, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./de_sax-2026.pmtiles",
@@ -189,7 +190,8 @@
         "visual"
       ],
       "file:size": 32600075,
-      "file:checksum": "1220dcac2d3bf37ad6ac17a57a80e926b8871a63ee393226d246290043a0f221ecd7"
+      "file:checksum": "1220dcac2d3bf37ad6ac17a57a80e926b8871a63ee393226d246290043a0f221ecd7",
+      "description": "PMTiles vector tiles of the 2026 edition of Germany, Saxony, generated from this item's `data` asset."
     }
   },
   "links": [

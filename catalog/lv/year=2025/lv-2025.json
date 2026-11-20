@@ -129,7 +129,8 @@
       ],
       "file:size": 434673455,
       "file:checksum": "12208730f8e37b93d3f9f7b6ad706f4aff2497cf2752d417b0382181a764ae05cf44",
-      "proj:code": "EPSG:3059"
+      "proj:code": "EPSG:3059",
+      "description": "GeoParquet file for the 2025 edition of Latvia, partition `year=2025` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./lv-2025.pmtiles",
@@ -139,7 +140,8 @@
         "visual"
       ],
       "file:size": 205253547,
-      "file:checksum": "12208312211626e440e2b8d966fbd972a1630166b476a3cbedc3c04f10787971e1db"
+      "file:checksum": "12208312211626e440e2b8d966fbd972a1630166b476a3cbedc3c04f10787971e1db",
+      "description": "PMTiles vector tiles of the 2025 edition of Latvia, generated from this item's `data` asset."
     }
   },
   "links": [

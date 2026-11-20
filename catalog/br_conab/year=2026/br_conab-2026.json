@@ -99,7 +99,8 @@
       ],
       "file:size": 212324727,
       "file:checksum": "12203a372cf13a2eba7a27d09408f752090c5d4611a3f832d26d8f8d17104a5dafc3",
-      "proj:code": "EPSG:4674"
+      "proj:code": "EPSG:4674",
+      "description": "GeoParquet file for the 2026 edition of Conab, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./br_conab-2026.pmtiles",
@@ -109,7 +110,8 @@
         "visual"
       ],
       "file:size": 111992238,
-      "file:checksum": "12209ab4ac2dc1be9ee995dcd6cd214b5112bed09ee5707ba5aba5b9c89abc605dc8"
+      "file:checksum": "12209ab4ac2dc1be9ee995dcd6cd214b5112bed09ee5707ba5aba5b9c89abc605dc8",
+      "description": "PMTiles vector tiles of the 2026 edition of Conab, generated from this item's `data` asset."
     }
   },
   "links": [

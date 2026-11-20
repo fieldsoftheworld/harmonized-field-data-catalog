@@ -121,7 +121,8 @@
       ],
       "file:size": 3077135994,
       "file:checksum": "1220bafbf47370c37a4db4fa9ca152779befa1154b43575231ac08310c3796a2d277",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2015 edition of France, partition `year=2015` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

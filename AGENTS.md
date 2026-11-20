@@ -37,7 +37,7 @@ Look at every thumbnail you generate. `thumbnail.py`'s blank-probe gate only pro
 
 - `ACCEPTED` in `tests/test_conformance.py` is empty. Never add a rule there without a row in `docs/conformance.md` naming where it fires, why, and the tracking issue.
 - `CI_LIGHT=1` (set in CI) lets `tests/test_links.py` skip hrefs to data files that are not in git; it skips nothing else and prints how many it skipped. Run the gates without it locally, with `staging/` populated.
-- `stac-check` is advisory, `rashid` is the gate. Do not add a `self` link to silence stac-check; Portolan forbids it.
+- `stac-check` is advisory, `rashid` is the gate. Do not add a `self` link to the *tracked* `catalog.json` to silence stac-check — `tools/publish.py` already adds an absolute one to the root catalog it uploads (PORTO-CORE-081, since Portolan v0.2.0); keeping it out of the tracked tree is what lets the same files validate in the repository, a preview, and production.
 - Pin `rashid` identically in `pyproject.toml` and `.github/workflows/ci.yml`.
 - Commit metadata changes with the build that produced them; a collection whose `updated` or checksums disagree with the bucket is a conformance failure.
 

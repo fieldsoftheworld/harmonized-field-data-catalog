@@ -109,7 +109,8 @@
       ],
       "file:size": 2608430,
       "file:checksum": "12201c29ea3a29dc9d9b106601af1c7c60b35a40f34967936c219d4035e56af68fe2",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2024 edition of Trazo with splits, partition `year=2024` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./wri_trazo_ml-2024.pmtiles",
@@ -119,7 +120,8 @@
         "visual"
       ],
       "file:size": 1589371,
-      "file:checksum": "122016d074f2c2e7829f68d551fb56b0a71461dc2586fd5af8e52075517ec96617f0"
+      "file:checksum": "122016d074f2c2e7829f68d551fb56b0a71461dc2586fd5af8e52075517ec96617f0",
+      "description": "PMTiles vector tiles of the 2024 edition of Trazo with splits, generated from this item's `data` asset."
     }
   },
   "links": [

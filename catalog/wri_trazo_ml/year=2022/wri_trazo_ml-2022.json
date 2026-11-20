@@ -109,7 +109,8 @@
       ],
       "file:size": 1526602,
       "file:checksum": "1220a59ff626779b65e32306f8b88067e5a02e3629cd4c71a3b83732124d75627fc3",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2022 edition of Trazo with splits, partition `year=2022` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

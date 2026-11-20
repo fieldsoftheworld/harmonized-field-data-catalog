@@ -109,7 +109,8 @@
       ],
       "file:size": 587958740,
       "file:checksum": "1220cb04dd015843643f1d710951e3ccdd64d1ec9fff163972aa88957883e1c9c5a4",
-      "proj:code": "EPSG:3035"
+      "proj:code": "EPSG:3035",
+      "description": "GeoParquet file for the 2021 edition of Germany (Thünen), partition `year=2021` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./de_thuenen-2021.pmtiles",
@@ -119,7 +120,8 @@
         "visual"
       ],
       "file:size": 471617410,
-      "file:checksum": "12205b79abfee581a3cd36f749363a7273cf3c80bc8bd5c2d7e73869463bdf833193"
+      "file:checksum": "12205b79abfee581a3cd36f749363a7273cf3c80bc8bd5c2d7e73869463bdf833193",
+      "description": "PMTiles vector tiles of the 2021 edition of Germany (Thünen), generated from this item's `data` asset."
     }
   },
   "links": [

@@ -114,7 +114,8 @@
       ],
       "file:size": 4723579,
       "file:checksum": "1220bf1f172113a1c6f5e39700d97c4e63565fa0d66f3a7bdc48dd1a416b2e23bb4f",
-      "proj:code": "EPSG:4326"
+      "proj:code": "EPSG:4326",
+      "description": "GeoParquet file for the 2017 edition of GloCAB, partition `year=2017` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

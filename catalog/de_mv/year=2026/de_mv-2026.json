@@ -144,7 +144,8 @@
       ],
       "file:size": 123676285,
       "file:checksum": "1220e115c6082aa3e076dd7876edecf4e964c1bd2de6f422e5650b42362a764bdf11",
-      "proj:code": "EPSG:25833"
+      "proj:code": "EPSG:25833",
+      "description": "GeoParquet file for the 2026 edition of Germany, Mecklenburg-Western Pomerania, partition `year=2026` of the collection. Converted with fiboa-cli into the fiboa schema."
     },
     "visual": {
       "href": "./de_mv-2026.pmtiles",
@@ -154,7 +155,8 @@
         "visual"
       ],
       "file:size": 36090417,
-      "file:checksum": "12205ae421dcfacffdc239f913170076892d67c6e0118a114a532e646f47ebb4a1e4"
+      "file:checksum": "12205ae421dcfacffdc239f913170076892d67c6e0118a114a532e646f47ebb4a1e4",
+      "description": "PMTiles vector tiles of the 2026 edition of Germany, Mecklenburg-Western Pomerania, generated from this item's `data` asset."
     }
   },
   "links": [

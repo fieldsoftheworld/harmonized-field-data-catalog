@@ -23,15 +23,37 @@ BOUNDARIES = ("declared", "mapped", "inferred")
 TOOLS_DIR = Path(__file__).resolve().parent
 
 sys.path.insert(0, str(TOOLS_DIR))
-from publish import load_config  # noqa: E402
+from publish import load_config, split_s3_uri  # noqa: E402
 
-PORTOLAN_EXTENSION = "https://schemas.portolan-sdi.org/portolan/v0.1.2/schema.json"
+PORTOLAN_EXTENSION = "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json"
 FILE_EXTENSION = "https://stac-extensions.github.io/file/v2.1.0/schema.json"
 TABLE_EXTENSION = "https://stac-extensions.github.io/table/v1.2.0/schema.json"
 PROJECTION_EXTENSION = "https://stac-extensions.github.io/projection/v2.0.0/schema.json"
 PROCESSING_EXTENSION = "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
 WEB_MAP_LINKS_EXTENSION = "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json"
 PARTITION_EXTENSION = "https://schemas.portolan-sdi.org/incubating/partition/v1.0.0/schema.json"
+STORAGE_EXTENSION = "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
+
+# PORTO-FMT-066: Source Cooperative's data proxy is an S3-compatible endpoint
+# that is not Amazon S3, so a client must not assume the `aws-s3` hostname
+# template. `custom-s3` carries no such assumption; this is the scheme id
+# every collection's `partition:glob` (an `s3://` URL) resolves through.
+STORAGE_SCHEME_ID = "source-coop"
+
+
+def storage_schemes(config: dict[str, str]) -> dict:
+    """The collection-level ``storage:schemes`` entry that lets a client list
+    and read ``partition:glob`` against the Source Cooperative proxy instead
+    of assuming AWS S3 (PORTO-FMT-066)."""
+    bucket, _ = split_s3_uri(config["write_prefix"])
+    return {
+        STORAGE_SCHEME_ID: {
+            "type": "custom-s3",
+            "platform": config["endpoint_url"].rstrip("/"),
+            "region": config.get("region", "us-west-2"),
+            "bucket": bucket,
+        }
+    }
 
 PARQUET_TYPE = "application/vnd.apache.parquet"
 PMTILES_TYPE = "application/vnd.pmtiles"

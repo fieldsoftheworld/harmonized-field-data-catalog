@@ -124,7 +124,8 @@
       ],
       "file:size": 533568789,
       "file:checksum": "1220f278abec07b0541292215bbdc14934703540c83bfcbf5e52ac372ce458a296de",
-      "proj:code": null
+      "proj:code": null,
+      "description": "GeoParquet file for the 2019 edition of Austria, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [

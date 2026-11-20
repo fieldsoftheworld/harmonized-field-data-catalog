@@ -124,7 +124,8 @@
       ],
       "file:size": 221734245,
       "file:checksum": "12209c6c62ca9db79522dcaf3c8906ce3d4127261cc6e59dd1e68f22b26aca0c7b63",
-      "proj:code": "EPSG:4258"
+      "proj:code": "EPSG:4258",
+      "description": "GeoParquet file for the 2019 edition of Czech, partition `year=2019` of the collection. Converted with fiboa-cli into the fiboa schema."
     }
   },
   "links": [
