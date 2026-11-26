@@ -12,10 +12,10 @@ Catalonia field boundaries in the [fiboa](https://github.com/fiboa/specification
 ## Quirks that produce silently wrong answers
 
 - **CRS is EPSG:25831, not WGS84.** `ST_Area`/`ST_Distance` return units of that CRS; transform with `ST_Transform` if you need lon/lat, or use `metrics:area`.
-- **`metrics:area` is in square metres**, taken from the source column `ha` (hectares × 10 000). Divide by 10 000 for hectares.
+- **`metrics:area` is in square metres** (source column `ha`, hectares × 10 000; where the source value is missing or 0 the converter computed it from the geometry, in EPSG:6933 when the CRS is not metric). Divide by 10 000 for hectares.
 - **`year` is the year the boundaries represent**: the declaration year or season of a register, the year a snapshot was taken, or (for a source covering several years) the year of each field's own `determination:datetime`. `determination:datetime`, where present, is the source's own date for a field.
-- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is the source column `id`). Whether an id persists across editions is not verified here; do not join editions on it without checking.
-- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`https://fiboa.org/code/es/cat/crop.csv`) have `NULL`. All 723,039 rows of the 2024 edition carry one.
+- **`id` is only guaranteed unique within one edition** (fiboa requires uniqueness per file; it is assigned by the converter). Whether an id persists across editions is not verified here; do not join editions on it without checking.
+- **`hcat:code` is hierarchical.** The first 4/6/8 digits are increasingly specific crop groups; compare prefixes, not equality, to aggregate (see the crop query below). Source crops without a mapping in the converter's HCAT table (`None`) have `NULL`. All 713,767 rows of the 2024 edition carry one.
 - **Some fiboa properties are not columns.** Values constant for the whole file are stored once in the GeoParquet `collection` key-value metadata: `determination:datetime` = `2024-01-01T00:00:00Z`, `crop:code_list` = `https://fiboa.org/code/es/cat/crop.csv` (2024 edition). Read them with `parquet_kv_metadata()` in DuckDB or `pyarrow.parquet.ParquetFile(f).schema_arrow.metadata[b'collection']`; they differ per edition where the source does.
 
 ## Tested queries
@@ -29,7 +29,7 @@ SELECT year, count(*) AS fields, round(sum("metrics:area") / 1e4) AS hectares
 FROM read_parquet('s3://ftw/harmonized-field-data/es_cat/year=*/*.parquet', hive_partitioning = true)
 GROUP BY year ORDER BY year;
 -- year | fields | hectares
--- 2024 | 723039 | 757593.0
+-- 2024 | 713767 | 746058.0
 ```
 
 Largest crop groups in the latest edition (HCAT level 3 = first 6 digits):
@@ -41,11 +41,11 @@ FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_cat/lat
 WHERE "hcat:code" IS NOT NULL
 GROUP BY 1 ORDER BY hectares DESC LIMIT 5;
 -- hcat_group | most_common_name | fields | hectares
--- 330101 | barley | 199593 | 349905.0
--- 330305 | olive_plantations | 127439 | 88285.0
--- 330109 | alfalfa_lucerne | 69005 | 80965.0
--- 330306 | vineyards_wine_vine_rebland_grapes | 66032 | 56629.0
--- 330303 | almond | 67132 | 43862.0
+-- 330101 | barley | 198145 | 345423.0
+-- 330305 | olive_plantations | 126115 | 85835.0
+-- 330109 | alfalfa_lucerne | 68547 | 80065.0
+-- 330306 | vineyards_wine_vine_rebland_grapes | 64685 | 55173.0
+-- 330303 | almond | 66116 | 42945.0
 ```
 
 Fields within 500 m of a point given in lon/lat, transforming the point into the data's CRS instead of the data into WGS84:
@@ -54,14 +54,14 @@ Fields within 500 m of a point given in lon/lat, transforming the point into the
 INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;
 SELECT id, round("metrics:area") AS m2
 FROM read_parquet('https://data.source.coop/ftw/harmonized-field-data/es_cat/latest/es_cat.parquet')
-WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(1.7131, 41.6807), 'EPSG:4326', 'EPSG:25831', always_xy := true), 500))
+WHERE ST_Intersects(geometry, ST_Buffer(ST_Transform(ST_Point(1.7479, 41.6725), 'EPSG:4326', 'EPSG:25831', always_xy := true), 500))
 LIMIT 5;
 -- id | m2
--- 272861 | 30247.0
--- 272857 | 13769.0
--- 425356 | 1322.0
--- 644778 | 568.0
--- 644779 | 3127.0
+-- 275071 | 6862.0
+-- 370225 | 7943.0
+-- 370223 | 2305.0
+-- 370222 | 1487.0
+-- 437747 | 6409.0
 ```
 
 ## Related collections
