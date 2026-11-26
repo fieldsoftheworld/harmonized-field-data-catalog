@@ -13,37 +13,37 @@
     "coordinates": [
       [
         [
-          0.12466226116318571,
-          40.517607134976934
+          0.2005785455161655,
+          40.52413928351101
         ],
         [
-          3.300154846569645,
-          40.517607134976934
+          3.2974942336828468,
+          40.52413928351101
         ],
         [
-          3.300154846569645,
-          42.843188592707676
+          3.2974942336828468,
+          42.82083700697112
         ],
         [
-          0.12466226116318571,
-          42.843188592707676
+          0.2005785455161655,
+          42.82083700697112
         ],
         [
-          0.12466226116318571,
-          40.517607134976934
+          0.2005785455161655,
+          40.52413928351101
         ]
       ]
     ]
   },
   "bbox": [
-    0.12466226116318571,
-    40.517607134976934,
-    3.300154846569645,
-    42.843188592707676
+    0.2005785455161655,
+    40.52413928351101,
+    3.2974942336828468,
+    42.82083700697112
   ],
   "properties": {
     "title": "Catalonia — 2024",
-    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`es_cat-2024.parquet`, 723,039 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
+    "description": "Field boundaries of the 2024 edition of this dataset, one GeoParquet file (`es_cat-2024.parquet`, 713,767 fields) and its PMTiles. Partition `year=2024` of the collection's hive layout.",
     "datetime": null,
     "start_datetime": "2024-01-01T00:00:00Z",
     "end_datetime": "2024-01-01T00:00:00Z",
@@ -51,9 +51,9 @@
     "proj:code": "EPSG:25831",
     "table:columns": [
       {
-        "name": "crop:name",
-        "type": "string",
-        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "name": "geometry",
+        "type": "binary",
+        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "metrics:area",
@@ -61,29 +61,9 @@
         "description": "Area of the field, in square meters (m²). Must be > 0 and <= 1,000,000,000. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
-        "name": "geometry",
-        "type": "binary",
-        "description": "A geometry that reflects the footprint of the field, usually a Polygon. Stored in the source CRS (see `proj:code`), not reprojected. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "id",
+        "name": "crop:name",
         "type": "string",
-        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
-      },
-      {
-        "name": "hcat:code",
-        "type": "uint32",
-        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "hcat:name",
-        "type": "string",
-        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
-      },
-      {
-        "name": "crop:name_en",
-        "type": "string",
-        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+        "description": "Crop name in the original language. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
         "name": "crop:code",
@@ -91,9 +71,29 @@
         "description": "The crop code, from the code list of the source. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
       },
       {
+        "name": "crop:name_en",
+        "type": "string",
+        "description": "Crop name in English. ([spec](https://github.com/fiboa/crop-extension/blob/main/README.md))"
+      },
+      {
         "name": "hcat:name_en",
         "type": "string",
         "description": "The original crop name translated into English. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:name",
+        "type": "string",
+        "description": "The machine-readable HCAT name of the crop (Hierarchical Crop and Agriculture Taxonomy, EuroCrops). ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "hcat:code",
+        "type": "uint32",
+        "description": "The 10-digit HCAT code indicating the hierarchy of the crop. The first 4, 6, 8 digits select increasingly specific crop groups. ([spec](https://github.com/fiboa/hcat-extension/blob/main/README.md))"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "An identifier for the field. ([spec](https://github.com/fiboa/specification/blob/main/core/README.md))"
       },
       {
         "name": "bbox",
@@ -102,10 +102,10 @@
       }
     ],
     "table:primary_geometry": "geometry",
-    "table:row_count": 723039,
+    "table:row_count": 713767,
     "processing:software": {
-      "fiboa-cli": "0.21.0",
-      "vecorel-cli": "0.2.18"
+      "fiboa-cli": "0.30.0",
+      "vecorel-cli": "0.4.4"
     }
   },
   "collection": "es_cat",
@@ -118,8 +118,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 296758384,
-      "file:checksum": "1220458d24a660b886772b17cd8a106c7719a118c24f1e0b7007bc53f56818e9b5c6",
+      "file:size": 296074740,
+      "file:checksum": "122019f8a78e32686e53a7d5df77a59970aca90ab4c5a99bcb1250af885640a9fa30",
       "proj:code": "EPSG:25831"
     },
     "visual": {
@@ -130,8 +130,8 @@
       "roles": [
         "visual"
       ],
-      "file:size": 122161304,
-      "file:checksum": "1220ed26db9948a210335c2e24e8fba04f8ae7c08a283df394ccedaf2124f3d11f30"
+      "file:size": 121869769,
+      "file:checksum": "12202a21b3c609a931128f64fa68eb300094479b51b687e27a274f0b80a799ca3741"
     }
   },
   "links": [
